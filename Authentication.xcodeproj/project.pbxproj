@@ -18,6 +18,8 @@
 		9D72AA081C8DC7EA00BB4082 /* Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D72AA071C8DC7EA00BB4082 /* Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D72AA0F1C8DC7EB00BB4082 /* Authentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; };
 		9D72AA141C8DC7EB00BB4082 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72AA131C8DC7EB00BB4082 /* AuthenticationTests.swift */; };
+		CEBF66BA1C8DD582006EE090 /* LogInViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LogInViewType.swift */; };
+		CEBF66BC1C8DD5D7006EE090 /* PasswordVisibilityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BB1C8DD5D7006EE090 /* PasswordVisibilityButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA131C8DC7EB00BB4082 /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEBF66B91C8DD582006EE090 /* LogInViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInViewType.swift; path = LogIn/View/LogInViewType.swift; sourceTree = "<group>"; };
+		CEBF66BB1C8DD5D7006EE090 /* PasswordVisibilityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordVisibilityButton.swift; path = LogIn/View/PasswordVisibilityButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +124,8 @@
 		9D72AA061C8DC7EA00BB4082 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				CEBF66B51C8DD3AB006EE090 /* LogIn */,
+				CEBF66B41C8DD3A4006EE090 /* SignUp */,
 				9D72AA071C8DC7EA00BB4082 /* Authentication.h */,
 				9D72AA091C8DC7EA00BB4082 /* Info.plist */,
 			);
@@ -133,6 +139,46 @@
 				9D72AA151C8DC7EB00BB4082 /* Info.plist */,
 			);
 			path = AuthenticationTests;
+			sourceTree = "<group>";
+		};
+		CEBF66B41C8DD3A4006EE090 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		CEBF66B51C8DD3AB006EE090 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				CEBF66B81C8DD531006EE090 /* Model */,
+				CEBF66B71C8DD52C006EE090 /* ViewModel */,
+				CEBF66B61C8DD526006EE090 /* View */,
+			);
+			name = LogIn;
+			sourceTree = "<group>";
+		};
+		CEBF66B61C8DD526006EE090 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CEBF66B91C8DD582006EE090 /* LogInViewType.swift */,
+				CEBF66BB1C8DD5D7006EE090 /* PasswordVisibilityButton.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		CEBF66B71C8DD52C006EE090 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		CEBF66B81C8DD531006EE090 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +312,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEBF66BC1C8DD5D7006EE090 /* PasswordVisibilityButton.swift in Sources */,
+				CEBF66BA1C8DD582006EE090 /* LogInViewType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +428,7 @@
 		9D72AA191C8DC7EB00BB4082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -394,12 +443,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ar.com.wolox.Authentication;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		9D72AA1A1C8DC7EB00BB4082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
