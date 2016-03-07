@@ -33,14 +33,14 @@ public final class PasswordVisibilityButton: UIButton {
         super.init(frame: frame)
         
         self.mode.signal.observeNext {
-            switch $0 {
-            case .ShowPassword: self.setTitle("Hide", forState: .Normal)
-            case .HidePassword: self.setTitle("Show", forState: .Normal)
+            switch $0 {         // so as to show "hide" when shown, and viceversa
+            case .ShowPassword: self.setTitle("password-visibility.title".localized(false), forState: .Normal)
+            case .HidePassword: self.setTitle("password-visibility.title".localized(true), forState: .Normal)
             }
         }
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) { //TODO
         fatalError("init(coder:) has not been implemented")
     }
     

@@ -30,3 +30,27 @@ public protocol LogInViewType: Renderable {
     var termsAndService: UIButton? { get }
     
 }
+
+final class LoginView: UIView, LogInViewType {  //TODO preguntar UIView en protocolo
+    
+    //TODO return real objects
+    var emailLabel: UILabel { return UILabel() }
+    var emailTextField: UITextField { return UITextField() }
+    var emailValidationMessageLabel: UILabel? { return .None }
+    
+    var passwordLabel: UILabel { return UILabel() }
+    var passwordTextField: UITextField { return UITextField() }
+    var passwordValidationMessageLabel: UILabel? { return .None }
+    var passwordVisibilityButton: PasswordVisibilityButton? { return .None }
+    
+    var loginButton: UIButton { return UIButton() }
+    var registerButton: UIButton { return UIButton() }
+    var termsAndService: UIButton? { return .None }
+    
+    func render() {
+        // TODO this function should configure each view elements and
+        // in case we are doing the layout programatically it should
+        // layout all its components
+    }
+    
+}
