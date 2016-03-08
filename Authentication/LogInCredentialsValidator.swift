@@ -18,12 +18,15 @@ public struct LogInCredentialsValidator {
                 ])
     }
     
-    public static func defaultPasswordValidator(minLength: Int = 4, maxLength: Int = 30) -> TextInputValidatorType {
-        return CompositeTextInputValidator(validators: [
-            NonEmptyValidator(),
-            MinLengthValidator(minLength: minLength),
-            MaxLengthValidator(maxLength: maxLength)
-            ])
+    public static func defaultPasswordValidator(minLength: Int = 4, maxLength: Int? = 30) -> TextInputValidatorType {
+        var validators : [TextInputValidatorType] = [
+                NonEmptyValidator(),
+                MinLengthValidator(minLength: minLength)
+            ]
+        if let max = maxLength {
+            validators.append(MaxLengthValidator(maxLength: max))
+        }
+        return CompositeTextInputValidator(validators: validators)
     }
     
     public let emailValidator: TextInputValidatorType

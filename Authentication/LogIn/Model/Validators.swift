@@ -42,7 +42,7 @@ public protocol TextInputValidatorType {
 
 public struct CompositeTextInputValidator: TextInputValidatorType {
     
-    private var _validators: [TextInputValidatorType]
+    private let _validators: [TextInputValidatorType]
     
     init(validators: [TextInputValidatorType]) {
         _validators = validators
@@ -57,6 +57,12 @@ public struct CompositeTextInputValidator: TextInputValidatorType {
             default: return .Valid
             }
         }
+    }
+    
+    public func addValidator(newValidator: TextInputValidatorType) -> CompositeTextInputValidator {
+        var validators = _validators
+        validators.append(newValidator)
+        return CompositeTextInputValidator(validators: validators)
     }
     
 }

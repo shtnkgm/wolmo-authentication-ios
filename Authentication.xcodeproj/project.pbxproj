@@ -18,8 +18,10 @@
 		9D72AA081C8DC7EA00BB4082 /* Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D72AA071C8DC7EA00BB4082 /* Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D72AA0F1C8DC7EB00BB4082 /* Authentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; };
 		9D72AA141C8DC7EB00BB4082 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72AA131C8DC7EB00BB4082 /* AuthenticationTests.swift */; };
+		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
+		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */; };
+		CE9AC3C81C8F4E430012D20B /* LogInErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C71C8F4E430012D20B /* LogInErrorController.swift */; };
 		CEBF66BA1C8DD582006EE090 /* LogInViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LogInViewType.swift */; };
-		CEBF66BC1C8DD5D7006EE090 /* PasswordVisibilityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BB1C8DD5D7006EE090 /* PasswordVisibilityButton.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C41C8DEF9A006EE090 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF66C31C8DEF9A006EE090 /* Localizable.strings */; };
 		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
@@ -29,7 +31,6 @@
 		CEBF66CE1C8E089D006EE090 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CD1C8E089D006EE090 /* LogInController.swift */; };
 		CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CF1C8E0A6E006EE090 /* Email.swift */; };
 		CEBF66D21C8E0A80006EE090 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66D11C8E0A80006EE090 /* User.swift */; };
-		CEBF66D41C8E0B23006EE090 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66D31C8E0B23006EE090 /* RegisterController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,8 +71,10 @@
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA131C8DC7EB00BB4082 /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = SignUp/View/RegisterController.swift; sourceTree = "<group>"; };
+		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstraper.swift; sourceTree = "<group>"; };
+		CE9AC3C71C8F4E430012D20B /* LogInErrorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInErrorController.swift; path = LogIn/View/LogInErrorController.swift; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LogInViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInViewType.swift; path = LogIn/View/LogInViewType.swift; sourceTree = "<group>"; };
-		CEBF66BB1C8DD5D7006EE090 /* PasswordVisibilityButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PasswordVisibilityButton.swift; path = LogIn/View/PasswordVisibilityButton.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C31C8DEF9A006EE090 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -81,7 +84,6 @@
 		CEBF66CD1C8E089D006EE090 /* LogInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInController.swift; path = LogIn/View/LogInController.swift; sourceTree = "<group>"; };
 		CEBF66CF1C8E0A6E006EE090 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = LogIn/Model/Email.swift; sourceTree = "<group>"; };
 		CEBF66D11C8E0A80006EE090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = LogIn/Model/User.swift; sourceTree = "<group>"; };
-		CEBF66D31C8E0B23006EE090 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = LogIn/ViewModel/RegisterController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				9D72AA091C8DC7EA00BB4082 /* Info.plist */,
 				CEBF66C31C8DEF9A006EE090 /* Localizable.strings */,
 				CEBF66C51C8DF0DD006EE090 /* Extensions.swift */,
+				CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -163,9 +166,34 @@
 			path = AuthenticationTests;
 			sourceTree = "<group>";
 		};
+		CE9AC3C01C8F2F5C0012D20B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		CE9AC3C11C8F2F650012D20B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		CE9AC3C21C8F2F6C0012D20B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		CEBF66B41C8DD3A4006EE090 /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
+				CE9AC3C21C8F2F6C0012D20B /* Model */,
+				CE9AC3C11C8F2F650012D20B /* ViewModel */,
+				CE9AC3C01C8F2F5C0012D20B /* View */,
 			);
 			name = SignUp;
 			sourceTree = "<group>";
@@ -184,8 +212,8 @@
 			isa = PBXGroup;
 			children = (
 				CEBF66B91C8DD582006EE090 /* LogInViewType.swift */,
-				CEBF66BB1C8DD5D7006EE090 /* PasswordVisibilityButton.swift */,
 				CEBF66CD1C8E089D006EE090 /* LogInController.swift */,
+				CE9AC3C71C8F4E430012D20B /* LogInErrorController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -196,7 +224,6 @@
 				CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */,
 				CEBF66C71C8DFCB1006EE090 /* LogInViewModel.swift */,
 				CEBF66C91C8DFFF2006EE090 /* LogInCredentialsValidator.swift */,
-				CEBF66D31C8E0B23006EE090 /* RegisterController.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -343,17 +370,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9AC3C81C8F4E430012D20B /* LogInErrorController.swift in Sources */,
+				CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */,
 				CEBF66C81C8DFCB1006EE090 /* LogInViewModel.swift in Sources */,
 				CEBF66CC1C8E07FD006EE090 /* Validators.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
 				CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */,
-				CEBF66BC1C8DD5D7006EE090 /* PasswordVisibilityButton.swift in Sources */,
 				CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */,
 				CEBF66CE1C8E089D006EE090 /* LogInController.swift in Sources */,
 				CEBF66BA1C8DD582006EE090 /* LogInViewType.swift in Sources */,
 				CEBF66D21C8E0A80006EE090 /* User.swift in Sources */,
+				CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */,
 				CEBF66CA1C8DFFF2006EE090 /* LogInCredentialsValidator.swift in Sources */,
-				CEBF66D41C8E0B23006EE090 /* RegisterController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,15 +23,17 @@ public protocol LogInViewType: Renderable {
     var passwordLabel: UILabel { get }
     var passwordTextField: UITextField { get }
     var passwordValidationMessageLabel: UILabel? { get }
-    var passwordVisibilityButton: PasswordVisibilityButton? { get }
+    var passwordVisibilityButton: UIButton? { get }
     
     var loginButton: UIButton { get }
     var registerButton: UIButton { get }
     var termsAndService: UIButton? { get }
     
+    var activityIndicator: UIActivityIndicatorView { get }
+    
 }
 
-final class LoginView: UIView, LogInViewType {  //TODO preguntar UIView en protocolo
+final class LogInView: UIView, LogInViewType {  //TODO preguntar UIView en protocolo
     
     //TODO return real objects
     var emailLabel: UILabel { return UILabel() }
@@ -41,11 +43,19 @@ final class LoginView: UIView, LogInViewType {  //TODO preguntar UIView en proto
     var passwordLabel: UILabel { return UILabel() }
     var passwordTextField: UITextField { return UITextField() }
     var passwordValidationMessageLabel: UILabel? { return .None }
-    var passwordVisibilityButton: PasswordVisibilityButton? { return .None }
+    var passwordVisibilityButton: UIButton? { return .None }
     
     var loginButton: UIButton { return UIButton() }
     var registerButton: UIButton { return UIButton() }
     var termsAndService: UIButton? { return .None }
+    
+    var activityIndicator: UIActivityIndicatorView {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.hidesWhenStopped = true
+        self.addSubview(activityIndicator)
+        return activityIndicator
+    }
     
     func render() {
         // TODO this function should configure each view elements and
