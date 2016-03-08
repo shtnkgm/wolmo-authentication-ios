@@ -29,7 +29,7 @@
 		CEBF66CE1C8E089D006EE090 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CD1C8E089D006EE090 /* LogInController.swift */; };
 		CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CF1C8E0A6E006EE090 /* Email.swift */; };
 		CEBF66D21C8E0A80006EE090 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66D11C8E0A80006EE090 /* User.swift */; };
-		CEBF66D41C8E0B23006EE090 /* RegisterControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66D31C8E0B23006EE090 /* RegisterControllerType.swift */; };
+		CEBF66D41C8E0B23006EE090 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66D31C8E0B23006EE090 /* RegisterController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +81,7 @@
 		CEBF66CD1C8E089D006EE090 /* LogInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInController.swift; path = LogIn/View/LogInController.swift; sourceTree = "<group>"; };
 		CEBF66CF1C8E0A6E006EE090 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = LogIn/Model/Email.swift; sourceTree = "<group>"; };
 		CEBF66D11C8E0A80006EE090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = LogIn/Model/User.swift; sourceTree = "<group>"; };
-		CEBF66D31C8E0B23006EE090 /* RegisterControllerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterControllerType.swift; path = LogIn/ViewModel/RegisterControllerType.swift; sourceTree = "<group>"; };
+		CEBF66D31C8E0B23006EE090 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = LogIn/ViewModel/RegisterController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,7 +196,7 @@
 				CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */,
 				CEBF66C71C8DFCB1006EE090 /* LogInViewModel.swift */,
 				CEBF66C91C8DFFF2006EE090 /* LogInCredentialsValidator.swift */,
-				CEBF66D31C8E0B23006EE090 /* RegisterControllerType.swift */,
+				CEBF66D31C8E0B23006EE090 /* RegisterController.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -353,7 +353,7 @@
 				CEBF66BA1C8DD582006EE090 /* LogInViewType.swift in Sources */,
 				CEBF66D21C8E0A80006EE090 /* User.swift in Sources */,
 				CEBF66CA1C8DFFF2006EE090 /* LogInCredentialsValidator.swift in Sources */,
-				CEBF66D41C8E0B23006EE090 /* RegisterControllerType.swift in Sources */,
+				CEBF66D41C8E0B23006EE090 /* RegisterController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  Validator.swift
+//  Validators.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.

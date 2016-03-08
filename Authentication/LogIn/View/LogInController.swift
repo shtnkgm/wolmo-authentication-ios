@@ -8,18 +8,19 @@
 
 import Foundation
 import ReactiveCocoa
+import Rex
 
 
 final public class LogInController: UIViewController {
     
     private let _viewModel: LogInViewModel<UserType, SessionServiceType>
     private let _onUserLoggedIn: UserType -> ()
-    private let _registerControllerFactory: () -> RegisterControllerType
+    private let _registerControllerFactory: () -> RegisterController
     
     public let logInView: LogInViewType
     
     init(viewModel: LogInViewModel<UserType, SessionServiceType>,
-        registerControllerFactory: () -> RegisterControllerType,
+        registerControllerFactory: () -> RegisterController,
         loginView: LogInViewType = LogInView(),
         onUserLoggedIn: UserType -> () = { _ in }) {
             
@@ -65,10 +66,11 @@ private extension LogInController {
         logInView.loginButton.rex_pressed.value = _viewModel.login.unsafeCocoaAction
         
         logInView.registerButton.setTitle(_viewModel.registerButtonTitle, state: .Normal)
-        logInView.registerButton.action { [unowned self] _ in
-            let controller = self._registerControllerFactory()
-            navigationController?.pushViewController(controller, animated: true)
-        }
+//        logInView.registerButton.action { [unowned self] _ in
+//            let controller = self._registerControllerFactory()
+//            navigationController?.pushViewController(controller, animated: true)
+//        }
+        logInView.registerButton.addTarget(self, action: "transitionToRegister:", forControlEvents: UIControlEvents.TouchUpInside)
         
         // loginView.termsAndService -> Present modally web view controller that shows HTML file
         logInView.termsAndService?.setTitle(_viewModel.termsAndServiceButtonTitle, state: .Normal)
@@ -87,6 +89,11 @@ private extension LogInController {
         }
         
         _viewModel.login.values.observeNext(_onUserLoggedIn)
+    }
+    
+    func transitionToRegister(sender: UIButton) {
+        let controller = self._registerControllerFactory()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 }

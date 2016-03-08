@@ -1,5 +1,5 @@
 //
-//  RegisterControllerType.swift
+//  RegisterController.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.
@@ -9,6 +9,6 @@
 import Foundation
 
 
-public protocol RegisterControllerType {
-
+final class RegisterController : UIViewController {
+    
 }
