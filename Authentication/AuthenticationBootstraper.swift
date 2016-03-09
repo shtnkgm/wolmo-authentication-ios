@@ -23,6 +23,13 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
         self.sessionService = sessionService
+        
+        sessionService.events.observeNext { [unowned self] event in
+            switch event {
+            case .Login(let user): self._window.rootViewController = self._mainViewControllerFactory()  //Pasarle el user?
+            case .Logout(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLogInController())
+            }
+        }
     }
     
     public final func bootstrap() {
@@ -49,20 +56,26 @@ private extension AuthenticationBootstraper {
         return RegisterController()
     }
     
+    func transitionToSignUp() { //TODO
+        //let controller = createRegisterController()
+        //navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func createLogInErrorController() -> LogInErrorController { //TODO
         return LogInErrorController()
     }
     
-    func createLogInController() -> LogInController<User, SessionService> {
-        let a: LogInViewModel<User, SessionService> = createLogInViewModel()
-        return LogInController<User, SessionService>(
-            viewModel: a,
-            registerControllerFactory: createRegisterController,
+    func transitionToLogInError(error: NSError) { //TODO
+        //let controller = self._logInErrorControllerFactory(error)
+        //self.presentViewController(controller, animated: false, completion: nil)
+    }
+    
+    func createLogInController() -> LogInController {
+        return LogInController(
+            viewModel: createLogInViewModel(),
             logInView: createLogInView(),
-            onUserLoggedIn: { _ in
-                self._window.rootViewController = _mainViewControllerFactory()  //Pasarle el user?
-            },
-            logInErrorControllerFactory: createLogInErrorController
+            onLogInError: transitionToLogInError,
+            onRegister: { [unowned self] _ in self.transitionToSignUp() }
         )
     }
     

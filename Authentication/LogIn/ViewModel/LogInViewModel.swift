@@ -8,9 +8,35 @@
 
 import Foundation
 import ReactiveCocoa
-import Result
+import enum Result.NoError
 
-public class LogInViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
+
+public protocol LogInViewModelType {
+    
+    var email: MutableProperty<String> { get }
+    var emailValidationErrors: AnyProperty<[String]> { get }
+    
+    var password: MutableProperty<String> { get }
+    var passwordValidationErrors: AnyProperty<[String]> { get }
+    var showPassword: MutableProperty<Bool> { get }
+    
+    var togglePasswordVisibility: Action<AnyObject?, Bool, NoError> { get }
+    var logInCocoaAction: CocoaAction { get }
+    var logInErrors: Signal<NSError, NoError> { get }
+    var logInExecuting: Signal<Bool, NoError> { get }
+    
+    var emailText: String { get }
+    var passwordText: String { get }
+    var emailPlaceholderText: String { get }
+    var passwordPlaceholderText: String { get }
+    var loginButtonTitle: String { get }
+    var registerButtonTitle: String { get }
+    var termsAndServicesButtonTitle: String { get }
+    var passwordVisibilityButtonTitle : String { get }
+    
+}
+
+public class LogInViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LogInViewModelType {
     
     private let _credentialsAreValid: AnyProperty<Bool>
     private let _sessionService: SessionService
@@ -22,15 +48,20 @@ public class LogInViewModel<User: UserType, SessionService: SessionServiceType w
     public let passwordValidationErrors: AnyProperty<[String]>
     public let showPassword = MutableProperty(false)
     
-    public private(set) lazy var login: Action<AnyObject, User, NSError> = {
+    private lazy var _logIn: Action<AnyObject?, User, NSError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             let email = Email(raw: self.email.value)!
             let password = self.password.value
             return self._sessionService.login(email, password).observeOn(UIScheduler())
         }
     }()
-    public private(set) lazy var togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
-        return Action { _ in
+    public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
+    public var logInErrors: Signal<NSError, NoError> { return _logIn.errors }
+    public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
+    
+    
+    public private(set) lazy var togglePasswordVisibility: Action<AnyObject?, Bool, NoError> = {
+        return Action { [unowned self] _ in
             self.showPassword.value = !self.showPassword.value
             return SignalProducer(value: self.showPassword.value)
         }

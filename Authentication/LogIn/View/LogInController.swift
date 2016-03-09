@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  LogInController.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.
@@ -9,27 +9,25 @@
 import Foundation
 import ReactiveCocoa
 import Rex
+import enum Result.NoError
 
 
-final public class LogInController<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: UIViewController {
+final public class LogInController : UIViewController {
     
-    private let _viewModel: LogInViewModel<User, SessionService>
-    private let _onUserLoggedIn: User -> ()
-    private let _registerControllerFactory: () -> RegisterController
-    private let _logInErrorControllerFactory: (NSError) -> LogInErrorController
+    private let _viewModel: LogInViewModelType
+    private let _onLogInError: (NSError) -> ()
+    private let _onRegister: (UIButton) -> ()
     
     public let logInView: LogInViewType
     
-    init<User: UserType, SessionService: SessionServiceType where SessionService.User == User>(viewModel: LogInViewModel<User, SessionService>,
+    init(viewModel: LogInViewModelType,
         logInView: LogInViewType = LogInView(),
-        onUserLoggedIn: User -> () = { _ in },
-        onRegister: () -> (),
-        logInErrorControllerFactory: (NSError) -> LogInErrorController) {
-            
+        onLogInError: (NSError) -> (),
+        onRegister: (UIButton) -> ()
+    ) {
             _viewModel = viewModel
-            _registerControllerFactory = registerControllerFactory
-            _onUserLoggedIn = onUserLoggedIn
-            _logInErrorControllerFactory = logInErrorControllerFactory
+            _onLogInError = onLogInError
+            _onRegister = onRegister
             self.logInView = logInView
             super.init(nibName: nil, bundle: nil) //TODO
     }
@@ -54,7 +52,7 @@ private extension LogInController {
         bindPasswordElements()
         bindButtons()
         
-        _viewModel.login.executing.signal.observeNext { [unowned self] executing in
+        _viewModel.logInExecuting.observeNext { [unowned self] executing in
             if executing {
                 self.logInView.activityIndicator.startAnimating()
                 UIApplication.sharedApplication().beginIgnoringInteractionEvents()
@@ -64,12 +62,7 @@ private extension LogInController {
             }
         }
         
-        _viewModel.login.errors.observeNext { [unowned self] error in
-            let controller = self._logInErrorControllerFactory(error)
-            self.presentViewController(controller, animated: false, completion: nil)
-        }
-        
-        _viewModel.login.values.observeNext(_onUserLoggedIn)
+        _viewModel.logInErrors.observeNext(_onLogInError)
     }
     
     func bindEmailElements() {
@@ -99,22 +92,13 @@ private extension LogInController {
     
     func bindButtons() {
         logInView.loginButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
-        logInView.loginButton.rex_pressed.value = _viewModel.login.unsafeCocoaAction
+        logInView.loginButton.rex_pressed.value = _viewModel.logInCocoaAction
         
         logInView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
-        //        logInView.registerButton.action { [unowned self] _ in
-        //            let controller = self._registerControllerFactory()
-        //            navigationController?.pushViewController(controller, animated: true)
-        //        }
-        logInView.registerButton.addTarget(self, action: "transitionToSignUp:", forControlEvents: UIControlEvents.TouchUpInside)
+        logInView.registerButton.setAction { [unowned self] in self._onRegister($0) }
         
         // loginView.termsAndService -> Present modally web view controller that shows HTML file
         logInView.termsAndService?.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
-    }
-    
-    func transitionToSignUp(sender: UIButton) {
-        let controller = self._registerControllerFactory()
-        navigationController?.pushViewController(controller, animated: true)
     }
     
 }
