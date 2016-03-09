@@ -36,7 +36,7 @@ public protocol LogInViewModelType {
     
 }
 
-public class LogInViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LogInViewModelType {
+public final class LogInViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LogInViewModelType {
     
     private let _credentialsAreValid: AnyProperty<Bool>
     private let _sessionService: SessionService
