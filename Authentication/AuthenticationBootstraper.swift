@@ -56,18 +56,18 @@ private extension AuthenticationBootstraper {
         return RegisterController()
     }
     
-    func transitionToSignUp() { //TODO
-        //let controller = createRegisterController()
-        //navigationController?.pushViewController(controller, animated: true)
+    func transitionToSignUp() {
+        let controller = createRegisterController()
+        self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
     }
     
-    func createLogInErrorController() -> LogInErrorController { //TODO
+    func createLogInErrorController(error: NSError) -> LogInErrorController { //TODO
         return LogInErrorController()
     }
     
-    func transitionToLogInError(error: NSError) { //TODO
-        //let controller = self._logInErrorControllerFactory(error)
-        //self.presentViewController(controller, animated: false, completion: nil)
+    func transitionToLogInError(error: NSError) {
+        let controller = createLogInErrorController(error)
+        self._window.rootViewController?.presentViewController(controller, animated: false, completion: nil)
     }
     
     func createLogInController() -> LogInController {
