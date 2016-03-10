@@ -12,7 +12,7 @@ import Foundation
 public struct Email {
     
     public static func isValidEmail(raw: String) -> Bool {
-        return true
+        return raw.containsString("@")
     }
     
     let raw: String

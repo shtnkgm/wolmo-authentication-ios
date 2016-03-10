@@ -17,7 +17,6 @@
 		9D1DFF061C8DCFC800F0A37C /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF011C8DCFB300F0A37C /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D72AA081C8DC7EA00BB4082 /* Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D72AA071C8DC7EA00BB4082 /* Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D72AA0F1C8DC7EB00BB4082 /* Authentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; };
-		9D72AA141C8DC7EB00BB4082 /* AuthenticationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D72AA131C8DC7EB00BB4082 /* AuthenticationTests.swift */; };
 		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */; };
 		CE9AC3C81C8F4E430012D20B /* LogInErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C71C8F4E430012D20B /* LogInErrorController.swift */; };
@@ -31,6 +30,7 @@
 		CEBF66CE1C8E089D006EE090 /* LogInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CD1C8E089D006EE090 /* LogInController.swift */; };
 		CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CF1C8E0A6E006EE090 /* Email.swift */; };
 		CEBF66D21C8E0A80006EE090 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66D11C8E0A80006EE090 /* User.swift */; };
+		CEFB5F801C91BF4100760A2A /* LogInViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB5F7F1C91BF4100760A2A /* LogInViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +69,6 @@
 		9D72AA071C8DC7EA00BB4082 /* Authentication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Authentication.h; sourceTree = "<group>"; };
 		9D72AA091C8DC7EA00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D72AA131C8DC7EB00BB4082 /* AuthenticationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationTests.swift; sourceTree = "<group>"; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = SignUp/View/RegisterController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstraper.swift; sourceTree = "<group>"; };
@@ -84,6 +83,7 @@
 		CEBF66CD1C8E089D006EE090 /* LogInController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInController.swift; path = LogIn/View/LogInController.swift; sourceTree = "<group>"; };
 		CEBF66CF1C8E0A6E006EE090 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = LogIn/Model/Email.swift; sourceTree = "<group>"; };
 		CEBF66D11C8E0A80006EE090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = LogIn/Model/User.swift; sourceTree = "<group>"; };
+		CEFB5F7F1C91BF4100760A2A /* LogInViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInViewModelTests.swift; path = LogIn/LogInViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,7 +160,7 @@
 		9D72AA121C8DC7EB00BB4082 /* AuthenticationTests */ = {
 			isa = PBXGroup;
 			children = (
-				9D72AA131C8DC7EB00BB4082 /* AuthenticationTests.swift */,
+				CEFB5F7B1C91BBC600760A2A /* LogIn */,
 				9D72AA151C8DC7EB00BB4082 /* Info.plist */,
 			);
 			path = AuthenticationTests;
@@ -236,6 +236,14 @@
 				CEBF66D11C8E0A80006EE090 /* User.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		CEFB5F7B1C91BBC600760A2A /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				CEFB5F7F1C91BF4100760A2A /* LogInViewModelTests.swift */,
+			);
+			name = LogIn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,7 +411,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D72AA141C8DC7EB00BB4082 /* AuthenticationTests.swift in Sources */,
+				CEFB5F801C91BF4100760A2A /* LogInViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +561,7 @@
 		9D72AA1C1C8DC7EB00BB4082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -561,12 +570,15 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ar.com.wolox.AuthenticationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AuthenticationTests/AuthenticationTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		9D72AA1D1C8DC7EB00BB4082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -575,6 +587,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ar.com.wolox.AuthenticationTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AuthenticationTests/AuthenticationTests-Bridging-Header.h";
 			};
 			name = Release;
 		};

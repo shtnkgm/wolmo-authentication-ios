@@ -12,8 +12,14 @@ import enum Result.NoError
 
 
 public enum SessionServiceEvent<User: UserType> {
-    case Login(User)
-    case Logout(User)
+    case LogIn(User)
+    case LogOut(User)
+}
+
+public enum SessionServiceError: ErrorType {
+    case InexistentUser
+    case WrongPassword
+    case NetworkError(NSError)
 }
 
 public protocol SessionServiceType {
@@ -24,7 +30,7 @@ public protocol SessionServiceType {
     
     var events: Signal<SessionServiceEvent<User>, NoError> { get }
     
-    func login(email: Email, _ password: String) -> SignalProducer<User, NSError>
+    func login(email: Email, _ password: String) -> SignalProducer<User, SessionServiceError>
     
 }
 

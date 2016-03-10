@@ -33,23 +33,23 @@ public protocol LogInViewType: Renderable {
     
 }
 
-final class LogInView: UIView, LogInViewType {  //TODO preguntar UIView en protocolo
+public final class LogInView: UIView, LogInViewType {  //TODO preguntar UIView en protocolo
     
     //TODO return real objects
-    var emailLabel: UILabel { return UILabel() }
-    var emailTextField: UITextField { return UITextField() }
-    var emailValidationMessageLabel: UILabel? { return .None }
+    public var emailLabel: UILabel { return UILabel() }
+    public var emailTextField: UITextField { return UITextField() }
+    public var emailValidationMessageLabel: UILabel? { return .None }
     
-    var passwordLabel: UILabel { return UILabel() }
-    var passwordTextField: UITextField { return UITextField() }
-    var passwordValidationMessageLabel: UILabel? { return .None }
-    var passwordVisibilityButton: UIButton? { return .None }
+    public var passwordLabel: UILabel { return UILabel() }
+    public var passwordTextField: UITextField { return UITextField() }
+    public var passwordValidationMessageLabel: UILabel? { return .None }
+    public var passwordVisibilityButton: UIButton? { return .None }
     
-    var loginButton: UIButton { return UIButton() }
-    var registerButton: UIButton { return UIButton() }
-    var termsAndService: UIButton? { return .None }
+    public var loginButton: UIButton { return UIButton() }
+    public var registerButton: UIButton { return UIButton() }
+    public var termsAndService: UIButton? { return .None }
     
-    var activityIndicator: UIActivityIndicatorView {
+    public var activityIndicator: UIActivityIndicatorView {
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.hidesWhenStopped = true
@@ -57,7 +57,7 @@ final class LogInView: UIView, LogInViewType {  //TODO preguntar UIView en proto
         return activityIndicator
     }
     
-    func render() {
+    public func render() {
         // TODO this function should configure each view elements and
         // in case we are doing the layout programatically it should
         // layout all its components

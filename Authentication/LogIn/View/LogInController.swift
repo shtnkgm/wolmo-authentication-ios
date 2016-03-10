@@ -12,17 +12,17 @@ import Rex
 import enum Result.NoError
 
 
-final public class LogInController : UIViewController {
+public final class LogInController : UIViewController {
     
     private let _viewModel: LogInViewModelType
-    private let _onLogInError: (NSError) -> ()
+    private let _onLogInError: (SessionServiceError) -> ()
     private let _onRegister: (UIButton) -> ()
     
     public let logInView: LogInViewType
     
     init(viewModel: LogInViewModelType,
         logInView: LogInViewType = LogInView(),
-        onLogInError: (NSError) -> (),
+        onLogInError: (SessionServiceError) -> (),
         onRegister: (UIButton) -> ()
     ) {
             _viewModel = viewModel

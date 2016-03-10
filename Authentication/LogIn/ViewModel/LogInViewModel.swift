@@ -22,7 +22,7 @@ public protocol LogInViewModelType {
     
     var togglePasswordVisibility: Action<AnyObject?, Bool, NoError> { get }
     var logInCocoaAction: CocoaAction { get }
-    var logInErrors: Signal<NSError, NoError> { get }
+    var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
     
     var emailText: String { get }
@@ -48,7 +48,7 @@ public final class LogInViewModel<User: UserType, SessionService: SessionService
     public let passwordValidationErrors: AnyProperty<[String]>
     public let showPassword = MutableProperty(false)
     
-    private lazy var _logIn: Action<AnyObject?, User, NSError> = {
+    private lazy var _logIn: Action<AnyObject?, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             let email = Email(raw: self.email.value)!
             let password = self.password.value
@@ -56,7 +56,7 @@ public final class LogInViewModel<User: UserType, SessionService: SessionService
         }
     }()
     public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
-    public var logInErrors: Signal<NSError, NoError> { return _logIn.errors }
+    public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
     public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
     
     

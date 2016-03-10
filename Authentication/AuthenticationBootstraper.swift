@@ -26,8 +26,8 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         
         sessionService.events.observeNext { [unowned self] event in
             switch event {
-            case .Login(let user): self._window.rootViewController = self._mainViewControllerFactory()  //Pasarle el user?
-            case .Logout(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLogInController())
+            case .LogIn(_): self._window.rootViewController = self._mainViewControllerFactory()  //Pasarle el user?
+            case .LogOut(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLogInController())
             }
         }
     }
@@ -61,11 +61,11 @@ private extension AuthenticationBootstraper {
         self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
     }
     
-    func createLogInErrorController(error: NSError) -> LogInErrorController { //TODO
+    func createLogInErrorController(error: SessionServiceError) -> LogInErrorController { //TODO
         return LogInErrorController()
     }
     
-    func transitionToLogInError(error: NSError) {
+    func transitionToLogInError(error: SessionServiceError) {
         let controller = createLogInErrorController(error)
         self._window.rootViewController?.presentViewController(controller, animated: false, completion: nil)
     }
