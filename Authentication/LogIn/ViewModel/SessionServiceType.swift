@@ -14,6 +14,7 @@ import enum Result.NoError
 public enum SessionServiceEvent<User: UserType> {
     case LogIn(User)
     case LogOut(User)
+    case LogInError(SessionServiceError)
 }
 
 public enum SessionServiceError: ErrorType {

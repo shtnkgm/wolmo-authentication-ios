@@ -205,9 +205,19 @@ class LogInViewModelSpec: QuickSpec {
                         expect(logInVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("should return logIn error") { waitUntil { done in
-                        logInVM.logInCocoaAction.start() //TODO
-                        done()
+                    it("should return logIn email error") { waitUntil { done in
+                        logInVM.logInCocoaAction.execute(.None)
+                        sessionService.events.observeNext { event in
+                            switch event {
+                            case .LogInError(let error):
+                                switch error {
+                                case .InexistentUser:
+                                    done()
+                                default: break
+                                }
+                            default: break
+                            }
+                        }
                     }}
                     
                 }
@@ -228,7 +238,20 @@ class LogInViewModelSpec: QuickSpec {
                         expect(logInVM.logInCocoaAction.enabled) == true
                     }
                     
-                    //make the logIn
+                    it("should return logIn password error") { waitUntil { done in
+                        logInVM.logInCocoaAction.execute(.None)
+                        sessionService.events.observeNext { event in
+                            switch event {
+                            case .LogInError(let error):
+                                switch error {
+                                case .WrongPassword:
+                                    done()
+                                default: break
+                                }
+                            default: break
+                            }
+                        }
+                    }}
                     
                 }
                 
@@ -248,7 +271,20 @@ class LogInViewModelSpec: QuickSpec {
                         expect(logInVM.logInCocoaAction.enabled) == true
                     }
                     
-                    //make the logIn
+                    it("should return logIn email error") { waitUntil { done in
+                        logInVM.logInCocoaAction.execute(.None)
+                        sessionService.events.observeNext { event in
+                            switch event {
+                            case .LogInError(let error):
+                                switch error {
+                                case .InexistentUser:
+                                    done()
+                                default: break
+                                }
+                            default: break
+                            }
+                        }
+                    }}
                     
                 }
                 
@@ -268,13 +304,23 @@ class LogInViewModelSpec: QuickSpec {
                         expect(logInVM.logInCocoaAction.enabled) == true
                     }
                     
-                    //make the logIn
+                    it("should return logInUser") { waitUntil { done in
+                        logInVM.logInCocoaAction.execute(.None)
+                        sessionService.events.observeNext { event in
+                            switch event {
+                            case .LogIn(let user):
+                                expect(user.email) == Email("myuser@mail.com")!
+                                expect(user.password) == "password"
+                                expect(user.name) == "MyUser"
+                                done()
+                            default: break
+                            }
+                        }
+                    }}
                     
                 }
                 
             }
-            
-            
             
             
         }
