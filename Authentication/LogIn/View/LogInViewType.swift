@@ -16,6 +16,8 @@ public protocol Renderable {
 
 public protocol LogInViewType: Renderable {
     
+    var view: UIView { get }
+    
     var emailLabel: UILabel { get }
     var emailTextField: UITextField { get }
     var emailValidationMessageLabel: UILabel? { get }
@@ -33,7 +35,15 @@ public protocol LogInViewType: Renderable {
     
 }
 
-public final class LogInView: UIView, LogInViewType {  //TODO preguntar UIView en protocolo
+public extension LogInViewType where Self: UIView {
+    
+    var view: UIView {
+        return self
+    }
+    
+}
+
+public final class LogInView: UIView, LogInViewType {
     
     //TODO return real objects
     public var emailLabel: UILabel { return UILabel() }

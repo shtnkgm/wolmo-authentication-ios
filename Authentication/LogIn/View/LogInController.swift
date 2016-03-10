@@ -18,17 +18,18 @@ public final class LogInController : UIViewController {
     private let _onLogInError: (SessionServiceError) -> ()
     private let _onRegister: (UIButton) -> ()
     
-    public let logInView: LogInViewType
+    private let _logInViewFactory: () -> LogInViewType
+    public lazy var logInView: LogInViewType = self._logInViewFactory()
     
     init(viewModel: LogInViewModelType,
-        logInView: LogInViewType = LogInView(),
+        logInViewFactory: () -> LogInViewType,
         onLogInError: (SessionServiceError) -> (),
         onRegister: (UIButton) -> ()
     ) {
             _viewModel = viewModel
             _onLogInError = onLogInError
             _onRegister = onRegister
-            self.logInView = logInView
+            self._logInViewFactory = logInViewFactory
             super.init(nibName: nil, bundle: nil) //TODO
     }
 
@@ -36,8 +37,12 @@ public final class LogInController : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override public func loadView() {
+        self.view = logInView.view
+    }
+
+    
     override public func viewDidLoad() {
-        view.addSubview(logInView as! UIView)
         logInView.render()
         bindViewModel()
     }
