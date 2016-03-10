@@ -205,7 +205,10 @@ class LogInViewModelSpec: QuickSpec {
                         expect(logInVM.logInCocoaAction.enabled) == true
                     }
                     
-                    //make the logIn
+                    it("should return logIn error") { waitUntil { done in
+                        logInVM.logInCocoaAction.start() //TODO
+                        done()
+                    }}
                     
                 }
                 
