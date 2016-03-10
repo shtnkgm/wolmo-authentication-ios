@@ -242,8 +242,8 @@
 		CEFB5F7B1C91BBC600760A2A /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
-				CEFB5F821C91C52500760A2A /* LogInViewModelTests.swift */,
 				CEFB5F811C91C52400760A2A /* AuthenticationTests-Bridging-Header.h */,
+				CEFB5F821C91C52500760A2A /* LogInViewModelTests.swift */,
 			);
 			name = LogIn;
 			sourceTree = "<group>";
