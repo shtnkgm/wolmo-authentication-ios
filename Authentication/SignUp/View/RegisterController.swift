@@ -9,6 +9,6 @@
 import Foundation
 
 
-public final class RegisterController : UIViewController {
+public final class RegisterController: UIViewController {
     
 }

@@ -25,3 +25,7 @@ public struct Email {
     }
     
 }
+
+public func == (left: Email, right: Email) -> Bool {
+    return left.raw == right.raw
+}

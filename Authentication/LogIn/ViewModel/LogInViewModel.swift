@@ -32,7 +32,7 @@ public protocol LogInViewModelType {
     var loginButtonTitle: String { get }
     var registerButtonTitle: String { get }
     var termsAndServicesButtonTitle: String { get }
-    var passwordVisibilityButtonTitle : String { get }
+    var passwordVisibilityButtonTitle: String { get }
     
 }
 
@@ -73,13 +73,11 @@ public final class LogInViewModel<User: UserType, SessionService: SessionService
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         
         let credentialsValidationResults = combineLatest(
-            emailValidationResult.map{ $0.isValid },
-            passwordValidationResult.map{ $0.isValid }
-        )
+            emailValidationResult.map { $0.isValid },
+            passwordValidationResult.map { $0.isValid })
         _credentialsAreValid = AnyProperty(
             initialValue: false,
-            signal: credentialsValidationResults.map { $0 && $1 }
-        )
+            signal: credentialsValidationResults.map { $0 && $1 })
         
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
@@ -117,9 +115,8 @@ public extension LogInViewModel {
         return "login-view-model.terms-and-services-button-title".localized
     }
     
-    var passwordVisibilityButtonTitle : String {
+    var passwordVisibilityButtonTitle: String {
         return ("password-visibility.button-title." + (showPassword.value ? "false" : "true")).localized
     }
-    
     
 }

@@ -28,6 +28,7 @@ public protocol LogInViewType: Renderable {
     var passwordVisibilityButton: UIButton? { get }
     
     var loginButton: UIButton { get }
+    var loginErrorLabel: UILabel? { get }
     var registerButton: UIButton { get }
     var termsAndService: UIButton? { get }
     
@@ -56,6 +57,7 @@ public final class LogInView: UIView, LogInViewType {
     public var passwordVisibilityButton: UIButton? { return .None }
     
     public var loginButton: UIButton { return UIButton() }
+    public var loginErrorLabel: UILabel? { return .None }
     public var registerButton: UIButton { return UIButton() }
     public var termsAndService: UIButton? { return .None }
     

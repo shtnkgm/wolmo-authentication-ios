@@ -83,7 +83,7 @@ public struct AnyTextInputValidator: TextInputValidatorType {
 
 
 
-public struct NonEmptyValidator : TextInputValidatorType {
+public struct NonEmptyValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {
         if text.isEmpty {
@@ -95,7 +95,7 @@ public struct NonEmptyValidator : TextInputValidatorType {
     
 }
 
-public struct EmailValidator : TextInputValidatorType {
+public struct EmailValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {
         if Email.isValidEmail(text) {
@@ -142,5 +142,3 @@ public struct MinLengthValidator: TextInputValidatorType {
     }
     
 }
-
-

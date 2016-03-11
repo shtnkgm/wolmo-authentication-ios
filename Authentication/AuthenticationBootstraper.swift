@@ -35,6 +35,8 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         - Parameters:
             - sessionService: The session service to use for logging in and out.
             - window: The window the application will use.
+            - mainViewControllerFactory: Method that returns a valid mainViewController to use when starting the 
+            core of the app
 
         - Returns: A new authentication bootstrapper ready to use for starting your app as needed.
     */
@@ -104,7 +106,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
 
 private extension AuthenticationBootstraper {
 
-    func createRegisterController() -> RegisterController { //TODO
+    func createRegisterController() -> RegisterController { //todo
         return RegisterController()
     }
 
@@ -117,7 +119,7 @@ private extension AuthenticationBootstraper {
         return LogInErrorController()
     }
 
-    func transitionToLogInError(error: SessionServiceError) {
+    func transitionToLogInError(error: SessionServiceError, logInController: LogInController) {
         let controller = createLogInErrorController(error)
         self._window.rootViewController?.presentViewController(controller, animated: false, completion: nil)
     }
@@ -126,9 +128,8 @@ private extension AuthenticationBootstraper {
         return LogInController(
             viewModel: createLogInViewModel(),
             logInViewFactory: createLogInView,
-            onLogInError: transitionToLogInError,
-            onRegister: { [unowned self] _ in self.transitionToSignUp() }
-        )
+            onRegister: { [unowned self] _ in self.transitionToSignUp() },
+            onLogInError: transitionToLogInError)
     }
 
 }

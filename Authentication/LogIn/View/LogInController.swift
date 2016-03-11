@@ -12,28 +12,29 @@ import Rex
 import enum Result.NoError
 
 
-public final class LogInController : UIViewController {
+public final class LogInController: UIViewController {
+    
+    typealias LogInErrorHandler = (SessionServiceError, LogInController) -> ()
     
     private let _viewModel: LogInViewModelType
-    private let _onLogInError: (SessionServiceError) -> ()
-    private let _onRegister: (UIButton) -> ()
+    private let _onLogInError: LogInErrorHandler?
+    private let _onRegister: (LogInController) -> ()
     
     private let _logInViewFactory: () -> LogInViewType
     public lazy var logInView: LogInViewType = self._logInViewFactory()
     
     init(viewModel: LogInViewModelType,
         logInViewFactory: () -> LogInViewType,
-        onLogInError: (SessionServiceError) -> (),
-        onRegister: (UIButton) -> ()
-    ) {
+        onRegister: (LogInController) -> (),
+        onLogInError: LogInErrorHandler? = Optional.None) {
             _viewModel = viewModel
             _onLogInError = onLogInError
             _onRegister = onRegister
             self._logInViewFactory = logInViewFactory
-            super.init(nibName: nil, bundle: nil) //TODO
+            super.init(nibName: nil, bundle: nil)
     }
 
-    required public init?(coder aDecoder: NSCoder) { //TODO
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -67,7 +68,17 @@ private extension LogInController {
             }
         }
         
-        _viewModel.logInErrors.observeNext(_onLogInError)
+        _viewModel.logInErrors.observeNext { [unowned self] error in
+            if let logInErrorLabel = self.logInView.loginErrorLabel {
+                logInErrorLabel.text = error.message
+            } else if let onLogInError = self._onLogInError {
+                onLogInError(error, self)
+            } else {
+                let alert = UIAlertController(title: "", message: error.message, preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "", style: .Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     func bindEmailElements() {
@@ -100,10 +111,23 @@ private extension LogInController {
         logInView.loginButton.rex_pressed.value = _viewModel.logInCocoaAction
         
         logInView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
-        logInView.registerButton.setAction { [unowned self] in self._onRegister($0) }
+        logInView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }
         
         // loginView.termsAndService -> Present modally web view controller that shows HTML file
         logInView.termsAndService?.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
     }
     
+}
+
+public extension SessionServiceError {
+    var message: String {
+        switch self {
+        case .InexistentUser:
+            return "login-error.inexistent-user.message".localized
+        case .WrongPassword:
+            return "login-error.wrong-password.message".localized
+        case .NetworkError(_):
+            return "NETWORK ERROR" //Debería sacar el mensaje del error
+        }
+    }
 }

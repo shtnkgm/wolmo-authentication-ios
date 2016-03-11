@@ -19,7 +19,7 @@ public struct LogInCredentialsValidator {
     }
     
     public static func defaultPasswordValidator(minLength: Int = 4, maxLength: Int? = 30) -> TextInputValidatorType {
-        var validators : [TextInputValidatorType] = [
+        var validators: [TextInputValidatorType] = [
                 NonEmptyValidator(),
                 MinLengthValidator(minLength: minLength)
             ]
@@ -33,7 +33,7 @@ public struct LogInCredentialsValidator {
     public let passwordValidator: TextInputValidatorType
     
     init(emailValidator: TextInputValidatorType = LogInCredentialsValidator.defaultEmailValidator(),
-        passwordValidator : TextInputValidatorType = LogInCredentialsValidator.defaultPasswordValidator()) {
+        passwordValidator: TextInputValidatorType = LogInCredentialsValidator.defaultPasswordValidator()) {
             self.emailValidator = emailValidator
             self.passwordValidator = passwordValidator
     }

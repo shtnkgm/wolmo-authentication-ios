@@ -34,4 +34,3 @@ public protocol SessionServiceType {
     func login(email: Email, _ password: String) -> SignalProducer<User, SessionServiceError>
     
 }
-

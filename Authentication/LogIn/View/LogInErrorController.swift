@@ -9,6 +9,6 @@
 import Foundation
 
 
-public final class LogInErrorController : UIViewController {
+public final class LogInErrorController: UIViewController {
     
 }
