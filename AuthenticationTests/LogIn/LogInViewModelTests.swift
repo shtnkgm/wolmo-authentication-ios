@@ -207,7 +207,7 @@ class LogInViewModelSpec: QuickSpec {
                     }
                     
                     it("should return logIn email error") { waitUntil { done in
-                        logInVM.logInCocoaAction.execute(.None)
+                        logInVM.logInCocoaAction.execute("")
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogInError(let error):
@@ -240,7 +240,7 @@ class LogInViewModelSpec: QuickSpec {
                     }
                     
                     it("should return logIn password error") { waitUntil { done in
-                        logInVM.logInCocoaAction.execute(.None)
+                        logInVM.logInCocoaAction.execute("")
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogInError(let error):
@@ -273,7 +273,7 @@ class LogInViewModelSpec: QuickSpec {
                     }
                     
                     it("should return logIn email error") { waitUntil { done in
-                        logInVM.logInCocoaAction.execute(.None)
+                        logInVM.logInCocoaAction.execute("")
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogInError(let error):
@@ -306,7 +306,7 @@ class LogInViewModelSpec: QuickSpec {
                     }
                     
                     it("should return logInUser") { waitUntil { done in
-                        logInVM.logInCocoaAction.execute(.None)
+                        logInVM.logInCocoaAction.execute("")
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogIn(let user):

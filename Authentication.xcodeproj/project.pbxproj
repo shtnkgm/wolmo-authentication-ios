@@ -17,6 +17,10 @@
 		9D1DFF061C8DCFC800F0A37C /* Quick.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF011C8DCFB300F0A37C /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D72AA081C8DC7EA00BB4082 /* Authentication.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D72AA071C8DC7EA00BB4082 /* Authentication.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9D72AA0F1C8DC7EB00BB4082 /* Authentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; };
+		9DC1F1561C94DC8C005FC65A /* CocoaLumberjack.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEFE1C8DCF5300F0A37C /* CocoaLumberjack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9DC1F1591C94DC8C005FC65A /* Rex.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF91C8DCE0A00F0A37C /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */; };
 		CE9AC3C81C8F4E430012D20B /* LogInErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C71C8F4E430012D20B /* LogInErrorController.swift */; };
@@ -50,6 +54,10 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9DC1F1561C94DC8C005FC65A /* CocoaLumberjack.framework in Copy Frameworks */,
+				9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */,
+				9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */,
+				9DC1F1591C94DC8C005FC65A /* Rex.framework in Copy Frameworks */,
 				9D1DFF051C8DCFC800F0A37C /* Nimble.framework in Copy Frameworks */,
 				9D1DFF061C8DCFC800F0A37C /* Quick.framework in Copy Frameworks */,
 			);

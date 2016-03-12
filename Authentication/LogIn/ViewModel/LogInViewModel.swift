@@ -48,7 +48,7 @@ public final class LogInViewModel<User: UserType, SessionService: SessionService
     public let passwordValidationErrors: AnyProperty<[String]>
     public let showPassword = MutableProperty(false)
     
-    private lazy var _logIn: Action<AnyObject?, User, SessionServiceError> = {
+    private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             let email = Email(raw: self.email.value)!
             let password = self.password.value
