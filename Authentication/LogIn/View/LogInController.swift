@@ -11,7 +11,9 @@ import ReactiveCocoa
 import Rex
 import enum Result.NoError
 
+/**
 
+*/
 public final class LogInController: UIViewController {
     
     typealias LogInErrorHandler = (SessionServiceError, LogInController) -> ()

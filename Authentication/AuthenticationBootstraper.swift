@@ -83,7 +83,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
          Creates the LogInViewModel to use in the authentication process logic,
          with the LogInCredentialsValidator returned in the function createLogInCredentialsValidator.
 
-         - Returns: A log in view model that controls the log in logic and comunicates with the session service.
+         - Returns: A login view model that controls the log in logic and comunicates with the session service.
 
          - Warning: The LogInViewModel returned must be constructed with the same session service as the
          authentication bootstrapper.
@@ -93,10 +93,12 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
     }
 
     /**
-        Creates log in view that conforms to the logInViewType protocol
-        and will be use for the log in visual.
+        Creates login view that conforms to the logInViewType protocol
+        and will be use for the login visual.
 
-        - Returns: 
+        - Returns: A valid login view ready to be used.
+     
+        - Attention: Override this method for customizing the view for the login.
     */
     public func createLogInView() -> LogInViewType {
         return LogInView()

@@ -134,7 +134,7 @@ public struct MinLengthValidator: TextInputValidatorType {
     }
     
     public func validate(text: String) -> ValidationResult {
-        if text.characters.count > _minLength {
+        if text.characters.count < _minLength {
             return .Invalid(errors: ["text-input-validator.min-length".localized(_minLength)])
         } else {
             return .Valid
