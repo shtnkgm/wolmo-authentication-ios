@@ -48,7 +48,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         sessionService.events.observeNext { [unowned self] event in
             switch event {
             case .LogIn(_): self._window.rootViewController = self._mainViewControllerFactory()  //Pasarle el user?
-            case .LogOut(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLogInController())
+            case .LogOut(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLoginController())
             default: break
             }
         }
@@ -63,7 +63,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         if let _ = self.currentUser {
             _window.rootViewController = _mainViewControllerFactory()
         } else {
-            _window.rootViewController = UINavigationController(rootViewController: createLogInController())
+            _window.rootViewController = UINavigationController(rootViewController: createLoginController())
         }
     }
 
@@ -75,8 +75,8 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
 
         - Attention: Override this method for customizing the criteria of email and password validity.
     */
-    public func createLogInCredentialsValidator() -> LogInCredentialsValidator {
-        return LogInCredentialsValidator()
+    public func createLogInCredentialsValidator() -> LoginCredentialsValidator {
+        return LoginCredentialsValidator()
     }
 
     /**
@@ -88,8 +88,8 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
          - Warning: The LogInViewModel returned must be constructed with the same session service as the
          authentication bootstrapper.
      */
-    func createLogInViewModel() -> LogInViewModel<User, SessionService> {
-        return LogInViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
+    func createLoginViewModel() -> LoginViewModel<User, SessionService> {
+        return LoginViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
     }
 
     /**
@@ -100,8 +100,8 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
      
         - Attention: Override this method for customizing the view for the login.
     */
-    public func createLogInView() -> LogInViewType {
-        return LogInView()
+    public func createLoginView() -> LoginViewType {
+        return LoginView()
     }
 
 }
@@ -117,21 +117,21 @@ private extension AuthenticationBootstraper {
         self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
     }
 
-    func createLogInErrorController(error: SessionServiceError) -> LogInErrorController { //TODO
-        return LogInErrorController()
+    func createLoginErrorController(error: SessionServiceError) -> LoginErrorController { //TODO
+        return LoginErrorController()
     }
 
-    func transitionToLogInError(error: SessionServiceError, logInController: LogInController) {
-        let controller = createLogInErrorController(error)
+    func transitionToLoginError(error: SessionServiceError, logInController: LoginController) {
+        let controller = createLoginErrorController(error)
         self._window.rootViewController?.presentViewController(controller, animated: false, completion: nil)
     }
 
-    func createLogInController() -> LogInController {
-        return LogInController(
-            viewModel: createLogInViewModel(),
-            logInViewFactory: createLogInView,
+    func createLoginController() -> LoginController {
+        return LoginController(
+            viewModel: createLoginViewModel(),
+            loginViewFactory: createLoginView,
             onRegister: { [unowned self] _ in self.transitionToSignUp() },
-            onLogInError: transitionToLogInError)
+            onLogInError: transitionToLoginError)
     }
 
 }

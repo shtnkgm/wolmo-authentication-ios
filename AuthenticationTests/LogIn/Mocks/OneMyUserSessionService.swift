@@ -28,7 +28,7 @@ final class OneMyUserSessionService: SessionServiceType {
         (events, _eventsObserver) = Signal<SessionServiceEvent<User>, NoError>.pipe()
     }
     
-    func login(email: Email, _ password: String) -> SignalProducer<MyUser, SessionServiceError> {
+    func logIn(email: Email, _ password: String) -> SignalProducer<MyUser, SessionServiceError> {
         if email == self._possibleUser.email {
             if password == self._possibleUser.password {
                 return SignalProducer(value: self._possibleUser).on(completed: { [unowned self] in

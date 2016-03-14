@@ -1,5 +1,5 @@
 //
-//  LogInViewModel.swift
+//  LoginViewModel.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.
@@ -11,7 +11,7 @@ import ReactiveCocoa
 import enum Result.NoError
 
 
-public protocol LogInViewModelType {
+public protocol LoginViewModelType {
     
     var email: MutableProperty<String> { get }
     var emailValidationErrors: AnyProperty<[String]> { get }
@@ -36,7 +36,7 @@ public protocol LogInViewModelType {
     
 }
 
-public final class LogInViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LogInViewModelType {
+public final class LoginViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LoginViewModelType {
     
     private let _credentialsAreValid: AnyProperty<Bool>
     private let _sessionService: SessionService
@@ -52,7 +52,7 @@ public final class LogInViewModel<User: UserType, SessionService: SessionService
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             let email = Email(raw: self.email.value)!
             let password = self.password.value
-            return self._sessionService.login(email, password).observeOn(UIScheduler())
+            return self._sessionService.logIn(email, password).observeOn(UIScheduler())
         }
     }()
     public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
@@ -67,7 +67,7 @@ public final class LogInViewModel<User: UserType, SessionService: SessionService
         }
     }()
     
-    public init(sessionService: SessionService, credentialsValidator: LogInCredentialsValidator = LogInCredentialsValidator()) {
+    public init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
         _sessionService = sessionService
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
@@ -85,7 +85,7 @@ public final class LogInViewModel<User: UserType, SessionService: SessionService
     
 }
 
-public extension LogInViewModel {
+public extension LoginViewModel {
     
     var emailText: String {
         return "login-view-model.email".localized

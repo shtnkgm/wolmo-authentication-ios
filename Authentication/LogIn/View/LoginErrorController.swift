@@ -1,5 +1,5 @@
 //
-//  LogInErrorController.swift
+//  LoginErrorController.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/8/16.
@@ -9,6 +9,6 @@
 import Foundation
 
 
-public final class LogInErrorController: UIViewController {
+public final class LoginErrorController: UIViewController {
     
 }

@@ -1,5 +1,5 @@
 //
-//  LogInViewType.swift
+//  LoginViewType.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.
@@ -14,7 +14,7 @@ public protocol Renderable {
     
 }
 
-public protocol LogInViewType: Renderable {
+public protocol LoginViewType: Renderable {
     
     var view: UIView { get }
     
@@ -36,7 +36,7 @@ public protocol LogInViewType: Renderable {
     
 }
 
-public extension LogInViewType where Self: UIView {
+public extension LoginViewType where Self: UIView {
     
     var view: UIView {
         return self
@@ -44,7 +44,7 @@ public extension LogInViewType where Self: UIView {
     
 }
 
-public final class LogInView: UIView, LogInViewType {
+public final class LoginView: UIView, LoginViewType {
     
     //TODO return real objects
     public var emailLabel: UILabel { return UILabel() }

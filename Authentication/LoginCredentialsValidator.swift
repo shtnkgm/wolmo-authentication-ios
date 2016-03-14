@@ -1,5 +1,5 @@
 //
-//  LogInCredentialsValidator.swift
+//  LoginCredentialsValidator.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-public struct LogInCredentialsValidator {
+public struct LoginCredentialsValidator {
     
     public static func defaultEmailValidator() -> TextInputValidatorType {
         return  CompositeTextInputValidator(validators: [
@@ -32,8 +32,8 @@ public struct LogInCredentialsValidator {
     public let emailValidator: TextInputValidatorType
     public let passwordValidator: TextInputValidatorType
     
-    init(emailValidator: TextInputValidatorType = LogInCredentialsValidator.defaultEmailValidator(),
-        passwordValidator: TextInputValidatorType = LogInCredentialsValidator.defaultPasswordValidator()) {
+    init(emailValidator: TextInputValidatorType = LoginCredentialsValidator.defaultEmailValidator(),
+        passwordValidator: TextInputValidatorType = LoginCredentialsValidator.defaultPasswordValidator()) {
             self.emailValidator = emailValidator
             self.passwordValidator = passwordValidator
     }

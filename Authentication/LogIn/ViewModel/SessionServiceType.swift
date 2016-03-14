@@ -31,6 +31,6 @@ public protocol SessionServiceType {
     
     var events: Signal<SessionServiceEvent<User>, NoError> { get }
     
-    func login(email: Email, _ password: String) -> SignalProducer<User, SessionServiceError>
+    func logIn(email: Email, _ password: String) -> SignalProducer<User, SessionServiceError>
     
 }

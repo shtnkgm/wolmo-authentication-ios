@@ -1,5 +1,5 @@
 //
-//  LogInController.swift
+//  LoginController.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.
@@ -14,25 +14,25 @@ import enum Result.NoError
 /**
 
 */
-public final class LogInController: UIViewController {
+public final class LoginController: UIViewController {
     
-    typealias LogInErrorHandler = (SessionServiceError, LogInController) -> ()
+    typealias LogInErrorHandler = (SessionServiceError, LoginController) -> ()
     
-    private let _viewModel: LogInViewModelType
+    private let _viewModel: LoginViewModelType
     private let _onLogInError: LogInErrorHandler?
-    private let _onRegister: (LogInController) -> ()
+    private let _onRegister: (LoginController) -> ()
     
-    private let _logInViewFactory: () -> LogInViewType
-    public lazy var logInView: LogInViewType = self._logInViewFactory()
+    private let _loginViewFactory: () -> LoginViewType
+    public lazy var loginView: LoginViewType = self._loginViewFactory()
     
-    init(viewModel: LogInViewModelType,
-        logInViewFactory: () -> LogInViewType,
-        onRegister: (LogInController) -> (),
+    init(viewModel: LoginViewModelType,
+        loginViewFactory: () -> LoginViewType,
+        onRegister: (LoginController) -> (),
         onLogInError: LogInErrorHandler? = Optional.None) {
             _viewModel = viewModel
             _onLogInError = onLogInError
             _onRegister = onRegister
-            self._logInViewFactory = logInViewFactory
+            self._loginViewFactory = loginViewFactory
             super.init(nibName: nil, bundle: nil)
     }
 
@@ -41,18 +41,18 @@ public final class LogInController: UIViewController {
     }
     
     override public func loadView() {
-        self.view = logInView.view
+        self.view = loginView.view
     }
 
     
     override public func viewDidLoad() {
-        logInView.render()
+        loginView.render()
         bindViewModel()
     }
     
 }
 
-private extension LogInController {
+private extension LoginController {
     
     func bindViewModel() {
         
@@ -62,16 +62,16 @@ private extension LogInController {
         
         _viewModel.logInExecuting.observeNext { [unowned self] executing in
             if executing {
-                self.logInView.activityIndicator.startAnimating()
+                self.loginView.activityIndicator.startAnimating()
                 UIApplication.sharedApplication().beginIgnoringInteractionEvents()
             } else {
-                self.logInView.activityIndicator.stopAnimating()
+                self.loginView.activityIndicator.stopAnimating()
                 UIApplication.sharedApplication().endIgnoringInteractionEvents()
             }
         }
         
         _viewModel.logInErrors.observeNext { [unowned self] error in
-            if let logInErrorLabel = self.logInView.loginErrorLabel {
+            if let logInErrorLabel = self.loginView.loginErrorLabel {
                 logInErrorLabel.text = error.message
             } else if let onLogInError = self._onLogInError {
                 onLogInError(error, self)
@@ -84,39 +84,39 @@ private extension LogInController {
     }
     
     func bindEmailElements() {
-        _viewModel.email <~ logInView.emailTextField.rex_textSignal
-        logInView.emailLabel.text = _viewModel.emailText
-        logInView.emailTextField.placeholder = _viewModel.emailPlaceholderText
-        if let emailValidationMessageLabel = logInView.emailValidationMessageLabel {
+        _viewModel.email <~ loginView.emailTextField.rex_textSignal
+        loginView.emailLabel.text = _viewModel.emailText
+        loginView.emailTextField.placeholder = _viewModel.emailPlaceholderText
+        if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
         }
     }
     
     func bindPasswordElements() {
-        _viewModel.password <~ logInView.passwordTextField.rex_textSignal
-        logInView.passwordLabel.text = _viewModel.passwordText
-        logInView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
-        if let passwordValidationMessageLabel = logInView.passwordValidationMessageLabel {
+        _viewModel.password <~ loginView.passwordTextField.rex_textSignal
+        loginView.passwordLabel.text = _viewModel.passwordText
+        loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
+        if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
-        if let passwordVisibilityButton = logInView.passwordVisibilityButton {
+        if let passwordVisibilityButton = loginView.passwordVisibilityButton {
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility.unsafeCocoaAction
             _viewModel.showPassword.signal.observeNext { [unowned self] showPassword in
                 passwordVisibilityButton.setTitle(self._viewModel.passwordVisibilityButtonTitle, forState: .Normal)
-                self.logInView.passwordTextField.secureTextEntry = !showPassword
+                self.loginView.passwordTextField.secureTextEntry = !showPassword
             }
         }
     }
     
     func bindButtons() {
-        logInView.loginButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
-        logInView.loginButton.rex_pressed.value = _viewModel.logInCocoaAction
+        loginView.loginButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
+        loginView.loginButton.rex_pressed.value = _viewModel.logInCocoaAction
         
-        logInView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
-        logInView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }
+        loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
+        loginView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }
         
         // loginView.termsAndService -> Present modally web view controller that shows HTML file
-        logInView.termsAndService?.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
+        loginView.termsAndService?.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
     }
     
 }
