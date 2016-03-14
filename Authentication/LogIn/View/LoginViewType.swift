@@ -27,8 +27,8 @@ public protocol LoginViewType: Renderable {
     var passwordValidationMessageLabel: UILabel? { get }
     var passwordVisibilityButton: UIButton? { get }
     
-    var loginButton: UIButton { get }
-    var loginErrorLabel: UILabel? { get }
+    var logInButton: UIButton { get }
+    var logInErrorLabel: UILabel? { get }
     var registerButton: UIButton { get }
     var termsAndService: UIButton? { get }
     
@@ -46,27 +46,47 @@ public extension LoginViewType where Self: UIView {
 
 public final class LoginView: UIView, LoginViewType {
     
-    //TODO return real objects
-    public var emailLabel: UILabel { return UILabel() }
-    public var emailTextField: UITextField { return UITextField() }
-    public var emailValidationMessageLabel: UILabel? { return .None }
+    public let emailLabel: UILabel
+    public let emailTextField: UITextField
+    public let emailValidationMessageLabel: UILabel?
     
-    public var passwordLabel: UILabel { return UILabel() }
-    public var passwordTextField: UITextField { return UITextField() }
-    public var passwordValidationMessageLabel: UILabel? { return .None }
-    public var passwordVisibilityButton: UIButton? { return .None }
+    public let passwordLabel: UILabel
+    public let passwordTextField: UITextField
+    public let passwordValidationMessageLabel: UILabel?
+    public let passwordVisibilityButton: UIButton?
     
-    public var loginButton: UIButton { return UIButton() }
-    public var loginErrorLabel: UILabel? { return .None }
-    public var registerButton: UIButton { return UIButton() }
-    public var termsAndService: UIButton? { return .None }
+    public let logInButton: UIButton
+    public let logInErrorLabel: UILabel?
+    public let registerButton: UIButton
+    public let termsAndService: UIButton?
     
-    public var activityIndicator: UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+    public let activityIndicator: UIActivityIndicatorView
+    
+    init() {
+        emailLabel = UILabel()
+        emailTextField = UITextField()
+        emailValidationMessageLabel = UILabel()
+        
+        passwordLabel = UILabel()
+        passwordTextField = UITextField()
+        passwordValidationMessageLabel = UILabel()
+        passwordVisibilityButton = UIButton()
+        
+        logInButton = UIButton()
+        logInErrorLabel = UILabel()
+        registerButton = UIButton()
+        termsAndService = UIButton()
+        
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.hidesWhenStopped = true
+        
+        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         self.addSubview(activityIndicator)
-        return activityIndicator
+    }
+
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     public func render() {

@@ -16,10 +16,10 @@ import enum Result.NoError
 */
 public final class LoginController: UIViewController {
     
-    typealias LogInErrorHandler = (SessionServiceError, LoginController) -> ()
+    typealias LoginErrorHandler = (SessionServiceError, LoginController) -> ()
     
     private let _viewModel: LoginViewModelType
-    private let _onLogInError: LogInErrorHandler?
+    private let _onLoginError: LoginErrorHandler?
     private let _onRegister: (LoginController) -> ()
     
     private let _loginViewFactory: () -> LoginViewType
@@ -28,11 +28,11 @@ public final class LoginController: UIViewController {
     init(viewModel: LoginViewModelType,
         loginViewFactory: () -> LoginViewType,
         onRegister: (LoginController) -> (),
-        onLogInError: LogInErrorHandler? = Optional.None) {
+        onLoginError: LoginErrorHandler? = Optional.None) {
             _viewModel = viewModel
-            _onLogInError = onLogInError
+            _onLoginError = onLoginError
             _onRegister = onRegister
-            self._loginViewFactory = loginViewFactory
+            _loginViewFactory = loginViewFactory
             super.init(nibName: nil, bundle: nil)
     }
 
@@ -71,10 +71,10 @@ private extension LoginController {
         }
         
         _viewModel.logInErrors.observeNext { [unowned self] error in
-            if let logInErrorLabel = self.loginView.loginErrorLabel {
+            if let logInErrorLabel = self.loginView.logInErrorLabel {
                 logInErrorLabel.text = error.message
-            } else if let onLogInError = self._onLogInError {
-                onLogInError(error, self)
+            } else if let onLoginError = self._onLoginError {
+                onLoginError(error, self)
             } else {
                 let alert = UIAlertController(title: "", message: error.message, preferredStyle: .Alert)
                 alert.addAction(UIAlertAction(title: "", style: .Default, handler: nil))
@@ -96,10 +96,12 @@ private extension LoginController {
         _viewModel.password <~ loginView.passwordTextField.rex_textSignal
         loginView.passwordLabel.text = _viewModel.passwordText
         loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
+        //loginView.passwordTextField.secureTextEntry = !_viewModel.showPassword.value    // initial value
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
+            //passwordVisibilityButton.setTitle(_viewModel.passwordVisibilityButtonTitle, forState: .Normal)  // initial value
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility.unsafeCocoaAction
             _viewModel.showPassword.signal.observeNext { [unowned self] showPassword in
                 passwordVisibilityButton.setTitle(self._viewModel.passwordVisibilityButtonTitle, forState: .Normal)
@@ -109,8 +111,8 @@ private extension LoginController {
     }
     
     func bindButtons() {
-        loginView.loginButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
-        loginView.loginButton.rex_pressed.value = _viewModel.logInCocoaAction
+        loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
+        loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
         
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
         loginView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }

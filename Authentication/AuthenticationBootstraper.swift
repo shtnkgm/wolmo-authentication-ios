@@ -131,7 +131,7 @@ private extension AuthenticationBootstraper {
             viewModel: createLoginViewModel(),
             loginViewFactory: createLoginView,
             onRegister: { [unowned self] _ in self.transitionToSignUp() },
-            onLogInError: transitionToLoginError)
+            onLoginError: transitionToLoginError)
     }
 
 }
