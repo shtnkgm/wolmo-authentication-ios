@@ -10,7 +10,9 @@ import Foundation
 import ReactiveCocoa
 import enum Result.NoError
 
-
+/**
+    Protocol for login view models.
+*/
 public protocol LoginViewModelType {
     
     var email: MutableProperty<String> { get }
@@ -36,6 +38,11 @@ public protocol LoginViewModelType {
     
 }
 
+/**
+    Default LoginViewModel responsible for validating entries to email and password fields 
+    and therefore enabling log in action, managing password visibility, reporting log in events
+    and communicating with the session service for executing the log in.
+*/
 public final class LoginViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LoginViewModelType {
     
     private let _credentialsAreValid: AnyProperty<Bool>
@@ -67,6 +74,17 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
         }
     }()
     
+    /**
+        Initializes a login view model which will communicate to the session service provided and
+        will regulate the log in with the validation criteria from the login credentials validator.
+     
+        - Parameters:
+            - sessionService: session service to communicate with for log in action.
+            - credentialsValidator: login credentials validator which encapsulates the criteria
+            that the email and password fields must meet.
+     
+        - Returns: A valid login view model ready to use.
+    */
     public init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
         _sessionService = sessionService
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
