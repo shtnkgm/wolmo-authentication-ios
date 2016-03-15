@@ -50,3 +50,30 @@ private class ActionHandler<T>: NSObject {
     }
     
 }
+
+
+public enum NibIdentifier: String {
+    case LoginView = "LoginView"
+}
+
+
+extension UIView {
+    /**
+        Loads the nib for the specific view. If called without specifying the identifier, it will use the view name as the xib name.
+    
+         - parameter identifier: View's xib identifier, default = nil.
+         - parameter bundle: Specific bundle, default = nil.
+         
+         - returns: The loaded UIView
+    */
+    class func loadFromNib<T: UIView>(identifier: NibIdentifier? = nil, bundle: NSBundle? = nil) -> T {
+        let nibName = identifier.map { $0.rawValue } ?? NSStringFromClass(self).componentsSeparatedByString(".").last!
+        return NSBundle.mainBundle().loadNib(nibName) as! T
+    }
+}
+
+public extension NSBundle {
+    public func loadNib(name: String) -> AnyObject {
+        return self.loadNibNamed(name, owner: self, options: nil)[0]
+    }
+}

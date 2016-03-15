@@ -60,12 +60,13 @@ public final class LoginController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func loadView() {
+    public override func loadView() {
         self.view = loginView.view
+        LoginView.loadFromNib()
     }
 
     
-    override public func viewDidLoad() {
+    public override func viewDidLoad() {
         loginView.render()
         bindViewModel()
     }
