@@ -96,15 +96,17 @@ private extension LoginController {
         _viewModel.password <~ loginView.passwordTextField.rex_textSignal
         loginView.passwordLabel.text = _viewModel.passwordText
         loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
-        //loginView.passwordTextField.secureTextEntry = !_viewModel.showPassword.value    // initial value
+        //loginView.passwordTextField.secureTextEntry = !_viewModel.showPassword.value    // initial value may be required, check with tests
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
-            //passwordVisibilityButton.setTitle(_viewModel.passwordVisibilityButtonTitle, forState: .Normal)  // initial value
+            //passwordVisibilityButton.setTitle(_viewModel.passwordVisibilityButtonTitle, forState: .Normal)  // initial value may be required, check with tests
+            passwordVisibilityButton.rex_title <~ _viewModel.showPassword.producer.map { [unowned self] _ in
+                self._viewModel.passwordVisibilityButtonTitle
+            }
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility.unsafeCocoaAction
             _viewModel.showPassword.signal.observeNext { [unowned self] showPassword in
-                passwordVisibilityButton.setTitle(self._viewModel.passwordVisibilityButtonTitle, forState: .Normal)
                 self.loginView.passwordTextField.secureTextEntry = !showPassword
             }
         }
