@@ -104,26 +104,40 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         return LoginView()
     }
 
+    /**
+        Creates the login view controller delegate that the login controller
+        will use to add behaviour to certain events.
+     
+        - Returns: A valid login controller delegate to use.
+     
+        - Attention: Override this method for customizing any of the 
+        delegate's reactions to events.
+    */
+    public func createLoginControllerDelegate() -> LoginControllerDelegateType {
+        return DefaultLoginControllerDelegate()
+    }
+    
+    
+    /**
+         Creates the register (sign up) controller to use when the
+         user selects that option.
+         
+         - Returns: A valid register controller delegate to use.
+         
+         - Attention: Override this method for customizing the
+         register controller to be used.
+    */
+    public func createRegisterController() -> RegisterController { //todo
+        return RegisterController()
+    }
+    
 }
 
 private extension AuthenticationBootstraper {
 
-    func createRegisterController() -> RegisterController { //todo
-        return RegisterController()
-    }
-
     func transitionToSignUp() {
         let controller = createRegisterController()
         self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
-    }
-
-    func createLoginErrorController(error: SessionServiceError) -> LoginErrorController { //TODO
-        return LoginErrorController()
-    }
-
-    func transitionToLoginError(error: SessionServiceError, logInController: LoginController) {
-        let controller = createLoginErrorController(error)
-        self._window.rootViewController?.presentViewController(controller, animated: false, completion: nil)
     }
 
     func createLoginController() -> LoginController {
@@ -131,7 +145,7 @@ private extension AuthenticationBootstraper {
             viewModel: createLoginViewModel(),
             loginViewFactory: createLoginView,
             onRegister: { [unowned self] _ in self.transitionToSignUp() },
-            onLoginError: transitionToLoginError)
+            delegate: createLoginControllerDelegate())
     }
 
 }

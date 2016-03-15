@@ -12,27 +12,47 @@ import Rex
 import enum Result.NoError
 
 /**
-
-*/
+    Log In View Controller that takes care of managing the login, from
+    validating email and password fields, to binding a login view to the
+    view model and infoming a log in controller delegate when certain 
+    events occur for it to act upon them.
+ */
 public final class LoginController: UIViewController {
     
     typealias LoginErrorHandler = (SessionServiceError, LoginController) -> ()
     
     private let _viewModel: LoginViewModelType
-    private let _onLoginError: LoginErrorHandler?
     private let _onRegister: (LoginController) -> ()
-    
     private let _loginViewFactory: () -> LoginViewType
+    private let _delegate: LoginControllerDelegateType
+
     public lazy var loginView: LoginViewType = self._loginViewFactory()
     
+    /**
+        Initializes a login controller with the view model, delegate,
+        a factory method for the login view and onRegister closure to use.
+     
+        - Params:
+            - viewModel: view model to bind to and use.
+            - loginViewFactory: factory method to call only once
+            to get the login view to use.
+            - onRegister: closure which indicates what to do when
+            the user selects the Register/SignUp option.
+            - delegate: delegate which adds behaviour to certain
+            events, like handling a login error or selecting log in option.
+            A default delegate is provided.
+     
+        - Returns: A valid login view controller ready to use.
+     
+    */
     init(viewModel: LoginViewModelType,
         loginViewFactory: () -> LoginViewType,
         onRegister: (LoginController) -> (),
-        onLoginError: LoginErrorHandler? = Optional.None) {
+        delegate: LoginControllerDelegateType = DefaultLoginControllerDelegate()) {
             _viewModel = viewModel
-            _onLoginError = onLoginError
-            _onRegister = onRegister
             _loginViewFactory = loginViewFactory
+            _onRegister = onRegister
+            _delegate = delegate
             super.init(nibName: nil, bundle: nil)
     }
 
@@ -60,27 +80,17 @@ private extension LoginController {
         bindPasswordElements()
         bindButtons()
         
+        
         _viewModel.logInExecuting.observeNext { [unowned self] executing in
             if executing {
-                self.loginView.activityIndicator.startAnimating()
-                UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+                self._delegate.loginControllerWillExecuteLogIn(self)
             } else {
-                self.loginView.activityIndicator.stopAnimating()
-                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+                self._delegate.loginControllerDidExecuteLogIn(self)
             }
         }
         
-        _viewModel.logInErrors.observeNext { [unowned self] error in
-            if let logInErrorLabel = self.loginView.logInErrorLabel {
-                logInErrorLabel.text = error.message
-            } else if let onLoginError = self._onLoginError {
-                onLoginError(error, self)
-            } else {
-                let alert = UIAlertController(title: "", message: error.message, preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "", style: .Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-        }
+        _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.loginController(self, didLogInWithError: $0) }
+        
     }
     
     func bindEmailElements() {

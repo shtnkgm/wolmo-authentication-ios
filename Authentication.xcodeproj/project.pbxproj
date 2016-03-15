@@ -21,13 +21,13 @@
 		9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC1F1591C94DC8C005FC65A /* Rex.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF91C8DCE0A00F0A37C /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE11A7011C9848AE002C9779 /* LoginControllerDelegateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11A7001C9848AE002C9779 /* LoginControllerDelegateType.swift */; };
 		CE2BB8C71C972819009CAC8F /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */; };
 		CE2BC5261C970E51003A1616 /* MyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5251C970E51003A1616 /* MyUser.swift */; };
 		CE2BC5281C970E89003A1616 /* OneMyUserSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5271C970E89003A1616 /* OneMyUserSessionService.swift */; };
 		CE2BC52A1C970F22003A1616 /* ValidatorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5291C970F22003A1616 /* ValidatorsTests.swift */; };
 		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */; };
-		CE9AC3C81C8F4E430012D20B /* LoginErrorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C71C8F4E430012D20B /* LoginErrorController.swift */; };
 		CEBF66BA1C8DD582006EE090 /* LoginViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginViewType.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C41C8DEF9A006EE090 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBF66C31C8DEF9A006EE090 /* Localizable.strings */; };
@@ -82,13 +82,13 @@
 		9D72AA091C8DC7EA00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE11A7001C9848AE002C9779 /* LoginControllerDelegateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginControllerDelegateType.swift; path = LogIn/View/LoginControllerDelegateType.swift; sourceTree = "<group>"; };
 		CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = LogIn/LoginControllerTests.swift; sourceTree = "<group>"; };
 		CE2BC5251C970E51003A1616 /* MyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyUser.swift; path = LogIn/Mocks/MyUser.swift; sourceTree = "<group>"; };
 		CE2BC5271C970E89003A1616 /* OneMyUserSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OneMyUserSessionService.swift; path = LogIn/Mocks/OneMyUserSessionService.swift; sourceTree = "<group>"; };
 		CE2BC5291C970F22003A1616 /* ValidatorsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidatorsTests.swift; path = LogIn/ValidatorsTests.swift; sourceTree = "<group>"; };
 		CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = SignUp/View/RegisterController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstraper.swift; sourceTree = "<group>"; };
-		CE9AC3C71C8F4E430012D20B /* LoginErrorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginErrorController.swift; path = LogIn/View/LoginErrorController.swift; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LoginViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewType.swift; path = LogIn/View/LoginViewType.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C31C8DEF9A006EE090 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 			children = (
 				CEBF66B91C8DD582006EE090 /* LoginViewType.swift */,
 				CEBF66CD1C8E089D006EE090 /* LoginController.swift */,
-				CE9AC3C71C8F4E430012D20B /* LoginErrorController.swift */,
+				CE11A7001C9848AE002C9779 /* LoginControllerDelegateType.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -422,7 +422,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE9AC3C81C8F4E430012D20B /* LoginErrorController.swift in Sources */,
 				CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */,
 				CEBF66C81C8DFCB1006EE090 /* LoginViewModel.swift in Sources */,
 				CEBF66CC1C8E07FD006EE090 /* Validators.swift in Sources */,
@@ -431,6 +430,7 @@
 				CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */,
 				CEBF66CE1C8E089D006EE090 /* LoginController.swift in Sources */,
 				CEBF66BA1C8DD582006EE090 /* LoginViewType.swift in Sources */,
+				CE11A7011C9848AE002C9779 /* LoginControllerDelegateType.swift in Sources */,
 				CEBF66D21C8E0A80006EE090 /* User.swift in Sources */,
 				CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */,
 				CEBF66CA1C8DFFF2006EE090 /* LoginCredentialsValidator.swift in Sources */,
