@@ -16,6 +16,8 @@ import enum Result.NoError
     validating email and password fields, to binding a login view to the
     view model and infoming a log in controller delegate when certain 
     events occur for it to act upon them.
+    If there are more than one errors in a field, the controller presents
+    only the first one.
  */
 public final class LoginController: UIViewController {
     
@@ -24,7 +26,7 @@ public final class LoginController: UIViewController {
     private let _viewModel: LoginViewModelType
     private let _onRegister: (LoginController) -> ()
     private let _loginViewFactory: () -> LoginViewType
-    private let _delegate: LoginControllerDelegateType
+    private let _delegate: LoginControllerDelegate
 
     public lazy var loginView: LoginViewType = self._loginViewFactory()
     
@@ -48,7 +50,7 @@ public final class LoginController: UIViewController {
     init(viewModel: LoginViewModelType,
         loginViewFactory: () -> LoginViewType,
         onRegister: (LoginController) -> (),
-        delegate: LoginControllerDelegateType = DefaultLoginControllerDelegate()) {
+        delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
             _viewModel = viewModel
             _loginViewFactory = loginViewFactory
             _onRegister = onRegister
@@ -62,7 +64,6 @@ public final class LoginController: UIViewController {
     
     public override func loadView() {
         self.view = loginView.view
-        LoginView.loadFromNib()
     }
 
     
@@ -98,6 +99,13 @@ private extension LoginController {
         _viewModel.email <~ loginView.emailTextField.rex_textSignal
         loginView.emailLabel.text = _viewModel.emailText
         loginView.emailTextField.placeholder = _viewModel.emailPlaceholderText
+        _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
+            if errors == [] {
+                self._delegate.loginControllerDidPassEmailValidation(self)
+            } else {
+                self._delegate.loginController(self, didFailEmailValidationWithErrors: errors)
+            }
+        }
         if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
         }
@@ -108,6 +116,14 @@ private extension LoginController {
         loginView.passwordLabel.text = _viewModel.passwordText
         loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         //loginView.passwordTextField.secureTextEntry = !_viewModel.showPassword.value    // initial value may be required, check with tests
+        _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
+            if errors == [] {
+                self._delegate.loginControllerDidPassPasswordValidation(self)
+            } else {
+                self._delegate.loginController(self, didFailPasswordValidationWithErrors: errors)
+            }
+
+        }
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }

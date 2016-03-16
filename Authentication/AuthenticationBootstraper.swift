@@ -101,7 +101,8 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         - Attention: Override this method for customizing the view for the login.
     */
     public func createLoginView() -> LoginViewType {
-        return LoginView()
+        let view: LoginView = LoginView.loadFromNib()
+        return view
     }
 
     /**
@@ -113,7 +114,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         - Attention: Override this method for customizing any of the 
         delegate's reactions to events.
     */
-    public func createLoginControllerDelegate() -> LoginControllerDelegateType {
+    public func createLoginControllerDelegate() -> LoginControllerDelegate {
         return DefaultLoginControllerDelegate()
     }
     

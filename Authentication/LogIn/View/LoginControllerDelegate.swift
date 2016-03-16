@@ -14,7 +14,7 @@ import Foundation
     Create your own delegate and override any of the defaut methods to
     add behaviour to your login process.
 */
-public protocol LoginControllerDelegateType {
+public protocol LoginControllerDelegate {
     
     func loginControllerWillExecuteLogIn(controller: LoginController)
     
@@ -22,9 +22,17 @@ public protocol LoginControllerDelegateType {
     
     func loginController(controller: LoginController, didLogInWithError error: SessionServiceError)
     
+    func loginControllerDidPassEmailValidation(controller: LoginController)
+    
+    func loginController(controller: LoginController, didFailEmailValidationWithErrors errors: [String])
+    
+    func loginControllerDidPassPasswordValidation(controller: LoginController)
+    
+    func loginController(controller: LoginController, didFailPasswordValidationWithErrors errors: [String])
+    
 }
 
-extension LoginControllerDelegateType {
+extension LoginControllerDelegate {
     
     public func loginControllerWillExecuteLogIn(controller: LoginController) {
         controller.loginView.activityIndicator.startAnimating()
@@ -37,6 +45,9 @@ extension LoginControllerDelegateType {
     }
     
     public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {
+        controller.loginView.emailTextFieldValid = false
+        controller.loginView.passwordTextFieldValid = false
+        
         if let logInErrorLabel = controller.loginView.logInErrorLabel {
             logInErrorLabel.text = error.message
         } else {
@@ -46,6 +57,22 @@ extension LoginControllerDelegateType {
         }
     }
     
+    public func loginControllerDidPassEmailValidation(controller: LoginController) {
+        controller.loginView.emailTextFieldValid = true
+    }
+    
+    public func loginController(controller: LoginController, didFailEmailValidationWithErrors errors: [String]) {
+        controller.loginView.emailTextFieldValid = false
+    }
+    
+    public func loginControllerDidPassPasswordValidation(controller: LoginController) {
+        controller.loginView.passwordTextFieldValid = true
+    }
+    
+    public func loginController(controller: LoginController, didFailPasswordValidationWithErrors errors: [String]) {
+        controller.loginView.passwordTextFieldValid = false
+    }
+    
 }
 
-public final class DefaultLoginControllerDelegate: LoginControllerDelegateType { }
+public final class DefaultLoginControllerDelegate: LoginControllerDelegate { }

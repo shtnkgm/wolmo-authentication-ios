@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -104,16 +103,22 @@
                         </mask>
                     </variation>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FRi-GN-nfX">
+                    <rect key="frame" x="400" y="626" width="128" height="30"/>
+                    <state key="normal" title="Terms and Service"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="m8f-j5-qTM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="40" id="2cO-SY-wUT"/>
                 <constraint firstItem="hiI-H5-iJW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="40" id="4ry-5b-BUL"/>
+                <constraint firstItem="FRi-GN-nfX" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="7bW-K9-62p"/>
                 <constraint firstItem="hiI-H5-iJW" firstAttribute="top" secondItem="5B8-U1-3A4" secondAttribute="bottom" constant="15" id="A2A-TF-V46"/>
                 <constraint firstItem="ZAD-1z-Cfs" firstAttribute="top" secondItem="n6d-h8-UK6" secondAttribute="bottom" constant="8" id="AtW-E0-L9M"/>
                 <constraint firstItem="cxB-U7-f9X" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DnR-Kz-60R"/>
                 <constraint firstItem="Clc-p3-LR7" firstAttribute="top" secondItem="2dd-3i-SpJ" secondAttribute="top" id="FhB-2Q-SHE"/>
                 <constraint firstItem="ye1-Vf-OdP" firstAttribute="trailing" secondItem="G9U-PP-eSg" secondAttribute="trailing" id="Hf1-JZ-zis"/>
+                <constraint firstItem="FRi-GN-nfX" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottomMargin" id="IHR-Rv-Bb7"/>
                 <constraint firstItem="k1E-m0-zdE" firstAttribute="top" secondItem="hiI-H5-iJW" secondAttribute="bottom" constant="35" id="IvA-Ac-Tkz"/>
                 <constraint firstItem="hiI-H5-iJW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="JTD-fm-IcL"/>
                 <constraint firstAttribute="trailingMargin" secondItem="n6d-h8-UK6" secondAttribute="trailing" constant="75" id="Jn2-8g-HIp"/>
@@ -141,6 +146,19 @@
                 <constraint firstItem="GLr-di-9jk" firstAttribute="trailing" secondItem="ZAD-1z-Cfs" secondAttribute="trailing" id="yPA-EK-GxL"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="emailLabelOutlet" destination="G9U-PP-eSg" id="Q7p-za-A8H"/>
+                <outlet property="emailTextFieldOutlet" destination="n6d-h8-UK6" id="MSO-qq-Uh1"/>
+                <outlet property="emailValidationMessageLabelOutlet" destination="ZAD-1z-Cfs" id="LTO-At-YO7"/>
+                <outlet property="logInButtonOutlet" destination="hiI-H5-iJW" id="UMz-QM-poS"/>
+                <outlet property="logInErrorLabelOutlet" destination="5B8-U1-3A4" id="VYs-zp-vgB"/>
+                <outlet property="passwordLabelOutlet" destination="ye1-Vf-OdP" id="gVR-TW-0ii"/>
+                <outlet property="passwordTextFieldOutlet" destination="2dd-3i-SpJ" id="Zzp-gZ-3Iq"/>
+                <outlet property="passwordValidationMessageLabelOutlet" destination="GLr-di-9jk" id="UEW-6E-QDi"/>
+                <outlet property="passwordVisibilityButtonOutlet" destination="Clc-p3-LR7" id="bFW-Qo-sbf"/>
+                <outlet property="registerButtonOutlet" destination="cxB-U7-f9X" id="HAI-nd-Jra"/>
+                <outlet property="termsAndServiceOutlet" destination="FRi-GN-nfX" id="eYu-g9-We0"/>
+            </connections>
             <point key="canvasLocation" x="436" y="392"/>
         </view>
     </objects>

@@ -34,6 +34,9 @@ public protocol LoginViewType: Renderable {
     
     var activityIndicator: UIActivityIndicatorView { get }
     
+    var passwordTextFieldValid: Bool { get set }
+    var emailTextFieldValid: Bool { get set }
+    
 }
 
 public extension LoginViewType where Self: UIView {
@@ -46,40 +49,73 @@ public extension LoginViewType where Self: UIView {
 
 public final class LoginView: UIView, LoginViewType {
     
-    public let emailLabel: UILabel
-    public let emailTextField: UITextField
-    public let emailValidationMessageLabel: UILabel?
+    public var emailLabel: UILabel { return emailLabelOutlet }
+    @IBOutlet weak var emailLabelOutlet: UILabel!
     
-    public let passwordLabel: UILabel
-    public let passwordTextField: UITextField
-    public let passwordValidationMessageLabel: UILabel?
-    public let passwordVisibilityButton: UIButton?
+    public var emailTextField: UITextField { return emailTextFieldOutlet }
+    @IBOutlet weak var emailTextFieldOutlet: UITextField!
     
-    public let logInButton: UIButton
-    public let logInErrorLabel: UILabel?
-    public let registerButton: UIButton
-    public let termsAndService: UIButton?
+    public var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
+    @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel!
+    
+    public var passwordLabel: UILabel { return passwordLabelOutlet }
+    @IBOutlet weak var passwordLabelOutlet: UILabel!
+    
+    public var passwordTextField: UITextField { return passwordTextFieldOutlet }
+    @IBOutlet weak var passwordTextFieldOutlet: UITextField!
+    
+    public var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
+    @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel!
+    
+    public var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
+    @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton!
+    
+    public var logInButton: UIButton { return logInButtonOutlet }
+    @IBOutlet weak var logInButtonOutlet: UIButton!
+    
+    public var logInErrorLabel: UILabel? { return logInErrorLabelOutlet }
+    @IBOutlet weak var logInErrorLabelOutlet: UILabel!
+    
+    public var registerButton: UIButton { return registerButtonOutlet }
+    @IBOutlet weak var registerButtonOutlet: UIButton!
+    
+    public var termsAndService: UIButton? { return termsAndServiceOutlet }
+    @IBOutlet weak var termsAndServiceOutlet: UIButton!
+    
     
     public let activityIndicator: UIActivityIndicatorView
     
+    public var passwordTextFieldValid: Bool {
+        didSet {
+            let color: CGColor
+            if passwordTextFieldValid {
+                color = UIColor.clearColor().CGColor
+            } else {
+                color = UIColor.redColor().CGColor
+            }
+            passwordTextField.layer.borderColor = color
+        }
+    }
+    
+    public var emailTextFieldValid: Bool {
+        didSet {
+            let color: CGColor
+            if emailTextFieldValid {
+                color = UIColor.clearColor().CGColor
+            } else {
+                color = UIColor.redColor().CGColor
+            }
+            emailTextField.layer.borderColor = color
+        }
+    }
+    
     init() {
-        emailLabel = UILabel()
-        emailTextField = UITextField()
-        emailValidationMessageLabel = UILabel()
-        
-        passwordLabel = UILabel()
-        passwordTextField = UITextField()
-        passwordValidationMessageLabel = UILabel()
-        passwordVisibilityButton = UIButton()
-        
-        logInButton = UIButton()
-        logInErrorLabel = UILabel()
-        registerButton = UIButton()
-        termsAndService = UIButton()
-        
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.hidesWhenStopped = true
+        
+        emailTextFieldValid = true
+        passwordTextFieldValid = true
         
         super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         self.addSubview(activityIndicator)
