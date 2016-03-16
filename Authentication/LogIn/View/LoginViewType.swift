@@ -83,7 +83,9 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var termsAndServiceOutlet: UIButton!
     
     
-    public let activityIndicator: UIActivityIndicatorView
+    public var activityIndicator: UIActivityIndicatorView { return activityIndicatorOutlet }
+    @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
+    
     
     public var passwordTextFieldValid: Bool {
         didSet {
@@ -108,27 +110,20 @@ public final class LoginView: UIView, LoginViewType {
             emailTextField.layer.borderColor = color
         }
     }
-    
-    init() {
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
-        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
-        activityIndicator.hidesWhenStopped = true
-        
-        emailTextFieldValid = true
-        passwordTextFieldValid = true
-        
-        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        self.addSubview(activityIndicator)
-    }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public override func awakeFromNib() {
+        emailTextFieldValid = true
+        passwordTextFieldValid = true
+    }
+    
     public func render() {
-        // TODO this function should configure each view elements and
-        // in case we are doing the layout programatically it should
-        // layout all its components
+        activityIndicator.hidesWhenStopped = true
+        
+        //Configure colour palette
     }
     
 }

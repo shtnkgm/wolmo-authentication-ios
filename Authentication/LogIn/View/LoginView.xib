@@ -107,6 +107,9 @@
                     <rect key="frame" x="400" y="626" width="128" height="30"/>
                     <state key="normal" title="Terms and Service"/>
                 </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="lVI-SN-nAC">
+                    <rect key="frame" x="258" y="499" width="20" height="20"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -124,10 +127,12 @@
                 <constraint firstAttribute="trailingMargin" secondItem="n6d-h8-UK6" secondAttribute="trailing" constant="75" id="Jn2-8g-HIp"/>
                 <constraint firstItem="2dd-3i-SpJ" firstAttribute="top" secondItem="n6d-h8-UK6" secondAttribute="bottom" constant="60" id="KFc-cH-SV2"/>
                 <constraint firstItem="2dd-3i-SpJ" firstAttribute="leading" secondItem="n6d-h8-UK6" secondAttribute="leading" id="KcC-IP-trB"/>
+                <constraint firstItem="lVI-SN-nAC" firstAttribute="centerX" secondItem="hiI-H5-iJW" secondAttribute="centerX" id="NrY-Bm-e7R"/>
                 <constraint firstItem="Clc-p3-LR7" firstAttribute="bottom" secondItem="2dd-3i-SpJ" secondAttribute="bottom" id="TyC-fm-uhH"/>
                 <constraint firstItem="GLr-di-9jk" firstAttribute="top" secondItem="Clc-p3-LR7" secondAttribute="bottom" constant="8" id="UIZ-Yg-eYw"/>
                 <constraint firstItem="G9U-PP-eSg" firstAttribute="centerY" secondItem="n6d-h8-UK6" secondAttribute="centerY" id="VAd-9g-tKM"/>
                 <constraint firstItem="6sL-Hy-vEE" firstAttribute="leading" secondItem="ye1-Vf-OdP" secondAttribute="leading" id="Wte-mW-E4n"/>
+                <constraint firstItem="lVI-SN-nAC" firstAttribute="centerY" secondItem="hiI-H5-iJW" secondAttribute="centerY" id="XJu-I6-04F"/>
                 <constraint firstItem="n6d-h8-UK6" firstAttribute="leading" secondItem="G9U-PP-eSg" secondAttribute="trailing" constant="15" id="Y0c-LI-nZX"/>
                 <constraint firstAttribute="trailingMargin" secondItem="hiI-H5-iJW" secondAttribute="trailing" constant="40" id="a54-Ru-MbC"/>
                 <constraint firstItem="6sL-Hy-vEE" firstAttribute="top" secondItem="2dd-3i-SpJ" secondAttribute="bottom" constant="8" id="aT9-Jw-8dl"/>
@@ -147,6 +152,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="activityIndicatorOutlet" destination="lVI-SN-nAC" id="23M-x4-VHY"/>
                 <outlet property="emailLabelOutlet" destination="G9U-PP-eSg" id="Q7p-za-A8H"/>
                 <outlet property="emailTextFieldOutlet" destination="n6d-h8-UK6" id="MSO-qq-Uh1"/>
                 <outlet property="emailValidationMessageLabelOutlet" destination="ZAD-1z-Cfs" id="LTO-At-YO7"/>
@@ -161,5 +167,10 @@
             </connections>
             <point key="canvasLocation" x="436" y="392"/>
         </view>
+        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="OW5-pv-kEY">
+            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <point key="canvasLocation" x="898" y="563"/>
+        </activityIndicatorView>
     </objects>
 </document>
