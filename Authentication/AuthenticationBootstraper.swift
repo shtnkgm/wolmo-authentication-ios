@@ -56,7 +56,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
 
     /**
         Bootstraps your project with the authentication framework,
-        starting with the authentication project if no user is already logged in.
+        starting with the authentication project if no user is already logged in the session service.
         Otherwise, it runs your project directly from starting the main View Controller.
     */
     public final func bootstrap() {
@@ -88,7 +88,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
          - Warning: The LogInViewModel returned must be constructed with the same session service as the
          authentication bootstrapper.
      */
-    func createLoginViewModel() -> LoginViewModel<User, SessionService> {
+    public func createLoginViewModel() -> LoginViewModel<User, SessionService> {
         return LoginViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
     }
 

@@ -277,10 +277,10 @@
 		CEBF66B61C8DD526006EE090 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEAB1EE71C999B5900725619 /* LoginView.xib */,
 				CEBF66B91C8DD582006EE090 /* LoginViewType.swift */,
 				CEBF66CD1C8E089D006EE090 /* LoginController.swift */,
 				CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */,
+				CEAF8C611C985F8300FFD54F /* LoginView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";

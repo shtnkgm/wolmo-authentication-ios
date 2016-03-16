@@ -87,7 +87,7 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
     
     
-    public var passwordTextFieldValid: Bool {
+    public var passwordTextFieldValid: Bool = true {
         didSet {
             let color: CGColor
             if passwordTextFieldValid {
@@ -99,7 +99,7 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
-    public var emailTextFieldValid: Bool {
+    public var emailTextFieldValid: Bool = true {
         didSet {
             let color: CGColor
             if emailTextFieldValid {
@@ -111,19 +111,21 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
 
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     public override func awakeFromNib() {
-        emailTextFieldValid = true
-        passwordTextFieldValid = true
+        
     }
     
     public func render() {
         activityIndicator.hidesWhenStopped = true
         
         //Configure colour palette
+        //Configure fonts
     }
+    
+}
+
+extension LoginView: NibViewLoader {
+    
+    typealias NibLoadableViewType = LoginView
     
 }

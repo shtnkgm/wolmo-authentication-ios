@@ -44,27 +44,21 @@ public enum NibIdentifier: String {
     case LoginView = "LoginView"
 }
 
-extension UIView {
+internal protocol NibViewLoader {
     
-    /**
-     Loads the nib for the specific view. If called without specifying the identifier, it will use the view name as the xib name.
-     
-     - parameter identifier: View's xib identifier, default = nil.
-     - parameter bundle: Specific bundle, default = nil.
-     
-     - returns: The loaded UIView
-     */
-    class func loadFromNib<T: UIView, Identifier: RawRepresentable where Identifier.RawValue == String>(identifier: Identifier? = .None, bundle: NSBundle = NSBundle.mainBundle()) -> T {
-        // swiftlint:disable force_cast
-        let nibName = identifier?.rawValue ?? NSStringFromClass(self).componentsSeparatedByString(".").last!
-        return bundle.loadNib(nibName) as! T
-        // swiftlint:enable force_cast
-    }
+    typealias NibLoadableViewType
+
+    static func loadFromNib() -> NibLoadableViewType
     
-    class func loadFromNib<T: UIView>(bundle: NSBundle = NSBundle.mainBundle()) -> T {
+}
+
+extension NibViewLoader where NibLoadableViewType: UIView {
+    
+    static func loadFromNib() -> NibLoadableViewType {
         // swiftlint:disable force_cast
-        let nibName = String(self.dynamicType).componentsSeparatedByString(".").last!
-        return bundle.loadNib(nibName) as! T
+        let bundle = NSBundle(forClass: NibLoadableViewType.self)
+        let nibName = String(self).componentsSeparatedByString(".").first!
+        return bundle.loadNib(nibName) as! NibLoadableViewType
         // swiftlint:enable force_cast
     }
     
