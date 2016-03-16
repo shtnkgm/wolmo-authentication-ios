@@ -57,9 +57,12 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     
     private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
-            let email = Email(raw: self.email.value)!
-            let password = self.password.value
-            return self._sessionService.logIn(email, password).observeOn(UIScheduler())
+            if let email = Email(raw: self.email.value) {
+                let password = self.password.value
+                return self._sessionService.logIn(email, password).observeOn(UIScheduler())
+            } else {
+                return SignalProducer(error: .InvalidCredentials(.None))
+            }
         }
     }()
     public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
@@ -118,7 +121,7 @@ public extension LoginViewModel {
     }
     
     var passwordPlaceholderText: String {
-        return "login-view-model.email-placeholder".localized
+        return "login-view-model.password-placeholder".localized
     }
     
     var loginButtonTitle: String {

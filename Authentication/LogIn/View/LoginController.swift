@@ -138,12 +138,10 @@ private extension LoginController {
 public extension SessionServiceError {
     var message: String {
         switch self {
-        case .InexistentUser:
-            return "login-error.inexistent-user.message".localized
-        case .WrongPassword:
-            return "login-error.wrong-password.message".localized
-        case .NetworkError(_):
-            return "NETWORK ERROR" //Debería sacar el mensaje del error
+        case .InvalidCredentials(let error):
+            return "login-error.invalid-credentials.message".localized + (error?.localizedDescription ?? "")
+        case .NetworkError(let error):
+            return "login-error.network-error.message".localized + error.localizedDescription
         }
     }
 }

@@ -30,7 +30,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
 
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
-        the factory methos from where to obtain the main View Controller of the application.
+        the factory method from where to obtain the main View Controller of the application.
 
         - Parameters:
             - sessionService: The session service to use for logging in and out.
@@ -47,7 +47,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
 
         sessionService.events.observeNext { [unowned self] event in
             switch event {
-            case .LogIn(_): self._window.rootViewController = self._mainViewControllerFactory()  //Pasarle el user?
+            case .LogIn(_): self._window.rootViewController = self._mainViewControllerFactory()
             case .LogOut(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLoginController())
             default: break
             }

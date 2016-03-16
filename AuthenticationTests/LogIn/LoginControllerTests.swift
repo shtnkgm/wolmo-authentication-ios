@@ -20,13 +20,13 @@ class LoginViewControllerSpec: QuickSpec {
     override func spec() {
         describe("LoginViewController") {
             
-            var sessionService: OneMyUserSessionService!
+            var sessionService: MockSessionService!
             var loginVM: LoginViewModelType!
             var loginV: LoginViewType!
             var loginC: LoginController!
             
             beforeEach() {
-                sessionService = OneMyUserSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
+                sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
                 loginVM = LoginViewModel(sessionService: sessionService)
                 loginV = LoginView()
                 loginC = LoginController(viewModel: loginVM, loginViewFactory: { return loginV }, onRegister: { _ in })

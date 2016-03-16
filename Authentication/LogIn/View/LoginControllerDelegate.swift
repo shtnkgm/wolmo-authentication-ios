@@ -1,5 +1,5 @@
 //
-//  LoginControllerDelegateType.swift
+//  LoginControllerDelegate.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/15/16.
@@ -40,8 +40,8 @@ extension LoginControllerDelegateType {
         if let logInErrorLabel = controller.loginView.logInErrorLabel {
             logInErrorLabel.text = error.message
         } else {
-            let alert = UIAlertController(title: "", message: error.message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "", style: .Default, handler: nil))
+            let alert = UIAlertController(title: "login-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "login-error.alert.close", style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)
         }
     }

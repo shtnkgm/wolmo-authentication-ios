@@ -19,47 +19,47 @@ class LoginViewModelSpec: QuickSpec {
     override func spec() {
         describe("LoginViewModel") {
             
-            var sessionService: OneMyUserSessionService!
-            var loginVM: LoginViewModel<MyUser, OneMyUserSessionService>!
+            var sessionService: MockSessionService!
+            var loginVM: LoginViewModel<MyUser, MockSessionService>!
             
             beforeEach() {
-                sessionService = OneMyUserSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
+                sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
                 loginVM = LoginViewModel(sessionService: sessionService)
             }
             
-            it("should start without errors") {
+            it("starts without errors") {
                 expect(loginVM.emailValidationErrors.value) == []
                 expect(loginVM.passwordValidationErrors.value) == []
             }
             
-            it("should start without showing password") {
+            it("starts without showing password") {
                 expect(loginVM.showPassword.value) == false
             }
             
-            context("fill email with invalid email") {
+            context("when filling email with invalid email") {
                 
-                context("email without @ character") {
+                context("when email doesn't have @ character") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.email.value = "my"
                     }
                     
-                    it("should have one email error") {
+                    it("has one email error") {
                         expect(loginVM.emailValidationErrors.value.count).toEventually(equal(1), timeout: 3)
                     }
                     
-                    it("should have no password errors") {
+                    it("has no password errors") {
                         expect(loginVM.passwordValidationErrors.value) == []
                     }
                     
-                    it("should not let logIn start") {
+                    it("does not let logIn start") {
                         expect(loginVM.logInCocoaAction.enabled) == false
                     }
                     
                 }
                 
-                context("empty") {
+                context("when email is empty") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
@@ -67,15 +67,15 @@ class LoginViewModelSpec: QuickSpec {
                         loginVM.email.value = ""
                     }
                     
-                    it("should have two email error - empty and not valid") {
+                    it("has two email error - empty and not valid") {
                         expect(loginVM.emailValidationErrors.value.count).toEventually(equal(2), timeout: 3)
                     }
                     
-                    it("should have no password errors") {
+                    it("has no password errors") {
                         expect(loginVM.passwordValidationErrors.value) == []
                     }
                     
-                    it("should not let logIn start") {
+                    it("does not let logIn start") {
                         expect(loginVM.logInCocoaAction.enabled) == false
                     }
                     
@@ -84,51 +84,51 @@ class LoginViewModelSpec: QuickSpec {
                 
             }
             
-            context("fill password with invalid password") {
+            context("when filling password with invalid password") {
                 
-                context("password shorter than expected") {
+                context("when password is shorter than expected") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.password.value = "my"
                     }
                     
-                    it("should have one password error") {
+                    it("has one password error") {
                         expect(loginVM.passwordValidationErrors.value.count).toEventually(equal(1), timeout: 3)
                     }
                     
-                    it("should have no email errors") {
+                    it("has no email errors") {
                         expect(loginVM.emailValidationErrors.value) == []
                     }
                     
-                    it("should not let logIn start") {
+                    it("does not let logIn start") {
                         expect(loginVM.logInCocoaAction.enabled) == false
                     }
                     
                 }
                 
-                context("password longer than expected") {
+                context("when password is longer than expected") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.password.value = "myVeryLongPasswordWithMoreThan30Characters"
                     }
                     
-                    it("should have one password error") {
+                    it("has one password error") {
                         expect(loginVM.passwordValidationErrors.value.count).toEventually(equal(1), timeout: 3)
                     }
                     
-                    it("should have no email errors") {
+                    it("has no email errors") {
                         expect(loginVM.emailValidationErrors.value) == []
                     }
                     
-                    it("should not let logIn start") {
+                    it("does not let logIn start") {
                         expect(loginVM.logInCocoaAction.enabled) == false
                     }
                     
                 }
                 
-                context("empty password") {
+                context("when password is empty") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
@@ -136,15 +136,15 @@ class LoginViewModelSpec: QuickSpec {
                         loginVM.password.value = ""
                     }
                     
-                    it("should have two password errors - empty and short") {
+                    it("has two password errors - empty and short") {
                         expect(loginVM.passwordValidationErrors.value.count).toEventually(equal(2), timeout: 3)
                     }
                     
-                    it("should have no email errors") {
+                    it("has no email errors") {
                         expect(loginVM.emailValidationErrors.value) == []
                     }
                     
-                    it("should not let logIn start") {
+                    it("does not let logIn start") {
                         expect(loginVM.logInCocoaAction.enabled) == false
                     }
                     
@@ -152,9 +152,9 @@ class LoginViewModelSpec: QuickSpec {
                 
             }
             
-            context("fill with valid email and password") {
+            context("when filling with valid email and password") {
                 
-                context("wrong email, wrong password") {
+                context("when email and password are wrong") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
@@ -162,21 +162,21 @@ class LoginViewModelSpec: QuickSpec {
                         loginVM.password.value = "wrongPassword"
                     }
                     
-                    it("should have no errors at all") {
+                    it("has no errors at all") {
                         expect(loginVM.emailValidationErrors.value) == []
                         expect(loginVM.passwordValidationErrors.value) == []
                     }
                     
-                    it("should enable LogIn") {
+                    it("enables LogIn") {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("should return logIn email error") { waitUntil { done in
+                    it("returns logIn credentials error") { waitUntil { done in
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogInError(let error):
                                 switch error {
-                                case .InexistentUser:
+                                case .InvalidCredentials(_):
                                     done()
                                 default: break
                                 }
@@ -188,7 +188,7 @@ class LoginViewModelSpec: QuickSpec {
                     
                 }
                 
-                context("correct email, wrong password") {
+                context("when emailis correct but password is wrong") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
@@ -196,21 +196,21 @@ class LoginViewModelSpec: QuickSpec {
                         loginVM.password.value = "wrongPassword"
                     }
                     
-                    it("should have no errors at all") {
+                    it("has no errors at all") {
                         expect(loginVM.emailValidationErrors.value) == []
                         expect(loginVM.passwordValidationErrors.value) == []
                     }
                     
-                    it("should enable LogIn") {
+                    it("enables LogIn") {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("should return logIn password error") { waitUntil { done in
+                    it("returns logIn credentials error") { waitUntil { done in
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogInError(let error):
                                 switch error {
-                                case .WrongPassword:
+                                case .InvalidCredentials(_):
                                     done()
                                 default: break
                                 }
@@ -222,7 +222,7 @@ class LoginViewModelSpec: QuickSpec {
                     
                 }
                 
-                context("wrong email, correct password") {
+                context("when email is wrong and password is correct") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
@@ -230,21 +230,21 @@ class LoginViewModelSpec: QuickSpec {
                         loginVM.password.value = "password"
                     }
                     
-                    it("should have no errors at all") {
+                    it("has no errors at all") {
                         expect(loginVM.emailValidationErrors.value) == []
                         expect(loginVM.passwordValidationErrors.value) == []
                     }
                     
-                    it("should enable LogIn") {
+                    it("enables LogIn") {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("should return logIn email error") { waitUntil { done in
+                    it("returns logIn credentials error") { waitUntil { done in
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogInError(let error):
                                 switch error {
-                                case .InexistentUser:
+                                case .InvalidCredentials(_):
                                     done()
                                 default: break
                                 }
@@ -256,7 +256,7 @@ class LoginViewModelSpec: QuickSpec {
                     
                 }
                 
-                context("correct email, correct password") {
+                context("when email and password are correct") {
                     
                     beforeEach() {
                         loginVM = LoginViewModel(sessionService: sessionService)
@@ -264,16 +264,16 @@ class LoginViewModelSpec: QuickSpec {
                         loginVM.password.value = "password"
                     }
                     
-                    it("should have no errors at all") {
+                    it("has no errors at all") {
                         expect(loginVM.emailValidationErrors.value) == []
                         expect(loginVM.passwordValidationErrors.value) == []
                     }
                     
-                    it("should enable LogIn") {
+                    it("enables LogIn") {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("should return logInUser") { waitUntil { done in
+                    it("returns logInUser") { waitUntil { done in
                         sessionService.events.observeNext { event in
                             switch event {
                             case .LogIn(let user):

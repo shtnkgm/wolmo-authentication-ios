@@ -18,8 +18,7 @@ public enum SessionServiceEvent<User: UserType> {
 }
 
 public enum SessionServiceError: ErrorType {
-    case InexistentUser
-    case WrongPassword
+    case InvalidCredentials(NSError?)
     case NetworkError(NSError)
 }
 
