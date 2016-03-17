@@ -50,14 +50,14 @@ public final class ExampleSessionService: SessionServiceType {
                     self._currentUserObserver.sendNext(user)
                 })
             } else {
-                return SignalProducer(error: SessionServiceError.WrongPassword).on(failed: { [unowned self] _ in
-                    self._eventsObserver.sendNext(.LogInError(.WrongPassword))
+                return SignalProducer(error: SessionServiceError.InvalidCredentials(.None)).on(failed: { [unowned self] _ in
+                    self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
                 })
                 
             }
         } else {
-            return SignalProducer(error: SessionServiceError.InexistentUser).on(failed: { [unowned self] _ in
-                self._eventsObserver.sendNext(.LogInError(.InexistentUser))
+            return SignalProducer(error: SessionServiceError.InvalidCredentials(.None)).on(failed: { [unowned self] _ in
+                self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
                 })
             
         }

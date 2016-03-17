@@ -24,14 +24,13 @@
 		CE040D741C99CDB40020DDE0 /* InlineValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE040D731C99CDB40020DDE0 /* InlineValidator.swift */; };
 		CE040D761C99CE650020DDE0 /* TextInputValidatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE040D751C99CE650020DDE0 /* TextInputValidatorType.swift */; };
 		CE040D7A1C99CEE10020DDE0 /* LengthValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE040D791C99CEE10020DDE0 /* LengthValidators.swift */; };
-		CE040D711C99BD890020DDE0 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE040D701C99BD890020DDE0 /* UIExtensions.swift */; };
 		CE11A7011C9848AE002C9779 /* LoginControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */; };
 		CE2BB8C71C972819009CAC8F /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */; };
 		CE2BC5261C970E51003A1616 /* MyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5251C970E51003A1616 /* MyUser.swift */; };
 		CE2BC5281C970E89003A1616 /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5271C970E89003A1616 /* MockSessionService.swift */; };
 		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */; };
-		CEAB1EE81C999B5900725619 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAB1EE71C999B5900725619 /* LoginView.xib */; };
+		CEAF8C621C985F8300FFD54F /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAF8C611C985F8300FFD54F /* LoginView.xib */; };
 		CEBF66BA1C8DD582006EE090 /* LoginViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginViewType.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
@@ -97,14 +96,13 @@
 		CE040D731C99CDB40020DDE0 /* InlineValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InlineValidator.swift; path = Validators/InlineValidator.swift; sourceTree = "<group>"; };
 		CE040D751C99CE650020DDE0 /* TextInputValidatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextInputValidatorType.swift; path = Validators/TextInputValidatorType.swift; sourceTree = "<group>"; };
 		CE040D791C99CEE10020DDE0 /* LengthValidators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LengthValidators.swift; path = Validators/LengthValidators.swift; sourceTree = "<group>"; };
-		CE040D701C99BD890020DDE0 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginControllerDelegate.swift; path = LogIn/View/LoginControllerDelegate.swift; sourceTree = "<group>"; };
 		CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = LogIn/LoginControllerTests.swift; sourceTree = "<group>"; };
 		CE2BC5251C970E51003A1616 /* MyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyUser.swift; path = LogIn/Mocks/MyUser.swift; sourceTree = "<group>"; };
 		CE2BC5271C970E89003A1616 /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSessionService.swift; path = LogIn/Mocks/MockSessionService.swift; sourceTree = "<group>"; };
 		CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = SignUp/View/RegisterController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstraper.swift; sourceTree = "<group>"; };
-		CEAB1EE71C999B5900725619 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginView.xib; path = LogIn/View/LoginView.xib; sourceTree = "<group>"; };
+		CEAF8C611C985F8300FFD54F /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LoginViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewType.swift; path = LogIn/View/LoginViewType.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 				9D72AA091C8DC7EA00BB4082 /* Info.plist */,
 				CEBF66C51C8DF0DD006EE090 /* Extensions.swift */,
 				CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */,
-				CE040D701C99BD890020DDE0 /* UIExtensions.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -481,7 +478,6 @@
 				CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */,
 				CEBF66C81C8DFCB1006EE090 /* LoginViewModel.swift in Sources */,
 				CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */,
-				CE040D711C99BD890020DDE0 /* UIExtensions.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
 				CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */,
 				CE040D7A1C99CEE10020DDE0 /* LengthValidators.swift in Sources */,

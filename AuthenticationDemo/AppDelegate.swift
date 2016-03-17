@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        if window == nil {
-            print("Window es nil")
-        }
         
         let bundle = NSBundle(forClass: LoginView.self)
         let nib = bundle.loadNib("LoginView")
