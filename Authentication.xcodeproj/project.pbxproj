@@ -39,8 +39,20 @@
 		CEBF66CE1C8E089D006EE090 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CD1C8E089D006EE090 /* LoginController.swift */; };
 		CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CF1C8E0A6E006EE090 /* Email.swift */; };
 		CEBF66D21C8E0A80006EE090 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66D11C8E0A80006EE090 /* User.swift */; };
-		CEE226A01C9C3713005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE2269E1C9C3713005EB279 /* Localizable.strings */; };
-		CEE226A31C9C371B005EB279 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A11C9C371B005EB279 /* Spanish(es).strings */; };
+		CED63ECA1C9AECC10092F323 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED63EC81C9AECC10092F323 /* Localizable.strings */; };
+		CED63ECB1C9AECC10092F323 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CED63EC91C9AECC10092F323 /* Spanish(es).strings */; };
+		CED63F0C1C9AFA170092F323 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED63F0B1C9AFA170092F323 /* AppDelegate.swift */; };
+		CED63F111C9AFA170092F323 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED63F0F1C9AFA170092F323 /* Main.storyboard */; };
+		CED63F131C9AFA170092F323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED63F121C9AFA170092F323 /* Assets.xcassets */; };
+		CED63F161C9AFA170092F323 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED63F141C9AFA170092F323 /* LaunchScreen.storyboard */; };
+		CED63F1D1C9AFA8C0092F323 /* ExampleMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED63F1B1C9AFA8C0092F323 /* ExampleMainViewController.swift */; };
+		CED63F1E1C9AFA8C0092F323 /* ExampleSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED63F1C1C9AFA8C0092F323 /* ExampleSessionService.swift */; };
+		CED63F2D1C9AFDE20092F323 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED63F2B1C9AFDE20092F323 /* ReactiveCocoa.framework */; };
+		CED63F2E1C9AFDE20092F323 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CED63F2B1C9AFDE20092F323 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CED63F2F1C9AFDE20092F323 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED63F2C1C9AFDE20092F323 /* Result.framework */; };
+		CED63F301C9AFDE20092F323 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CED63F2C1C9AFDE20092F323 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CED63F331C9AFFAB0092F323 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED63F321C9AFFAB0092F323 /* LoginView.xib */; };
+		CED63F3D1C9B07480092F323 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED63F3C1C9B07480092F323 /* Localizable.strings */; };
 		CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */; };
 		CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */; };
 		CEE404A11C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4049B1C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift */; };
@@ -111,8 +123,24 @@
 		CEBF66CD1C8E089D006EE090 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = LogIn/View/LoginController.swift; sourceTree = "<group>"; };
 		CEBF66CF1C8E0A6E006EE090 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = LogIn/Model/Email.swift; sourceTree = "<group>"; };
 		CEBF66D11C8E0A80006EE090 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = LogIn/Model/User.swift; sourceTree = "<group>"; };
-		CEE2269F1C9C3713005EB279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEE226A21C9C371B005EB279 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Spanish(es).strings"; sourceTree = "<group>"; };
+		CED63EC81C9AECC10092F323 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = "Supporting Files/Localizable.strings"; sourceTree = "<group>"; };
+		CED63EC91C9AECC10092F323 /* Spanish(es).strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = "Spanish(es).strings"; path = "Supporting Files/Spanish(es).strings"; sourceTree = "<group>"; };
+		CED63F091C9AFA170092F323 /* AuthenticationDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthenticationDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CED63F0B1C9AFA170092F323 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CED63F101C9AFA170092F323 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CED63F121C9AFA170092F323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CED63F151C9AFA170092F323 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CED63F171C9AFA170092F323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CED63F1B1C9AFA8C0092F323 /* ExampleMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleMainViewController.swift; sourceTree = "<group>"; };
+		CED63F1C1C9AFA8C0092F323 /* ExampleSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleSessionService.swift; sourceTree = "<group>"; };
+		CED63F241C9AFD270092F323 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		CED63F251C9AFD270092F323 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		CED63F2B1C9AFDE20092F323 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		CED63F2C1C9AFDE20092F323 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		CED63F321C9AFFAB0092F323 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginView.xib; path = Login/View/LoginView.xib; sourceTree = "<group>"; };
+		CED63F3C1C9B07480092F323 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		CED63F401C9B07880092F323 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		CED63F411C9B07880092F323 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = Validators/EmailValidator.swift; sourceTree = "<group>"; };
 		CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompositeValidator.swift; path = Validators/CompositeValidator.swift; sourceTree = "<group>"; };
 		CEE4049B1C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnyInputTextValidatorTests.swift; path = Validators/AnyInputTextValidatorTests.swift; sourceTree = "<group>"; };
@@ -301,6 +329,30 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		CED63EC21C9AE7D90092F323 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CED63EC81C9AECC10092F323 /* Localizable.strings */,
+				CED63EC91C9AECC10092F323 /* Spanish(es).strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CED63F0A1C9AFA170092F323 /* AuthenticationDemo */ = {
+			isa = PBXGroup;
+			children = (
+				CED63F1B1C9AFA8C0092F323 /* ExampleMainViewController.swift */,
+				CED63F1C1C9AFA8C0092F323 /* ExampleSessionService.swift */,
+				CED63F0B1C9AFA170092F323 /* AppDelegate.swift */,
+				CED63F0F1C9AFA170092F323 /* Main.storyboard */,
+				CED63F121C9AFA170092F323 /* Assets.xcassets */,
+				CED63F141C9AFA170092F323 /* LaunchScreen.storyboard */,
+				CED63F171C9AFA170092F323 /* Info.plist */,
+				CED63F3C1C9B07480092F323 /* Localizable.strings */,
+			);
+			path = AuthenticationDemo;
+			sourceTree = "<group>";
+		};
 		CEE4049A1C9A061200AB70B3 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +485,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CED63F071C9AFA170092F323 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CED63F161C9AFA170092F323 /* LaunchScreen.storyboard in Resources */,
+				CED63F3D1C9B07480092F323 /* Localizable.strings in Resources */,
+				CED63F131C9AFA170092F323 /* Assets.xcassets in Resources */,
+				CED63F111C9AFA170092F323 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -525,7 +588,8 @@
 		CEE2269E1C9C3713005EB279 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CEE2269F1C9C3713005EB279 /* en */,
+				CED63F101C9AFA170092F323 /* Base */,
+				CED63F401C9B07880092F323 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -533,7 +597,8 @@
 		CEE226A11C9C371B005EB279 /* Spanish(es).strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CEE226A21C9C371B005EB279 /* es */,
+				CED63F151C9AFA170092F323 /* Base */,
+				CED63F411C9B07880092F323 /* es */,
 			);
 			name = "Spanish(es).strings";
 			sourceTree = "<group>";

@@ -18,9 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let bundle = NSBundle(forClass: LoginView.self)
-        let nib = bundle.loadNib("LoginView")
-        
         authenticationBootstraper = AuthenticationBootstraper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"), window: window!) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // swiftlint:disable force_cast
