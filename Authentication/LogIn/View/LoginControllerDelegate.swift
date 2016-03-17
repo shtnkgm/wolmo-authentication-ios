@@ -35,13 +35,11 @@ public protocol LoginControllerDelegate {
 extension LoginControllerDelegate {
     
     public func loginControllerWillExecuteLogIn(controller: LoginController) {
-        controller.loginView.activityIndicator.startAnimating()
-        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        // Start activity indicator
     }
     
     public func loginControllerDidExecuteLogIn(controller: LoginController) {
-        controller.loginView.activityIndicator.stopAnimating()
-        UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        // Finish activity indicator
     }
     
     public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {

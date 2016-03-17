@@ -1,3 +1,11 @@
+/* 
+  Localizable.strings
+  Authentication
+
+  Created by Daniela Riesgo on 3/17/16.
+  Copyright © 2016 Wolox. All rights reserved.
+*/
+
 /* Errores de los validadores */
 "text-input-validator.empty" = "No puede dejarse vacío";
 "text-input-validator.max-length" = "No puede ser más largo que %d caracteres";

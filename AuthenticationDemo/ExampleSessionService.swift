@@ -42,6 +42,7 @@ public final class ExampleSessionService: SessionServiceType {
     }
     
     public func logIn(email: Email, _ password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+        sleep(5)
         if email.raw == _email {
             if password == _password {
                 let user = User(email: email.raw, password: password)

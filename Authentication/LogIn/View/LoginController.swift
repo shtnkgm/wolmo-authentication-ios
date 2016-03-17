@@ -82,10 +82,10 @@ private extension LoginController {
         bindPasswordElements()
         bindButtons()
         
-        
         _viewModel.logInExecuting.observeNext { [unowned self] executing in
             if executing {
                 self._delegate.loginControllerWillExecuteLogIn(self)
+                print("Entró a llamar al delegate para empezar la RUEDITA")
             } else {
                 self._delegate.loginControllerDidExecuteLogIn(self)
             }
@@ -100,6 +100,7 @@ private extension LoginController {
         loginView.emailLabel.text = _viewModel.emailText
         loginView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
+            print("Llama al delegate porque cambiaron los errores del EMAIL")
             if errors == [] {
                 self._delegate.loginControllerDidPassEmailValidation(self)
             } else {
@@ -115,8 +116,8 @@ private extension LoginController {
         _viewModel.password <~ loginView.passwordTextField.rex_textSignal
         loginView.passwordLabel.text = _viewModel.passwordText
         loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
-        //loginView.passwordTextField.secureTextEntry = !_viewModel.showPassword.value    // initial value may be required, check with tests
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
+            print("Llama al delegate porque cambiaron los errores de la PASSWORD")
             if errors == [] {
                 self._delegate.loginControllerDidPassPasswordValidation(self)
             } else {
@@ -128,7 +129,6 @@ private extension LoginController {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
-            //passwordVisibilityButton.setTitle(_viewModel.passwordVisibilityButtonTitle, forState: .Normal)  // initial value may be required, check with tests
             passwordVisibilityButton.rex_title <~ _viewModel.showPassword.producer.map { [unowned self] _ in
                 self._viewModel.passwordVisibilityButtonTitle
             }
@@ -142,12 +142,11 @@ private extension LoginController {
     func bindButtons() {
         loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
+        loginView.logInButtonEnabled = false
+        loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
         
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
         loginView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }
-        
-        // loginView.termsAndService -> Present modally web view controller that shows HTML file
-        loginView.termsAndService?.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
     }
     
 }

@@ -30,7 +30,8 @@
 		CE2BC5281C970E89003A1616 /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5271C970E89003A1616 /* MockSessionService.swift */; };
 		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstraper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */; };
-		CEAF8C621C985F8300FFD54F /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEAF8C611C985F8300FFD54F /* LoginView.xib */; };
+		CEAFEAA21C9B3514007E4C7B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEAFEAA01C9B3514007E4C7B /* Localizable.strings */; };
+		CEAFEAA41C9B35A6007E4C7B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEAFEAA61C9B35A6007E4C7B /* Localizable.strings */; };
 		CEBF66BA1C8DD582006EE090 /* LoginViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginViewType.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
@@ -52,7 +53,6 @@
 		CED63F2F1C9AFDE20092F323 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED63F2C1C9AFDE20092F323 /* Result.framework */; };
 		CED63F301C9AFDE20092F323 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CED63F2C1C9AFDE20092F323 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CED63F331C9AFFAB0092F323 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED63F321C9AFFAB0092F323 /* LoginView.xib */; };
-		CED63F3D1C9B07480092F323 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CED63F3C1C9B07480092F323 /* Localizable.strings */; };
 		CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */; };
 		CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */; };
 		CEE404A11C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4049B1C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift */; };
@@ -114,7 +114,8 @@
 		CE2BC5271C970E89003A1616 /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSessionService.swift; path = LogIn/Mocks/MockSessionService.swift; sourceTree = "<group>"; };
 		CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = SignUp/View/RegisterController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstraper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstraper.swift; sourceTree = "<group>"; };
-		CEAF8C611C985F8300FFD54F /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		CEAFEAA11C9B3514007E4C7B /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CEAFEAA51C9B35A6007E4C7B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LoginViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewType.swift; path = LogIn/View/LoginViewType.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -138,7 +139,6 @@
 		CED63F2B1C9AFDE20092F323 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		CED63F2C1C9AFDE20092F323 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		CED63F321C9AFFAB0092F323 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginView.xib; path = Login/View/LoginView.xib; sourceTree = "<group>"; };
-		CED63F3C1C9B07480092F323 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CED63F401C9B07880092F323 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		CED63F411C9B07880092F323 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = Validators/EmailValidator.swift; sourceTree = "<group>"; };
@@ -279,6 +279,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		CEAFEA9F1C9B34C3007E4C7B /* es.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				CEAFEAA01C9B3514007E4C7B /* Localizable.strings */,
+			);
+			name = es.lproj;
+			sourceTree = "<group>";
+		};
 		CEBF66B41C8DD3A4006EE090 /* Signup */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +349,7 @@
 		CED63F0A1C9AFA170092F323 /* AuthenticationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				CEAFEA9F1C9B34C3007E4C7B /* es.lproj */,
 				CED63F1B1C9AFA8C0092F323 /* ExampleMainViewController.swift */,
 				CED63F1C1C9AFA8C0092F323 /* ExampleSessionService.swift */,
 				CED63F0B1C9AFA170092F323 /* AppDelegate.swift */,
@@ -348,7 +357,7 @@
 				CED63F121C9AFA170092F323 /* Assets.xcassets */,
 				CED63F141C9AFA170092F323 /* LaunchScreen.storyboard */,
 				CED63F171C9AFA170092F323 /* Info.plist */,
-				CED63F3C1C9B07480092F323 /* Localizable.strings */,
+				CEAFEAA61C9B35A6007E4C7B /* Localizable.strings */,
 			);
 			path = AuthenticationDemo;
 			sourceTree = "<group>";
@@ -454,6 +463,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 				es,
 			);
 			mainGroup = 9D72A9FA1C8DC7EA00BB4082;
@@ -489,8 +499,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAFEAA21C9B3514007E4C7B /* Localizable.strings in Resources */,
 				CED63F161C9AFA170092F323 /* LaunchScreen.storyboard in Resources */,
-				CED63F3D1C9B07480092F323 /* Localizable.strings in Resources */,
+				CEAFEAA41C9B35A6007E4C7B /* Localizable.strings in Resources */,
 				CED63F131C9AFA170092F323 /* Assets.xcassets in Resources */,
 				CED63F111C9AFA170092F323 /* Main.storyboard in Resources */,
 			);
@@ -585,7 +596,23 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CEE2269E1C9C3713005EB279 /* Localizable.strings */ = {
+		CEAFEAA01C9B3514007E4C7B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEAFEAA11C9B3514007E4C7B /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CEAFEAA61C9B35A6007E4C7B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEAFEAA51C9B35A6007E4C7B /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CED63F0F1C9AFA170092F323 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CED63F101C9AFA170092F323 /* Base */,

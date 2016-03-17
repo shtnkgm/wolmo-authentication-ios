@@ -30,12 +30,12 @@ public protocol LoginViewType: Renderable {
     var logInButton: UIButton { get }
     var logInErrorLabel: UILabel? { get }
     var registerButton: UIButton { get }
-    var termsAndService: UIButton? { get }
     
     var activityIndicator: UIActivityIndicatorView { get }
     
     var passwordTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
+    var logInButtonEnabled: Bool { get set }
     
 }
 
@@ -78,13 +78,13 @@ public final class LoginView: UIView, LoginViewType {
     
     public var registerButton: UIButton { return registerButtonOutlet }
     @IBOutlet weak var registerButtonOutlet: UIButton!
+
     
-    public var termsAndService: UIButton? { return termsAndServiceOutlet }
-    @IBOutlet weak var termsAndServiceOutlet: UIButton!
+    public var activityIndicator: UIActivityIndicatorView { return UIActivityIndicatorView() }
     
     
-    public var activityIndicator: UIActivityIndicatorView { return activityIndicatorOutlet }
-    @IBOutlet weak var activityIndicatorOutlet: UIActivityIndicatorView!
+    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView!
+    
     
     
     public var passwordTextFieldValid: Bool = true {
@@ -95,7 +95,7 @@ public final class LoginView: UIView, LoginViewType {
             } else {
                 color = UIColor.redColor().CGColor
             }
-            passwordTextField.layer.borderColor = color
+            passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
         }
     }
     
@@ -111,11 +111,32 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
 
-    public override func awakeFromNib() {
-        
+    public var logInButtonEnabled: Bool = true {
+        didSet {
+            let alpha: CGFloat
+            if logInButtonEnabled {
+                alpha = 1.0
+            } else {
+                alpha = 0.5
+            }
+            logInButton.alpha = alpha
+        }
     }
     
     public func render() {
+        emailValidationMessageLabel?.text = " "
+        passwordValidationMessageLabel?.text = " "
+        logInErrorLabel?.text = " "
+        
+        emailTextField.layer.borderWidth = 1
+        emailTextField.layer.cornerRadius = 8.0
+        emailTextFieldValid = true
+        
+        passwordTextField.secureTextEntry = true
+        passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
+        passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 8.0
+        passwordTextFieldValid = true
+        
         activityIndicator.hidesWhenStopped = true
         
         //Configure colour palette

@@ -11,9 +11,8 @@
 "login-view-model.password-placeholder" = "Ingrese su contraseña aquí";
 "login-view-model.login-button-title" = "INGRESAR";
 "login-view-model.register-button-title" = "Regístrese";
-"login-view-model.terms-and-services-button-title" = "Términos y Servicios";
-"password-visibility.button-title.false" = "Ocultar";
-"password-visibility.button-title.true" = "Mostrar";
+"login-view-model.password-visibility-button-title.false" = "Ocultar";
+"login-view-model.password-visibility-button-title.true" = "Mostrar";
 
 /* Errores del servicio de sesión */
 "login-error.invalid-credentials.message" = "Email o contraseña incorrectos. ";
@@ -22,3 +21,7 @@
 /* Alerta de error de login */
 "login-error.alert.title" = "Error al intentar ingresar";
 "login-error.alert.close" = "Cerrar";
+
+
+/* Títulos de los elementos de UI de Signup */
+"signup-view-model.terms-and-services-button-title" = "Términos y Servicios";

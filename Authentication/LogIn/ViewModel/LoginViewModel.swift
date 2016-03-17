@@ -22,7 +22,7 @@ public protocol LoginViewModelType {
     var passwordValidationErrors: AnyProperty<[String]> { get }
     var showPassword: MutableProperty<Bool> { get }
     
-    var togglePasswordVisibility: Action<AnyObject?, Bool, NoError> { get }
+    var togglePasswordVisibility: Action<AnyObject, Bool, NoError> { get }
     var logInCocoaAction: CocoaAction { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
@@ -33,7 +33,6 @@ public protocol LoginViewModelType {
     var passwordPlaceholderText: String { get }
     var loginButtonTitle: String { get }
     var registerButtonTitle: String { get }
-    var termsAndServicesButtonTitle: String { get }
     var passwordVisibilityButtonTitle: String { get }
     
 }
@@ -61,7 +60,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
                 let password = self.password.value
                 return self._sessionService.logIn(email, password).observeOn(UIScheduler())
             } else {
-                return SignalProducer(error: .InvalidCredentials(.None))
+                return SignalProducer(error: .InvalidCredentials(.None)).observeOn(UIScheduler())
             }
         }
     }()
@@ -70,10 +69,10 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
     
     
-    public private(set) lazy var togglePasswordVisibility: Action<AnyObject?, Bool, NoError> = {
+    public private(set) lazy var togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
         return Action { [unowned self] _ in
             self.showPassword.value = !self.showPassword.value
-            return SignalProducer(value: self.showPassword.value)
+            return SignalProducer(value: self.showPassword.value).observeOn(UIScheduler())
         }
     }()
     
@@ -132,12 +131,8 @@ public extension LoginViewModel {
         return "login-view-model.register-button-title".localized
     }
     
-    var termsAndServicesButtonTitle: String {
-        return "login-view-model.terms-and-services-button-title".localized
-    }
-    
     var passwordVisibilityButtonTitle: String {
-        return ("password-visibility.button-title." + (showPassword.value ? "false" : "true")).localized
+        return ("login-view-model.password-visibility-button-title." + (showPassword.value ? "false" : "true")).localized
     }
     
 }
