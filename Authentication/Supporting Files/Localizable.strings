@@ -10,7 +10,7 @@
 "text-input-validator.empty" = "Can't be empty";
 "text-input-validator.max-length" = "Can't be longer than %d";
 "text-input-validator.min-length" = "Can't be shorter than %d";
-"text-input-validator.invalid-email" = "It isn't a valid email (For example, user@mail.com)";
+"text-input-validator.invalid-email" = "It has to be a valid email (For example, user@mail.com)";
 
 /* UI elements titles */
 "login-view-model.email" = "Email:";
