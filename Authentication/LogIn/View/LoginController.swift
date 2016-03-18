@@ -85,7 +85,6 @@ private extension LoginController {
         _viewModel.logInExecuting.observeNext { [unowned self] executing in
             if executing {
                 self._delegate.loginControllerWillExecuteLogIn(self)
-                print("Entró a llamar al delegate para empezar la RUEDITA")
             } else {
                 self._delegate.loginControllerDidExecuteLogIn(self)
             }
@@ -100,7 +99,6 @@ private extension LoginController {
         loginView.emailLabel.text = _viewModel.emailText
         loginView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
-            print("Llama al delegate porque cambiaron los errores del EMAIL")
             if errors == [] {
                 self._delegate.loginControllerDidPassEmailValidation(self)
             } else {
@@ -117,7 +115,6 @@ private extension LoginController {
         loginView.passwordLabel.text = _viewModel.passwordText
         loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
-            print("Llama al delegate porque cambiaron los errores de la PASSWORD")
             if errors == [] {
                 self._delegate.loginControllerDidPassPasswordValidation(self)
             } else {
