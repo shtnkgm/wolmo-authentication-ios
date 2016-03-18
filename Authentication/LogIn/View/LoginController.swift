@@ -25,6 +25,7 @@ public final class LoginController: UIViewController {
     
     private let _viewModel: LoginViewModelType
     private let _onRegister: (LoginController) -> ()
+    private let _onRecoverPassword: (LoginController) -> ()
     private let _loginViewFactory: () -> LoginViewType
     private let _delegate: LoginControllerDelegate
 
@@ -40,6 +41,8 @@ public final class LoginController: UIViewController {
             to get the login view to use.
             - onRegister: closure which indicates what to do when
             the user selects the Register/SignUp option.
+            - onRecoverPassword: closure which indicates what to 
+            do when the user selects the Recover Password option.
             - delegate: delegate which adds behaviour to certain
             events, like handling a login error or selecting log in option.
             A default delegate is provided.
@@ -50,10 +53,12 @@ public final class LoginController: UIViewController {
     init(viewModel: LoginViewModelType,
         loginViewFactory: () -> LoginViewType,
         onRegister: (LoginController) -> (),
+        onRecoverPassword: (LoginController) -> (),
         delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
             _viewModel = viewModel
             _loginViewFactory = loginViewFactory
             _onRegister = onRegister
+            _onRecoverPassword = onRecoverPassword
             _delegate = delegate
             super.init(nibName: nil, bundle: nil)
     }
@@ -144,6 +149,9 @@ private extension LoginController {
         
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
         loginView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }
+        
+        loginView.recoverPasswordButton.setTitle(_viewModel.recoverPasswordButtonTitle, forState: .Normal)
+        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._onRecoverPassword(self) }
     }
     
 }

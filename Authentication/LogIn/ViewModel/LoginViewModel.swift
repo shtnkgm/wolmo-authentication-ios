@@ -33,6 +33,7 @@ public protocol LoginViewModelType {
     var passwordPlaceholderText: String { get }
     var loginButtonTitle: String { get }
     var registerButtonTitle: String { get }
+    var recoverPasswordButtonTitle: String { get }
     var passwordVisibilityButtonTitle: String { get }
     
 }
@@ -133,6 +134,10 @@ public extension LoginViewModel {
     
     var passwordVisibilityButtonTitle: String {
         return ("login-view-model.password-visibility-button-title." + (showPassword.value ? "false" : "true")).localized
+    }
+    
+    var recoverPasswordButtonTitle: String {
+        return "login-view-model.recover-password-button-title".localized
     }
     
 }

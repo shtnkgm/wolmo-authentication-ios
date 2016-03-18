@@ -173,7 +173,9 @@
                 <outlet property="passwordTextFieldOutlet" destination="2dd-3i-SpJ" id="Zzp-gZ-3Iq"/>
                 <outlet property="passwordValidationMessageLabelOutlet" destination="GLr-di-9jk" id="UEW-6E-QDi"/>
                 <outlet property="passwordVisibilityButtonOutlet" destination="Clc-p3-LR7" id="bFW-Qo-sbf"/>
+                <outlet property="recoverPasswordButtonOutlet" destination="6sL-Hy-vEE" id="Kzs-T3-h9J"/>
                 <outlet property="registerButtonOutlet" destination="cxB-U7-f9X" id="HAI-nd-Jra"/>
+                <outlet property="toRegisterLabel" destination="k1E-m0-zdE" id="AaW-Tl-Vxk"/>
             </connections>
             <point key="canvasLocation" x="436" y="392"/>
         </view>

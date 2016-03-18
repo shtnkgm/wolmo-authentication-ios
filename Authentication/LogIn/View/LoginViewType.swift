@@ -29,7 +29,9 @@ public protocol LoginViewType: Renderable {
     
     var logInButton: UIButton { get }
     var logInErrorLabel: UILabel? { get }
+    
     var registerButton: UIButton { get }
+    var recoverPasswordButton: UIButton { get }
     
     var activityIndicator: UIActivityIndicatorView { get }
     
@@ -79,12 +81,15 @@ public final class LoginView: UIView, LoginViewType {
     public var registerButton: UIButton { return registerButtonOutlet }
     @IBOutlet weak var registerButtonOutlet: UIButton!
 
+    public var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
+    @IBOutlet weak var recoverPasswordButtonOutlet: UIButton!
     
     public var activityIndicator: UIActivityIndicatorView { return UIActivityIndicatorView() }
     
     
     @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView!
     
+    @IBOutlet weak var toRegisterLabel: UILabel!
     
     
     public var passwordTextFieldValid: Bool = true {
@@ -124,6 +129,8 @@ public final class LoginView: UIView, LoginViewType {
     }
     
     public func render() {
+        toRegisterLabel.text = "login-view.to-register-label".localized
+        
         emailValidationMessageLabel?.text = " "
         passwordValidationMessageLabel?.text = " "
         logInErrorLabel?.text = " "

@@ -12,6 +12,7 @@ import Foundation
     Bootstrapper to start the application.
     Takes care of starting the authentication process before the main View Controller of the app when necessary,
     and after the user logs out.
+    The authentication process includes login, signup and recover password logic.
 */
 public class AuthenticationBootstraper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
 
@@ -123,13 +124,26 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
          Creates the register (sign up) controller to use when the
          user selects that option.
          
-         - Returns: A valid register controller delegate to use.
+         - Returns: A valid register controller to use.
          
          - Attention: Override this method for customizing the
          register controller to be used.
     */
     public func createRegisterController() -> RegisterController { //todo
         return RegisterController()
+    }
+    
+    /**
+         Creates the recover password main controller to use when the
+         user selects that option.
+         
+         - Returns: A valid recover password controller to use.
+         
+         - Attention: Override this method for customizing the
+         recover password main controller to be used.
+     */
+    public func createRecoverPasswordController() -> RecoverPasswordController { //todo
+        return RecoverPasswordController()
     }
     
 }
@@ -140,12 +154,18 @@ private extension AuthenticationBootstraper {
         let controller = createRegisterController()
         self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
     }
+    
+    func transitionToRecoverPassword() {
+        let controller = createRecoverPasswordController()
+        self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
+    }
 
     func createLoginController() -> LoginController {
         return LoginController(
             viewModel: createLoginViewModel(),
             loginViewFactory: createLoginView,
             onRegister: { [unowned self] _ in self.transitionToSignUp() },
+            onRecoverPassword: { [unowned self] _ in self.transitionToRecoverPassword() },
             delegate: createLoginControllerDelegate())
     }
 
