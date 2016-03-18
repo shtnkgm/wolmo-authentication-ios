@@ -1,0 +1,35 @@
+/* 
+  Localizable.strings
+  Authentication
+
+  Created by Daniela Riesgo on 3/7/16.
+  Copyright © 2016 Wolox. All rights reserved.
+*/
+
+/* Validators errors */
+"text-input-validator.empty" = "Can't be empty";
+"text-input-validator.max-length" = "Can't be longer than %d";
+"text-input-validator.min-length" = "Can't be shorter than %d";
+"text-input-validator.invalid-email" = "It has to be a valid email (For example, user@mail.com)";
+
+/* Login UI elements titles */
+"login-view-model.email" = "Email:";
+"login-view-model.password" = "Password:";
+"login-view-model.email-placeholder" = "Enter your email here";
+"login-view-model.password-placeholder" = "Enter your password here";
+"login-view-model.login-button-title" = "LOG IN";
+"login-view-model.register-button-title" = "Register";
+"login-view-model.password-visibility-button-title.false" = "Hide";
+"login-view-model.password-visibility-button-title.true" = "Show";
+
+/* Session service errors */
+"login-error.invalid-credentials.message" = "Wrong email or password. ";
+"login-error.network-error.message" = "Network error. ";
+
+/* LogIn error alert */
+"login-error.alert.title" = "Unable to log in";
+"login-error.alert.close" = "Okay";
+
+
+/* Signup UI elements titles */
+"signup-view-model.terms-and-services-button-title" = "Terms and Services";
