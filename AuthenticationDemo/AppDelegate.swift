@@ -13,18 +13,18 @@ import Authentication
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var authenticationBootstraper: AuthenticationBootstraper<ExampleUser, ExampleSessionService>?
+    var authenticationBootstrapper: AuthenticationBootstrapper<ExampleUser, ExampleSessionService>?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        authenticationBootstraper = AuthenticationBootstraper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"), window: window!) {
+        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"), window: window!) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // swiftlint:disable force_cast
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController
             // swiftlint:enable force_cast
         }
-        authenticationBootstraper!.bootstrap()
+        authenticationBootstrapper!.bootstrap()
         return true
     }
 

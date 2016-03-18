@@ -1,5 +1,5 @@
 //
-//  AuthenticationBootstraper.swift
+//  AuthenticationBootstrapper.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/8/16.
@@ -14,7 +14,7 @@ import Foundation
     and after the user logs out.
     The authentication process includes login, signup and recover password logic.
 */
-public class AuthenticationBootstraper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
+public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
 
     /// The window of the app
     private let _window: UIWindow
@@ -148,7 +148,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
     
 }
 
-private extension AuthenticationBootstraper {
+private extension AuthenticationBootstrapper {
 
     func transitionToSignUp() {
         let controller = createRegisterController()
