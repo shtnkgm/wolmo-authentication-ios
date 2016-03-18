@@ -25,19 +25,56 @@ public protocol RegisterViewType {
     var passwordValidationMessageLabel: UILabel? { get }
     var passwordVisibilityButton: UIButton? { get }
     
-    var passwordConfirmationLabel: UILabel { get }
-    var passwordConfirmationTextField: UITextField { get }
-    var passwordConfirmationValidationMessageLabel: UILabel? { get }
-    var passwordConfirmationVisibilityButton: UIButton? { get }
+    var passwordConfirmLabel: UILabel { get }
+    var passwordConfirmTextField: UITextField { get }
+    var passwordConfirmValidationMessageLabel: UILabel? { get }
+    var passwordConfirmVisibilityButton: UIButton? { get }
     
     var registerButton: UIButton { get }
     var registerErrorLabel: UILabel? { get }
     
     var activityIndicator: UIActivityIndicatorView { get }
     
-    var passwordTextFieldValid: Bool { get set }
+    var usernameTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
+    var passwordTextFieldValid: Bool { get set }
+    var passwordConfirmationTextFieldValid: Bool { get set }
     var registerButtonEnabled: Bool { get set }
     
+    
+}
+
+public final class RegisterView: UIView, RegisterViewType {
+    
+    public var view: UIView { return UIView() }
+    
+    public var usernameLabel: UILabel { return UILabel() }
+    public var usernameTextField: UITextField { return UITextField() }
+    public var usernameValidationMessageLabel: UILabel? { return .None }
+    
+    public var emailLabel: UILabel { return UILabel() }
+    public var emailTextField: UITextField { return UITextField() }
+    public var emailValidationMessageLabel: UILabel? { return .None }
+    
+    public var passwordLabel: UILabel { return UILabel() }
+    public var passwordTextField: UITextField { return UITextField() }
+    public var passwordValidationMessageLabel: UILabel? { return .None }
+    public var passwordVisibilityButton: UIButton? { return .None }
+    
+    public var passwordConfirmLabel: UILabel { return UILabel() }
+    public var passwordConfirmTextField: UITextField { return UITextField() }
+    public var passwordConfirmValidationMessageLabel: UILabel? { return .None }
+    public var passwordConfirmVisibilityButton: UIButton? { return .None }
+    
+    public var registerButton: UIButton { return UIButton() }
+    public var registerErrorLabel: UILabel? { return .None }
+    
+    public var activityIndicator: UIActivityIndicatorView { return UIActivityIndicatorView() }
+    
+    public var usernameTextFieldValid: Bool = false
+    public var emailTextFieldValid: Bool = false
+    public var passwordTextFieldValid: Bool = false
+    public var passwordConfirmationTextFieldValid: Bool = false
+    public var registerButtonEnabled: Bool = false
     
 }

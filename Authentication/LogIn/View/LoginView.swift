@@ -51,6 +51,8 @@ public extension LoginViewType where Self: UIView {
 
 public final class LoginView: UIView, LoginViewType {
     
+    public lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()
+    
     public var emailLabel: UILabel { return emailLabelOutlet }
     @IBOutlet weak var emailLabelOutlet: UILabel!
     
@@ -60,7 +62,6 @@ public final class LoginView: UIView, LoginViewType {
             emailTextFieldOutlet.layer.borderWidth = 1
             emailTextFieldOutlet.layer.cornerRadius = 8.0
             emailTextFieldOutlet.autocorrectionType = .No
-
         }
     }
     
@@ -164,8 +165,13 @@ public final class LoginView: UIView, LoginViewType {
     public func render() {
         activityIndicator.hidesWhenStopped = true
         
+        emailTextFieldValid = true
+        passwordTextFieldValid = true
+        
         //Configure colour palette
         //Configure fonts
+        
+        delegate.configureView(self)
     }
     
 }

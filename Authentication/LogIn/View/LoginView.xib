@@ -94,12 +94,15 @@
                     <rect key="frame" x="124" y="319" width="374" height="30"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2dd-3i-SpJ">
-                            <rect key="frame" x="0.0" y="0.0" width="339" height="30"/>
+                            <rect key="frame" x="0.0" y="0.0" width="326" height="30"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-p3-LR7">
-                            <rect key="frame" x="339" y="0.0" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-p3-LR7">
+                            <rect key="frame" x="326" y="0.0" width="45" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="45" id="Qzs-1x-4YJ"/>
+                            </constraints>
                             <state key="normal" title="Ver"/>
                         </button>
                     </subviews>
@@ -109,7 +112,7 @@
                         <constraint firstItem="Clc-p3-LR7" firstAttribute="leading" secondItem="2dd-3i-SpJ" secondAttribute="trailing" id="FRa-SO-RVh"/>
                         <constraint firstAttribute="bottom" secondItem="2dd-3i-SpJ" secondAttribute="bottom" id="NQ8-yU-KkC"/>
                         <constraint firstItem="2dd-3i-SpJ" firstAttribute="top" secondItem="1xR-de-3a1" secondAttribute="top" id="cAW-Mh-ENX"/>
-                        <constraint firstAttribute="trailing" secondItem="Clc-p3-LR7" secondAttribute="trailing" constant="5" id="e5f-dh-am6"/>
+                        <constraint firstAttribute="trailing" secondItem="Clc-p3-LR7" secondAttribute="trailing" constant="3" id="e5f-dh-am6"/>
                         <constraint firstItem="2dd-3i-SpJ" firstAttribute="leading" secondItem="1xR-de-3a1" secondAttribute="leading" id="fDr-JF-A2z"/>
                         <constraint firstItem="Clc-p3-LR7" firstAttribute="top" secondItem="1xR-de-3a1" secondAttribute="top" id="yjl-56-e70"/>
                     </constraints>

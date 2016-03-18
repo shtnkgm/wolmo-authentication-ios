@@ -130,7 +130,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          register controller to be used.
     */
     public func createRegisterController() -> RegisterController { //todo
-        return RegisterController()
+        return RegisterController(viewModel: RegisterViewModel(), registerViewFactory: { return RegisterView()})
     }
     
     /**

@@ -30,7 +30,7 @@
 		CE2BC5281C970E89003A1616 /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5271C970E89003A1616 /* MockSessionService.swift */; };
 		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */; };
-		CEBF66BA1C8DD582006EE090 /* LoginViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginViewType.swift */; };
+		CEBF66BA1C8DD582006EE090 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginView.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
 		CEBF66C81C8DFCB1006EE090 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C71C8DFCB1006EE090 /* LoginViewModel.swift */; };
@@ -56,6 +56,7 @@
 		CEE226B11C9C7283005EB279 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226AC1C9C4018005EB279 /* Spanish(es).strings */; };
 		CEE226B31C9C75CC005EB279 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */; };
 		CEE226B51C9C7692005EB279 /* RegisterViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B41C9C7692005EB279 /* RegisterViewType.swift */; };
+		CEE226B71C9C7FA4005EB279 /* LoginViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */; };
 		CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */; };
 		CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */; };
 		CEE404A11C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4049B1C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift */; };
@@ -117,7 +118,7 @@
 		CE2BC5271C970E89003A1616 /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSessionService.swift; path = LogIn/Mocks/MockSessionService.swift; sourceTree = "<group>"; };
 		CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = SignUp/View/RegisterController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstrapper.swift; sourceTree = "<group>"; };
-		CEBF66B91C8DD582006EE090 /* LoginViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewType.swift; path = LogIn/View/LoginViewType.swift; sourceTree = "<group>"; };
+		CEBF66B91C8DD582006EE090 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = LogIn/View/LoginView.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEBF66C71C8DFCB1006EE090 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = LogIn/ViewModel/LoginViewModel.swift; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		CEE226AF1C9C726F005EB279 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewModel.swift; path = SignUp/ViewModel/RegisterViewModel.swift; sourceTree = "<group>"; };
 		CEE226B41C9C7692005EB279 /* RegisterViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewType.swift; path = SignUp/View/RegisterViewType.swift; sourceTree = "<group>"; };
+		CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewDelegate.swift; path = Login/View/LoginViewDelegate.swift; sourceTree = "<group>"; };
 		CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = Validators/EmailValidator.swift; sourceTree = "<group>"; };
 		CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompositeValidator.swift; path = Validators/CompositeValidator.swift; sourceTree = "<group>"; };
 		CEE4049B1C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnyInputTextValidatorTests.swift; path = Validators/AnyInputTextValidatorTests.swift; sourceTree = "<group>"; };
@@ -311,10 +313,11 @@
 		CEBF66B61C8DD526006EE090 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CEBF66B91C8DD582006EE090 /* LoginViewType.swift */,
+				CED63F321C9AFFAB0092F323 /* LoginView.xib */,
+				CEBF66B91C8DD582006EE090 /* LoginView.swift */,
 				CEBF66CD1C8E089D006EE090 /* LoginController.swift */,
 				CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */,
-				CEAF8C611C985F8300FFD54F /* LoginView.xib */,
+				CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -553,13 +556,14 @@
 				CEE226B51C9C7692005EB279 /* RegisterViewType.swift in Sources */,
 				CE040D711C99BD890020DDE0 /* UIExtensions.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
+				CEE226B71C9C7FA4005EB279 /* LoginViewDelegate.swift in Sources */,
 				CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */,
 				CE040D7A1C99CEE10020DDE0 /* LengthValidators.swift in Sources */,
 				CEE226A61C9C3CEA005EB279 /* RecoverPasswordController.swift in Sources */,
 				CEE226B31C9C75CC005EB279 /* RegisterViewModel.swift in Sources */,
 				CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */,
 				CEBF66CE1C8E089D006EE090 /* LoginController.swift in Sources */,
-				CEBF66BA1C8DD582006EE090 /* LoginViewType.swift in Sources */,
+				CEBF66BA1C8DD582006EE090 /* LoginView.swift in Sources */,
 				CE11A7011C9848AE002C9779 /* LoginControllerDelegate.swift in Sources */,
 				CE040D741C99CDB40020DDE0 /* InlineValidator.swift in Sources */,
 				CE040D761C99CE650020DDE0 /* TextInputValidatorType.swift in Sources */,
