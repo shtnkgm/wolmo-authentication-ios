@@ -33,7 +33,8 @@ public final class LoginController: UIViewController {
     
     private lazy var _notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     private var _notificationDisposables: [Disposable] = []
-    private var keyboardDisplayed: Bool = false
+    public private(set) var keyboardDisplayed: Bool = false
+    private var offsetMoved: CGFloat = 0
     
     /**
         Initializes a login controller with the view model, delegate,
@@ -79,6 +80,8 @@ public final class LoginController: UIViewController {
     public override func viewDidLoad() {
         loginView.render()
         bindViewModel()
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard:")
+        self.view.addGestureRecognizer(tapRecognizer)
     }
     
     public override func viewWillAppear(animated: Bool) {
@@ -196,19 +199,41 @@ extension LoginController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
             if !keyboardDisplayed {
-                self.view.frame.origin.y -= keyboardSize.height
                 keyboardDisplayed = true
+                let navigationBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController!.navigationBar.frame.size.height
+                let keyboardOffset = keyboardSize.height
+                let emailOffset = loginView.emailTextField.frame.origin.y - 10
+                if emailOffset > keyboardOffset {
+                    print("Keyboard: \(keyboardOffset)")
+                    self.view.frame.origin.y -= keyboardOffset
+                    offsetMoved = keyboardOffset
+                } else {
+                    print("Email: \(emailOffset)")
+                    self.view.frame.origin.y -= emailOffset
+                    offsetMoved = emailOffset
+                }
+//                self.view.frame.origin.y += navigationBarOffset
+//                offsetMoved -= navigationBarOffset
             }
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
         self.view.frame.origin.y = 0
+//        self.view.frame.origin.y += offsetMoved
     }
     
     func keyboardDidHide(notification: NSNotification) {
         keyboardDisplayed = false
     }
+    
+    func dismissKeyboard(sender: UITapGestureRecognizer) {
+        if (keyboardDisplayed) {
+            keyboardDisplayed = false
+            self.view.endEditing(true)
+        }
+    }
+    
 }
 
 public extension SessionServiceError {

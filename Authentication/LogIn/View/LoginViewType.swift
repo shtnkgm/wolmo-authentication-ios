@@ -138,11 +138,13 @@ public final class LoginView: UIView, LoginViewType {
         emailTextField.layer.borderWidth = 1
         emailTextField.layer.cornerRadius = 8.0
         emailTextFieldValid = true
+        emailTextField.autocorrectionType = .No
         
         passwordTextField.secureTextEntry = true
         passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
         passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 8.0
         passwordTextFieldValid = true
+        passwordTextField.autocorrectionType = .No
         
         activityIndicator.hidesWhenStopped = true
         
