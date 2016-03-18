@@ -55,19 +55,39 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var emailLabelOutlet: UILabel!
     
     public var emailTextField: UITextField { return emailTextFieldOutlet }
-    @IBOutlet weak var emailTextFieldOutlet: UITextField!
+    @IBOutlet weak var emailTextFieldOutlet: UITextField! {
+        didSet {
+            emailTextFieldOutlet.layer.borderWidth = 1
+            emailTextFieldOutlet.layer.cornerRadius = 8.0
+            emailTextFieldOutlet.autocorrectionType = .No
+
+        }
+    }
     
     public var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
-    @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel!
+    @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
+        didSet {
+            emailValidationMessageLabelOutlet.text = " "
+        }
+    }
     
     public var passwordLabel: UILabel { return passwordLabelOutlet }
     @IBOutlet weak var passwordLabelOutlet: UILabel!
     
     public var passwordTextField: UITextField { return passwordTextFieldOutlet }
-    @IBOutlet weak var passwordTextFieldOutlet: UITextField!
+    @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
+        didSet {
+            passwordTextFieldOutlet.secureTextEntry = true
+            passwordTextFieldOutlet.autocorrectionType = .No
+        }
+    }
     
     public var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
-    @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel!
+    @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
+        didSet {
+            passwordValidationMessageLabelOutlet.text = " "
+        }
+    }
     
     public var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton!
@@ -76,7 +96,11 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var logInButtonOutlet: UIButton!
     
     public var logInErrorLabel: UILabel? { return logInErrorLabelOutlet }
-    @IBOutlet weak var logInErrorLabelOutlet: UILabel!
+    @IBOutlet weak var logInErrorLabelOutlet: UILabel! {
+        didSet {
+            logInErrorLabelOutlet.text = " "
+        }
+    }
     
     public var registerButton: UIButton { return registerButtonOutlet }
     @IBOutlet weak var registerButtonOutlet: UIButton!
@@ -87,9 +111,18 @@ public final class LoginView: UIView, LoginViewType {
     public var activityIndicator: UIActivityIndicatorView { return UIActivityIndicatorView() }
     
     
-    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView!
+    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
+        didSet {
+            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
+            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 8.0
+        }
+    }
     
-    @IBOutlet weak var toRegisterLabel: UILabel!
+    @IBOutlet weak var toRegisterLabel: UILabel! {
+        didSet {
+            toRegisterLabel.text = "login-view.to-register-label".localized
+        }
+    }
     
     
     public var passwordTextFieldValid: Bool = true {
@@ -129,23 +162,6 @@ public final class LoginView: UIView, LoginViewType {
     }
     
     public func render() {
-        toRegisterLabel.text = "login-view.to-register-label".localized
-        
-        emailValidationMessageLabel?.text = " "
-        passwordValidationMessageLabel?.text = " "
-        logInErrorLabel?.text = " "
-        
-        emailTextField.layer.borderWidth = 1
-        emailTextField.layer.cornerRadius = 8.0
-        emailTextFieldValid = true
-        emailTextField.autocorrectionType = .No
-        
-        passwordTextField.secureTextEntry = true
-        passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
-        passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 8.0
-        passwordTextFieldValid = true
-        passwordTextField.autocorrectionType = .No
-        
         activityIndicator.hidesWhenStopped = true
         
         //Configure colour palette

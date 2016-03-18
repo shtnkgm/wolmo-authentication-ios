@@ -52,8 +52,10 @@
 		CEE226A61C9C3CEA005EB279 /* RecoverPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226A51C9C3CEA005EB279 /* RecoverPasswordController.swift */; };
 		CEE226A71C9C4011005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
 		CEE226AA1C9C4018005EB279 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226AC1C9C4018005EB279 /* Spanish(es).strings */; };
-		CEE226AD1C9C403F005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
-		CEE226AE1C9C4043005EB279 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226AC1C9C4018005EB279 /* Spanish(es).strings */; };
+		CEE226B01C9C727F005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
+		CEE226B11C9C7283005EB279 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226AC1C9C4018005EB279 /* Spanish(es).strings */; };
+		CEE226B31C9C75CC005EB279 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */; };
+		CEE226B51C9C7692005EB279 /* RegisterViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B41C9C7692005EB279 /* RegisterViewType.swift */; };
 		CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */; };
 		CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */; };
 		CEE404A11C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4049B1C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift */; };
@@ -141,6 +143,9 @@
 		CEE226A51C9C3CEA005EB279 /* RecoverPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecoverPasswordController.swift; path = RecoverPassword/RecoverPasswordController.swift; sourceTree = "<group>"; };
 		CEE226A81C9C4011005EB279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE226AB1C9C4018005EB279 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Spanish(es).strings"; sourceTree = "<group>"; };
+		CEE226AF1C9C726F005EB279 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewModel.swift; path = SignUp/ViewModel/RegisterViewModel.swift; sourceTree = "<group>"; };
+		CEE226B41C9C7692005EB279 /* RegisterViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewType.swift; path = SignUp/View/RegisterViewType.swift; sourceTree = "<group>"; };
 		CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = Validators/EmailValidator.swift; sourceTree = "<group>"; };
 		CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompositeValidator.swift; path = Validators/CompositeValidator.swift; sourceTree = "<group>"; };
 		CEE4049B1C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnyInputTextValidatorTests.swift; path = Validators/AnyInputTextValidatorTests.swift; sourceTree = "<group>"; };
@@ -263,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */,
+				CEE226B41C9C7692005EB279 /* RegisterViewType.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -270,6 +276,7 @@
 		CE9AC3C11C8F2F650012D20B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -491,10 +498,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED63F161C9AFA170092F323 /* LaunchScreen.storyboard in Resources */,
-				CEE226AD1C9C403F005EB279 /* Localizable.strings in Resources */,
+				CEE226B01C9C727F005EB279 /* Localizable.strings in Resources */,
 				CED63F131C9AFA170092F323 /* Assets.xcassets in Resources */,
 				CED63F111C9AFA170092F323 /* Main.storyboard in Resources */,
-				CEE226AE1C9C4043005EB279 /* Spanish(es).strings in Resources */,
+				CEE226B11C9C7283005EB279 /* Spanish(es).strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,10 +550,13 @@
 				CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */,
 				CEBF66C81C8DFCB1006EE090 /* LoginViewModel.swift in Sources */,
 				CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */,
+				CEE226B51C9C7692005EB279 /* RegisterViewType.swift in Sources */,
+				CE040D711C99BD890020DDE0 /* UIExtensions.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
 				CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */,
 				CE040D7A1C99CEE10020DDE0 /* LengthValidators.swift in Sources */,
 				CEE226A61C9C3CEA005EB279 /* RecoverPasswordController.swift in Sources */,
+				CEE226B31C9C75CC005EB279 /* RegisterViewModel.swift in Sources */,
 				CEBF66D01C8E0A6E006EE090 /* Email.swift in Sources */,
 				CEBF66CE1C8E089D006EE090 /* LoginController.swift in Sources */,
 				CEBF66BA1C8DD582006EE090 /* LoginViewType.swift in Sources */,
@@ -610,6 +620,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEE226A81C9C4011005EB279 /* en */,
+				CEE226AF1C9C726F005EB279 /* Base */,
 			);
 			name = Localizable.strings;
 			path = "Supporting Files";

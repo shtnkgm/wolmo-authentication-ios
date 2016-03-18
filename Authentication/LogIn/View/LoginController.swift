@@ -21,8 +21,6 @@ import enum Result.NoError
  */
 public final class LoginController: UIViewController {
     
-    typealias LoginErrorHandler = (SessionServiceError, LoginController) -> ()
-    
     private let _viewModel: LoginViewModelType
     private let _onRegister: (LoginController) -> ()
     private let _onRecoverPassword: (LoginController) -> ()

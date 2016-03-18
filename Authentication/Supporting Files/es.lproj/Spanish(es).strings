@@ -23,7 +23,7 @@
 "password-visibility.button-title.false" = "Ocultar";
 "password-visibility.button-title.true" = "Mostrar";
 "login-view-model.recover-password-button-title" = "Recuperar contraseña";
-"login-view.to-register-label" = "¿No tienes usuario?";
+"login-view.to-register-label" = "¿No tienes cuenta?";
 
 /* Errores del servicio de sesión */
 "login-error.invalid-credentials.message" = "Email o contraseña incorrectos. ";
