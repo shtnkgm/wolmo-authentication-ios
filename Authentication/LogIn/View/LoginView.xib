@@ -165,23 +165,35 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n6d-h8-UK6">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nph-gf-vkr">
                                             <rect key="frame" x="133" y="17" width="378" height="30"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n6d-h8-UK6">
+                                                    <rect key="frame" x="8" y="0.0" width="362" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="310" id="eIh-dr-2BA"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="eIh-dr-2BA"/>
+                                                        </mask>
+                                                    </variation>
+                                                </textField>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="310" id="eIh-dr-2BA"/>
+                                                <constraint firstItem="n6d-h8-UK6" firstAttribute="leading" secondItem="Nph-gf-vkr" secondAttribute="leading" constant="8" id="8hZ-CJ-lY8"/>
+                                                <constraint firstItem="n6d-h8-UK6" firstAttribute="top" secondItem="Nph-gf-vkr" secondAttribute="top" id="b20-pL-uRQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="n6d-h8-UK6" secondAttribute="trailing" constant="8" id="bYd-2s-laI"/>
+                                                <constraint firstAttribute="bottom" secondItem="n6d-h8-UK6" secondAttribute="bottom" id="wj4-dd-v8i"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="eIh-dr-2BA"/>
-                                                </mask>
-                                            </variation>
-                                        </textField>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Nph-gf-vkr" firstAttribute="centerY" secondItem="mmO-qG-jdH" secondAttribute="centerY" id="Hym-Q6-2f2"/>
                                         <constraint firstItem="G9U-PP-eSg" firstAttribute="centerY" secondItem="mmO-qG-jdH" secondAttribute="centerY" id="kZP-hL-qcU"/>
-                                        <constraint firstItem="n6d-h8-UK6" firstAttribute="centerY" secondItem="mmO-qG-jdH" secondAttribute="centerY" id="sYy-jk-g05"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDu-Ke-6e4" userLabel="View Errors">
@@ -256,8 +268,8 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xR-de-3a1">
                                             <rect key="frame" x="133" y="17" width="378" height="30"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2dd-3i-SpJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="330" height="30"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2dd-3i-SpJ">
+                                                    <rect key="frame" x="8" y="0.0" width="322" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -276,7 +288,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="2dd-3i-SpJ" secondAttribute="bottom" id="NQ8-yU-KkC"/>
                                                 <constraint firstItem="2dd-3i-SpJ" firstAttribute="top" secondItem="1xR-de-3a1" secondAttribute="top" id="cAW-Mh-ENX"/>
                                                 <constraint firstAttribute="trailing" secondItem="Clc-p3-LR7" secondAttribute="trailing" constant="3" id="e5f-dh-am6"/>
-                                                <constraint firstItem="2dd-3i-SpJ" firstAttribute="leading" secondItem="1xR-de-3a1" secondAttribute="leading" id="fDr-JF-A2z"/>
+                                                <constraint firstItem="2dd-3i-SpJ" firstAttribute="leading" secondItem="1xR-de-3a1" secondAttribute="leading" constant="8" id="fDr-JF-A2z"/>
                                                 <constraint firstItem="Clc-p3-LR7" firstAttribute="top" secondItem="1xR-de-3a1" secondAttribute="top" id="yjl-56-e70"/>
                                             </constraints>
                                         </view>
@@ -330,16 +342,17 @@
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="IE0-sh-sDd"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="height" secondItem="fOh-Ac-Urc" secondAttribute="height" multiplier="1/3" id="JcD-W7-ygf"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="top" secondItem="biK-V3-UKv" secondAttribute="bottom" id="LG9-XP-3Ww"/>
-                        <constraint firstItem="1xR-de-3a1" firstAttribute="leading" secondItem="n6d-h8-UK6" secondAttribute="leading" id="MGX-pD-Yyd"/>
                         <constraint firstItem="biK-V3-UKv" firstAttribute="height" secondItem="fOh-Ac-Urc" secondAttribute="height" id="O1a-zZ-Dbn"/>
                         <constraint firstItem="biK-V3-UKv" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="RKa-Di-Ucc"/>
-                        <constraint firstItem="1xR-de-3a1" firstAttribute="trailing" secondItem="n6d-h8-UK6" secondAttribute="trailing" id="SKy-1k-MHt"/>
                         <constraint firstItem="GLr-di-9jk" firstAttribute="trailing" secondItem="ZAD-1z-Cfs" secondAttribute="trailing" id="SM4-1X-8wb"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="top" secondItem="biK-V3-UKv" secondAttribute="bottom" id="b8d-mQ-Mha"/>
                         <constraint firstAttribute="trailing" secondItem="PIp-l7-LQy" secondAttribute="trailing" id="fAc-iM-Ya6"/>
+                        <constraint firstItem="2dd-3i-SpJ" firstAttribute="height" secondItem="n6d-h8-UK6" secondAttribute="height" id="fZY-MU-PVj"/>
                         <constraint firstAttribute="trailing" secondItem="fOh-Ac-Urc" secondAttribute="trailing" id="k96-bH-6lb"/>
                         <constraint firstAttribute="trailing" secondItem="biK-V3-UKv" secondAttribute="trailing" id="lgS-76-xHG"/>
                         <constraint firstItem="biK-V3-UKv" firstAttribute="top" secondItem="fOh-Ac-Urc" secondAttribute="bottom" id="nqF-jP-Sch"/>
+                        <constraint firstItem="1xR-de-3a1" firstAttribute="leading" secondItem="Nph-gf-vkr" secondAttribute="leading" id="tR4-hE-kQA"/>
+                        <constraint firstItem="1xR-de-3a1" firstAttribute="trailing" secondItem="Nph-gf-vkr" secondAttribute="trailing" id="vYc-U8-4wt"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -373,6 +386,7 @@
             <connections>
                 <outlet property="emailLabelOutlet" destination="G9U-PP-eSg" id="Q7p-za-A8H"/>
                 <outlet property="emailTextFieldOutlet" destination="n6d-h8-UK6" id="MSO-qq-Uh1"/>
+                <outlet property="emailTextFieldViewOutlet" destination="Nph-gf-vkr" id="3Ah-I6-lnl"/>
                 <outlet property="emailValidationMessageLabelOutlet" destination="ZAD-1z-Cfs" id="LTO-At-YO7"/>
                 <outlet property="logInButtonOutlet" destination="hiI-H5-iJW" id="UMz-QM-poS"/>
                 <outlet property="logInErrorLabelOutlet" destination="5B8-U1-3A4" id="VYs-zp-vgB"/>

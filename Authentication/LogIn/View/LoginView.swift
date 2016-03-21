@@ -59,8 +59,6 @@ public final class LoginView: UIView, LoginViewType {
     public var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
         didSet {
-            emailTextFieldOutlet.layer.borderWidth = 1
-            emailTextFieldOutlet.layer.cornerRadius = 8.0
             emailTextFieldOutlet.autocorrectionType = .No
         }
     }
@@ -119,6 +117,13 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
+    @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
+        didSet {
+            emailTextFieldViewOutlet.layer.borderWidth = 1
+            emailTextFieldViewOutlet.layer.cornerRadius = 8.0
+        }
+    }
+    
     @IBOutlet weak var toRegisterLabel: UILabel! {
         didSet {
             toRegisterLabel.text = "login-view.to-register-label".localized
@@ -146,7 +151,7 @@ public final class LoginView: UIView, LoginViewType {
             } else {
                 color = UIColor.redColor().CGColor
             }
-            emailTextField.layer.borderColor = color
+            emailTextFieldViewOutlet.layer.borderColor = color
         }
     }
 
