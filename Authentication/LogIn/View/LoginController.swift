@@ -208,7 +208,7 @@ extension LoginController {
                     self.view.frame.origin.y -= emailOffset
                 }
                 let navBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
-                print("navBarOfsset: \(navBarOffset)")
+                //print("navBarOfsset: \(navBarOffset)")
                 self.view.frame.origin.y += navBarOffset
             }
         }
