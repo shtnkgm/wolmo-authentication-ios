@@ -198,12 +198,18 @@ extension LoginController {
             if !keyboardDisplayed {
                 keyboardDisplayed = true
                 let keyboardOffset = keyboardSize.height
-                let emailOffset = loginView.emailTextField.frame.origin.y - 10
+                let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
+                //print("Email offset: \(emailOffset)")
                 if emailOffset > keyboardOffset {
+                    //print("Keyboard: \(keyboardOffset)")
                     self.view.frame.origin.y -= keyboardOffset
                 } else {
+                    //print("Email: \(emailOffset)")
                     self.view.frame.origin.y -= emailOffset
                 }
+                let navBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
+                print("navBarOfsset: \(navBarOffset)")
+                self.view.frame.origin.y += navBarOffset
             }
         }
     }
