@@ -8,6 +8,10 @@
 
 import Foundation
 
+/**
+    Delegate for any extra configuration
+    to the login view when rendered.
+*/
 public protocol LoginViewDelegate {
     
     func configureView(loginView: LoginViewType)
