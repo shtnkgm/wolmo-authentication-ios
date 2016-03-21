@@ -45,7 +45,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="536" height="45"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿No tiene usuario?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-m0-zdE">
-                                            <rect key="frame" x="208" y="14" width="120" height="17"/>
+                                            <rect key="frame" x="208" y="5" width="120" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -53,20 +53,26 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="k1E-m0-zdE" firstAttribute="centerX" secondItem="XBY-TO-W3Y" secondAttribute="centerX" id="gLP-4n-Z8x"/>
+                                        <constraint firstItem="k1E-m0-zdE" firstAttribute="top" secondItem="XBY-TO-W3Y" secondAttribute="top" constant="5" id="guW-y3-H2S"/>
                                         <constraint firstItem="k1E-m0-zdE" firstAttribute="centerY" secondItem="XBY-TO-W3Y" secondAttribute="centerY" id="jtt-vE-R5M"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="jtt-vE-R5M"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5G-OH-g8x" userLabel="View Button">
                                     <rect key="frame" x="0.0" y="45" width="536" height="44"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-U7-f9X">
-                                            <rect key="frame" x="230" y="5" width="77" height="32"/>
+                                            <rect key="frame" x="230" y="-5" width="77" height="32"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <state key="normal" title="Regístrese"/>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="cxB-U7-f9X" firstAttribute="top" secondItem="d5G-OH-g8x" secondAttribute="top" constant="5" id="cIy-gZ-oIo"/>
+                                        <constraint firstAttribute="top" secondItem="cxB-U7-f9X" secondAttribute="top" constant="5" id="cIy-gZ-oIo"/>
                                         <constraint firstItem="cxB-U7-f9X" firstAttribute="centerX" secondItem="d5G-OH-g8x" secondAttribute="centerX" id="zSE-s3-Kfb"/>
                                     </constraints>
                                 </view>
@@ -85,39 +91,52 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-pZ-IZv" userLabel="View Log in">
                             <rect key="frame" x="0.0" y="0.0" width="536" height="132"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In Errors" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B8-U1-3A4">
-                                    <rect key="frame" x="227" y="5" width="83" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiI-H5-iJW">
-                                    <rect key="frame" x="54" y="32" width="428" height="67"/>
-                                    <color key="backgroundColor" red="1" green="0.75446993829115305" blue="0.19559735966350844" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                    <state key="normal" title="LOG IN">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQS-8v-dkX" userLabel="View Label">
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="26"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In Errors" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B8-U1-3A4">
+                                            <rect key="frame" x="5" y="9" width="536" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5B8-U1-3A4" firstAttribute="trailing" secondItem="WQS-8v-dkX" secondAttribute="trailing" constant="5" id="SLg-w5-FEX"/>
+                                        <constraint firstAttribute="bottom" secondItem="5B8-U1-3A4" secondAttribute="bottom" id="fmw-34-4E9"/>
+                                        <constraint firstItem="5B8-U1-3A4" firstAttribute="leading" secondItem="WQS-8v-dkX" secondAttribute="leading" constant="5" id="gft-Pk-clz"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-bP-pgL" userLabel="View Button">
+                                    <rect key="frame" x="0.0" y="26" width="536" height="106"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiI-H5-iJW">
+                                            <rect key="frame" x="36" y="16" width="464" height="64"/>
+                                            <color key="backgroundColor" red="1" green="0.75446993829115305" blue="0.19559735966350844" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <state key="normal" title="LOG IN">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="hiI-H5-iJW" secondAttribute="centerY" constant="5" id="B5T-47-qj2"/>
+                                        <constraint firstItem="hiI-H5-iJW" firstAttribute="width" secondItem="fUN-bP-pgL" secondAttribute="width" multiplier="13/15" id="SXY-dY-t0N"/>
+                                        <constraint firstItem="hiI-H5-iJW" firstAttribute="centerX" secondItem="fUN-bP-pgL" secondAttribute="centerX" id="XIz-tD-NRf"/>
+                                        <constraint firstItem="hiI-H5-iJW" firstAttribute="height" secondItem="fUN-bP-pgL" secondAttribute="height" multiplier="3/5" id="bsg-Tt-aP8"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="hiI-H5-iJW" firstAttribute="width" secondItem="cmY-pZ-IZv" secondAttribute="width" multiplier="12/15" id="0bs-fx-CYI"/>
-                                <constraint firstItem="hiI-H5-iJW" firstAttribute="top" secondItem="5B8-U1-3A4" secondAttribute="bottom" constant="10" id="1Eh-Gs-yoa"/>
-                                <constraint firstItem="hiI-H5-iJW" firstAttribute="height" secondItem="cmY-pZ-IZv" secondAttribute="height" multiplier="1/2" id="3KJ-xE-eIl"/>
-                                <constraint firstItem="5B8-U1-3A4" firstAttribute="centerX" secondItem="cmY-pZ-IZv" secondAttribute="centerX" id="GhB-Fo-Wug"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="hiI-H5-iJW" secondAttribute="trailing" constant="40" id="Hjo-eH-gLZ"/>
-                                <constraint firstAttribute="width" constant="536" id="hIS-RP-3EO"/>
-                                <constraint firstItem="hiI-H5-iJW" firstAttribute="leading" secondItem="cmY-pZ-IZv" secondAttribute="leadingMargin" constant="40" id="mqh-l0-m3r"/>
-                                <constraint firstItem="hiI-H5-iJW" firstAttribute="centerY" secondItem="cmY-pZ-IZv" secondAttribute="centerY" id="vB1-wh-AaI"/>
-                                <constraint firstItem="hiI-H5-iJW" firstAttribute="centerX" secondItem="cmY-pZ-IZv" secondAttribute="centerX" id="xXR-je-wna"/>
+                                <constraint firstItem="WQS-8v-dkX" firstAttribute="height" secondItem="fUN-bP-pgL" secondAttribute="height" multiplier="1/4" id="6P3-cG-31a"/>
+                                <constraint firstItem="fUN-bP-pgL" firstAttribute="top" secondItem="WQS-8v-dkX" secondAttribute="bottom" id="8zv-Gw-H1A"/>
+                                <constraint firstItem="WQS-8v-dkX" firstAttribute="leading" secondItem="cmY-pZ-IZv" secondAttribute="leading" id="Bt6-gH-rcp"/>
+                                <constraint firstItem="fUN-bP-pgL" firstAttribute="leading" secondItem="cmY-pZ-IZv" secondAttribute="leading" id="TRb-bv-VSv"/>
+                                <constraint firstItem="WQS-8v-dkX" firstAttribute="top" secondItem="cmY-pZ-IZv" secondAttribute="top" id="irN-4w-fRd"/>
+                                <constraint firstAttribute="bottom" secondItem="fUN-bP-pgL" secondAttribute="bottom" id="jCp-na-eKF"/>
+                                <constraint firstAttribute="trailing" secondItem="WQS-8v-dkX" secondAttribute="trailing" id="kWr-Rm-ngh"/>
+                                <constraint firstAttribute="trailing" secondItem="fUN-bP-pgL" secondAttribute="trailing" id="nfF-NN-qx2"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="hIS-RP-3EO"/>
-                                    <exclude reference="Hjo-eH-gLZ"/>
-                                    <exclude reference="mqh-l0-m3r"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -168,8 +187,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDu-Ke-6e4" userLabel="View Errors">
                                     <rect key="frame" x="0.0" y="63" width="536" height="32"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Validation Errors" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAD-1z-Cfs">
-                                            <rect key="frame" x="373" y="2" width="145" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="ZAD-1z-Cfs">
+                                            <rect key="frame" x="5" y="2" width="513" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -177,6 +196,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="centerY" secondItem="ZAD-1z-Cfs" secondAttribute="centerY" constant="5" id="Dah-Lg-XGM"/>
+                                        <constraint firstItem="ZAD-1z-Cfs" firstAttribute="leading" secondItem="UDu-Ke-6e4" secondAttribute="leading" constant="5" id="Qsj-FM-b0f"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -201,10 +221,10 @@
                             <rect key="frame" x="0.0" y="95" width="536" height="95"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-9d-BLN" userLabel="View Errors">
-                                    <rect key="frame" x="0.0" y="63" width="536" height="32"/>
+                                    <rect key="frame" x="-5" y="63" width="541" height="32"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Validation Errors" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-di-9jk">
-                                            <rect key="frame" x="346" y="2" width="172" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-di-9jk">
+                                            <rect key="frame" x="5" y="2" width="518" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="260" id="X66-an-LU6"/>
                                             </constraints>
@@ -220,6 +240,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="centerY" secondItem="GLr-di-9jk" secondAttribute="centerY" constant="5" id="KTC-lx-MBp"/>
+                                        <constraint firstItem="GLr-di-9jk" firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" constant="5" id="RMI-fM-eu7"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="GLr-di-9jk" secondAttribute="trailing" constant="10" id="pYh-Pc-6qA"/>
                                     </constraints>
                                 </view>
@@ -278,30 +299,27 @@
                                 <constraint firstItem="cqr-9d-BLN" firstAttribute="top" secondItem="BHv-O5-QdK" secondAttribute="bottom" id="fXt-gh-5Ah"/>
                                 <constraint firstAttribute="bottom" secondItem="cqr-9d-BLN" secondAttribute="bottom" id="lA2-KP-rQ7"/>
                                 <constraint firstAttribute="trailing" secondItem="BHv-O5-QdK" secondAttribute="trailing" id="pzu-ev-jC0"/>
-                                <constraint firstItem="cqr-9d-BLN" firstAttribute="leading" secondItem="biK-V3-UKv" secondAttribute="leading" id="vhY-7V-hkn"/>
+                                <constraint firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" constant="5" id="vhY-7V-hkn"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="fXt-gh-5Ah"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIp-l7-LQy" userLabel="View Recover Password">
                             <rect key="frame" x="0.0" y="190" width="536" height="32"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sL-Hy-vEE">
-                                    <rect key="frame" x="23" y="-6" width="149" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sL-Hy-vEE">
+                                    <rect key="frame" x="23" y="-5" width="149" height="30"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <state key="normal" title="Recuperar contraseña"/>
                                 </button>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="top" secondItem="6sL-Hy-vEE" secondAttribute="top" constant="5" id="5Af-Og-iBu"/>
-                                <constraint firstAttribute="centerY" secondItem="6sL-Hy-vEE" secondAttribute="centerY" constant="5" id="70T-8W-H5k"/>
-                                <constraint firstAttribute="centerY" secondItem="6sL-Hy-vEE" secondAttribute="centerY" constant="10" id="VtR-1q-2NG"/>
                                 <constraint firstItem="6sL-Hy-vEE" firstAttribute="leading" secondItem="PIp-l7-LQy" secondAttribute="leadingMargin" constant="15" id="ti6-as-OtM"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="70T-8W-H5k"/>
-                                    <exclude reference="VtR-1q-2NG"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>

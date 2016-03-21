@@ -200,10 +200,8 @@ extension LoginController {
                 let keyboardOffset = keyboardSize.height
                 let emailOffset = loginView.emailTextField.frame.origin.y - 10
                 if emailOffset > keyboardOffset {
-                    print("Keyboard: \(keyboardOffset)")
                     self.view.frame.origin.y -= keyboardOffset
                 } else {
-                    print("Email: \(emailOffset)")
                     self.view.frame.origin.y -= emailOffset
                 }
             }
