@@ -150,7 +150,7 @@ private extension LoginController {
             }
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility.unsafeCocoaAction
             _viewModel.showPassword.signal.observeNext { [unowned self] showPassword in
-                self.loginView.passwordTextField.secureTextEntry = !showPassword
+                self.loginView.showPassword = showPassword
             }
         }
     }

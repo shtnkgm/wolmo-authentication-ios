@@ -38,6 +38,7 @@ public protocol LoginViewType: Renderable {
     var passwordTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
     var logInButtonEnabled: Bool { get set }
+    var showPassword: Bool { get set }
     
 }
 
@@ -76,7 +77,6 @@ public final class LoginView: UIView, LoginViewType {
     public var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
         didSet {
-            passwordTextFieldOutlet.secureTextEntry = true
             passwordTextFieldOutlet.autocorrectionType = .No
         }
     }
@@ -167,11 +167,22 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
+    public var showPassword: Bool = false {
+        didSet {
+            passwordTextField.enabled = false
+            passwordTextField.secureTextEntry = !showPassword
+            passwordTextField.enabled = true
+            passwordTextField.font = UIFont.systemFontOfSize(14)
+        }
+    }
+    
     public func render() {
         activityIndicator.hidesWhenStopped = true
         
         emailTextFieldValid = true
         passwordTextFieldValid = true
+        logInButtonEnabled = false
+        showPassword = false
         
         //Configure colour palette
         //Configure fonts
