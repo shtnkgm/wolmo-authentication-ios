@@ -30,8 +30,8 @@ public final class LoginController: UIViewController {
     public lazy var loginView: LoginViewType = self._loginViewFactory()
     
     private lazy var _notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-    private var _notificationDisposables: [Disposable] = []
-    public private(set) var keyboardDisplayed: Bool = false
+    private var _disposable = CompositeDisposable()
+    private let _keyboardDisplayed = MutableProperty(false)
     
     /**
         Initializes a login controller with the view model, delegate,
@@ -63,6 +63,11 @@ public final class LoginController: UIViewController {
             _onRecoverPassword = onRecoverPassword
             _delegate = delegate
             super.init(nibName: nil, bundle: nil)
+            addKeyboardObservers()
+    }
+    
+    deinit {
+        _disposable.dispose()
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -83,12 +88,10 @@ public final class LoginController: UIViewController {
     
     public override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        addKeyboardObservers()
     }
     
     public override func viewDidDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        removeKeyboardObservers()
     }
     
 }
@@ -173,58 +176,39 @@ private extension LoginController {
 extension LoginController {
     
     public func addKeyboardObservers() {
-        _notificationDisposables.append(_notificationCenter.rac_notifications(UIKeyboardDidHideNotification)
-            .startWithNext { [unowned self] in
-                self.keyboardDidHide($0)
-        })
-        _notificationDisposables.append(_notificationCenter.rac_notifications(UIKeyboardWillShowNotification)
-            .startWithNext { [unowned self] in
-                self.keyboardWillShow($0)
-        })
-        _notificationDisposables.append(_notificationCenter.rac_notifications(UIKeyboardWillHideNotification)
-            .startWithNext { [unowned self] in
-                self.keyboardWillHide($0)
-        })
-    }
-    
-    public func removeKeyboardObservers() {
-        for disposable in _notificationDisposables {
-            disposable.dispose()
-        }
+        _disposable += _keyboardDisplayed <~ _notificationCenter
+            .rac_notifications(UIKeyboardDidHideNotification)
+            .map { _ in false }
+        
+        _disposable += _notificationCenter
+            .rac_notifications(UIKeyboardWillShowNotification)
+            .startWithNext { [unowned self] in self.keyboardWillShow($0) }
+        
+        _disposable += _notificationCenter
+            .rac_notifications(UIKeyboardWillHideNotification)
+            .startWithNext { [unowned self] in self.view.frame.origin.y = 0 }
     }
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
-            if !keyboardDisplayed {
-                keyboardDisplayed = true
+            if !_keyboardDisplayed.value {
+                _keyboardDisplayed.value = true
                 let keyboardOffset = keyboardSize.height
                 let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
-                //print("Email offset: \(emailOffset)")
                 if emailOffset > keyboardOffset {
-                    //print("Keyboard: \(keyboardOffset)")
                     self.view.frame.origin.y -= keyboardOffset
                 } else {
-                    //print("Email: \(emailOffset)")
                     self.view.frame.origin.y -= emailOffset
                 }
                 let navBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
-                //print("navBarOfsset: \(navBarOffset)")
                 self.view.frame.origin.y += navBarOffset
             }
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
-    
-    func keyboardDidHide(notification: NSNotification) {
-        keyboardDisplayed = false
-    }
-    
     func dismissKeyboard(sender: UITapGestureRecognizer) {
-        if keyboardDisplayed {
-            keyboardDisplayed = false
+        if _keyboardDisplayed.value {
+            _keyboardDisplayed.value = false
             self.view.endEditing(true)
         }
     }
