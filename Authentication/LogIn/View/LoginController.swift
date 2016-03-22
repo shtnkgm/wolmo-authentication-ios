@@ -118,7 +118,7 @@ private extension LoginController {
         loginView.emailLabel.text = _viewModel.emailText
         loginView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
-            if errors == [] {
+            if errors.isEmpty {
                 self._delegate.loginControllerDidPassEmailValidation(self)
             } else {
                 self._delegate.loginController(self, didFailEmailValidationWithErrors: errors)
@@ -134,7 +134,7 @@ private extension LoginController {
         loginView.passwordLabel.text = _viewModel.passwordText
         loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
-            if errors == [] {
+            if errors.isEmpty {
                 self._delegate.loginControllerDidPassPasswordValidation(self)
             } else {
                 self._delegate.loginController(self, didFailPasswordValidationWithErrors: errors)
