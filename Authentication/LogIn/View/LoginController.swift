@@ -22,8 +22,6 @@ import enum Result.NoError
 public final class LoginController: UIViewController {
     
     private let _viewModel: LoginViewModelType
-    private let _onRegister: (LoginController) -> ()
-    private let _onRecoverPassword: (LoginController) -> ()
     private let _loginViewFactory: () -> LoginViewType
     private let _delegate: LoginControllerDelegate
 
@@ -41,26 +39,19 @@ public final class LoginController: UIViewController {
             - viewModel: view model to bind to and use.
             - loginViewFactory: factory method to call only once
             to get the login view to use.
-            - onRegister: closure which indicates what to do when
-            the user selects the Register/SignUp option.
-            - onRecoverPassword: closure which indicates what to 
-            do when the user selects the Recover Password option.
             - delegate: delegate which adds behaviour to certain
-            events, like handling a login error or selecting log in option.
-            A default delegate is provided.
+            events, like handling a login error or selecting log
+            in option, as handling register or recover password
+            selection.
      
         - Returns: A valid login view controller ready to use.
      
     */
     init(viewModel: LoginViewModelType,
         loginViewFactory: () -> LoginViewType,
-        onRegister: (LoginController) -> (),
-        onRecoverPassword: (LoginController) -> (),
-        delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
+        delegate: LoginControllerDelegate) {
             _viewModel = viewModel
             _loginViewFactory = loginViewFactory
-            _onRegister = onRegister
-            _onRecoverPassword = onRecoverPassword
             _delegate = delegate
             super.init(nibName: nil, bundle: nil)
             addKeyboardObservers()
@@ -165,10 +156,10 @@ private extension LoginController {
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
         
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
-        loginView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }
+        loginView.registerButton.setAction { [unowned self] _ in self._delegate.onRegister(self) }
         
         loginView.recoverPasswordButton.setTitle(_viewModel.recoverPasswordButtonTitle, forState: .Normal)
-        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._onRecoverPassword(self) }
+        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._delegate.onRecoverPassword(self) }
     }
     
 }
@@ -182,11 +173,11 @@ extension LoginController {
         
         _disposable += _notificationCenter
             .rac_notifications(UIKeyboardWillShowNotification)
-            .startWithNext { [unowned self] in self.keyboardWillShow($0) }
+            .startWithNext { [unowned self] notification in self.keyboardWillShow(notification) }
         
         _disposable += _notificationCenter
             .rac_notifications(UIKeyboardWillHideNotification)
-            .startWithNext { [unowned self] in self.view.frame.origin.y = 0 }
+            .startWithNext { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
     func keyboardWillShow(notification: NSNotification) {
