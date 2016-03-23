@@ -182,7 +182,7 @@ extension LoginController {
         
         _disposable += _notificationCenter
             .rac_notifications(UIKeyboardWillHideNotification)
-            .startWithNext { [unowned self] in self.view.frame.origin.y = 0 }
+            .startWithNext { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
     func keyboardWillShow(notification: NSNotification) {
