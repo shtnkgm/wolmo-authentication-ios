@@ -14,7 +14,7 @@ import Foundation
     and after the user logs out.
     The authentication process includes login, signup and recover password logic.
 */
-public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LoginControllerTransitionDelegate {
+public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
 
     /// The window of the app
     private let _window: UIWindow
@@ -156,14 +156,14 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     
 }
 
-public extension AuthenticationBootstrapper {
+extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
     public func loginControllerDidTapOnRegister(controller: LoginController) {
         let registerController = createRegisterController()
         if let navigationController = controller.navigationController {
             navigationController.pushViewController(registerController, animated: true)
         } else {
-            self._window.rootViewController = UINavigationController(rootViewController: registerController)
+            _window.rootViewController = UINavigationController(rootViewController: registerController)
         }
     }
     
@@ -172,7 +172,7 @@ public extension AuthenticationBootstrapper {
         if let navigationController = controller.navigationController {
             navigationController.pushViewController(recoverPasswordController, animated: true)
         } else {
-            self._window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
+            _window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
         }
     }
     
