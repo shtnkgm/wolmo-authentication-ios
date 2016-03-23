@@ -139,13 +139,9 @@ private extension LoginController {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
-            passwordVisibilityButton.rex_title <~ _viewModel.showPassword.producer.map { [unowned self] _ in
-                self._viewModel.passwordVisibilityButtonTitle
-            }
+            passwordVisibilityButton.rex_title <~ _viewModel.showPassword.producer.map { [unowned self] _ in self._viewModel.passwordVisibilityButtonTitle }
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility.unsafeCocoaAction
-            _viewModel.showPassword.signal.observeNext { [unowned self] showPassword in
-                self.loginView.showPassword = showPassword
-            }
+            _viewModel.showPassword.signal.observeNext { [unowned self] showPassword in self.loginView.showPassword = showPassword }
         }
     }
     
@@ -153,8 +149,7 @@ private extension LoginController {
         loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
         loginView.logInButtonEnabled = false
-        loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in
-            self.loginView.logInButtonEnabled = $0 }
+        loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
         
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
         loginView.registerButton.setAction { [unowned self] _ in self._delegate.onRegister(self) }
