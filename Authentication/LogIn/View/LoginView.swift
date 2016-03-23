@@ -33,7 +33,7 @@ public protocol LoginViewType: Renderable {
     var registerButton: UIButton { get }
     var recoverPasswordButton: UIButton { get }
     
-    var activityIndicator: UIActivityIndicatorView { get }
+    var activityIndicator: UIActivityIndicatorView? { get }
     
     var passwordTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
@@ -107,7 +107,7 @@ public final class LoginView: UIView, LoginViewType {
     public var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton!
     
-    public var activityIndicator: UIActivityIndicatorView { return UIActivityIndicatorView() }
+    public var activityIndicator: UIActivityIndicatorView? { return .None }
     
     
     @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
@@ -179,7 +179,7 @@ public final class LoginView: UIView, LoginViewType {
     }
     
     public func render() {
-        activityIndicator.hidesWhenStopped = true
+        activityIndicator?.hidesWhenStopped = true
         
         emailTextFieldValid = true
         passwordTextFieldValid = true

@@ -35,11 +35,21 @@ public protocol LoginControllerDelegate {
 extension LoginControllerDelegate {
     
     public func loginControllerWillExecuteLogIn(controller: LoginController) {
-        // Start activity indicator
+        if let indicator = controller.loginView.activityIndicator {
+            indicator.startAnimating()
+        } else {
+            let app = UIApplication.sharedApplication()
+            app.networkActivityIndicatorVisible = true
+        }
     }
     
     public func loginControllerDidExecuteLogIn(controller: LoginController) {
-        // Finish activity indicator
+        if let indicator = controller.loginView.activityIndicator {
+            indicator.stopAnimating()
+        } else {
+            let app = UIApplication.sharedApplication()
+            app.networkActivityIndicatorVisible = false
+        }
     }
     
     public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {
