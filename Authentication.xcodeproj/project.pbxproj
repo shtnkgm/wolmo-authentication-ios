@@ -36,6 +36,7 @@
 		CEB119181CA2E43B0049DABF /* LoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */; };
 		CEB1191A1CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */; };
 		CEB1191C1CA2F39D0049DABF /* UserServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1191B1CA2F39D0049DABF /* UserServiceType.swift */; };
+		CEB119201CA315000049DABF /* SignupCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */; };
 		CEBF66BA1C8DD582006EE090 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginView.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
@@ -150,6 +151,7 @@
 		CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginConfiguration.swift; path = Login/View/LoginConfiguration.swift; sourceTree = "<group>"; };
 		CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockLoginTransitionDelegate.swift; path = Login/Mocks/MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CEB1191B1CA2F39D0049DABF /* UserServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserServiceType.swift; path = SignUp/ViewModel/UserServiceType.swift; sourceTree = "<group>"; };
+		CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupCredentialsValidator.swift; path = SignUp/ViewModel/SignupCredentialsValidator.swift; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = LogIn/View/LoginView.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			children = (
 				CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */,
 				CEB1191B1CA2F39D0049DABF /* UserServiceType.swift */,
+				CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 				CE040D741C99CDB40020DDE0 /* InlineValidator.swift in Sources */,
 				CEE94AB41CA06D5F0089E71B /* UIExtensions.swift in Sources */,
 				CE040D761C99CE650020DDE0 /* TextInputValidatorType.swift in Sources */,
+				CEB119201CA315000049DABF /* SignupCredentialsValidator.swift in Sources */,
 				CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */,
 				CEB119181CA2E43B0049DABF /* LoginConfiguration.swift in Sources */,
 				CEBF66D21C8E0A80006EE090 /* User.swift in Sources */,
