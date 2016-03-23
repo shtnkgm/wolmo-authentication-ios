@@ -142,7 +142,6 @@ private extension LoginController {
     func bindButtons() {
         loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
-        loginView.logInButtonEnabled = false
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
         
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
