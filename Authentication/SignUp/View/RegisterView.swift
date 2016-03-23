@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol RegisterViewType {
+public protocol RegisterViewType: Renderable {
  
     var view: UIView { get }
     
@@ -33,8 +33,6 @@ public protocol RegisterViewType {
     var registerButton: UIButton { get }
     var registerErrorLabel: UILabel? { get }
     
-    var activityIndicator: UIActivityIndicatorView? { get }
-    
     var usernameTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
     var passwordTextFieldValid: Bool { get set }
@@ -44,8 +42,19 @@ public protocol RegisterViewType {
     
 }
 
+public extension RegisterViewType where Self: UIView {
+    
+    var view: UIView {
+        return self
+    }
+    
+}
+
+
 public final class RegisterView: UIView, RegisterViewType {
     
+    
+    //TODO return real objects
     public var view: UIView { return UIView() }
     
     public var usernameLabel: UILabel { return UILabel() }
@@ -69,12 +78,14 @@ public final class RegisterView: UIView, RegisterViewType {
     public var registerButton: UIButton { return UIButton() }
     public var registerErrorLabel: UILabel? { return .None }
     
-    public var activityIndicator: UIActivityIndicatorView? { return .None }
-    
     public var usernameTextFieldValid: Bool = false
     public var emailTextFieldValid: Bool = false
     public var passwordTextFieldValid: Bool = false
     public var passwordConfirmationTextFieldValid: Bool = false
     public var registerButtonEnabled: Bool = false
+    
+    public func render() {
+        
+    }
     
 }

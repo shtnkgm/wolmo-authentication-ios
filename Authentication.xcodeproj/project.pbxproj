@@ -49,7 +49,7 @@
 		CEE226A71C9C4011005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
 		CEE226AA1C9C4018005EB279 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226AC1C9C4018005EB279 /* Spanish(es).strings */; };
 		CEE226B31C9C75CC005EB279 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */; };
-		CEE226B51C9C7692005EB279 /* RegisterViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B41C9C7692005EB279 /* RegisterViewType.swift */; };
+		CEE226B51C9C7692005EB279 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B41C9C7692005EB279 /* RegisterView.swift */; };
 		CEE226B71C9C7FA4005EB279 /* LoginViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */; };
 		CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */; };
 		CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */; };
@@ -164,7 +164,7 @@
 		CEE226AB1C9C4018005EB279 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Spanish(es).strings"; sourceTree = "<group>"; };
 		CEE226AF1C9C726F005EB279 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE226B21C9C75CC005EB279 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewModel.swift; path = SignUp/ViewModel/RegisterViewModel.swift; sourceTree = "<group>"; };
-		CEE226B41C9C7692005EB279 /* RegisterViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewType.swift; path = SignUp/View/RegisterViewType.swift; sourceTree = "<group>"; };
+		CEE226B41C9C7692005EB279 /* RegisterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterView.swift; path = SignUp/View/RegisterView.swift; sourceTree = "<group>"; };
 		CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewDelegate.swift; path = Login/View/LoginViewDelegate.swift; sourceTree = "<group>"; };
 		CEE4048C1C9A040B00AB70B3 /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailValidator.swift; path = Validators/EmailValidator.swift; sourceTree = "<group>"; };
 		CEE4048E1C9A043200AB70B3 /* CompositeValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompositeValidator.swift; path = Validators/CompositeValidator.swift; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */,
-				CEE226B41C9C7692005EB279 /* RegisterViewType.swift */,
+				CEE226B41C9C7692005EB279 /* RegisterView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -642,7 +642,7 @@
 				CEBF66C81C8DFCB1006EE090 /* LoginViewModel.swift in Sources */,
 				CEB1191C1CA2F39D0049DABF /* UserServiceType.swift in Sources */,
 				CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */,
-				CEE226B51C9C7692005EB279 /* RegisterViewType.swift in Sources */,
+				CEE226B51C9C7692005EB279 /* RegisterView.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
 				CEE226B71C9C7FA4005EB279 /* LoginViewDelegate.swift in Sources */,
 				CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */,

@@ -24,6 +24,16 @@ protocol RegisterViewModelType {
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
     
+    var nameText: String { get }
+    var emailText: String { get }
+    var passwordText: String { get }
+    var confirmPasswordText: String { get }
+    var namePlaceholderText: String { get }
+    var emailPlaceholderText: String { get }
+    var passwordPlaceholderText: String { get }
+    var confirmPasswordPlaceholderText: String { get }
+    var signupButtonTitle: String { get }
+    
 }
 
 public final class RegisterViewModel {
