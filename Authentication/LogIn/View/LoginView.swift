@@ -169,6 +169,8 @@ public final class LoginView: UIView, LoginViewType {
     
     public var showPassword: Bool = false {
         didSet {
+            // Changing enabled property for the
+            // font setting to take effect.
             passwordTextField.enabled = false
             passwordTextField.secureTextEntry = !showPassword
             passwordTextField.enabled = true
