@@ -30,6 +30,8 @@
 		CE2BC5281C970E89003A1616 /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5271C970E89003A1616 /* MockSessionService.swift */; };
 		CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */; };
+		CEB119181CA2E43B0049DABF /* LoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */; };
+		CEB1191A1CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */; };
 		CEBF66BA1C8DD582006EE090 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginView.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
@@ -138,6 +140,8 @@
 		CE2BC5271C970E89003A1616 /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSessionService.swift; path = LogIn/Mocks/MockSessionService.swift; sourceTree = "<group>"; };
 		CE9AC3C31C8F2F9E0012D20B /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterController.swift; path = SignUp/View/RegisterController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstrapper.swift; sourceTree = "<group>"; };
+		CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginConfiguration.swift; path = Login/View/LoginConfiguration.swift; sourceTree = "<group>"; };
+		CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockLoginTransitionDelegate.swift; path = Login/Mocks/MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = LogIn/View/LoginView.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 			children = (
 				CE2BC5251C970E51003A1616 /* MyUser.swift */,
 				CE2BC5271C970E89003A1616 /* MockSessionService.swift */,
+				CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */,
 			);
 			name = Mocks;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				CEBF66CD1C8E089D006EE090 /* LoginController.swift */,
 				CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */,
 				CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */,
+				CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 				CEE94AB41CA06D5F0089E71B /* UIExtensions.swift in Sources */,
 				CE040D761C99CE650020DDE0 /* TextInputValidatorType.swift in Sources */,
 				CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */,
+				CEB119181CA2E43B0049DABF /* LoginConfiguration.swift in Sources */,
 				CEBF66D21C8E0A80006EE090 /* User.swift in Sources */,
 				CE9AC3C61C8F34A70012D20B /* AuthenticationBootstrapper.swift in Sources */,
 				CEBF66CA1C8DFFF2006EE090 /* LoginCredentialsValidator.swift in Sources */,
@@ -649,6 +656,7 @@
 				CEE404A51C9A067D00AB70B3 /* MinLengthValidatorTests.swift in Sources */,
 				CEE404A21C9A067D00AB70B3 /* CompositeValidatorTests.swift in Sources */,
 				CEE404A41C9A067D00AB70B3 /* MaxLengthValidatorTests.swift in Sources */,
+				CEB1191A1CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift in Sources */,
 				CEE404A31C9A067D00AB70B3 /* EmailValidatorTests.swift in Sources */,
 				CEE404A11C9A067D00AB70B3 /* AnyInputTextValidatorTests.swift in Sources */,
 				CE2BB8C71C972819009CAC8F /* LoginControllerTests.swift in Sources */,

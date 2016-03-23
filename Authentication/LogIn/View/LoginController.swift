@@ -11,19 +11,19 @@ import ReactiveCocoa
 import Rex
 import enum Result.NoError
 
+
 /**
     Log In View Controller that takes care of managing the login, from
     validating email and password fields, to binding a login view to the
-    view model and infoming a log in controller delegate when certain 
+    view model and informing the log in controller delegate when certain
     events occur for it to act upon them.
     If there are more than one errors in a field, the controller presents
-    only the first one.
+    only the first one in the errors label.
  */
 public final class LoginController: UIViewController {
     
     private let _viewModel: LoginViewModelType
-    private let _onRegister: (LoginController) -> ()
-    private let _onRecoverPassword: (LoginController) -> ()
+    private let _transitionDelegate: LoginControllerTransitionDelegate
     private let _loginViewFactory: () -> LoginViewType
     private let _delegate: LoginControllerDelegate
 
@@ -34,34 +34,19 @@ public final class LoginController: UIViewController {
     private let _keyboardDisplayed = MutableProperty(false)
     
     /**
-        Initializes a login controller with the view model, delegate,
-        a factory method for the login view and onRegister closure to use.
+        Initializes a login controller with the configuration to use:
      
-        - Params:
-            - viewModel: view model to bind to and use.
-            - loginViewFactory: factory method to call only once
-            to get the login view to use.
-            - onRegister: closure which indicates what to do when
-            the user selects the Register/SignUp option.
-            - onRecoverPassword: closure which indicates what to 
-            do when the user selects the Recover Password option.
-            - delegate: delegate which adds behaviour to certain
-            events, like handling a login error or selecting log in option.
-            A default delegate is provided.
+        Params: configuration: A login controller configuration with all
+                    elements needed to operate.
      
         - Returns: A valid login view controller ready to use.
      
     */
-    init(viewModel: LoginViewModelType,
-        loginViewFactory: () -> LoginViewType,
-        onRegister: (LoginController) -> (),
-        onRecoverPassword: (LoginController) -> (),
-        delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
-            _viewModel = viewModel
-            _loginViewFactory = loginViewFactory
-            _onRegister = onRegister
-            _onRecoverPassword = onRecoverPassword
-            _delegate = delegate
+    init(configuration: LoginControllerConfiguration) {
+            _viewModel = configuration.viewModel
+            _loginViewFactory = configuration.viewFactory
+            _transitionDelegate = configuration.transitionDelegate
+            _delegate = configuration.delegate
             super.init(nibName: nil, bundle: nil)
             addKeyboardObservers()
     }
@@ -161,10 +146,10 @@ private extension LoginController {
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
         
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
-        loginView.registerButton.setAction { [unowned self] _ in self._onRegister(self) }
+        loginView.registerButton.setAction { [unowned self] _ in self._transitionDelegate.loginControllerDidTapOnRegister(self) }
         
         loginView.recoverPasswordButton.setTitle(_viewModel.recoverPasswordButtonTitle, forState: .Normal)
-        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._onRecoverPassword(self) }
+        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.loginControllerDidTapOnRecoverPassword(self) }
     }
     
 }

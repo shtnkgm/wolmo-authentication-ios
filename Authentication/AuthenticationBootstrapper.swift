@@ -14,7 +14,7 @@ import Foundation
     and after the user logs out.
     The authentication process includes login, signup and recover password logic.
 */
-public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
+public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LoginControllerTransitionDelegate {
 
     /// The window of the app
     private let _window: UIWindow
@@ -145,28 +145,35 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     public func createRecoverPasswordController() -> RecoverPasswordController { //todo
         return RecoverPasswordController()
     }
+
+    func createLoginController() -> LoginController {
+        let configuration = LoginControllerConfiguration(
+            viewModel: createLoginViewModel(),
+            viewFactory: createLoginView,
+            transitionDelegate: self)
+        return LoginController(configuration: configuration)
+    }
     
 }
 
-private extension AuthenticationBootstrapper {
-
-    func transitionToSignUp() {
-        let controller = createRegisterController()
-        self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
+public extension AuthenticationBootstrapper {
+    
+    public func loginControllerDidTapOnRegister(controller: LoginController) {
+        let registerController = createRegisterController()
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(registerController, animated: true)
+        } else {
+            self._window.rootViewController = UINavigationController(rootViewController: registerController)
+        }
     }
     
-    func transitionToRecoverPassword() {
-        let controller = createRecoverPasswordController()
-        self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
+    public func loginControllerDidTapOnRecoverPassword(controller: LoginController) {
+        let recoverPasswordController = createRecoverPasswordController()
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(recoverPasswordController, animated: true)
+        } else {
+            self._window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
+        }
     }
-
-    func createLoginController() -> LoginController {
-        return LoginController(
-            viewModel: createLoginViewModel(),
-            loginViewFactory: createLoginView,
-            onRegister: { [unowned self] _ in self.transitionToSignUp() },
-            onRecoverPassword: { [unowned self] _ in self.transitionToRecoverPassword() },
-            delegate: createLoginControllerDelegate())
-    }
-
+    
 }
