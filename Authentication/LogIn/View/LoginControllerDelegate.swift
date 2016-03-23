@@ -38,21 +38,13 @@ extension LoginControllerDelegate {
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = " "
         }
-        if let indicator = controller.loginView.activityIndicator {
-            indicator.startAnimating()
-        } else {
-            let app = UIApplication.sharedApplication()
-            app.networkActivityIndicatorVisible = true
-        }
+        let app = UIApplication.sharedApplication()
+        app.networkActivityIndicatorVisible = true
     }
     
     public func loginControllerDidExecuteLogIn(controller: LoginController) {
-        if let indicator = controller.loginView.activityIndicator {
-            indicator.stopAnimating()
-        } else {
-            let app = UIApplication.sharedApplication()
-            app.networkActivityIndicatorVisible = false
-        }
+        let app = UIApplication.sharedApplication()
+        app.networkActivityIndicatorVisible = false
     }
     
     public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {

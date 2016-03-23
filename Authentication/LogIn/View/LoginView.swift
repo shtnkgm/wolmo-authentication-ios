@@ -33,8 +33,6 @@ public protocol LoginViewType: Renderable {
     var registerButton: UIButton { get }
     var recoverPasswordButton: UIButton { get }
     
-    var activityIndicator: UIActivityIndicatorView? { get }
-    
     var passwordTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
     var logInButtonEnabled: Bool { get set }
