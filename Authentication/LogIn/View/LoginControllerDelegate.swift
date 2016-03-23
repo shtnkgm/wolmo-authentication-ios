@@ -16,23 +16,19 @@ import Foundation
 */
 public protocol LoginControllerDelegate {
     
-    /**
-        The protocol offers a default implementation for these functions.
-     */
     func loginControllerWillExecuteLogIn(controller: LoginController)
+    
     func loginControllerDidExecuteLogIn(controller: LoginController)
+    
     func loginController(controller: LoginController, didLogInWithError error: SessionServiceError)
     
     func loginControllerDidPassEmailValidation(controller: LoginController)
-    func loginController(controller: LoginController, didFailEmailValidationWithErrors errors: [String])
-    func loginControllerDidPassPasswordValidation(controller: LoginController)
-    func loginController(controller: LoginController, didFailPasswordValidationWithErrors errors: [String])
     
-    /**
-        These functions are of mandatory implementation.
-    */
-    func onRegister(controller: LoginController)
-    func onRecoverPassword(controller: LoginController)
+    func loginController(controller: LoginController, didFailEmailValidationWithErrors errors: [String])
+    
+    func loginControllerDidPassPasswordValidation(controller: LoginController)
+    
+    func loginController(controller: LoginController, didFailPasswordValidationWithErrors errors: [String])
     
 }
 
@@ -77,37 +73,4 @@ extension LoginControllerDelegate {
     
 }
 
-public final class DefaultLoginControllerDelegate: LoginControllerDelegate {
-    
-    private let _window: UIWindow
-    private let _registerControllerFactory: () -> RegisterController
-    private let _recoverPasswordControllerFactory: () -> RecoverPasswordController
-    
-    init(window: UIWindow,
-        registerControllerFactory: () -> RegisterController = { return RegisterController(viewModel: RegisterViewModel(), registerViewFactory: { return RegisterView() }) },
-        recoverPasswordControllerFactory: () -> RecoverPasswordController = { return RecoverPasswordController() }) {
-            _window = window
-            _registerControllerFactory = registerControllerFactory
-            _recoverPasswordControllerFactory = recoverPasswordControllerFactory
-    }
-    
-    public func onRegister(controller: LoginController) {
-        let registerController = _registerControllerFactory()
-        if let navigationController = self._window.rootViewController?.navigationController {
-            navigationController.pushViewController(registerController, animated: true)
-        } else {
-            self._window.rootViewController = UINavigationController(rootViewController: registerController)
-        }
-        
-    }
-    
-    public func onRecoverPassword(controller: LoginController) {
-        let recoverPasswordController = _recoverPasswordControllerFactory()
-        if let navigationController = controller.navigationController {
-            navigationController.pushViewController(recoverPasswordController, animated: true)
-        } else {
-            self._window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
-        }
-    }
-    
-}
+public final class DefaultLoginControllerDelegate: LoginControllerDelegate { }

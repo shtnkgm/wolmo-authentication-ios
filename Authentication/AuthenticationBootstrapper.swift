@@ -116,7 +116,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         delegate's reactions to events.
     */
     public func createLoginControllerDelegate() -> LoginControllerDelegate {
-        return DefaultLoginControllerDelegate(window: self._window, registerControllerFactory: createRegisterController, recoverPasswordControllerFactory: createRecoverPasswordController)
+        return DefaultLoginControllerDelegate()
     }
     
     
@@ -130,7 +130,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          register controller to be used.
     */
     public func createRegisterController() -> RegisterController { //todo
-        return RegisterController(viewModel: RegisterViewModel(), registerViewFactory: { return RegisterView() })
+        return RegisterController(viewModel: RegisterViewModel(), registerViewFactory: { return RegisterView()})
     }
     
     /**
@@ -150,10 +150,22 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
 
 private extension AuthenticationBootstrapper {
 
+    func transitionToSignUp() {
+        let controller = createRegisterController()
+        self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    func transitionToRecoverPassword() {
+        let controller = createRecoverPasswordController()
+        self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
+    }
+
     func createLoginController() -> LoginController {
         return LoginController(
             viewModel: createLoginViewModel(),
             loginViewFactory: createLoginView,
+            onRegister: { [unowned self] _ in self.transitionToSignUp() },
+            onRecoverPassword: { [unowned self] _ in self.transitionToRecoverPassword() },
             delegate: createLoginControllerDelegate())
     }
 
