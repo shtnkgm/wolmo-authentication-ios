@@ -42,25 +42,39 @@ public final class ExampleSessionService: SessionServiceType {
     }
     
     public func logIn(email: Email, _ password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
         if email.raw == _email {
             if password == _password {
                 let user = User(email: email.raw, password: password)
-                return SignalProducer(value: user).on(completed: { [unowned self] in
-                    self._eventsObserver.sendNext(.LogIn(user))
-                    self._currentUserObserver.sendNext(user)
-                })
+                return successSignalProducer(user, dispatchTime: dispatchTime)
             } else {
-                return SignalProducer(error: SessionServiceError.InvalidCredentials(.None)).on(failed: { [unowned self] _ in
-                    self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
-                })
-                
+                return failureSignalProducer(dispatchTime)
             }
         } else {
-            return SignalProducer(error: SessionServiceError.InvalidCredentials(.None)).on(failed: { [unowned self] _ in
-                self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
-                })
-            
+            return failureSignalProducer(dispatchTime)
         }
+    }
+    
+    private func successSignalProducer(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                observer.sendNext(user)
+                observer.sendCompleted()
+            }
+        }.on(completed: { [unowned self] in
+            self._eventsObserver.sendNext(.LogIn(user))
+            self._currentUserObserver.sendNext(user)
+        })
+    }
+    
+    private func failureSignalProducer(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                observer.sendFailed(.InvalidCredentials(.None))
+            }
+        }.on(failed: { [unowned self] _ in
+            self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
+        })
     }
     
 }
