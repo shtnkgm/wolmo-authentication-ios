@@ -35,6 +35,9 @@ public protocol LoginControllerDelegate {
 extension LoginControllerDelegate {
     
     public func loginControllerWillExecuteLogIn(controller: LoginController) {
+        if let errorLabel = controller.loginView.logInErrorLabel {
+            errorLabel.text = " "
+        }
         if let indicator = controller.loginView.activityIndicator {
             indicator.startAnimating()
         } else {
