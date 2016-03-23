@@ -33,7 +33,7 @@ public protocol RegisterViewType {
     var registerButton: UIButton { get }
     var registerErrorLabel: UILabel? { get }
     
-    var activityIndicator: UIActivityIndicatorView { get }
+    var activityIndicator: UIActivityIndicatorView? { get }
     
     var usernameTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
@@ -69,7 +69,7 @@ public final class RegisterView: UIView, RegisterViewType {
     public var registerButton: UIButton { return UIButton() }
     public var registerErrorLabel: UILabel? { return .None }
     
-    public var activityIndicator: UIActivityIndicatorView { return UIActivityIndicatorView() }
+    public var activityIndicator: UIActivityIndicatorView? { return .None }
     
     public var usernameTextFieldValid: Bool = false
     public var emailTextFieldValid: Bool = false
