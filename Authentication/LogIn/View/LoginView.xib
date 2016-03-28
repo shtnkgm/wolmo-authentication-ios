@@ -84,16 +84,18 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDu-Ke-6e4" userLabel="View Errors">
                                     <rect key="frame" x="0.0" y="63" width="536" height="32"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="ZAD-1z-Cfs">
-                                            <rect key="frame" x="5" y="2" width="513" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZAD-1z-Cfs">
+                                            <rect key="frame" x="5" y="8" width="513" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="ZAD-1z-Cfs" secondAttribute="centerY" constant="5" id="Dah-Lg-XGM"/>
+                                        <constraint firstItem="ZAD-1z-Cfs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UDu-Ke-6e4" secondAttribute="top" id="A0E-ih-FCO"/>
+                                        <constraint firstAttribute="centerY" secondItem="ZAD-1z-Cfs" secondAttribute="centerY" id="Dah-Lg-XGM"/>
                                         <constraint firstItem="ZAD-1z-Cfs" firstAttribute="leading" secondItem="UDu-Ke-6e4" secondAttribute="leading" constant="5" id="Qsj-FM-b0f"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZAD-1z-Cfs" secondAttribute="bottom" id="qEx-wd-BPa"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -120,8 +122,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-9d-BLN" userLabel="View Errors">
                                     <rect key="frame" x="-5" y="63" width="541" height="32"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-di-9jk">
-                                            <rect key="frame" x="5" y="2" width="518" height="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-di-9jk">
+                                            <rect key="frame" x="5" y="7" width="518" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="260" id="X66-an-LU6"/>
                                             </constraints>
@@ -136,8 +138,10 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="GLr-di-9jk" secondAttribute="centerY" constant="5" id="KTC-lx-MBp"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GLr-di-9jk" secondAttribute="bottom" id="GNw-FI-Ygs"/>
+                                        <constraint firstAttribute="centerY" secondItem="GLr-di-9jk" secondAttribute="centerY" id="KTC-lx-MBp"/>
                                         <constraint firstItem="GLr-di-9jk" firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" constant="5" id="RMI-fM-eu7"/>
+                                        <constraint firstItem="GLr-di-9jk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cqr-9d-BLN" secondAttribute="top" id="RhK-ne-6kN"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="GLr-di-9jk" secondAttribute="trailing" constant="10" id="pYh-Pc-6qA"/>
                                     </constraints>
                                 </view>

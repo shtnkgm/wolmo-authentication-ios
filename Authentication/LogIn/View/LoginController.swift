@@ -205,16 +205,34 @@ extension LoginController {
                 let keyboardOffset = keyboardSize.height
                 let textFieldOffset = calculateTextFieldOffsetToMoveFrame(keyboardOffset)
                 if textFieldOffset > keyboardOffset {
-                    self.view.frame.origin.y -= keyboardOffset
+                    view.frame.origin.y -= keyboardOffset
                 } else {
-                    self.view.frame.origin.y -= textFieldOffset
+                    view.frame.origin.y -= textFieldOffset
                 }
-                let navBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
-                self.view.frame.origin.y += navBarOffset
+                
+                view.frame.origin.y += navBarOffset()
             }
         }
     }
     
+    func navBarOffset() -> CGFloat {
+        let statusBarHeight = UIApplication .sharedApplication().statusBarFrame.height
+        let navBarHeight: CGFloat
+        if navigationController?.navigationBarHidden ?? true {
+            navBarHeight = 0
+        } else {
+            navBarHeight = navigationController?.navigationBar.frame.size.height ?? 0
+        }
+        return navBarHeight + statusBarHeight
+    }
+    
+    /**
+        Method to determine the offset that the frame should be moved in order to get the
+        desired textfield at the top with a small offset of 10px.
+        If both textfields fit in the frame left over the keyboard, the email textfield
+        will be shown on the top of the screen. If both don't fit, the textfield selected
+        or active will be the one shown on top.
+    */
     func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
         let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
         let passwordBottom = loginView.emailTextField.convertPoint(loginView.passwordTextField.frame.origin, toView: self.view).y + loginView.passwordTextField.frame.size.height
