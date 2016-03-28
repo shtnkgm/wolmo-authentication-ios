@@ -56,11 +56,7 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var emailLabelOutlet: UILabel!
     
     public var emailTextField: UITextField { return emailTextFieldOutlet }
-    @IBOutlet weak var emailTextFieldOutlet: UITextField! {
-        didSet {
-            emailTextFieldOutlet.autocorrectionType = .No
-        }
-    }
+    @IBOutlet weak var emailTextFieldOutlet: UITextField!
     
     public var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
@@ -73,12 +69,8 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var passwordLabelOutlet: UILabel!
     
     public var passwordTextField: UITextField { return passwordTextFieldOutlet }
-    @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
-        didSet {
-            passwordTextFieldOutlet.autocorrectionType = .No
-        }
-    }
-    
+    @IBOutlet weak var passwordTextFieldOutlet: UITextField!
+
     public var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
         didSet {

@@ -173,7 +173,7 @@ extension LoginController {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
-                let keyboardOffset = keyboardSize.height
+                let keyboardOffset = keyboardSize.height    // If the orientation changes this may not work: it may need using convertRect:fromView/Window:)
                 let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
                 if emailOffset > keyboardOffset {
                     self.view.frame.origin.y -= keyboardOffset
