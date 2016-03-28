@@ -203,24 +203,27 @@ extension LoginController {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
                 let keyboardOffset = keyboardSize.height
-                let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
-                let passwordBottom = loginView.emailTextField.convertPoint(loginView.passwordTextField.frame.origin, toView: self.view).y + loginView.passwordTextField.frame.size.height
-                let textFieldOffset: CGFloat
-                if (keyboardOffset + (passwordBottom - emailOffset)) <= self.view.frame.size.height {
-                    textFieldOffset = emailOffset
-                } else {
-                    textFieldOffset = loginView.emailTextField.convertPoint(_activeField.value!.frame.origin, toView: self.view).y - 10
-                }
+                let textFieldOffset = calculateTextFieldOffsetToMoveFrame(keyboardOffset)
                 if textFieldOffset > keyboardOffset {
                     self.view.frame.origin.y -= keyboardOffset
                 } else {
                     self.view.frame.origin.y -= textFieldOffset
                 }
-                let barHidden = self.navigationController?.navigationBarHidden
-                let navBarOffset = (barHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
+                let navBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
                 self.view.frame.origin.y += navBarOffset
             }
         }
+    }
+    
+    func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
+        let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
+        let passwordBottom = loginView.emailTextField.convertPoint(loginView.passwordTextField.frame.origin, toView: self.view).y + loginView.passwordTextField.frame.size.height
+        if (keyboardOffset + (passwordBottom - emailOffset)) <= self.view.frame.size.height {
+            return emailOffset
+        } else {
+            return _activeField.value!.convertPoint(_activeField.value!.frame.origin, toView: self.view).y - 10
+        }
+
     }
     
     func dismissKeyboard(sender: UITapGestureRecognizer) {
