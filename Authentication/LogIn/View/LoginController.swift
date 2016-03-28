@@ -32,6 +32,7 @@ public final class LoginController: UIViewController {
     private lazy var _notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     private var _disposable = CompositeDisposable()
     private let _keyboardDisplayed = MutableProperty(false)
+    private let _activeField = MutableProperty<UITextField?>(.None)
     
     /**
         Initializes a login controller with the configuration to use:
@@ -158,16 +159,25 @@ private extension LoginController {
 extension LoginController: UITextFieldDelegate {
     
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if (textField == loginView.emailTextField) {
+        if textField == loginView.emailTextField {
             loginView.passwordTextField.becomeFirstResponder()
         } else {
             if _viewModel.logInCocoaAction.enabled {
+                textField.resignFirstResponder()
                 _viewModel.logInCocoaAction.execute("")
             } else {
                 loginView.emailTextField.becomeFirstResponder()
             }
         }
         return true
+    }
+    
+    public func textFieldDidBeginEditing(textField: UITextField) {
+        _activeField.value = textField
+    }
+    
+    public func textFieldDidEndEditing(textField: UITextField) {
+        _activeField.value = .None
     }
     
 }
@@ -192,14 +202,22 @@ extension LoginController {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
-                let keyboardOffset = keyboardSize.height    // If the orientation changes this may not work: it may need using convertRect:fromView/Window:)
+                let keyboardOffset = keyboardSize.height
                 let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
-                if emailOffset > keyboardOffset {
+                let passwordBottom = loginView.emailTextField.convertPoint(loginView.passwordTextField.frame.origin, toView: self.view).y + loginView.passwordTextField.frame.size.height
+                let textFieldOffset: CGFloat
+                if (keyboardOffset + (passwordBottom - emailOffset)) <= self.view.frame.size.height {
+                    textFieldOffset = emailOffset
+                } else {
+                    textFieldOffset = loginView.emailTextField.convertPoint(_activeField.value!.frame.origin, toView: self.view).y - 10
+                }
+                if textFieldOffset > keyboardOffset {
                     self.view.frame.origin.y -= keyboardOffset
                 } else {
-                    self.view.frame.origin.y -= emailOffset
+                    self.view.frame.origin.y -= textFieldOffset
                 }
-                let navBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
+                let barHidden = self.navigationController?.navigationBarHidden
+                let navBarOffset = (barHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
                 self.view.frame.origin.y += navBarOffset
             }
         }
