@@ -115,6 +115,7 @@ private extension LoginController {
         if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
         }
+        loginView.emailTextField.delegate = self
     }
     
     func bindPasswordElements() {
@@ -137,6 +138,7 @@ private extension LoginController {
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility.unsafeCocoaAction
             _viewModel.showPassword.signal.observeNext { [unowned self] in self.loginView.showPassword = $0 }
         }
+        loginView.passwordTextField.delegate = self
     }
     
     func bindButtons() {
@@ -149,6 +151,23 @@ private extension LoginController {
         
         loginView.recoverPasswordButton.setTitle(_viewModel.recoverPasswordButtonTitle, forState: .Normal)
         loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.loginControllerDidTapOnRecoverPassword(self) }
+    }
+
+}
+
+extension LoginController: UITextFieldDelegate {
+    
+    public func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField == loginView.emailTextField) {
+            loginView.passwordTextField.becomeFirstResponder()
+        } else {
+            if _viewModel.logInCocoaAction.enabled {
+                _viewModel.logInCocoaAction.execute("")
+            } else {
+                loginView.emailTextField.becomeFirstResponder()
+            }
+        }
+        return true
     }
     
 }
