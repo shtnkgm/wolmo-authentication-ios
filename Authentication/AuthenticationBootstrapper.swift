@@ -14,7 +14,7 @@ import Foundation
     and after the user logs out.
     The authentication process includes login, signup and recover password logic.
 */
-public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
+public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType, RegistrationService: RegistrationServiceType where SessionService.User == User, RegistrationService.User == User> {
 
     /// The window of the app
     private let _window: UIWindow

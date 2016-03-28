@@ -39,7 +39,6 @@ public protocol RegisterViewType: Renderable {
     var passwordConfirmationTextFieldValid: Bool { get set }
     var registerButtonEnabled: Bool { get set }
     
-    
 }
 
 public extension RegisterViewType where Self: UIView {
@@ -55,8 +54,6 @@ public final class RegisterView: UIView, RegisterViewType {
     
     
     //TODO return real objects
-    public var view: UIView { return UIView() }
-    
     public var usernameLabel: UILabel { return UILabel() }
     public var usernameTextField: UITextField { return UITextField() }
     public var usernameValidationMessageLabel: UILabel? { return .None }

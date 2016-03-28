@@ -9,6 +9,7 @@
 import Foundation
 import ReactiveCocoa
 import enum Result.NoError
+import Rex
 
 
 protocol RegisterViewModelType {
@@ -25,6 +26,10 @@ protocol RegisterViewModelType {
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
     
+    var signUpCocoaAction: CocoaAction { get }
+    var signUpErrors: Signal<RegistrationServiceError, NoError> { get }
+    var signUpExecuting: Signal<Bool, NoError> { get }
+    
     var nameText: String { get }
     var emailText: String { get }
     var passwordText: String { get }
@@ -37,7 +42,10 @@ protocol RegisterViewModelType {
     
 }
 
-public final class RegisterViewModel: RegisterViewModelType {
+public final class RegisterViewModel<User: UserType, RegistrationService: RegistrationServiceType where RegistrationService.User == User>: RegisterViewModelType {
+    
+    private let _registrationService: RegistrationService
+    private let _credentialsAreValid: AndProperty
     
     public let name = MutableProperty("")
     public let email = MutableProperty("")
@@ -49,7 +57,24 @@ public final class RegisterViewModel: RegisterViewModelType {
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
     
-    init(credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
+    private lazy var _signUp: Action<AnyObject, User, RegistrationServiceError> = {
+        return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
+            if let email = Email(raw: self.email.value) {
+                return self._registrationService.signUp(self.name.value, email, self.password.value)
+            } else {
+                return SignalProducer(error: .InvalidCredentials(.None)).observeOn(UIScheduler())
+            }
+        }
+    }()
+    
+    public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
+    public var signUpErrors: Signal<RegistrationServiceError, NoError> { return _signUp.errors }
+    public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
+    
+    
+    init(registrationService: RegistrationService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
+        _registrationService = registrationService
+        
         let nameValidationResult = name.signal.map(credentialsValidator.nameValidator.validate)
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
@@ -66,6 +91,11 @@ public final class RegisterViewModel: RegisterViewModelType {
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
         passwordConfirmationValidationErrors = AnyProperty(initialValue: [], signal: passwordConfirmValidationResult.map { $0.errors })
+        
+        _credentialsAreValid = AnyProperty<Bool>(initialValue: false, signal: nameValidationResult.map { $0.isValid })
+                            .and(AnyProperty<Bool>(initialValue: false, signal: emailValidationResult.map { $0.isValid }))
+                            .and(AnyProperty<Bool>(initialValue: false, signal: passwordValidationResult.map { $0.isValid }))
+                            .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
     }
     
 }

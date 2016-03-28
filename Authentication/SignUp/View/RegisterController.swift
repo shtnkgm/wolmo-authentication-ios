@@ -16,10 +16,10 @@ public final class RegisterController: UIViewController {
     
     public lazy var signupView: RegisterViewType = self._registerViewFactory()
     
-    
     private lazy var _notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     private var _disposable = CompositeDisposable()
     private let _keyboardDisplayed = MutableProperty(false)
+    private let _activeTextField = MutableProperty<UITextField?>(.None)
 
     
     init(viewModel: RegisterViewModelType, registerViewFactory: () -> RegisterViewType) {
@@ -49,32 +49,92 @@ public final class RegisterController: UIViewController {
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
-    public override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    public override func viewDidDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
 }
 
 private extension RegisterController {
     
     func bindViewModel() {
         bindNameElements()
+        bindEmailElements()
+        bindPasswordElements()
+        bindButtons()
     }
     
     func bindNameElements() {
         _viewModel.name <~ signupView.usernameTextField.rex_textSignal
         signupView.usernameLabel.text = _viewModel.nameText
         signupView.usernameTextField.placeholder = _viewModel.namePlaceholderText
-//        _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
-//            //TODO delegate
-//        }
-        if let nameValidationMessageLabel = signupView.emailValidationMessageLabel {
+        _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
+            //TODO delegate
+        }
+        if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
             nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
         }
+    }
+    
+    func bindEmailElements() {
+        _viewModel.email <~ signupView.emailTextField.rex_textSignal
+        signupView.emailLabel.text = _viewModel.emailText
+        signupView.emailTextField.placeholder = _viewModel.emailPlaceholderText
+        _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
+            //TODO delegate
+        }
+        if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
+            emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
+        }
+    }
+    
+    func bindPasswordElements() {
+        _viewModel.password <~ signupView.passwordTextField.rex_textSignal
+        signupView.passwordLabel.text = _viewModel.passwordText
+        signupView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
+        _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
+            //TODO delegate
+        }
+        if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
+            passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
+        }
+        
+        _viewModel.passwordConfirmation <~ signupView.passwordConfirmTextField.rex_textSignal
+        signupView.passwordConfirmLabel.text = _viewModel.confirmPasswordText
+        signupView.passwordConfirmTextField.placeholder = _viewModel.confirmPasswordPlaceholderText
+        _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
+            //TODO delegate
+        }
+        if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
+            passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
+        }
+    }
+    
+    func bindButtons() {
+        signupView.registerButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
+        signupView.registerButton.rex_pressed.value = 
+        signupView.registerButton.rex_enabled.signal.observeNext { [unowned self] enabled in self.signupView.registerButtonEnabled = enabled }
+    }
+    
+}
+
+extension RegisterController: UITextFieldDelegate {
+    
+    public func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == signupView.usernameTextField {
+            signupView.emailTextField.becomeFirstResponder()
+        } else if textField == signupView.emailTextField {
+            signupView.passwordTextField.becomeFirstResponder()
+        } else if textField == signupView.passwordTextField {
+            signupView.passwordConfirmTextField.becomeFirstResponder()
+        } else {
+            signupView.usernameTextField.becomeFirstResponder()
+        }
+        return true
+    }
+    
+    public func textFieldDidBeginEditing(textField: UITextField) {
+        _activeTextField.value = textField
+    }
+    
+    public func textFieldDidEndEditing(textField: UITextField) {
+        _activeTextField.value = .None
     }
     
 }
@@ -100,16 +160,30 @@ extension RegisterController {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
                 let keyboardOffset = keyboardSize.height
-                let nameOffset = (CGFloat) (-10) //TODO
-                if nameOffset > keyboardOffset {
+                let textFieldOffset = calculateTextFieldOffsetToMoveFrame(keyboardOffset)
+                if textFieldOffset > keyboardOffset {
                     self.view.frame.origin.y -= keyboardOffset
                 } else {
-                    self.view.frame.origin.y -= nameOffset
+                    self.view.frame.origin.y -= textFieldOffset
                 }
-                let navBarOffset = (self.navigationController?.navigationBarHidden ?? true) ? 0 : self.navigationController?.navigationBar.frame.size.height ?? 0
-                self.view.frame.origin.y += navBarOffset
+                self.view.frame.origin.y += navBarOffset()
             }
         }
+    }
+    
+    func navBarOffset() -> CGFloat {
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
+        let navBarHeight: CGFloat
+        if navigationController?.navigationBarHidden ?? true {
+            navBarHeight = 0
+        } else {
+            navBarHeight = navigationController?.navigationBar.frame.size.height ?? 0
+        }
+        return navBarHeight + statusBarHeight
+    }
+    
+    func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
+        return _activeTextField.value!.convertPoint(_activeTextField.value!.frame.origin, toView: self.view).y - 10
     }
     
     func dismissKeyboard(sender: UITapGestureRecognizer) {
