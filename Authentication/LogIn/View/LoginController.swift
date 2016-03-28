@@ -227,20 +227,11 @@ extension LoginController {
     }
     
     /**
-        Method to determine the offset that the frame should be moved in order to get the
-        desired textfield at the top with a small offset of 10px.
-        If both textfields fit in the frame left over the keyboard, the email textfield
-        will be shown on the top of the screen. If both don't fit, the textfield selected
-        or active will be the one shown on top.
+        As both textfield fit in all devices, it will always show the email
+        textfield at the top of the screen.
     */
     func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
-        let emailOffset = loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
-        let passwordBottom = loginView.emailTextField.convertPoint(loginView.passwordTextField.frame.origin, toView: self.view).y + loginView.passwordTextField.frame.size.height
-        if (keyboardOffset + (passwordBottom - emailOffset)) <= self.view.frame.size.height {
-            return emailOffset
-        } else {
-            return _activeField.value!.convertPoint(_activeField.value!.frame.origin, toView: self.view).y - 10
-        }
+        return loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
 
     }
     
