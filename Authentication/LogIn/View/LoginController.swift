@@ -227,7 +227,7 @@ extension LoginController {
     }
     
     /**
-        As both textfield fit in all devices, it will always show the email
+        As both textfields fit in all devices, it will always show the email
         textfield at the top of the screen.
     */
     func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
