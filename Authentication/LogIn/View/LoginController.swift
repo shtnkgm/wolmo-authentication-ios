@@ -44,12 +44,12 @@ public final class LoginController: UIViewController {
      
     */
     init(configuration: LoginControllerConfiguration) {
-            _viewModel = configuration.viewModel
-            _loginViewFactory = configuration.viewFactory
-            _transitionDelegate = configuration.transitionDelegate
-            _delegate = configuration.delegate
-            super.init(nibName: nil, bundle: nil)
-            addKeyboardObservers()
+        _viewModel = configuration.viewModel
+        _loginViewFactory = configuration.viewFactory
+        _transitionDelegate = configuration.transitionDelegate
+        _delegate = configuration.delegate
+        super.init(nibName: nil, bundle: nil)
+        addKeyboardObservers()
     }
     
     deinit {
