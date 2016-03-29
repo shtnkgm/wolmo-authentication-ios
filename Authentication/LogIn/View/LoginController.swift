@@ -85,7 +85,6 @@ public final class LoginController: UIViewController {
 private extension LoginController {
     
     func bindViewModel() {
-        
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
@@ -99,7 +98,6 @@ private extension LoginController {
         }
         
         _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.loginController(self, didLogInWithError: $0) }
-        
     }
     
     func bindEmailElements() {
@@ -232,7 +230,6 @@ extension LoginController {
     */
     func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
         return loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
-
     }
     
     func dismissKeyboard(sender: UITapGestureRecognizer) {
