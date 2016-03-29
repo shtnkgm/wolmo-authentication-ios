@@ -14,7 +14,8 @@ import Foundation
     and after the user logs out.
     The authentication process includes login, signup and recover password logic.
 */
-public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType, RegistrationService: RegistrationServiceType where SessionService.User == User, RegistrationService.User == User> {
+public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType, RegistrationService: RegistrationServiceType
+        where SessionService.User == User, RegistrationService.User == User> {
 
     /// The window of the app
     private let _window: UIWindow
@@ -25,6 +26,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
+    public let registrationService: RegistrationService
 
     /// The user in session.
     public var currentUser: User? {
@@ -50,6 +52,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         _mainViewControllerFactory = mainViewControllerFactory
         _viewConfiguration = viewConfiguration
         self.sessionService = sessionService
+        self.registrationService = registrationService
 
         sessionService.events.observeNext { [unowned self] event in
             switch event {
@@ -136,7 +139,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          register controller to be used.
     */
     public func createRegisterController() -> RegisterController { //todo
-        return RegisterController(viewModel: RegisterViewModel(), registerViewFactory: { return RegisterView()})
+        return RegisterController(viewModel: RegisterViewModel(registrationService: registrationService), registerViewFactory: { return RegisterView() })
     }
     
     /**

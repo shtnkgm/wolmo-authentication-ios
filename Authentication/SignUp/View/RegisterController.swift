@@ -108,8 +108,8 @@ private extension RegisterController {
     
     func bindButtons() {
         signupView.registerButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
-        signupView.registerButton.rex_pressed.value = 
-        signupView.registerButton.rex_enabled.signal.observeNext { [unowned self] enabled in self.signupView.registerButtonEnabled = enabled }
+        signupView.registerButton.rex_pressed.value = _viewModel.signUpCocoaAction
+        signupView.registerButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.registerButtonEnabled = $0 }
     }
     
 }

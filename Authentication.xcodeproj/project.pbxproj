@@ -37,6 +37,7 @@
 		CEB1191A1CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */; };
 		CEB1191C1CA2F39D0049DABF /* RegistrationServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1191B1CA2F39D0049DABF /* RegistrationServiceType.swift */; };
 		CEB119201CA315000049DABF /* SignupCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */; };
+		CEB4E4F11CAAD586002FE023 /* ExampleRegistrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB4E4F01CAAD586002FE023 /* ExampleRegistrationService.swift */; };
 		CEBF66BA1C8DD582006EE090 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginView.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
@@ -152,6 +153,7 @@
 		CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockLoginTransitionDelegate.swift; path = Login/Mocks/MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CEB1191B1CA2F39D0049DABF /* RegistrationServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegistrationServiceType.swift; path = SignUp/ViewModel/RegistrationServiceType.swift; sourceTree = "<group>"; };
 		CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupCredentialsValidator.swift; path = SignUp/ViewModel/SignupCredentialsValidator.swift; sourceTree = "<group>"; };
+		CEB4E4F01CAAD586002FE023 /* ExampleRegistrationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleRegistrationService.swift; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = LogIn/View/LoginView.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionServiceType.swift; path = LogIn/ViewModel/SessionServiceType.swift; sourceTree = "<group>"; };
 		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				CEE94A8F1CA06B1B0089E71B /* AppDelegate.swift */,
 				CEE94A961CA06B1B0089E71B /* Assets.xcassets */,
 				CEE94A9B1CA06B1B0089E71B /* Info.plist */,
+				CEB4E4F01CAAD586002FE023 /* ExampleRegistrationService.swift */,
 			);
 			path = AuthenticationDemo;
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 			files = (
 				CEE94AA21CA06BBC0089E71B /* ExampleSessionService.swift in Sources */,
 				CEE94AA11CA06BBC0089E71B /* ExampleMainViewController.swift in Sources */,
+				CEB4E4F11CAAD586002FE023 /* ExampleRegistrationService.swift in Sources */,
 				CEE94A901CA06B1B0089E71B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
