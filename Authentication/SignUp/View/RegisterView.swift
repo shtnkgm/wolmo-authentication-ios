@@ -34,9 +34,13 @@ public protocol RegisterViewType: Renderable {
     var registerErrorLabel: UILabel? { get }
     
     var usernameTextFieldValid: Bool { get set }
+    var usernameTextFieldSelected: Bool { get set }
     var emailTextFieldValid: Bool { get set }
+    var emailTextFieldSelected: Bool { get set }
     var passwordTextFieldValid: Bool { get set }
+    var passwordTextFieldSelected: Bool { get set }
     var passwordConfirmationTextFieldValid: Bool { get set }
+    var passwordConfirmationTextFieldSelected: Bool { get set }
     var registerButtonEnabled: Bool { get set }
     
 }
@@ -76,9 +80,13 @@ public final class RegisterView: UIView, RegisterViewType {
     public var registerErrorLabel: UILabel? { return .None }
     
     public var usernameTextFieldValid: Bool = false
+    public var usernameTextFieldSelected: Bool = false
     public var emailTextFieldValid: Bool = false
+    public var emailTextFieldSelected: Bool = false
     public var passwordTextFieldValid: Bool = false
+    public var passwordTextFieldSelected: Bool = false
     public var passwordConfirmationTextFieldValid: Bool = false
+    public var passwordConfirmationTextFieldSelected: Bool = false
     public var registerButtonEnabled: Bool = false
     
     public func render() {
