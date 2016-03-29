@@ -13,6 +13,7 @@ public final class RegisterController: UIViewController {
     
     private let _viewModel: RegisterViewModelType
     private let _registerViewFactory: () -> RegisterViewType
+    private let _delegate: RegisterControllerDelegate
     
     public lazy var signupView: RegisterViewType = self._registerViewFactory()
     
@@ -22,9 +23,10 @@ public final class RegisterController: UIViewController {
     private let _activeTextField = MutableProperty<UITextField?>(.None)
 
     
-    init(viewModel: RegisterViewModelType, registerViewFactory: () -> RegisterViewType) {
+    init(viewModel: RegisterViewModelType, registerViewFactory: () -> RegisterViewType, delegate: RegisterControllerDelegate = DefaultRegisterControllerDelegate()) {
         _viewModel = viewModel
         _registerViewFactory = registerViewFactory
+        _delegate = delegate
         super.init(nibName: nil, bundle: nil)
         addKeyboardObservers()
     }
@@ -65,7 +67,7 @@ private extension RegisterController {
         signupView.usernameLabel.text = _viewModel.nameText
         signupView.usernameTextField.placeholder = _viewModel.namePlaceholderText
         _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
-            //TODO delegate
+            self._delegate.signupController(self, didFailNameValidationWithErrors: errors)
         }
         if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
             nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
@@ -77,7 +79,7 @@ private extension RegisterController {
         signupView.emailLabel.text = _viewModel.emailText
         signupView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
-            //TODO delegate
+            self._delegate.signupController(self, didFailEmailValidationWithErrors: errors)
         }
         if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
@@ -89,7 +91,7 @@ private extension RegisterController {
         signupView.passwordLabel.text = _viewModel.passwordText
         signupView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
-            //TODO delegate
+            self._delegate.signupController(self, didFailPasswordValidationWithErrors: errors)
         }
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
@@ -99,7 +101,7 @@ private extension RegisterController {
         signupView.passwordConfirmLabel.text = _viewModel.confirmPasswordText
         signupView.passwordConfirmTextField.placeholder = _viewModel.confirmPasswordPlaceholderText
         _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
-            //TODO delegate
+            self._delegate.signupController(self, didFailPasswordConfirmationValidationWithErrors: errors)
         }
         if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
             passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
@@ -130,10 +132,28 @@ extension RegisterController: UITextFieldDelegate {
     }
     
     public func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == signupView.usernameTextField {
+            signupView.usernameTextFieldSelected = true
+        } else if textField == signupView.emailTextField {
+            signupView.emailTextFieldSelected = true
+        } else if textField == signupView.passwordTextField {
+            signupView.passwordTextFieldSelected = true
+        } else {
+            signupView.passwordConfirmationTextFieldSelected = true
+        }
         _activeTextField.value = textField
     }
     
     public func textFieldDidEndEditing(textField: UITextField) {
+        if textField == signupView.usernameTextField {
+            signupView.usernameTextFieldSelected = false
+        } else if textField == signupView.emailTextField {
+            signupView.emailTextFieldSelected = false
+        } else if textField == signupView.passwordTextField {
+            signupView.passwordTextFieldSelected = false
+        } else {
+            signupView.passwordConfirmationTextFieldSelected = false
+        }
         _activeTextField.value = .None
     }
     
@@ -160,18 +180,19 @@ extension RegisterController {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
                 let keyboardOffset = keyboardSize.height
-                let textFieldOffset = calculateTextFieldOffsetToMoveFrame(keyboardOffset)
+                let navBarOffset = navigationBarOffset()
+                let textFieldOffset = calculateTextFieldOffsetToMoveFrame(keyboardOffset, navBarOffset: navBarOffset)
                 if textFieldOffset > keyboardOffset {
                     self.view.frame.origin.y -= keyboardOffset
                 } else {
                     self.view.frame.origin.y -= textFieldOffset
                 }
-                self.view.frame.origin.y += navBarOffset()
+                self.view.frame.origin.y += navBarOffset
             }
         }
     }
     
-    func navBarOffset() -> CGFloat {
+    func navigationBarOffset() -> CGFloat {
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
         let navBarHeight: CGFloat
         if navigationController?.navigationBarHidden ?? true {
@@ -182,8 +203,14 @@ extension RegisterController {
         return navBarHeight + statusBarHeight
     }
     
-    func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
-        return _activeTextField.value!.convertPoint(_activeTextField.value!.frame.origin, toView: self.view).y - 10
+    func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
+        let top = signupView.usernameTextField.convertPoint(signupView.usernameTextField.frame.origin, toView: self.view).y - 10
+        let bottom = signupView.passwordConfirmTextField.convertPoint(signupView.passwordConfirmTextField.frame.origin, toView: self.view).y + signupView.passwordConfirmTextField.frame.size.height
+        if (keyboardOffset + (bottom - top) + navBarOffset) <= self.view.frame.size.height {
+            return top
+        } else {
+            return _activeTextField.value!.convertPoint(_activeTextField.value!.frame.origin, toView: self.view).y - 10
+        }
     }
     
     func dismissKeyboard(sender: UITapGestureRecognizer) {

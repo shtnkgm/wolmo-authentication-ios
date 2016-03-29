@@ -121,7 +121,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
      
         - Returns: A valid login controller delegate to use.
      
-        - Attention: Override this method for customizing any of the 
+        - Attention: Override this method for customizing any of the used
         delegate's reactions to events.
     */
     public func createLoginControllerDelegate() -> LoginControllerDelegate {
@@ -139,7 +139,21 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          register controller to be used.
     */
     public func createRegisterController() -> RegisterController { //todo
-        return RegisterController(viewModel: RegisterViewModel(registrationService: registrationService), registerViewFactory: { return RegisterView() })
+        return RegisterController(viewModel: RegisterViewModel(registrationService: registrationService), registerViewFactory: { return RegisterView() }, delegate: createRegisterControllerDelegate())
+    }
+    
+    /**
+         Creates the register (signup) view controller delegate 
+         that the register controller will use to add behaviour
+         to certain events.
+         
+         - Returns: A valid register controller delegate to use.
+         
+         - Attention: Override this method for customizing any of the used
+         delegate's reactions to events.
+     */
+    public func createRegisterControllerDelegate() -> RegisterControllerDelegate {
+        return DefaultRegisterControllerDelegate()
     }
     
     /**

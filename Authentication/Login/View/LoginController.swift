@@ -73,14 +73,6 @@ public final class LoginController: UIViewController {
         view.addGestureRecognizer(tapRecognizer)
     }
     
-    public override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
-    public override func viewDidDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
 }
 
 private extension LoginController {
@@ -262,15 +254,4 @@ extension LoginController {
         }
     }
     
-}
-
-public extension SessionServiceError {
-    var message: String {
-        switch self {
-        case .InvalidCredentials(let error):
-            return "login-error.invalid-credentials.message".localized + (error?.localizedDescription ?? "")
-        case .NetworkError(let error):
-            return "login-error.network-error.message".localized + error.localizedDescription
-        }
-    }
 }
