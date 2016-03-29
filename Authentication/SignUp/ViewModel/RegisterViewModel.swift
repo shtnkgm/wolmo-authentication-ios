@@ -30,6 +30,9 @@ protocol RegisterViewModelType {
     var signUpErrors: Signal<RegistrationServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
     
+    var termsAndServicesAccepted: MutableProperty<Bool> { get }
+    var toggleTermsAndServicesAcceptance: CocoaAction { get }
+    
     var nameText: String { get }
     var emailText: String { get }
     var passwordText: String { get }
@@ -38,6 +41,8 @@ protocol RegisterViewModelType {
     var emailPlaceholderText: String { get }
     var passwordPlaceholderText: String { get }
     var confirmPasswordPlaceholderText: String { get }
+    var termsAndServicesLabelText: String { get }
+    var termsAndServicesButtonTitle: String { get }
     var signupButtonTitle: String { get }
     
 }
@@ -51,11 +56,13 @@ public final class RegisterViewModel<User: UserType, RegistrationService: Regist
     public let email = MutableProperty("")
     public let password = MutableProperty("")
     public let passwordConfirmation = MutableProperty("")
+    public let termsAndServicesAccepted = MutableProperty(false)
     
     public let nameValidationErrors: AnyProperty<[String]>
     public let emailValidationErrors: AnyProperty<[String]>
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
+    public let termsAndServicesValidationErrors: AnyProperty<[String]>
     
     private lazy var _signUp: Action<AnyObject, User, RegistrationServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
@@ -71,6 +78,14 @@ public final class RegisterViewModel<User: UserType, RegistrationService: Regist
     public var signUpErrors: Signal<RegistrationServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
+    private lazy var _toggleTermsAndServicesAcceptance: Action<AnyObject, Bool, NoError> = {
+        return Action { [unowned self] _ in
+            self.termsAndServicesAccepted.value = !self.termsAndServicesAccepted.value
+            return SignalProducer(value: self.termsAndServicesAccepted.value).observeOn(UIScheduler())
+        }
+    }()
+    
+    public var toggleTermsAndServicesAcceptance: CocoaAction { return _toggleTermsAndServicesAcceptance.unsafeCocoaAction }
     
     init(registrationService: RegistrationService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
         _registrationService = registrationService
@@ -79,25 +94,38 @@ public final class RegisterViewModel<User: UserType, RegistrationService: Regist
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         let passwordConfirmValidationResult = combineLatest(password.signal, passwordConfirmation.signal)
-            .map { $0 == $1 }.map { equals -> ValidationResult in
-                if equals {
-                    return .Valid
-                } else {
-                    return .invalid("signup.password-confirmation.invalid".localized)
-                }
-        }
-        
+            .map { $0 == $1 }.map(getPasswordConfirmValidationResultFromEquality)
+        let termsAndServicesValidationResult = termsAndServicesAccepted.signal.map(getTermsAndServicesValidationResultFromAcceptance)
+
         nameValidationErrors = AnyProperty(initialValue: [], signal: nameValidationResult.map { $0.errors })
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
         passwordConfirmationValidationErrors = AnyProperty(initialValue: [], signal: passwordConfirmValidationResult.map { $0.errors })
+        termsAndServicesValidationErrors = AnyProperty(initialValue: [], signal: termsAndServicesValidationResult.map { $0.errors })
         
         _credentialsAreValid = AnyProperty<Bool>(initialValue: false, signal: nameValidationResult.map { $0.isValid })
                             .and(AnyProperty<Bool>(initialValue: false, signal: emailValidationResult.map { $0.isValid }))
                             .and(AnyProperty<Bool>(initialValue: false, signal: passwordValidationResult.map { $0.isValid }))
                             .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
+                            .and(termsAndServicesAccepted)
     }
     
+}
+
+private func getPasswordConfirmValidationResultFromEquality(equals: Bool) -> ValidationResult {
+    if equals {
+        return .Valid
+    } else {
+        return .invalid("signup.password-confirmation.invalid".localized)
+    }
+}
+
+private func getTermsAndServicesValidationResultFromAcceptance(accepted: Bool) -> ValidationResult {
+    if accepted {
+        return .Valid
+    } else {
+        return .invalid("signup.terms-and-services.not-accepted".localized)
+    }
 }
 
 public extension RegisterViewModel {
@@ -134,6 +162,13 @@ public extension RegisterViewModel {
         return "signup-view-model.confirm-password-placeholder".localized
     }
     
+    public var termsAndServicesLabelText: String {
+        return "signup-view-model.terms-and-services.label-text".localized
+    }
+    
+    public var termsAndServicesButtonTitle: String {
+        return "signup-view-model.terms-and-services.button-title".localized
+    }
     public var signupButtonTitle: String {
         return "signup-view-model.signup-button-title".localized
     }

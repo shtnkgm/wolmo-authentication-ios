@@ -112,6 +112,12 @@ private extension RegisterController {
         signupView.registerButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
         signupView.registerButton.rex_pressed.value = _viewModel.signUpCocoaAction
         signupView.registerButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.registerButtonEnabled = $0 }
+        
+        signupView.termsAndServicesLabel?.text = _viewModel.termsAndServicesLabelText
+        signupView.termsAndServicesButton.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
+        //signupView.termsAndServicesButton -> Presents the terms and services
+        signupView.termsAndServicesCheckBoxButton.rex_pressed.value = _viewModel.toggleTermsAndServicesAcceptance
+        _viewModel.termsAndServicesAccepted.signal.observeNext { [unowned self] in self.signupView.termsAndServicesChecked = $0 }
     }
     
 }

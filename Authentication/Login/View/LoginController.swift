@@ -138,7 +138,7 @@ private extension LoginController {
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
             passwordVisibilityButton.rex_title <~ _viewModel.showPassword.producer.map { [unowned self] _ in self._viewModel.passwordVisibilityButtonTitle }
-            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility.unsafeCocoaAction
+            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibilityCocoaAction
             _viewModel.showPassword.signal.observeNext { [unowned self] in self.loginView.showPassword = $0 }
         }
         loginView.passwordTextField.delegate = self

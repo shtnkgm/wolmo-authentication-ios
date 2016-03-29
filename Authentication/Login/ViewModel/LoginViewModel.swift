@@ -22,7 +22,7 @@ public protocol LoginViewModelType {
     var passwordValidationErrors: AnyProperty<[String]> { get }
     var showPassword: MutableProperty<Bool> { get }
     
-    var togglePasswordVisibility: Action<AnyObject, Bool, NoError> { get }
+    var togglePasswordVisibilityCocoaAction: CocoaAction { get }
     var logInCocoaAction: CocoaAction { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
@@ -71,12 +71,13 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
     
     
-    public private(set) lazy var togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
+    private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
         return Action { [unowned self] _ in
             self.showPassword.value = !self.showPassword.value
             return SignalProducer(value: self.showPassword.value).observeOn(UIScheduler())
         }
     }()
+    public var togglePasswordVisibilityCocoaAction: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     
     /**
         Initializes a login view model which will communicate to the session service provided and

@@ -33,6 +33,10 @@ public protocol RegisterViewType: Renderable {
     var registerButton: UIButton { get }
     var registerErrorLabel: UILabel? { get }
     
+    var termsAndServicesButton: UIButton { get }
+    var termsAndServicesLabel: UILabel? { get }
+    var termsAndServicesCheckBoxButton: UIButton { get }
+    
     var usernameTextFieldValid: Bool { get set }
     var usernameTextFieldSelected: Bool { get set }
     var emailTextFieldValid: Bool { get set }
@@ -41,6 +45,7 @@ public protocol RegisterViewType: Renderable {
     var passwordTextFieldSelected: Bool { get set }
     var passwordConfirmationTextFieldValid: Bool { get set }
     var passwordConfirmationTextFieldSelected: Bool { get set }
+    var termsAndServicesChecked: Bool { get set }
     var registerButtonEnabled: Bool { get set }
     
 }
@@ -53,9 +58,7 @@ public extension RegisterViewType where Self: UIView {
     
 }
 
-
 public final class RegisterView: UIView, RegisterViewType {
-    
     
     //TODO return real objects
     public var usernameLabel: UILabel { return UILabel() }
@@ -79,6 +82,10 @@ public final class RegisterView: UIView, RegisterViewType {
     public var registerButton: UIButton { return UIButton() }
     public var registerErrorLabel: UILabel? { return .None }
     
+    public var termsAndServicesButton: UIButton { return UIButton() }
+    public var termsAndServicesLabel: UILabel? { return .None }
+    public var termsAndServicesCheckBoxButton: UIButton { return UIButton() }
+    
     public var usernameTextFieldValid: Bool = false
     public var usernameTextFieldSelected: Bool = false
     public var emailTextFieldValid: Bool = false
@@ -87,6 +94,7 @@ public final class RegisterView: UIView, RegisterViewType {
     public var passwordTextFieldSelected: Bool = false
     public var passwordConfirmationTextFieldValid: Bool = false
     public var passwordConfirmationTextFieldSelected: Bool = false
+    public var termsAndServicesChecked: Bool = false
     public var registerButtonEnabled: Bool = false
     
     public func render() {
