@@ -76,7 +76,7 @@ bootstrap_carthage ()
   then
     carthage_cmd="$carthage_cmd --no-use-binaries"
   fi
-
+  echo "Disabled cache: $DISABLE_CARTHAGE_CACHE"
   if [ -z $DISABLE_CARTHAGE_CACHE ] && type bundle > /dev/null && bundle show carthage_cache > /dev/null && ([ ! -z $DISABLE_CARTHAGE_CACHE_CONFIG ] || [ -f .carthage_cache.yml ])
   then
     carthage_cache_cmd="carthage_cache"
