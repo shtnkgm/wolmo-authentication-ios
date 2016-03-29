@@ -171,10 +171,20 @@ extension LoginController: UITextFieldDelegate {
     }
     
     public func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == loginView.emailTextField {
+            loginView.emailTextFieldSelected = true
+        } else {
+            loginView.passwordTextFieldSelected = true
+        }
         _activeField.value = textField
     }
     
     public func textFieldDidEndEditing(textField: UITextField) {
+        if textField == loginView.emailTextField {
+            loginView.emailTextFieldSelected = false
+        } else {
+            loginView.passwordTextFieldSelected = false
+        }
         _activeField.value = .None
     }
     

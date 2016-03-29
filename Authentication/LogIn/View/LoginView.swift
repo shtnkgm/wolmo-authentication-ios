@@ -33,8 +33,10 @@ public protocol LoginViewType: Renderable {
     var registerButton: UIButton { get }
     var recoverPasswordButton: UIButton { get }
     
-    var passwordTextFieldValid: Bool { get set }
     var emailTextFieldValid: Bool { get set }
+    var emailTextFieldSelected: Bool { get set }
+    var passwordTextFieldValid: Bool { get set }
+    var passwordTextFieldSelected: Bool { get set }
     var logInButtonEnabled: Bool { get set }
     var showPassword: Bool { get set }
     
@@ -121,6 +123,20 @@ public final class LoginView: UIView, LoginViewType {
     }
     
     
+    public var emailTextFieldValid: Bool = true {
+        didSet {
+            let color: CGColor
+            if emailTextFieldValid {
+                color = UIColor.clearColor().CGColor
+            } else {
+                color = UIColor.redColor().CGColor
+            }
+            emailTextFieldViewOutlet.layer.borderColor = color
+        }
+    }
+    
+    public var emailTextFieldSelected: Bool = false
+    
     public var passwordTextFieldValid: Bool = true {
         didSet {
             let color: CGColor
@@ -133,17 +149,7 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
-    public var emailTextFieldValid: Bool = true {
-        didSet {
-            let color: CGColor
-            if emailTextFieldValid {
-                color = UIColor.clearColor().CGColor
-            } else {
-                color = UIColor.redColor().CGColor
-            }
-            emailTextFieldViewOutlet.layer.borderColor = color
-        }
-    }
+    public var passwordTextFieldSelected = false
 
     public var logInButtonEnabled: Bool = true {
         didSet {
