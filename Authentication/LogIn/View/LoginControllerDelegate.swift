@@ -35,6 +35,8 @@ public protocol LoginControllerDelegate {
 extension LoginControllerDelegate {
     
     public func loginControllerWillExecuteLogIn(controller: LoginController) {
+        controller.loginView.emailTextFieldValid = true
+        controller.loginView.passwordTextFieldValid = true
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = " "
         }
