@@ -59,7 +59,7 @@ extension LoginControllerDelegate {
         controller.loginView.emailTextFieldValid = false
         controller.loginView.passwordTextFieldValid = false
         
-        if let logInErrorLabel = controller.loginView.logInErrorLabel {
+        if let logInErrorLabel = controller.loginView.logInErrorLabel && !shouldDisplayLoginErrorWithAlert() {
             logInErrorLabel.text = error.message
         } else {
             let alert = UIAlertController(title: "login-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
