@@ -29,6 +29,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         return sessionService.currentUser.value
     }
     
+    /// The logo image to show in login.
     public var logoImage: UIImage?
 
     /**
@@ -43,7 +44,9 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
 
         - Returns: A new authentication bootstrapper ready to use for starting your app as needed.
     */
+// swiftlint:disable valid_docs
     public init(sessionService: SessionService, window: UIWindow, mainViewControllerFactory: () -> UIViewController) {
+// swiftlint:enable valid_docs
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
         self.sessionService = sessionService
@@ -105,11 +108,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     */
     public func createLoginView() -> LoginViewType {
         let view: LoginView = LoginView.loadFromNib()
-        if let logo = logoImage {
-            view.delegate = DefaultLogoSetterLoginViewDelegate(logoImage: logo)
-        } else {
-            view.delegate = DefaultLoginViewDelegate()
-        }
+        view.delegate = DefaultLogoSetterLoginViewDelegate(logoImage: logoImage)
         return view
     }
 

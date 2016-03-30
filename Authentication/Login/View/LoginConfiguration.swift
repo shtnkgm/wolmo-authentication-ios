@@ -52,7 +52,9 @@ public final class LoginControllerConfiguration {
      
         - Returns: A valid configuration
     */
+// swiftlint:disable valid_docs
     init(viewModel: LoginViewModelType,
+// swiftlint:enable valid_docs
         viewFactory: () -> LoginViewType,
         transitionDelegate: LoginControllerTransitionDelegate,
         delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {

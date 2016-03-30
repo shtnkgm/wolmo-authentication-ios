@@ -30,14 +30,16 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate { }
 
 public final class DefaultLogoSetterLoginViewDelegate: LoginViewDelegate {
     
-    private let _logoImage: UIImage
+    private let _logoImage: UIImage?
     
-    init(logoImage: UIImage) {
+    init(logoImage: UIImage?) {
         _logoImage = logoImage
     }
     
     public func configureView(loginView: LoginViewType) {
-        loginView.logoImageView.image = _logoImage
+        if let logo = _logoImage {
+            loginView.logoImageView.image = logo
+        }
     }
     
 }
