@@ -15,8 +15,8 @@
 /* Títulos de los elementos de UI del login */
 "login-view-model.email" = "Email:";
 "login-view-model.password" = "Contraseña:";
-"login-view-model.email-placeholder" = "Ingrese email aquí";
-"login-view-model.password-placeholder" = "Ingrese su contraseña aquí";
+"login-view-model.email-placeholder" = "Email";
+"login-view-model.password-placeholder" = "Contraseña";
 "login-view-model.login-button-title" = "INGRESAR";
 "login-view-model.register-button-title" = "Regístrese";
 "login-view-model.password-visibility-button-title.false" = "Ocultar";

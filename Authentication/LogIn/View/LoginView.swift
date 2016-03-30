@@ -18,11 +18,11 @@ public protocol LoginViewType: Renderable {
     
     var view: UIView { get }
     
-    var emailLabel: UILabel { get }
+    var emailLabel: UILabel? { get }
     var emailTextField: UITextField { get }
     var emailValidationMessageLabel: UILabel? { get }
     
-    var passwordLabel: UILabel { get }
+    var passwordLabel: UILabel? { get }
     var passwordTextField: UITextField { get }
     var passwordValidationMessageLabel: UILabel? { get }
     var passwordVisibilityButton: UIButton? { get }
@@ -54,8 +54,7 @@ public final class LoginView: UIView, LoginViewType {
     
     public lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()
     
-    public var emailLabel: UILabel { return emailLabelOutlet }
-    @IBOutlet weak var emailLabelOutlet: UILabel!
+    public var emailLabel: UILabel? { return .None }
     
     public var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField!
@@ -67,8 +66,7 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
-    public var passwordLabel: UILabel { return passwordLabelOutlet }
-    @IBOutlet weak var passwordLabelOutlet: UILabel!
+    public var passwordLabel: UILabel? { return .None }
     
     public var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField!

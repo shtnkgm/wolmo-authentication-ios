@@ -14,10 +14,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qrx-9t-qLL" userLabel="View Image">
-                    <rect key="frame" x="0.0" y="0.0" width="536" height="221"/>
+                    <rect key="frame" x="0.0" y="0.0" width="536" height="257"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="m8f-j5-qTM">
-                            <rect key="frame" x="179" y="46" width="179" height="129"/>
+                            <rect key="frame" x="179" y="64" width="179" height="129"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="179" id="5fO-D4-ddk"/>
                                 <constraint firstAttribute="height" constant="129" id="hgD-Bc-jUC"/>
@@ -36,25 +36,19 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1rE-7v-geU" userLabel="View TextFields">
-                    <rect key="frame" x="0.0" y="221" width="536" height="222"/>
+                    <rect key="frame" x="0.0" y="257" width="536" height="150"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOh-Ac-Urc" userLabel="View Email">
-                            <rect key="frame" x="0.0" y="0.0" width="536" height="95"/>
+                            <rect key="frame" x="0.0" y="0.0" width="536" height="55"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmO-qG-jdH" userLabel="View TexField">
-                                    <rect key="frame" x="0.0" y="0.0" width="536" height="63"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="40"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9U-PP-eSg">
-                                            <rect key="frame" x="62" y="21" width="46" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nph-gf-vkr">
-                                            <rect key="frame" x="133" y="17" width="378" height="30"/>
+                                            <rect key="frame" x="25" y="5" width="486" height="30"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n6d-h8-UK6">
-                                                    <rect key="frame" x="8" y="0.0" width="362" height="30"/>
+                                                    <rect key="frame" x="8" y="0.0" width="470" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="310" id="eIh-dr-2BA"/>
                                                     </constraints>
@@ -78,15 +72,21 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="Nph-gf-vkr" firstAttribute="centerY" secondItem="mmO-qG-jdH" secondAttribute="centerY" id="Hym-Q6-2f2"/>
-                                        <constraint firstItem="G9U-PP-eSg" firstAttribute="centerY" secondItem="mmO-qG-jdH" secondAttribute="centerY" id="kZP-hL-qcU"/>
+                                        <constraint firstAttribute="bottom" secondItem="Nph-gf-vkr" secondAttribute="bottom" constant="5" id="RTr-ap-6ct"/>
+                                        <constraint firstItem="Nph-gf-vkr" firstAttribute="top" secondItem="mmO-qG-jdH" secondAttribute="top" constant="5" id="XGh-lk-LaV"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Hym-Q6-2f2"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDu-Ke-6e4" userLabel="View Errors">
-                                    <rect key="frame" x="0.0" y="63" width="536" height="32"/>
+                                    <rect key="frame" x="0.0" y="40" width="536" height="15"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZAD-1z-Cfs">
-                                            <rect key="frame" x="5" y="8" width="513" height="17"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Validation Errors" textAlignment="right" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAD-1z-Cfs">
+                                            <rect key="frame" x="10" y="0.0" width="508" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -94,15 +94,24 @@
                                     <constraints>
                                         <constraint firstItem="ZAD-1z-Cfs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UDu-Ke-6e4" secondAttribute="top" id="A0E-ih-FCO"/>
                                         <constraint firstAttribute="centerY" secondItem="ZAD-1z-Cfs" secondAttribute="centerY" id="Dah-Lg-XGM"/>
-                                        <constraint firstItem="ZAD-1z-Cfs" firstAttribute="leading" secondItem="UDu-Ke-6e4" secondAttribute="leading" constant="5" id="Qsj-FM-b0f"/>
+                                        <constraint firstItem="ZAD-1z-Cfs" firstAttribute="leading" secondItem="UDu-Ke-6e4" secondAttribute="leading" constant="10" id="Qsj-FM-b0f"/>
+                                        <constraint firstItem="ZAD-1z-Cfs" firstAttribute="top" secondItem="UDu-Ke-6e4" secondAttribute="top" id="ZVT-ws-W7S"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZAD-1z-Cfs" secondAttribute="bottom" id="qEx-wd-BPa"/>
+                                        <constraint firstAttribute="bottom" secondItem="ZAD-1z-Cfs" secondAttribute="bottom" id="zZg-NM-yQg"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="A0E-ih-FCO"/>
+                                            <exclude reference="Dah-Lg-XGM"/>
+                                            <exclude reference="qEx-wd-BPa"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="mmO-qG-jdH" firstAttribute="leading" secondItem="fOh-Ac-Urc" secondAttribute="leading" id="Au5-wt-Ktz"/>
                                 <constraint firstItem="UDu-Ke-6e4" firstAttribute="top" secondItem="mmO-qG-jdH" secondAttribute="bottom" id="IUT-ac-3DA"/>
-                                <constraint firstItem="UDu-Ke-6e4" firstAttribute="height" secondItem="mmO-qG-jdH" secondAttribute="height" multiplier="1/2" id="JG1-qd-7IL"/>
+                                <constraint firstItem="UDu-Ke-6e4" firstAttribute="height" secondItem="mmO-qG-jdH" secondAttribute="height" id="JG1-qd-7IL"/>
                                 <constraint firstItem="mmO-qG-jdH" firstAttribute="top" secondItem="fOh-Ac-Urc" secondAttribute="top" id="JNz-yD-Z6k"/>
                                 <constraint firstAttribute="bottom" secondItem="UDu-Ke-6e4" secondAttribute="bottom" id="N05-QE-qvS"/>
                                 <constraint firstItem="UDu-Ke-6e4" firstAttribute="leading" secondItem="fOh-Ac-Urc" secondAttribute="leading" id="T6u-fl-qhl"/>
@@ -112,58 +121,27 @@
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
+                                    <exclude reference="JG1-qd-7IL"/>
                                     <exclude reference="lmr-VD-JGU"/>
                                 </mask>
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biK-V3-UKv" userLabel="View Password">
-                            <rect key="frame" x="0.0" y="95" width="536" height="95"/>
+                            <rect key="frame" x="0.0" y="55" width="536" height="55"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-9d-BLN" userLabel="View Errors">
-                                    <rect key="frame" x="-5" y="63" width="541" height="32"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Validation Errors" textAlignment="right" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-di-9jk">
-                                            <rect key="frame" x="5" y="7" width="518" height="17"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="260" id="X66-an-LU6"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="X66-an-LU6"/>
-                                                </mask>
-                                            </variation>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GLr-di-9jk" secondAttribute="bottom" id="GNw-FI-Ygs"/>
-                                        <constraint firstAttribute="centerY" secondItem="GLr-di-9jk" secondAttribute="centerY" id="KTC-lx-MBp"/>
-                                        <constraint firstItem="GLr-di-9jk" firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" constant="5" id="RMI-fM-eu7"/>
-                                        <constraint firstItem="GLr-di-9jk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cqr-9d-BLN" secondAttribute="top" id="RhK-ne-6kN"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="GLr-di-9jk" secondAttribute="trailing" constant="10" id="pYh-Pc-6qA"/>
-                                    </constraints>
-                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHv-O5-QdK" userLabel="View TextField">
-                                    <rect key="frame" x="0.0" y="0.0" width="536" height="63"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="40"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contraseña:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ye1-Vf-OdP">
-                                            <rect key="frame" x="15" y="21" width="93" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xR-de-3a1">
-                                            <rect key="frame" x="133" y="17" width="378" height="30"/>
+                                            <rect key="frame" x="25" y="5" width="486" height="30"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2dd-3i-SpJ">
-                                                    <rect key="frame" x="8" y="0.0" width="322" height="30"/>
+                                                    <rect key="frame" x="8" y="0.0" width="430" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="Clc-p3-LR7">
-                                                    <rect key="frame" x="330" y="0.0" width="45" height="30"/>
+                                                    <rect key="frame" x="438" y="0.0" width="45" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="Qzs-1x-4YJ"/>
                                                     </constraints>
@@ -183,54 +161,104 @@
                                         </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="ye1-Vf-OdP" firstAttribute="centerY" secondItem="BHv-O5-QdK" secondAttribute="centerY" id="0aT-2U-Y7E"/>
-                                        <constraint firstItem="1xR-de-3a1" firstAttribute="leading" secondItem="ye1-Vf-OdP" secondAttribute="trailing" constant="25" id="JBb-df-6UE"/>
+                                        <constraint firstItem="1xR-de-3a1" firstAttribute="centerX" secondItem="BHv-O5-QdK" secondAttribute="centerX" id="Myq-Fe-Pgb"/>
                                         <constraint firstAttribute="trailing" secondItem="1xR-de-3a1" secondAttribute="trailing" constant="25" id="YoM-ka-uSL"/>
                                         <constraint firstItem="1xR-de-3a1" firstAttribute="centerY" secondItem="BHv-O5-QdK" secondAttribute="centerY" id="gDV-qx-EYe"/>
-                                        <constraint firstItem="ye1-Vf-OdP" firstAttribute="leading" secondItem="BHv-O5-QdK" secondAttribute="leading" constant="15" id="nQG-fj-V5D"/>
+                                        <constraint firstAttribute="bottom" secondItem="1xR-de-3a1" secondAttribute="bottom" constant="5" id="joT-e6-285"/>
+                                        <constraint firstItem="1xR-de-3a1" firstAttribute="leading" secondItem="BHv-O5-QdK" secondAttribute="leading" constant="25" id="mHU-io-Pu3"/>
+                                        <constraint firstItem="1xR-de-3a1" firstAttribute="top" secondItem="BHv-O5-QdK" secondAttribute="top" constant="5" id="oJn-s6-JHM"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="gDV-qx-EYe"/>
+                                        </mask>
+                                    </variation>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-9d-BLN" userLabel="View Errors">
+                                    <rect key="frame" x="0.0" y="40" width="536" height="15"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password Validation Errors" textAlignment="right" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLr-di-9jk">
+                                            <rect key="frame" x="10" y="0.0" width="508" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="260" id="X66-an-LU6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="X66-an-LU6"/>
+                                                </mask>
+                                            </variation>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GLr-di-9jk" secondAttribute="bottom" id="GNw-FI-Ygs"/>
+                                        <constraint firstItem="GLr-di-9jk" firstAttribute="top" secondItem="cqr-9d-BLN" secondAttribute="top" id="GmF-06-2ok"/>
+                                        <constraint firstAttribute="centerY" secondItem="GLr-di-9jk" secondAttribute="centerY" id="KTC-lx-MBp"/>
+                                        <constraint firstItem="GLr-di-9jk" firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" constant="10" id="RMI-fM-eu7"/>
+                                        <constraint firstItem="GLr-di-9jk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cqr-9d-BLN" secondAttribute="top" id="RhK-ne-6kN"/>
+                                        <constraint firstAttribute="bottom" secondItem="GLr-di-9jk" secondAttribute="bottom" id="UFF-Yq-LcS"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="GLr-di-9jk" secondAttribute="trailing" constant="10" id="pYh-Pc-6qA"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="GNw-FI-Ygs"/>
+                                            <exclude reference="KTC-lx-MBp"/>
+                                            <exclude reference="RhK-ne-6kN"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="cqr-9d-BLN" firstAttribute="height" secondItem="BHv-O5-QdK" secondAttribute="height" multiplier="1/2" id="0j8-gz-Pa1"/>
+                                <constraint firstItem="cqr-9d-BLN" firstAttribute="height" secondItem="BHv-O5-QdK" secondAttribute="height" id="0j8-gz-Pa1"/>
                                 <constraint firstItem="cqr-9d-BLN" firstAttribute="top" secondItem="BHv-O5-QdK" secondAttribute="bottom" id="Eey-a6-eaX"/>
                                 <constraint firstAttribute="trailing" secondItem="cqr-9d-BLN" secondAttribute="trailing" id="HPK-FR-JYL"/>
                                 <constraint firstItem="BHv-O5-QdK" firstAttribute="top" secondItem="biK-V3-UKv" secondAttribute="top" id="Je2-dq-aqy"/>
                                 <constraint firstItem="BHv-O5-QdK" firstAttribute="leading" secondItem="biK-V3-UKv" secondAttribute="leading" id="RF9-Kd-g9M"/>
-                                <constraint firstItem="cqr-9d-BLN" firstAttribute="top" secondItem="BHv-O5-QdK" secondAttribute="bottom" id="fXt-gh-5Ah"/>
                                 <constraint firstAttribute="bottom" secondItem="cqr-9d-BLN" secondAttribute="bottom" id="lA2-KP-rQ7"/>
                                 <constraint firstAttribute="trailing" secondItem="BHv-O5-QdK" secondAttribute="trailing" id="pzu-ev-jC0"/>
-                                <constraint firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" constant="5" id="vhY-7V-hkn"/>
+                                <constraint firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" id="vhY-7V-hkn"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="fXt-gh-5Ah"/>
+                                    <exclude reference="0j8-gz-Pa1"/>
                                 </mask>
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIp-l7-LQy" userLabel="View Recover Password">
-                            <rect key="frame" x="0.0" y="190" width="536" height="32"/>
+                            <rect key="frame" x="0.0" y="110" width="536" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sL-Hy-vEE">
-                                    <rect key="frame" x="23" y="-5" width="149" height="30"/>
+                                    <rect key="frame" x="362" y="5" width="149" height="30"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                     <state key="normal" title="Recuperar contraseña"/>
                                 </button>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="top" secondItem="6sL-Hy-vEE" secondAttribute="top" constant="5" id="5Af-Og-iBu"/>
+                                <constraint firstItem="6sL-Hy-vEE" firstAttribute="centerY" secondItem="PIp-l7-LQy" secondAttribute="centerY" id="8vL-ot-8mA"/>
+                                <constraint firstItem="6sL-Hy-vEE" firstAttribute="top" secondItem="PIp-l7-LQy" secondAttribute="top" constant="5" id="ZWJ-Nx-hib"/>
+                                <constraint firstAttribute="bottom" secondItem="6sL-Hy-vEE" secondAttribute="bottom" constant="5" id="nlt-0j-Im7"/>
                                 <constraint firstItem="6sL-Hy-vEE" firstAttribute="leading" secondItem="PIp-l7-LQy" secondAttribute="leadingMargin" constant="15" id="ti6-as-OtM"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="5Af-Og-iBu"/>
+                                    <exclude reference="ti6-as-OtM"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="PIp-l7-LQy" secondAttribute="bottom" id="2IS-wF-8IP"/>
-                        <constraint firstItem="ye1-Vf-OdP" firstAttribute="trailing" secondItem="G9U-PP-eSg" secondAttribute="trailing" id="680-CE-dPz"/>
                         <constraint firstItem="fOh-Ac-Urc" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="C73-lx-hkC"/>
+                        <constraint firstItem="6sL-Hy-vEE" firstAttribute="trailing" secondItem="BHv-O5-QdK" secondAttribute="trailing" id="CBd-yf-eCb"/>
                         <constraint firstItem="fOh-Ac-Urc" firstAttribute="top" secondItem="1rE-7v-geU" secondAttribute="top" id="GYH-Gi-Vcw"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="IE0-sh-sDd"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="height" secondItem="fOh-Ac-Urc" secondAttribute="height" multiplier="1/3" id="JcD-W7-ygf"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="top" secondItem="biK-V3-UKv" secondAttribute="bottom" id="LG9-XP-3Ww"/>
+                        <constraint firstItem="6sL-Hy-vEE" firstAttribute="trailing" secondItem="GLr-di-9jk" secondAttribute="trailing" id="LkP-oW-QRe"/>
                         <constraint firstItem="biK-V3-UKv" firstAttribute="height" secondItem="fOh-Ac-Urc" secondAttribute="height" id="O1a-zZ-Dbn"/>
                         <constraint firstItem="biK-V3-UKv" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="RKa-Di-Ucc"/>
                         <constraint firstItem="GLr-di-9jk" firstAttribute="trailing" secondItem="ZAD-1z-Cfs" secondAttribute="trailing" id="SM4-1X-8wb"/>
@@ -242,21 +270,25 @@
                         <constraint firstItem="biK-V3-UKv" firstAttribute="top" secondItem="fOh-Ac-Urc" secondAttribute="bottom" id="nqF-jP-Sch"/>
                         <constraint firstItem="1xR-de-3a1" firstAttribute="leading" secondItem="Nph-gf-vkr" secondAttribute="leading" id="tR4-hE-kQA"/>
                         <constraint firstItem="1xR-de-3a1" firstAttribute="trailing" secondItem="Nph-gf-vkr" secondAttribute="trailing" id="vYc-U8-4wt"/>
+                        <constraint firstItem="6sL-Hy-vEE" firstAttribute="trailing" secondItem="1xR-de-3a1" secondAttribute="trailing" id="zEC-DZ-oFp"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="JcD-W7-ygf"/>
                             <exclude reference="b8d-mQ-Mha"/>
+                            <exclude reference="CBd-yf-eCb"/>
+                            <exclude reference="LkP-oW-QRe"/>
                         </mask>
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5vG-Dj-ID2" userLabel="View Log in">
-                    <rect key="frame" x="0.0" y="443" width="536" height="221"/>
+                    <rect key="frame" x="0.0" y="407" width="536" height="257"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sL5-zj-47A" userLabel="View Register">
-                            <rect key="frame" x="0.0" y="132" width="536" height="89"/>
+                            <rect key="frame" x="0.0" y="154" width="536" height="103"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBY-TO-W3Y" userLabel="View Label">
-                                    <rect key="frame" x="0.0" y="0.0" width="536" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="52"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿No tiene usuario?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-m0-zdE">
                                             <rect key="frame" x="208" y="5" width="120" height="17"/>
@@ -277,10 +309,10 @@
                                     </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5G-OH-g8x" userLabel="View Button">
-                                    <rect key="frame" x="0.0" y="45" width="536" height="44"/>
+                                    <rect key="frame" x="0.0" y="52" width="536" height="51"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-U7-f9X">
-                                            <rect key="frame" x="230" y="-5" width="77" height="32"/>
+                                            <rect key="frame" x="230" y="-4" width="77" height="32"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <state key="normal" title="Regístrese"/>
                                         </button>
@@ -303,13 +335,13 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-pZ-IZv" userLabel="View Log in">
-                            <rect key="frame" x="0.0" y="0.0" width="536" height="132"/>
+                            <rect key="frame" x="0.0" y="0.0" width="536" height="154"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQS-8v-dkX" userLabel="View Label">
-                                    <rect key="frame" x="0.0" y="0.0" width="536" height="26"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="31"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In Errors" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B8-U1-3A4">
-                                            <rect key="frame" x="5" y="9" width="536" height="17"/>
+                                            <rect key="frame" x="5" y="14" width="536" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -322,10 +354,10 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-bP-pgL" userLabel="View Button">
-                                    <rect key="frame" x="0.0" y="26" width="536" height="106"/>
+                                    <rect key="frame" x="0.0" y="31" width="536" height="123"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiI-H5-iJW">
-                                            <rect key="frame" x="36" y="16" width="464" height="64"/>
+                                            <rect key="frame" x="36" y="20" width="464" height="74"/>
                                             <color key="backgroundColor" red="1" green="0.75446993829115305" blue="0.19559735966350844" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <state key="normal" title="LOG IN">
@@ -384,17 +416,16 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="UbK-e4-Tnf"/>
                     <exclude reference="di9-Zj-3pG"/>
                 </mask>
             </variation>
             <connections>
-                <outlet property="emailLabelOutlet" destination="G9U-PP-eSg" id="Q7p-za-A8H"/>
                 <outlet property="emailTextFieldOutlet" destination="n6d-h8-UK6" id="MSO-qq-Uh1"/>
                 <outlet property="emailTextFieldViewOutlet" destination="Nph-gf-vkr" id="3Ah-I6-lnl"/>
                 <outlet property="emailValidationMessageLabelOutlet" destination="ZAD-1z-Cfs" id="LTO-At-YO7"/>
                 <outlet property="logInButtonOutlet" destination="hiI-H5-iJW" id="UMz-QM-poS"/>
                 <outlet property="logInErrorLabelOutlet" destination="5B8-U1-3A4" id="VYs-zp-vgB"/>
-                <outlet property="passwordLabelOutlet" destination="ye1-Vf-OdP" id="gVR-TW-0ii"/>
                 <outlet property="passwordTextFieldAndButtonViewOutlet" destination="1xR-de-3a1" id="JUr-nU-p3i"/>
                 <outlet property="passwordTextFieldOutlet" destination="2dd-3i-SpJ" id="Zzp-gZ-3Iq"/>
                 <outlet property="passwordValidationMessageLabelOutlet" destination="GLr-di-9jk" id="UEW-6E-QDi"/>

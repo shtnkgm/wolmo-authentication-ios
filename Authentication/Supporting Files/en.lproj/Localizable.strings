@@ -10,13 +10,13 @@
 "text-input-validator.empty" = "Can't be empty";
 "text-input-validator.max-length" = "Can't be longer than %d";
 "text-input-validator.min-length" = "Can't be shorter than %d";
-"text-input-validator.invalid-email" = "It has to be a valid email (For example, user@mail.com)";
+"text-input-validator.invalid-email" = "It has to be a valid email";
 
 /* Login UI elements titles */
 "login-view-model.email" = "Email:";
 "login-view-model.password" = "Password:";
-"login-view-model.email-placeholder" = "Enter your email here";
-"login-view-model.password-placeholder" = "Enter your password here";
+"login-view-model.email-placeholder" = "Email";
+"login-view-model.password-placeholder" = "Password";
 "login-view-model.login-button-title" = "LOG IN";
 "login-view-model.register-button-title" = "Register";
 "login-view-model.password-visibility-button-title.false" = "Hide";

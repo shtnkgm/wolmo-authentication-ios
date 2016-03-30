@@ -102,7 +102,9 @@ private extension LoginController {
     
     func bindEmailElements() {
         _viewModel.email <~ loginView.emailTextField.rex_textSignal
-        loginView.emailLabel.text = _viewModel.emailText
+        if let label = loginView.emailLabel {
+            label.text = _viewModel.emailText
+        }
         loginView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
             if errors.isEmpty {
@@ -119,7 +121,9 @@ private extension LoginController {
     
     func bindPasswordElements() {
         _viewModel.password <~ loginView.passwordTextField.rex_textSignal
-        loginView.passwordLabel.text = _viewModel.passwordText
+        if let label = loginView.passwordLabel {
+            label.text = _viewModel.passwordText
+        }
         loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             if errors.isEmpty {
