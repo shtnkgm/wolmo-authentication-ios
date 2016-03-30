@@ -84,7 +84,11 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton!
     
     public var logInButton: UIButton { return logInButtonOutlet }
-    @IBOutlet weak var logInButtonOutlet: UIButton!
+    @IBOutlet weak var logInButtonOutlet: UIButton! {
+        didSet {
+            logInButtonOutlet.layer.cornerRadius = 8.0
+        }
+    }
     
     public var logInErrorLabel: UILabel? { return logInErrorLabelOutlet }
     @IBOutlet weak var logInErrorLabelOutlet: UILabel! {
