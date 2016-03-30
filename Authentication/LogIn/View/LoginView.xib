@@ -285,13 +285,13 @@
                     <rect key="frame" x="0.0" y="407" width="536" height="257"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sL5-zj-47A" userLabel="View Register">
-                            <rect key="frame" x="0.0" y="154" width="536" height="103"/>
+                            <rect key="frame" x="0.0" y="171" width="536" height="86"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XBY-TO-W3Y" userLabel="View Label">
-                                    <rect key="frame" x="0.0" y="0.0" width="536" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="43"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿No tiene usuario?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-m0-zdE">
-                                            <rect key="frame" x="208" y="5" width="120" height="17"/>
+                                            <rect key="frame" x="208" y="16" width="120" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -299,26 +299,29 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="k1E-m0-zdE" firstAttribute="centerX" secondItem="XBY-TO-W3Y" secondAttribute="centerX" id="gLP-4n-Z8x"/>
-                                        <constraint firstItem="k1E-m0-zdE" firstAttribute="top" secondItem="XBY-TO-W3Y" secondAttribute="top" constant="5" id="guW-y3-H2S"/>
+                                        <constraint firstItem="k1E-m0-zdE" firstAttribute="top" secondItem="XBY-TO-W3Y" secondAttribute="top" id="guW-y3-H2S"/>
                                         <constraint firstItem="k1E-m0-zdE" firstAttribute="centerY" secondItem="XBY-TO-W3Y" secondAttribute="centerY" id="jtt-vE-R5M"/>
+                                        <constraint firstAttribute="bottom" secondItem="k1E-m0-zdE" secondAttribute="bottom" constant="10" id="nMe-2W-91x"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="guW-y3-H2S"/>
                                             <exclude reference="jtt-vE-R5M"/>
                                         </mask>
                                     </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5G-OH-g8x" userLabel="View Button">
-                                    <rect key="frame" x="0.0" y="52" width="536" height="51"/>
+                                    <rect key="frame" x="0.0" y="43" width="536" height="43"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-U7-f9X">
-                                            <rect key="frame" x="230" y="-4" width="77" height="32"/>
+                                            <rect key="frame" x="230" y="0.0" width="77" height="32"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <state key="normal" title="Regístrese"/>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="top" secondItem="cxB-U7-f9X" secondAttribute="top" constant="5" id="cIy-gZ-oIo"/>
+                                        <constraint firstAttribute="top" secondItem="cxB-U7-f9X" secondAttribute="top" id="cIy-gZ-oIo"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cxB-U7-f9X" secondAttribute="bottom" constant="10" id="zQq-Rk-4SE"/>
                                         <constraint firstItem="cxB-U7-f9X" firstAttribute="centerX" secondItem="d5G-OH-g8x" secondAttribute="centerX" id="zSE-s3-Kfb"/>
                                     </constraints>
                                 </view>
@@ -335,13 +338,13 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmY-pZ-IZv" userLabel="View Log in">
-                            <rect key="frame" x="0.0" y="0.0" width="536" height="154"/>
+                            <rect key="frame" x="0.0" y="0.0" width="536" height="171"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQS-8v-dkX" userLabel="View Label">
-                                    <rect key="frame" x="0.0" y="0.0" width="536" height="31"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="536" height="34"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In Errors" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B8-U1-3A4">
-                                            <rect key="frame" x="5" y="14" width="536" height="17"/>
+                                            <rect key="frame" x="5" y="17" width="536" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.87805986400000002" green="0.0" blue="0.061996804019999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -354,10 +357,10 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-bP-pgL" userLabel="View Button">
-                                    <rect key="frame" x="0.0" y="31" width="536" height="123"/>
+                                    <rect key="frame" x="0.0" y="34" width="536" height="137"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiI-H5-iJW">
-                                            <rect key="frame" x="36" y="20" width="464" height="74"/>
+                                            <rect key="frame" x="36" y="22" width="464" height="82"/>
                                             <color key="backgroundColor" red="1" green="0.75446993829115305" blue="0.19559735966350844" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                             <state key="normal" title="LOG IN">
@@ -391,7 +394,7 @@
                         <constraint firstAttribute="bottom" secondItem="sL5-zj-47A" secondAttribute="bottom" id="ECi-qE-Hv7"/>
                         <constraint firstItem="cmY-pZ-IZv" firstAttribute="top" secondItem="5vG-Dj-ID2" secondAttribute="top" id="MI9-pl-alx"/>
                         <constraint firstItem="sL5-zj-47A" firstAttribute="top" secondItem="cmY-pZ-IZv" secondAttribute="bottom" id="P3V-b7-eTC"/>
-                        <constraint firstItem="sL5-zj-47A" firstAttribute="height" secondItem="cmY-pZ-IZv" secondAttribute="height" multiplier="2/3" id="aLz-px-LZk"/>
+                        <constraint firstItem="sL5-zj-47A" firstAttribute="height" secondItem="cmY-pZ-IZv" secondAttribute="height" multiplier="1/2" id="aLz-px-LZk"/>
                         <constraint firstItem="sL5-zj-47A" firstAttribute="leading" secondItem="5vG-Dj-ID2" secondAttribute="leading" id="gsO-39-lxy"/>
                         <constraint firstItem="cmY-pZ-IZv" firstAttribute="leading" secondItem="5vG-Dj-ID2" secondAttribute="leading" id="yBK-W0-IKJ"/>
                     </constraints>
