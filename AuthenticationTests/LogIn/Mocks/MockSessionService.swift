@@ -35,11 +35,15 @@ final class MockSessionService: SessionServiceType {
                 self._currentUserObserver.sendNext(self._possibleUser)
             })
         } else {
-            return SignalProducer(error: SessionServiceError.InvalidCredentials(.None)).on(failed: { [unowned self] _ in
-                self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
+            return SignalProducer(error: SessionServiceError.InvalidLogInCredentials(.None)).on(failed: { [unowned self] _ in
+                self._eventsObserver.sendNext(.LogInError(.InvalidLogInCredentials(.None)))
             })
             
         }
+    }
+    
+    func signUp(name: String, _ email: Email, _ password: String) -> SignalProducer<MyUser, SessionServiceError> {
+        return SignalProducer.empty
     }
     
 }

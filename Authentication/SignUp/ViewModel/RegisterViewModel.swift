@@ -26,9 +26,6 @@ public protocol RegisterViewModelType {
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
     
-    var termsAndServicesAccepted: MutableProperty<Bool> { get }
-    
-    var toggleTermsAndServicesCocoaAction: CocoaAction { get }
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
@@ -56,13 +53,11 @@ public final class RegisterViewModel<User: UserType, SessionService: SessionServ
     public let email = MutableProperty("")
     public let password = MutableProperty("")
     public let passwordConfirmation = MutableProperty("")
-    public let termsAndServicesAccepted = MutableProperty(false)
     
     public let nameValidationErrors: AnyProperty<[String]>
     public let emailValidationErrors: AnyProperty<[String]>
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
-    public let termsAndServicesValidationErrors: AnyProperty<[String]>
     
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
@@ -78,15 +73,6 @@ public final class RegisterViewModel<User: UserType, SessionService: SessionServ
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
-    private lazy var _toggleTermsAndServicesAcceptance: Action<AnyObject, Bool, NoError> = {
-        return Action { [unowned self] _ in
-            self.termsAndServicesAccepted.value = !self.termsAndServicesAccepted.value
-            return SignalProducer(value: self.termsAndServicesAccepted.value).observeOn(UIScheduler())
-        }
-    }()
-    
-    public var toggleTermsAndServicesCocoaAction: CocoaAction { return _toggleTermsAndServicesAcceptance.unsafeCocoaAction }
-    
     init(sessionService: SessionService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
         _sessionService = sessionService
         
@@ -95,19 +81,16 @@ public final class RegisterViewModel<User: UserType, SessionService: SessionServ
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         let passwordConfirmValidationResult = combineLatest(password.signal, passwordConfirmation.signal)
             .map { $0 == $1 }.map(getPasswordConfirmValidationResultFromEquality)
-        let termsAndServicesValidationResult = termsAndServicesAccepted.signal.map(getTermsAndServicesValidationResultFromAcceptance)
 
         nameValidationErrors = AnyProperty(initialValue: [], signal: nameValidationResult.map { $0.errors })
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
         passwordConfirmationValidationErrors = AnyProperty(initialValue: [], signal: passwordConfirmValidationResult.map { $0.errors })
-        termsAndServicesValidationErrors = AnyProperty(initialValue: [], signal: termsAndServicesValidationResult.map { $0.errors })
         
         _credentialsAreValid = AnyProperty<Bool>(initialValue: false, signal: nameValidationResult.map { $0.isValid })
                             .and(AnyProperty<Bool>(initialValue: false, signal: emailValidationResult.map { $0.isValid }))
                             .and(AnyProperty<Bool>(initialValue: false, signal: passwordValidationResult.map { $0.isValid }))
                             .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
-                            .and(termsAndServicesAccepted)
     }
     
 }
