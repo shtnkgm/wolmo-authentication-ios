@@ -429,6 +429,7 @@
                 <outlet property="emailValidationMessageLabelOutlet" destination="ZAD-1z-Cfs" id="LTO-At-YO7"/>
                 <outlet property="logInButtonOutlet" destination="hiI-H5-iJW" id="UMz-QM-poS"/>
                 <outlet property="logInErrorLabelOutlet" destination="5B8-U1-3A4" id="VYs-zp-vgB"/>
+                <outlet property="logoImageViewOutlet" destination="m8f-j5-qTM" id="rao-6w-s5e"/>
                 <outlet property="passwordTextFieldAndButtonViewOutlet" destination="1xR-de-3a1" id="JUr-nU-p3i"/>
                 <outlet property="passwordTextFieldOutlet" destination="2dd-3i-SpJ" id="Zzp-gZ-3Iq"/>
                 <outlet property="passwordValidationMessageLabelOutlet" destination="GLr-di-9jk" id="UEW-6E-QDi"/>

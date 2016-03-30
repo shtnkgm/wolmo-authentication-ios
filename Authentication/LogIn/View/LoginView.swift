@@ -18,6 +18,8 @@ public protocol LoginViewType: Renderable {
     
     var view: UIView { get }
     
+    var logoImageView: UIImageView { get }
+    
     var emailLabel: UILabel? { get }
     var emailTextField: UITextField { get }
     var emailValidationMessageLabel: UILabel? { get }
@@ -53,6 +55,9 @@ public extension LoginViewType where Self: UIView {
 public final class LoginView: UIView, LoginViewType {
     
     public lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()
+    
+    public var logoImageView: UIImageView { return logoImageViewOutlet }
+    @IBOutlet weak var logoImageViewOutlet: UIImageView!
     
     public var emailLabel: UILabel? { return .None }
     

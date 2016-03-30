@@ -27,3 +27,17 @@ public extension LoginViewDelegate {
 }
 
 public final class DefaultLoginViewDelegate: LoginViewDelegate { }
+
+public final class DefaultLogoSetterLoginViewDelegate: LoginViewDelegate {
+    
+    private let _logoImage: UIImage
+    
+    init(logoImage: UIImage) {
+        _logoImage = logoImage
+    }
+    
+    public func configureView(loginView: LoginViewType) {
+        loginView.logoImageView.image = _logoImage
+    }
+    
+}

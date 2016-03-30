@@ -28,6 +28,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     public var currentUser: User? {
         return sessionService.currentUser.value
     }
+    
+    public var logoImage: UIImage?
 
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
@@ -103,6 +105,11 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     */
     public func createLoginView() -> LoginViewType {
         let view: LoginView = LoginView.loadFromNib()
+        if let logo = logoImage {
+            view.delegate = DefaultLogoSetterLoginViewDelegate(logoImage: logo)
+        } else {
+            view.delegate = DefaultLoginViewDelegate()
+        }
         return view
     }
 
@@ -146,11 +153,15 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         return RecoverPasswordController()
     }
 
-    func createLoginController() -> LoginController {
-        let configuration = LoginControllerConfiguration(
+    public func createLoginControllerConfiguration() -> LoginControllerConfiguration {
+        return LoginControllerConfiguration(
             viewModel: createLoginViewModel(),
             viewFactory: createLoginView,
             transitionDelegate: self)
+    }
+    
+    public func createLoginController() -> LoginController {
+        let configuration = createLoginControllerConfiguration()
         return LoginController(configuration: configuration)
     }
     

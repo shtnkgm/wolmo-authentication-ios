@@ -13,7 +13,7 @@ import Authentication
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var authenticationBootstrapper: AuthenticationBootstrapper<ExampleUser, ExampleSessionService>?
+    var authenticationBootstrapper: AuthenticationBootstrapper<ExampleUser, ExampleSessionService>!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController
             // swiftlint:enable force_cast
         }
-        authenticationBootstrapper!.bootstrap()
+        authenticationBootstrapper.logoImage = UIImage(named: "agregar_contacto")!
+        authenticationBootstrapper.bootstrap()
         return true
     }
 
