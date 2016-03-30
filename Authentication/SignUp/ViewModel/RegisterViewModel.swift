@@ -26,12 +26,12 @@ protocol RegisterViewModelType {
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
     
+    var termsAndServicesAccepted: MutableProperty<Bool> { get }
+    
+    var toggleTermsAndServicesAcceptanceCocoaAction: CocoaAction { get }
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<RegistrationServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
-    
-    var termsAndServicesAccepted: MutableProperty<Bool> { get }
-    var toggleTermsAndServicesAcceptance: CocoaAction { get }
     
     var nameText: String { get }
     var emailText: String { get }
@@ -85,7 +85,7 @@ public final class RegisterViewModel<User: UserType, RegistrationService: Regist
         }
     }()
     
-    public var toggleTermsAndServicesAcceptance: CocoaAction { return _toggleTermsAndServicesAcceptance.unsafeCocoaAction }
+    public var toggleTermsAndServicesAcceptanceCocoaAction: CocoaAction { return _toggleTermsAndServicesAcceptance.unsafeCocoaAction }
     
     init(registrationService: RegistrationService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
         _registrationService = registrationService
