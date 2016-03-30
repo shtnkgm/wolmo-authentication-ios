@@ -33,10 +33,12 @@ public final class ExampleSessionService: SessionServiceType {
     
     private let _email: String
     private let _password: String
+    private let _registeredAlready: Bool
     
     init(email: String, password: String) {
         _email = email
         _password = password
+        _registeredAlready = false
         currentUser = AnyProperty(initialValue: Optional.None, signal: _currentUser.map { $0 })
         (events, _eventsObserver) = Signal<SessionServiceEvent<ExampleUser>, NoError>.pipe()
     }
@@ -46,16 +48,16 @@ public final class ExampleSessionService: SessionServiceType {
         if email.raw == _email {
             if password == _password {
                 let user = User(email: email.raw, password: password)
-                return successSignalProducer(user, dispatchTime: dispatchTime)
+                return logInSuccessSignalProducer(user, dispatchTime: dispatchTime)
             } else {
-                return failureSignalProducer(dispatchTime)
+                return logInFailureSignalProducer(dispatchTime)
             }
         } else {
-            return failureSignalProducer(dispatchTime)
+            return logInFailureSignalProducer(dispatchTime)
         }
     }
     
-    private func successSignalProducer(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func logInSuccessSignalProducer(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendNext(user)
@@ -67,14 +69,45 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    private func failureSignalProducer(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func logInFailureSignalProducer(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
-                observer.sendFailed(.InvalidCredentials(.None))
+                observer.sendFailed(.InvalidLogInCredentials(.None))
             }
         }.on(failed: { [unowned self] _ in
-            self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
+            self._eventsObserver.sendNext(.LogInError(.InvalidLogInCredentials(.None)))
         })
+    }
+    
+    public func signUp(name: String, _ email: Email, _ password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
+        if email.raw == _email {
+            if _registeredAlready {
+                return signUpFailureSignalProducer(dispatchTime)
+            } else {
+                let user = ExampleUser(email: email.raw, password: password)
+                return signUpSuccessSignalProducer(user, dispatchTime: dispatchTime)
+            }
+        } else {
+            return signUpFailureSignalProducer(dispatchTime)
+        }
+    }
+    
+    private func signUpSuccessSignalProducer(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                observer.sendNext(user)
+                observer.sendCompleted()
+            }
+        }
+    }
+    
+    private func signUpFailureSignalProducer(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                observer.sendFailed(.InvalidSignUpCredentials(.None))
+            }
+        }
     }
     
 }

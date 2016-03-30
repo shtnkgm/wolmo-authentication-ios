@@ -116,7 +116,7 @@ private extension RegisterController {
         signupView.termsAndServicesLabel?.text = _viewModel.termsAndServicesLabelText
         signupView.termsAndServicesButton.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
         //signupView.termsAndServicesButton -> Presents the terms and services
-        signupView.termsAndServicesCheckBoxButton.rex_pressed.value = _viewModel.toggleTermsAndServicesAcceptanceCocoaAction
+        signupView.termsAndServicesCheckBoxButton.rex_pressed.value = _viewModel.toggleTermsAndServicesCocoaAction
         _viewModel.termsAndServicesAccepted.signal.observeNext { [unowned self] in self.signupView.termsAndServicesChecked = $0 }
     }
     

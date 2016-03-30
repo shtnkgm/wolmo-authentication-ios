@@ -34,17 +34,6 @@ public protocol LoginControllerDelegate {
     
 }
 
-public extension SessionServiceError {
-    var message: String {
-        switch self {
-        case .InvalidCredentials(let error):
-            return "login-error.invalid-credentials.message".localized + (error?.localizedDescription ?? "")
-        case .NetworkError(let error):
-            return "login-error.network-error.message".localized + error.localizedDescription
-        }
-    }
-}
-
 extension LoginControllerDelegate {
     
     public func loginControllerWillExecuteLogIn(controller: LoginController) {

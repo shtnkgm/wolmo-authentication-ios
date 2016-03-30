@@ -14,7 +14,7 @@ public protocol RegisterControllerDelegate {
     
     func signupControllerDidExecuteSignUp(controller: RegisterController)
     
-    func signupController(controller: RegisterController, didSignUpWithError error: RegistrationServiceError)
+    func signupController(controller: RegisterController, didSignUpWithError error: SessionServiceError)
     
     func signupControllerDidPassNameValidation(controller: RegisterController)
     
@@ -34,17 +34,6 @@ public protocol RegisterControllerDelegate {
     
 }
 
-public extension RegistrationServiceError {
-    var message: String {
-        switch self {
-        case .InvalidCredentials(let error):
-            return "signup-error.invalid-credentials.message".localized + (error?.localizedDescription ?? "")
-        case .NetworkError(let error):
-            return "signup-error.network-error.message".localized + error.localizedDescription
-        }
-    }
-}
-
 extension RegisterControllerDelegate {
     
     public func signupControllerWillExecuteSignUp(controller: RegisterController) {
@@ -60,7 +49,7 @@ extension RegisterControllerDelegate {
         app.networkActivityIndicatorVisible = false
     }
     
-    public func signupController(controller: RegisterController, didSignUpWithError error: RegistrationServiceError) {
+    public func signupController(controller: RegisterController, didSignUpWithError error: SessionServiceError) {
         controller.signupView.usernameTextFieldValid = false
         controller.signupView.emailTextFieldValid = false
         controller.signupView.passwordTextFieldValid = false

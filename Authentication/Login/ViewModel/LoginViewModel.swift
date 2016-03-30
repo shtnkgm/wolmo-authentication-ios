@@ -62,7 +62,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
                 let password = self.password.value
                 return self._sessionService.logIn(email, password).observeOn(UIScheduler())
             } else {
-                return SignalProducer(error: .InvalidCredentials(.None)).observeOn(UIScheduler())
+                return SignalProducer(error: .InvalidLogInCredentials(.None)).observeOn(UIScheduler())
             }
         }
     }()

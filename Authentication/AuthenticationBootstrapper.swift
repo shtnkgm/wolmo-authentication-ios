@@ -14,8 +14,7 @@ import Foundation
     and after the user logs out.
     The authentication process includes login, signup and recover password logic.
 */
-public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType, RegistrationService: RegistrationServiceType
-        where SessionService.User == User, RegistrationService.User == User> {
+public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
 
     /// The window of the app
     private let _window: UIWindow
@@ -26,7 +25,6 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
-    public let registrationService: RegistrationService
 
     /// The user in session.
     public var currentUser: User? {
@@ -52,7 +50,6 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         _mainViewControllerFactory = mainViewControllerFactory
         _viewConfiguration = viewConfiguration
         self.sessionService = sessionService
-        self.registrationService = registrationService
 
         sessionService.events.observeNext { [unowned self] event in
             switch event {
@@ -92,7 +89,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          Creates the LogInViewModel to use in the authentication process logic,
          with the LogInCredentialsValidator returned in the function createLogInCredentialsValidator.
 
-         - Returns: A login view model that controls the log in logic and comunicates with the session service.
+         - Returns: A login view model that controls the login logic and comunicates with the session service.
 
          - Warning: The LogInViewModel returned must be constructed with the same session service as the
          authentication bootstrapper.
@@ -138,12 +135,29 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          - Attention: Override this method for customizing the
          register controller to be used.
     */
-    public func createRegisterController() -> RegisterController { //todo
-        return RegisterController(viewModel: RegisterViewModel(registrationService: registrationService), registerViewFactory: { return RegisterView() }, delegate: createRegisterControllerDelegate())
+    public func createRegisterController() -> RegisterController {
+        return RegisterController(viewModel: createRegisterViewModel(), registerViewFactory: { return RegisterView() }, delegate: createRegisterControllerDelegate())
     }
     
     /**
-         Creates the register (signup) view controller delegate 
+         Creates the RegisterViewModel to use in the registration process logic,
+         with the SignUpCredentialsValidator returned in the function createSignUpCredentialsValidator.
+         
+         - Returns: A signup view model that controls the registration logic and comunicates with the session service.
+         
+         - Warning: The RegisterViewModel returned must be constructed with the same session service as the
+         authentication bootstrapper.
+     */
+    public func createRegisterViewModel() -> RegisterViewModelType {
+        return RegisterViewModel(sessionService: sessionService, credentialsValidator: createSignUpCredentialsValidator())
+    }
+    
+    public func createSignUpCredentialsValidator() -> SignupCredentialsValidator {
+        return SignupCredentialsValidator()
+    }
+    
+    /**
+         Creates the register (signup) view controller delegate
          that the register controller will use to add behaviour
          to certain events.
          
