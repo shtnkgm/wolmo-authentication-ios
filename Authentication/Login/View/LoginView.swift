@@ -90,7 +90,7 @@ public final class LoginView: UIView, LoginViewType {
     public var logInButton: UIButton { return logInButtonOutlet }
     @IBOutlet weak var logInButtonOutlet: UIButton! {
         didSet {
-            logInButtonOutlet.layer.cornerRadius = 8.0
+            logInButtonOutlet.layer.cornerRadius = 6.0
         }
     }
     
@@ -113,14 +113,14 @@ public final class LoginView: UIView, LoginViewType {
     @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
         didSet {
             passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
-            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 8.0
+            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
         }
     }
     
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
         didSet {
             emailTextFieldViewOutlet.layer.borderWidth = 1
-            emailTextFieldViewOutlet.layer.cornerRadius = 8.0
+            emailTextFieldViewOutlet.layer.cornerRadius = 6.0
         }
     }
     
