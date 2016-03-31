@@ -32,6 +32,7 @@ public protocol LoginViewModelType {
     var emailPlaceholderText: String { get }
     var passwordPlaceholderText: String { get }
     var loginButtonTitle: String { get }
+    var registerLabelText: String { get }
     var registerButtonTitle: String { get }
     var recoverPasswordButtonTitle: String { get }
     var passwordVisibilityButtonTitle: String { get }
@@ -126,6 +127,10 @@ public extension LoginViewModel {
     
     var loginButtonTitle: String {
         return "login-view-model.login-button-title".localized
+    }
+    
+    var registerLabelText: String {
+        return "login-view.to-register-label".localized
     }
     
     var registerButtonTitle: String {

@@ -108,7 +108,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     */
     public func createLoginView() -> LoginViewType {
         let view: LoginView = LoginView.loadFromNib()
-        view.delegate = DefaultLogoSetterLoginViewDelegate(logoImage: logoImage)
+        let config = LoginViewConfiguration(logoImage: logoImage)
+        view.delegate = DefaultLoginViewDelegate(configuration: config)
         return view
     }
 

@@ -156,6 +156,8 @@ private extension LoginController {
         loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
+        
+        loginView.registerLabel.text = _viewModel.registerLabelText
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
         loginView.registerButton.setAction { [unowned self] _ in self._transitionDelegate.loginControllerDidTapOnRegister(self) }
         

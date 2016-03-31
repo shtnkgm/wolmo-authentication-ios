@@ -239,15 +239,20 @@
                                     <rect key="frame" x="0.0" y="0.0" width="536" height="81"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-U7-f9X">
-                                            <rect key="frame" x="234" y="46" width="69" height="20"/>
+                                            <rect key="frame" x="234" y="37" width="69" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="FY4-Rv-sY3"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <state key="normal" title="Regístrese"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="FY4-Rv-sY3"/>
+                                                </mask>
+                                            </variation>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿No tiene usuario?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-m0-zdE">
-                                            <rect key="frame" x="208" y="26" width="120" height="17"/>
+                                            <rect key="frame" x="208" y="22" width="120" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -259,7 +264,7 @@
                                         <constraint firstItem="k1E-m0-zdE" firstAttribute="top" secondItem="d5G-OH-g8x" secondAttribute="top" constant="5" id="QLh-0j-jrW"/>
                                         <constraint firstItem="k1E-m0-zdE" firstAttribute="centerX" secondItem="d5G-OH-g8x" secondAttribute="centerX" id="aQh-ct-qOi"/>
                                         <constraint firstAttribute="top" secondItem="cxB-U7-f9X" secondAttribute="top" id="cIy-gZ-oIo"/>
-                                        <constraint firstItem="cxB-U7-f9X" firstAttribute="top" secondItem="k1E-m0-zdE" secondAttribute="bottom" constant="3" id="m1U-kp-UxZ"/>
+                                        <constraint firstItem="cxB-U7-f9X" firstAttribute="top" secondItem="k1E-m0-zdE" secondAttribute="bottom" constant="-2" id="m1U-kp-UxZ"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cxB-U7-f9X" secondAttribute="bottom" constant="10" id="zQq-Rk-4SE"/>
                                         <constraint firstItem="cxB-U7-f9X" firstAttribute="centerX" secondItem="d5G-OH-g8x" secondAttribute="centerX" id="zSE-s3-Kfb"/>
                                     </constraints>

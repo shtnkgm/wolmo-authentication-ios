@@ -32,6 +32,7 @@ public protocol LoginViewType: Renderable {
     var logInButton: UIButton { get }
     var logInErrorLabel: UILabel? { get }
     
+    var registerLabel: UILabel { get }
     var registerButton: UIButton { get }
     var recoverPasswordButton: UIButton { get }
     
@@ -128,11 +129,8 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
-    @IBOutlet weak var toRegisterLabel: UILabel! {
-        didSet {
-            toRegisterLabel.text = "login-view.to-register-label".localized
-        }
-    }
+    public var registerLabel: UILabel { return toRegisterLabel }
+    @IBOutlet weak var toRegisterLabel: UILabel!
     
     @IBOutlet var emailErrorsHeightConstraint: NSLayoutConstraint!      // not weak
     @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
@@ -140,54 +138,66 @@ public final class LoginView: UIView, LoginViewType {
     
     public var emailTextFieldValid: Bool = true {
         didSet {
-            let color: CGColor
-            if emailTextFieldValid {
-                color = UIColor.clearColor().CGColor
+            if !emailTextFieldSelected {
+                let color: CGColor
+                if emailTextFieldValid {
+                    color = delegate.colourPalette.textfieldsNormal.CGColor
+                    emailErrorsHeightConstraint.constant = 0
+                    emailErrorsHeightConstraint.active = true
+                } else {
+                    color = delegate.colourPalette.textfieldsError.CGColor
+                    emailErrorsHeightConstraint.active = false
+                }
+                emailTextFieldViewOutlet.layer.borderColor = color
+            } else {
                 emailErrorsHeightConstraint.constant = 0
                 emailErrorsHeightConstraint.active = true
-            } else if !emailTextFieldSelected {
-                color = UIColor.redColor().CGColor
-            } else {
-                color = UIColor.clearColor().CGColor
             }
-            emailTextFieldViewOutlet.layer.borderColor = color
         }
     }
     
     public var emailTextFieldSelected: Bool = false {
         didSet {
             if emailTextFieldSelected {
-                emailTextFieldValid = true
-            } else if !emailTextFieldValid {
-                emailTextFieldValid = false
-                emailErrorsHeightConstraint.active = false
+                emailTextFieldViewOutlet.layer.borderColor = delegate.colourPalette.textfieldsSelected.CGColor
+                emailErrorsHeightConstraint.constant = 0
+                emailErrorsHeightConstraint.active = true
+            } else {
+                let valid = emailTextFieldValid
+                emailTextFieldValid = valid
             }
         }
     }
     
     public var passwordTextFieldValid: Bool = true {
         didSet {
-            let color: CGColor
-            if passwordTextFieldValid {
-                color = UIColor.clearColor().CGColor
+            if !passwordTextFieldSelected {
+                let color: CGColor
+                if passwordTextFieldValid {
+                    color = delegate.colourPalette.textfieldsNormal.CGColor
+                    passwordErrorsHeightConstraint.constant = 0
+                    passwordErrorsHeightConstraint.active = true
+                } else {
+                    color = delegate.colourPalette.textfieldsError.CGColor
+                    passwordErrorsHeightConstraint.active = false
+                }
+                passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
+            } else {
                 passwordErrorsHeightConstraint.constant = 0
                 passwordErrorsHeightConstraint.active = true
-            } else if !passwordTextFieldSelected {
-                color = UIColor.redColor().CGColor
-            } else {
-                color = UIColor.clearColor().CGColor
             }
-            passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
         }
     }
     
     public var passwordTextFieldSelected = false {
         didSet {
             if passwordTextFieldSelected {
-                passwordTextFieldValid = true
-            } else if !passwordTextFieldValid {
-                passwordTextFieldValid = false
-                passwordErrorsHeightConstraint.active = false
+                passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colourPalette.textfieldsSelected.CGColor
+                passwordErrorsHeightConstraint.constant = 0
+                passwordErrorsHeightConstraint.active = true
+            } else {
+                let valid = passwordTextFieldValid
+                passwordTextFieldValid = valid
             }
         }
     }
@@ -196,9 +206,9 @@ public final class LoginView: UIView, LoginViewType {
         didSet {
             let color: UIColor
             if logInButtonEnabled {
-                color = UIColor(hexString: "#f5a623ff")!
+                color = delegate.colourPalette.logInButtonEnabled
             } else {
-                color = UIColor(hexString: "#d8d8d8ff")!
+                color =  delegate.colourPalette.logInButtonDisabled
             }
             logInButton.backgroundColor = color
         }
@@ -208,9 +218,9 @@ public final class LoginView: UIView, LoginViewType {
         didSet {
             let color: UIColor
             if logInButtonPressed {
-                color = UIColor(hexString: "#e78f00ff")!
+                color =  delegate.colourPalette.logInButtonExecuted
             } else {
-                color = UIColor(hexString: "#f5a623ff")!
+                color =  delegate.colourPalette.logInButtonEnabled
             }
             logInButton.backgroundColor = color
         }
@@ -219,11 +229,12 @@ public final class LoginView: UIView, LoginViewType {
     public var showPassword: Bool = false {
         didSet {
             // Changing enabled property for the
-            // font setting to take effect.
+            // font setting to take effect, which is
+            // necessary for it not to shrink.
             passwordTextField.enabled = false
             passwordTextField.secureTextEntry = !showPassword
             passwordTextField.enabled = true
-            passwordTextField.font = UIFont.systemFontOfSize(14)
+            passwordTextField.font = delegate.fontPalette.textfields
         }
     }
     
