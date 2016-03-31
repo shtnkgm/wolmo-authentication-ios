@@ -130,12 +130,17 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
+    @IBOutlet var emailErrorsHeightConstraint: NSLayoutConstraint!      // not weak
+    @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
+
     
     public var emailTextFieldValid: Bool = true {
         didSet {
             let color: CGColor
             if emailTextFieldValid {
                 color = UIColor.clearColor().CGColor
+                emailErrorsHeightConstraint.constant = 0
+                emailErrorsHeightConstraint.active = true
             } else {
                 color = UIColor.redColor().CGColor
             }
@@ -143,13 +148,24 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
-    public var emailTextFieldSelected: Bool = false
+    public var emailTextFieldSelected: Bool = false {
+        didSet {
+            if emailTextFieldSelected {
+                emailErrorsHeightConstraint.constant = 0
+                emailErrorsHeightConstraint.active = true
+            } else if !emailTextFieldValid {
+                emailErrorsHeightConstraint.active = false
+            }
+        }
+    }
     
     public var passwordTextFieldValid: Bool = true {
         didSet {
             let color: CGColor
             if passwordTextFieldValid {
                 color = UIColor.clearColor().CGColor
+                passwordErrorsHeightConstraint.constant = 0
+                passwordErrorsHeightConstraint.active = true
             } else {
                 color = UIColor.redColor().CGColor
             }
@@ -157,8 +173,17 @@ public final class LoginView: UIView, LoginViewType {
         }
     }
     
-    public var passwordTextFieldSelected = false
-
+    public var passwordTextFieldSelected = false {
+        didSet {
+            if passwordTextFieldSelected {
+                passwordErrorsHeightConstraint.constant = 0
+                passwordErrorsHeightConstraint.active = true
+            } else if !passwordTextFieldValid {
+                passwordErrorsHeightConstraint.active = false
+            }
+        }
+    }
+    
     public var logInButtonEnabled: Bool = true {
         didSet {
             let alpha: CGFloat
@@ -199,6 +224,8 @@ public final class LoginView: UIView, LoginViewType {
         
         emailTextFieldValid = true
         passwordTextFieldValid = true
+        emailTextFieldSelected = false
+        passwordTextFieldSelected = false
         logInButtonEnabled = false
         showPassword = false
         

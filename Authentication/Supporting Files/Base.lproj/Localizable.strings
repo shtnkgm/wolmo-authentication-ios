@@ -30,7 +30,7 @@
 
 /* LogIn error alert */
 "login-error.alert.title" = "Unable to log in";
-"login-error.alert.close" = "Okay";
+"login-error.alert.close" = "Try again";
 
 
 /* Signup UI elements titles */

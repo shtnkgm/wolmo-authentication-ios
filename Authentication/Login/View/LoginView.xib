@@ -41,7 +41,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOh-Ac-Urc" userLabel="View Email">
                             <rect key="frame" x="0.0" y="0.0" width="536" height="55"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmO-qG-jdH" userLabel="View TexField">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmO-qG-jdH" userLabel="View TextField">
                                     <rect key="frame" x="0.0" y="0.0" width="536" height="40"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nph-gf-vkr">
@@ -92,39 +92,22 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="ZAD-1z-Cfs" firstAttribute="top" relation="greaterThanOrEqual" secondItem="UDu-Ke-6e4" secondAttribute="top" id="A0E-ih-FCO"/>
-                                        <constraint firstAttribute="centerY" secondItem="ZAD-1z-Cfs" secondAttribute="centerY" id="Dah-Lg-XGM"/>
                                         <constraint firstItem="ZAD-1z-Cfs" firstAttribute="leading" secondItem="UDu-Ke-6e4" secondAttribute="leading" constant="10" id="Qsj-FM-b0f"/>
                                         <constraint firstItem="ZAD-1z-Cfs" firstAttribute="top" secondItem="UDu-Ke-6e4" secondAttribute="top" id="ZVT-ws-W7S"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZAD-1z-Cfs" secondAttribute="bottom" id="qEx-wd-BPa"/>
+                                        <constraint firstAttribute="height" constant="15" id="pmR-wc-7xz"/>
                                         <constraint firstAttribute="bottom" secondItem="ZAD-1z-Cfs" secondAttribute="bottom" id="zZg-NM-yQg"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="A0E-ih-FCO"/>
-                                            <exclude reference="Dah-Lg-XGM"/>
-                                            <exclude reference="qEx-wd-BPa"/>
-                                        </mask>
-                                    </variation>
                                 </view>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="mmO-qG-jdH" firstAttribute="leading" secondItem="fOh-Ac-Urc" secondAttribute="leading" id="Au5-wt-Ktz"/>
-                                <constraint firstItem="UDu-Ke-6e4" firstAttribute="top" secondItem="mmO-qG-jdH" secondAttribute="bottom" id="IUT-ac-3DA"/>
-                                <constraint firstItem="UDu-Ke-6e4" firstAttribute="height" secondItem="mmO-qG-jdH" secondAttribute="height" id="JG1-qd-7IL"/>
-                                <constraint firstItem="mmO-qG-jdH" firstAttribute="top" secondItem="fOh-Ac-Urc" secondAttribute="top" id="JNz-yD-Z6k"/>
-                                <constraint firstAttribute="bottom" secondItem="UDu-Ke-6e4" secondAttribute="bottom" id="N05-QE-qvS"/>
+                                <constraint firstItem="UDu-Ke-6e4" firstAttribute="top" secondItem="mmO-qG-jdH" secondAttribute="bottom" identifier="$EmailTextFieldBOTTOMtoErrorsTOP$" id="IUT-ac-3DA"/>
+                                <constraint firstItem="mmO-qG-jdH" firstAttribute="top" secondItem="fOh-Ac-Urc" secondAttribute="top" identifier="$EmailTextFieldTOP$" id="JNz-yD-Z6k"/>
+                                <constraint firstAttribute="bottom" secondItem="UDu-Ke-6e4" secondAttribute="bottom" identifier="$EmailErrorBOTTOM$" id="N05-QE-qvS"/>
                                 <constraint firstItem="UDu-Ke-6e4" firstAttribute="leading" secondItem="fOh-Ac-Urc" secondAttribute="leading" id="T6u-fl-qhl"/>
                                 <constraint firstAttribute="trailing" secondItem="mmO-qG-jdH" secondAttribute="trailing" id="fxd-0y-Dxh"/>
-                                <constraint firstItem="UDu-Ke-6e4" firstAttribute="top" secondItem="mmO-qG-jdH" secondAttribute="bottom" id="lmr-VD-JGU"/>
                                 <constraint firstAttribute="trailing" secondItem="UDu-Ke-6e4" secondAttribute="trailing" id="rIa-fz-opW"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="JG1-qd-7IL"/>
-                                    <exclude reference="lmr-VD-JGU"/>
-                                </mask>
-                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="biK-V3-UKv" userLabel="View Password">
                             <rect key="frame" x="0.0" y="55" width="536" height="55"/>
@@ -163,16 +146,10 @@
                                     <constraints>
                                         <constraint firstItem="1xR-de-3a1" firstAttribute="centerX" secondItem="BHv-O5-QdK" secondAttribute="centerX" id="Myq-Fe-Pgb"/>
                                         <constraint firstAttribute="trailing" secondItem="1xR-de-3a1" secondAttribute="trailing" constant="25" id="YoM-ka-uSL"/>
-                                        <constraint firstItem="1xR-de-3a1" firstAttribute="centerY" secondItem="BHv-O5-QdK" secondAttribute="centerY" id="gDV-qx-EYe"/>
                                         <constraint firstAttribute="bottom" secondItem="1xR-de-3a1" secondAttribute="bottom" constant="5" id="joT-e6-285"/>
                                         <constraint firstItem="1xR-de-3a1" firstAttribute="leading" secondItem="BHv-O5-QdK" secondAttribute="leading" constant="25" id="mHU-io-Pu3"/>
                                         <constraint firstItem="1xR-de-3a1" firstAttribute="top" secondItem="BHv-O5-QdK" secondAttribute="top" constant="5" id="oJn-s6-JHM"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="gDV-qx-EYe"/>
-                                        </mask>
-                                    </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqr-9d-BLN" userLabel="View Errors">
                                     <rect key="frame" x="0.0" y="40" width="536" height="15"/>
@@ -193,38 +170,23 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="GLr-di-9jk" secondAttribute="bottom" id="GNw-FI-Ygs"/>
                                         <constraint firstItem="GLr-di-9jk" firstAttribute="top" secondItem="cqr-9d-BLN" secondAttribute="top" id="GmF-06-2ok"/>
-                                        <constraint firstAttribute="centerY" secondItem="GLr-di-9jk" secondAttribute="centerY" id="KTC-lx-MBp"/>
+                                        <constraint firstAttribute="height" constant="15" id="Gwq-1q-G2U"/>
                                         <constraint firstItem="GLr-di-9jk" firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" constant="10" id="RMI-fM-eu7"/>
-                                        <constraint firstItem="GLr-di-9jk" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cqr-9d-BLN" secondAttribute="top" id="RhK-ne-6kN"/>
                                         <constraint firstAttribute="bottom" secondItem="GLr-di-9jk" secondAttribute="bottom" id="UFF-Yq-LcS"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="GLr-di-9jk" secondAttribute="trailing" constant="10" id="pYh-Pc-6qA"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="GNw-FI-Ygs"/>
-                                            <exclude reference="KTC-lx-MBp"/>
-                                            <exclude reference="RhK-ne-6kN"/>
-                                        </mask>
-                                    </variation>
                                 </view>
                             </subviews>
                             <constraints>
-                                <constraint firstItem="cqr-9d-BLN" firstAttribute="height" secondItem="BHv-O5-QdK" secondAttribute="height" id="0j8-gz-Pa1"/>
-                                <constraint firstItem="cqr-9d-BLN" firstAttribute="top" secondItem="BHv-O5-QdK" secondAttribute="bottom" id="Eey-a6-eaX"/>
+                                <constraint firstItem="cqr-9d-BLN" firstAttribute="top" secondItem="BHv-O5-QdK" secondAttribute="bottom" identifier="$PasswordTextFieldBOTTOMtoErrorsTOP$" id="Eey-a6-eaX"/>
                                 <constraint firstAttribute="trailing" secondItem="cqr-9d-BLN" secondAttribute="trailing" id="HPK-FR-JYL"/>
                                 <constraint firstItem="BHv-O5-QdK" firstAttribute="top" secondItem="biK-V3-UKv" secondAttribute="top" id="Je2-dq-aqy"/>
                                 <constraint firstItem="BHv-O5-QdK" firstAttribute="leading" secondItem="biK-V3-UKv" secondAttribute="leading" id="RF9-Kd-g9M"/>
-                                <constraint firstAttribute="bottom" secondItem="cqr-9d-BLN" secondAttribute="bottom" id="lA2-KP-rQ7"/>
+                                <constraint firstAttribute="bottom" secondItem="cqr-9d-BLN" secondAttribute="bottom" identifier="$PasswordErrorBOTTOM$" id="lA2-KP-rQ7"/>
                                 <constraint firstAttribute="trailing" secondItem="BHv-O5-QdK" secondAttribute="trailing" id="pzu-ev-jC0"/>
                                 <constraint firstAttribute="leading" secondItem="cqr-9d-BLN" secondAttribute="leading" id="vhY-7V-hkn"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="0j8-gz-Pa1"/>
-                                </mask>
-                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PIp-l7-LQy" userLabel="View Recover Password">
                             <rect key="frame" x="0.0" y="110" width="536" height="40"/>
@@ -236,33 +198,21 @@
                                 </button>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="top" secondItem="6sL-Hy-vEE" secondAttribute="top" constant="5" id="5Af-Og-iBu"/>
                                 <constraint firstItem="6sL-Hy-vEE" firstAttribute="centerY" secondItem="PIp-l7-LQy" secondAttribute="centerY" id="8vL-ot-8mA"/>
                                 <constraint firstItem="6sL-Hy-vEE" firstAttribute="top" secondItem="PIp-l7-LQy" secondAttribute="top" constant="5" id="ZWJ-Nx-hib"/>
                                 <constraint firstAttribute="bottom" secondItem="6sL-Hy-vEE" secondAttribute="bottom" constant="5" id="nlt-0j-Im7"/>
-                                <constraint firstItem="6sL-Hy-vEE" firstAttribute="leading" secondItem="PIp-l7-LQy" secondAttribute="leadingMargin" constant="15" id="ti6-as-OtM"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="5Af-Og-iBu"/>
-                                    <exclude reference="ti6-as-OtM"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="PIp-l7-LQy" secondAttribute="bottom" id="2IS-wF-8IP"/>
                         <constraint firstItem="fOh-Ac-Urc" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="C73-lx-hkC"/>
-                        <constraint firstItem="6sL-Hy-vEE" firstAttribute="trailing" secondItem="BHv-O5-QdK" secondAttribute="trailing" id="CBd-yf-eCb"/>
                         <constraint firstItem="fOh-Ac-Urc" firstAttribute="top" secondItem="1rE-7v-geU" secondAttribute="top" id="GYH-Gi-Vcw"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="IE0-sh-sDd"/>
-                        <constraint firstItem="PIp-l7-LQy" firstAttribute="height" secondItem="fOh-Ac-Urc" secondAttribute="height" multiplier="1/3" id="JcD-W7-ygf"/>
                         <constraint firstItem="PIp-l7-LQy" firstAttribute="top" secondItem="biK-V3-UKv" secondAttribute="bottom" id="LG9-XP-3Ww"/>
-                        <constraint firstItem="6sL-Hy-vEE" firstAttribute="trailing" secondItem="GLr-di-9jk" secondAttribute="trailing" id="LkP-oW-QRe"/>
-                        <constraint firstItem="biK-V3-UKv" firstAttribute="height" secondItem="fOh-Ac-Urc" secondAttribute="height" id="O1a-zZ-Dbn"/>
                         <constraint firstItem="biK-V3-UKv" firstAttribute="leading" secondItem="1rE-7v-geU" secondAttribute="leading" id="RKa-Di-Ucc"/>
                         <constraint firstItem="GLr-di-9jk" firstAttribute="trailing" secondItem="ZAD-1z-Cfs" secondAttribute="trailing" id="SM4-1X-8wb"/>
-                        <constraint firstItem="PIp-l7-LQy" firstAttribute="top" secondItem="biK-V3-UKv" secondAttribute="bottom" id="b8d-mQ-Mha"/>
+                        <constraint firstItem="mmO-qG-jdH" firstAttribute="height" secondItem="BHv-O5-QdK" secondAttribute="height" id="TAv-Lz-2T9"/>
                         <constraint firstAttribute="trailing" secondItem="PIp-l7-LQy" secondAttribute="trailing" id="fAc-iM-Ya6"/>
                         <constraint firstItem="2dd-3i-SpJ" firstAttribute="height" secondItem="n6d-h8-UK6" secondAttribute="height" id="fZY-MU-PVj"/>
                         <constraint firstAttribute="trailing" secondItem="fOh-Ac-Urc" secondAttribute="trailing" id="k96-bH-6lb"/>
@@ -272,14 +222,6 @@
                         <constraint firstItem="1xR-de-3a1" firstAttribute="trailing" secondItem="Nph-gf-vkr" secondAttribute="trailing" id="vYc-U8-4wt"/>
                         <constraint firstItem="6sL-Hy-vEE" firstAttribute="trailing" secondItem="1xR-de-3a1" secondAttribute="trailing" id="zEC-DZ-oFp"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="JcD-W7-ygf"/>
-                            <exclude reference="b8d-mQ-Mha"/>
-                            <exclude reference="CBd-yf-eCb"/>
-                            <exclude reference="LkP-oW-QRe"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5vG-Dj-ID2" userLabel="View Log in">
                     <rect key="frame" x="0.0" y="407" width="536" height="257"/>
@@ -424,12 +366,14 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="emailErrorsHeightConstraint" destination="pmR-wc-7xz" id="You-hk-GHR"/>
                 <outlet property="emailTextFieldOutlet" destination="n6d-h8-UK6" id="MSO-qq-Uh1"/>
                 <outlet property="emailTextFieldViewOutlet" destination="Nph-gf-vkr" id="3Ah-I6-lnl"/>
                 <outlet property="emailValidationMessageLabelOutlet" destination="ZAD-1z-Cfs" id="LTO-At-YO7"/>
                 <outlet property="logInButtonOutlet" destination="hiI-H5-iJW" id="UMz-QM-poS"/>
                 <outlet property="logInErrorLabelOutlet" destination="5B8-U1-3A4" id="VYs-zp-vgB"/>
                 <outlet property="logoImageViewOutlet" destination="m8f-j5-qTM" id="rao-6w-s5e"/>
+                <outlet property="passwordErrorsHeightConstraint" destination="Gwq-1q-G2U" id="Sg0-ZN-srU"/>
                 <outlet property="passwordTextFieldAndButtonViewOutlet" destination="1xR-de-3a1" id="JUr-nU-p3i"/>
                 <outlet property="passwordTextFieldOutlet" destination="2dd-3i-SpJ" id="Zzp-gZ-3Iq"/>
                 <outlet property="passwordValidationMessageLabelOutlet" destination="GLr-di-9jk" id="UEW-6E-QDi"/>
