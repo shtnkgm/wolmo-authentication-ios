@@ -96,6 +96,7 @@ private extension LoginController {
             } else {
                 self._delegate.loginControllerDidExecuteLogIn(self)
             }
+            self.loginView.logInButtonPressed = executing
         }
         
         _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.loginController(self, didLogInWithError: $0) }
@@ -155,7 +156,6 @@ private extension LoginController {
         loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
-        
         loginView.registerButton.setTitle(_viewModel.registerButtonTitle, forState: .Normal)
         loginView.registerButton.setAction { [unowned self] _ in self._transitionDelegate.loginControllerDidTapOnRegister(self) }
         

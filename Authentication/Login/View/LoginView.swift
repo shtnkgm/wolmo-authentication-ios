@@ -190,25 +190,25 @@ public final class LoginView: UIView, LoginViewType {
     
     public var logInButtonEnabled: Bool = true {
         didSet {
-            let alpha: CGFloat
+            let color: UIColor
             if logInButtonEnabled {
-                alpha = 1.0
+                color = UIColor(hexString: "#f5a623ff")!
             } else {
-                alpha = 0.5
+                color = UIColor(hexString: "#d8d8d8ff")!
             }
-            logInButton.alpha = alpha
+            logInButton.backgroundColor = color
         }
     }
     
     public var logInButtonPressed = false {
         didSet {
-            let alpha: CGFloat
+            let color: UIColor
             if logInButtonPressed {
-                alpha = 1.5
+                color = UIColor(hexString: "#e78f00ff")!
             } else {
-                alpha = 1.0
+                color = UIColor(hexString: "#f5a623ff")!
             }
-            logInButton.alpha = alpha
+            logInButton.backgroundColor = color
         }
     }
     
