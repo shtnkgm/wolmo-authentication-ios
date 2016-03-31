@@ -121,7 +121,13 @@ private extension LoginController {
     }
     
     func bindPasswordElements() {
-        _viewModel.password <~ loginView.passwordTextField.rex_textSignal
+        _viewModel.password <~ loginView.passwordTextField.rex_textSignal.on(next: { [unowned self] text in
+            if text.isEmpty {
+                self.loginView.passwordVisibilityButton?.hidden = true
+            } else {
+                self.loginView.passwordVisibilityButton?.hidden = false
+            }
+        })
         if let label = loginView.passwordLabel {
             label.text = _viewModel.passwordText
         }

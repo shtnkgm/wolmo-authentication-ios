@@ -85,7 +85,11 @@ public final class LoginView: UIView, LoginViewType {
     }
     
     public var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
-    @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton!
+    @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
+        didSet {
+            passwordVisibilityButtonOutlet.hidden = true
+        }
+    }
     
     public var logInButton: UIButton { return logInButtonOutlet }
     @IBOutlet weak var logInButtonOutlet: UIButton! {
