@@ -145,8 +145,10 @@ public final class LoginView: UIView, LoginViewType {
                 color = UIColor.clearColor().CGColor
                 emailErrorsHeightConstraint.constant = 0
                 emailErrorsHeightConstraint.active = true
-            } else {
+            } else if !emailTextFieldSelected {
                 color = UIColor.redColor().CGColor
+            } else {
+                color = UIColor.clearColor().CGColor
             }
             emailTextFieldViewOutlet.layer.borderColor = color
         }
@@ -155,9 +157,9 @@ public final class LoginView: UIView, LoginViewType {
     public var emailTextFieldSelected: Bool = false {
         didSet {
             if emailTextFieldSelected {
-                emailErrorsHeightConstraint.constant = 0
-                emailErrorsHeightConstraint.active = true
+                emailTextFieldValid = true
             } else if !emailTextFieldValid {
+                emailTextFieldValid = false
                 emailErrorsHeightConstraint.active = false
             }
         }
@@ -170,8 +172,10 @@ public final class LoginView: UIView, LoginViewType {
                 color = UIColor.clearColor().CGColor
                 passwordErrorsHeightConstraint.constant = 0
                 passwordErrorsHeightConstraint.active = true
-            } else {
+            } else if !passwordTextFieldSelected {
                 color = UIColor.redColor().CGColor
+            } else {
+                color = UIColor.clearColor().CGColor
             }
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
         }
@@ -180,9 +184,9 @@ public final class LoginView: UIView, LoginViewType {
     public var passwordTextFieldSelected = false {
         didSet {
             if passwordTextFieldSelected {
-                passwordErrorsHeightConstraint.constant = 0
-                passwordErrorsHeightConstraint.active = true
+                passwordTextFieldValid = true
             } else if !passwordTextFieldValid {
+                passwordTextFieldValid = false
                 passwordErrorsHeightConstraint.active = false
             }
         }
