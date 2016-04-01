@@ -206,9 +206,9 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet {
             let color: UIColor
             if logInButtonEnabled {
-                color = delegate.colourPalette.logInButtonEnabled
+                color = delegate.colourPalette.mainButtonEnabled
             } else {
-                color =  delegate.colourPalette.logInButtonDisabled
+                color =  delegate.colourPalette.mainButtonDisabled
             }
             logInButton.backgroundColor = color
         }
@@ -218,9 +218,9 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet {
             let color: UIColor
             if logInButtonPressed {
-                color =  delegate.colourPalette.logInButtonExecuted
+                color =  delegate.colourPalette.mainButtonExecuted
             } else {
-                color =  delegate.colourPalette.logInButtonEnabled
+                color =  delegate.colourPalette.mainButtonEnabled
             }
             logInButton.backgroundColor = color
             emailErrorsHeightConstraint.constant = 0

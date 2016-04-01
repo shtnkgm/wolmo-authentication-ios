@@ -33,6 +33,11 @@ class LoginViewControllerSpec: QuickSpec {
                 loginC = LoginController(configuration: configuration)
                 loginC.viewDidLoad()
             }
+            
+            afterEach() {
+                expect(loginC).to(beNil(), description: "Retain cycle detected in LoginController")
+            }
+            
             /*
             it("basic example") {
                 let button = UIButton(frame: CGRectZero)

@@ -17,9 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
+        let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "agregar_contacto"))
+        
         authenticationBootstrapper = AuthenticationBootstrapper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"),
+<<<<<<< HEAD
             window: window!, viewConfiguration: DefaultLoginViewConfiguration(logoImage: UIImage(named: "agregar_contacto"))) {
+=======
+            window: window!, viewConfiguration: AuthenticationViewConfiguration(loginViewConfiguration: loginConfiguration)) {
+>>>>>>> Finished configuration details. Made colour and font palettes same for both views. Finished register view delegate and its configuration. Added missing configuration in login view delegate as well.
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // swiftlint:disable force_cast
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController

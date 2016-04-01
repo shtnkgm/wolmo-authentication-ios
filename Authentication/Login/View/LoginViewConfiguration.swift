@@ -13,7 +13,6 @@ public protocol LoginViewConfigurationType {
     var logoImage: UIImage? { get }
     var colourPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
-
     
 }
 

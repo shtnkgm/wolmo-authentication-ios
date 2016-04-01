@@ -21,7 +21,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     /// The factory method from which to obtain a main View Controller for the app
     private let _mainViewControllerFactory: () -> UIViewController
     /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
-    private let _viewConfiguration: LoginViewConfigurationType
+    private let _viewConfiguration: AuthenticationViewConfiguration
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
@@ -44,7 +44,9 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Returns: A new authentication bootstrapper ready to use for starting your app as needed.
     */
 // swiftlint:disable valid_docs
-    public init(sessionService: SessionService, window: UIWindow, viewConfiguration: LoginViewConfigurationType = DefaultLoginViewConfiguration(), mainViewControllerFactory: () -> UIViewController) {
+    public init(sessionService: SessionService, window: UIWindow,
+        viewConfiguration: AuthenticationViewConfiguration = AuthenticationViewConfiguration(),
+        mainViewControllerFactory: () -> UIViewController) {
 // swiftlint:enable valid_docs
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
@@ -108,7 +110,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     */
     public func createLoginView() -> LoginViewType {
         let view: LoginView = LoginView.loadFromNib()
-        view.delegate = DefaultLoginViewDelegate(configuration: _viewConfiguration)
+        view.delegate = DefaultLoginViewDelegate(configuration: _viewConfiguration.loginConfiguration)
         return view
     }
 
@@ -136,7 +138,13 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          register controller to be used.
     */
     public func createRegisterController() -> RegisterController {
-        return RegisterController(viewModel: createRegisterViewModel(), registerViewFactory: { return RegisterView() }, delegate: createRegisterControllerDelegate())
+        return RegisterController(viewModel: createRegisterViewModel(), registerViewFactory: createRegisterView, delegate: createRegisterControllerDelegate())
+    }
+    
+    public func createRegisterView() -> RegisterView {
+        let view = RegisterView()
+        view.delegate = DefaultRegisterViewDelegate(configuration: _viewConfiguration.signupConfiguration)
+        return view
     }
     
     /**

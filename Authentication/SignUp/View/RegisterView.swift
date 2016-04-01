@@ -59,6 +59,8 @@ public extension RegisterViewType where Self: UIView {
 
 public final class RegisterView: UIView, RegisterViewType {
     
+    public lazy var delegate: RegisterViewDelegate = DefaultRegisterViewDelegate()
+    
     //TODO return real objects
     public var usernameLabel: UILabel? { return .None }
     public var usernameTextField: UITextField? { return .None }
@@ -96,6 +98,8 @@ public final class RegisterView: UIView, RegisterViewType {
     public var registerButtonPressed: Bool = false
     
     public func render() {
+        
+        delegate.configureView(self)
         
     }
     
