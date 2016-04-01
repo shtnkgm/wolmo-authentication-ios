@@ -10,6 +10,8 @@ import Foundation
 
 public protocol RegisterControllerDelegate {
     
+    func shouldDisplaySignupErrorWithAlert() -> Bool
+    
     func signupControllerWillExecuteSignUp(controller: RegisterController)
     
     func signupControllerDidExecuteSignUp(controller: RegisterController)
@@ -36,6 +38,10 @@ public protocol RegisterControllerDelegate {
 
 extension RegisterControllerDelegate {
     
+    public func shouldDisplaySignupErrorWithAlert() -> Bool {
+        return true
+    }
+    
     public func signupControllerWillExecuteSignUp(controller: RegisterController) {
         if let errorLabel = controller.signupView.registerErrorLabel {
             errorLabel.text = " "
@@ -54,10 +60,12 @@ extension RegisterControllerDelegate {
         controller.signupView.emailTextFieldValid = false
         controller.signupView.passwordTextFieldValid = false
         controller.signupView.passwordConfirmationTextFieldValid = false
+        controller.signupView.registerButtonPressed = false
         
         if let errorLabel = controller.signupView.registerErrorLabel {
             errorLabel.text = error.message
-        } else {
+        }
+        if shouldDisplaySignupErrorWithAlert() {
             let alert = UIAlertController(title: "signup-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "signup-error.alert.close", style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)

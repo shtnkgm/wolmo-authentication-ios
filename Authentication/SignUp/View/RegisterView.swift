@@ -12,20 +12,20 @@ public protocol RegisterViewType: Renderable {
  
     var view: UIView { get }
     
-    var usernameLabel: UILabel { get }
-    var usernameTextField: UITextField { get }
+    var usernameLabel: UILabel? { get }
+    var usernameTextField: UITextField? { get }
     var usernameValidationMessageLabel: UILabel? { get }
     
-    var emailLabel: UILabel { get }
+    var emailLabel: UILabel? { get }
     var emailTextField: UITextField { get }
     var emailValidationMessageLabel: UILabel? { get }
     
-    var passwordLabel: UILabel { get }
+    var passwordLabel: UILabel? { get }
     var passwordTextField: UITextField { get }
     var passwordValidationMessageLabel: UILabel? { get }
     var passwordVisibilityButton: UIButton? { get }
     
-    var passwordConfirmLabel: UILabel { get }
+    var passwordConfirmLabel: UILabel? { get }
     var passwordConfirmTextField: UITextField { get }
     var passwordConfirmValidationMessageLabel: UILabel? { get }
     var passwordConfirmVisibilityButton: UIButton? { get }
@@ -34,7 +34,7 @@ public protocol RegisterViewType: Renderable {
     var registerErrorLabel: UILabel? { get }
     
     var termsAndServicesButton: UIButton { get }
-    var termsAndServicesLabel: UILabel { get }
+    var termsAndServicesLabel: UILabel? { get }
     
     var usernameTextFieldValid: Bool { get set }
     var usernameTextFieldSelected: Bool { get set }
@@ -45,6 +45,7 @@ public protocol RegisterViewType: Renderable {
     var passwordConfirmationTextFieldValid: Bool { get set }
     var passwordConfirmationTextFieldSelected: Bool { get set }
     var registerButtonEnabled: Bool { get set }
+    var registerButtonPressed: Bool { get set }
     
 }
 
@@ -59,20 +60,20 @@ public extension RegisterViewType where Self: UIView {
 public final class RegisterView: UIView, RegisterViewType {
     
     //TODO return real objects
-    public var usernameLabel: UILabel { return UILabel() }
-    public var usernameTextField: UITextField { return UITextField() }
+    public var usernameLabel: UILabel? { return .None }
+    public var usernameTextField: UITextField? { return .None }
     public var usernameValidationMessageLabel: UILabel? { return .None }
     
-    public var emailLabel: UILabel { return UILabel() }
+    public var emailLabel: UILabel? { return .None }
     public var emailTextField: UITextField { return UITextField() }
     public var emailValidationMessageLabel: UILabel? { return .None }
     
-    public var passwordLabel: UILabel { return UILabel() }
+    public var passwordLabel: UILabel? { return .None }
     public var passwordTextField: UITextField { return UITextField() }
     public var passwordValidationMessageLabel: UILabel? { return .None }
     public var passwordVisibilityButton: UIButton? { return .None }
     
-    public var passwordConfirmLabel: UILabel { return UILabel() }
+    public var passwordConfirmLabel: UILabel? { return .None }
     public var passwordConfirmTextField: UITextField { return UITextField() }
     public var passwordConfirmValidationMessageLabel: UILabel? { return .None }
     public var passwordConfirmVisibilityButton: UIButton? { return .None }
@@ -81,7 +82,7 @@ public final class RegisterView: UIView, RegisterViewType {
     public var registerErrorLabel: UILabel? { return .None }
     
     public var termsAndServicesButton: UIButton { return UIButton() }
-    public var termsAndServicesLabel: UILabel { return UILabel() }
+    public var termsAndServicesLabel: UILabel? { return .None }
     
     public var usernameTextFieldValid: Bool = false
     public var usernameTextFieldSelected: Bool = false
@@ -92,6 +93,7 @@ public final class RegisterView: UIView, RegisterViewType {
     public var passwordConfirmationTextFieldValid: Bool = false
     public var passwordConfirmationTextFieldSelected: Bool = false
     public var registerButtonEnabled: Bool = false
+    public var registerButtonPressed: Bool = false
     
     public func render() {
         

@@ -63,20 +63,22 @@ private extension RegisterController {
     }
     
     func bindNameElements() {
-        _viewModel.name <~ signupView.usernameTextField.rex_textSignal
-        signupView.usernameLabel.text = _viewModel.nameText
-        signupView.usernameTextField.placeholder = _viewModel.namePlaceholderText
-        _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
-            self._delegate.signupController(self, didFailNameValidationWithErrors: errors)
-        }
-        if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
-            nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
+        if let nameTextField = signupView.usernameTextField {
+            _viewModel.name <~ nameTextField.rex_textSignal
+            signupView.usernameLabel?.text = _viewModel.nameText
+            nameTextField.placeholder = _viewModel.namePlaceholderText
+            _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
+                self._delegate.signupController(self, didFailNameValidationWithErrors: errors)
+            }
+            if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
+                nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
+            }
         }
     }
     
     func bindEmailElements() {
         _viewModel.email <~ signupView.emailTextField.rex_textSignal
-        signupView.emailLabel.text = _viewModel.emailText
+        signupView.emailLabel?.text = _viewModel.emailText
         signupView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
             self._delegate.signupController(self, didFailEmailValidationWithErrors: errors)
@@ -88,7 +90,7 @@ private extension RegisterController {
     
     func bindPasswordElements() {
         _viewModel.password <~ signupView.passwordTextField.rex_textSignal
-        signupView.passwordLabel.text = _viewModel.passwordText
+        signupView.passwordLabel?.text = _viewModel.passwordText
         signupView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             self._delegate.signupController(self, didFailPasswordValidationWithErrors: errors)
@@ -98,7 +100,7 @@ private extension RegisterController {
         }
         
         _viewModel.passwordConfirmation <~ signupView.passwordConfirmTextField.rex_textSignal
-        signupView.passwordConfirmLabel.text = _viewModel.confirmPasswordText
+        signupView.passwordConfirmLabel?.text = _viewModel.confirmPasswordText
         signupView.passwordConfirmTextField.placeholder = _viewModel.confirmPasswordPlaceholderText
         _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
             self._delegate.signupController(self, didFailPasswordConfirmationValidationWithErrors: errors)
@@ -113,7 +115,7 @@ private extension RegisterController {
         signupView.registerButton.rex_pressed.value = _viewModel.signUpCocoaAction
         signupView.registerButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.registerButtonEnabled = $0 }
         
-        signupView.termsAndServicesLabel.text = _viewModel.termsAndServicesLabelText
+        signupView.termsAndServicesLabel?.text = _viewModel.termsAndServicesLabelText
         signupView.termsAndServicesButton.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
         //signupView.termsAndServicesButton -> Presents the terms and services
     }
@@ -130,7 +132,7 @@ extension RegisterController: UITextFieldDelegate {
         } else if textField == signupView.passwordTextField {
             signupView.passwordConfirmTextField.becomeFirstResponder()
         } else {
-            signupView.usernameTextField.becomeFirstResponder()
+            (signupView.usernameTextField ?? signupView.emailTextField).becomeFirstResponder()
         }
         return true
     }
@@ -208,7 +210,8 @@ extension RegisterController {
     }
     
     func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
-        let top = signupView.usernameTextField.convertPoint(signupView.usernameTextField.frame.origin, toView: self.view).y - 10
+        let topTextField = signupView.usernameTextField ?? signupView.emailTextField
+        let top = topTextField.convertPoint(topTextField.frame.origin, toView: self.view).y - 10
         let bottom = signupView.passwordConfirmTextField.convertPoint(signupView.passwordConfirmTextField.frame.origin, toView: self.view).y + signupView.passwordConfirmTextField.frame.size.height
         if (keyboardOffset + (bottom - top) + navBarOffset) <= self.view.frame.size.height {
             return top
