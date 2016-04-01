@@ -223,6 +223,10 @@ public final class LoginView: UIView, LoginViewType {
                 color =  delegate.colourPalette.logInButtonEnabled
             }
             logInButton.backgroundColor = color
+            emailErrorsHeightConstraint.constant = 0
+            emailErrorsHeightConstraint.active = true
+            passwordErrorsHeightConstraint.constant = 0
+            passwordErrorsHeightConstraint.active = true
         }
     }
     
