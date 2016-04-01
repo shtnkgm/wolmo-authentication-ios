@@ -37,6 +37,7 @@
 		CE9AC3C41C8F2F9E0012D20B /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* SignupController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */; };
 		CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA65B831D33F9960065283E /* ViewProtocols.swift */; };
+		CEA65B861D342CB30065283E /* SignupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA65B851D342CB30065283E /* SignupView.xib */; };
 		CEB119181CA2E43B0049DABF /* LoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */; };
 		CEB1191A1CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */; };
 		CEB119201CA315000049DABF /* SignupCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */; };
@@ -156,6 +157,7 @@
 		CE9AC3C31C8F2F9E0012D20B /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupController.swift; path = SignUp/View/SignupController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstrapper.swift; sourceTree = "<group>"; };
 		CEA65B831D33F9960065283E /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
+		CEA65B851D342CB30065283E /* SignupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignupView.xib; path = SignUp/View/SignupView.xib; sourceTree = "<group>"; };
 		CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginConfiguration.swift; path = Login/View/LoginConfiguration.swift; sourceTree = "<group>"; };
 		CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockLoginTransitionDelegate.swift; path = Login/Mocks/MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupCredentialsValidator.swift; path = SignUp/ViewModel/SignupCredentialsValidator.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		CE9AC3C01C8F2F5C0012D20B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CEA65B851D342CB30065283E /* SignupView.xib */,
 				CE9AC3C31C8F2F9E0012D20B /* SignupController.swift */,
 				CEE226B41C9C7692005EB279 /* SignupView.swift */,
 				CEB4E4F21CAAEB51002FE023 /* SignupControllerDelegate.swift */,
@@ -579,6 +582,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEA65B861D342CB30065283E /* SignupView.xib in Resources */,
 				CEE226AA1C9C4018005EB279 /* Spanish(es).strings in Resources */,
 				CEE226A71C9C4011005EB279 /* Localizable.strings in Resources */,
 				CED63F331C9AFFAB0092F323 /* LoginView.xib in Resources */,
