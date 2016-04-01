@@ -20,7 +20,9 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     private let _window: UIWindow
     /// The factory method from which to obtain a main View Controller for the app
     private let _mainViewControllerFactory: () -> UIViewController
-
+    /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
+    private let _viewConfiguration: LoginViewConfiguration
+    
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
 
@@ -28,9 +30,6 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     public var currentUser: User? {
         return sessionService.currentUser.value
     }
-    
-    /// The logo image to show in login.
-    public var logoImage: UIImage?
 
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
@@ -45,10 +44,11 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Returns: A new authentication bootstrapper ready to use for starting your app as needed.
     */
 // swiftlint:disable valid_docs
-    public init(sessionService: SessionService, window: UIWindow, mainViewControllerFactory: () -> UIViewController) {
+    public init(sessionService: SessionService, window: UIWindow, viewConfiguration: LoginViewConfiguration = LoginViewConfiguration(), mainViewControllerFactory: () -> UIViewController) {
 // swiftlint:enable valid_docs
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
+        _viewConfiguration = viewConfiguration
         self.sessionService = sessionService
 
         sessionService.events.observeNext { [unowned self] event in
@@ -108,8 +108,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     */
     public func createLoginView() -> LoginViewType {
         let view: LoginView = LoginView.loadFromNib()
-        let config = LoginViewConfiguration(logoImage: logoImage)
-        view.delegate = DefaultLoginViewDelegate(configuration: config)
+        view.delegate = DefaultLoginViewDelegate(configuration: _viewConfiguration)
         return view
     }
 

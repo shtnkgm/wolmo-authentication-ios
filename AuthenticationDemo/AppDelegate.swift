@@ -18,13 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"), window: window!) {
+        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"),
+            window: window!, viewConfiguration: LoginViewConfiguration(logoImage: UIImage(named: "agregar_contacto"))) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // swiftlint:disable force_cast
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController
             // swiftlint:enable force_cast
         }
-        authenticationBootstrapper.logoImage = UIImage(named: "agregar_contacto")!
         authenticationBootstrapper.bootstrap()
         return true
     }

@@ -14,13 +14,13 @@ public struct LoginViewConfiguration {
     public let colourPalette: LoginColourPalette
     public let fontPalette: LoginFontPalette
     
-    init() {
+    public init() {
         logoImage = .None
         colourPalette = LoginColourPalette()
         fontPalette = LoginFontPalette()
     }
     
-    init(logoImage: UIImage?) {
+    public init(logoImage: UIImage?) {
         self.logoImage = logoImage
         colourPalette = LoginColourPalette()
         fontPalette = LoginFontPalette()
