@@ -35,7 +35,7 @@ public final class DefaultRegisterViewDelegate: RegisterViewDelegate {
         fontPalette = FontPalette()
     }
     
-    public init(configuration: SignupViewConfiguration) {
+    public init(configuration: SignupViewConfigurationType) {
         colourPalette = configuration.colourPalette
         fontPalette = configuration.fontPalette
     }

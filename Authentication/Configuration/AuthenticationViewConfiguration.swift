@@ -10,20 +10,20 @@ import Foundation
 
 public struct AuthenticationViewConfiguration {
     
-    public let loginConfiguration: LoginViewConfiguration
-    public let signupConfiguration: SignupViewConfiguration
+    public let loginConfiguration: LoginViewConfigurationType
+    public let signupConfiguration: SignupViewConfigurationType
     
     public init() {
-        loginConfiguration = LoginViewConfiguration()
-        signupConfiguration = SignupViewConfiguration()
+        loginConfiguration = DefaultLoginViewConfiguration()
+        signupConfiguration = DefaultSignupViewConfiguration()
     }
     
-    public init(loginViewConfiguration: LoginViewConfiguration, signupViewConfiguration: SignupViewConfiguration = SignupViewConfiguration()) {
+    public init(loginViewConfiguration: LoginViewConfigurationType, signupViewConfiguration: SignupViewConfigurationType = DefaultSignupViewConfiguration()) {
         loginConfiguration = loginViewConfiguration
         signupConfiguration = signupViewConfiguration
     }
     
-    public init(signupViewConfiguration: SignupViewConfiguration, loginViewConfiguration: LoginViewConfiguration = LoginViewConfiguration()) {
+    public init(signupViewConfiguration: SignupViewConfigurationType, loginViewConfiguration: LoginViewConfigurationType = DefaultLoginViewConfiguration()) {
         loginConfiguration = loginViewConfiguration
         signupConfiguration = signupViewConfiguration
     }

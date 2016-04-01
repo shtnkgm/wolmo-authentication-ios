@@ -8,7 +8,14 @@
 
 import Foundation
 
-public struct SignupViewConfiguration {
+public protocol SignupViewConfigurationType {
+    
+    var colourPalette: ColorPalette { get }
+    var fontPalette: FontPalette { get }
+    
+}
+
+public final class DefaultSignupViewConfiguration: SignupViewConfigurationType {
     
     public let colourPalette: ColorPalette
     public let fontPalette: FontPalette
