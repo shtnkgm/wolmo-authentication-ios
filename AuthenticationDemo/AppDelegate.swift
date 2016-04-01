@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         authenticationBootstrapper = AuthenticationBootstrapper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"),
-            window: window!, viewConfiguration: LoginViewConfiguration(logoImage: UIImage(named: "agregar_contacto"))) {
+            window: window!, viewConfiguration: DefaultLoginViewConfiguration(logoImage: UIImage(named: "agregar_contacto"))) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // swiftlint:disable force_cast
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController

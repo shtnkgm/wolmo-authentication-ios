@@ -26,7 +26,7 @@
 		CE040D7A1C99CEE10020DDE0 /* LengthValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE040D791C99CEE10020DDE0 /* LengthValidators.swift */; };
 		CE11A7011C9848AE002C9779 /* LoginControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */; };
 		CE2361321CAD97C200AFB6F2 /* LoginViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2361311CAD97C200AFB6F2 /* LoginViewConfiguration.swift */; };
-		CE2361341CAD983D00AFB6F2 /* LoginColourPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2361331CAD983D00AFB6F2 /* LoginColourPalette.swift */; };
+		CE2361341CAD983D00AFB6F2 /* LoginColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2361331CAD983D00AFB6F2 /* LoginColorPalette.swift */; };
 		CE2361361CADA0B200AFB6F2 /* LoginFontPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2361351CADA0B200AFB6F2 /* LoginFontPalette.swift */; };
 		CE2BB8C71C972819009CAC8F /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */; };
 		CE2BC5261C970E51003A1616 /* MyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5251C970E51003A1616 /* MyUser.swift */; };
@@ -139,7 +139,7 @@
 		CE040D791C99CEE10020DDE0 /* LengthValidators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LengthValidators.swift; path = Validators/LengthValidators.swift; sourceTree = "<group>"; };
 		CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginControllerDelegate.swift; path = LogIn/View/LoginControllerDelegate.swift; sourceTree = "<group>"; };
 		CE2361311CAD97C200AFB6F2 /* LoginViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewConfiguration.swift; path = Login/View/LoginViewConfiguration.swift; sourceTree = "<group>"; };
-		CE2361331CAD983D00AFB6F2 /* LoginColourPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginColourPalette.swift; path = Login/Model/LoginColourPalette.swift; sourceTree = "<group>"; };
+		CE2361331CAD983D00AFB6F2 /* LoginColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginColorPalette.swift; path = Login/Model/LoginColorPalette.swift; sourceTree = "<group>"; };
 		CE2361351CADA0B200AFB6F2 /* LoginFontPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginFontPalette.swift; path = Login/Model/LoginFontPalette.swift; sourceTree = "<group>"; };
 		CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = LogIn/LoginControllerTests.swift; sourceTree = "<group>"; };
 		CE2BC5251C970E51003A1616 /* MyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyUser.swift; path = LogIn/Mocks/MyUser.swift; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 			children = (
 				CEBF66CF1C8E0A6E006EE090 /* Email.swift */,
 				CEBF66D11C8E0A80006EE090 /* User.swift */,
-				CE2361331CAD983D00AFB6F2 /* LoginColourPalette.swift */,
+				CE2361331CAD983D00AFB6F2 /* LoginColorPalette.swift */,
 				CE2361351CADA0B200AFB6F2 /* LoginFontPalette.swift */,
 			);
 			name = Model;
@@ -634,7 +634,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9AC3C41C8F2F9E0012D20B /* RegisterController.swift in Sources */,
-				CE2361341CAD983D00AFB6F2 /* LoginColourPalette.swift in Sources */,
+				CE2361341CAD983D00AFB6F2 /* LoginColorPalette.swift in Sources */,
 				CEBF66C81C8DFCB1006EE090 /* LoginViewModel.swift in Sources */,
 				CEE4048D1C9A040B00AB70B3 /* EmailValidator.swift in Sources */,
 				CEE226B51C9C7692005EB279 /* RegisterViewType.swift in Sources */,

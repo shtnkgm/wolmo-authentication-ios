@@ -8,21 +8,30 @@
 
 import Foundation
 
-public struct LoginViewConfiguration {
+public protocol LoginViewConfigurationType {
+    
+    var logoImage: UIImage? { get }
+    var colourPalette: LoginColorPalette { get }
+    var fontPalette: LoginFontPalette { get }
+
+    
+}
+
+public final class DefaultLoginViewConfiguration: LoginViewConfigurationType {
     
     public let logoImage: UIImage?
-    public let colourPalette: LoginColourPalette
+    public let colourPalette: LoginColorPalette
     public let fontPalette: LoginFontPalette
     
     public init() {
         logoImage = .None
-        colourPalette = LoginColourPalette()
+        colourPalette = LoginColorPalette()
         fontPalette = LoginFontPalette()
     }
     
     public init(logoImage: UIImage?) {
         self.logoImage = logoImage
-        colourPalette = LoginColourPalette()
+        colourPalette = LoginColorPalette()
         fontPalette = LoginFontPalette()
     }
     

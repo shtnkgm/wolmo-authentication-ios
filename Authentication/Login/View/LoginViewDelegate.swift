@@ -14,7 +14,7 @@ import Foundation
 */
 public protocol LoginViewDelegate {
     
-    var colourPalette: LoginColourPalette { get }
+    var colourPalette: LoginColorPalette { get }
     var fontPalette: LoginFontPalette { get }
     
     func configureView(loginView: LoginViewType)
@@ -31,18 +31,18 @@ public extension LoginViewDelegate {
 
 public final class DefaultLoginViewDelegate: LoginViewDelegate {
     
-    private let _configuration: LoginViewConfiguration
+    private let _configuration: LoginViewConfigurationType
     
-    public let colourPalette: LoginColourPalette
+    public let colourPalette: LoginColorPalette
     public let fontPalette: LoginFontPalette
 
     init() {
-        _configuration = LoginViewConfiguration()
-        colourPalette = LoginColourPalette()
+        _configuration = DefaultLoginViewConfiguration()
+        colourPalette = LoginColorPalette()
         fontPalette = LoginFontPalette()
     }
     
-    init(configuration: LoginViewConfiguration) {
+    init(configuration: LoginViewConfigurationType) {
         _configuration = configuration
         colourPalette = configuration.colourPalette
         fontPalette = configuration.fontPalette

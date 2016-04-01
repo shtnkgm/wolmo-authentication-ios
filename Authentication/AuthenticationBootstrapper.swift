@@ -21,7 +21,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     /// The factory method from which to obtain a main View Controller for the app
     private let _mainViewControllerFactory: () -> UIViewController
     /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
-    private let _viewConfiguration: LoginViewConfiguration
+    private let _viewConfiguration: LoginViewConfigurationType
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
@@ -44,7 +44,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Returns: A new authentication bootstrapper ready to use for starting your app as needed.
     */
 // swiftlint:disable valid_docs
-    public init(sessionService: SessionService, window: UIWindow, viewConfiguration: LoginViewConfiguration = LoginViewConfiguration(), mainViewControllerFactory: () -> UIViewController) {
+    public init(sessionService: SessionService, window: UIWindow, viewConfiguration: LoginViewConfigurationType = DefaultLoginViewConfiguration(), mainViewControllerFactory: () -> UIViewController) {
 // swiftlint:enable valid_docs
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory

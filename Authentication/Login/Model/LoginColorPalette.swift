@@ -1,5 +1,5 @@
 //
-//  LoginColourPalette.swift
+//  LoginColorPalette.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/31/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LoginColourPalette {
+public struct LoginColorPalette {
 
     public let logInButtonDisabled: UIColor
     public let logInButtonEnabled: UIColor
