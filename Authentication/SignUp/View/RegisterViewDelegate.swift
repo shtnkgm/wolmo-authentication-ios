@@ -10,8 +10,8 @@ import Foundation
 
 public protocol RegisterViewDelegate {
     
-    var colourPalette: ColorPalette { get }
-    var fontPalette: FontPalette { get }
+    var colourPalette: ColorPaletteType { get }
+    var fontPalette: FontPaletteType { get }
     
     func configureView(signupView: RegisterViewType)
     
@@ -27,12 +27,12 @@ public extension RegisterViewDelegate {
 
 public final class DefaultRegisterViewDelegate: RegisterViewDelegate {
     
-    public let colourPalette: ColorPalette
-    public let fontPalette: FontPalette
+    public let colourPalette: ColorPaletteType
+    public let fontPalette: FontPaletteType
     
     public init() {
-        colourPalette = ColorPalette()
-        fontPalette = FontPalette()
+        colourPalette = DefaultColorPalette()
+        fontPalette = DefaultFontPalette()
     }
     
     public init(configuration: SignupViewConfigurationType) {

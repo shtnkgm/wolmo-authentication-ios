@@ -8,20 +8,29 @@
 
 import Foundation
 
-public struct FontPalette {
+/**
+ All fonts used should be from the same family
+ for style coherence.
+ */
+public protocol FontPaletteType {
     
-    public let textfields: UIFont
-    public let passwordVisibilityButton: UIFont
-    public let links: UIFont
-    public let labels: UIFont
-    public let mainButton: UIFont
-    
-    init() {
-        textfields = UIFont.systemFontOfSize(14)
-        passwordVisibilityButton = UIFont.systemFontOfSize(14)
-        links = UIFont.systemFontOfSize(14)
-        labels = UIFont.systemFontOfSize(14)
-        mainButton = UIFont.boldSystemFontOfSize(16)
-    }
+    var textfields: UIFont { get }
+    var passwordVisibilityButton: UIFont { get }
+    var links: UIFont { get }
+    var labels: UIFont { get }
+    var mainButton: UIFont { get }
     
 }
+
+public extension FontPaletteType {
+    
+    public var textfields: UIFont { return UIFont.systemFontOfSize(14) }
+    public var passwordVisibilityButton: UIFont { return UIFont.systemFontOfSize(14) }
+    public var links: UIFont { return UIFont.systemFontOfSize(14) }
+    public var labels: UIFont { return UIFont.systemFontOfSize(14) }
+    public var mainButton: UIFont { return UIFont.boldSystemFontOfSize(16) }
+    
+    
+}
+
+public struct DefaultFontPalette: FontPaletteType { }
