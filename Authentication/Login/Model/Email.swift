@@ -18,9 +18,9 @@ public struct Email {
         return emailTest.evaluateWithObject(raw)
     }
     
-    let raw: String
+    public let raw: String
     
-    init?(raw: String) {
+    public init?(raw: String) {
         guard Email.isValidEmail(raw) else {
             return nil
         }

@@ -1,5 +1,5 @@
 //
-//  AuthenticationBootstraper.swift
+//  AuthenticationBootstrapper.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/8/16.
@@ -12,14 +12,17 @@ import Foundation
     Bootstrapper to start the application.
     Takes care of starting the authentication process before the main View Controller of the app when necessary,
     and after the user logs out.
+    The authentication process includes login, signup and recover password logic.
 */
-public class AuthenticationBootstraper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
+public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
 
     /// The window of the app
     private let _window: UIWindow
     /// The factory method from which to obtain a main View Controller for the app
     private let _mainViewControllerFactory: () -> UIViewController
-
+    /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
+    private let _viewConfiguration: LoginViewConfigurationType
+    
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
 
@@ -40,9 +43,12 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
 
         - Returns: A new authentication bootstrapper ready to use for starting your app as needed.
     */
-    public init(sessionService: SessionService, window: UIWindow, mainViewControllerFactory: () -> UIViewController) {
+// swiftlint:disable valid_docs
+    public init(sessionService: SessionService, window: UIWindow, viewConfiguration: LoginViewConfigurationType = DefaultLoginViewConfiguration(), mainViewControllerFactory: () -> UIViewController) {
+// swiftlint:enable valid_docs
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
+        _viewConfiguration = viewConfiguration
         self.sessionService = sessionService
 
         sessionService.events.observeNext { [unowned self] event in
@@ -56,7 +62,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
 
     /**
         Bootstraps your project with the authentication framework,
-        starting with the authentication project if no user is already logged in.
+        starting with the authentication project if no user is already logged in the session service.
         Otherwise, it runs your project directly from starting the main View Controller.
     */
     public final func bootstrap() {
@@ -88,7 +94,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
          - Warning: The LogInViewModel returned must be constructed with the same session service as the
          authentication bootstrapper.
      */
-    func createLoginViewModel() -> LoginViewModel<User, SessionService> {
+    public func createLoginViewModel() -> LoginViewModel<User, SessionService> {
         return LoginViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
     }
 
@@ -101,7 +107,9 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         - Attention: Override this method for customizing the view for the login.
     */
     public func createLoginView() -> LoginViewType {
-        return LoginView()
+        let view: LoginView = LoginView.loadFromNib()
+        view.delegate = DefaultLoginViewDelegate(configuration: _viewConfiguration)
+        return view
     }
 
     /**
@@ -113,7 +121,7 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
         - Attention: Override this method for customizing any of the 
         delegate's reactions to events.
     */
-    public func createLoginControllerDelegate() -> LoginControllerDelegateType {
+    public func createLoginControllerDelegate() -> LoginControllerDelegate {
         return DefaultLoginControllerDelegate()
     }
     
@@ -122,30 +130,60 @@ public class AuthenticationBootstraper<User: UserType, SessionService: SessionSe
          Creates the register (sign up) controller to use when the
          user selects that option.
          
-         - Returns: A valid register controller delegate to use.
+         - Returns: A valid register controller to use.
          
          - Attention: Override this method for customizing the
          register controller to be used.
     */
     public func createRegisterController() -> RegisterController { //todo
-        return RegisterController()
+        return RegisterController(viewModel: RegisterViewModel(), registerViewFactory: { return RegisterView()})
+    }
+    
+    /**
+         Creates the recover password main controller to use when the
+         user selects that option.
+         
+         - Returns: A valid recover password controller to use.
+         
+         - Attention: Override this method for customizing the
+         recover password main controller to be used.
+     */
+    public func createRecoverPasswordController() -> RecoverPasswordController { //todo
+        return RecoverPasswordController()
+    }
+
+    public func createLoginControllerConfiguration() -> LoginControllerConfiguration {
+        return LoginControllerConfiguration(
+            viewModel: createLoginViewModel(),
+            viewFactory: createLoginView,
+            transitionDelegate: self)
+    }
+    
+    public func createLoginController() -> LoginController {
+        let configuration = createLoginControllerConfiguration()
+        return LoginController(configuration: configuration)
     }
     
 }
 
-private extension AuthenticationBootstraper {
-
-    func transitionToSignUp() {
-        let controller = createRegisterController()
-        self._window.rootViewController?.navigationController?.pushViewController(controller, animated: true)
+extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
+    
+    public func loginControllerDidTapOnRegister(controller: LoginController) {
+        let registerController = createRegisterController()
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(registerController, animated: true)
+        } else {
+            _window.rootViewController = UINavigationController(rootViewController: registerController)
+        }
     }
-
-    func createLoginController() -> LoginController {
-        return LoginController(
-            viewModel: createLoginViewModel(),
-            loginViewFactory: createLoginView,
-            onRegister: { [unowned self] _ in self.transitionToSignUp() },
-            delegate: createLoginControllerDelegate())
+    
+    public func loginControllerDidTapOnRecoverPassword(controller: LoginController) {
+        let recoverPasswordController = createRecoverPasswordController()
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(recoverPasswordController, animated: true)
+        } else {
+            _window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
+        }
     }
-
+    
 }
