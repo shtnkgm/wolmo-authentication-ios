@@ -24,7 +24,7 @@ public enum SessionServiceError: ErrorType {
 
 public protocol SessionServiceType {
     
-    typealias User: UserType
+    associatedtype User: UserType
     
     var currentUser: AnyProperty<User?> { get }
     

@@ -54,7 +54,7 @@ public extension LoginViewType where Self: UIView {
     
 }
 
-public final class LoginView: UIView, LoginViewType {
+public final class LoginView: UIView, LoginViewType, NibLoadable {
     
     public lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()
     
@@ -256,11 +256,5 @@ public final class LoginView: UIView, LoginViewType {
         //Configure fonts
         delegate.configureView(self)
     }
-    
-}
-
-extension LoginView: NibViewLoader {
-    
-    typealias NibLoadableViewType = LoginView
     
 }
