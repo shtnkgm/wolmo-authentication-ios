@@ -1,6 +1,6 @@
 github "CocoaLumberjack/CocoaLumberjack" "2.3.0"
 github "Quick/Nimble" "v3.2.0"
 github "Quick/Quick" "v0.8.0"
-github "antitypical/Result" "2.1.0"
+github "antitypical/Result" "2.1.2"
 github "ReactiveCocoa/ReactiveCocoa" "v4.2.0"
 github "neilpa/Rex" "v0.9.0"
