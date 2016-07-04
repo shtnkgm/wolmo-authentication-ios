@@ -1,7 +1,7 @@
 coverage_service: coveralls
 xcodeproj: ./Authentication.xcodeproj
-ci_service: travis_pro
 scheme: Authentication
+ci_service: travis_pro
 coverage_access_token: 70TniiTKCtcXa8J6oDCmWG9MYkVrsJCQW
 ignore:
   - AuthenticationTests/*
