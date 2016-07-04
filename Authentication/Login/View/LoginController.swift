@@ -69,7 +69,7 @@ public final class LoginController: UIViewController {
         loginView.render()
         bindViewModel()
         navigationController?.navigationBarHidden = true
-        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard:")
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapRecognizer)
     }
     

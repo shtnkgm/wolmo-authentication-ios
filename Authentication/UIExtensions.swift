@@ -12,9 +12,9 @@ public protocol ActionHandlerType {}
 
 extension ActionHandlerType where Self: UIControl {
     
-    public func setAction(events: UIControlEvents = .TouchUpInside, _ action: Self -> Void) {
+    public func setAction(events: UIControlEvents = .TouchUpInside, _ action: (Self, UIEvent) -> Void) {
         let handler = ActionHandler(action: action)
-        self.addTarget(handler, action: "action:", forControlEvents: events)
+        self.addTarget(handler, action: #selector(handler.action(_:forEvent:)), forControlEvents: events)
         objc_setAssociatedObject(self, actionHandlerTypeAssociatedObjectKey, handler, .OBJC_ASSOCIATION_RETAIN)
     }
     
@@ -25,15 +25,15 @@ extension UIControl: ActionHandlerType {}
 private let actionHandlerTypeAssociatedObjectKey = UnsafeMutablePointer<Int8>.alloc(1)
 
 private class ActionHandler<T>: NSObject {
-    private let action: T -> Void
+    private let _action: ((T, UIEvent) -> Void)
     
-    init(action: T -> Void) {
-        self.action = action
+    init(action: (T, UIEvent) -> Void) {
+        self._action = action
     }
     
-    @objc func action(sender: UIControl) {
-        if sender is T {
-            action(sender)
+    @objc func action(sender: UIControl, forEvent event: UIEvent) {
+        if let sender = sender as? T {
+            _action(sender, event)
         }
     }
     
@@ -44,21 +44,19 @@ public enum NibIdentifier: String {
     case LoginView = "LoginView"
 }
 
-internal protocol NibViewLoader {
-    
-    typealias NibLoadableViewType
+internal protocol NibLoadable {
 
-    static func loadFromNib() -> NibLoadableViewType
+    static func loadFromNib() -> Self
     
 }
 
-extension NibViewLoader where NibLoadableViewType: UIView {
+extension NibLoadable where Self: UIView {
     
-    static func loadFromNib() -> NibLoadableViewType {
+    static func loadFromNib() -> Self {
         // swiftlint:disable force_cast
-        let bundle = NSBundle(forClass: NibLoadableViewType.self)
+        let bundle = NSBundle(forClass: Self.self)
         let nibName = String(self).componentsSeparatedByString(".").first!
-        return bundle.loadNib(nibName) as! NibLoadableViewType
+        return bundle.loadNib(nibName) as! Self
         // swiftlint:enable force_cast
     }
     
