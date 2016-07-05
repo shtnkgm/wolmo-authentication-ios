@@ -101,3 +101,5 @@ if [ -z "$RUNNING_ON_CI" ] && [ -f .slather.yml ]
 then
   bundle exec slather coverage -s
 fi
+
+sleep 60
