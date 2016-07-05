@@ -5,6 +5,15 @@ WolMo - Authentication iOS
 [![Coverage Status](https://coveralls.io/repos/github/Wolox/wolmo-authentication-ios/badge.svg?branch=master)](https://coveralls.io/github/Wolox/wolmo-authentication-ios?branch=master)
 
 
+**Wolmo - Authentication** is an authentication framework for Swift, designed to take care of some basic steps present in almost every iOS app:
+
+- [ ] Onboarding
+- [x] Signup
+- [x] Login
+- [ ] Recover password
+
+It provides logic as well as default views with many extensibility points.
+
 ## Table of Contents
 * [Installation](#installation)
 * [Dependencies](#dependencies)
@@ -29,8 +38,12 @@ script/bootstrap
 ```
 
 
-## Dependencies
+# Dependencies
 
+- [ ] [WolmoCore](https://github.com/Wolox/wolmo-core-ios): Framework with useful basic extensions.
+- [x] [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa): Framework inspired by functional reactive programming.
+- [x] [Rex](https://github.com/neilpa/Rex): Extensions for ReactiveCocoa.
+- [x] [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack): Logging framework.
 
 
 
@@ -40,6 +53,9 @@ script/bootstrap
 
 
 ## Usage
+
+
+
 
 
 
@@ -59,6 +75,7 @@ script/bootstrap
 
 
 ## Contributing
+
 
 
 
