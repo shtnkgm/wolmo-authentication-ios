@@ -47,7 +47,7 @@ public final class RegisterController: UIViewController {
     public override func viewDidLoad() {
         signupView.render()
         bindViewModel()
-        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard:")
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tapRecognizer)
     }
     
