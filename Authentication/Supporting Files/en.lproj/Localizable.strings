@@ -18,11 +18,11 @@
 "login-view-model.email-placeholder" = "Email";
 "login-view-model.password-placeholder" = "Password";
 "login-view-model.login-button-title" = "LOG IN";
-"login-view-model.register-button-title" = "Register";
+"login-view-model.signup-button-title" = "Sign up";
 "login-view-model.password-visibility-button-title.false" = "Hide";
 "login-view-model.password-visibility-button-title.true" = "Show";
 "login-view-model.recover-password-button-title" = "Forgot password?";
-"login-view.to-register-label" = "Don't have an account?";
+"login-view.to-signup-label" = "Don't have an account?";
 
 /* Session service errors */
 "login-error.invalid-credentials.message" = "Wrong email or password. ";

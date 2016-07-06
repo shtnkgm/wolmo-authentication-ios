@@ -13,7 +13,7 @@ import Foundation
 */
 public protocol LoginControllerTransitionDelegate {
     
-    func loginControllerDidTapOnRegister(controller: LoginController)
+    func loginControllerDidTapOnSignup(controller: LoginController)
     
     func loginControllerDidTapOnRecoverPassword(controller: LoginController)
     

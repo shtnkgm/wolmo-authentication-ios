@@ -1,5 +1,5 @@
 //
-//  RegisterViewType.swift
+//  SignupViewType.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/18/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol RegisterViewType: Renderable {
+public protocol SignupViewType: Renderable {
  
     var view: UIView { get }
     
@@ -30,8 +30,8 @@ public protocol RegisterViewType: Renderable {
     var passwordConfirmValidationMessageLabel: UILabel? { get }
     var passwordConfirmVisibilityButton: UIButton? { get }
     
-    var registerButton: UIButton { get }
-    var registerErrorLabel: UILabel? { get }
+    var signupButton: UIButton { get }
+    var signupErrorLabel: UILabel? { get }
     
     var termsAndServicesButton: UIButton { get }
     var termsAndServicesLabel: UILabel? { get }
@@ -44,12 +44,12 @@ public protocol RegisterViewType: Renderable {
     var passwordTextFieldSelected: Bool { get set }
     var passwordConfirmationTextFieldValid: Bool { get set }
     var passwordConfirmationTextFieldSelected: Bool { get set }
-    var registerButtonEnabled: Bool { get set }
-    var registerButtonPressed: Bool { get set }
+    var signupButtonEnabled: Bool { get set }
+    var signupButtonPressed: Bool { get set }
     
 }
 
-public extension RegisterViewType where Self: UIView {
+public extension SignupViewType where Self: UIView {
     
     var view: UIView {
         return self
@@ -57,9 +57,9 @@ public extension RegisterViewType where Self: UIView {
     
 }
 
-public final class RegisterView: UIView, RegisterViewType {
+public final class SignupView: UIView, SignupViewType {
     
-    public lazy var delegate: RegisterViewDelegate = DefaultRegisterViewDelegate()
+    public lazy var delegate: SignupViewDelegate = DefaultSignupViewDelegate()
     
     //TODO return real objects
     public var usernameLabel: UILabel? { return .None }
@@ -80,8 +80,8 @@ public final class RegisterView: UIView, RegisterViewType {
     public var passwordConfirmValidationMessageLabel: UILabel? { return .None }
     public var passwordConfirmVisibilityButton: UIButton? { return .None }
     
-    public var registerButton: UIButton { return UIButton() }
-    public var registerErrorLabel: UILabel? { return .None }
+    public var signupButton: UIButton { return UIButton() }
+    public var signupErrorLabel: UILabel? { return .None }
     
     public var termsAndServicesButton: UIButton { return UIButton() }
     public var termsAndServicesLabel: UILabel? { return .None }
@@ -94,8 +94,8 @@ public final class RegisterView: UIView, RegisterViewType {
     public var passwordTextFieldSelected: Bool = false
     public var passwordConfirmationTextFieldValid: Bool = false
     public var passwordConfirmationTextFieldSelected: Bool = false
-    public var registerButtonEnabled: Bool = false
-    public var registerButtonPressed: Bool = false
+    public var signupButtonEnabled: Bool = false
+    public var signupButtonPressed: Bool = false
     
     public func render() {
         

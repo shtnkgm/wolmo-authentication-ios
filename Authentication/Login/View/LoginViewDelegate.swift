@@ -88,10 +88,10 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
         loginView.recoverPasswordButton.titleLabel?.font = fontPalette.links
         loginView.recoverPasswordButton.titleLabel?.textColor = colourPalette.links
         
-        loginView.registerLabel.font = fontPalette.labels
-        loginView.registerLabel.textColor = colourPalette.labels
-        loginView.registerButton.titleLabel?.font = fontPalette.links
-        loginView.registerButton.titleLabel?.textColor = colourPalette.links
+        loginView.signupLabel.font = fontPalette.labels
+        loginView.signupLabel.textColor = colourPalette.labels
+        loginView.signupButton.titleLabel?.font = fontPalette.links
+        loginView.signupButton.titleLabel?.textColor = colourPalette.links
     }
     
     private func configureErrorElements(loginView: LoginViewType) {

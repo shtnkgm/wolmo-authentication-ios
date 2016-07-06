@@ -32,8 +32,8 @@ public protocol LoginViewType: Renderable {
     var logInButton: UIButton { get }
     var logInErrorLabel: UILabel? { get }
     
-    var registerLabel: UILabel { get }
-    var registerButton: UIButton { get }
+    var signupLabel: UILabel { get }
+    var signupButton: UIButton { get }
     var recoverPasswordButton: UIButton { get }
     
     var emailTextFieldValid: Bool { get set }
@@ -106,8 +106,8 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    public var registerButton: UIButton { return registerButtonOutlet }
-    @IBOutlet weak var registerButtonOutlet: UIButton!
+    public var signupButton: UIButton { return signupButtonOutlet }
+    @IBOutlet weak var signupButtonOutlet: UIButton!
 
     public var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton!
@@ -129,8 +129,8 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    public var registerLabel: UILabel { return toRegisterLabel }
-    @IBOutlet weak var toRegisterLabel: UILabel!
+    public var signupLabel: UILabel { return toSignupLabel }
+    @IBOutlet weak var toSignupLabel: UILabel!
     
     @IBOutlet var emailErrorsHeightConstraint: NSLayoutConstraint!      // not weak
     @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak

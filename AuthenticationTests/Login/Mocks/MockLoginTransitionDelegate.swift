@@ -11,7 +11,7 @@ import Authentication
 
 final class MockLoginTransitionDelegate: LoginControllerTransitionDelegate {
     
-    func loginControllerDidTapOnRegister(controller: LoginController) {
+    func loginControllerDidTapOnSignup(controller: LoginController) {
         
     }
     

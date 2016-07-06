@@ -1,5 +1,5 @@
 //
-//  RegisterViewModel.swift
+//  SignupViewModel.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/18/16.
@@ -12,7 +12,7 @@ import enum Result.NoError
 import Rex
 
 
-public protocol RegisterViewModelType {
+public protocol SignupViewModelType {
     
     var name: MutableProperty<String> { get }
     var nameValidationErrors: AnyProperty<[String]> { get }
@@ -44,7 +44,7 @@ public protocol RegisterViewModelType {
     
 }
 
-public final class RegisterViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: RegisterViewModelType {
+public final class SignupViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
     
     private let _sessionService: SessionService
     private let _credentialsAreValid: AndProperty
@@ -111,7 +111,7 @@ private func getTermsAndServicesValidationResultFromAcceptance(accepted: Bool) -
     }
 }
 
-public extension RegisterViewModel {
+public extension SignupViewModel {
     
     public var nameText: String {
         return "signup-view-model.name".localized

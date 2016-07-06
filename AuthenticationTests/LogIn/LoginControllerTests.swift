@@ -63,7 +63,7 @@ class LoginViewControllerSpec: QuickSpec {
                     sessionService = OneMyUserSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
                     loginVM = LoginViewModel(sessionService: sessionService)
                     loginV = LoginView()
-                    loginC = LoginController(viewModel: loginVM, loginViewFactory: { return loginV }, onRegister: { _ in }, onLoginError: .None)
+                    loginC = LoginController(viewModel: loginVM, loginViewFactory: { return loginV }, onSignup: { _ in }, onLoginError: .None)
                     loginC.viewDidLoad()
                     loginV.passwordVisibilityButton!.enabled = true
                     loginV.passwordVisibilityButton!.userInteractionEnabled = true

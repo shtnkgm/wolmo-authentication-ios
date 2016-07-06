@@ -1,5 +1,5 @@
 //
-//  RegisterController.swift
+//  SignupController.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/7/16.
@@ -9,13 +9,13 @@
 import Foundation
 import ReactiveCocoa
 
-public final class RegisterController: UIViewController {
+public final class SignupController: UIViewController {
     
-    private let _viewModel: RegisterViewModelType
-    private let _registerViewFactory: () -> RegisterViewType
-    private let _delegate: RegisterControllerDelegate
+    private let _viewModel: SignupViewModelType
+    private let _signupViewFactory: () -> SignupViewType
+    private let _delegate: SignupControllerDelegate
     
-    public lazy var signupView: RegisterViewType = self._registerViewFactory()
+    public lazy var signupView: SignupViewType = self._signupViewFactory()
     
     private lazy var _notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     private var _disposable = CompositeDisposable()
@@ -23,9 +23,9 @@ public final class RegisterController: UIViewController {
     private let _activeTextField = MutableProperty<UITextField?>(.None)
 
     
-    init(viewModel: RegisterViewModelType, registerViewFactory: () -> RegisterViewType, delegate: RegisterControllerDelegate = DefaultRegisterControllerDelegate()) {
+    init(viewModel: SignupViewModelType, signupViewFactory: () -> SignupViewType, delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
         _viewModel = viewModel
-        _registerViewFactory = registerViewFactory
+        _signupViewFactory = signupViewFactory
         _delegate = delegate
         super.init(nibName: nil, bundle: nil)
         addKeyboardObservers()
@@ -53,7 +53,7 @@ public final class RegisterController: UIViewController {
     
 }
 
-private extension RegisterController {
+private extension SignupController {
     
     func bindViewModel() {
         bindNameElements()
@@ -111,9 +111,9 @@ private extension RegisterController {
     }
     
     func bindButtons() {
-        signupView.registerButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
-        signupView.registerButton.rex_pressed.value = _viewModel.signUpCocoaAction
-        signupView.registerButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.registerButtonEnabled = $0 }
+        signupView.signupButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
+        signupView.signupButton.rex_pressed.value = _viewModel.signUpCocoaAction
+        signupView.signupButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.signupButtonEnabled = $0 }
         
         signupView.termsAndServicesLabel?.text = _viewModel.termsAndServicesLabelText
         signupView.termsAndServicesButton.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
@@ -122,7 +122,7 @@ private extension RegisterController {
     
 }
 
-extension RegisterController: UITextFieldDelegate {
+extension SignupController: UITextFieldDelegate {
     
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == signupView.usernameTextField {
@@ -165,7 +165,7 @@ extension RegisterController: UITextFieldDelegate {
     
 }
 
-extension RegisterController {
+extension SignupController {
 
     public func addKeyboardObservers() {
         _disposable += _keyboardDisplayed <~ _notificationCenter

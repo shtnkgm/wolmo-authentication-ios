@@ -129,35 +129,35 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     
     
     /**
-         Creates the register (sign up) controller to use when the
+         Creates the signup controller to use when the
          user selects that option.
          
-         - Returns: A valid register controller to use.
+         - Returns: A valid signup controller to use.
          
          - Attention: Override this method for customizing the
-         register controller to be used.
+         signup controller to be used.
     */
-    public func createRegisterController() -> RegisterController {
-        return RegisterController(viewModel: createRegisterViewModel(), registerViewFactory: createRegisterView, delegate: createRegisterControllerDelegate())
+    public func createSignupController() -> SignupController {
+        return SignupController(viewModel: createSignupViewModel(), signupViewFactory: createSignupView, delegate: createSignupControllerDelegate())
     }
     
-    public func createRegisterView() -> RegisterView {
-        let view = RegisterView()
-        view.delegate = DefaultRegisterViewDelegate(configuration: _viewConfiguration.signupConfiguration)
+    public func createSignupView() -> SignupView {
+        let view = SignupView()
+        view.delegate = DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
         return view
     }
     
     /**
-         Creates the RegisterViewModel to use in the registration process logic,
+         Creates the SignupViewModel to use in the registration process logic,
          with the SignUpCredentialsValidator returned in the function createSignUpCredentialsValidator.
          
          - Returns: A signup view model that controls the registration logic and comunicates with the session service.
          
-         - Warning: The RegisterViewModel returned must be constructed with the same session service as the
+         - Warning: The SignupViewModel returned must be constructed with the same session service as the
          authentication bootstrapper.
      */
-    public func createRegisterViewModel() -> RegisterViewModelType {
-        return RegisterViewModel(sessionService: sessionService, credentialsValidator: createSignUpCredentialsValidator())
+    public func createSignupViewModel() -> SignupViewModelType {
+        return SignupViewModel(sessionService: sessionService, credentialsValidator: createSignUpCredentialsValidator())
     }
     
     public func createSignUpCredentialsValidator() -> SignupCredentialsValidator {
@@ -165,17 +165,17 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     }
     
     /**
-         Creates the register (signup) view controller delegate
-         that the register controller will use to add behaviour
+         Creates the signup view controller delegate
+         that the signup controller will use to add behaviour
          to certain events.
          
-         - Returns: A valid register controller delegate to use.
+         - Returns: A valid signup controller delegate to use.
          
          - Attention: Override this method for customizing any of the used
          delegate's reactions to events.
      */
-    public func createRegisterControllerDelegate() -> RegisterControllerDelegate {
-        return DefaultRegisterControllerDelegate()
+    public func createSignupControllerDelegate() -> SignupControllerDelegate {
+        return DefaultSignupControllerDelegate()
     }
     
     /**
@@ -207,12 +207,12 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
 
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
-    public func loginControllerDidTapOnRegister(controller: LoginController) {
-        let registerController = createRegisterController()
+    public func loginControllerDidTapOnSignup(controller: LoginController) {
+        let signupController = createSignupController()
         if let navigationController = controller.navigationController {
-            navigationController.pushViewController(registerController, animated: true)
+            navigationController.pushViewController(signupController, animated: true)
         } else {
-            _window.rootViewController = UINavigationController(rootViewController: registerController)
+            _window.rootViewController = UINavigationController(rootViewController: signupController)
         }
     }
     
