@@ -10,6 +10,9 @@ public protocol SignupViewType: Renderable, SignupFormType {
 
     var titleLabel: UILabel { get }
     
+    var loginLabel: UILabel? { get }
+    var loginButton: UIButton? { get }
+    
 }
 
 internal final class SignupView: UIView, SignupViewType {
@@ -18,7 +21,9 @@ internal final class SignupView: UIView, SignupViewType {
     
     internal var titleLabel: UILabel { return titleLabelOutlet }
     @IBOutlet weak var titleLabelOutlet: UILabel! {
-        titleLabel.text = titleText
+        didSet {
+            titleLabel.text = titleText
+        }
     }
 
     internal var usernameLabel: UILabel? { return .None }
@@ -50,17 +55,30 @@ internal final class SignupView: UIView, SignupViewType {
     
     internal var termsAndServicesLabel: UILabel? { return termsAndServicesLabelOutlet }
     @IBOutlet weak var termsAndServicesLabelOutlet: UILabel! {
-        termsAndServicesLabelOutlet.text = termsAndServicesLabelText
+        didSet {
+            termsAndServicesLabelOutlet.text = termsAndServicesLabelText
+        }
     }
     internal var termsAndServicesButton: UIButton { return termsAndServicesButtonOutlet }
     @IBOutlet weak var termsAndServicesButtonOutlet: UIButton! {
-        termsAndServicesButtonOutlet.setTitle(termsAndServicesButtonTitle, forState: .Normal)
+        didSet {
+            termsAndServicesButtonOutlet.setTitle(termsAndServicesButtonTitle, forState: .Normal)
+        }
     }
     
     internal var loginLabel: UILabel? { return loginLabelOutlet }
-    @IBOutlet weak var loginLabelOutlet: UILabel!
+    @IBOutlet weak var loginLabelOutlet: UILabel! {
+        didSet {
+            loginLabelOutlet.text = loginLabelText
+        }
+    }
+    
     internal var loginButton: UIButton? { return loginButtonOutlet }
-    @IBOutlet weak var loginButtonOutlet: UIButton!
+    @IBOutlet weak var loginButtonOutlet: UIButton! {
+        didSet {
+            loginButtonOutlet.setTitle(loginButtonTitle, forState: .Normal)
+        }
+    }
 
     internal var usernameTextFieldValid = false
     internal var usernameTextFieldSelected = false
@@ -132,6 +150,14 @@ public extension SignupViewType {
 
     public var signupButtonTitle: String {
         return "signup-view.signup-button-title".localized
+    }
+    
+    private var loginLabelText: String {
+        return "signup-view-model.login.label-text".localized
+    }
+    
+    private var loginButtonTitle: String {
+        return "signup-view-model.login.button-title".localized
     }
     
 }
