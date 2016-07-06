@@ -34,17 +34,17 @@
 
 
 /* Signup UI elements titles */
-"signup-view-model.title" = "Sign Up";
-"signup-view-model.name" = "Name:";
-"signup-view-model.name-placeholder" = "Name";
-"signup-view-model.email" = "Email:";
-"signup-view-model.email-placeholder" = "Email";
-"signup-view-model.password" = "Password:";
-"signup-view-model.password-placeholder" = "Password";
-"signup-view-model.confirm-password" = "Confirm Password:";
-"signup-view-model.confirm-password-placeholder" = "Confirm password";
-"signup-view-model.terms-and-services.label-text" = "By signing up, I agree to the";
-"signup-view-model.terms-and-services.button-title" = "Terms and Services";
-"signup-view-model.signup-button-title" = "Sign Up";
-"signup-view-model.login.label-text" = "Already registered?";
-"signup-view-model.login.button-title" = "Log In";
+"signup-view.title" = "Sign Up";
+"signup-view.name" = "Name:";
+"signup-view.name-placeholder" = "Name";
+"signup-view.email" = "Email:";
+"signup-view.email-placeholder" = "Email";
+"signup-view.password" = "Password:";
+"signup-view.password-placeholder" = "Password";
+"signup-view.confirm-password" = "Confirm Password:";
+"signup-view.confirm-password-placeholder" = "Confirm password";
+"signup-view.terms-and-services.label-text" = "By signing up, I agree to the";
+"signup-view.terms-and-services.button-title" = "Terms and Services";
+"signup-view.signup-button-title" = "Sign Up";
+"signup-view.login.label-text" = "Already registered?";
+"signup-view.login.button-title" = "Log In";

@@ -97,13 +97,18 @@ private extension SignupController {
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
-        
-        _viewModel.passwordConfirmation <~ signupView.passwordConfirmTextField.rex_textSignal
-        _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
-            self._delegate.signupController(self, didFailPasswordConfirmationValidationWithErrors: errors)
-        }
-        if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
-            passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
+        bindPasswordConfirmationElements()
+    }
+    
+    func bindPasswordConfirmationElements() {
+        if let passwordConfirmationTextField = signupView.passwordConfirmTextField {
+            _viewModel.passwordConfirmation <~ passwordConfirmationTextField.rex_textSignal
+            _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
+                self._delegate.signupController(self, didFailPasswordConfirmationValidationWithErrors: errors)
+            }
+            if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
+                passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
+            }
         }
     }
     
@@ -114,13 +119,14 @@ private extension SignupController {
     }
     
     private func setTextfieldOrder() {
-        signupView.passwordConfirmTextField.nextTextField = signupView.usernameTextField ?? signupView.emailTextField
+        signupView.usernameTextField?.nextTextField = signupView.emailTextField
         signupView.emailTextField.nextTextField = signupView.passwordTextField
-        signupView.passwordTextField.nextTextField = signupView.passwordConfirmTextField
+        signupView.passwordTextField.nextTextField = signupView.passwordConfirmTextField ?? signupView.usernameTextField ?? signupView.emailTextField
+        signupView.passwordConfirmTextField?.nextTextField = signupView.usernameTextField ?? signupView.emailTextField
     }
     
     private var lastTextField: UITextField {
-        return signupView.passwordConfirmTextField
+        return signupView.passwordConfirmTextField ?? signupView.passwordTextField
     }
     
 }
@@ -134,7 +140,6 @@ extension SignupController: UITextFieldDelegate {
         } else {
             textField.nextTextField?.becomeFirstResponder()
         }
-
         return true
     }
     
@@ -213,7 +218,8 @@ extension SignupController {
     private func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
         let topTextField = signupView.usernameTextField ?? signupView.emailTextField
         let top = topTextField.convertPoint(topTextField.frame.origin, toView: self.view).y - 10
-        let bottom = signupView.passwordConfirmTextField.convertPoint(signupView.passwordConfirmTextField.frame.origin, toView: self.view).y + signupView.passwordConfirmTextField.frame.size.height
+        let bottomTextField = signupView.passwordConfirmTextField ?? signupView.passwordTextField
+        let bottom = bottomTextField.convertPoint(bottomTextField.frame.origin, toView: self.view).y + bottomTextField.frame.size.height
         if (keyboardOffset + (bottom - top) + navBarOffset) <= self.view.frame.size.height {
             return top
         } else {

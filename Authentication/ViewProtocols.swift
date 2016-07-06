@@ -63,7 +63,7 @@ public protocol SignupFormType: AuthenticationFormType {
     var usernameTextFieldSelected: Bool { get set }
 
     var passwordConfirmLabel: UILabel? { get }
-    var passwordConfirmTextField: UITextField { get }
+    var passwordConfirmTextField: UITextField? { get }
     var passwordConfirmValidationMessageLabel: UILabel? { get }
     var passwordConfirmVisibilityButton: UIButton? { get }
     

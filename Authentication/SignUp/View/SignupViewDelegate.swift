@@ -19,9 +19,7 @@ public protocol SignupViewDelegate {
 
 public extension SignupViewDelegate {
     
-    func configureView(signupView: SignupViewType) {
-        
-    }
+    func configureView(signupView: SignupViewType) { }
     
 }
 
@@ -78,8 +76,8 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         
         signupView.passwordConfirmLabel?.font = fontPalette.labels
         signupView.passwordConfirmLabel?.textColor = colorPalette.labels
-        signupView.passwordConfirmTextField.font = fontPalette.textfields
-        signupView.passwordConfirmTextField.textColor = colorPalette.textfieldText
+        signupView.passwordConfirmTextField?.font = fontPalette.textfields
+        signupView.passwordConfirmTextField?.textColor = colorPalette.textfieldText
         signupView.passwordConfirmVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
         signupView.passwordConfirmVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
     }

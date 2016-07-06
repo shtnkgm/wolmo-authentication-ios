@@ -45,7 +45,7 @@ internal final class SignupView: UIView, SignupViewType {
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton!
     
     internal var passwordConfirmLabel: UILabel? { return .None }
-    internal var passwordConfirmTextField: UITextField { return UITextField() }
+    internal var passwordConfirmTextField: UITextField? { return .None }
     internal var passwordConfirmValidationMessageLabel: UILabel? { return .None }
     internal var passwordConfirmVisibilityButton: UIButton? { return .None }
     
