@@ -8,12 +8,19 @@
 
 public protocol SignupViewType: Renderable, SignupFormType {
 
+    var titleLabel: UILabel { get }
+    
 }
 
 internal final class SignupView: UIView, SignupViewType {
     
     internal lazy var delegate: SignupViewDelegate = DefaultSignupViewDelegate()
     
+    internal var titleLabel: UILabel { return titleLabelOutlet }
+    @IBOutlet weak var titleLabelOutlet: UILabel! {
+        titleLabel.text = titleText
+    }
+
     internal var usernameLabel: UILabel? { return .None }
     internal var usernameTextField: UITextField? { return .None }
     internal var usernameValidationMessageLabel: UILabel? { return .None }
@@ -42,9 +49,18 @@ internal final class SignupView: UIView, SignupViewType {
     internal var signupErrorLabel: UILabel? { return .None }
     
     internal var termsAndServicesLabel: UILabel? { return termsAndServicesLabelOutlet }
-    @IBOutlet weak var termsAndServicesLabelOutlet: UILabel!
+    @IBOutlet weak var termsAndServicesLabelOutlet: UILabel! {
+        termsAndServicesLabelOutlet.text = termsAndServicesLabelText
+    }
     internal var termsAndServicesButton: UIButton { return termsAndServicesButtonOutlet }
-    @IBOutlet weak var termsAndServicesButtonOutlet: UIButton!
+    @IBOutlet weak var termsAndServicesButtonOutlet: UIButton! {
+        termsAndServicesButtonOutlet.setTitle(termsAndServicesButtonTitle, forState: .Normal)
+    }
+    
+    internal var loginLabel: UILabel? { return loginLabelOutlet }
+    @IBOutlet weak var loginLabelOutlet: UILabel!
+    internal var loginButton: UIButton? { return loginButtonOutlet }
+    @IBOutlet weak var loginButtonOutlet: UIButton!
 
     internal var usernameTextFieldValid = false
     internal var usernameTextFieldSelected = false
@@ -59,6 +75,7 @@ internal final class SignupView: UIView, SignupViewType {
     internal var signupButtonEnabled = false
     internal var signupButtonPressed = false
     
+    
     internal func render() {
         
         delegate.configureView(self)
@@ -68,6 +85,10 @@ internal final class SignupView: UIView, SignupViewType {
 }
 
 public extension SignupViewType {
+    
+    public var titleText: String {
+        return "signup-view.title".localized
+    }
     
     public var nameText: String {
         return "signup-view.name".localized
@@ -108,6 +129,7 @@ public extension SignupViewType {
     public var termsAndServicesButtonTitle: String {
         return "signup-view.terms-and-services.button-title".localized
     }
+
     public var signupButtonTitle: String {
         return "signup-view.signup-button-title".localized
     }

@@ -37,6 +37,8 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     
     public func configureView(signupView: SignupViewType) {
         signupView.view.backgroundColor = colorPalette.background
+        signupView.titleLabel.textColor = colorPalette.labels
+        signupView.titleLabel.font = fontPalette.mainButton
         
         configureMainButton(signupView)
         configureUsernameElements(signupView)

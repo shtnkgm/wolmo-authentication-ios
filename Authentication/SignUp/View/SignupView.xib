@@ -12,8 +12,24 @@
             <rect key="frame" x="0.0" y="0.0" width="418" height="607"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPU-cw-qqE" userLabel="Title View">
+                    <rect key="frame" x="0.0" y="20" width="418" height="41"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtd-MK-bQ0">
+                            <rect key="frame" x="179" y="10" width="61" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Dtd-MK-bQ0" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="top" constant="10" id="JPc-Hp-UgR"/>
+                        <constraint firstAttribute="bottom" secondItem="Dtd-MK-bQ0" secondAttribute="bottom" constant="10" id="saP-wf-Wtu"/>
+                        <constraint firstItem="Dtd-MK-bQ0" firstAttribute="centerX" secondItem="lPU-cw-qqE" secondAttribute="centerX" id="uoc-2g-OYB"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSa-0q-elf" userLabel="Textfields View">
-                    <rect key="frame" x="0.0" y="20" width="418" height="136"/>
+                    <rect key="frame" x="0.0" y="61" width="418" height="136"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1A-j1-8cE" userLabel="Email View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="68"/>
@@ -161,7 +177,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iqv-fj-4Xd" userLabel="SignUp View">
-                    <rect key="frame" x="0.0" y="156" width="418" height="451"/>
+                    <rect key="frame" x="0.0" y="197" width="418" height="410"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8o-uo-260" userLabel="Terms&amp;Serivces View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="82"/>
@@ -207,8 +223,39 @@
                                 <constraint firstItem="5rz-BZ-aoM" firstAttribute="centerX" secondItem="X8o-uo-260" secondAttribute="centerX" id="iW9-FP-8fP"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TH1-Y1-ZZn" userLabel="Log In View">
+                            <rect key="frame" x="0.0" y="351" width="418" height="59"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿Ya estás registrado?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl4-RA-UdB">
+                                    <rect key="frame" x="140" y="0.0" width="138" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1l-gv-6Fh">
+                                    <rect key="frame" x="170" y="15" width="79" height="29"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="OFv-EE-Kpy"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="Inicia sesión"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="OFv-EE-Kpy"/>
+                                        </mask>
+                                    </variation>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Rl4-RA-UdB" firstAttribute="centerX" secondItem="TH1-Y1-ZZn" secondAttribute="centerX" id="2Fe-Ow-A88"/>
+                                <constraint firstItem="Rl4-RA-UdB" firstAttribute="top" secondItem="TH1-Y1-ZZn" secondAttribute="top" id="ChR-Sj-hpB"/>
+                                <constraint firstAttribute="bottom" secondItem="h1l-gv-6Fh" secondAttribute="bottom" constant="15" id="IHO-Ma-NJa"/>
+                                <constraint firstItem="h1l-gv-6Fh" firstAttribute="top" secondItem="Rl4-RA-UdB" secondAttribute="bottom" constant="-2" id="bl1-xJ-Ksi"/>
+                                <constraint firstItem="h1l-gv-6Fh" firstAttribute="centerX" secondItem="TH1-Y1-ZZn" secondAttribute="centerX" id="u5k-9M-kaS"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-Mz-klY" userLabel="Button View">
-                            <rect key="frame" x="0.0" y="82" width="418" height="310"/>
+                            <rect key="frame" x="0.0" y="82" width="418" height="269"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZp-rK-32z">
                                     <rect key="frame" x="21" y="0.0" width="376" height="50"/>
@@ -231,37 +278,6 @@
                                 </mask>
                             </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TH1-Y1-ZZn" userLabel="Log In View">
-                            <rect key="frame" x="0.0" y="392" width="418" height="59"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1l-gv-6Fh">
-                                    <rect key="frame" x="170" y="15" width="79" height="29"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="OFv-EE-Kpy"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <state key="normal" title="Inicia sesión"/>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="OFv-EE-Kpy"/>
-                                        </mask>
-                                    </variation>
-                                </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿Ya estás registrado?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl4-RA-UdB">
-                                    <rect key="frame" x="140" y="0.0" width="138" height="17"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="Rl4-RA-UdB" firstAttribute="centerX" secondItem="TH1-Y1-ZZn" secondAttribute="centerX" id="2Fe-Ow-A88"/>
-                                <constraint firstItem="Rl4-RA-UdB" firstAttribute="top" secondItem="TH1-Y1-ZZn" secondAttribute="top" id="ChR-Sj-hpB"/>
-                                <constraint firstAttribute="bottom" secondItem="h1l-gv-6Fh" secondAttribute="bottom" constant="15" id="IHO-Ma-NJa"/>
-                                <constraint firstItem="h1l-gv-6Fh" firstAttribute="top" secondItem="Rl4-RA-UdB" secondAttribute="bottom" constant="-2" id="bl1-xJ-Ksi"/>
-                                <constraint firstItem="h1l-gv-6Fh" firstAttribute="centerX" secondItem="TH1-Y1-ZZn" secondAttribute="centerX" id="u5k-9M-kaS"/>
-                            </constraints>
-                        </view>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="6RS-Mz-klY" secondAttribute="trailing" id="5hH-yk-wZd"/>
@@ -280,26 +296,33 @@
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Iqv-fj-4Xd" secondAttribute="bottom" id="5PJ-cu-YpV"/>
+                <constraint firstItem="pSa-0q-elf" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="bottom" id="6Bf-ek-bUJ"/>
                 <constraint firstItem="YZp-rK-32z" firstAttribute="trailing" secondItem="JVi-Ec-hKI" secondAttribute="trailing" id="8Nm-Te-hM3"/>
                 <constraint firstItem="pSa-0q-elf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BFG-ez-ZM5"/>
                 <constraint firstItem="YZp-rK-32z" firstAttribute="leading" secondItem="JVi-Ec-hKI" secondAttribute="leading" id="IUA-8f-tBd"/>
                 <constraint firstAttribute="trailing" secondItem="pSa-0q-elf" secondAttribute="trailing" id="KFW-7Z-jt1"/>
                 <constraint firstItem="YZp-rK-32z" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="56/671" id="OA0-y1-LDP"/>
+                <constraint firstItem="pSa-0q-elf" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="bottom" id="OE6-Ur-KWl"/>
                 <constraint firstItem="Iqv-fj-4Xd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WtO-SA-rte"/>
                 <constraint firstAttribute="trailing" secondItem="Iqv-fj-4Xd" secondAttribute="trailing" id="bCd-JD-6j7"/>
-                <constraint firstItem="pSa-0q-elf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="bl5-9T-hCS"/>
+                <constraint firstItem="lPU-cw-qqE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="cNL-Df-ANF"/>
                 <constraint firstItem="Iqv-fj-4Xd" firstAttribute="top" secondItem="pSa-0q-elf" secondAttribute="bottom" id="hiQ-ur-uol"/>
+                <constraint firstItem="lPU-cw-qqE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kX9-eB-Uo4"/>
+                <constraint firstAttribute="trailing" secondItem="lPU-cw-qqE" secondAttribute="trailing" id="uFv-Pj-4ll"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="emailTextFieldOutlet" destination="ng0-Kr-R1N" id="hyC-hE-93x"/>
                 <outlet property="emailValidationMessageLabelOutlet" destination="qlr-5N-r0b" id="4SM-hA-7U9"/>
+                <outlet property="loginButtonOutlet" destination="h1l-gv-6Fh" id="7i8-jd-cRv"/>
+                <outlet property="loginLabelOutlet" destination="Rl4-RA-UdB" id="hmE-C3-FxU"/>
                 <outlet property="passwordTextFieldOutlet" destination="88a-FE-Vb2" id="6Kj-Ay-xmh"/>
                 <outlet property="passwordValidationMessageLabelOutlet" destination="gkr-sO-rLU" id="tUM-6F-QQO"/>
                 <outlet property="passwordVisibilityButtonOutlet" destination="f0R-Cq-Zz3" id="61Q-cC-fGh"/>
                 <outlet property="signupButtonOutlet" destination="YZp-rK-32z" id="uPv-9G-yqq"/>
                 <outlet property="termsAndServicesButtonOutlet" destination="JuJ-8k-i6o" id="gyu-mz-cvR"/>
                 <outlet property="termsAndServicesLabelOutlet" destination="ysg-6j-g6B" id="oLn-i1-MxY"/>
+                <outlet property="titleLabelOutlet" destination="Dtd-MK-bQ0" id="ead-da-FeC"/>
             </connections>
             <point key="canvasLocation" x="307" y="460.5"/>
         </view>
