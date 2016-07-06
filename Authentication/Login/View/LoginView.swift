@@ -256,41 +256,41 @@ private extension LoginView {
     
 }
 
-private extension LoginView {
+public extension LoginViewType {
         
-    private var emailText: String {
+    public var emailText: String {
         return "login-view.email".localized
     }
     
-    private var passwordText: String {
+    public var passwordText: String {
         return "login-view.password".localized
     }
     
-    private var emailPlaceholderText: String {
+    public var emailPlaceholderText: String {
         return "login-view.email-placeholder".localized
     }
     
-    private var passwordPlaceholderText: String {
+    public var passwordPlaceholderText: String {
         return "login-view.password-placeholder".localized
     }
     
-    private var logInButtonTitle: String {
+    public var logInButtonTitle: String {
         return "login-view.login-button-title".localized
     }
     
-    private var signupLabelText: String {
+    public var signupLabelText: String {
         return "login-view.to-signup-label".localized
     }
     
-    private var signupButtonTitle: String {
+    public var signupButtonTitle: String {
         return "login-view.signup-button-title".localized
     }
     
-    private var passwordVisibilityButtonTitle: String {
+    public var passwordVisibilityButtonTitle: String {
         return ("login-view.password-visibility-button-title." + (showPassword ? "false" : "true")).localized
     }
     
-    private var recoverPasswordButtonTitle: String {
+    public var recoverPasswordButtonTitle: String {
         return "login-view.recover-password-button-title".localized
     }
     
