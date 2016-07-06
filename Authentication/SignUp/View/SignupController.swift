@@ -11,7 +11,7 @@ import ReactiveCocoa
 
 public final class SignupController: UIViewController {
     
-    private let _viewModel: SignupViewModelType
+    private var _viewModel: SignupViewModelType
     private let _signupViewFactory: () -> SignupViewType
     private let _delegate: SignupControllerDelegate
     
@@ -110,6 +110,9 @@ private extension SignupController {
             if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
                 passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
             }
+            _viewModel.passwordConfirmationValidationEnabled = true
+        } else {
+            _viewModel.passwordConfirmationValidationEnabled = false
         }
     }
     
