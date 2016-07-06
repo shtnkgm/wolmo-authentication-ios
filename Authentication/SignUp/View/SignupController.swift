@@ -77,6 +77,7 @@ private extension SignupController {
             if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
                 nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
             }
+            nameTextField.delegate = self
         }
     }
     
@@ -88,6 +89,7 @@ private extension SignupController {
         if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
         }
+        signupView.emailTextField.delegate = self
     }
     
     private func bindPasswordElements() {
@@ -98,6 +100,11 @@ private extension SignupController {
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
+        if let passwordVisibilityButton = signupView.passwordVisibilityButton {
+            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibilityCocoaAction
+            _viewModel.showPassword.signal.observeNext { [unowned self] in self.signupView.showPassword = $0 }
+        }
+        signupView.passwordTextField.delegate = self
         bindPasswordConfirmationElements()
     }
     
@@ -111,6 +118,11 @@ private extension SignupController {
                 passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
             }
             _viewModel.passwordConfirmationValidationEnabled = true
+            if let passwordVisibilityButton = signupView.passwordVisibilityButton {
+                passwordVisibilityButton.rex_pressed.value = _viewModel.toggleConfirmPswdVisibilityCocoaAction
+                _viewModel.showPassword.signal.observeNext { [unowned self] in self.signupView.showConfirmationPassword = $0 }
+            }
+            passwordConfirmationTextField.delegate = self
         } else {
             _viewModel.passwordConfirmationValidationEnabled = false
         }

@@ -41,19 +41,19 @@
                                             <rect key="frame" x="21" y="5" width="376" height="43"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ng0-Kr-R1N">
-                                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="360" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="ng0-Kr-R1N" firstAttribute="leading" secondItem="wS1-Yg-TTU" secondAttribute="leading" id="7Er-1N-PXI"/>
+                                                <constraint firstItem="ng0-Kr-R1N" firstAttribute="leading" secondItem="wS1-Yg-TTU" secondAttribute="leading" constant="8" id="7Er-1N-PXI"/>
                                                 <constraint firstAttribute="height" constant="52" id="8ST-6g-NRQ"/>
                                                 <constraint firstItem="ng0-Kr-R1N" firstAttribute="top" secondItem="wS1-Yg-TTU" secondAttribute="top" id="JlB-qv-Yge"/>
                                                 <constraint firstAttribute="bottom" secondItem="ng0-Kr-R1N" secondAttribute="bottom" id="KdF-Kw-GUX"/>
                                                 <constraint firstAttribute="height" constant="43" id="Tbs-kg-BPd"/>
-                                                <constraint firstAttribute="trailing" secondItem="ng0-Kr-R1N" secondAttribute="trailing" id="juZ-LG-zl0"/>
+                                                <constraint firstAttribute="trailing" secondItem="ng0-Kr-R1N" secondAttribute="trailing" constant="8" id="juZ-LG-zl0"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -106,12 +106,12 @@
                                             <rect key="frame" x="21" y="5" width="376" height="43"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="88a-FE-Vb2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="331" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="320" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0R-Cq-Zz3">
-                                                    <rect key="frame" x="331" y="0.0" width="45" height="43"/>
+                                                    <rect key="frame" x="328" y="0.0" width="45" height="43"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="51q-uO-k85"/>
                                                     </constraints>
@@ -121,10 +121,10 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="f0R-Cq-Zz3" firstAttribute="leading" secondItem="88a-FE-Vb2" secondAttribute="trailing" id="QJ7-cF-FGA"/>
-                                                <constraint firstItem="88a-FE-Vb2" firstAttribute="leading" secondItem="JVi-Ec-hKI" secondAttribute="leading" id="Ruf-aX-fAW"/>
+                                                <constraint firstItem="88a-FE-Vb2" firstAttribute="leading" secondItem="JVi-Ec-hKI" secondAttribute="leading" constant="8" id="Ruf-aX-fAW"/>
                                                 <constraint firstItem="f0R-Cq-Zz3" firstAttribute="top" secondItem="JVi-Ec-hKI" secondAttribute="top" id="b62-gH-6Ch"/>
                                                 <constraint firstAttribute="bottom" secondItem="88a-FE-Vb2" secondAttribute="bottom" id="dGh-hC-9QO"/>
-                                                <constraint firstAttribute="trailing" secondItem="f0R-Cq-Zz3" secondAttribute="trailing" id="foL-UJ-OaN"/>
+                                                <constraint firstAttribute="trailing" secondItem="f0R-Cq-Zz3" secondAttribute="trailing" constant="3" id="foL-UJ-OaN"/>
                                                 <constraint firstItem="88a-FE-Vb2" firstAttribute="top" secondItem="JVi-Ec-hKI" secondAttribute="top" id="sST-74-PaQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="f0R-Cq-Zz3" secondAttribute="bottom" id="uKk-0C-30q"/>
                                             </constraints>

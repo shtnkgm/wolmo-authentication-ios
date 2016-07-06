@@ -129,6 +129,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
             passwordTextField.secureTextEntry = !showPassword
             passwordTextField.enabled = true
             passwordTextField.font = delegate.fontPalette.textfields
+            passwordVisibilityButton?.setTitle(passwordVisibilityButtonTitle, forState: .Normal)
         }
     }
     
@@ -144,6 +145,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
             passwordConfirmTextField?.secureTextEntry = !showPassword
             passwordConfirmTextField?.enabled = true
             passwordConfirmTextField?.font = delegate.fontPalette.textfields
+            passwordConfirmVisibilityButton?.setTitle(confirmPasswordVisibilityButtonTitle, forState: .Normal)
         }
     }
     
@@ -196,6 +198,14 @@ public extension SignupViewType {
         return "signup-view.confirm-password-placeholder".localized
     }
     
+    public var passwordVisibilityButtonTitle: String {
+        return ("text-visibility-button-title." + (showPassword ? "false" : "true")).localized
+    }
+    
+    public var confirmPasswordVisibilityButtonTitle: String {
+        return ("text-visibility-button-title." + (showConfirmationPassword ? "false" : "true")).localized
+    }
+    
     public var termsAndServicesLabelText: String {
         return "signup-view.terms-and-services.label-text".localized
     }
@@ -208,11 +218,11 @@ public extension SignupViewType {
         return "signup-view.signup-button-title".localized
     }
     
-    private var loginLabelText: String {
+    public var loginLabelText: String {
         return "signup-view-model.login.label-text".localized
     }
     
-    private var loginButtonTitle: String {
+    public var loginButtonTitle: String {
         return "signup-view-model.login.button-title".localized
     }
     

@@ -22,10 +22,14 @@ public protocol SignupViewModelType {
     
     var password: MutableProperty<String> { get }
     var passwordValidationErrors: AnyProperty<[String]> { get }
+    var showPassword: MutableProperty<Bool> { get }
+    var togglePasswordVisibilityCocoaAction: CocoaAction { get }
     
     var passwordConfirmationValidationEnabled: Bool { get set }
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
+    var showConfirmationPassword: MutableProperty<Bool> { get }
+    var toggleConfirmPswdVisibilityCocoaAction: CocoaAction { get }
     
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
@@ -56,9 +60,15 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
     
+    public let showPassword = MutableProperty(false)
+    public let showConfirmationPassword = MutableProperty(false)
+    
     public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
+    
+    public var togglePasswordVisibilityCocoaAction: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
+    public var toggleConfirmPswdVisibilityCocoaAction: CocoaAction { return _toggleConfirmationPasswordVisibility.unsafeCocoaAction }
     
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
@@ -70,6 +80,10 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
         }
     }()
     
+    private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
+    private lazy var _toggleConfirmationPasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeToggleConfirmationPasswordVisibilityAction()
+    
+    // If there is no username in the view, the credentials validator's nameValidator.validate should always return true.
     internal init(sessionService: SessionService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
         _sessionService = sessionService
         
@@ -101,20 +115,26 @@ private extension SignupViewModel {
         }))
     }
     
+    private func initializeTogglePasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+        return Action { [unowned self] _ in
+            self.showPassword.value = !self.showPassword.value
+            return SignalProducer(value: self.showPassword.value).observeOn(UIScheduler())
+        }
+    }
+    
+    private func initializeToggleConfirmationPasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+        return Action { [unowned self] _ in
+            self.showConfirmationPassword.value = !self.showConfirmationPassword.value
+            return SignalProducer(value: self.showConfirmationPassword.value).observeOn(UIScheduler())
+        }
+    }
+    
 }
 
 private func getPasswordConfirmValidationResultFromEquality(equals: Bool) -> ValidationResult {
     if equals {
         return .Valid
     } else {
-        return .invalid("signup.password-confirmation.invalid".localized)
-    }
-}
-
-private func getTermsAndServicesValidationResultFromAcceptance(accepted: Bool) -> ValidationResult {
-    if accepted {
-        return .Valid
-    } else {
-        return .invalid("signup.terms-and-services.not-accepted".localized)
+        return .invalid("signup-error.password-confirmation.invalid".localized)
     }
 }

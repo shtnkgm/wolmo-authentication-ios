@@ -70,12 +70,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    internal var logInErrorLabel: UILabel? { return logInErrorLabelOutlet }
-    @IBOutlet weak var logInErrorLabelOutlet: UILabel! {
-        didSet {
-            logInErrorLabelOutlet.text = " "
-        }
-    }
+    internal var logInErrorLabel: UILabel? { return .None }
     
     internal var signupLabel: UILabel { return toSignupLabel }
     @IBOutlet weak var toSignupLabel: UILabel! {

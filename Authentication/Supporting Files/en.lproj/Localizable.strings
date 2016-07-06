@@ -12,6 +12,10 @@
 "text-input-validator.min-length" = "Can't be shorter than %d";
 "text-input-validator.invalid-email" = "It has to be a valid email";
 
+/* Text visibility */
+"text-visibility-button-title.false" = "Hide";
+"text-visibility-button-title.true" = "Show";
+
 /* Login UI elements titles */
 "login-view.email" = "Email:";
 "login-view.password" = "Password:";
@@ -19,8 +23,6 @@
 "login-view.password-placeholder" = "Password";
 "login-view.login-button-title" = "LOG IN";
 "login-view.signup-button-title" = "Sign up";
-"login-view.password-visibility-button-title.false" = "Hide";
-"login-view.password-visibility-button-title.true" = "Show";
 "login-view.recover-password-button-title" = "Forgot password?";
 "login-view.to-signup-label" = "Don't have an account?";
 
@@ -32,19 +34,21 @@
 "login-error.alert.title" = "Unable to log in";
 "login-error.alert.close" = "Try again";
 
-
 /* Signup UI elements titles */
 "signup-view.title" = "Sign Up";
 "signup-view.name" = "Name:";
-"signup-view.name-placeholder" = "Name";
 "signup-view.email" = "Email:";
-"signup-view.email-placeholder" = "Email";
 "signup-view.password" = "Password:";
-"signup-view.password-placeholder" = "Password";
 "signup-view.confirm-password" = "Confirm Password:";
+"signup-view.name-placeholder" = "Name";
+"signup-view.email-placeholder" = "Email";
+"signup-view.password-placeholder" = "Password";
 "signup-view.confirm-password-placeholder" = "Confirm password";
 "signup-view.terms-and-services.label-text" = "By signing up, I agree to the";
 "signup-view.terms-and-services.button-title" = "Terms and Services";
 "signup-view.signup-button-title" = "Sign Up";
 "signup-view.login.label-text" = "Already registered?";
 "signup-view.login.button-title" = "Log In";
+
+/* Signup errors */
+"signup-error.password-confirmation.invalid" = "Passwords don't match";
