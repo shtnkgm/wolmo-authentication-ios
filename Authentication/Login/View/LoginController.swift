@@ -71,6 +71,7 @@ public final class LoginController: UIViewController {
 
     
     public override func viewDidLoad() {
+        super.viewDidLoad()
         loginView.render()
         bindViewModel()
         navigationController?.navigationBarHidden = true

@@ -313,16 +313,18 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="emailTextFieldOutlet" destination="ng0-Kr-R1N" id="hyC-hE-93x"/>
+                <outlet property="emailTextFieldViewOutlet" destination="wS1-Yg-TTU" id="ybK-pj-Rme"/>
                 <outlet property="emailValidationMessageLabelOutlet" destination="qlr-5N-r0b" id="4SM-hA-7U9"/>
                 <outlet property="loginButtonOutlet" destination="h1l-gv-6Fh" id="7i8-jd-cRv"/>
                 <outlet property="loginLabelOutlet" destination="Rl4-RA-UdB" id="hmE-C3-FxU"/>
+                <outlet property="passwordTextFieldAndButtonViewOutlet" destination="JVi-Ec-hKI" id="Y6T-xL-Mak"/>
                 <outlet property="passwordTextFieldOutlet" destination="88a-FE-Vb2" id="6Kj-Ay-xmh"/>
                 <outlet property="passwordValidationMessageLabelOutlet" destination="gkr-sO-rLU" id="tUM-6F-QQO"/>
                 <outlet property="passwordVisibilityButtonOutlet" destination="f0R-Cq-Zz3" id="61Q-cC-fGh"/>
                 <outlet property="signupButtonOutlet" destination="YZp-rK-32z" id="uPv-9G-yqq"/>
                 <outlet property="termsAndServicesButtonOutlet" destination="JuJ-8k-i6o" id="gyu-mz-cvR"/>
                 <outlet property="termsAndServicesLabelOutlet" destination="ysg-6j-g6B" id="oLn-i1-MxY"/>
-                <outlet property="titleLabelOutlet" destination="Dtd-MK-bQ0" id="ead-da-FeC"/>
+                <outlet property="titleLabelOutlet" destination="Dtd-MK-bQ0" id="v4q-H7-B6l"/>
             </connections>
             <point key="canvasLocation" x="307" y="460.5"/>
         </view>

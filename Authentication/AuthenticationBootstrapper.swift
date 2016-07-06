@@ -154,7 +154,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     }
     
     public func createSignupView() -> SignupViewType {
-        let view = SignupView()
+        let view = SignupView.loadFromNib()
         view.delegate = DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
         return view
     }

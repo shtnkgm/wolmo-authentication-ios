@@ -15,7 +15,7 @@ public protocol SignupViewType: Renderable, SignupFormType {
     
 }
 
-internal final class SignupView: UIView, SignupViewType {
+internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal lazy var delegate: SignupViewDelegate = DefaultSignupViewDelegate()
     
@@ -31,26 +31,59 @@ internal final class SignupView: UIView, SignupViewType {
     internal var usernameValidationMessageLabel: UILabel? { return .None }
     
     internal var emailLabel: UILabel? { return .None }
+    
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField!
+    @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
+        didSet {
+            emailTextFieldViewOutlet.layer.borderWidth = 1
+            emailTextFieldViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
-    @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel!
+    @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
+        didSet {
+            emailValidationMessageLabelOutlet.text = " "
+        }
+    }
     
     internal var passwordLabel: UILabel? { return .None }
+    
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField!
+    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
+        didSet {
+            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
+            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
-    @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel!
+    @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
+        didSet {
+            passwordValidationMessageLabelOutlet.text = " "
+        }
+    }
+    
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
-    @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton!
+    @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
+        didSet {
+            passwordVisibilityButtonOutlet.hidden = true
+        }
+    }
     
     internal var passwordConfirmLabel: UILabel? { return .None }
     internal var passwordConfirmTextField: UITextField? { return .None }
     internal var passwordConfirmValidationMessageLabel: UILabel? { return .None }
     internal var passwordConfirmVisibilityButton: UIButton? { return .None }
-    
+
     internal var signupButton: UIButton { return signupButtonOutlet }
-    @IBOutlet weak var signupButtonOutlet: UIButton!
+    @IBOutlet weak var signupButtonOutlet: UIButton! {
+        didSet {
+            signupButtonOutlet.layer.cornerRadius = 6.0
+        }
+    }
     internal var signupErrorLabel: UILabel? { return .None }
     
     internal var termsAndServicesLabel: UILabel? { return termsAndServicesLabelOutlet }
@@ -86,13 +119,36 @@ internal final class SignupView: UIView, SignupViewType {
     internal var emailTextFieldSelected = false
     internal var passwordTextFieldValid = false
     internal var passwordTextFieldSelected = false
-    internal var showPassword = false
+    
+    internal var showPassword = false {
+        didSet {
+            // Changing enabled property for the
+            // font setting to take effect, which is
+            // necessary for it not to shrink.
+            passwordTextField.enabled = false
+            passwordTextField.secureTextEntry = !showPassword
+            passwordTextField.enabled = true
+            passwordTextField.font = delegate.fontPalette.textfields
+        }
+    }
+    
     internal var passwordConfirmationTextFieldValid = false
     internal var passwordConfirmationTextFieldSelected = false
-    internal var showConfirmPassword = false
+    
+    internal var showConfirmationPassword = false {
+        didSet {
+            // Changing enabled property for the
+            // font setting to take effect, which is
+            // necessary for it not to shrink.
+            passwordConfirmTextField?.enabled = false
+            passwordConfirmTextField?.secureTextEntry = !showPassword
+            passwordConfirmTextField?.enabled = true
+            passwordConfirmTextField?.font = delegate.fontPalette.textfields
+        }
+    }
+    
     internal var signupButtonEnabled = false
     internal var signupButtonPressed = false
-    
     
     internal func render() {
         

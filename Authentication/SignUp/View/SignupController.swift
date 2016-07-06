@@ -49,6 +49,7 @@ public final class SignupController: UIViewController {
     
     
     public override func viewDidLoad() {
+        super.viewDidLoad()
         signupView.render()
         bindViewModel()
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
