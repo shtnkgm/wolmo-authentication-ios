@@ -102,10 +102,6 @@ private extension LoginController {
     
     private func bindEmailElements() {
         _viewModel.email <~ loginView.emailTextField.rex_textSignal
-        if let label = loginView.emailLabel {
-            label.text = _viewModel.emailText
-        }
-        loginView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.loginControllerDidPassEmailValidation(self)
@@ -127,10 +123,6 @@ private extension LoginController {
                 self.loginView.passwordVisibilityButton?.hidden = false
             }
         })
-        if let label = loginView.passwordLabel {
-            label.text = _viewModel.passwordText
-        }
-        loginView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.loginControllerDidPassPasswordValidation(self)
@@ -143,7 +135,6 @@ private extension LoginController {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
-            passwordVisibilityButton.rex_title <~ _viewModel.showPassword.producer.map { [unowned self] _ in self._viewModel.passwordVisibilityButtonTitle }
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibilityCocoaAction
             _viewModel.showPassword.signal.observeNext { [unowned self] in self.loginView.showPassword = $0 }
         }
@@ -151,15 +142,9 @@ private extension LoginController {
     }
     
     private func bindButtons() {
-        loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
-        
-        loginView.signupLabel.text = _viewModel.signupLabelText
-        loginView.signupButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
         loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.didTapOnSignup(self) }
-        
-        loginView.recoverPasswordButton.setTitle(_viewModel.recoverPasswordButtonTitle, forState: .Normal)
         loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.didTapOnRecoverPassword(self) }
     }
     

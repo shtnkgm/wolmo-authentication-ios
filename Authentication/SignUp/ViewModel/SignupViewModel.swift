@@ -30,18 +30,6 @@ public protocol SignupViewModelType {
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
     
-    var nameText: String { get }
-    var emailText: String { get }
-    var passwordText: String { get }
-    var confirmPasswordText: String { get }
-    var namePlaceholderText: String { get }
-    var emailPlaceholderText: String { get }
-    var passwordPlaceholderText: String { get }
-    var confirmPasswordPlaceholderText: String { get }
-    var termsAndServicesLabelText: String { get }
-    var termsAndServicesButtonTitle: String { get }
-    var signupButtonTitle: String { get }
-    
 }
 
 public final class SignupViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
@@ -111,49 +99,3 @@ private func getTermsAndServicesValidationResultFromAcceptance(accepted: Bool) -
     }
 }
 
-public extension SignupViewModel {
-    
-    public var nameText: String {
-        return "signup-view-model.name".localized
-    }
-    
-    public var emailText: String {
-        return "signup-view-model.email".localized
-    }
-    
-    public var passwordText: String {
-        return "signup-view-model.password".localized
-    }
-    
-    public var confirmPasswordText: String {
-        return "signup-view-model.confirm-password".localized
-    }
-    
-    public var namePlaceholderText: String {
-        return "signup-view-model.name-placeholder".localized
-    }
-    
-    public var emailPlaceholderText: String {
-        return "signup-view-model.email-placeholder".localized
-    }
-    
-    public var passwordPlaceholderText: String {
-        return "signup-view-model.password-placeholder".localized
-    }
-    
-    public var confirmPasswordPlaceholderText: String {
-        return "signup-view-model.confirm-password-placeholder".localized
-    }
-    
-    public var termsAndServicesLabelText: String {
-        return "signup-view-model.terms-and-services.label-text".localized
-    }
-    
-    public var termsAndServicesButtonTitle: String {
-        return "signup-view-model.terms-and-services.button-title".localized
-    }
-    public var signupButtonTitle: String {
-        return "signup-view-model.signup-button-title".localized
-    }
-    
-}

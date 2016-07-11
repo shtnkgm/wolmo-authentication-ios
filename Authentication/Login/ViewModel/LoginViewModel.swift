@@ -27,16 +27,6 @@ public protocol LoginViewModelType {
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
     
-    var emailText: String { get }
-    var passwordText: String { get }
-    var emailPlaceholderText: String { get }
-    var passwordPlaceholderText: String { get }
-    var loginButtonTitle: String { get }
-    var signupLabelText: String { get }
-    var signupButtonTitle: String { get }
-    var recoverPasswordButtonTitle: String { get }
-    var passwordVisibilityButtonTitle: String { get }
-    
 }
 
 /**
@@ -104,46 +94,6 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
         
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
-    }
-    
-}
-
-public extension LoginViewModel {
-    
-    var emailText: String {
-        return "login-view-model.email".localized
-    }
-    
-    var passwordText: String {
-        return "login-view-model.password".localized
-    }
-    
-    var emailPlaceholderText: String {
-        return "login-view-model.email-placeholder".localized
-    }
-    
-    var passwordPlaceholderText: String {
-        return "login-view-model.password-placeholder".localized
-    }
-    
-    var loginButtonTitle: String {
-        return "login-view-model.login-button-title".localized
-    }
-    
-    var signupLabelText: String {
-        return "login-view.to-signup-label".localized
-    }
-    
-    var signupButtonTitle: String {
-        return "login-view-model.signup-button-title".localized
-    }
-    
-    var passwordVisibilityButtonTitle: String {
-        return ("login-view-model.password-visibility-button-title." + (showPassword.value ? "false" : "true")).localized
-    }
-    
-    var recoverPasswordButtonTitle: String {
-        return "login-view-model.recover-password-button-title".localized
     }
     
 }

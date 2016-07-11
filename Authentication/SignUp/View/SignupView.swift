@@ -57,3 +57,50 @@ public final class SignupView: UIView, SignupViewType {
     }
     
 }
+
+private extension SignupView {
+    
+    private var nameText: String {
+        return "signup-view.name".localized
+    }
+    
+    private var emailText: String {
+        return "signup-view.email".localized
+    }
+    
+    private var passwordText: String {
+        return "signup-view.password".localized
+    }
+    
+    private var confirmPasswordText: String {
+        return "signup-view.confirm-password".localized
+    }
+    
+    private var namePlaceholderText: String {
+        return "signup-view.name-placeholder".localized
+    }
+    
+    private var emailPlaceholderText: String {
+        return "signup-view.email-placeholder".localized
+    }
+    
+    private var passwordPlaceholderText: String {
+        return "signup-view.password-placeholder".localized
+    }
+    
+    private var confirmPasswordPlaceholderText: String {
+        return "signup-view.confirm-password-placeholder".localized
+    }
+    
+    private var termsAndServicesLabelText: String {
+        return "signup-view.terms-and-services.label-text".localized
+    }
+    
+    private var termsAndServicesButtonTitle: String {
+        return "signup-view.terms-and-services.button-title".localized
+    }
+    private var signupButtonTitle: String {
+        return "signup-view.signup-button-title".localized
+    }
+    
+}

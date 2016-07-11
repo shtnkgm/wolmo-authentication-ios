@@ -70,8 +70,6 @@ private extension SignupController {
     private func bindNameElements() {
         if let nameTextField = signupView.usernameTextField {
             _viewModel.name <~ nameTextField.rex_textSignal
-            signupView.usernameLabel?.text = _viewModel.nameText
-            nameTextField.placeholder = _viewModel.namePlaceholderText
             _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
                 self._delegate.signupController(self, didFailNameValidationWithErrors: errors)
             }
@@ -83,8 +81,6 @@ private extension SignupController {
     
     private func bindEmailElements() {
         _viewModel.email <~ signupView.emailTextField.rex_textSignal
-        signupView.emailLabel?.text = _viewModel.emailText
-        signupView.emailTextField.placeholder = _viewModel.emailPlaceholderText
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
             self._delegate.signupController(self, didFailEmailValidationWithErrors: errors)
         }
@@ -95,8 +91,6 @@ private extension SignupController {
     
     private func bindPasswordElements() {
         _viewModel.password <~ signupView.passwordTextField.rex_textSignal
-        signupView.passwordLabel?.text = _viewModel.passwordText
-        signupView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             self._delegate.signupController(self, didFailPasswordValidationWithErrors: errors)
         }
@@ -105,8 +99,6 @@ private extension SignupController {
         }
         
         _viewModel.passwordConfirmation <~ signupView.passwordConfirmTextField.rex_textSignal
-        signupView.passwordConfirmLabel?.text = _viewModel.confirmPasswordText
-        signupView.passwordConfirmTextField.placeholder = _viewModel.confirmPasswordPlaceholderText
         _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
             self._delegate.signupController(self, didFailPasswordConfirmationValidationWithErrors: errors)
         }
@@ -116,12 +108,8 @@ private extension SignupController {
     }
     
     private func bindButtons() {
-        signupView.signupButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
         signupView.signupButton.rex_pressed.value = _viewModel.signUpCocoaAction
         signupView.signupButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.signupButtonEnabled = $0 }
-        
-        signupView.termsAndServicesLabel?.text = _viewModel.termsAndServicesLabelText
-        signupView.termsAndServicesButton.setTitle(_viewModel.termsAndServicesButtonTitle, forState: .Normal)
         //signupView.termsAndServicesButton -> Presents the terms and services
     }
     
