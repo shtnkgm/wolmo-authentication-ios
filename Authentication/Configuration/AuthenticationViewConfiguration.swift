@@ -13,17 +13,7 @@ public struct AuthenticationViewConfiguration {
     public let loginConfiguration: LoginViewConfigurationType
     public let signupConfiguration: SignupViewConfigurationType
     
-    public init() {
-        loginConfiguration = DefaultLoginViewConfiguration()
-        signupConfiguration = DefaultSignupViewConfiguration()
-    }
-    
-    public init(loginViewConfiguration: LoginViewConfigurationType, signupViewConfiguration: SignupViewConfigurationType = DefaultSignupViewConfiguration()) {
-        loginConfiguration = loginViewConfiguration
-        signupConfiguration = signupViewConfiguration
-    }
-    
-    public init(signupViewConfiguration: SignupViewConfigurationType, loginViewConfiguration: LoginViewConfigurationType = DefaultLoginViewConfiguration()) {
+    public init(loginViewConfiguration: LoginViewConfigurationType = DefaultLoginViewConfiguration(), signupViewConfiguration: SignupViewConfigurationType = DefaultSignupViewConfiguration()) {
         loginConfiguration = loginViewConfiguration
         signupConfiguration = signupViewConfiguration
     }
