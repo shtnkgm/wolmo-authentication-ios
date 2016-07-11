@@ -207,7 +207,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
 
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
-    public func loginControllerDidTapOnSignup(controller: LoginController) {
+    public func didTapOnSignup(controller: LoginController) {
         let signupController = createSignupController()
         if let navigationController = controller.navigationController {
             navigationController.pushViewController(signupController, animated: true)
@@ -216,7 +216,7 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
         }
     }
     
-    public func loginControllerDidTapOnRecoverPassword(controller: LoginController) {
+    public func didTapOnRecoverPassword(controller: LoginController) {
         let recoverPasswordController = createRecoverPasswordController()
         if let navigationController = controller.navigationController {
             navigationController.pushViewController(recoverPasswordController, animated: true)

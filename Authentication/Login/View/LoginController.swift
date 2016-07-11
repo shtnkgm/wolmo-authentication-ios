@@ -151,10 +151,10 @@ private extension LoginController {
         
         loginView.signupLabel.text = _viewModel.signupLabelText
         loginView.signupButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
-        loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.loginControllerDidTapOnSignup(self) }
+        loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.didTapOnSignup(self) }
         
         loginView.recoverPasswordButton.setTitle(_viewModel.recoverPasswordButtonTitle, forState: .Normal)
-        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.loginControllerDidTapOnRecoverPassword(self) }
+        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.didTapOnRecoverPassword(self) }
     }
 
 }
