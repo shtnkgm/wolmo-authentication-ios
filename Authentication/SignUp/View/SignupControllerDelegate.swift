@@ -10,7 +10,7 @@ import Foundation
 
 public protocol SignupControllerDelegate {
     
-    var shouldDisplaySignupErrorWithAlert: Bool
+    var shouldDisplaySignupErrorWithAlert: Bool { get }
     
     func signupControllerWillExecuteSignUp(controller: SignupController)
     

@@ -16,7 +16,7 @@ import Foundation
 */
 public protocol LoginControllerDelegate {
     
-    var shouldDisplayLoginErrorWithAlert: Bool
+    var shouldDisplayLoginErrorWithAlert: Bool { get }
 
     func loginControllerWillExecuteLogIn(controller: LoginController)
     
@@ -61,7 +61,7 @@ extension LoginControllerDelegate {
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = error.message
         }
-        if shouldDisplayLoginErrorWithAlert() {
+        if shouldDisplayLoginErrorWithAlert {
             let alert = UIAlertController(title: "login-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "login-error.alert.close".localized, style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)
