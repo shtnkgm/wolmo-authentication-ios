@@ -6,51 +6,13 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
-
-public protocol Renderable {
-    
-    func render()
-    
-}
-
-public protocol LoginViewType: Renderable {
-    
-    var view: UIView { get }
+public protocol LoginViewType: Renderable, LoginFormType {
     
     var logoImageView: UIImageView { get }
-    
-    var emailLabel: UILabel? { get }
-    var emailTextField: UITextField { get }
-    var emailValidationMessageLabel: UILabel? { get }
-    
-    var passwordLabel: UILabel? { get }
-    var passwordTextField: UITextField { get }
-    var passwordValidationMessageLabel: UILabel? { get }
-    var passwordVisibilityButton: UIButton? { get }
-    
-    var logInButton: UIButton { get }
-    var logInErrorLabel: UILabel? { get }
     
     var signupLabel: UILabel { get }
     var signupButton: UIButton { get }
     var recoverPasswordButton: UIButton { get }
-    
-    var emailTextFieldValid: Bool { get set }
-    var emailTextFieldSelected: Bool { get set }
-    var passwordTextFieldValid: Bool { get set }
-    var passwordTextFieldSelected: Bool { get set }
-    var logInButtonEnabled: Bool { get set }
-    var logInButtonPressed: Bool { get set }
-    var showPassword: Bool { get set }
-    
-}
-
-public extension LoginViewType where Self: UIView {
-    
-    var view: UIView {
-        return self
-    }
     
 }
 

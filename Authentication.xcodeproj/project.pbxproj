@@ -36,6 +36,7 @@
 		CE89A26F1CAF019D00E1903B /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE89A26E1CAF019D00E1903B /* ColorPalette.swift */; };
 		CE9AC3C41C8F2F9E0012D20B /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C31C8F2F9E0012D20B /* SignupController.swift */; };
 		CE9AC3C61C8F34A70012D20B /* AuthenticationBootstrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */; };
+		CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA65B831D33F9960065283E /* ViewProtocols.swift */; };
 		CEB119181CA2E43B0049DABF /* LoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */; };
 		CEB1191A1CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */; };
 		CEB119201CA315000049DABF /* SignupCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */; };
@@ -154,6 +155,7 @@
 		CE89A26E1CAF019D00E1903B /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPalette.swift; path = Configuration/ColorPalette.swift; sourceTree = "<group>"; };
 		CE9AC3C31C8F2F9E0012D20B /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupController.swift; path = SignUp/View/SignupController.swift; sourceTree = "<group>"; };
 		CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationBootstrapper.swift; sourceTree = "<group>"; };
+		CEA65B831D33F9960065283E /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
 		CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginConfiguration.swift; path = Login/View/LoginConfiguration.swift; sourceTree = "<group>"; };
 		CEB119191CA2EB3B0049DABF /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockLoginTransitionDelegate.swift; path = Login/Mocks/MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CEB1191F1CA315000049DABF /* SignupCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupCredentialsValidator.swift; path = SignUp/ViewModel/SignupCredentialsValidator.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				CEE94AB31CA06D5F0089E71B /* UIExtensions.swift */,
 				CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */,
 				CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */,
+				CEA65B831D33F9960065283E /* ViewProtocols.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				CEE226B51C9C7692005EB279 /* SignupView.swift in Sources */,
 				CEB4E4F31CAAEB51002FE023 /* SignupControllerDelegate.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
+				CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */,
 				CEE226B71C9C7FA4005EB279 /* LoginViewDelegate.swift in Sources */,
 				CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */,
 				CE040D7A1C99CEE10020DDE0 /* LengthValidators.swift in Sources */,
