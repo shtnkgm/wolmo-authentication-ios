@@ -16,7 +16,7 @@ import Foundation
 */
 public protocol LoginControllerDelegate {
     
-    func shouldDisplayLoginErrorWithAlert() -> Bool
+    var shouldDisplayLoginErrorWithAlert: Bool
 
     func loginControllerWillExecuteLogIn(controller: LoginController)
     
@@ -51,9 +51,7 @@ extension LoginControllerDelegate {
         app.networkActivityIndicatorVisible = false
     }
     
-    public func shouldDisplayLoginErrorWithAlert() -> Bool {
-        return true
-    }
+    public var shouldDisplayLoginErrorWithAlert: Bool { return true }
     
     public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {
         controller.loginView.emailTextFieldValid = false

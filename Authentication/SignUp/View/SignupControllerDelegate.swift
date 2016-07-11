@@ -10,7 +10,7 @@ import Foundation
 
 public protocol SignupControllerDelegate {
     
-    func shouldDisplaySignupErrorWithAlert() -> Bool
+    var shouldDisplaySignupErrorWithAlert: Bool
     
     func signupControllerWillExecuteSignUp(controller: SignupController)
     
@@ -38,9 +38,7 @@ public protocol SignupControllerDelegate {
 
 extension SignupControllerDelegate {
     
-    public func shouldDisplaySignupErrorWithAlert() -> Bool {
-        return true
-    }
+    public var shouldDisplaySignupErrorWithAlert: Bool { return true }
     
     public func signupControllerWillExecuteSignUp(controller: SignupController) {
         if let errorLabel = controller.signupView.signupErrorLabel {
@@ -65,7 +63,7 @@ extension SignupControllerDelegate {
         if let errorLabel = controller.signupView.signupErrorLabel {
             errorLabel.text = error.message
         }
-        if shouldDisplaySignupErrorWithAlert() {
+        if shouldDisplaySignupErrorWithAlert {
             let alert = UIAlertController(title: "signup-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "signup-error.alert.close", style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)
