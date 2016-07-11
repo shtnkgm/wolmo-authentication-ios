@@ -28,7 +28,7 @@ final class MockSessionService: SessionServiceType {
         (events, _eventsObserver) = Signal<SessionServiceEvent<User>, NoError>.pipe()
     }
     
-    func logIn(email: Email, _ password: String) -> SignalProducer<MyUser, SessionServiceError> {
+    func logIn(email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
         if email == self._possibleUser.email && password == self._possibleUser.password {
             return SignalProducer(value: self._possibleUser).on(completed: { [unowned self] in
                 self._eventsObserver.sendNext(.LogIn(self._possibleUser))
@@ -42,7 +42,7 @@ final class MockSessionService: SessionServiceType {
         }
     }
     
-    func signUp(name: String, _ email: Email, _ password: String) -> SignalProducer<MyUser, SessionServiceError> {
+    func signUp(name: String, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
         return SignalProducer.empty
     }
     
