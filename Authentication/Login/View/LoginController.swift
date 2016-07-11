@@ -34,8 +34,13 @@ public final class LoginController: UIViewController {
     private let _keyboardDisplayed = MutableProperty(false)
     private let _activeField = MutableProperty<UITextField?>(.None)
     
+    // This is an internal initializer, because if wanting to use the  default SignupController,
+    // you should not override the `createLoginController` method, but all the others
+    // that provide the elements this controller uses. (That is to say,
+    // `createLoginView`, `createLoginViewModel`, `createLoginControllerDelegate` or
+    // `createLoginControllerConfiguration`)
     /**
-        Initializes a login controller with the configuration to use:
+        Initializes a login controller with the configuration to use.
      
         Parameters:
             - configuration: A login controller configuration with all

@@ -127,6 +127,18 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         return DefaultLoginControllerDelegate()
     }
     
+    public func createLoginControllerConfiguration() -> LoginControllerConfiguration {
+        return LoginControllerConfiguration(
+            viewModel: createLoginViewModel(),
+            viewFactory: createLoginView,
+            transitionDelegate: self)
+    }
+    
+    public func createLoginController() -> LoginController {
+        let configuration = createLoginControllerConfiguration()
+        return LoginController(configuration: configuration)
+    }
+    
     
     /**
          Creates the signup controller to use when the
@@ -189,18 +201,6 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
      */
     public func createRecoverPasswordController() -> RecoverPasswordController { //todo
         return RecoverPasswordController()
-    }
-
-    public func createLoginControllerConfiguration() -> LoginControllerConfiguration {
-        return LoginControllerConfiguration(
-            viewModel: createLoginViewModel(),
-            viewFactory: createLoginView,
-            transitionDelegate: self)
-    }
-    
-    public func createLoginController() -> LoginController {
-        let configuration = createLoginControllerConfiguration()
-        return LoginController(configuration: configuration)
     }
     
 }

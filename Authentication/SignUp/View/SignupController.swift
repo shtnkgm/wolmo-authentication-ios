@@ -23,6 +23,10 @@ public final class SignupController: UIViewController {
     private let _activeTextField = MutableProperty<UITextField?>(.None)
 
     
+    // Internal initializer, because if wanting to use the  default SignupController,
+    // you should not override the `createSignupController` method, but all the others 
+    // that provide the elements this controller uses. (That is to say,
+    // `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`)
     init(viewModel: SignupViewModelType, signupViewFactory: () -> SignupViewType, delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
         _viewModel = viewModel
         _signupViewFactory = signupViewFactory
