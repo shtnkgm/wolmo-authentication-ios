@@ -64,6 +64,7 @@ private extension SignupController {
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
+        setTextfieldOrder()
     }
     
     private func bindNameElements() {
@@ -124,20 +125,28 @@ private extension SignupController {
         //signupView.termsAndServicesButton -> Presents the terms and services
     }
     
+    private func setTextfieldOrder() {
+        signupView.passwordConfirmTextField.nextTextField = signupView.usernameTextField ?? signupView.emailTextField
+        signupView.emailTextField.nextTextField = signupView.passwordTextField
+        signupView.passwordTextField.nextTextField = signupView.passwordConfirmTextField
+    }
+    
+    private var lastTextField: UITextField {
+        return signupView.passwordConfirmTextField
+    }
+    
 }
 
 extension SignupController: UITextFieldDelegate {
     
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == signupView.usernameTextField {
-            signupView.emailTextField.becomeFirstResponder()
-        } else if textField == signupView.emailTextField {
-            signupView.passwordTextField.becomeFirstResponder()
-        } else if textField == signupView.passwordTextField {
-            signupView.passwordConfirmTextField.becomeFirstResponder()
+        if textField == lastTextField && _viewModel.signUpCocoaAction.enabled {
+            textField.resignFirstResponder()
+            _viewModel.signUpCocoaAction.execute("")
         } else {
-            (signupView.usernameTextField ?? signupView.emailTextField).becomeFirstResponder()
+            textField.nextTextField?.becomeFirstResponder()
         }
+
         return true
     }
     

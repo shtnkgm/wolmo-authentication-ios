@@ -86,6 +86,7 @@ private extension LoginController {
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
+        setTextfieldOrder()
         
         _viewModel.logInExecuting.observeNext { [unowned self] executing in
             if executing {
@@ -161,21 +162,26 @@ private extension LoginController {
         loginView.recoverPasswordButton.setTitle(_viewModel.recoverPasswordButtonTitle, forState: .Normal)
         loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.didTapOnRecoverPassword(self) }
     }
+    
+    private func setTextfieldOrder() {
+        loginView.emailTextField.nextTextField = loginView.passwordTextField
+        loginView.passwordTextField.nextTextField = loginView.emailTextField
+    }
+    
+    private var lastTextField: UITextField {
+        return loginView.passwordTextField
+    }
 
 }
 
 extension LoginController: UITextFieldDelegate {
     
     public func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == loginView.emailTextField {
-            loginView.passwordTextField.becomeFirstResponder()
+        if textField == lastTextField && _viewModel.logInCocoaAction.enabled {
+            textField.resignFirstResponder()
+            _viewModel.logInCocoaAction.execute("")
         } else {
-            if _viewModel.logInCocoaAction.enabled {
-                textField.resignFirstResponder()
-                _viewModel.logInCocoaAction.execute("")
-            } else {
-                loginView.emailTextField.becomeFirstResponder()
-            }
+            textField.nextTextField?.becomeFirstResponder()
         }
         return true
     }
