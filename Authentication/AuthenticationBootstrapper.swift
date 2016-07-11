@@ -91,7 +91,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          Creates the LogInViewModel to use in the authentication process logic,
          with the LogInCredentialsValidator returned in the function createLogInCredentialsValidator.
 
-         - Returns: A login view model that controls the login logic and comunicates with the session service.
+         - Returns: A login view model that controls the login logic and communicates with the session service.
 
          - Warning: The LogInViewModel returned must be constructed with the same session service as the
          authentication bootstrapper.
