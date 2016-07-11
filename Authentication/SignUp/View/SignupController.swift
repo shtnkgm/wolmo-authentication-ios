@@ -59,14 +59,14 @@ public final class SignupController: UIViewController {
 
 private extension SignupController {
     
-    func bindViewModel() {
+    private func bindViewModel() {
         bindNameElements()
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
     }
     
-    func bindNameElements() {
+    private func bindNameElements() {
         if let nameTextField = signupView.usernameTextField {
             _viewModel.name <~ nameTextField.rex_textSignal
             signupView.usernameLabel?.text = _viewModel.nameText
@@ -80,7 +80,7 @@ private extension SignupController {
         }
     }
     
-    func bindEmailElements() {
+    private func bindEmailElements() {
         _viewModel.email <~ signupView.emailTextField.rex_textSignal
         signupView.emailLabel?.text = _viewModel.emailText
         signupView.emailTextField.placeholder = _viewModel.emailPlaceholderText
@@ -92,7 +92,7 @@ private extension SignupController {
         }
     }
     
-    func bindPasswordElements() {
+    private func bindPasswordElements() {
         _viewModel.password <~ signupView.passwordTextField.rex_textSignal
         signupView.passwordLabel?.text = _viewModel.passwordText
         signupView.passwordTextField.placeholder = _viewModel.passwordPlaceholderText
@@ -114,7 +114,7 @@ private extension SignupController {
         }
     }
     
-    func bindButtons() {
+    private func bindButtons() {
         signupView.signupButton.setTitle(_viewModel.signupButtonTitle, forState: .Normal)
         signupView.signupButton.rex_pressed.value = _viewModel.signUpCocoaAction
         signupView.signupButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.signupButtonEnabled = $0 }
@@ -171,7 +171,7 @@ extension SignupController: UITextFieldDelegate {
 
 extension SignupController {
 
-    public func addKeyboardObservers() {
+    private func addKeyboardObservers() {
         _disposable += _keyboardDisplayed <~ _notificationCenter
             .rac_notifications(UIKeyboardDidHideNotification)
             .map { _ in false }
@@ -185,7 +185,7 @@ extension SignupController {
             .startWithNext { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
@@ -202,7 +202,7 @@ extension SignupController {
         }
     }
     
-    func navigationBarOffset() -> CGFloat {
+    private func navigationBarOffset() -> CGFloat {
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
         let navBarHeight: CGFloat
         if navigationController?.navigationBarHidden ?? true {
@@ -213,7 +213,7 @@ extension SignupController {
         return navBarHeight + statusBarHeight
     }
     
-    func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
+    private func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
         let topTextField = signupView.usernameTextField ?? signupView.emailTextField
         let top = topTextField.convertPoint(topTextField.frame.origin, toView: self.view).y - 10
         let bottom = signupView.passwordConfirmTextField.convertPoint(signupView.passwordConfirmTextField.frame.origin, toView: self.view).y + signupView.passwordConfirmTextField.frame.size.height
@@ -224,7 +224,8 @@ extension SignupController {
         }
     }
     
-    func dismissKeyboard(sender: UITapGestureRecognizer) {
+    // Internal to avoid using @objc label for using it in selector.
+    internal func dismissKeyboard(sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)

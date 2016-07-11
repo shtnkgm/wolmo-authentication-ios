@@ -82,7 +82,7 @@ public final class LoginController: UIViewController {
 
 private extension LoginController {
     
-    func bindViewModel() {
+    private func bindViewModel() {
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
@@ -99,7 +99,7 @@ private extension LoginController {
         _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.loginController(self, didLogInWithError: $0) }
     }
     
-    func bindEmailElements() {
+    private func bindEmailElements() {
         _viewModel.email <~ loginView.emailTextField.rex_textSignal
         if let label = loginView.emailLabel {
             label.text = _viewModel.emailText
@@ -118,7 +118,7 @@ private extension LoginController {
         loginView.emailTextField.delegate = self
     }
     
-    func bindPasswordElements() {
+    private func bindPasswordElements() {
         _viewModel.password <~ loginView.passwordTextField.rex_textSignal.on(next: { [unowned self] text in
             if text.isEmpty {
                 self.loginView.passwordVisibilityButton?.hidden = true
@@ -149,7 +149,7 @@ private extension LoginController {
         loginView.passwordTextField.delegate = self
     }
     
-    func bindButtons() {
+    private func bindButtons() {
         loginView.logInButton.setTitle(_viewModel.loginButtonTitle, forState: .Normal)
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
@@ -200,9 +200,9 @@ extension LoginController: UITextFieldDelegate {
     
 }
 
-extension LoginController {
+internal extension LoginController {
     
-    public func addKeyboardObservers() {
+    private func addKeyboardObservers() {
         _disposable += _keyboardDisplayed <~ _notificationCenter
             .rac_notifications(UIKeyboardDidHideNotification)
             .map { _ in false }
@@ -216,7 +216,7 @@ extension LoginController {
             .startWithNext { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
@@ -233,7 +233,7 @@ extension LoginController {
         }
     }
     
-    func navBarOffset() -> CGFloat {
+    private func navBarOffset() -> CGFloat {
         let statusBarHeight = UIApplication .sharedApplication().statusBarFrame.height
         let navBarHeight: CGFloat
         if navigationController?.navigationBarHidden ?? true {
@@ -248,11 +248,12 @@ extension LoginController {
         As both textfields fit in all devices, it will always show the email
         textfield at the top of the screen.
     */
-    func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
+    private func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
         return loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
     }
     
-    func dismissKeyboard(sender: UITapGestureRecognizer) {
+    // Internal to avoid using @objc label for using it in selector.
+    internal func dismissKeyboard(sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)
