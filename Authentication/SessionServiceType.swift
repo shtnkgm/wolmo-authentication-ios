@@ -16,7 +16,7 @@ public enum SessionServiceEvent<User: UserType> {
     case LogOut(User)
     case SignUp(User)
     case LogInError(SessionServiceError)
-    case RegistrationError(SessionServiceError)
+    case SignUpError(SessionServiceError)
 }
 
 public enum SessionServiceError: ErrorType {
