@@ -35,16 +35,16 @@ public extension ColorPaletteType {
     public var mainButtonExecuted: UIColor { return UIColor(hexString: "#e78f00ff")! }
     
     public var textfieldsError: UIColor { return UIColor(hexString: "#d0021bff")! }
-    public var textfieldsNormal: UIColor { return UIColor.clearColor() }
-    public var textfieldsSelected: UIColor { return UIColor.clearColor() }
+    public var textfieldsNormal: UIColor { return .clearColor() }
+    public var textfieldsSelected: UIColor { return .clearColor() }
     
     public var background: UIColor { return UIColor(hexString: "#efefefff")! }
     
     public var links: UIColor { return UIColor(hexString: "#0076ffff")! }
-    public var labels: UIColor { return UIColor.blackColor() }
-    public var textfieldText: UIColor { return UIColor.blackColor() }
+    public var labels: UIColor { return .blackColor() }
+    public var textfieldText: UIColor { return .blackColor() }
     public var passwordVisibilityButtonText: UIColor { return UIColor(hexString: "#0076ffff")! }
-    public var mainButtonText: UIColor { return UIColor.whiteColor() }
+    public var mainButtonText: UIColor { return .whiteColor() }
     
 }
 
