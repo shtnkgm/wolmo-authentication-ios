@@ -62,7 +62,7 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
-                return self._sessionService.signUp(self.name.value, email, self.password.value)
+                return self._sessionService.signUp(self.name.value, email: email, password: self.password.value)
             } else {
                 return SignalProducer(error: .InvalidSignUpCredentials(.None)).observeOn(UIScheduler())
             }

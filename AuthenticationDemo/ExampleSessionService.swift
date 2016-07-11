@@ -43,7 +43,7 @@ public final class ExampleSessionService: SessionServiceType {
         (events, _eventsObserver) = Signal<SessionServiceEvent<ExampleUser>, NoError>.pipe()
     }
     
-    public func logIn(email: Email, _ password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+    public func logIn(email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
         if email.raw == _email {
             if password == _password {
@@ -79,7 +79,7 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    public func signUp(name: String, _ email: Email, _ password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+    public func signUp(name: String, email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
         if email.raw == _email {
             if _registeredAlready {
