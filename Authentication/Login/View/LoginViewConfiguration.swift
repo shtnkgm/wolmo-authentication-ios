@@ -11,7 +11,7 @@ import Foundation
 public protocol LoginViewConfigurationType {
     
     var logoImage: UIImage? { get }
-    var colourPalette: ColorPaletteType { get }
+    var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
 }
@@ -19,18 +19,18 @@ public protocol LoginViewConfigurationType {
 public final class DefaultLoginViewConfiguration: LoginViewConfigurationType {
     
     public let logoImage: UIImage?
-    public let colourPalette: ColorPaletteType
+    public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
     public init() {
         logoImage = .None
-        colourPalette = DefaultColorPalette()
+        colorPalette = DefaultColorPalette()
         fontPalette = DefaultFontPalette()
     }
     
     public init(logoImage: UIImage?) {
         self.logoImage = logoImage
-        colourPalette = DefaultColorPalette()
+        colorPalette = DefaultColorPalette()
         fontPalette = DefaultFontPalette()
     }
     

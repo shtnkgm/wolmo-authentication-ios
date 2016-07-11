@@ -141,11 +141,11 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
             if !emailTextFieldSelected {
                 let color: CGColor
                 if emailTextFieldValid {
-                    color = delegate.colourPalette.textfieldsNormal.CGColor
+                    color = delegate.colorPalette.textfieldsNormal.CGColor
                     emailErrorsHeightConstraint.constant = 0
                     emailErrorsHeightConstraint.active = true
                 } else {
-                    color = delegate.colourPalette.textfieldsError.CGColor
+                    color = delegate.colorPalette.textfieldsError.CGColor
                     emailErrorsHeightConstraint.active = false
                 }
                 emailTextFieldViewOutlet.layer.borderColor = color
@@ -159,7 +159,7 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
     public var emailTextFieldSelected: Bool = false {
         didSet {
             if emailTextFieldSelected {
-                emailTextFieldViewOutlet.layer.borderColor = delegate.colourPalette.textfieldsSelected.CGColor
+                emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
                 emailErrorsHeightConstraint.constant = 0
                 emailErrorsHeightConstraint.active = true
             } else {
@@ -174,11 +174,11 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
             if !passwordTextFieldSelected {
                 let color: CGColor
                 if passwordTextFieldValid {
-                    color = delegate.colourPalette.textfieldsNormal.CGColor
+                    color = delegate.colorPalette.textfieldsNormal.CGColor
                     passwordErrorsHeightConstraint.constant = 0
                     passwordErrorsHeightConstraint.active = true
                 } else {
-                    color = delegate.colourPalette.textfieldsError.CGColor
+                    color = delegate.colorPalette.textfieldsError.CGColor
                     passwordErrorsHeightConstraint.active = false
                 }
                 passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
@@ -192,7 +192,7 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
     public var passwordTextFieldSelected = false {
         didSet {
             if passwordTextFieldSelected {
-                passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colourPalette.textfieldsSelected.CGColor
+                passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
                 passwordErrorsHeightConstraint.constant = 0
                 passwordErrorsHeightConstraint.active = true
             } else {
@@ -204,24 +204,16 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
     
     public var logInButtonEnabled: Bool = true {
         didSet {
-            let color: UIColor
-            if logInButtonEnabled {
-                color = delegate.colourPalette.mainButtonEnabled
-            } else {
-                color =  delegate.colourPalette.mainButtonDisabled
-            }
+            let colorPalette = delegate.colorPalette
+            let color = logInButtonEnabled ? colorPalette.mainButtonEnabled : colorPalette.mainButtonDisabled
             logInButton.backgroundColor = color
         }
     }
     
     public var logInButtonPressed = false {
         didSet {
-            let color: UIColor
-            if logInButtonPressed {
-                color =  delegate.colourPalette.mainButtonExecuted
-            } else {
-                color =  delegate.colourPalette.mainButtonEnabled
-            }
+            let colorPalette = delegate.colorPalette
+            let color = logInButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
             logInButton.backgroundColor = color
             emailErrorsHeightConstraint.constant = 0
             emailErrorsHeightConstraint.active = true
