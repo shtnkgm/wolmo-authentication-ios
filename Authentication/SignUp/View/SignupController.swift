@@ -17,7 +17,7 @@ public final class SignupController: UIViewController {
     
     public lazy var signupView: SignupViewType = self._signupViewFactory()
     
-    private lazy var _notificationCenter: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    private let _notificationCenter: NSNotificationCenter = .defaultCenter()
     private var _disposable = CompositeDisposable()
     private let _keyboardDisplayed = MutableProperty(false)
     private let _activeTextField = MutableProperty<UITextField?>(.None)
