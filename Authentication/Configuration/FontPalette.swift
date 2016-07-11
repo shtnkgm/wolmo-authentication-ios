@@ -24,11 +24,11 @@ public protocol FontPaletteType {
 
 public extension FontPaletteType {
     
-    public var textfields: UIFont { return UIFont.systemFontOfSize(14) }
-    public var passwordVisibilityButton: UIFont { return UIFont.systemFontOfSize(14) }
-    public var links: UIFont { return UIFont.systemFontOfSize(14) }
-    public var labels: UIFont { return UIFont.systemFontOfSize(14) }
-    public var mainButton: UIFont { return UIFont.boldSystemFontOfSize(16) }
+    public var textfields: UIFont { return .systemFontOfSize(14) }
+    public var passwordVisibilityButton: UIFont { return .systemFontOfSize(14) }
+    public var links: UIFont { return .systemFontOfSize(14) }
+    public var labels: UIFont { return .systemFontOfSize(14) }
+    public var mainButton: UIFont { return .boldSystemFontOfSize(16) }
     
     
 }
