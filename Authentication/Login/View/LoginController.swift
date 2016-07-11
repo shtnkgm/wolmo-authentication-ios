@@ -66,7 +66,7 @@ public final class LoginController: UIViewController {
     }
     
     public override func loadView() {
-        self.view = loginView.view
+        view = loginView.view
     }
 
     

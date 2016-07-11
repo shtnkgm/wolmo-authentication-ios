@@ -44,7 +44,7 @@ public final class SignupController: UIViewController {
     }
     
     public override func loadView() {
-        self.view = signupView.view
+        view = signupView.view
     }
     
     
