@@ -71,11 +71,11 @@ public protocol SignupFormType: AuthenticationFormType {
     var passwordConfirmationTextFieldSelected: Bool { get set }
     var showConfirmationPassword: Bool { get set }
     
-    var signupButton: UIButton { get }
-    var signupErrorLabel: UILabel? { get }
+    var signUpButton: UIButton { get }
+    var signUpErrorLabel: UILabel? { get }
     
-    var signupButtonEnabled: Bool { get set }
-    var signupButtonPressed: Bool { get set }
+    var signUpButtonEnabled: Bool { get set }
+    var signUpButtonPressed: Bool { get set }
     
     var termsAndServicesButton: UIButton { get }
     var termsAndServicesLabel: UILabel? { get }

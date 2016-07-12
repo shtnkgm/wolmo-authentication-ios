@@ -6,8 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
-
 public struct SignupCredentialsValidator {
     
     public static func defaultNameValidator() -> TextInputValidatorType {

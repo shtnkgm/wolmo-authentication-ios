@@ -169,11 +169,14 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          authentication bootstrapper.
      */
     public func createSignupViewModel() -> SignupViewModelType {
-        return SignupViewModel(sessionService: sessionService, credentialsValidator: createSignUpCredentialsValidator())
+        return SignupViewModel(sessionService: sessionService,
+                               credentialsValidator: createSignUpCredentialsValidator(),
+                               passwordConfirmationEnabled: _viewConfiguration.signupConfiguration.passwordConfirmationEnabled,
+                               usernameEnabled: _viewConfiguration.signupConfiguration.usernameEnabled)
     }
     
     public func createSignUpCredentialsValidator() -> SignupCredentialsValidator {
-        return SignupCredentialsValidator()
+        return SignupCredentialsValidator(nameValidator: AlwaysValidValidator())
     }
     
     /**

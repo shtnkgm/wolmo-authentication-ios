@@ -77,7 +77,7 @@ public extension SessionServiceError {
         case .InvalidLogInCredentials(let error):
             return "login-error.invalid-credentials.message".localized + (error?.localizedDescription ?? "")
         case .NetworkError(let error):
-            return "login-error.network-error.message".localized + error.localizedDescription
+            return "network-error.message".localized + error.localizedDescription
         }
     }
 }

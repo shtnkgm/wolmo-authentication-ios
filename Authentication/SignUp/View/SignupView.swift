@@ -21,37 +21,41 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var titleLabel: UILabel { return titleLabelOutlet }
     @IBOutlet weak var titleLabelOutlet: UILabel! {
-        didSet {
-            titleLabel.text = titleText
-        }
+        didSet { titleLabel.text = titleText }
     }
 
     internal var usernameLabel: UILabel? { return .None }
     internal var usernameTextField: UITextField? { return .None }
     internal var usernameValidationMessageLabel: UILabel? { return .None }
+    var usernameErrorsHeightConstraint: NSLayoutConstraint?
     
     internal var emailLabel: UILabel? { return .None }
     
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
-    @IBOutlet weak var emailTextFieldOutlet: UITextField!
+    @IBOutlet weak var emailTextFieldOutlet: UITextField! {
+        didSet { emailTextFieldOutlet.placeholder = emailPlaceholderText }
+    }
+    
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
         didSet {
             emailTextFieldViewOutlet.layer.borderWidth = 1
             emailTextFieldViewOutlet.layer.cornerRadius = 6.0
         }
     }
+
+    @IBOutlet var emailErrorsHeightConstraint: NSLayoutConstraint!  // not weak
     
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
-        didSet {
-            emailValidationMessageLabelOutlet.text = " "
-        }
+        didSet { emailValidationMessageLabelOutlet.text = " " }
     }
     
     internal var passwordLabel: UILabel? { return .None }
-    
+
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
-    @IBOutlet weak var passwordTextFieldOutlet: UITextField!
+    @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
+        didSet { passwordTextFieldOutlet.placeholder = passwordPlaceholderText }
+    }
     @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
         didSet {
             passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
@@ -59,103 +63,275 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         }
     }
     
+    @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
+    
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
-        didSet {
-            passwordValidationMessageLabelOutlet.text = " "
-        }
+        didSet { passwordValidationMessageLabelOutlet.text = " " }
     }
     
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
-        didSet {
-            passwordVisibilityButtonOutlet.hidden = true
-        }
+        didSet { passwordVisibilityButtonOutlet.hidden = true }
     }
-    
+
     internal var passwordConfirmLabel: UILabel? { return .None }
     internal var passwordConfirmTextField: UITextField? { return .None }
     internal var passwordConfirmValidationMessageLabel: UILabel? { return .None }
     internal var passwordConfirmVisibilityButton: UIButton? { return .None }
-
-    internal var signupButton: UIButton { return signupButtonOutlet }
-    @IBOutlet weak var signupButtonOutlet: UIButton! {
+    var passwordConfirmErrorsHeightConstraint: NSLayoutConstraint?
+    
+    internal var signUpButton: UIButton { return signUpButtonOutlet }
+    @IBOutlet weak var signUpButtonOutlet: UIButton! {
         didSet {
-            signupButtonOutlet.layer.cornerRadius = 6.0
+            signUpButtonOutlet.layer.cornerRadius = 6.0
+            signUpButtonOutlet.setTitle(signUpButtonTitle, forState: .Normal)
         }
     }
-    internal var signupErrorLabel: UILabel? { return .None }
+    internal var signUpErrorLabel: UILabel? { return .None }
     
     internal var termsAndServicesLabel: UILabel? { return termsAndServicesLabelOutlet }
     @IBOutlet weak var termsAndServicesLabelOutlet: UILabel! {
-        didSet {
-            termsAndServicesLabelOutlet.text = termsAndServicesLabelText
-        }
+        didSet { termsAndServicesLabelOutlet.text = termsAndServicesLabelText }
     }
     internal var termsAndServicesButton: UIButton { return termsAndServicesButtonOutlet }
     @IBOutlet weak var termsAndServicesButtonOutlet: UIButton! {
-        didSet {
-            termsAndServicesButtonOutlet.setTitle(termsAndServicesButtonTitle, forState: .Normal)
-        }
+        didSet { termsAndServicesButtonOutlet.setTitle(termsAndServicesButtonTitle, forState: .Normal) }
     }
     
     internal var loginLabel: UILabel? { return loginLabelOutlet }
     @IBOutlet weak var loginLabelOutlet: UILabel! {
-        didSet {
-            loginLabelOutlet.text = loginLabelText
-        }
+        didSet { loginLabelOutlet.text = loginLabelText }
     }
     
     internal var loginButton: UIButton? { return loginButtonOutlet }
     @IBOutlet weak var loginButtonOutlet: UIButton! {
-        didSet {
-            loginButtonOutlet.setTitle(loginButtonTitle, forState: .Normal)
-        }
-    }
-
-    internal var usernameTextFieldValid = false
-    internal var usernameTextFieldSelected = false
-    internal var emailTextFieldValid = false
-    internal var emailTextFieldSelected = false
-    internal var passwordTextFieldValid = false
-    internal var passwordTextFieldSelected = false
-    
-    internal var showPassword = false {
-        didSet {
-            // Changing enabled property for the
-            // font setting to take effect, which is
-            // necessary for it not to shrink.
-            passwordTextField.enabled = false
-            passwordTextField.secureTextEntry = !showPassword
-            passwordTextField.enabled = true
-            passwordTextField.font = delegate.fontPalette.textfields
-            passwordVisibilityButton?.setTitle(passwordVisibilityButtonTitle, forState: .Normal)
-        }
+        didSet { loginButtonOutlet.setTitle(loginButtonTitle, forState: .Normal) }
     }
     
-    internal var passwordConfirmationTextFieldValid = false
-    internal var passwordConfirmationTextFieldSelected = false
-    
-    internal var showConfirmationPassword = false {
-        didSet {
-            // Changing enabled property for the
-            // font setting to take effect, which is
-            // necessary for it not to shrink.
-            passwordConfirmTextField?.enabled = false
-            passwordConfirmTextField?.secureTextEntry = !showPassword
-            passwordConfirmTextField?.enabled = true
-            passwordConfirmTextField?.font = delegate.fontPalette.textfields
-            passwordConfirmVisibilityButton?.setTitle(confirmPasswordVisibilityButtonTitle, forState: .Normal)
-        }
+    internal var usernameTextFieldValid: Bool = false {
+        didSet { usernameTextFieldValidWasSet() }
+    }
+    internal var usernameTextFieldSelected: Bool = false {
+        didSet { usernameTextFieldSelectedWasSet() }
     }
     
-    internal var signupButtonEnabled = false
-    internal var signupButtonPressed = false
+    internal var emailTextFieldValid: Bool = false {
+        didSet { emailTextFieldValidWasSet() }
+    }
+    internal var emailTextFieldSelected: Bool = false {
+        didSet { emailTextFieldSelectedWasSet() }
+    }
+    
+    internal var passwordTextFieldValid: Bool = false {
+        didSet { passwordTextFieldValidWasSet() }
+    }
+    internal var passwordTextFieldSelected: Bool = false {
+        didSet { passwordTextFieldSelectedWasSet() }
+    }
+    
+    internal var showPassword: Bool = false {
+        didSet { showPasswordWasSet() }
+    }
+    
+    internal var passwordConfirmationTextFieldValid: Bool = false {
+        didSet { passwordConfirmationTextFieldValidWasSet() }
+    }
+    internal var passwordConfirmationTextFieldSelected: Bool = false {
+        didSet { passwordConfirmationTextFieldSelectedWasSet() }
+    }
+    
+    internal var showConfirmationPassword: Bool = false {
+        didSet { showConfirmationPasswordWasSet() }
+    }
+    
+    internal var signUpButtonEnabled: Bool = false {
+        didSet { signUpButtonEnabledWasSet() }
+    }
+    internal var signUpButtonPressed: Bool = false {
+        didSet { signUpButtonPressedWasSet() }
+    }
     
     internal func render() {
+        usernameTextFieldValid = true
+        emailTextFieldValid = true
+        passwordTextFieldValid = true
+        passwordConfirmationTextFieldValid = true
+        
+        usernameTextFieldSelected = false
+        emailTextFieldSelected = false
+        passwordTextFieldSelected = false
+        passwordConfirmationTextFieldSelected = false
+        
+        signUpButtonEnabled = false
+        signUpButtonPressed = false
+        
+        showPassword = false
+        showConfirmationPassword = false
         
         delegate.configureView(self)
-        
+    }
+    
+}
+
+private extension SignupView {
+    
+    private func usernameTextFieldValidWasSet() {
+        if !usernameTextFieldSelected {
+            let color: CGColor
+            if usernameTextFieldValid {
+                color = delegate.colorPalette.textfieldsNormal.CGColor
+                usernameErrorsHeightConstraint?.constant = 0
+                usernameErrorsHeightConstraint?.active = true
+            } else {
+                color = delegate.colorPalette.textfieldsError.CGColor
+                usernameErrorsHeightConstraint?.active = false
+            }
+            usernameTextField?.layer.borderColor = color
+        } else {
+            usernameErrorsHeightConstraint?.constant = 0
+            usernameErrorsHeightConstraint?.active = true
+        }
+    }
+    
+    private func usernameTextFieldSelectedWasSet() {
+        if usernameTextFieldSelected {
+            usernameTextField?.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
+            usernameErrorsHeightConstraint?.constant = 0
+            usernameErrorsHeightConstraint?.active = true
+        } else {
+            let valid = usernameTextFieldValid
+            usernameTextFieldValid = valid
+        }
+    }
+    
+    private func emailTextFieldValidWasSet() {
+        if !emailTextFieldSelected {
+            let color: CGColor
+            if emailTextFieldValid {
+                color = delegate.colorPalette.textfieldsNormal.CGColor
+                emailErrorsHeightConstraint.constant = 0
+                emailErrorsHeightConstraint.active = true
+            } else {
+                color = delegate.colorPalette.textfieldsError.CGColor
+                emailErrorsHeightConstraint.active = false
+            }
+            emailTextFieldViewOutlet.layer.borderColor = color
+        } else {
+            emailErrorsHeightConstraint.constant = 0
+            emailErrorsHeightConstraint.active = true
+        }
+    }
+    
+    private func emailTextFieldSelectedWasSet() {
+        if emailTextFieldSelected {
+            emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
+            emailErrorsHeightConstraint.constant = 0
+            emailErrorsHeightConstraint.active = true
+        } else {
+            let valid = emailTextFieldValid
+            emailTextFieldValid = valid
+        }
+    }
+    
+    private func passwordTextFieldValidWasSet() {
+        if !passwordTextFieldSelected {
+            let color: CGColor
+            if passwordTextFieldValid {
+                color = delegate.colorPalette.textfieldsNormal.CGColor
+                passwordErrorsHeightConstraint.constant = 0
+                passwordErrorsHeightConstraint.active = true
+            } else {
+                color = delegate.colorPalette.textfieldsError.CGColor
+                passwordErrorsHeightConstraint.active = false
+            }
+            passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
+        } else {
+            passwordErrorsHeightConstraint.constant = 0
+            passwordErrorsHeightConstraint.active = true
+        }
+    }
+    
+    private func passwordTextFieldSelectedWasSet() {
+        if passwordTextFieldSelected {
+            passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
+            passwordErrorsHeightConstraint.constant = 0
+            passwordErrorsHeightConstraint.active = true
+        } else {
+            let valid = passwordTextFieldValid
+            passwordTextFieldValid = valid
+        }
+    }
+    
+    private func showPasswordWasSet() {
+        // Changing enabled property for the
+        // font setting to take effect, which is
+        // necessary for it not to shrink.
+        passwordTextField.enabled = false
+        passwordTextField.secureTextEntry = !showPassword
+        passwordTextField.enabled = true
+        passwordTextField.font = delegate.fontPalette.textfields
+        passwordVisibilityButtonOutlet.setTitle(passwordVisibilityButtonTitle, forState: .Normal)
+    }
+    
+    private func passwordConfirmationTextFieldValidWasSet() {
+        if !passwordConfirmationTextFieldSelected {
+            let color: CGColor
+            if passwordConfirmationTextFieldValid {
+                color = delegate.colorPalette.textfieldsNormal.CGColor
+                passwordConfirmErrorsHeightConstraint?.constant = 0
+                passwordConfirmErrorsHeightConstraint?.active = true
+            } else {
+                color = delegate.colorPalette.textfieldsError.CGColor
+                passwordConfirmErrorsHeightConstraint?.active = false
+            }
+            passwordConfirmTextField?.layer.borderColor = color
+        } else {
+            passwordConfirmErrorsHeightConstraint?.constant = 0
+            passwordConfirmErrorsHeightConstraint?.active = true
+        }
+    }
+    
+    private func passwordConfirmationTextFieldSelectedWasSet() {
+        if passwordConfirmationTextFieldSelected {
+            passwordConfirmTextField?.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
+            passwordConfirmErrorsHeightConstraint?.constant = 0
+            passwordConfirmErrorsHeightConstraint?.active = true
+        } else {
+            let valid = passwordConfirmationTextFieldValid
+            passwordConfirmationTextFieldValid = valid
+        }
+    }
+    
+    private func showConfirmationPasswordWasSet() {
+        // Changing enabled property for the
+        // font setting to take effect, which is
+        // necessary for it not to shrink.
+        passwordConfirmTextField?.enabled = false
+        passwordConfirmTextField?.secureTextEntry = !showPassword
+        passwordConfirmTextField?.enabled = true
+        passwordConfirmTextField?.font = delegate.fontPalette.textfields
+        passwordConfirmVisibilityButton?.setTitle(confirmPasswordVisibilityButtonTitle, forState: .Normal)
+    }
+    
+    private func signUpButtonEnabledWasSet() {
+        let colorPalette = delegate.colorPalette
+        let color = signUpButtonEnabled ? colorPalette.mainButtonEnabled : colorPalette.mainButtonDisabled
+        signUpButton.backgroundColor = color
+    }
+    
+    private func signUpButtonPressedWasSet() {
+        let colorPalette = delegate.colorPalette
+        let color = signUpButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
+        signUpButton.backgroundColor = color
+        usernameErrorsHeightConstraint?.constant = 0
+        usernameErrorsHeightConstraint?.active = true
+        emailErrorsHeightConstraint.constant = 0
+        emailErrorsHeightConstraint.active = true
+        passwordErrorsHeightConstraint.constant = 0
+        passwordErrorsHeightConstraint.active = true
+        passwordConfirmErrorsHeightConstraint?.constant = 0
+        passwordConfirmErrorsHeightConstraint?.active = true
     }
     
 }
@@ -213,17 +389,17 @@ public extension SignupViewType {
     public var termsAndServicesButtonTitle: String {
         return "signup-view.terms-and-services.button-title".localized
     }
-
-    public var signupButtonTitle: String {
+    
+    public var signUpButtonTitle: String {
         return "signup-view.signup-button-title".localized
     }
     
     public var loginLabelText: String {
-        return "signup-view-model.login.label-text".localized
+        return "signup-view.login.label-text".localized
     }
     
     public var loginButtonTitle: String {
-        return "signup-view-model.login.button-title".localized
+        return "signup-view.login.button-title".localized
     }
     
 }

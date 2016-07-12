@@ -41,7 +41,7 @@ extension SignupControllerDelegate {
     public var shouldDisplaySignupErrorWithAlert: Bool { return true }
     
     public func signupControllerWillExecuteSignUp(controller: SignupController) {
-        if let errorLabel = controller.signupView.signupErrorLabel {
+        if let errorLabel = controller.signupView.signUpErrorLabel {
             errorLabel.text = " "
         }
         let app = UIApplication.sharedApplication()
@@ -58,9 +58,9 @@ extension SignupControllerDelegate {
         controller.signupView.emailTextFieldValid = false
         controller.signupView.passwordTextFieldValid = false
         controller.signupView.passwordConfirmationTextFieldValid = false
-        controller.signupView.signupButtonPressed = false
+        controller.signupView.signUpButtonPressed = false
         
-        if let errorLabel = controller.signupView.signupErrorLabel {
+        if let errorLabel = controller.signupView.signUpErrorLabel {
             errorLabel.text = error.message
         }
         if shouldDisplaySignupErrorWithAlert {

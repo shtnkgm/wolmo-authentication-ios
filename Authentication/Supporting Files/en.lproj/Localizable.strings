@@ -28,7 +28,8 @@
 
 /* Session service errors */
 "login-error.invalid-credentials.message" = "Wrong email or password. ";
-"login-error.network-error.message" = "Network error. ";
+"signup-error.invalid-credentials.message" = "Invalid credentials. ";
+"network-error.message" = "Network error. ";
 
 /* LogIn error alert */
 "login-error.alert.title" = "Unable to log in";
@@ -52,3 +53,5 @@
 
 /* Signup errors */
 "signup-error.password-confirmation.invalid" = "Passwords don't match";
+"signup-error.alert.title" = "Unable to sign up";
+"signup-error.alert.close" = "Try again";

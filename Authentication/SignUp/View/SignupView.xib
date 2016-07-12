@@ -82,6 +82,7 @@
                                     <constraints>
                                         <constraint firstItem="qlr-5N-r0b" firstAttribute="top" secondItem="RQ6-LA-hWA" secondAttribute="top" id="Jd1-Qy-xek"/>
                                         <constraint firstAttribute="bottom" secondItem="qlr-5N-r0b" secondAttribute="bottom" id="WQi-Vk-bKz"/>
+                                        <constraint firstAttribute="height" constant="15" id="aEH-fh-gBa"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -148,6 +149,7 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="gkr-sO-rLU" secondAttribute="bottom" id="Ujy-6s-gl9"/>
                                         <constraint firstItem="gkr-sO-rLU" firstAttribute="top" secondItem="H8J-KY-Ia1" secondAttribute="top" id="e5S-eV-9ua"/>
+                                        <constraint firstAttribute="height" constant="15" id="oAM-Ux-kdB"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -223,6 +225,30 @@
                                 <constraint firstItem="5rz-BZ-aoM" firstAttribute="centerX" secondItem="X8o-uo-260" secondAttribute="centerX" id="iW9-FP-8fP"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-Mz-klY" userLabel="Button View">
+                            <rect key="frame" x="0.0" y="82" width="418" height="269"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZp-rK-32z">
+                                    <rect key="frame" x="21" y="0.0" width="376" height="50"/>
+                                    <color key="backgroundColor" red="1" green="0.75446993829999998" blue="0.1955973597" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                    <state key="normal" title="SIGN UP">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="YZp-rK-32z" firstAttribute="centerY" secondItem="6RS-Mz-klY" secondAttribute="centerY" id="7fz-Hb-DHF"/>
+                                <constraint firstItem="YZp-rK-32z" firstAttribute="centerX" secondItem="6RS-Mz-klY" secondAttribute="centerX" id="ni2-Lq-nq7"/>
+                                <constraint firstItem="YZp-rK-32z" firstAttribute="top" secondItem="6RS-Mz-klY" secondAttribute="top" id="ycf-J8-CCg"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="7fz-Hb-DHF"/>
+                                    <exclude reference="ni2-Lq-nq7"/>
+                                </mask>
+                            </variation>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TH1-Y1-ZZn" userLabel="Log In View">
                             <rect key="frame" x="0.0" y="351" width="418" height="59"/>
                             <subviews>
@@ -253,30 +279,6 @@
                                 <constraint firstItem="h1l-gv-6Fh" firstAttribute="top" secondItem="Rl4-RA-UdB" secondAttribute="bottom" constant="-2" id="bl1-xJ-Ksi"/>
                                 <constraint firstItem="h1l-gv-6Fh" firstAttribute="centerX" secondItem="TH1-Y1-ZZn" secondAttribute="centerX" id="u5k-9M-kaS"/>
                             </constraints>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-Mz-klY" userLabel="Button View">
-                            <rect key="frame" x="0.0" y="82" width="418" height="269"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZp-rK-32z">
-                                    <rect key="frame" x="21" y="0.0" width="376" height="50"/>
-                                    <color key="backgroundColor" red="1" green="0.75446993829999998" blue="0.1955973597" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                    <state key="normal" title="SIGN UP">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
-                            </subviews>
-                            <constraints>
-                                <constraint firstItem="YZp-rK-32z" firstAttribute="centerY" secondItem="6RS-Mz-klY" secondAttribute="centerY" id="7fz-Hb-DHF"/>
-                                <constraint firstItem="YZp-rK-32z" firstAttribute="centerX" secondItem="6RS-Mz-klY" secondAttribute="centerX" id="ni2-Lq-nq7"/>
-                                <constraint firstItem="YZp-rK-32z" firstAttribute="top" secondItem="6RS-Mz-klY" secondAttribute="top" id="ycf-J8-CCg"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="7fz-Hb-DHF"/>
-                                    <exclude reference="ni2-Lq-nq7"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -312,16 +314,18 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="emailErrorsHeightConstraint" destination="aEH-fh-gBa" id="sWZ-LE-pvP"/>
                 <outlet property="emailTextFieldOutlet" destination="ng0-Kr-R1N" id="hyC-hE-93x"/>
                 <outlet property="emailTextFieldViewOutlet" destination="wS1-Yg-TTU" id="ybK-pj-Rme"/>
                 <outlet property="emailValidationMessageLabelOutlet" destination="qlr-5N-r0b" id="4SM-hA-7U9"/>
                 <outlet property="loginButtonOutlet" destination="h1l-gv-6Fh" id="7i8-jd-cRv"/>
                 <outlet property="loginLabelOutlet" destination="Rl4-RA-UdB" id="hmE-C3-FxU"/>
+                <outlet property="passwordErrorsHeightConstraint" destination="oAM-Ux-kdB" id="r23-O7-bU8"/>
                 <outlet property="passwordTextFieldAndButtonViewOutlet" destination="JVi-Ec-hKI" id="Y6T-xL-Mak"/>
                 <outlet property="passwordTextFieldOutlet" destination="88a-FE-Vb2" id="6Kj-Ay-xmh"/>
                 <outlet property="passwordValidationMessageLabelOutlet" destination="gkr-sO-rLU" id="tUM-6F-QQO"/>
                 <outlet property="passwordVisibilityButtonOutlet" destination="f0R-Cq-Zz3" id="61Q-cC-fGh"/>
-                <outlet property="signupButtonOutlet" destination="YZp-rK-32z" id="uPv-9G-yqq"/>
+                <outlet property="signUpButtonOutlet" destination="YZp-rK-32z" id="2jr-Vi-Rtp"/>
                 <outlet property="termsAndServicesButtonOutlet" destination="JuJ-8k-i6o" id="gyu-mz-cvR"/>
                 <outlet property="termsAndServicesLabelOutlet" destination="ysg-6j-g6B" id="oLn-i1-MxY"/>
                 <outlet property="titleLabelOutlet" destination="Dtd-MK-bQ0" id="v4q-H7-B6l"/>

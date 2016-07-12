@@ -27,46 +27,36 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
-        didSet {
-            emailTextFieldOutlet.placeholder = emailPlaceholderText
-        }
+        didSet { emailTextFieldOutlet.placeholder = emailPlaceholderText }
     }
     
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
-        didSet {
-            emailValidationMessageLabelOutlet.text = " "
-        }
+        didSet { emailValidationMessageLabelOutlet.text = " " }
     }
     
     internal var passwordLabel: UILabel? { return .None }
     
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
-        didSet {
-            passwordTextFieldOutlet.placeholder = passwordPlaceholderText
-        }
+        didSet { passwordTextFieldOutlet.placeholder = passwordPlaceholderText }
     }
 
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
-        didSet {
-            passwordValidationMessageLabelOutlet.text = " "
-        }
+        didSet { passwordValidationMessageLabelOutlet.text = " " }
     }
     
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
-        didSet {
-            passwordVisibilityButtonOutlet.hidden = true
-        }
+        didSet { passwordVisibilityButtonOutlet.hidden = true }
     }
     
     internal var logInButton: UIButton { return logInButtonOutlet }
     @IBOutlet weak var logInButtonOutlet: UIButton! {
         didSet {
             logInButtonOutlet.layer.cornerRadius = 6.0
-            logInButton.setTitle(logInButtonTitle, forState: .Normal)
+            logInButtonOutlet.setTitle(logInButtonTitle, forState: .Normal)
         }
     }
     
@@ -74,27 +64,18 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal var signupLabel: UILabel { return toSignupLabel }
     @IBOutlet weak var toSignupLabel: UILabel! {
-        didSet {
-            toSignupLabel.text = signupLabelText
-        }
+        didSet { toSignupLabel.text = signupLabelText }
     }
     
     internal var signupButton: UIButton { return signupButtonOutlet }
     @IBOutlet weak var signupButtonOutlet: UIButton! {
-        didSet {
-            signupButton.setTitle(signupButtonTitle, forState: .Normal)
-        }
+        didSet { signupButton.setTitle(signupButtonTitle, forState: .Normal) }
     }
 
     internal var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton! {
-        didSet {
-            recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal)
-        }
+        didSet { recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal) }
     }
-    
-    internal var activityIndicator: UIActivityIndicatorView? { return .None }
-    
     
     @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
         didSet {
@@ -143,13 +124,12 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     }
     
     internal func render() {
-        activityIndicator?.hidesWhenStopped = true
-        
         emailTextFieldValid = true
         passwordTextFieldValid = true
         emailTextFieldSelected = false
         passwordTextFieldSelected = false
         logInButtonEnabled = false
+        logInButtonPressed = false
         showPassword = false
         
         //Configure colour palette
@@ -280,9 +260,9 @@ public extension LoginViewType {
     public var signupButtonTitle: String {
         return "login-view.signup-button-title".localized
     }
-    
-    public var passwordVisibilityButtonTitle: String {
-        return ("login-view.password-visibility-button-title." + (showPassword ? "false" : "true")).localized
+
+    private var passwordVisibilityButtonTitle: String {
+        return ("text-visibility-button-title." + (showPassword ? "false" : "true")).localized
     }
     
     public var recoverPasswordButtonTitle: String {

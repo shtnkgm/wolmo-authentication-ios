@@ -47,9 +47,9 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     }
     
     private func configureMainButton(signupView: SignupViewType) {
-        signupView.signupButton.backgroundColor = colorPalette.mainButtonDisabled
-        signupView.signupButton.titleLabel?.font = fontPalette.mainButton
-        signupView.signupButton.titleLabel?.textColor = colorPalette.mainButtonText
+        signupView.signUpButton.backgroundColor = colorPalette.mainButtonDisabled
+        signupView.signUpButton.titleLabel?.font = fontPalette.mainButton
+        signupView.signUpButton.titleLabel?.textColor = colorPalette.mainButtonText
     }
     
     private func configureUsernameElements(signupView: SignupViewType) {
@@ -98,8 +98,8 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         signupView.passwordValidationMessageLabel?.textColor = colorPalette.textfieldsError
         signupView.passwordConfirmValidationMessageLabel?.font = fontPalette.labels
         signupView.passwordConfirmValidationMessageLabel?.textColor = colorPalette.textfieldsError
-        signupView.signupErrorLabel?.font = fontPalette.labels
-        signupView.signupErrorLabel?.textColor = colorPalette.textfieldsError
+        signupView.signUpErrorLabel?.font = fontPalette.labels
+        signupView.signUpErrorLabel?.textColor = colorPalette.textfieldsError
     }
     
 }
