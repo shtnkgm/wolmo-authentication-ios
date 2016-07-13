@@ -15,7 +15,7 @@ public enum ValidationResult {
         return .Invalid(errors: [errorMessage])
     }
     
-    public static func valid() -> ValidationResult {
+    public static var valid: ValidationResult {
         return .Valid
     }
     
