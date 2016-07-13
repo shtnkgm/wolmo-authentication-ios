@@ -61,7 +61,7 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
-    init(sessionService: SessionService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
+    internal init(sessionService: SessionService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
         _sessionService = sessionService
         
         let nameValidationResult = name.signal.map(credentialsValidator.nameValidator.validate)

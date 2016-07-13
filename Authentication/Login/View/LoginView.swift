@@ -16,53 +16,53 @@ public protocol LoginViewType: Renderable, LoginFormType {
     
 }
 
-public final class LoginView: UIView, LoginViewType, NibLoadable {
+internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
-    public lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()
+    internal lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()
     
-    public var logoImageView: UIImageView { return logoImageViewOutlet }
+    internal var logoImageView: UIImageView { return logoImageViewOutlet }
     @IBOutlet weak var logoImageViewOutlet: UIImageView!
     
-    public var emailLabel: UILabel? { return .None }
+    internal var emailLabel: UILabel? { return .None }
     
-    public var emailTextField: UITextField { return emailTextFieldOutlet }
+    internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
         didSet {
             emailTextFieldOutlet.placeholder = emailPlaceholderText
         }
     }
     
-    public var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
+    internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
         didSet {
             emailValidationMessageLabelOutlet.text = " "
         }
     }
     
-    public var passwordLabel: UILabel? { return .None }
+    internal var passwordLabel: UILabel? { return .None }
     
-    public var passwordTextField: UITextField { return passwordTextFieldOutlet }
+    internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
         didSet {
             passwordTextFieldOutlet.placeholder = passwordPlaceholderText
         }
     }
 
-    public var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
+    internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
         didSet {
             passwordValidationMessageLabelOutlet.text = " "
         }
     }
     
-    public var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
+    internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
         didSet {
             passwordVisibilityButtonOutlet.hidden = true
         }
     }
     
-    public var logInButton: UIButton { return logInButtonOutlet }
+    internal var logInButton: UIButton { return logInButtonOutlet }
     @IBOutlet weak var logInButtonOutlet: UIButton! {
         didSet {
             logInButtonOutlet.layer.cornerRadius = 6.0
@@ -70,35 +70,35 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    public var logInErrorLabel: UILabel? { return logInErrorLabelOutlet }
+    internal var logInErrorLabel: UILabel? { return logInErrorLabelOutlet }
     @IBOutlet weak var logInErrorLabelOutlet: UILabel! {
         didSet {
             logInErrorLabelOutlet.text = " "
         }
     }
     
-    public var signupLabel: UILabel { return toSignupLabel }
+    internal var signupLabel: UILabel { return toSignupLabel }
     @IBOutlet weak var toSignupLabel: UILabel! {
         didSet {
             toSignupLabel.text = signupLabelText
         }
     }
     
-    public var signupButton: UIButton { return signupButtonOutlet }
+    internal var signupButton: UIButton { return signupButtonOutlet }
     @IBOutlet weak var signupButtonOutlet: UIButton! {
         didSet {
             signupButton.setTitle(signupButtonTitle, forState: .Normal)
         }
     }
 
-    public var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
+    internal var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton! {
         didSet {
             recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal)
         }
     }
     
-    public var activityIndicator: UIActivityIndicatorView? { return .None }
+    internal var activityIndicator: UIActivityIndicatorView? { return .None }
     
     
     @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
@@ -119,35 +119,35 @@ public final class LoginView: UIView, LoginViewType, NibLoadable {
     @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
 
     
-    public var emailTextFieldValid: Bool = true {
+    internal var emailTextFieldValid: Bool = true {
         didSet { emailTextFieldValidWasSet() }
     }
     
-    public var emailTextFieldSelected: Bool = false {
+    internal var emailTextFieldSelected: Bool = false {
         didSet { emailTextFieldSelectedWasSet() }
     }
     
-    public var passwordTextFieldValid: Bool = true {
+    internal var passwordTextFieldValid: Bool = true {
         didSet { passwordTextFieldValidWasSet() }
     }
     
-    public var passwordTextFieldSelected = false {
+    internal var passwordTextFieldSelected = false {
         didSet { passwordTextFieldSelectedWasSet() }
     }
     
-    public var logInButtonEnabled: Bool = true {
+    internal var logInButtonEnabled: Bool = true {
         didSet { logInButtonEnabledWasSet() }
     }
     
-    public var logInButtonPressed = false {
+    internal var logInButtonPressed = false {
         didSet { logInButtonPressedWasSet() }
     }
     
-    public var showPassword: Bool = false {
+    internal var showPassword: Bool = false {
         didSet { showPasswordWasSet() }
     }
     
-    public func render() {
+    internal func render() {
         activityIndicator?.hidesWhenStopped = true
         
         emailTextFieldValid = true

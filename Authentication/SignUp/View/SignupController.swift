@@ -27,7 +27,7 @@ public final class SignupController: UIViewController {
     // you should not override the `createSignupController` method, but all the others 
     // that provide the elements this controller uses. (That is to say,
     // `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`)
-    init(viewModel: SignupViewModelType, signupViewFactory: () -> SignupViewType, delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
+    internal init(viewModel: SignupViewModelType, signupViewFactory: () -> SignupViewType, delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
         _viewModel = viewModel
         _signupViewFactory = signupViewFactory
         _delegate = delegate

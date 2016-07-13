@@ -48,7 +48,7 @@ public final class LoginController: UIViewController {
      
         - Returns: A valid login view controller ready to use.
     */
-    init(configuration: LoginControllerConfiguration) {
+    internal init(configuration: LoginControllerConfiguration) {
         _viewModel = configuration.viewModel
         _loginViewFactory = configuration.viewFactory
         _transitionDelegate = configuration.transitionDelegate

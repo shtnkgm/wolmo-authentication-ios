@@ -153,7 +153,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         return SignupController(viewModel: createSignupViewModel(), signupViewFactory: createSignupView, delegate: createSignupControllerDelegate())
     }
     
-    public func createSignupView() -> SignupView {
+    public func createSignupView() -> SignupViewType {
         let view = SignupView()
         view.delegate = DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
         return view

@@ -80,7 +80,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
      
         - Returns: A valid login view model ready to use.
     */
-    public init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
+    internal init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
         _sessionService = sessionService
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
