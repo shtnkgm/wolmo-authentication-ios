@@ -13,15 +13,15 @@
 "text-input-validator.invalid-email" = "It has to be a valid email";
 
 /* Login UI elements titles */
-"login-view-model.email" = "Email:";
-"login-view-model.password" = "Password:";
-"login-view-model.email-placeholder" = "Email";
-"login-view-model.password-placeholder" = "Password";
-"login-view-model.login-button-title" = "LOG IN";
-"login-view-model.signup-button-title" = "Sign up";
-"login-view-model.password-visibility-button-title.false" = "Hide";
-"login-view-model.password-visibility-button-title.true" = "Show";
-"login-view-model.recover-password-button-title" = "Forgot password?";
+"login-view.email" = "Email:";
+"login-view.password" = "Password:";
+"login-view.email-placeholder" = "Email";
+"login-view.password-placeholder" = "Password";
+"login-view.login-button-title" = "LOG IN";
+"login-view.signup-button-title" = "Sign up";
+"login-view.password-visibility-button-title.false" = "Hide";
+"login-view.password-visibility-button-title.true" = "Show";
+"login-view.recover-password-button-title" = "Forgot password?";
 "login-view.to-signup-label" = "Don't have an account?";
 
 /* Session service errors */
@@ -34,4 +34,4 @@
 
 
 /* Signup UI elements titles */
-"signup-view-model.terms-and-services-button-title" = "Terms and Services";
+"signup-view.terms-and-services-button-title" = "Terms and Services";

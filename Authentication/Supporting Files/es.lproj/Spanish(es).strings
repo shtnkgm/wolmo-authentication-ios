@@ -13,15 +13,15 @@
 "text-input-validator.invalid-email" = "Debe ser un email válido (Por ejemplo, usuario@mail.com)";
 
 /* Títulos de los elementos de UI del login */
-"login-view-model.email" = "Email:";
-"login-view-model.password" = "Contraseña:";
-"login-view-model.email-placeholder" = "Email";
-"login-view-model.password-placeholder" = "Contraseña";
-"login-view-model.login-button-title" = "INGRESAR";
-"login-view-model.signup-button-title" = "Regístrese";
-"login-view-model.password-visibility-button-title.false" = "Ocultar";
-"login-view-model.password-visibility-button-title.true" = "Mostrar";
-"login-view-model.recover-password-button-title" = "Recuperar contraseña";
+"login-view.email" = "Email:";
+"login-view.password" = "Contraseña:";
+"login-view.email-placeholder" = "Email";
+"login-view.password-placeholder" = "Contraseña";
+"login-view.login-button-title" = "INGRESAR";
+"login-view.signup-button-title" = "Regístrese";
+"login-view.password-visibility-button-title.false" = "Ocultar";
+"login-view.password-visibility-button-title.true" = "Mostrar";
+"login-view.recover-password-button-title" = "Recuperar contraseña";
 "login-view.to-signup-label" = "¿No tienes cuenta?";
 
 /* Errores del servicio de sesión */
@@ -33,4 +33,4 @@
 "login-error.alert.close" = "Cerrar";
 
 /* Títulos de los elementos de UI del signup */
-"login-view-model.terms-and-services-button-title" = "Términos y Servicios";
+"login-view.terms-and-services-button-title" = "Términos y Servicios";
