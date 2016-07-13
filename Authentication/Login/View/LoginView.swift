@@ -295,4 +295,3 @@ private extension LoginView {
     }
     
 }
-

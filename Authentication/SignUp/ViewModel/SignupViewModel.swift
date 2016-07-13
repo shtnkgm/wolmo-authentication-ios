@@ -98,4 +98,3 @@ private func getTermsAndServicesValidationResultFromAcceptance(accepted: Bool) -
         return .invalid("signup.terms-and-services.not-accepted".localized)
     }
 }
-
