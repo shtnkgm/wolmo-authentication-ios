@@ -144,8 +144,8 @@ private extension LoginController {
     private func bindButtons() {
         loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
         loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
-        loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.didTapOnSignup(self) }
-        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.didTapOnRecoverPassword(self) }
+        loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.onSignup(self) }
+        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.onRecoverPassword(self) }
     }
     
     private func setTextfieldOrder() {

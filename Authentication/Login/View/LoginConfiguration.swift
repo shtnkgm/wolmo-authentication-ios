@@ -13,9 +13,9 @@ import Foundation
 */
 public protocol LoginControllerTransitionDelegate {
     
-    func didTapOnSignup(controller: LoginController)
+    func onSignup(controller: LoginController)
     
-    func didTapOnRecoverPassword(controller: LoginController)
+    func onRecoverPassword(controller: LoginController)
     
 }
 
