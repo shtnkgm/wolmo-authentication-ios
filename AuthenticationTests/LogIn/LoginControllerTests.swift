@@ -21,21 +21,21 @@ class LoginViewControllerSpec: QuickSpec {
         describe("LoginViewController") {
             
             var sessionService: MockSessionService!
-            var loginVM: LoginViewModelType!
-            var loginV: LoginViewType!
-            var loginC: LoginController!
+            var loginViewModel: LoginViewModelType!
+            var loginView: LoginViewType!
+            var loginController: LoginController!
             
             beforeEach() {
                 sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
-                loginVM = LoginViewModel(sessionService: sessionService)
-                loginV = LoginView()
-                let configuration = LoginControllerConfiguration(viewModel: loginVM, viewFactory: { return loginV }, transitionDelegate: MockLoginTransitionDelegate())
-                loginC = LoginController(configuration: configuration)
-                loginC.viewDidLoad()
+                loginViewModel = LoginViewModel(sessionService: sessionService)
+                loginView = LoginView()
+                let configuration = LoginControllerConfiguration(viewModel: loginViewModel, viewFactory: { return loginView }, transitionDelegate: MockLoginTransitionDelegate())
+                loginController = LoginController(configuration: configuration)
+                loginController.viewDidLoad()
             }
             
             afterEach() {
-                expect(loginC).to(beNil(), description: "Retain cycle detected in LoginController")
+                expect(loginController).to(beNil(), description: "Retain cycle detected in LoginController")
             }
             
             /*
@@ -61,41 +61,41 @@ class LoginViewControllerSpec: QuickSpec {
                 
                 beforeEach() {
                     sessionService = OneMyUserSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
-                    loginVM = LoginViewModel(sessionService: sessionService)
-                    loginV = LoginView()
-                    loginC = LoginController(viewModel: loginVM, loginViewFactory: { return loginV }, onSignup: { _ in }, onLoginError: .None)
-                    loginC.viewDidLoad()
-                    loginV.passwordVisibilityButton!.enabled = true
-                    loginV.passwordVisibilityButton!.userInteractionEnabled = true
+                    loginViewModel = LoginViewModel(sessionService: sessionService)
+                    loginView = LoginView()
+                    loginController = LoginController(viewModel: loginViewModel, loginViewFactory: { return loginView }, onSignup: { _ in }, onLoginError: .None)
+                    loginController.viewDidLoad()
+                    loginView.passwordVisibilityButton!.enabled = true
+                    loginView.passwordVisibilityButton!.userInteractionEnabled = true
                 }
                 
                 it("should start hidden") {
-                    expect(loginVM.showPassword.value) == false
-                    expect(loginV.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".localized
-                    expect(loginV.passwordTextField.secureTextEntry) == true
+                    expect(loginViewModel.showPassword.value) == false
+                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".localized
+                    expect(loginView.passwordTextField.secureTextEntry) == true
                 }
                 
                 it("should show password when button pressed") {
-                    loginV.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
-                    expect(loginVM.showPassword.value).toEventually(beTrue())
-                    expect(loginV.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.false".localized
-                    expect(loginV.passwordTextField.secureTextEntry) == false
+                    loginView.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
+                    expect(loginViewModel.showPassword.value).toEventually(beTrue())
+                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.false".localized
+                    expect(loginView.passwordTextField.secureTextEntry) == false
                 }
                 
                 it("should hide password when button pressed again") {
-                    loginV.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
-                    loginV.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
-                    expect(loginVM.showPassword.value) == false
-                    expect(loginV.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".localized
-                    expect(loginV.passwordTextField.secureTextEntry) == true                }
+                    loginView.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
+                    loginView.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
+                    expect(loginViewModel.showPassword.value) == false
+                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".localized
+                    expect(loginView.passwordTextField.secureTextEntry) == true                }
                 
             }
             
             describe("Email errors") {
                 
                 it("should show the first of the email errors when email is invalid") {
-                    loginV.emailTextField.text = "email"
-                    expect(loginV.emailValidationMessageLabel!.text).toEventually(equal("text-input-validator.invalid-email".localized("email")))
+                    loginView.emailTextField.text = "email"
+                    expect(loginView.emailValidationMessageLabel!.text).toEventually(equal("text-input-validator.invalid-email".localized("email")))
                 }
                 
             }
