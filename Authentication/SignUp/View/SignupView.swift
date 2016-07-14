@@ -79,7 +79,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     internal var passwordConfirmTextField: UITextField? { return .None }
     internal var passwordConfirmValidationMessageLabel: UILabel? { return .None }
     internal var passwordConfirmVisibilityButton: UIButton? { return .None }
-    var passwordConfirmErrorsHeightConstraint: NSLayoutConstraint?
+    internal var passwordConfirmErrorsHeightConstraint: NSLayoutConstraint?
     
     internal var signUpButton: UIButton { return signUpButtonOutlet }
     @IBOutlet weak var signUpButtonOutlet: UIButton! {
@@ -109,48 +109,22 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         didSet { loginButtonOutlet.setTitle(loginButtonTitle, forState: .Normal) }
     }
     
-    internal var usernameTextFieldValid: Bool = false {
-        didSet { usernameTextFieldValidWasSet() }
-    }
-    internal var usernameTextFieldSelected: Bool = false {
-        didSet { usernameTextFieldSelectedWasSet() }
-    }
+    internal var usernameTextFieldValid: Bool = false { didSet { usernameTextFieldValidWasSet() } }
+    internal var usernameTextFieldSelected: Bool = false { didSet { usernameTextFieldSelectedWasSet() } }
     
-    internal var emailTextFieldValid: Bool = false {
-        didSet { emailTextFieldValidWasSet() }
-    }
-    internal var emailTextFieldSelected: Bool = false {
-        didSet { emailTextFieldSelectedWasSet() }
-    }
+    internal var emailTextFieldValid: Bool = false { didSet { emailTextFieldValidWasSet() } }
+    internal var emailTextFieldSelected: Bool = false { didSet { emailTextFieldSelectedWasSet() } }
     
-    internal var passwordTextFieldValid: Bool = false {
-        didSet { passwordTextFieldValidWasSet() }
-    }
-    internal var passwordTextFieldSelected: Bool = false {
-        didSet { passwordTextFieldSelectedWasSet() }
-    }
+    internal var passwordTextFieldValid: Bool = false { didSet { passwordTextFieldValidWasSet() } }
+    internal var passwordTextFieldSelected: Bool = false { didSet { passwordTextFieldSelectedWasSet() } }
+    internal var showPassword: Bool = false { didSet { showPasswordWasSet() } }
     
-    internal var showPassword: Bool = false {
-        didSet { showPasswordWasSet() }
-    }
+    internal var passwordConfirmationTextFieldValid: Bool = false { didSet { passwordConfirmationTextFieldValidWasSet() } }
+    internal var passwordConfirmationTextFieldSelected: Bool = false { didSet { passwordConfirmationTextFieldSelectedWasSet() } }
+    internal var showConfirmationPassword: Bool = false { didSet { showConfirmationPasswordWasSet() } }
     
-    internal var passwordConfirmationTextFieldValid: Bool = false {
-        didSet { passwordConfirmationTextFieldValidWasSet() }
-    }
-    internal var passwordConfirmationTextFieldSelected: Bool = false {
-        didSet { passwordConfirmationTextFieldSelectedWasSet() }
-    }
-    
-    internal var showConfirmationPassword: Bool = false {
-        didSet { showConfirmationPasswordWasSet() }
-    }
-    
-    internal var signUpButtonEnabled: Bool = false {
-        didSet { signUpButtonEnabledWasSet() }
-    }
-    internal var signUpButtonPressed: Bool = false {
-        didSet { signUpButtonPressedWasSet() }
-    }
+    internal var signUpButtonEnabled: Bool = false { didSet { signUpButtonEnabledWasSet() } }
+    internal var signUpButtonPressed: Bool = false { didSet { signUpButtonPressedWasSet() } }
     
     internal func render() {
         usernameTextFieldValid = true
@@ -264,9 +238,7 @@ private extension SignupView {
     }
     
     private func showPasswordWasSet() {
-        // Changing enabled property for the
-        // font setting to take effect, which is
-        // necessary for it not to shrink.
+        // Changing enabled property for the font setting to take effect, which is necessary for it not to shrink.
         passwordTextField.enabled = false
         passwordTextField.secureTextEntry = !showPassword
         passwordTextField.enabled = true
@@ -304,9 +276,7 @@ private extension SignupView {
     }
     
     private func showConfirmationPasswordWasSet() {
-        // Changing enabled property for the
-        // font setting to take effect, which is
-        // necessary for it not to shrink.
+        // Changing enabled property for the font setting to take effect, which is necessary for it not to shrink.
         passwordConfirmTextField?.enabled = false
         passwordConfirmTextField?.secureTextEntry = !showPassword
         passwordConfirmTextField?.enabled = true
