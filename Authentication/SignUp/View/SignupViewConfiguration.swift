@@ -15,7 +15,7 @@ public protocol SignupViewConfigurationType {
     
 }
 
-public final class DefaultSignupViewConfiguration: SignupViewConfigurationType {
+public struct DefaultSignupViewConfiguration: SignupViewConfigurationType {
     
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType

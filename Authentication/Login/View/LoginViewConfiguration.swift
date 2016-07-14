@@ -16,7 +16,7 @@ public protocol LoginViewConfigurationType {
     
 }
 
-public final class DefaultLoginViewConfiguration: LoginViewConfigurationType {
+public struct DefaultLoginViewConfiguration: LoginViewConfigurationType {
     
     public let logoImage: UIImage?
     public let colorPalette: ColorPaletteType
