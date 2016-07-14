@@ -10,7 +10,7 @@ import Foundation
 
 public protocol SignupViewDelegate {
     
-    var colourPalette: ColorPaletteType { get }
+    var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
     func configureView(signupView: SignupViewType)
@@ -27,21 +27,21 @@ public extension SignupViewDelegate {
 
 public final class DefaultSignupViewDelegate: SignupViewDelegate {
     
-    public let colourPalette: ColorPaletteType
+    public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
     public init() {
-        colourPalette = DefaultColorPalette()
+        colorPalette = DefaultColorPalette()
         fontPalette = DefaultFontPalette()
     }
     
     public init(configuration: SignupViewConfigurationType) {
-        colourPalette = configuration.colourPalette
+        colorPalette = configuration.colorPalette
         fontPalette = configuration.fontPalette
     }
     
     public func configureView(signupView: SignupViewType) {
-        signupView.view.backgroundColor = colourPalette.background
+        signupView.view.backgroundColor = colorPalette.background
         
         configureMainButton(signupView)
         configureUsernameElements(signupView)
@@ -52,59 +52,59 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     }
     
     private func configureMainButton(signupView: SignupViewType) {
-        signupView.signupButton.backgroundColor = colourPalette.mainButtonDisabled
+        signupView.signupButton.backgroundColor = colorPalette.mainButtonDisabled
         signupView.signupButton.titleLabel?.font = fontPalette.mainButton
-        signupView.signupButton.titleLabel?.textColor = colourPalette.mainButtonText
+        signupView.signupButton.titleLabel?.textColor = colorPalette.mainButtonText
     }
     
     private func configureUsernameElements(signupView: SignupViewType) {
         signupView.usernameLabel?.font = fontPalette.labels
-        signupView.usernameLabel?.textColor = colourPalette.labels
+        signupView.usernameLabel?.textColor = colorPalette.labels
         signupView.usernameTextField?.font = fontPalette.textfields
-        signupView.usernameTextField?.textColor = colourPalette.textfieldText
+        signupView.usernameTextField?.textColor = colorPalette.textfieldText
     }
     
     private func configureEmailElements(signupView: SignupViewType) {
         signupView.emailLabel?.font = fontPalette.labels
-        signupView.emailLabel?.textColor = colourPalette.labels
+        signupView.emailLabel?.textColor = colorPalette.labels
         signupView.emailTextField.font = fontPalette.textfields
-        signupView.emailTextField.textColor = colourPalette.textfieldText
+        signupView.emailTextField.textColor = colorPalette.textfieldText
     }
     
     private func configurePasswordElements(signupView: SignupViewType) {
         signupView.passwordLabel?.font = fontPalette.labels
-        signupView.passwordLabel?.textColor = colourPalette.labels
+        signupView.passwordLabel?.textColor = colorPalette.labels
         signupView.passwordTextField.font = fontPalette.textfields
-        signupView.passwordTextField.textColor = colourPalette.textfieldText
+        signupView.passwordTextField.textColor = colorPalette.textfieldText
         signupView.passwordVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
-        signupView.passwordVisibilityButton?.titleLabel?.textColor = colourPalette.passwordVisibilityButtonText
+        signupView.passwordVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
         
         signupView.passwordConfirmLabel?.font = fontPalette.labels
-        signupView.passwordConfirmLabel?.textColor = colourPalette.labels
+        signupView.passwordConfirmLabel?.textColor = colorPalette.labels
         signupView.passwordConfirmTextField.font = fontPalette.textfields
-        signupView.passwordConfirmTextField.textColor = colourPalette.textfieldText
+        signupView.passwordConfirmTextField.textColor = colorPalette.textfieldText
         signupView.passwordConfirmVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
-        signupView.passwordConfirmVisibilityButton?.titleLabel?.textColor = colourPalette.passwordVisibilityButtonText
+        signupView.passwordConfirmVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
     }
     
     private func configureLinksElements(signupView: SignupViewType) {
         signupView.termsAndServicesLabel?.font = fontPalette.labels
-        signupView.termsAndServicesLabel?.textColor = colourPalette.labels
+        signupView.termsAndServicesLabel?.textColor = colorPalette.labels
         signupView.termsAndServicesButton.titleLabel?.font = fontPalette.links
-        signupView.termsAndServicesButton.titleLabel?.textColor = colourPalette.links
+        signupView.termsAndServicesButton.titleLabel?.textColor = colorPalette.links
     }
     
     private func configureErrorElements(signupView: SignupViewType) {
         signupView.usernameValidationMessageLabel?.font = fontPalette.labels
-        signupView.usernameValidationMessageLabel?.textColor = colourPalette.textfieldsError
+        signupView.usernameValidationMessageLabel?.textColor = colorPalette.textfieldsError
         signupView.emailValidationMessageLabel?.font = fontPalette.labels
-        signupView.emailValidationMessageLabel?.textColor = colourPalette.textfieldsError
+        signupView.emailValidationMessageLabel?.textColor = colorPalette.textfieldsError
         signupView.passwordValidationMessageLabel?.font = fontPalette.labels
-        signupView.passwordValidationMessageLabel?.textColor = colourPalette.textfieldsError
+        signupView.passwordValidationMessageLabel?.textColor = colorPalette.textfieldsError
         signupView.passwordConfirmValidationMessageLabel?.font = fontPalette.labels
-        signupView.passwordConfirmValidationMessageLabel?.textColor = colourPalette.textfieldsError
+        signupView.passwordConfirmValidationMessageLabel?.textColor = colorPalette.textfieldsError
         signupView.signupErrorLabel?.font = fontPalette.labels
-        signupView.signupErrorLabel?.textColor = colourPalette.textfieldsError
+        signupView.signupErrorLabel?.textColor = colorPalette.textfieldsError
     }
     
 }

@@ -10,19 +10,20 @@ import Foundation
 
 public protocol SignupViewConfigurationType {
     
-    var colourPalette: ColorPaletteType { get }
+    var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
 }
 
 public final class DefaultSignupViewConfiguration: SignupViewConfigurationType {
     
-    public let colourPalette: ColorPaletteType
+    public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    public init() {
-        colourPalette = DefaultColorPalette()
-        fontPalette = DefaultFontPalette()
+    public init(colorPalette: ColorPaletteType = DefaultColorPalette(),
+                fontPalette: FontPaletteType = DefaultFontPalette()) {
+        self.colorPalette = colorPalette
+        self.fontPalette = fontPalette
     }
     
 }

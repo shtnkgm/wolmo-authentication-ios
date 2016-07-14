@@ -22,10 +22,12 @@ public final class DefaultLoginViewConfiguration: LoginViewConfigurationType {
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    public init(logoImage: UIImage? = .None) {
+    public init(logoImage: UIImage? = .None,
+                colorPalette: ColorPaletteType = DefaultColorPalette(),
+                fontPalette: FontPaletteType = DefaultFontPalette()) {
         self.logoImage = logoImage
-        colorPalette = DefaultColorPalette()
-        fontPalette = DefaultFontPalette()
+        self.colorPalette = colorPalette
+        self.fontPalette = fontPalette
     }
     
 }
