@@ -48,16 +48,16 @@ public final class ExampleSessionService: SessionServiceType {
         if email.raw == _email {
             if password == _password {
                 let user = User(email: email.raw, password: password)
-                return logInSuccessSignalProducer(user, dispatchTime: dispatchTime)
+                return logInSuccess(user, dispatchTime: dispatchTime)
             } else {
-                return logInFailureSignalProducer(dispatchTime)
+                return logInFailure(dispatchTime)
             }
         } else {
-            return logInFailureSignalProducer(dispatchTime)
+            return logInFailure(dispatchTime)
         }
     }
     
-    private func logInSuccessSignalProducer(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func logInSuccess(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendNext(user)
@@ -69,7 +69,7 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    private func logInFailureSignalProducer(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func logInFailure(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendFailed(.InvalidLogInCredentials(.None))
@@ -83,17 +83,17 @@ public final class ExampleSessionService: SessionServiceType {
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
         if email.raw == _email {
             if _registeredAlready {
-                return signUpFailureSignalProducer(dispatchTime)
+                return signUpFailure(dispatchTime)
             } else {
                 let user = ExampleUser(email: email.raw, password: password)
-                return signUpSuccessSignalProducer(user, dispatchTime: dispatchTime)
+                return signUpSuccess(user, dispatchTime: dispatchTime)
             }
         } else {
-            return signUpFailureSignalProducer(dispatchTime)
+            return signUpFailure(dispatchTime)
         }
     }
     
-    private func signUpSuccessSignalProducer(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func signUpSuccess(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendNext(user)
@@ -102,7 +102,7 @@ public final class ExampleSessionService: SessionServiceType {
         }
     }
     
-    private func signUpFailureSignalProducer(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func signUpFailure(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendFailed(.InvalidSignUpCredentials(.None))
