@@ -47,6 +47,10 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
     
+    public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
+    public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
+    public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
+    
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
@@ -56,10 +60,6 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
             }
         }
     }()
-    
-    public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
-    public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
-    public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
     internal init(sessionService: SessionService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
         _sessionService = sessionService

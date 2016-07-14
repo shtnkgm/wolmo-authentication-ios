@@ -46,6 +46,12 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     public let passwordValidationErrors: AnyProperty<[String]>
     public let showPassword = MutableProperty(false)
     
+    public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
+    public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
+    public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
+    
+    public var togglePasswordVisibilityCocoaAction: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
+    
     private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
@@ -56,10 +62,6 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
             }
         }
     }()
-    public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
-    public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
-    public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
-    
     
     private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
         return Action { [unowned self] _ in
@@ -67,7 +69,6 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
             return SignalProducer(value: self.showPassword.value).observeOn(UIScheduler())
         }
     }()
-    public var togglePasswordVisibilityCocoaAction: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     
     /**
         Initializes a login view model which will communicate to the session service provided and
