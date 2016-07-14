@@ -20,10 +20,9 @@ public final class DefaultSignupViewConfiguration: SignupViewConfigurationType {
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    public init(colorPalette: ColorPaletteType = DefaultColorPalette(),
-                fontPalette: FontPaletteType = DefaultFontPalette()) {
-        self.colorPalette = colorPalette
-        self.fontPalette = fontPalette
+    public init() {
+        self.colorPalette = DefaultColorPalette()
+        self.fontPalette = DefaultFontPalette()
     }
     
 }
