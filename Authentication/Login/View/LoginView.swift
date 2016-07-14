@@ -119,15 +119,15 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
 
     
-    internal var emailTextFieldValid: Bool = true {
+    internal var emailTextFieldValid = true {
         didSet { emailTextFieldValidWasSet() }
     }
     
-    internal var emailTextFieldSelected: Bool = false {
+    internal var emailTextFieldSelected = false {
         didSet { emailTextFieldSelectedWasSet() }
     }
     
-    internal var passwordTextFieldValid: Bool = true {
+    internal var passwordTextFieldValid = true {
         didSet { passwordTextFieldValidWasSet() }
     }
     
@@ -135,7 +135,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet { passwordTextFieldSelectedWasSet() }
     }
     
-    internal var logInButtonEnabled: Bool = true {
+    internal var logInButtonEnabled = true {
         didSet { logInButtonEnabledWasSet() }
     }
     
@@ -143,7 +143,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet { logInButtonPressedWasSet() }
     }
     
-    internal var showPassword: Bool = false {
+    internal var showPassword = false {
         didSet { showPasswordWasSet() }
     }
     

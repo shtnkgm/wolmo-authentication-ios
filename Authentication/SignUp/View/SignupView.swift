@@ -37,18 +37,18 @@ internal final class SignupView: UIView, SignupViewType {
     internal var termsAndServicesButton: UIButton { return UIButton() }
     internal var termsAndServicesLabel: UILabel? { return .None }
     
-    internal var usernameTextFieldValid: Bool = false
-    internal var usernameTextFieldSelected: Bool = false
-    internal var emailTextFieldValid: Bool = false
-    internal var emailTextFieldSelected: Bool = false
-    internal var passwordTextFieldValid: Bool = false
-    internal var passwordTextFieldSelected: Bool = false
-    internal var showPassword: Bool = false
-    internal var passwordConfirmationTextFieldValid: Bool = false
-    internal var passwordConfirmationTextFieldSelected: Bool = false
-    internal var showConfirmPassword: Bool = false
-    internal var signupButtonEnabled: Bool = false
-    internal var signupButtonPressed: Bool = false
+    internal var usernameTextFieldValid = false
+    internal var usernameTextFieldSelected = false
+    internal var emailTextFieldValid = false
+    internal var emailTextFieldSelected = false
+    internal var passwordTextFieldValid = false
+    internal var passwordTextFieldSelected = false
+    internal var showPassword = false
+    internal var passwordConfirmationTextFieldValid = false
+    internal var passwordConfirmationTextFieldSelected = false
+    internal var showConfirmPassword = false
+    internal var signupButtonEnabled = false
+    internal var signupButtonPressed = false
     
     internal func render() {
         
