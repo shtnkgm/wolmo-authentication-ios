@@ -191,7 +191,7 @@ extension LoginController: UITextFieldDelegate {
     
 }
 
-internal extension LoginController {
+private extension LoginController {
     
     private func addKeyboardObservers() {
         _disposable += _keyboardDisplayed <~ _notificationCenter
@@ -243,8 +243,7 @@ internal extension LoginController {
         return loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
     }
     
-    // Internal to avoid using @objc label for using it in selector.
-    internal func dismissKeyboard(sender: UITapGestureRecognizer) {
+    @objc private func dismissKeyboard(sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)
