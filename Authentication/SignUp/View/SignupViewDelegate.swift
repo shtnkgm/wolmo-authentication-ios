@@ -30,12 +30,7 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    public init() {
-        colorPalette = DefaultColorPalette()
-        fontPalette = DefaultFontPalette()
-    }
-    
-    public init(configuration: SignupViewConfigurationType) {
+    public init(configuration: SignupViewConfigurationType = DefaultSignupViewConfiguration()) {
         colorPalette = configuration.colorPalette
         fontPalette = configuration.fontPalette
     }

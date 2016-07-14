@@ -33,19 +33,11 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
     
     private let _configuration: LoginViewConfigurationType
 
-    public let colorPalette: ColorPaletteType
-    public let fontPalette: FontPaletteType
-
-    init() {
-        _configuration = DefaultLoginViewConfiguration()
-        colorPalette = DefaultColorPalette()
-        fontPalette = DefaultFontPalette()
-    }
+    public var colorPalette: ColorPaletteType { return _configuration.colorPalette }
+    public var fontPalette: FontPaletteType { return _configuration.fontPalette }
     
-    init(configuration: LoginViewConfigurationType) {
+    init(configuration: LoginViewConfigurationType = DefaultLoginViewConfiguration()) {
         _configuration = configuration
-        colorPalette = configuration.colorPalette
-        fontPalette = configuration.fontPalette
     }
     
     public func configureView(loginView: LoginViewType) {
