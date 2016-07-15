@@ -53,13 +53,7 @@ extension SignupControllerDelegate {
         app.networkActivityIndicatorVisible = false
     }
     
-    public func signupController(controller: SignupController, didSignUpWithError error: SessionServiceError) {
-        controller.signupView.usernameTextFieldValid = false
-        controller.signupView.emailTextFieldValid = false
-        controller.signupView.passwordTextFieldValid = false
-        controller.signupView.passwordConfirmationTextFieldValid = false
-        controller.signupView.signUpButtonPressed = false
-        
+    public func signupController(controller: SignupController, didSignUpWithError error: SessionServiceError) {        
         if let errorLabel = controller.signupView.signUpErrorLabel {
             errorLabel.text = error.message
         }

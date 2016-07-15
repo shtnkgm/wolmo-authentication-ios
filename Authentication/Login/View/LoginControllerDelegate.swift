@@ -54,10 +54,6 @@ extension LoginControllerDelegate {
     public var shouldDisplayLoginErrorWithAlert: Bool { return true }
     
     public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {
-        controller.loginView.emailTextFieldValid = false
-        controller.loginView.passwordTextFieldValid = false
-        controller.loginView.logInButtonPressed = false
-        
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = error.message
         }
