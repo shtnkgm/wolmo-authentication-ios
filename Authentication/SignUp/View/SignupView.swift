@@ -10,8 +10,8 @@ public protocol SignupViewType: Renderable, SignupFormType {
 
     var titleLabel: UILabel { get }
     
-    var loginLabel: UILabel? { get }
-    var loginButton: UIButton? { get }
+    var loginLabel: UILabel { get }
+    var loginButton: UIButton { get }
     
 }
 
@@ -99,12 +99,12 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         didSet { termsAndServicesButtonOutlet.setTitle(termsAndServicesButtonTitle, forState: .Normal) }
     }
     
-    internal var loginLabel: UILabel? { return loginLabelOutlet }
+    internal var loginLabel: UILabel { return loginLabelOutlet }
     @IBOutlet weak var loginLabelOutlet: UILabel! {
         didSet { loginLabelOutlet.text = loginLabelText }
     }
     
-    internal var loginButton: UIButton? { return loginButtonOutlet }
+    internal var loginButton: UIButton { return loginButtonOutlet }
     @IBOutlet weak var loginButtonOutlet: UIButton! {
         didSet { loginButtonOutlet.setTitle(loginButtonTitle, forState: .Normal) }
     }

@@ -13,23 +13,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPU-cw-qqE" userLabel="Title View">
-                    <rect key="frame" x="0.0" y="20" width="418" height="41"/>
+                    <rect key="frame" x="0.0" y="20" width="418" height="51"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dtd-MK-bQ0">
-                            <rect key="frame" x="179" y="10" width="61" height="21"/>
+                            <rect key="frame" x="179" y="15" width="61" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="Dtd-MK-bQ0" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="top" constant="10" id="JPc-Hp-UgR"/>
-                        <constraint firstAttribute="bottom" secondItem="Dtd-MK-bQ0" secondAttribute="bottom" constant="10" id="saP-wf-Wtu"/>
+                        <constraint firstItem="Dtd-MK-bQ0" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="top" constant="15" id="JPc-Hp-UgR"/>
+                        <constraint firstAttribute="bottom" secondItem="Dtd-MK-bQ0" secondAttribute="bottom" constant="15" id="saP-wf-Wtu"/>
                         <constraint firstItem="Dtd-MK-bQ0" firstAttribute="centerX" secondItem="lPU-cw-qqE" secondAttribute="centerX" id="uoc-2g-OYB"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSa-0q-elf" userLabel="Textfields View">
-                    <rect key="frame" x="0.0" y="71" width="418" height="136"/>
+                    <rect key="frame" x="0.0" y="81" width="418" height="136"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1A-j1-8cE" userLabel="Email View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="68"/>
@@ -179,7 +179,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iqv-fj-4Xd" userLabel="SignUp View">
-                    <rect key="frame" x="0.0" y="207" width="418" height="400"/>
+                    <rect key="frame" x="0.0" y="217" width="418" height="390"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8o-uo-260" userLabel="Terms&amp;Serivces View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="82"/>
@@ -226,7 +226,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-Mz-klY" userLabel="Button View">
-                            <rect key="frame" x="0.0" y="82" width="418" height="259"/>
+                            <rect key="frame" x="0.0" y="82" width="418" height="249"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZp-rK-32z">
                                     <rect key="frame" x="21" y="0.0" width="376" height="50"/>
@@ -250,7 +250,7 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TH1-Y1-ZZn" userLabel="Log In View">
-                            <rect key="frame" x="0.0" y="341" width="418" height="59"/>
+                            <rect key="frame" x="0.0" y="331" width="418" height="59"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿Ya estás registrado?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl4-RA-UdB">
                                     <rect key="frame" x="140" y="0.0" width="138" height="17"/>

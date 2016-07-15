@@ -150,7 +150,14 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          signup controller to be used.
     */
     public func createSignupController() -> SignupController {
-        return SignupController(viewModel: createSignupViewModel(), signupViewFactory: createSignupView, delegate: createSignupControllerDelegate())
+        return SignupController(configuration: createSignupControllerConfiguration())
+    }
+    
+    public func createSignupControllerConfiguration() -> SignupControllerConfiguration {
+        return SignupControllerConfiguration(
+            viewModel: createSignupViewModel(),
+            viewFactory: createSignupView,
+            transitionDelegate: self)
     }
     
     public func createSignupView() -> SignupViewType {
@@ -225,6 +232,19 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
             navigationController.pushViewController(recoverPasswordController, animated: true)
         } else {
             _window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
+        }
+    }
+    
+}
+
+extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
+    
+    public func onLogin(controller: SignupController) {
+        let loginController = createLoginController()
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(loginController, animated: true)
+        } else {
+            _window.rootViewController = UINavigationController(rootViewController: loginController)
         }
     }
     

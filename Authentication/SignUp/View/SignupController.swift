@@ -13,6 +13,7 @@ public final class SignupController: UIViewController {
     private var _viewModel: SignupViewModelType
     private let _signupViewFactory: () -> SignupViewType
     private let _delegate: SignupControllerDelegate
+    private let _transitionDelegate: SignupControllerTransitionDelegate
     
     public lazy var signupView: SignupViewType = self._signupViewFactory()
     
@@ -26,10 +27,11 @@ public final class SignupController: UIViewController {
     // you should not override the `createSignupController` method, but all the others 
     // that provide the elements this controller uses. (That is to say,
     // `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`)
-    internal init(viewModel: SignupViewModelType, signupViewFactory: () -> SignupViewType, delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
-        _viewModel = viewModel
-        _signupViewFactory = signupViewFactory
-        _delegate = delegate
+    internal init(configuration: SignupControllerConfiguration) {
+        _viewModel = configuration.viewModel
+        _signupViewFactory = configuration.viewFactory
+        _delegate = configuration.delegate
+        _transitionDelegate = configuration.transitionDelegate
         super.init(nibName: nil, bundle: nil)
         addKeyboardObservers()
     }
@@ -167,7 +169,7 @@ private extension SignupController {
         signupView.signUpButton.rex_pressed.value = _viewModel.signUpCocoaAction
         signupView.signUpButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.signUpButtonEnabled = $0 }
         //TODO: signupView.termsAndServicesButton -> Presents the terms and services
-        //TODO: Login button transitions to login
+        signupView.loginButton.setAction { [unowned self] _ in self._transitionDelegate.onLogin(self) }
     }
     
     private func setTextfieldOrder() {

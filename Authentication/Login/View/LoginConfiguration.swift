@@ -42,7 +42,7 @@ public final class LoginControllerConfiguration {
      
         - Params:
              - viewModel: view model to bind to and use.
-             - loginViewFactory: factory method to call only once
+             - viewFactory: factory method to call only once
              to get the login view to use.
              - transitionDelegate: delegate to handle events that fire a
              transition, like selecting registration or recover password.
