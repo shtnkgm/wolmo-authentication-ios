@@ -35,7 +35,6 @@
 
 
 /* Signup UI elements titles */
-<<<<<<< HEAD
 "signup-view.terms-and-services-button-title" = "Terms and Services";
 "signup-error.alert.title" = "Unable to sign up";
 "signup-error.alert.close" = "Try again";
