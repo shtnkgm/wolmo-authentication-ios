@@ -56,6 +56,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         sessionService.events.observeNext { [unowned self] event in
             switch event {
             case .LogIn(_): self._window.rootViewController = self._mainViewControllerFactory()
+            case .SignUp(_): self._window.rootViewController = self._mainViewControllerFactory()
             case .LogOut(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLoginController())
             default: break
             }
