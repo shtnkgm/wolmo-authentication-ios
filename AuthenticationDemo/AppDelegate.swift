@@ -22,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         authenticationBootstrapper = AuthenticationBootstrapper(sessionService: ExampleSessionService(email: "example@mail.com", password: "password"),
             window: window!, viewConfiguration: AuthenticationViewConfiguration(loginViewConfiguration: loginConfiguration)) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            // swiftlint:disable force_cast
-            return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController
-            // swiftlint:enable force_cast
+            return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }
         authenticationBootstrapper.bootstrap()
         return true
