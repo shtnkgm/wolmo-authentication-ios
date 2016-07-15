@@ -1,29 +1,26 @@
 //
-//  LoginViewConfiguration.swift
+//  SignupViewConfiguration.swift
 //  Authentication
 //
-//  Created by Daniela Riesgo on 3/31/16.
+//  Created by Daniela Riesgo on 4/1/16.
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
 import Foundation
 
-public protocol LoginViewConfigurationType {
+public protocol SignupViewConfigurationType {
     
-    var logoImage: UIImage? { get }
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
 }
 
-public struct DefaultLoginViewConfiguration: LoginViewConfigurationType {
+public struct DefaultSignupViewConfiguration: SignupViewConfigurationType {
     
-    public let logoImage: UIImage?
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    public init(logoImage: UIImage? = .None) {
-        self.logoImage = logoImage
+    public init() {
         self.colorPalette = DefaultColorPalette()
         self.fontPalette = DefaultFontPalette()
     }

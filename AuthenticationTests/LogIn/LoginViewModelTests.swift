@@ -176,7 +176,7 @@ class LoginViewModelSpec: QuickSpec {
                             switch event {
                             case .LogInError(let error):
                                 switch error {
-                                case .InvalidCredentials(_):
+                                case .InvalidLogInCredentials(_):
                                     done()
                                 default: break
                                 }
@@ -210,7 +210,7 @@ class LoginViewModelSpec: QuickSpec {
                             switch event {
                             case .LogInError(let error):
                                 switch error {
-                                case .InvalidCredentials(_):
+                                case .InvalidLogInCredentials(_):
                                     done()
                                 default: break
                                 }
@@ -244,7 +244,7 @@ class LoginViewModelSpec: QuickSpec {
                             switch event {
                             case .LogInError(let error):
                                 switch error {
-                                case .InvalidCredentials(_):
+                                case .InvalidLogInCredentials(_):
                                     done()
                                 default: break
                                 }

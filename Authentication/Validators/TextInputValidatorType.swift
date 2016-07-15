@@ -15,6 +15,10 @@ public enum ValidationResult {
         return .Invalid(errors: [errorMessage])
     }
     
+    public static var valid: ValidationResult {
+        return .Valid
+    }
+    
     case Valid
     case Invalid(errors: [String])
     

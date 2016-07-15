@@ -96,3 +96,20 @@ extension UIColor {
         return nil
     }
 }
+
+public extension UITextField {
+    
+    // This is intended to be used when we have a form, so in the delegate we can directly change to the next texfield
+    // (which is assigned previously in nextTextField)
+    public var nextTextField: UITextField? {
+        get {
+            return objc_getAssociatedObject(self, &nextTextFieldKey) as? UITextField
+        }
+        
+        set {
+            objc_setAssociatedObject(self, &nextTextFieldKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+}
+
+private var nextTextFieldKey: UInt8 = 0

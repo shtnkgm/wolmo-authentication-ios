@@ -33,29 +33,31 @@ public final class ExampleSessionService: SessionServiceType {
     
     private let _email: String
     private let _password: String
+    private let _registeredAlready: Bool
     
     init(email: String, password: String) {
         _email = email
         _password = password
+        _registeredAlready = false
         currentUser = AnyProperty(initialValue: Optional.None, signal: _currentUser.map { $0 })
         (events, _eventsObserver) = Signal<SessionServiceEvent<ExampleUser>, NoError>.pipe()
     }
     
-    public func logIn(email: Email, _ password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+    public func logIn(email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
         if email.raw == _email {
             if password == _password {
                 let user = User(email: email.raw, password: password)
-                return successSignalProducer(user, dispatchTime: dispatchTime)
+                return logInSuccess(user, dispatchTime: dispatchTime)
             } else {
-                return failureSignalProducer(dispatchTime)
+                return logInFailure(dispatchTime)
             }
         } else {
-            return failureSignalProducer(dispatchTime)
+            return logInFailure(dispatchTime)
         }
     }
     
-    private func successSignalProducer(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func logInSuccess(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendNext(user)
@@ -67,14 +69,45 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    private func failureSignalProducer(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func logInFailure(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
-                observer.sendFailed(.InvalidCredentials(.None))
+                observer.sendFailed(.InvalidLogInCredentials(.None))
             }
         }.on(failed: { [unowned self] _ in
-            self._eventsObserver.sendNext(.LogInError(.InvalidCredentials(.None)))
+            self._eventsObserver.sendNext(.LogInError(.InvalidLogInCredentials(.None)))
         })
+    }
+    
+    public func signUp(name: String, email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
+        if email.raw == _email {
+            if _registeredAlready {
+                return signUpFailure(dispatchTime)
+            } else {
+                let user = ExampleUser(email: email.raw, password: password)
+                return signUpSuccess(user, dispatchTime: dispatchTime)
+            }
+        } else {
+            return signUpFailure(dispatchTime)
+        }
+    }
+    
+    private func signUpSuccess(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                observer.sendNext(user)
+                observer.sendCompleted()
+            }
+        }
+    }
+    
+    private func signUpFailure(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+            dispatch_after(dispatchTime, dispatch_get_main_queue()) {
+                observer.sendFailed(.InvalidSignUpCredentials(.None))
+            }
+        }
     }
     
 }

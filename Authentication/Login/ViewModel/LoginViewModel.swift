@@ -22,20 +22,10 @@ public protocol LoginViewModelType {
     var passwordValidationErrors: AnyProperty<[String]> { get }
     var showPassword: MutableProperty<Bool> { get }
     
-    var togglePasswordVisibility: Action<AnyObject, Bool, NoError> { get }
+    var togglePasswordVisibilityCocoaAction: CocoaAction { get }
     var logInCocoaAction: CocoaAction { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
-    
-    var emailText: String { get }
-    var passwordText: String { get }
-    var emailPlaceholderText: String { get }
-    var passwordPlaceholderText: String { get }
-    var loginButtonTitle: String { get }
-    var registerLabelText: String { get }
-    var registerButtonTitle: String { get }
-    var recoverPasswordButtonTitle: String { get }
-    var passwordVisibilityButtonTitle: String { get }
     
 }
 
@@ -56,22 +46,24 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     public let passwordValidationErrors: AnyProperty<[String]>
     public let showPassword = MutableProperty(false)
     
-    private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = {
-        return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
-            if let email = Email(raw: self.email.value) {
-                let password = self.password.value
-                return self._sessionService.logIn(email, password).observeOn(UIScheduler())
-            } else {
-                return SignalProducer(error: .InvalidCredentials(.None)).observeOn(UIScheduler())
-            }
-        }
-    }()
     public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
     public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
     public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
     
+    public var togglePasswordVisibilityCocoaAction: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     
-    public private(set) lazy var togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
+    private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = {
+        return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
+            if let email = Email(raw: self.email.value) {
+                let password = self.password.value
+                return self._sessionService.logIn(email, password: password).observeOn(UIScheduler())
+            } else {
+                return SignalProducer(error: .InvalidLogInCredentials(.None)).observeOn(UIScheduler())
+            }
+        }
+    }()
+    
+    private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
         return Action { [unowned self] _ in
             self.showPassword.value = !self.showPassword.value
             return SignalProducer(value: self.showPassword.value).observeOn(UIScheduler())
@@ -89,7 +81,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
      
         - Returns: A valid login view model ready to use.
     */
-    public init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
+    internal init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
         _sessionService = sessionService
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
@@ -103,46 +95,6 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
         
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
-    }
-    
-}
-
-public extension LoginViewModel {
-    
-    var emailText: String {
-        return "login-view-model.email".localized
-    }
-    
-    var passwordText: String {
-        return "login-view-model.password".localized
-    }
-    
-    var emailPlaceholderText: String {
-        return "login-view-model.email-placeholder".localized
-    }
-    
-    var passwordPlaceholderText: String {
-        return "login-view-model.password-placeholder".localized
-    }
-    
-    var loginButtonTitle: String {
-        return "login-view-model.login-button-title".localized
-    }
-    
-    var registerLabelText: String {
-        return "login-view.to-register-label".localized
-    }
-    
-    var registerButtonTitle: String {
-        return "login-view-model.register-button-title".localized
-    }
-    
-    var passwordVisibilityButtonTitle: String {
-        return ("login-view-model.password-visibility-button-title." + (showPassword.value ? "false" : "true")).localized
-    }
-    
-    var recoverPasswordButtonTitle: String {
-        return "login-view-model.recover-password-button-title".localized
     }
     
 }

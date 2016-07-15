@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -232,7 +232,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5vG-Dj-ID2" userLabel="View Log in">
                     <rect key="frame" x="0.0" y="420" width="536" height="244"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sL5-zj-47A" userLabel="View Register">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sL5-zj-47A" userLabel="View Signup">
                             <rect key="frame" x="0.0" y="163" width="536" height="81"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5G-OH-g8x" userLabel="View Button">
@@ -368,8 +368,8 @@
                 <outlet property="passwordValidationMessageLabelOutlet" destination="GLr-di-9jk" id="UEW-6E-QDi"/>
                 <outlet property="passwordVisibilityButtonOutlet" destination="Clc-p3-LR7" id="bFW-Qo-sbf"/>
                 <outlet property="recoverPasswordButtonOutlet" destination="6sL-Hy-vEE" id="Kzs-T3-h9J"/>
-                <outlet property="registerButtonOutlet" destination="cxB-U7-f9X" id="HAI-nd-Jra"/>
-                <outlet property="toRegisterLabel" destination="k1E-m0-zdE" id="AaW-Tl-Vxk"/>
+                <outlet property="signupButtonOutlet" destination="cxB-U7-f9X" id="HAI-nd-Jra"/>
+                <outlet property="toSignupLabel" destination="k1E-m0-zdE" id="AaW-Tl-Vxk"/>
             </connections>
             <point key="canvasLocation" x="436" y="392"/>
         </view>

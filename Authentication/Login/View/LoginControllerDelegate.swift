@@ -16,7 +16,7 @@ import Foundation
 */
 public protocol LoginControllerDelegate {
     
-    func shouldDisplayLoginErrorWithAlert() -> Bool
+    var shouldDisplayLoginErrorWithAlert: Bool { get }
 
     func loginControllerWillExecuteLogIn(controller: LoginController)
     
@@ -51,18 +51,17 @@ extension LoginControllerDelegate {
         app.networkActivityIndicatorVisible = false
     }
     
-    public func shouldDisplayLoginErrorWithAlert() -> Bool {
-        return true
-    }
+    public var shouldDisplayLoginErrorWithAlert: Bool { return true }
     
     public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {
         controller.loginView.emailTextFieldValid = false
         controller.loginView.passwordTextFieldValid = false
         controller.loginView.logInButtonPressed = false
         
-        if !shouldDisplayLoginErrorWithAlert() && controller.loginView.logInErrorLabel != .None {
-            controller.loginView.logInErrorLabel!.text = error.message
-        } else {
+        if let errorLabel = controller.loginView.logInErrorLabel {
+            errorLabel.text = error.message
+        }
+        if shouldDisplayLoginErrorWithAlert {
             let alert = UIAlertController(title: "login-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "login-error.alert.close".localized, style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)
