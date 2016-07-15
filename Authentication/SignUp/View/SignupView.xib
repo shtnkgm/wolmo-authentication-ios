@@ -29,7 +29,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSa-0q-elf" userLabel="Textfields View">
-                    <rect key="frame" x="0.0" y="61" width="418" height="136"/>
+                    <rect key="frame" x="0.0" y="71" width="418" height="136"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1A-j1-8cE" userLabel="Email View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="68"/>
@@ -43,7 +43,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ng0-Kr-R1N">
                                                     <rect key="frame" x="8" y="0.0" width="360" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -109,7 +109,7 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="88a-FE-Vb2">
                                                     <rect key="frame" x="8" y="0.0" width="320" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0R-Cq-Zz3">
                                                     <rect key="frame" x="328" y="0.0" width="45" height="43"/>
@@ -179,7 +179,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iqv-fj-4Xd" userLabel="SignUp View">
-                    <rect key="frame" x="0.0" y="197" width="418" height="410"/>
+                    <rect key="frame" x="0.0" y="207" width="418" height="400"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8o-uo-260" userLabel="Terms&amp;Serivces View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="82"/>
@@ -226,7 +226,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-Mz-klY" userLabel="Button View">
-                            <rect key="frame" x="0.0" y="82" width="418" height="269"/>
+                            <rect key="frame" x="0.0" y="82" width="418" height="259"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YZp-rK-32z">
                                     <rect key="frame" x="21" y="0.0" width="376" height="50"/>
@@ -250,7 +250,7 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TH1-Y1-ZZn" userLabel="Log In View">
-                            <rect key="frame" x="0.0" y="351" width="418" height="59"/>
+                            <rect key="frame" x="0.0" y="341" width="418" height="59"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¿Ya estás registrado?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rl4-RA-UdB">
                                     <rect key="frame" x="140" y="0.0" width="138" height="17"/>
@@ -298,13 +298,12 @@
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Iqv-fj-4Xd" secondAttribute="bottom" id="5PJ-cu-YpV"/>
-                <constraint firstItem="pSa-0q-elf" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="bottom" id="6Bf-ek-bUJ"/>
                 <constraint firstItem="YZp-rK-32z" firstAttribute="trailing" secondItem="JVi-Ec-hKI" secondAttribute="trailing" id="8Nm-Te-hM3"/>
                 <constraint firstItem="pSa-0q-elf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BFG-ez-ZM5"/>
                 <constraint firstItem="YZp-rK-32z" firstAttribute="leading" secondItem="JVi-Ec-hKI" secondAttribute="leading" id="IUA-8f-tBd"/>
                 <constraint firstAttribute="trailing" secondItem="pSa-0q-elf" secondAttribute="trailing" id="KFW-7Z-jt1"/>
                 <constraint firstItem="YZp-rK-32z" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="56/671" id="OA0-y1-LDP"/>
-                <constraint firstItem="pSa-0q-elf" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="bottom" id="OE6-Ur-KWl"/>
+                <constraint firstItem="pSa-0q-elf" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="bottom" constant="10" id="OE6-Ur-KWl"/>
                 <constraint firstItem="Iqv-fj-4Xd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WtO-SA-rte"/>
                 <constraint firstAttribute="trailing" secondItem="Iqv-fj-4Xd" secondAttribute="trailing" id="bCd-JD-6j7"/>
                 <constraint firstItem="lPU-cw-qqE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="cNL-Df-ANF"/>
