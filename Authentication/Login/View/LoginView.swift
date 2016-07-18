@@ -119,8 +119,8 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet { logInButtonPressedWasSet() }
     }
     
-    internal var showPassword = false {
-        didSet { showPasswordWasSet() }
+    internal var passwordVisible: Bool = false {
+        didSet { passwordVisibleWasSet() }
     }
     
     internal func render() {
@@ -130,7 +130,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         passwordTextFieldSelected = false
         logInButtonEnabled = false
         logInButtonPressed = false
-        showPassword = false
+        passwordVisible = false
         
         //Configure colour palette
         //Configure fonts
@@ -218,12 +218,12 @@ private extension LoginView {
         passwordErrorsHeightConstraint.active = true
     }
     
-    private func showPasswordWasSet() {
+    private func passwordVisibleWasSet() {
         // Changing enabled property for the
         // font setting to take effect, which is
         // necessary for it not to shrink.
         passwordTextField.enabled = false
-        passwordTextField.secureTextEntry = !showPassword
+        passwordTextField.secureTextEntry = !passwordVisible
         passwordTextField.enabled = true
         passwordTextField.font = delegate.fontPalette.textfields
         passwordVisibilityButtonOutlet.setTitle(passwordVisibilityButtonTitle, forState: .Normal)
@@ -262,7 +262,7 @@ public extension LoginViewType {
     }
 
     private var passwordVisibilityButtonTitle: String {
-        return ("text-visibility-button-title." + (showPassword ? "false" : "true")).localized
+        return ("text-visibility-button-title." + (passwordVisible ? "false" : "true")).localized
     }
     
     public var recoverPasswordButtonTitle: String {

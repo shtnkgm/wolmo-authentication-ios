@@ -117,11 +117,11 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var passwordTextFieldValid = false { didSet { passwordTextFieldValidWasSet() } }
     internal var passwordTextFieldSelected = false { didSet { passwordTextFieldSelectedWasSet() } }
-    internal var showPassword = false { didSet { showPasswordWasSet() } }
+    internal var passwordVisible = false { didSet { passwordVisibleWasSet() } }
     
     internal var passwordConfirmationTextFieldValid = false { didSet { passwordConfirmationTextFieldValidWasSet() } }
     internal var passwordConfirmationTextFieldSelected = false { didSet { passwordConfirmationTextFieldSelectedWasSet() } }
-    internal var showConfirmationPassword = false { didSet { showConfirmationPasswordWasSet() } }
+    internal var confirmationPasswordVisible = false { didSet { confirmationPasswordVisibleWasSet() } }
     
     internal var signUpButtonEnabled = false { didSet { signUpButtonEnabledWasSet() } }
     internal var signUpButtonPressed = false { didSet { signUpButtonPressedWasSet() } }
@@ -140,8 +140,8 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         signUpButtonEnabled = false
         signUpButtonPressed = false
         
-        showPassword = false
-        showConfirmationPassword = false
+        passwordVisible = false
+        confirmationPasswordVisible = false
         
         delegate.configureView(self)
     }
@@ -237,10 +237,10 @@ private extension SignupView {
         }
     }
     
-    private func showPasswordWasSet() {
+    private func passwordVisibleWasSet() {
         // Changing enabled property for the font setting to take effect, which is necessary for it not to shrink.
         passwordTextField.enabled = false
-        passwordTextField.secureTextEntry = !showPassword
+        passwordTextField.secureTextEntry = !passwordVisible
         passwordTextField.enabled = true
         passwordTextField.font = delegate.fontPalette.textfields
         passwordVisibilityButtonOutlet.setTitle(passwordVisibilityButtonTitle, forState: .Normal)
@@ -275,10 +275,10 @@ private extension SignupView {
         }
     }
     
-    private func showConfirmationPasswordWasSet() {
+    private func confirmationPasswordVisibleWasSet() {
         // Changing enabled property for the font setting to take effect, which is necessary for it not to shrink.
         passwordConfirmTextField?.enabled = false
-        passwordConfirmTextField?.secureTextEntry = !showConfirmationPassword
+        passwordConfirmTextField?.secureTextEntry = !confirmationPasswordVisible
         passwordConfirmTextField?.enabled = true
         passwordConfirmTextField?.font = delegate.fontPalette.textfields
         passwordConfirmVisibilityButton?.setTitle(confirmPasswordVisibilityButtonTitle, forState: .Normal)
@@ -345,11 +345,11 @@ public extension SignupViewType {
     }
     
     public var passwordVisibilityButtonTitle: String {
-        return ("text-visibility-button-title." + (showPassword ? "false" : "true")).localized
+        return ("text-visibility-button-title." + (passwordVisible ? "false" : "true")).localized
     }
     
     public var confirmPasswordVisibilityButtonTitle: String {
-        return ("text-visibility-button-title." + (showConfirmationPassword ? "false" : "true")).localized
+        return ("text-visibility-button-title." + (confirmationPasswordVisible ? "false" : "true")).localized
     }
     
     public var termsAndServicesLabelText: String {

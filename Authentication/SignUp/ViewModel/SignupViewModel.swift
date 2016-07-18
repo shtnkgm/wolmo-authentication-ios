@@ -22,12 +22,12 @@ public protocol SignupViewModelType {
     
     var password: MutableProperty<String> { get }
     var passwordValidationErrors: AnyProperty<[String]> { get }
-    var showPassword: MutableProperty<Bool> { get }
+    var passwordVisible: MutableProperty<Bool> { get }
     var togglePasswordVisibilityCocoaAction: CocoaAction { get }
     
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
-    var showConfirmationPassword: MutableProperty<Bool> { get }
+    var confirmationPasswordVisible: MutableProperty<Bool> { get }
     var toggleConfirmPswdVisibilityCocoaAction: CocoaAction { get }
     
     var signUpCocoaAction: CocoaAction { get }
@@ -52,8 +52,8 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
     
-    public let showPassword = MutableProperty(false)
-    public let showConfirmationPassword = MutableProperty(false)
+    public let passwordVisible = MutableProperty(false)
+    public let confirmationPasswordVisible = MutableProperty(false)
     
     public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
@@ -113,15 +113,15 @@ private extension SignupViewModel {
     
     private func initializeTogglePasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
         return Action { [unowned self] _ in
-            self.showPassword.value = !self.showPassword.value
-            return SignalProducer(value: self.showPassword.value).observeOn(UIScheduler())
+            self.passwordVisible.value = !self.passwordVisible.value
+            return SignalProducer(value: self.passwordVisible.value).observeOn(UIScheduler())
         }
     }
     
     private func initializeToggleConfirmationPasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
         return Action { [unowned self] _ in
-            self.showConfirmationPassword.value = !self.showConfirmationPassword.value
-            return SignalProducer(value: self.showConfirmationPassword.value).observeOn(UIScheduler())
+            self.confirmationPasswordVisible.value = !self.confirmationPasswordVisible.value
+            return SignalProducer(value: self.confirmationPasswordVisible.value).observeOn(UIScheduler())
         }
     }
     
