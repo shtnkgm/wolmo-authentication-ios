@@ -10,7 +10,7 @@ import ReactiveCocoa
 
 public final class SignupController: UIViewController {
     
-    private var _viewModel: SignupViewModelType
+    private let _viewModel: SignupViewModelType
     private let _signupViewFactory: () -> SignupViewType
     private let _delegate: SignupControllerDelegate
     private let _transitionDelegate: SignupControllerTransitionDelegate
