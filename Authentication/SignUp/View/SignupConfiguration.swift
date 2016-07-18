@@ -47,9 +47,7 @@ public final class SignupControllerConfiguration {
      
      - Returns: A valid configuration
      */
-    // swiftlint:disable valid_docs
     init(viewModel: SignupViewModelType,
-    // swiftlint:enable valid_docs
         viewFactory: () -> SignupViewType,
         transitionDelegate: SignupControllerTransitionDelegate,
         delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
