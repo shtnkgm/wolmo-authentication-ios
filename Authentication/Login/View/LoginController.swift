@@ -102,9 +102,11 @@ private extension LoginController {
     private func bindEmailElements() {
         _viewModel.email <~ loginView.emailTextField.rex_textSignal
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
-            errors.isEmpty
-                ? self._delegate.didPassEmailValidation(self)
-                : self._delegate.didFailEmailValidation(self, with: errors)
+            if errors.isEmpty {
+                self._delegate.didPassEmailValidation(self)
+            } else {
+                self._delegate.didFailEmailValidation(self, with: errors)
+            }
         }
         if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
@@ -117,10 +119,11 @@ private extension LoginController {
             self.loginView.passwordVisibilityButton?.hidden = text.isEmpty
         })
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
-            errors.isEmpty
-                ? self._delegate.didPassPasswordValidation(self)
-                : self._delegate.didFailPasswordValidation(self, with: errors)
-
+            if errors.isEmpty {
+                self._delegate.didPassPasswordValidation(self)
+            } else {
+                self._delegate.didFailPasswordValidation(self, with: errors)
+            }
         }
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
