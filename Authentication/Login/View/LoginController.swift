@@ -90,11 +90,9 @@ private extension LoginController {
         setTextfieldOrder()
         
         _viewModel.logInExecuting.observeNext { [unowned self] executing in
-            if executing {
-                self._delegate.loginControllerWillExecuteLogIn(self)
-            } else {
-                self._delegate.loginControllerDidExecuteLogIn(self)
-            }
+            executing
+                ? self._delegate.loginControllerWillExecuteLogIn(self)
+                : self._delegate.loginControllerDidExecuteLogIn(self)
             self.loginView.logInButtonPressed = executing
         }
         
@@ -104,11 +102,9 @@ private extension LoginController {
     private func bindEmailElements() {
         _viewModel.email <~ loginView.emailTextField.rex_textSignal
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
-            if errors.isEmpty {
-                self._delegate.loginControllerDidPassEmailValidation(self)
-            } else {
-                self._delegate.loginController(self, didFailEmailValidationWithErrors: errors)
-            }
+            errors.isEmpty
+                ? self._delegate.loginControllerDidPassEmailValidation(self)
+                : self._delegate.loginController(self, didFailEmailValidationWithErrors: errors)
         }
         if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
@@ -125,11 +121,9 @@ private extension LoginController {
             }
         })
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
-            if errors.isEmpty {
-                self._delegate.loginControllerDidPassPasswordValidation(self)
-            } else {
-                self._delegate.loginController(self, didFailPasswordValidationWithErrors: errors)
-            }
+            errors.isEmpty
+                ? self._delegate.loginControllerDidPassPasswordValidation(self)
+                : self._delegate.loginController(self, didFailPasswordValidationWithErrors: errors)
 
         }
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
