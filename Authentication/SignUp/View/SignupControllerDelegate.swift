@@ -16,23 +16,23 @@ public protocol SignupControllerDelegate {
     
     func didExecuteSignUp(controller: SignupController)
     
-    func didSignUpWithError(controller: SignupController, error: SessionServiceError)
+    func didSignUp(controller: SignupController, with error: SessionServiceError)
     
     func didPassNameValidation(controller: SignupController)
     
-    func didFailNameValidationWithErrors(controller: SignupController, errors: [String])
+    func didFailNameValidation(controller: SignupController, with errors: [String])
     
     func didPassEmailValidation(controller: SignupController)
     
-    func didFailEmailValidationWithErrors(controller: SignupController, errors: [String])
+    func didFailEmailValidation(controller: SignupController, with errors: [String])
     
     func didPassPasswordValidation(controller: SignupController)
     
-    func didFailPasswordValidationWithErrors(controller: SignupController, errors: [String])
+    func didFailPasswordValidation(controller: SignupController, with errors: [String])
 
     func didPassPasswordConfirmationValidation(controller: SignupController)
     
-    func didFailPasswordConfirmationValidationWithErrors(controller: SignupController, errors: [String])
+    func didFailPasswordConfirmationValidation(controller: SignupController, with errors: [String])
     
 }
 
@@ -53,7 +53,7 @@ extension SignupControllerDelegate {
         app.networkActivityIndicatorVisible = false
     }
     
-    public func didSignUpWithError(controller: SignupController, error: SessionServiceError) {
+    public func didSignUp(controller: SignupController, with error: SessionServiceError) {
         if let errorLabel = controller.signupView.signUpErrorLabel {
             errorLabel.text = error.message
         }
@@ -68,7 +68,7 @@ extension SignupControllerDelegate {
         controller.signupView.usernameTextFieldValid = true
     }
     
-    public func didFailNameValidationWithErrors(controller: SignupController, errors: [String]) {
+    public func didFailNameValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.usernameTextFieldValid = false
     }
     
@@ -76,7 +76,7 @@ extension SignupControllerDelegate {
         controller.signupView.emailTextFieldValid = true
     }
     
-    public func didFailEmailValidationWithErrors(controller: SignupController, errors: [String]) {
+    public func didFailEmailValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.emailTextFieldValid = false
     }
     
@@ -84,7 +84,7 @@ extension SignupControllerDelegate {
         controller.signupView.passwordTextFieldValid = true
     }
     
-    public func didFailPasswordValidationWithErrors(controller: SignupController, errors: [String]) {
+    public func didFailPasswordValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.passwordTextFieldValid = false
     }
     
@@ -92,7 +92,7 @@ extension SignupControllerDelegate {
         controller.signupView.passwordConfirmationTextFieldValid = true
     }
     
-    public func didFailPasswordConfirmationValidationWithErrors(controller: SignupController, errors: [String]) {
+    public func didFailPasswordConfirmationValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.passwordConfirmationTextFieldValid = false
     }
     

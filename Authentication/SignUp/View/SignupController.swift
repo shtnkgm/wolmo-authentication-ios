@@ -75,7 +75,7 @@ private extension SignupController {
             self.signupView.signUpButtonPressed = executing
         }
         
-        _viewModel.signUpErrors.observeNext { [unowned self] in self._delegate.didSignUpWithError(self, error: $0) }
+        _viewModel.signUpErrors.observeNext { [unowned self] in self._delegate.didSignUp(self, with: $0) }
     }
     
     private func bindNameElements() {
@@ -84,7 +84,7 @@ private extension SignupController {
             _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
                 errors.isEmpty
                     ? self._delegate.didPassNameValidation(self)
-                    : self._delegate.didFailNameValidationWithErrors(self, errors: errors)
+                    : self._delegate.didFailNameValidation(self, with: errors)
             }
             if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
                 nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
@@ -98,7 +98,7 @@ private extension SignupController {
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
             errors.isEmpty
                 ? self._delegate.didPassEmailValidation(self)
-                : self._delegate.didFailEmailValidationWithErrors(self, errors: errors)
+                : self._delegate.didFailEmailValidation(self, with: errors)
         }
         if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
@@ -117,7 +117,7 @@ private extension SignupController {
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             errors.isEmpty
                 ? self._delegate.didPassPasswordValidation(self)
-                : self._delegate.didFailPasswordValidationWithErrors(self, errors: errors)
+                : self._delegate.didFailPasswordValidation(self, with: errors)
         }
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
@@ -142,7 +142,7 @@ private extension SignupController {
             _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
                 errors.isEmpty
                     ? self._delegate.didPassPasswordConfirmationValidation(self)
-                    : self._delegate.didFailPasswordConfirmationValidationWithErrors(self, errors: errors)
+                    : self._delegate.didFailPasswordConfirmationValidation(self, with: errors)
             }
             if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
                 passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }

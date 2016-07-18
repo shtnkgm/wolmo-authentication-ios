@@ -22,15 +22,15 @@ public protocol LoginControllerDelegate {
     
     func didExecuteLogIn(controller: LoginController)
     
-    func didLogInWithError(controller: LoginController, error: SessionServiceError)
+    func didLogIn(controller: LoginController, with error: SessionServiceError)
     
     func didPassEmailValidation(controller: LoginController)
     
-    func didFailEmailValidationWithErrors(controller: LoginController, errors: [String])
+    func didFailEmailValidation(controller: LoginController, with errors: [String])
     
     func didPassPasswordValidation(controller: LoginController)
     
-    func didFailPasswordValidationWithErrors(controller: LoginController, errors: [String])
+    func didFailPasswordValidation(controller: LoginController, with errors: [String])
     
 }
 
@@ -53,7 +53,7 @@ extension LoginControllerDelegate {
         app.networkActivityIndicatorVisible = false
     }
     
-    public func didLogInWithError(controller: LoginController, error: SessionServiceError) {
+    public func didLogIn(controller: LoginController, with error: SessionServiceError) {
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = error.message
         }
@@ -68,7 +68,7 @@ extension LoginControllerDelegate {
         controller.loginView.emailTextFieldValid = true
     }
     
-    public func didFailEmailValidationWithErrors(controller: LoginController, errors: [String]) {
+    public func didFailEmailValidation(controller: LoginController, with errors: [String]) {
         controller.loginView.emailTextFieldValid = false
     }
     
@@ -76,7 +76,7 @@ extension LoginControllerDelegate {
         controller.loginView.passwordTextFieldValid = true
     }
     
-    public func didFailPasswordValidationWithErrors(controller: LoginController, errors: [String]) {
+    public func didFailPasswordValidation(controller: LoginController, with errors: [String]) {
         controller.loginView.passwordTextFieldValid = false
     }
     
