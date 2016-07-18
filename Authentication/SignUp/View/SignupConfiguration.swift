@@ -16,7 +16,7 @@ public protocol SignupControllerTransitionDelegate {
 }
 
 /**
- Class for configuring the singup controller.
+ Class for configuring the signup controller.
  Includes all information required:
  view factory method,
  view model,
