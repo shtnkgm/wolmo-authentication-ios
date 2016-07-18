@@ -114,11 +114,7 @@ private extension LoginController {
     
     private func bindPasswordElements() {
         _viewModel.password <~ loginView.passwordTextField.rex_textSignal.on(next: { [unowned self] text in
-            if text.isEmpty {
-                self.loginView.passwordVisibilityButton?.hidden = true
-            } else {
-                self.loginView.passwordVisibilityButton?.hidden = false
-            }
+            self.loginView.passwordVisibilityButton?.hidden = text.isEmpty
         })
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             errors.isEmpty

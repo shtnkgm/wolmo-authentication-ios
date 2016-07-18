@@ -108,11 +108,7 @@ private extension SignupController {
     
     private func bindPasswordElements() {
         _viewModel.password <~ signupView.passwordTextField.rex_textSignal.on(next: { [unowned self] text in
-            if text.isEmpty {
-                self.signupView.passwordVisibilityButton?.hidden = true
-            } else {
-                self.signupView.passwordVisibilityButton?.hidden = false
-            }
+            self.signupView.passwordVisibilityButton?.hidden = text.isEmpty
         })
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             errors.isEmpty
@@ -133,11 +129,7 @@ private extension SignupController {
     func bindPasswordConfirmationElements() {
         if let passwordConfirmationTextField = signupView.passwordConfirmTextField {
             _viewModel.passwordConfirmation <~ passwordConfirmationTextField.rex_textSignal.on(next: { [unowned self] text in
-                if text.isEmpty {
-                    self.signupView.passwordConfirmVisibilityButton?.hidden = true
-                } else {
-                    self.signupView.passwordConfirmVisibilityButton?.hidden = false
-                }
+                self.signupView.passwordConfirmVisibilityButton?.hidden = text.isEmpty
             })
             _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
                 errors.isEmpty
