@@ -128,9 +128,5 @@ private extension SignupViewModel {
 }
 
 private func getPasswordConfirmValidationResultFromEquality(equals: Bool) -> ValidationResult {
-    if equals {
-        return .Valid
-    } else {
-        return .invalid("signup-error.password-confirmation.invalid".localized)
-    }
+    return equals ? .Valid : .invalid("signup-error.password-confirmation.invalid".localized)
 }
