@@ -24,12 +24,12 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         didSet { titleLabel.text = titleText }
     }
 
-    internal var usernameLabel: UILabel? { return .None }
-    internal var usernameTextField: UITextField? { return .None }
-    internal var usernameValidationMessageLabel: UILabel? { return .None }
-    var usernameErrorsHeightConstraint: NSLayoutConstraint?
+    internal var usernameLabel: UILabel?
+    internal var usernameTextField: UITextField?
+    internal var usernameValidationMessageLabel: UILabel?
+    internal var usernameErrorsHeightConstraint: NSLayoutConstraint?
     
-    internal var emailLabel: UILabel? { return .None }
+    internal var emailLabel: UILabel?
     
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
@@ -50,7 +50,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         didSet { emailValidationMessageLabelOutlet.text = " " }
     }
     
-    internal var passwordLabel: UILabel? { return .None }
+    internal var passwordLabel: UILabel?
 
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
@@ -75,10 +75,10 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         didSet { passwordVisibilityButtonOutlet.hidden = true }
     }
 
-    internal var passwordConfirmLabel: UILabel? { return .None }
-    internal var passwordConfirmTextField: UITextField? { return .None }
-    internal var passwordConfirmValidationMessageLabel: UILabel? { return .None }
-    internal var passwordConfirmVisibilityButton: UIButton? { return .None }
+    internal var passwordConfirmLabel: UILabel?
+    internal var passwordConfirmTextField: UITextField?
+    internal var passwordConfirmValidationMessageLabel: UILabel?
+    internal var passwordConfirmVisibilityButton: UIButton?
     internal var passwordConfirmErrorsHeightConstraint: NSLayoutConstraint?
     
     internal var signUpButton: UIButton { return signUpButtonOutlet }
@@ -278,7 +278,7 @@ private extension SignupView {
     private func showConfirmationPasswordWasSet() {
         // Changing enabled property for the font setting to take effect, which is necessary for it not to shrink.
         passwordConfirmTextField?.enabled = false
-        passwordConfirmTextField?.secureTextEntry = !showPassword
+        passwordConfirmTextField?.secureTextEntry = !showConfirmationPassword
         passwordConfirmTextField?.enabled = true
         passwordConfirmTextField?.font = delegate.fontPalette.textfields
         passwordConfirmVisibilityButton?.setTitle(confirmPasswordVisibilityButtonTitle, forState: .Normal)

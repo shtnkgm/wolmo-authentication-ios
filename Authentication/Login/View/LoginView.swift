@@ -23,7 +23,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     internal var logoImageView: UIImageView { return logoImageViewOutlet }
     @IBOutlet weak var logoImageViewOutlet: UIImageView!
     
-    internal var emailLabel: UILabel? { return .None }
+    internal var emailLabel: UILabel?
     
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
@@ -35,7 +35,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet { emailValidationMessageLabelOutlet.text = " " }
     }
     
-    internal var passwordLabel: UILabel? { return .None }
+    internal var passwordLabel: UILabel?
     
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
