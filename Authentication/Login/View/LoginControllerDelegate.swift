@@ -18,25 +18,27 @@ public protocol LoginControllerDelegate {
     
     var shouldDisplayLoginErrorWithAlert: Bool { get }
 
-    func loginControllerWillExecuteLogIn(controller: LoginController)
+    func willExecuteLogIn(controller: LoginController)
     
-    func loginControllerDidExecuteLogIn(controller: LoginController)
+    func didExecuteLogIn(controller: LoginController)
     
-    func loginController(controller: LoginController, didLogInWithError error: SessionServiceError)
+    func didLogInWithError(controller: LoginController, error: SessionServiceError)
     
-    func loginControllerDidPassEmailValidation(controller: LoginController)
+    func didPassEmailValidation(controller: LoginController)
     
-    func loginController(controller: LoginController, didFailEmailValidationWithErrors errors: [String])
+    func didFailEmailValidationWithErrors(controller: LoginController, errors: [String])
     
-    func loginControllerDidPassPasswordValidation(controller: LoginController)
+    func didPassPasswordValidation(controller: LoginController)
     
-    func loginController(controller: LoginController, didFailPasswordValidationWithErrors errors: [String])
+    func didFailPasswordValidationWithErrors(controller: LoginController, errors: [String])
     
 }
 
 extension LoginControllerDelegate {
     
-    public func loginControllerWillExecuteLogIn(controller: LoginController) {
+    public var shouldDisplayLoginErrorWithAlert: Bool { return true }
+    
+    public func willExecuteLogIn(controller: LoginController) {
         controller.loginView.emailTextFieldValid = true
         controller.loginView.passwordTextFieldValid = true
         if let errorLabel = controller.loginView.logInErrorLabel {
@@ -46,14 +48,12 @@ extension LoginControllerDelegate {
         app.networkActivityIndicatorVisible = true
     }
     
-    public func loginControllerDidExecuteLogIn(controller: LoginController) {
+    public func didExecuteLogIn(controller: LoginController) {
         let app = UIApplication.sharedApplication()
         app.networkActivityIndicatorVisible = false
     }
     
-    public var shouldDisplayLoginErrorWithAlert: Bool { return true }
-    
-    public func loginController(controller: LoginController, didLogInWithError error: SessionServiceError) {
+    public func didLogInWithError(controller: LoginController, error: SessionServiceError) {
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = error.message
         }
@@ -64,19 +64,19 @@ extension LoginControllerDelegate {
         }
     }
     
-    public func loginControllerDidPassEmailValidation(controller: LoginController) {
+    public func didPassEmailValidation(controller: LoginController) {
         controller.loginView.emailTextFieldValid = true
     }
     
-    public func loginController(controller: LoginController, didFailEmailValidationWithErrors errors: [String]) {
+    public func didFailEmailValidationWithErrors(controller: LoginController, errors: [String]) {
         controller.loginView.emailTextFieldValid = false
     }
     
-    public func loginControllerDidPassPasswordValidation(controller: LoginController) {
+    public func didPassPasswordValidation(controller: LoginController) {
         controller.loginView.passwordTextFieldValid = true
     }
     
-    public func loginController(controller: LoginController, didFailPasswordValidationWithErrors errors: [String]) {
+    public func didFailPasswordValidationWithErrors(controller: LoginController, errors: [String]) {
         controller.loginView.passwordTextFieldValid = false
     }
     
