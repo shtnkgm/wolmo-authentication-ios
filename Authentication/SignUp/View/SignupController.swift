@@ -271,8 +271,7 @@ extension SignupController {
         }
     }
     
-    // Internal to avoid using @objc label for using it in selector.
-    internal func dismissKeyboard(sender: UITapGestureRecognizer) {
+    @objc private func dismissKeyboard(sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)
