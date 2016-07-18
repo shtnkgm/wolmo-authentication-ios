@@ -126,7 +126,7 @@ private extension LoginController {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
-            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibilityCocoaAction
+            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility
             _viewModel.showPassword.signal.observeNext { [unowned self] in self.loginView.passwordVisible = $0 }
         }
         loginView.passwordTextField.delegate = self

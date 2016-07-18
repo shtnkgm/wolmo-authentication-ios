@@ -119,7 +119,7 @@ private extension SignupController {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = signupView.passwordVisibilityButton {
-            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibilityCocoaAction
+            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility
             _viewModel.passwordVisible.signal.observeNext { [unowned self] in self.signupView.passwordVisible = $0 }
         }
         signupView.passwordTextField.delegate = self
@@ -140,7 +140,7 @@ private extension SignupController {
                 passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
             }
             if let confirmPasswordVisibilityButton = signupView.passwordConfirmVisibilityButton {
-                confirmPasswordVisibilityButton.rex_pressed.value = _viewModel.toggleConfirmPswdVisibilityCocoaAction
+                confirmPasswordVisibilityButton.rex_pressed.value = _viewModel.toggleConfirmPasswordVisibility
                 _viewModel.confirmationPasswordVisible.signal.observeNext { [unowned self] in self.signupView.confirmationPasswordVisible = $0 }
             }
             passwordConfirmationTextField.delegate = self

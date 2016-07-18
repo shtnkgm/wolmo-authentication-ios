@@ -23,12 +23,12 @@ public protocol SignupViewModelType {
     var password: MutableProperty<String> { get }
     var passwordValidationErrors: AnyProperty<[String]> { get }
     var passwordVisible: MutableProperty<Bool> { get }
-    var togglePasswordVisibilityCocoaAction: CocoaAction { get }
+    var togglePasswordVisibility: CocoaAction { get }
     
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
     var confirmationPasswordVisible: MutableProperty<Bool> { get }
-    var toggleConfirmPswdVisibilityCocoaAction: CocoaAction { get }
+    var toggleConfirmPasswordVisibility: CocoaAction { get }
     
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
@@ -59,8 +59,8 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
-    public var togglePasswordVisibilityCocoaAction: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
-    public var toggleConfirmPswdVisibilityCocoaAction: CocoaAction { return _toggleConfirmationPasswordVisibility.unsafeCocoaAction }
+    public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
+    public var toggleConfirmPasswordVisibility: CocoaAction { return _toggleConfirmationPasswordVisibility.unsafeCocoaAction }
     
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = self.initializeSignUpAction()
     
