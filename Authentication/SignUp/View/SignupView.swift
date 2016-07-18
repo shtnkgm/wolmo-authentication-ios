@@ -109,22 +109,22 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         didSet { loginButtonOutlet.setTitle(loginButtonTitle, forState: .Normal) }
     }
     
-    internal var usernameTextFieldValid: Bool = false { didSet { usernameTextFieldValidWasSet() } }
-    internal var usernameTextFieldSelected: Bool = false { didSet { usernameTextFieldSelectedWasSet() } }
+    internal var usernameTextFieldValid = false { didSet { usernameTextFieldValidWasSet() } }
+    internal var usernameTextFieldSelected = false { didSet { usernameTextFieldSelectedWasSet() } }
     
-    internal var emailTextFieldValid: Bool = false { didSet { emailTextFieldValidWasSet() } }
-    internal var emailTextFieldSelected: Bool = false { didSet { emailTextFieldSelectedWasSet() } }
+    internal var emailTextFieldValid = false { didSet { emailTextFieldValidWasSet() } }
+    internal var emailTextFieldSelected = false { didSet { emailTextFieldSelectedWasSet() } }
     
-    internal var passwordTextFieldValid: Bool = false { didSet { passwordTextFieldValidWasSet() } }
-    internal var passwordTextFieldSelected: Bool = false { didSet { passwordTextFieldSelectedWasSet() } }
-    internal var showPassword: Bool = false { didSet { showPasswordWasSet() } }
+    internal var passwordTextFieldValid = false { didSet { passwordTextFieldValidWasSet() } }
+    internal var passwordTextFieldSelected = false { didSet { passwordTextFieldSelectedWasSet() } }
+    internal var showPassword = false { didSet { showPasswordWasSet() } }
     
-    internal var passwordConfirmationTextFieldValid: Bool = false { didSet { passwordConfirmationTextFieldValidWasSet() } }
-    internal var passwordConfirmationTextFieldSelected: Bool = false { didSet { passwordConfirmationTextFieldSelectedWasSet() } }
-    internal var showConfirmationPassword: Bool = false { didSet { showConfirmationPasswordWasSet() } }
+    internal var passwordConfirmationTextFieldValid = false { didSet { passwordConfirmationTextFieldValidWasSet() } }
+    internal var passwordConfirmationTextFieldSelected = false { didSet { passwordConfirmationTextFieldSelectedWasSet() } }
+    internal var showConfirmationPassword = false { didSet { showConfirmationPasswordWasSet() } }
     
-    internal var signUpButtonEnabled: Bool = false { didSet { signUpButtonEnabledWasSet() } }
-    internal var signUpButtonPressed: Bool = false { didSet { signUpButtonPressedWasSet() } }
+    internal var signUpButtonEnabled = false { didSet { signUpButtonEnabledWasSet() } }
+    internal var signUpButtonPressed = false { didSet { signUpButtonPressedWasSet() } }
     
     internal func render() {
         usernameTextFieldValid = true
