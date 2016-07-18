@@ -27,7 +27,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     internal var usernameLabel: UILabel?
     internal var usernameTextField: UITextField?
     internal var usernameValidationMessageLabel: UILabel?
-    internal var usernameErrorsHeightConstraint: NSLayoutConstraint?
+    internal var usernameErrorsView: UIView?
     
     internal var emailLabel: UILabel?
     
@@ -42,13 +42,13 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
             emailTextFieldViewOutlet.layer.cornerRadius = 6.0
         }
     }
-
-    @IBOutlet var emailErrorsHeightConstraint: NSLayoutConstraint!  // not weak
     
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
         didSet { emailValidationMessageLabelOutlet.text = " " }
     }
+    
+    @IBOutlet weak var emailErrorsView: UIView!
     
     internal var passwordLabel: UILabel?
 
@@ -63,8 +63,6 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         }
     }
     
-    @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
-    
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
         didSet { passwordValidationMessageLabelOutlet.text = " " }
@@ -74,12 +72,14 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
         didSet { passwordVisibilityButtonOutlet.hidden = true }
     }
+    
+    @IBOutlet weak var passwordErrorsView: UIView!
 
     internal var passwordConfirmLabel: UILabel?
     internal var passwordConfirmTextField: UITextField?
     internal var passwordConfirmValidationMessageLabel: UILabel?
     internal var passwordConfirmVisibilityButton: UIButton?
-    internal var passwordConfirmErrorsHeightConstraint: NSLayoutConstraint?
+    internal var passwordConfirmationErrorsView: UIView?
     
     internal var signUpButton: UIButton { return signUpButtonOutlet }
     @IBOutlet weak var signUpButtonOutlet: UIButton! {
@@ -155,24 +155,21 @@ private extension SignupView {
             let color: CGColor
             if usernameTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                usernameErrorsHeightConstraint?.constant = 0
-                usernameErrorsHeightConstraint?.active = true
+                usernameErrorsView?.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                usernameErrorsHeightConstraint?.active = false
+                usernameErrorsView?.hidden = false
             }
             usernameTextField?.layer.borderColor = color
         } else {
-            usernameErrorsHeightConstraint?.constant = 0
-            usernameErrorsHeightConstraint?.active = true
+            usernameErrorsView?.hidden = true
         }
     }
     
     private func usernameTextFieldSelectedWasSet() {
         if usernameTextFieldSelected {
             usernameTextField?.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            usernameErrorsHeightConstraint?.constant = 0
-            usernameErrorsHeightConstraint?.active = true
+            usernameErrorsView?.hidden = true
         } else {
             let valid = usernameTextFieldValid
             usernameTextFieldValid = valid
@@ -184,24 +181,21 @@ private extension SignupView {
             let color: CGColor
             if emailTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                emailErrorsHeightConstraint.constant = 0
-                emailErrorsHeightConstraint.active = true
+                emailErrorsView.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                emailErrorsHeightConstraint.active = false
+                emailErrorsView.hidden = false
             }
             emailTextFieldViewOutlet.layer.borderColor = color
         } else {
-            emailErrorsHeightConstraint.constant = 0
-            emailErrorsHeightConstraint.active = true
+            emailErrorsView.hidden = true
         }
     }
     
     private func emailTextFieldSelectedWasSet() {
         if emailTextFieldSelected {
             emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            emailErrorsHeightConstraint.constant = 0
-            emailErrorsHeightConstraint.active = true
+            emailErrorsView.hidden = true
         } else {
             let valid = emailTextFieldValid
             emailTextFieldValid = valid
@@ -213,24 +207,21 @@ private extension SignupView {
             let color: CGColor
             if passwordTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                passwordErrorsHeightConstraint.constant = 0
-                passwordErrorsHeightConstraint.active = true
+                passwordErrorsView.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                passwordErrorsHeightConstraint.active = false
+                passwordErrorsView.hidden = false
             }
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
         } else {
-            passwordErrorsHeightConstraint.constant = 0
-            passwordErrorsHeightConstraint.active = true
+            passwordErrorsView.hidden = true
         }
     }
     
     private func passwordTextFieldSelectedWasSet() {
         if passwordTextFieldSelected {
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            passwordErrorsHeightConstraint.constant = 0
-            passwordErrorsHeightConstraint.active = true
+            passwordErrorsView.hidden = true
         } else {
             let valid = passwordTextFieldValid
             passwordTextFieldValid = valid
@@ -251,24 +242,21 @@ private extension SignupView {
             let color: CGColor
             if passwordConfirmationTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                passwordConfirmErrorsHeightConstraint?.constant = 0
-                passwordConfirmErrorsHeightConstraint?.active = true
+                passwordConfirmationErrorsView?.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                passwordConfirmErrorsHeightConstraint?.active = false
+                passwordConfirmationErrorsView?.hidden = false
             }
             passwordConfirmTextField?.layer.borderColor = color
         } else {
-            passwordConfirmErrorsHeightConstraint?.constant = 0
-            passwordConfirmErrorsHeightConstraint?.active = true
+            passwordConfirmationErrorsView?.hidden = true
         }
     }
     
     private func passwordConfirmationTextFieldSelectedWasSet() {
         if passwordConfirmationTextFieldSelected {
             passwordConfirmTextField?.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            passwordConfirmErrorsHeightConstraint?.constant = 0
-            passwordConfirmErrorsHeightConstraint?.active = true
+            passwordConfirmationErrorsView?.hidden = true
         } else {
             let valid = passwordConfirmationTextFieldValid
             passwordConfirmationTextFieldValid = valid
@@ -294,14 +282,10 @@ private extension SignupView {
         let colorPalette = delegate.colorPalette
         let color = signUpButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
         signUpButton.backgroundColor = color
-        usernameErrorsHeightConstraint?.constant = 0
-        usernameErrorsHeightConstraint?.active = true
-        emailErrorsHeightConstraint.constant = 0
-        emailErrorsHeightConstraint.active = true
-        passwordErrorsHeightConstraint.constant = 0
-        passwordErrorsHeightConstraint.active = true
-        passwordConfirmErrorsHeightConstraint?.constant = 0
-        passwordConfirmErrorsHeightConstraint?.active = true
+        usernameErrorsView?.hidden = true
+        emailErrorsView.hidden = true
+        passwordErrorsView.hidden = true
+        passwordConfirmationErrorsView?.hidden = true
     }
     
 }

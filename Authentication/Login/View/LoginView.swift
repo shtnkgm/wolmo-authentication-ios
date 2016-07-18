@@ -31,6 +31,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     }
     
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
+    
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
         didSet { emailValidationMessageLabelOutlet.text = " " }
     }
@@ -77,13 +78,6 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet { recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal) }
     }
     
-    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
-        didSet {
-            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
-            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
-        }
-    }
-    
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
         didSet {
             emailTextFieldViewOutlet.layer.borderWidth = 1
@@ -91,8 +85,15 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    @IBOutlet var emailErrorsHeightConstraint: NSLayoutConstraint!      // not weak
-    @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
+    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
+        didSet {
+            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
+            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    
+    @IBOutlet weak var emailErrorsView: UIView!
+    @IBOutlet weak var passwordErrorsView: UIView!
 
     
     internal var emailTextFieldValid = true {
@@ -146,16 +147,14 @@ private extension LoginView {
             let color: CGColor
             if emailTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                emailErrorsHeightConstraint.constant = 0
-                emailErrorsHeightConstraint.active = true
+                emailErrorsView.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                emailErrorsHeightConstraint.active = false
+                emailErrorsView.hidden = false
             }
             emailTextFieldViewOutlet.layer.borderColor = color
         } else {
-            emailErrorsHeightConstraint.constant = 0
-            emailErrorsHeightConstraint.active = true
+            emailErrorsView.hidden = true
         }
     }
     
@@ -163,8 +162,7 @@ private extension LoginView {
     private func emailTextFieldSelectedWasSet() {
         if emailTextFieldSelected {
             emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            emailErrorsHeightConstraint.constant = 0
-            emailErrorsHeightConstraint.active = true
+            emailErrorsView.hidden = true
         } else {
             let valid = emailTextFieldValid
             emailTextFieldValid = valid
@@ -177,16 +175,14 @@ private extension LoginView {
             let color: CGColor
             if passwordTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                passwordErrorsHeightConstraint.constant = 0
-                passwordErrorsHeightConstraint.active = true
+                passwordErrorsView.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                passwordErrorsHeightConstraint.active = false
+                passwordErrorsView.hidden = false
             }
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
         } else {
-            passwordErrorsHeightConstraint.constant = 0
-            passwordErrorsHeightConstraint.active = true
+            passwordErrorsView.hidden = true
         }
     }
     
@@ -194,8 +190,7 @@ private extension LoginView {
     private func passwordTextFieldSelectedWasSet() {
         if passwordTextFieldSelected {
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            passwordErrorsHeightConstraint.constant = 0
-            passwordErrorsHeightConstraint.active = true
+            passwordErrorsView.hidden = true
         } else {
             let valid = passwordTextFieldValid
             passwordTextFieldValid = valid
@@ -212,10 +207,8 @@ private extension LoginView {
         let colorPalette = delegate.colorPalette
         let color = logInButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
         logInButton.backgroundColor = color
-        emailErrorsHeightConstraint.constant = 0
-        emailErrorsHeightConstraint.active = true
-        passwordErrorsHeightConstraint.constant = 0
-        passwordErrorsHeightConstraint.active = true
+        emailErrorsView.hidden = true
+        passwordErrorsView.hidden = true
     }
     
     private func passwordVisibleWasSet() {

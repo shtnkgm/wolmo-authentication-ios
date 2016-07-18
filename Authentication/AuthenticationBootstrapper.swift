@@ -243,7 +243,7 @@ extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     public func onLogin(controller: SignupController) {
         let loginController = createLoginController()
         if let navigationController = controller.navigationController {
-            navigationController.pushViewController(loginController, animated: true)
+            navigationController.popViewControllerAnimated(true)
         } else {
             _window.rootViewController = UINavigationController(rootViewController: loginController)
         }

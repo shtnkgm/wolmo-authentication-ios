@@ -47,7 +47,7 @@
 "signup-view.confirm-password-placeholder" = "Confirme contraseña";
 "signup-view.terms-and-services.label-text" = "Al registrarme, acepto los";
 "signup-view.terms-and-services.button-title" = "Términos y Servicios";
-"signup-view.signup-button-title" = "Regístrese";
+"signup-view.signup-button-title" = "REGISTRARSE";
 "signup-view.login.label-text" = "¿Ya está registrado?";
 "signup-view.login.button-title" = "Inicie sesión";
 
