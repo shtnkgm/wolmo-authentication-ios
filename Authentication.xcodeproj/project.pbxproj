@@ -411,8 +411,8 @@
 				CEBF66B91C8DD582006EE090 /* LoginView.swift */,
 				CEBF66CD1C8E089D006EE090 /* LoginController.swift */,
 				CE11A7001C9848AE002C9779 /* LoginControllerDelegate.swift */,
-				CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */,
 				CEB119171CA2E43B0049DABF /* LoginConfiguration.swift */,
+				CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */,
 				CE2361311CAD97C200AFB6F2 /* LoginViewConfiguration.swift */,
 			);
 			name = View;
