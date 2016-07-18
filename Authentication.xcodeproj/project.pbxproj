@@ -354,9 +354,9 @@
 				CEE226B41C9C7692005EB279 /* SignupView.swift */,
 				CE9AC3C31C8F2F9E0012D20B /* SignupController.swift */,
 				CEB4E4F21CAAEB51002FE023 /* SignupControllerDelegate.swift */,
+				CE8B03321D393B9400917570 /* SignupConfiguration.swift */,
 				CE89A25B1CAED14700E1903B /* SignupViewDelegate.swift */,
 				CE89A2661CAEDE4F00E1903B /* SignupViewConfiguration.swift */,
-				CE8B03321D393B9400917570 /* SignupConfiguration.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";

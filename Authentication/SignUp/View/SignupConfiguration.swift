@@ -25,10 +25,10 @@ public protocol SignupControllerTransitionDelegate {
  */
 public final class SignupControllerConfiguration {
     
-    var viewModel: SignupViewModelType
-    var viewFactory: () -> SignupViewType
-    var delegate: SignupControllerDelegate
-    var transitionDelegate: SignupControllerTransitionDelegate
+    public let viewModel: SignupViewModelType
+    public let viewFactory: () -> SignupViewType
+    public let delegate: SignupControllerDelegate
+    public let transitionDelegate: SignupControllerTransitionDelegate
     
     /**
      Initializes a signup controller configuration with the view model,

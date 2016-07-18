@@ -30,10 +30,10 @@ public protocol LoginControllerTransitionDelegate {
  */
 public final class LoginControllerConfiguration {
     
-    var viewModel: LoginViewModelType
-    var viewFactory: () -> LoginViewType
-    var delegate: LoginControllerDelegate
-    var transitionDelegate: LoginControllerTransitionDelegate
+    public let viewModel: LoginViewModelType
+    public let viewFactory: () -> LoginViewType
+    public let delegate: LoginControllerDelegate
+    public let transitionDelegate: LoginControllerTransitionDelegate
     
     /**
         Initializes a login controller configuration with the view model,
