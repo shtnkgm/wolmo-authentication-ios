@@ -4,7 +4,8 @@ before_install:
 - sudo gem install bundler
 script:
 - REPO_SLUG="$TRAVIS_REPO_SLUG" PULL_REQUEST="$TRAVIS_PULL_REQUEST"
-  FORCE_CARTHAGE_VERSION=true DISABLE_SWIFTLINT_RUN_SCRIPT=true
+  FORCE_CARTHAGE_VERSION=true FORCE_SWIFTLINT_VERSION=true
+  DISABLE_SWIFTLINT_RUN_SCRIPT=true
   script/cibuild
 after_success: bundle exec slather
 branches:
