@@ -349,35 +349,41 @@ public extension AuthenticationBootstrapper {
 
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
+    /**
+         Function that reacts to the user pressing "Sign Up" in the
+         login screen.
+         It will push the new controller in the navigation controller.
+     */
     public func onSignup(controller: LoginController) {
         let signupController = createSignupController()
-        if let navigationController = controller.navigationController {
-            navigationController.pushViewController(signupController, animated: true)
-        } else {
-            _window.rootViewController = UINavigationController(rootViewController: signupController)
-        }
+        // The authentication framework starts the process with a navigation controller.
+        controller.navigationController!.pushViewController(signupController, animated: true)
     }
     
+    /**
+         Function that reacts to the user pressing "Recover Password"
+         in the login screen.
+         It will push the new controller in the navigation controller.
+     */
     public func onRecoverPassword(controller: LoginController) {
         let recoverPasswordController = createRecoverPasswordController()
-        if let navigationController = controller.navigationController {
-            navigationController.pushViewController(recoverPasswordController, animated: true)
-        } else {
-            _window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
-        }
+        // The authentication framework starts the process with a navigation controller.
+        controller.navigationController!.pushViewController(recoverPasswordController, animated: true)
     }
     
 }
 
 extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     
+    /**
+         Function that reacts to the user pressing "Log In"
+         in the signup screen.
+         It will pop the signup controller from the navigation controller,
+         to return to login screen.
+     */
     public func onLogin(controller: SignupController) {
-        let loginController = createLoginController()
-        if let navigationController = controller.navigationController {
-            navigationController.popViewControllerAnimated(true)
-        } else {
-            _window.rootViewController = UINavigationController(rootViewController: loginController)
-        }
+        // The authentication framework starts the process with a navigation controller.
+        controller.navigationController!.popViewControllerAnimated(true)
     }
     
 }
