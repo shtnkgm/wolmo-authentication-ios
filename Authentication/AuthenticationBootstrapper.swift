@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
+import Core
 
 /**
     Bootstrapper to start the application.
@@ -110,7 +110,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Attention: Override this method for customizing the view for the login.
     */
     public func createLoginView() -> LoginViewType {
-        let view: LoginView = .loadFromNib()
+        let view = LoginView.loadFromNib()!
         view.delegate = DefaultLoginViewDelegate(configuration: _viewConfiguration.loginConfiguration)
         return view
     }
@@ -162,7 +162,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     }
     
     public func createSignupView() -> SignupViewType {
-        let view = SignupView.loadFromNib()
+        let view = SignupView.loadFromNib()!
         view.delegate = DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
         return view
     }

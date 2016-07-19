@@ -6,6 +6,8 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+import Core
+
 public protocol LoginViewType: Renderable, LoginFormType {
     
     var logoImageView: UIImageView { get }

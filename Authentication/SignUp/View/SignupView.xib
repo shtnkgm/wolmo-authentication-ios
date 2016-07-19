@@ -103,10 +103,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JVi-Ec-hKI" userLabel="Password TextField">
                                                     <rect key="frame" x="0.0" y="0.0" width="376" height="43"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0R-Cq-Zz3">
-                                                            <rect key="frame" x="331" y="0.0" width="45" height="43"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f0R-Cq-Zz3">
+                                                            <rect key="frame" x="331" y="0.0" width="40" height="43"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="45" id="51q-uO-k85"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="51q-uO-k85"/>
                                                             </constraints>
                                                             <state key="normal" title="Ver"/>
                                                         </button>
@@ -119,7 +119,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="88a-FE-Vb2" secondAttribute="bottom" id="4e1-NW-Vo5"/>
-                                                        <constraint firstAttribute="trailing" secondItem="f0R-Cq-Zz3" secondAttribute="trailing" id="AF9-zM-NhH"/>
+                                                        <constraint firstAttribute="trailing" secondItem="f0R-Cq-Zz3" secondAttribute="trailing" constant="5" id="AF9-zM-NhH"/>
                                                         <constraint firstItem="88a-FE-Vb2" firstAttribute="top" secondItem="JVi-Ec-hKI" secondAttribute="top" id="EmI-g9-JEO"/>
                                                         <constraint firstItem="f0R-Cq-Zz3" firstAttribute="leading" secondItem="88a-FE-Vb2" secondAttribute="trailing" id="QJ7-cF-FGA"/>
                                                         <constraint firstItem="88a-FE-Vb2" firstAttribute="leading" secondItem="JVi-Ec-hKI" secondAttribute="leading" constant="8" id="g0v-rK-xYv"/>

@@ -6,6 +6,8 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+import Core
+
 public struct AlwaysValidValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {

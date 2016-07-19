@@ -114,10 +114,10 @@
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="go" secureTextEntry="YES"/>
                                                         </textField>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEX-cj-Mzj">
-                                                            <rect key="frame" x="449" y="0.0" width="45" height="43"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEX-cj-Mzj">
+                                                            <rect key="frame" x="449" y="0.0" width="40" height="43"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="45" id="Y7R-uj-p2f"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="Y7R-uj-p2f"/>
                                                             </constraints>
                                                             <state key="normal" title="Ver"/>
                                                         </button>
@@ -125,7 +125,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="ksS-Np-VU4" firstAttribute="leading" secondItem="p9u-dF-glL" secondAttribute="leading" constant="8" id="2hk-b6-9cc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="gEX-cj-Mzj" secondAttribute="trailing" id="9ga-yY-29U"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gEX-cj-Mzj" secondAttribute="trailing" constant="5" id="9ga-yY-29U"/>
                                                         <constraint firstAttribute="bottom" secondItem="gEX-cj-Mzj" secondAttribute="bottom" id="MK1-JN-LLe"/>
                                                         <constraint firstAttribute="bottom" secondItem="ksS-Np-VU4" secondAttribute="bottom" id="YKF-eC-Zrm"/>
                                                         <constraint firstItem="ksS-Np-VU4" firstAttribute="top" secondItem="p9u-dF-glL" secondAttribute="top" id="iOM-Dh-vMY"/>
@@ -164,8 +164,8 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="ddn-xX-4dq"/>
                                             <exclude reference="Mqe-LV-aYE"/>
+                                            <exclude reference="ddn-xX-4dq"/>
                                         </mask>
                                     </variation>
                                 </view>

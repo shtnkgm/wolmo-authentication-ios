@@ -6,6 +6,8 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+import Core
+
 public protocol SignupViewType: Renderable, SignupFormType {
 
     var titleLabel: UILabel { get }
