@@ -27,9 +27,9 @@
 "login-view.signup-button-title" = "Sign up";
 
 /* Session service errors */
-"login-error.invalid-credentials.message" = "Wrong email or password. ";
-"signup-error.invalid-credentials.message" = "Invalid credentials. ";
-"network-error.message" = "Network error. ";
+"login-error.invalid-credentials.message" = "Wrong email or password";
+"signup-error.invalid-credentials.message" = "Invalid credentials";
+"network-error.message" = "Network error";
 
 /* LogIn error alert */
 "login-error.alert.title" = "Unable to log in";
