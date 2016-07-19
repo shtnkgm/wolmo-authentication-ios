@@ -56,6 +56,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         sessionService.events.observeNext { [unowned self] event in
             switch event {
             case .LogIn(_): self._window.rootViewController = self._mainViewControllerFactory()
+            case .SignUp(_): self._window.rootViewController = self._mainViewControllerFactory()
             case .LogOut(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLoginController())
             default: break
             }
@@ -150,11 +151,18 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          signup controller to be used.
     */
     public func createSignupController() -> SignupController {
-        return SignupController(viewModel: createSignupViewModel(), signupViewFactory: createSignupView, delegate: createSignupControllerDelegate())
+        return SignupController(configuration: createSignupControllerConfiguration())
+    }
+    
+    public func createSignupControllerConfiguration() -> SignupControllerConfiguration {
+        return SignupControllerConfiguration(
+            viewModel: createSignupViewModel(),
+            viewFactory: createSignupView,
+            transitionDelegate: self)
     }
     
     public func createSignupView() -> SignupViewType {
-        let view = SignupView()
+        let view = SignupView.loadFromNib()
         view.delegate = DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
         return view
     }
@@ -169,11 +177,14 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
          authentication bootstrapper.
      */
     public func createSignupViewModel() -> SignupViewModelType {
-        return SignupViewModel(sessionService: sessionService, credentialsValidator: createSignUpCredentialsValidator())
+        return SignupViewModel(sessionService: sessionService,
+                               credentialsValidator: createSignUpCredentialsValidator(),
+                               passwordConfirmationEnabled: _viewConfiguration.signupConfiguration.passwordConfirmationEnabled,
+                               usernameEnabled: _viewConfiguration.signupConfiguration.usernameEnabled)
     }
     
     public func createSignUpCredentialsValidator() -> SignupCredentialsValidator {
-        return SignupCredentialsValidator()
+        return SignupCredentialsValidator(nameValidator: AlwaysValidValidator())
     }
     
     /**
@@ -222,6 +233,19 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
             navigationController.pushViewController(recoverPasswordController, animated: true)
         } else {
             _window.rootViewController = UINavigationController(rootViewController: recoverPasswordController)
+        }
+    }
+    
+}
+
+extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
+    
+    public func onLogin(controller: SignupController) {
+        let loginController = createLoginController()
+        if let navigationController = controller.navigationController {
+            navigationController.popViewControllerAnimated(true)
+        } else {
+            _window.rootViewController = UINavigationController(rootViewController: loginController)
         }
     }
     

@@ -43,6 +43,11 @@ public final class ExampleSessionService: SessionServiceType {
         (events, _eventsObserver) = Signal<SessionServiceEvent<ExampleUser>, NoError>.pipe()
     }
     
+    deinit {
+        _currentUserObserver.sendCompleted()
+        _eventsObserver.sendCompleted()
+    }
+    
     public func logIn(email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
         if email.raw == _email {
@@ -99,7 +104,10 @@ public final class ExampleSessionService: SessionServiceType {
                 observer.sendNext(user)
                 observer.sendCompleted()
             }
-        }
+        }.on(completed: { [unowned self] in
+            self._eventsObserver.sendNext(.SignUp(user))
+            self._currentUserObserver.sendNext(user)
+        })
     }
     
     private func signUpFailure(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {

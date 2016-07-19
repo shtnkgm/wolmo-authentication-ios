@@ -30,10 +30,10 @@ public protocol LoginControllerTransitionDelegate {
  */
 public final class LoginControllerConfiguration {
     
-    var viewModel: LoginViewModelType
-    var viewFactory: () -> LoginViewType
-    var delegate: LoginControllerDelegate
-    var transitionDelegate: LoginControllerTransitionDelegate
+    public let viewModel: LoginViewModelType
+    public let viewFactory: () -> LoginViewType
+    public let delegate: LoginControllerDelegate
+    public let transitionDelegate: LoginControllerTransitionDelegate
     
     /**
         Initializes a login controller configuration with the view model,
@@ -42,7 +42,7 @@ public final class LoginControllerConfiguration {
      
         - Params:
              - viewModel: view model to bind to and use.
-             - loginViewFactory: factory method to call only once
+             - viewFactory: factory method to call only once
              to get the login view to use.
              - transitionDelegate: delegate to handle events that fire a
              transition, like selecting registration or recover password.

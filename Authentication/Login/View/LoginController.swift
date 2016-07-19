@@ -71,6 +71,7 @@ public final class LoginController: UIViewController {
 
     
     public override func viewDidLoad() {
+        super.viewDidLoad()
         loginView.render()
         bindViewModel()
         navigationController?.navigationBarHidden = true
@@ -89,24 +90,22 @@ private extension LoginController {
         setTextfieldOrder()
         
         _viewModel.logInExecuting.observeNext { [unowned self] executing in
-            if executing {
-                self._delegate.loginControllerWillExecuteLogIn(self)
-            } else {
-                self._delegate.loginControllerDidExecuteLogIn(self)
-            }
+            executing
+                ? self._delegate.willExecuteLogIn(self)
+                : self._delegate.didExecuteLogIn(self)
             self.loginView.logInButtonPressed = executing
         }
         
-        _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.loginController(self, didLogInWithError: $0) }
+        _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.didLogIn(self, with: $0) }
     }
     
     private func bindEmailElements() {
         _viewModel.email <~ loginView.emailTextField.rex_textSignal
         _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
             if errors.isEmpty {
-                self._delegate.loginControllerDidPassEmailValidation(self)
+                self._delegate.didPassEmailValidation(self)
             } else {
-                self._delegate.loginController(self, didFailEmailValidationWithErrors: errors)
+                self._delegate.didFailEmailValidation(self, with: errors)
             }
         }
         if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
@@ -117,26 +116,21 @@ private extension LoginController {
     
     private func bindPasswordElements() {
         _viewModel.password <~ loginView.passwordTextField.rex_textSignal.on(next: { [unowned self] text in
-            if text.isEmpty {
-                self.loginView.passwordVisibilityButton?.hidden = true
-            } else {
-                self.loginView.passwordVisibilityButton?.hidden = false
-            }
+            self.loginView.passwordVisibilityButton?.hidden = text.isEmpty
         })
         _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
             if errors.isEmpty {
-                self._delegate.loginControllerDidPassPasswordValidation(self)
+                self._delegate.didPassPasswordValidation(self)
             } else {
-                self._delegate.loginController(self, didFailPasswordValidationWithErrors: errors)
+                self._delegate.didFailPasswordValidation(self, with: errors)
             }
-
         }
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
-            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibilityCocoaAction
-            _viewModel.showPassword.signal.observeNext { [unowned self] in self.loginView.showPassword = $0 }
+            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility
+            _viewModel.showPassword.signal.observeNext { [unowned self] in self.loginView.passwordVisible = $0 }
         }
         loginView.passwordTextField.delegate = self
     }

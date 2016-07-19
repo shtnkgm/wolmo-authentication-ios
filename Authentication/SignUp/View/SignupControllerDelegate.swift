@@ -12,27 +12,27 @@ public protocol SignupControllerDelegate {
     
     var shouldDisplaySignupErrorWithAlert: Bool { get }
     
-    func signupControllerWillExecuteSignUp(controller: SignupController)
+    func willExecuteSignUp(controller: SignupController)
     
-    func signupControllerDidExecuteSignUp(controller: SignupController)
+    func didExecuteSignUp(controller: SignupController)
     
-    func signupController(controller: SignupController, didSignUpWithError error: SessionServiceError)
+    func didSignUp(controller: SignupController, with error: SessionServiceError)
     
-    func signupControllerDidPassNameValidation(controller: SignupController)
+    func didPassNameValidation(controller: SignupController)
     
-    func signupController(controller: SignupController, didFailNameValidationWithErrors errors: [String])
+    func didFailNameValidation(controller: SignupController, with errors: [String])
     
-    func signupControllerDidPassEmailValidation(controller: SignupController)
+    func didPassEmailValidation(controller: SignupController)
     
-    func signupController(controller: SignupController, didFailEmailValidationWithErrors errors: [String])
+    func didFailEmailValidation(controller: SignupController, with errors: [String])
     
-    func signupControllerDidPassPasswordValidation(controller: SignupController)
+    func didPassPasswordValidation(controller: SignupController)
     
-    func signupController(controller: SignupController, didFailPasswordValidationWithErrors errors: [String])
+    func didFailPasswordValidation(controller: SignupController, with errors: [String])
 
-    func signupControllerDidPassPasswordConfirmationValidation(controller: SignupController)
+    func didPassPasswordConfirmationValidation(controller: SignupController)
     
-    func signupController(controller: SignupController, didFailPasswordConfirmationValidationWithErrors errors: [String])
+    func didFailPasswordConfirmationValidation(controller: SignupController, with errors: [String])
     
 }
 
@@ -40,65 +40,59 @@ extension SignupControllerDelegate {
     
     public var shouldDisplaySignupErrorWithAlert: Bool { return true }
     
-    public func signupControllerWillExecuteSignUp(controller: SignupController) {
-        if let errorLabel = controller.signupView.signupErrorLabel {
+    public func willExecuteSignUp(controller: SignupController) {
+        if let errorLabel = controller.signupView.signUpErrorLabel {
             errorLabel.text = " "
         }
         let app = UIApplication.sharedApplication()
         app.networkActivityIndicatorVisible = true
     }
     
-    public func signupControllerDidExecuteSignUp(controller: SignupController) {
+    public func didExecuteSignUp(controller: SignupController) {
         let app = UIApplication.sharedApplication()
         app.networkActivityIndicatorVisible = false
     }
     
-    public func signupController(controller: SignupController, didSignUpWithError error: SessionServiceError) {
-        controller.signupView.usernameTextFieldValid = false
-        controller.signupView.emailTextFieldValid = false
-        controller.signupView.passwordTextFieldValid = false
-        controller.signupView.passwordConfirmationTextFieldValid = false
-        controller.signupView.signupButtonPressed = false
-        
-        if let errorLabel = controller.signupView.signupErrorLabel {
+    public func didSignUp(controller: SignupController, with error: SessionServiceError) {
+        if let errorLabel = controller.signupView.signUpErrorLabel {
             errorLabel.text = error.message
         }
         if shouldDisplaySignupErrorWithAlert {
             let alert = UIAlertController(title: "signup-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "signup-error.alert.close", style: .Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "signup-error.alert.close".localized, style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
-    public func signupControllerDidPassNameValidation(controller: SignupController) {
+    public func didPassNameValidation(controller: SignupController) {
         controller.signupView.usernameTextFieldValid = true
     }
     
-    public func signupController(controller: SignupController, didFailNameValidationWithErrors errors: [String]) {
+    public func didFailNameValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.usernameTextFieldValid = false
     }
     
-    public func signupControllerDidPassEmailValidation(controller: SignupController) {
+    public func didPassEmailValidation(controller: SignupController) {
         controller.signupView.emailTextFieldValid = true
     }
     
-    public func signupController(controller: SignupController, didFailEmailValidationWithErrors errors: [String]) {
+    public func didFailEmailValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.emailTextFieldValid = false
     }
     
-    public func signupControllerDidPassPasswordValidation(controller: SignupController) {
+    public func didPassPasswordValidation(controller: SignupController) {
         controller.signupView.passwordTextFieldValid = true
     }
     
-    public func signupController(controller: SignupController, didFailPasswordValidationWithErrors errors: [String]) {
+    public func didFailPasswordValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.passwordTextFieldValid = false
     }
     
-    public func signupControllerDidPassPasswordConfirmationValidation(controller: SignupController) {
+    public func didPassPasswordConfirmationValidation(controller: SignupController) {
         controller.signupView.passwordConfirmationTextFieldValid = true
     }
     
-    public func signupController(controller: SignupController, didFailPasswordConfirmationValidationWithErrors errors: [String]) {
+    public func didFailPasswordConfirmationValidation(controller: SignupController, with errors: [String]) {
         controller.signupView.passwordConfirmationTextFieldValid = false
     }
     

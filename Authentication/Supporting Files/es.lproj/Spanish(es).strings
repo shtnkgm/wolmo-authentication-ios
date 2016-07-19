@@ -12,25 +12,49 @@
 "text-input-validator.min-length" = "No puede ser más corto que %d caracteres";
 "text-input-validator.invalid-email" = "Debe ser un email válido (Por ejemplo, usuario@mail.com)";
 
+/* Text visibility */
+"text-visibility-button-title.false" = "Ocultar";ß
+"text-visibility-button-title.true" = "Mostrar";
+
 /* Títulos de los elementos de UI del login */
-"login-view.email" = "Email:";
-"login-view.password" = "Contraseña:";
-"login-view.email-placeholder" = "Email";
-"login-view.password-placeholder" = "Contraseña";
-"login-view.login-button-title" = "INGRESAR";
-"login-view.signup-button-title" = "Regístrese";
-"login-view.password-visibility-button-title.false" = "Ocultar";
-"login-view.password-visibility-button-title.true" = "Mostrar";
-"login-view.recover-password-button-title" = "Recuperar contraseña";
+"login-view-model.email" = "Email:";
+"login-view-model.password" = "Contraseña:";
+"login-view-model.email-placeholder" = "Email";
+"login-view-model.password-placeholder" = "Contraseña";
+"login-view-model.login-button-title" = "INGRESAR";
+"login-view-model.signup-button-title" = "Regístrese";
+"login-view-model.recover-password-button-title" = "Recuperar contraseña";
 "login-view.to-signup-label" = "¿No tienes cuenta?";
 
 /* Errores del servicio de sesión */
 "login-error.invalid-credentials.message" = "Email o contraseña incorrectos. ";
-"login-error.network-error.message" = "Error en la conexión. ";
+"signup-error.invalid-credentials.message" = "Credenciales incorrectas. ";
+"network-error.message" = "Error en la conexión. ";
 
 /* Alerta de error de login */
 "login-error.alert.title" = "Error al intentar ingresar";
 "login-error.alert.close" = "Cerrar";
 
 /* Títulos de los elementos de UI del signup */
-"login-view.terms-and-services-button-title" = "Términos y Servicios";
+"signup-view.title" = "Regístrese";
+"signup-view.name" = "Nombre:";
+"signup-view.email" = "Email:";
+"signup-view.password" = "Contraseña:";
+"signup-view.confirm-password" = "Confirme contraseña:";
+"signup-view.name-placeholder" = "Nombre";
+"signup-view.email-placeholder" = "Email";
+"signup-view.password-placeholder" = "Contraseña";
+"signup-view.confirm-password-placeholder" = "Confirme contraseña";
+"signup-view.terms-and-services.label-text" = "Al registrarme, acepto los";
+"signup-view.terms-and-services.button-title" = "Términos y Servicios";
+"signup-view.signup-button-title" = "REGISTRARSE";
+"signup-view.login.label-text" = "¿Ya está registrado?";
+"signup-view.login.button-title" = "Inicie sesión";
+
+/* Errores de signup */
+"signup-error.password-confirmation.invalid" = "Las contraseñas no coinciden";
+
+/* Errores de signup */
+"signup-error.password-confirmation.invalid" = "Las contraseñas no coinciden";
+"signup-error.alert.title" = "Error al intentar registrarse";
+"signup-error.alert.close" = "Cerrar";

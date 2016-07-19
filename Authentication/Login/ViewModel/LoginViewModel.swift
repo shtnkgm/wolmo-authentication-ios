@@ -22,7 +22,7 @@ public protocol LoginViewModelType {
     var passwordValidationErrors: AnyProperty<[String]> { get }
     var showPassword: MutableProperty<Bool> { get }
     
-    var togglePasswordVisibilityCocoaAction: CocoaAction { get }
+    var togglePasswordVisibility: CocoaAction { get }
     var logInCocoaAction: CocoaAction { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
@@ -50,7 +50,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
     public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
     
-    public var togglePasswordVisibilityCocoaAction: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
+    public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     
     private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in

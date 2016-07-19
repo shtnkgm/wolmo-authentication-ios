@@ -22,9 +22,13 @@ public protocol SignupViewModelType {
     
     var password: MutableProperty<String> { get }
     var passwordValidationErrors: AnyProperty<[String]> { get }
+    var passwordVisible: MutableProperty<Bool> { get }
+    var togglePasswordVisibility: CocoaAction { get }
     
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
+    var confirmationPasswordVisible: MutableProperty<Bool> { get }
+    var toggleConfirmPasswordVisibility: CocoaAction { get }
     
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
@@ -35,6 +39,7 @@ public protocol SignupViewModelType {
 public final class SignupViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
     
     private let _sessionService: SessionService
+    
     private let _credentialsAreValid: AndProperty
     
     public let name = MutableProperty("")
@@ -47,21 +52,25 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
     
+    public let passwordVisible = MutableProperty(false)
+    public let confirmationPasswordVisible = MutableProperty(false)
+    
     public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
-    private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = {
-        return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
-            if let email = Email(raw: self.email.value) {
-                return self._sessionService.signUp(self.name.value, email: email, password: self.password.value)
-            } else {
-                return SignalProducer(error: .InvalidSignUpCredentials(.None)).observeOn(UIScheduler())
-            }
-        }
-    }()
+    public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
+    public var toggleConfirmPasswordVisibility: CocoaAction { return _toggleConfirmationPasswordVisibility.unsafeCocoaAction }
     
-    internal init(sessionService: SessionService, credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator()) {
+    private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = self.initializeSignUpAction()
+    
+    private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
+    private lazy var _toggleConfirmationPasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeToggleConfirmationPasswordVisibilityAction()
+    
+    internal init(sessionService: SessionService,
+         credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator(),
+         passwordConfirmationEnabled: Bool = true,
+         usernameEnabled: Bool = true) {
         _sessionService = sessionService
         
         let nameValidationResult = name.signal.map(credentialsValidator.nameValidator.validate)
@@ -69,32 +78,55 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         let passwordConfirmValidationResult = combineLatest(password.signal, passwordConfirmation.signal)
             .map { $0 == $1 }.map(getPasswordConfirmValidationResultFromEquality)
-
+        
         nameValidationErrors = AnyProperty(initialValue: [], signal: nameValidationResult.map { $0.errors })
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
         passwordConfirmationValidationErrors = AnyProperty(initialValue: [], signal: passwordConfirmValidationResult.map { $0.errors })
         
-        _credentialsAreValid = AnyProperty<Bool>(initialValue: false, signal: nameValidationResult.map { $0.isValid })
-                            .and(AnyProperty<Bool>(initialValue: false, signal: emailValidationResult.map { $0.isValid }))
-                            .and(AnyProperty<Bool>(initialValue: false, signal: passwordValidationResult.map { $0.isValid }))
-                            .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
+        var credentialsAreValid = AnyProperty<Bool>(initialValue: false, signal: emailValidationResult.map { $0.isValid })
+            .and(AnyProperty<Bool>(initialValue: false, signal: passwordValidationResult.map { $0.isValid }))
+        if usernameEnabled {
+            credentialsAreValid = credentialsAreValid
+                .and(AnyProperty<Bool>(initialValue: false, signal: nameValidationResult.map { $0.isValid }))
+        }
+        if passwordConfirmationEnabled {
+            credentialsAreValid = credentialsAreValid
+                .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
+        }
+        _credentialsAreValid = credentialsAreValid
+    }
+    
+}
+
+private extension SignupViewModel {
+    
+    private func initializeSignUpAction() -> Action<AnyObject, User, SessionServiceError> {
+        return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
+            if let email = Email(raw: self.email.value) {
+                return self._sessionService.signUp(self.name.value, email: email, password: self.password.value)
+            } else {
+                return SignalProducer(error: .InvalidSignUpCredentials(.None)).observeOn(UIScheduler())
+            }
+        }
+    }
+    
+    private func initializeTogglePasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+        return Action { [unowned self] _ in
+            self.passwordVisible.value = !self.passwordVisible.value
+            return SignalProducer(value: self.passwordVisible.value).observeOn(UIScheduler())
+        }
+    }
+    
+    private func initializeToggleConfirmationPasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+        return Action { [unowned self] _ in
+            self.confirmationPasswordVisible.value = !self.confirmationPasswordVisible.value
+            return SignalProducer(value: self.confirmationPasswordVisible.value).observeOn(UIScheduler())
+        }
     }
     
 }
 
 private func getPasswordConfirmValidationResultFromEquality(equals: Bool) -> ValidationResult {
-    if equals {
-        return .Valid
-    } else {
-        return .invalid("signup.password-confirmation.invalid".localized)
-    }
-}
-
-private func getTermsAndServicesValidationResultFromAcceptance(accepted: Bool) -> ValidationResult {
-    if accepted {
-        return .Valid
-    } else {
-        return .invalid("signup.terms-and-services.not-accepted".localized)
-    }
+    return equals ? .Valid : .invalid("signup-error.password-confirmation.invalid".localized)
 }

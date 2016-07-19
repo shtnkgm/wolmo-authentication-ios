@@ -39,7 +39,7 @@ public protocol AuthenticationFormType {
     
     var passwordTextFieldValid: Bool { get set }
     var passwordTextFieldSelected: Bool { get set }
-    var showPassword: Bool { get set }
+    var passwordVisible: Bool { get set }
     
 }
 
@@ -63,19 +63,19 @@ public protocol SignupFormType: AuthenticationFormType {
     var usernameTextFieldSelected: Bool { get set }
 
     var passwordConfirmLabel: UILabel? { get }
-    var passwordConfirmTextField: UITextField { get }
+    var passwordConfirmTextField: UITextField? { get }
     var passwordConfirmValidationMessageLabel: UILabel? { get }
     var passwordConfirmVisibilityButton: UIButton? { get }
     
     var passwordConfirmationTextFieldValid: Bool { get set }
     var passwordConfirmationTextFieldSelected: Bool { get set }
-    var showConfirmPassword: Bool { get set }
+    var confirmationPasswordVisible: Bool { get set }
     
-    var signupButton: UIButton { get }
-    var signupErrorLabel: UILabel? { get }
+    var signUpButton: UIButton { get }
+    var signUpErrorLabel: UILabel? { get }
     
-    var signupButtonEnabled: Bool { get set }
-    var signupButtonPressed: Bool { get set }
+    var signUpButtonEnabled: Bool { get set }
+    var signUpButtonPressed: Bool { get set }
     
     var termsAndServicesButton: UIButton { get }
     var termsAndServicesLabel: UILabel? { get }

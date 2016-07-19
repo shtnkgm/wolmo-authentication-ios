@@ -19,9 +19,7 @@ public protocol SignupViewDelegate {
 
 public extension SignupViewDelegate {
     
-    func configureView(signupView: SignupViewType) {
-        
-    }
+    func configureView(signupView: SignupViewType) { }
     
 }
 
@@ -37,6 +35,8 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     
     public func configureView(signupView: SignupViewType) {
         signupView.view.backgroundColor = colorPalette.background
+        signupView.titleLabel.textColor = colorPalette.labels
+        signupView.titleLabel.font = fontPalette.mainButton
         
         configureMainButton(signupView)
         configureUsernameElements(signupView)
@@ -47,9 +47,9 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     }
     
     private func configureMainButton(signupView: SignupViewType) {
-        signupView.signupButton.backgroundColor = colorPalette.mainButtonDisabled
-        signupView.signupButton.titleLabel?.font = fontPalette.mainButton
-        signupView.signupButton.titleLabel?.textColor = colorPalette.mainButtonText
+        signupView.signUpButton.backgroundColor = colorPalette.mainButtonDisabled
+        signupView.signUpButton.titleLabel?.font = fontPalette.mainButton
+        signupView.signUpButton.titleLabel?.textColor = colorPalette.mainButtonText
     }
     
     private func configureUsernameElements(signupView: SignupViewType) {
@@ -76,8 +76,8 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         
         signupView.passwordConfirmLabel?.font = fontPalette.labels
         signupView.passwordConfirmLabel?.textColor = colorPalette.labels
-        signupView.passwordConfirmTextField.font = fontPalette.textfields
-        signupView.passwordConfirmTextField.textColor = colorPalette.textfieldText
+        signupView.passwordConfirmTextField?.font = fontPalette.textfields
+        signupView.passwordConfirmTextField?.textColor = colorPalette.textfieldText
         signupView.passwordConfirmVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
         signupView.passwordConfirmVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
     }
@@ -98,8 +98,8 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         signupView.passwordValidationMessageLabel?.textColor = colorPalette.textfieldsError
         signupView.passwordConfirmValidationMessageLabel?.font = fontPalette.labels
         signupView.passwordConfirmValidationMessageLabel?.textColor = colorPalette.textfieldsError
-        signupView.signupErrorLabel?.font = fontPalette.labels
-        signupView.signupErrorLabel?.textColor = colorPalette.textfieldsError
+        signupView.signUpErrorLabel?.font = fontPalette.labels
+        signupView.signUpErrorLabel?.textColor = colorPalette.textfieldsError
     }
     
 }

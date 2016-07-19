@@ -23,89 +23,59 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     internal var logoImageView: UIImageView { return logoImageViewOutlet }
     @IBOutlet weak var logoImageViewOutlet: UIImageView!
     
-    internal var emailLabel: UILabel? { return .None }
+    internal var emailLabel: UILabel?
     
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
-        didSet {
-            emailTextFieldOutlet.placeholder = emailPlaceholderText
-        }
+        didSet { emailTextFieldOutlet.placeholder = emailPlaceholderText }
     }
     
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
+    
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
-        didSet {
-            emailValidationMessageLabelOutlet.text = " "
-        }
+        didSet { emailValidationMessageLabelOutlet.text = " " }
     }
     
-    internal var passwordLabel: UILabel? { return .None }
+    internal var passwordLabel: UILabel?
     
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
-        didSet {
-            passwordTextFieldOutlet.placeholder = passwordPlaceholderText
-        }
+        didSet { passwordTextFieldOutlet.placeholder = passwordPlaceholderText }
     }
 
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
-        didSet {
-            passwordValidationMessageLabelOutlet.text = " "
-        }
+        didSet { passwordValidationMessageLabelOutlet.text = " " }
     }
     
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
-        didSet {
-            passwordVisibilityButtonOutlet.hidden = true
-        }
+        didSet { passwordVisibilityButtonOutlet.hidden = true }
     }
     
     internal var logInButton: UIButton { return logInButtonOutlet }
     @IBOutlet weak var logInButtonOutlet: UIButton! {
         didSet {
             logInButtonOutlet.layer.cornerRadius = 6.0
-            logInButton.setTitle(logInButtonTitle, forState: .Normal)
+            logInButtonOutlet.setTitle(logInButtonTitle, forState: .Normal)
         }
     }
     
-    internal var logInErrorLabel: UILabel? { return logInErrorLabelOutlet }
-    @IBOutlet weak var logInErrorLabelOutlet: UILabel! {
-        didSet {
-            logInErrorLabelOutlet.text = " "
-        }
-    }
+    internal var logInErrorLabel: UILabel? { return .None }
     
     internal var signupLabel: UILabel { return toSignupLabel }
     @IBOutlet weak var toSignupLabel: UILabel! {
-        didSet {
-            toSignupLabel.text = signupLabelText
-        }
+        didSet { toSignupLabel.text = signupLabelText }
     }
     
     internal var signupButton: UIButton { return signupButtonOutlet }
     @IBOutlet weak var signupButtonOutlet: UIButton! {
-        didSet {
-            signupButton.setTitle(signupButtonTitle, forState: .Normal)
-        }
+        didSet { signupButton.setTitle(signupButtonTitle, forState: .Normal) }
     }
 
     internal var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton! {
-        didSet {
-            recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal)
-        }
-    }
-    
-    internal var activityIndicator: UIActivityIndicatorView? { return .None }
-    
-    
-    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
-        didSet {
-            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
-            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
-        }
+        didSet { recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal) }
     }
     
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
@@ -115,8 +85,15 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    @IBOutlet var emailErrorsHeightConstraint: NSLayoutConstraint!      // not weak
-    @IBOutlet var passwordErrorsHeightConstraint: NSLayoutConstraint!   // not weak
+    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
+        didSet {
+            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
+            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    
+    @IBOutlet weak var emailErrorsView: UIView!
+    @IBOutlet weak var passwordErrorsView: UIView!
 
     
     internal var emailTextFieldValid = true {
@@ -143,19 +120,18 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         didSet { logInButtonPressedWasSet() }
     }
     
-    internal var showPassword = false {
-        didSet { showPasswordWasSet() }
+    internal var passwordVisible: Bool = false {
+        didSet { passwordVisibleWasSet() }
     }
     
     internal func render() {
-        activityIndicator?.hidesWhenStopped = true
-        
         emailTextFieldValid = true
         passwordTextFieldValid = true
         emailTextFieldSelected = false
         passwordTextFieldSelected = false
         logInButtonEnabled = false
-        showPassword = false
+        logInButtonPressed = false
+        passwordVisible = false
         
         //Configure colour palette
         //Configure fonts
@@ -171,16 +147,14 @@ private extension LoginView {
             let color: CGColor
             if emailTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                emailErrorsHeightConstraint.constant = 0
-                emailErrorsHeightConstraint.active = true
+                emailErrorsView.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                emailErrorsHeightConstraint.active = false
+                emailErrorsView.hidden = false
             }
             emailTextFieldViewOutlet.layer.borderColor = color
         } else {
-            emailErrorsHeightConstraint.constant = 0
-            emailErrorsHeightConstraint.active = true
+            emailErrorsView.hidden = true
         }
     }
     
@@ -188,8 +162,7 @@ private extension LoginView {
     private func emailTextFieldSelectedWasSet() {
         if emailTextFieldSelected {
             emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            emailErrorsHeightConstraint.constant = 0
-            emailErrorsHeightConstraint.active = true
+            emailErrorsView.hidden = true
         } else {
             let valid = emailTextFieldValid
             emailTextFieldValid = valid
@@ -202,16 +175,14 @@ private extension LoginView {
             let color: CGColor
             if passwordTextFieldValid {
                 color = delegate.colorPalette.textfieldsNormal.CGColor
-                passwordErrorsHeightConstraint.constant = 0
-                passwordErrorsHeightConstraint.active = true
+                passwordErrorsView.hidden = true
             } else {
                 color = delegate.colorPalette.textfieldsError.CGColor
-                passwordErrorsHeightConstraint.active = false
+                passwordErrorsView.hidden = false
             }
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
         } else {
-            passwordErrorsHeightConstraint.constant = 0
-            passwordErrorsHeightConstraint.active = true
+            passwordErrorsView.hidden = true
         }
     }
     
@@ -219,8 +190,7 @@ private extension LoginView {
     private func passwordTextFieldSelectedWasSet() {
         if passwordTextFieldSelected {
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            passwordErrorsHeightConstraint.constant = 0
-            passwordErrorsHeightConstraint.active = true
+            passwordErrorsView.hidden = true
         } else {
             let valid = passwordTextFieldValid
             passwordTextFieldValid = valid
@@ -237,18 +207,16 @@ private extension LoginView {
         let colorPalette = delegate.colorPalette
         let color = logInButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
         logInButton.backgroundColor = color
-        emailErrorsHeightConstraint.constant = 0
-        emailErrorsHeightConstraint.active = true
-        passwordErrorsHeightConstraint.constant = 0
-        passwordErrorsHeightConstraint.active = true
+        emailErrorsView.hidden = true
+        passwordErrorsView.hidden = true
     }
     
-    private func showPasswordWasSet() {
+    private func passwordVisibleWasSet() {
         // Changing enabled property for the
         // font setting to take effect, which is
         // necessary for it not to shrink.
         passwordTextField.enabled = false
-        passwordTextField.secureTextEntry = !showPassword
+        passwordTextField.secureTextEntry = !passwordVisible
         passwordTextField.enabled = true
         passwordTextField.font = delegate.fontPalette.textfields
         passwordVisibilityButtonOutlet.setTitle(passwordVisibilityButtonTitle, forState: .Normal)
@@ -256,41 +224,41 @@ private extension LoginView {
     
 }
 
-private extension LoginView {
+public extension LoginViewType {
         
-    private var emailText: String {
+    public var emailText: String {
         return "login-view.email".localized
     }
     
-    private var passwordText: String {
+    public var passwordText: String {
         return "login-view.password".localized
     }
     
-    private var emailPlaceholderText: String {
+    public var emailPlaceholderText: String {
         return "login-view.email-placeholder".localized
     }
     
-    private var passwordPlaceholderText: String {
+    public var passwordPlaceholderText: String {
         return "login-view.password-placeholder".localized
     }
     
-    private var logInButtonTitle: String {
+    public var logInButtonTitle: String {
         return "login-view.login-button-title".localized
     }
     
-    private var signupLabelText: String {
+    public var signupLabelText: String {
         return "login-view.to-signup-label".localized
     }
     
-    private var signupButtonTitle: String {
+    public var signupButtonTitle: String {
         return "login-view.signup-button-title".localized
     }
-    
+
     private var passwordVisibilityButtonTitle: String {
-        return ("login-view.password-visibility-button-title." + (showPassword ? "false" : "true")).localized
+        return ("text-visibility-button-title." + (passwordVisible ? "false" : "true")).localized
     }
     
-    private var recoverPasswordButtonTitle: String {
+    public var recoverPasswordButtonTitle: String {
         return "login-view.recover-password-button-title".localized
     }
     

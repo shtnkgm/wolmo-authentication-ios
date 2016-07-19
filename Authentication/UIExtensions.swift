@@ -39,11 +39,6 @@ private class ActionHandler<T>: NSObject {
     
 }
 
-
-public enum NibIdentifier: String {
-    case LoginView = "LoginView"
-}
-
 internal protocol NibLoadable {
 
     static func loadFromNib() -> Self
@@ -63,9 +58,11 @@ extension NibLoadable where Self: UIView {
 }
 
 public extension NSBundle {
+    
     public func loadNib(name: String) -> AnyObject {
         return self.loadNibNamed(name, owner: self, options: nil)[0]
     }
+
 }
 
 
