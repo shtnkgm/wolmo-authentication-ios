@@ -314,9 +314,9 @@
 		9D72AA121C8DC7EB00BB4082 /* AuthenticationTests */ = {
 			isa = PBXGroup;
 			children = (
-				CE89A25A1CAEC68300E1903B /* Signup */,
 				CEE4049A1C9A061200AB70B3 /* Validators */,
 				CEFB5F7B1C91BBC600760A2A /* Login */,
+				CE89A25A1CAEC68300E1903B /* Signup */,
 				9D72AA151C8DC7EB00BB4082 /* Info.plist */,
 			);
 			path = AuthenticationTests;

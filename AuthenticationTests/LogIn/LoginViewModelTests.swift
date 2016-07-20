@@ -33,7 +33,7 @@ class LoginViewModelSpec: QuickSpec {
             }
             
             it("starts without showing password") {
-                expect(loginVM.showPassword.value) == false
+                expect(loginVM.passwordVisible.value) == false
             }
             
             context("when filling email with invalid email") {
