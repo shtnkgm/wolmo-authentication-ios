@@ -33,8 +33,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     public var currentUser: User? {
         return sessionService.currentUser.value
     }
-    
-    
+
+
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
         the factory method from where to obtain the main View Controller of the application.
@@ -282,12 +282,12 @@ public extension AuthenticationBootstrapper {
     }
     
     /**
-     Creates signup view that conforms to the logInViewType protocol
-     and will be use for the login visual.
-     
-     - Returns: A valid login view ready to be used.
-     
-     - Attention: Override this method for customizing the view for the login.
+         Creates signup view that conforms to the SignupViewType protocol
+         and will be use for the signup visual.
+         
+         - Returns: A valid signup view ready to be used.
+         
+         - Attention: Override this method for customizing the view for the signup.
      */
     public func createSignupView() -> SignupViewType {
         let view = SignupView.loadFromNib(FrameworkBundle)!

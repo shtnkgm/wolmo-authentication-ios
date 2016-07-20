@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/**
+/*
  Protocol for handling transition events occured during signup.
  */
 public protocol SignupControllerTransitionDelegate {
@@ -15,7 +15,7 @@ public protocol SignupControllerTransitionDelegate {
     
 }
 
-/**
+/*
  Class for configuring the signup controller.
  Includes all information required:
  view factory method,
@@ -30,7 +30,7 @@ public final class SignupControllerConfiguration {
     public let delegate: SignupControllerDelegate
     public let transitionDelegate: SignupControllerTransitionDelegate
     
-    /**
+    /*
      Initializes a signup controller configuration with the view model,
      delegate, a factory method for the signup view and transition
      delegate for the signup controller to use.

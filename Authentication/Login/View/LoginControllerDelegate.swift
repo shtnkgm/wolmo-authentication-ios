@@ -9,7 +9,7 @@
 import Foundation
 
 
-/**
+/*
     Protocol gor login controller delegates.
     Create your own delegate and override any of the defaut methods to
     add behaviour to your login process.

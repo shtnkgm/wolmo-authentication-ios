@@ -12,7 +12,7 @@ import Rex
 import enum Result.NoError
 
 
-/**
+/*
     Log In View Controller that takes care of managing the login, from
     validating email and password fields, to binding a login view to the
     view model and informing the log in controller delegate when certain
@@ -34,12 +34,12 @@ public final class LoginController: UIViewController {
     private let _keyboardDisplayed = MutableProperty(false)
     private let _activeField = MutableProperty<UITextField?>(.None)
     
-    // This is an internal initializer, because if wanting to use the  default SignupController,
+    // This is an internal initializer, because if wanting to use the default SignupController,
     // you should not override the `createLoginController` method, but all the others
     // that provide the elements this controller uses. (That is to say,
     // `createLoginView`, `createLoginViewModel`, `createLoginControllerDelegate` or
     // `createLoginControllerConfiguration`)
-    /**
+    /*
         Initializes a login controller with the configuration to use.
      
         Parameters:
@@ -130,7 +130,7 @@ private extension LoginController {
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility
-            _viewModel.showPassword.signal.observeNext { [unowned self] in self.loginView.passwordVisible = $0 }
+            _viewModel.passwordVisible.signal.observeNext { [unowned self] in self.loginView.passwordVisible = $0 }
         }
         loginView.passwordTextField.delegate = self
     }
@@ -229,7 +229,7 @@ private extension LoginController {
         return navBarHeight + statusBarHeight
     }
     
-    /**
+    /*
         As both textfields fit in all devices, it will always show the email
         textfield at the top of the screen.
     */

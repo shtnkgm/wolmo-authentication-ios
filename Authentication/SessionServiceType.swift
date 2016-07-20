@@ -20,7 +20,7 @@ public enum SessionServiceEvent<User: UserType> {
     case SignUpError(SessionServiceError)
 }
 
-/**
+/*
      Represents any possible error that may happen
      in the session service through the authentication
      process.
@@ -35,7 +35,7 @@ public protocol SessionServiceType {
     
     associatedtype User: UserType
     
-    /**
+    /*
          The current user logged in in the app.
          
          This will be consulted by the framework to check
@@ -44,13 +44,13 @@ public protocol SessionServiceType {
     */
     var currentUser: AnyProperty<User?> { get }
     
-    /**
+    /*
          ...
          TODO: Check if we need a signal with all this events, or just logout.
     */
     var events: Signal<SessionServiceEvent<User>, NoError> { get }
     
-    /**
+    /*
         This method takes care of validating and logging in.
      
         - Returns: A SignalProducer that can send the User logged in
@@ -67,7 +67,7 @@ public protocol SessionServiceType {
     */
     func logIn(email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
-    /**
+    /*
          This method takes care of validating and signing up.
          
          - Returns: A SignalProducer that can send the User logged in
@@ -95,7 +95,7 @@ public protocol SessionServiceType {
 
 public extension SessionServiceError {
     
-    /**
+    /*
          The message from an error service is composed by
             a localized message relate to the error type and
             the description of the NSError tat accompanies it, if there is any.

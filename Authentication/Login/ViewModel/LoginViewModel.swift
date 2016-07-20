@@ -10,26 +10,32 @@ import Foundation
 import ReactiveCocoa
 import enum Result.NoError
 
-/**
+/*
     Protocol for login view models.
+    They must handle validation and
+    actions of al possible login elements.
 */
 public protocol LoginViewModelType {
     
+    /* Email field considerations: content and validation errors. */
     var email: MutableProperty<String> { get }
     var emailValidationErrors: AnyProperty<[String]> { get }
     
+    /* Password field considerations: content, validation errors
+       and password visibility. */
     var password: MutableProperty<String> { get }
     var passwordValidationErrors: AnyProperty<[String]> { get }
-    var showPassword: MutableProperty<Bool> { get }
-    
+    var passwordVisible: MutableProperty<Bool> { get }
     var togglePasswordVisibility: CocoaAction { get }
+    
+    /* Log In action considerations: action, executing state and errors. */
     var logInCocoaAction: CocoaAction { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
     
 }
 
-/**
+/*
     Default LoginViewModel responsible for validating entries to email and password fields 
     and therefore enabling log in action, managing password visibility, reporting log in events
     and communicating with the session service for executing the log in.
@@ -44,7 +50,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     
     public let password = MutableProperty("")
     public let passwordValidationErrors: AnyProperty<[String]>
-    public let showPassword = MutableProperty(false)
+    public let passwordVisible = MutableProperty(false)
     
     public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
     public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
@@ -52,25 +58,11 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     
     public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     
-    private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = {
-        return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
-            if let email = Email(raw: self.email.value) {
-                let password = self.password.value
-                return self._sessionService.logIn(email, password: password).observeOn(UIScheduler())
-            } else {
-                return SignalProducer(error: .InvalidLogInCredentials(.None)).observeOn(UIScheduler())
-            }
-        }
-    }()
+    private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = self.initializeLogInAction()
     
-    private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = {
-        return Action { [unowned self] _ in
-            self.showPassword.value = !self.showPassword.value
-            return SignalProducer(value: self.showPassword.value).observeOn(UIScheduler())
-        }
-    }()
+    private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
-    /**
+    /*
         Initializes a login view model which will communicate to the session service provided and
         will regulate the log in with the validation criteria from the login credentials validator.
      
@@ -97,4 +89,25 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
     }
     
+}
+
+private extension LoginViewModel {
+    
+    private func initializeLogInAction() -> Action<AnyObject, User, SessionServiceError> {
+        return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
+            if let email = Email(raw: self.email.value) {
+                let password = self.password.value
+                return self._sessionService.logIn(email, password: password).observeOn(UIScheduler())
+            } else {
+                return SignalProducer(error: .InvalidLogInCredentials(.None)).observeOn(UIScheduler())
+            }
+        }
+    }
+    
+    private func initializeTogglePasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+        return Action { [unowned self] _ in
+            self.passwordVisible.value = !self.passwordVisible.value
+            return SignalProducer(value: self.passwordVisible.value).observeOn(UIScheduler())
+        }
+    }
 }

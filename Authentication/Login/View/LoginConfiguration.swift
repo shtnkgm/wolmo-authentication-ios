@@ -8,7 +8,7 @@
 
 import Foundation
 
-/**
+/*
     Protocol for handling transition events occured during login.
 */
 public protocol LoginControllerTransitionDelegate {
@@ -20,7 +20,7 @@ public protocol LoginControllerTransitionDelegate {
 }
 
 
-/**
+/*
     Class for configuring the login controller.
     Includes all information required:
         view factory method,
@@ -35,7 +35,7 @@ public final class LoginControllerConfiguration {
     public let delegate: LoginControllerDelegate
     public let transitionDelegate: LoginControllerTransitionDelegate
     
-    /**
+    /*
         Initializes a login controller configuration with the view model,
         delegate, a factory method for the login view and transition 
         delegate for the login controller to use.

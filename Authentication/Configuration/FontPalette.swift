@@ -8,7 +8,7 @@
 
 import Foundation
 
-/**
+/*
  All fonts used should be from the same family
  for style coherence.
  */

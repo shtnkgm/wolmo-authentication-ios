@@ -8,7 +8,7 @@
 
 import Foundation
 
-/**
+/*
     Delegate for any extra configuration
     to the login view when rendered.
 */
