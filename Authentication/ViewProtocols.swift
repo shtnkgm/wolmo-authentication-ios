@@ -6,6 +6,10 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+/**
+     Represents something that can give us an
+     UIView to show and render.
+ */
 public protocol Renderable {
     
     var view: UIView { get }
@@ -22,7 +26,12 @@ public extension Renderable where Self: UIView {
     
 }
 
-
+/**
+     Represents an authentication form
+     with its minimum elements necessary
+     to be able to authenticate, and
+     properties to handle its states.
+ */
 public protocol AuthenticationFormType {
     
     var emailLabel: UILabel? { get }
@@ -43,6 +52,12 @@ public protocol AuthenticationFormType {
     
 }
 
+/**
+     Represents a login form with its
+     minimum elements necessary to
+     authenticate and start login action,
+     and properties to handle its states.
+ */
 public protocol LoginFormType: AuthenticationFormType {
 
     var logInButton: UIButton { get }
@@ -53,6 +68,12 @@ public protocol LoginFormType: AuthenticationFormType {
 
 }
 
+/**
+     Represents a signup form with its
+     most common elements used to
+     authenticate and start signup action,
+     and properties to handle its states.
+ */
 public protocol SignupFormType: AuthenticationFormType {
 
     var usernameLabel: UILabel? { get }
