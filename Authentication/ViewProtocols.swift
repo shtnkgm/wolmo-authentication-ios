@@ -52,6 +52,17 @@ public protocol AuthenticationFormType {
     
 }
 
+public extension AuthenticationFormType {
+    
+    var emailLabel: UILabel? { return .None }
+    var emailValidationMessageLabel: UILabel? { return .None }
+    
+    var passwordLabel: UILabel? { return .None }
+    var passwordValidationMessageLabel: UILabel? { return .None }
+    var passwordVisibilityButton: UIButton? { return .None }
+    
+}
+
 /*
      Represents a login form with its
      minimum elements necessary to
@@ -66,6 +77,12 @@ public protocol LoginFormType: AuthenticationFormType {
     var logInButtonEnabled: Bool { get set }
     var logInButtonPressed: Bool { get set }
 
+}
+
+public extension LoginFormType {
+    
+    var logInErrorLabel: UILabel? { return .None }
+    
 }
 
 /*
@@ -100,5 +117,22 @@ public protocol SignupFormType: AuthenticationFormType {
     
     var termsAndServicesButton: UIButton { get }
     var termsAndServicesLabel: UILabel? { get }
+    
+}
+
+public extension SignupFormType {
+    
+    var usernameLabel: UILabel? { return .None }
+    var usernameTextField: UITextField? { return .None }
+    var usernameValidationMessageLabel: UILabel? { return .None }
+    
+    var passwordConfirmLabel: UILabel? { return .None }
+    var passwordConfirmTextField: UITextField? { return .None }
+    var passwordConfirmValidationMessageLabel: UILabel? { return .None }
+    var passwordConfirmVisibilityButton: UIButton? { return .None }
+    
+    var signUpErrorLabel: UILabel? { return .None }
+    
+    var termsAndServicesLabel: UILabel? { return .None }
     
 }
