@@ -101,4 +101,8 @@ extension LoginControllerDelegate {
     
 }
 
+/*
+    The default login controller delegate operates with the
+    default behaviour of the LoginControllerDelegate protocol's methods.
+*/
 public final class DefaultLoginControllerDelegate: LoginControllerDelegate { }

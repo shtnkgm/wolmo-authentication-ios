@@ -129,4 +129,8 @@ extension SignupControllerDelegate {
     
 }
 
+/*
+     The default signup controller delegate operates with the
+     default behaviour of the SignupControllerDelegate protocol's methods.
+ */
 public final class DefaultSignupControllerDelegate: SignupControllerDelegate { }
