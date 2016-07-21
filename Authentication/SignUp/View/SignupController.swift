@@ -8,6 +8,21 @@
 
 import ReactiveCocoa
 
+
+/*
+     Signup View Controller that takes care of managing the signup, from
+     validating all fields, to binding a signup view to the view model
+     and informing the signup controller delegate when certain events 
+     occur for it to act upon them.
+     If there are more than one validation error in a field, the controller
+     presents only the first one in the errors label.
+     
+     If wanting to use the default SignupController, you should not override
+     the `createSignupController` method of the Bootstrapper, but all the others
+     that provide the elements this controller uses. (That is to say,
+     `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`
+     and/or `createSignupControllerConfiguration`)
+ */
 public final class SignupController: UIViewController {
     
     private let _viewModel: SignupViewModelType
@@ -23,10 +38,15 @@ public final class SignupController: UIViewController {
     private let _activeTextField = MutableProperty<UITextField?>(.None)
 
     
-    // Internal initializer, because if wanting to use the  default SignupController,
-    // you should not override the `createSignupController` method, but all the others 
-    // that provide the elements this controller uses. (That is to say,
-    // `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`)
+    /*
+         Initializes a signup controller with the configuration to use.
+         
+         Parameters:
+         - configuration: A signup controller configuration with all
+         elements needed to operate.
+         
+         - Returns: A valid signup view controller ready to use.
+     */
     internal init(configuration: SignupControllerConfiguration) {
         _viewModel = configuration.viewModel
         _signupViewFactory = configuration.viewFactory

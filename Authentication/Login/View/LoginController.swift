@@ -13,12 +13,18 @@ import enum Result.NoError
 
 
 /*
-    Log In View Controller that takes care of managing the login, from
+    Login View Controller that takes care of managing the login, from
     validating email and password fields, to binding a login view to the
-    view model and informing the log in controller delegate when certain
+    view model and informing the login controller delegate when certain
     events occur for it to act upon them.
-    If there are more than one errors in a field, the controller presents
-    only the first one in the errors label.
+    If there are more than one validation error in a field, the controller
+    presents only the first one in the errors label.
+ 
+    If wanting to use the default LoginController, you should not override
+    the `createLoginController` method of the Bootstrapper, but all the others
+    that provide the elements this controller uses. (That is to say,
+    `createLoginView`, `createLoginViewModel`, `createLoginControllerDelegate`
+    and/or `createLoginControllerConfiguration`)
  */
 public final class LoginController: UIViewController {
     
@@ -34,11 +40,6 @@ public final class LoginController: UIViewController {
     private let _keyboardDisplayed = MutableProperty(false)
     private let _activeField = MutableProperty<UITextField?>(.None)
     
-    // This is an internal initializer, because if wanting to use the default SignupController,
-    // you should not override the `createLoginController` method, but all the others
-    // that provide the elements this controller uses. (That is to say,
-    // `createLoginView`, `createLoginViewModel`, `createLoginControllerDelegate` or
-    // `createLoginControllerConfiguration`)
     /*
         Initializes a login controller with the configuration to use.
      
