@@ -8,7 +8,10 @@
 
 import Foundation
 
-
+/*
+     Represents any possible validation result:
+     valid, or invalid with any possibe quantity of errors.
+ */
 public enum ValidationResult {
     
     public static func invalid(errorMessage: String) -> ValidationResult {
@@ -38,6 +41,9 @@ public enum ValidationResult {
     
 }
 
+/*
+     Represents any text validator.
+ */
 public protocol TextInputValidatorType {
     
     func validate(text: String) -> ValidationResult

@@ -8,6 +8,10 @@
 
 import Foundation
 
+/*
+     Represents a validator which will validate
+     the text is not empty.
+ */
 public struct NonEmptyValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {
@@ -20,6 +24,13 @@ public struct NonEmptyValidator: TextInputValidatorType {
     
 }
 
+/*
+     Represents a validator which will validate
+     the text is no longer than the quantity of
+     characters associated.
+     (That is to say, any text with that exact 
+     quantity or less is valid)
+ */
 public struct MaxLengthValidator: TextInputValidatorType {
     
     private let _maxLength: Int
@@ -38,6 +49,13 @@ public struct MaxLengthValidator: TextInputValidatorType {
     
 }
 
+/*
+     Represents a validator which will validate
+     the text is no shorter than the quantity of
+     characters associated.
+     (That is to say, any text with that exact
+     quantity or more is valid)
+ */
 public struct MinLengthValidator: TextInputValidatorType {
     
     private let _minLength: Int

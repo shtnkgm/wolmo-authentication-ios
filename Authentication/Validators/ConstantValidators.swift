@@ -6,8 +6,11 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Core
 
+/*
+     Represents a validator which will consider
+     any input valid.
+ */
 public struct AlwaysValidValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {
@@ -16,6 +19,13 @@ public struct AlwaysValidValidator: TextInputValidatorType {
     
 }
 
+/*
+     Represents a validator which will consider
+     any input invalid.
+     It provides an errorTextToLocalize property
+     to customize the error message associated
+     with the invalidity, to explain its reason.
+ */
 public struct AlwaysInvalidValidator: TextInputValidatorType {
     
     public var errorTextToLocalize: String = ""
