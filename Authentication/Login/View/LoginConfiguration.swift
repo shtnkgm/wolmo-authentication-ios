@@ -46,11 +46,11 @@ public final class LoginControllerConfiguration {
              to get the login view to use.
              - transitionDelegate: delegate to handle events that fire a
              transition, like selecting registration or recover password.
-             - delegate: delegate which adds behaviour to certain
-             events, like handling a login error or selecting log in option.
+             - delegate: delegate which adds behaviour to certain events,
+             like handling a login error or selecting log in option.
              A default delegate is provided.
      
-        - Returns: A valid configuration
+        - Returns: A valid configuration.
     */
     init(viewModel: LoginViewModelType,
         viewFactory: () -> LoginViewType,
