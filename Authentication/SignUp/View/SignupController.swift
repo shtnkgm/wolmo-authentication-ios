@@ -84,6 +84,8 @@ private extension SignupController {
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
+        checkTextFieldsSelection()
+        hideUnselectedTextfields()
         setTextfieldOrder()
         
         _viewModel.signUpExecuting.observeNext { [unowned self] executing in
@@ -187,12 +189,32 @@ private extension SignupController {
     private func setTextfieldOrder() {
         signupView.usernameTextField?.nextTextField = signupView.emailTextField
         signupView.emailTextField.nextTextField = signupView.passwordTextField
-        signupView.passwordTextField.nextTextField = signupView.passwordConfirmTextField ?? signupView.usernameTextField ?? signupView.emailTextField
-        signupView.passwordConfirmTextField?.nextTextField = signupView.usernameTextField ?? signupView.emailTextField
+        signupView.passwordTextField.nextTextField = _viewModel.passwordConfirmationEnabled ? signupView.passwordConfirmTextField
+            : (_viewModel.usernameEnabled ? signupView.usernameTextField : signupView.emailTextField)
+        signupView.passwordConfirmTextField?.nextTextField = _viewModel.usernameEnabled ? signupView.usernameTextField : signupView.emailTextField
+        lastTextField.returnKeyType = .Go
     }
     
     private var lastTextField: UITextField {
-        return signupView.passwordConfirmTextField ?? signupView.passwordTextField
+        return _viewModel.passwordConfirmationEnabled ? signupView.passwordConfirmTextField! : signupView.passwordTextField
+    }
+    
+    private func hideUnselectedTextfields() {
+        if !_viewModel.usernameEnabled {
+            signupView.hideUsernameElements()
+        }
+        if !_viewModel.passwordConfirmationEnabled {
+            signupView.hidePasswordConfirmElements()
+        }
+    }
+    
+    private func checkTextFieldsSelection() {
+        if _viewModel.usernameEnabled && signupView.usernameTextField == .None {
+            //fatalError?
+        }
+        if _viewModel.passwordConfirmationEnabled && signupView.passwordConfirmTextField == .None {
+            //fatalError?
+        }
     }
     
 }

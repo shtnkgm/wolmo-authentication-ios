@@ -96,6 +96,7 @@ public protocol SignupFormType: AuthenticationFormType {
     var usernameLabel: UILabel? { get }
     var usernameTextField: UITextField? { get }
     var usernameValidationMessageLabel: UILabel? { get }
+    func hideUsernameElements()
     
     var usernameTextFieldValid: Bool { get set }
     var usernameTextFieldSelected: Bool { get set }
@@ -104,6 +105,7 @@ public protocol SignupFormType: AuthenticationFormType {
     var passwordConfirmTextField: UITextField? { get }
     var passwordConfirmValidationMessageLabel: UILabel? { get }
     var passwordConfirmVisibilityButton: UIButton? { get }
+    func hidePasswordConfirmElements()
     
     var passwordConfirmationTextFieldValid: Bool { get set }
     var passwordConfirmationTextFieldSelected: Bool { get set }

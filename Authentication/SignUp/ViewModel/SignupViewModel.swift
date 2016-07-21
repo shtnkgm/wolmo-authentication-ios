@@ -45,6 +45,9 @@ public protocol SignupViewModelType {
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
     
+    var usernameEnabled: Bool { get }
+    var passwordConfirmationEnabled: Bool { get }
+    
 }
 
 /**
@@ -54,10 +57,6 @@ public protocol SignupViewModelType {
      events and communicating with the session service for executing the sign up.
  */
 public final class SignupViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
-    
-    private let _sessionService: SessionService
-    
-    private let _credentialsAreValid: AndProperty
     
     public let name = MutableProperty("")
     public let email = MutableProperty("")
@@ -78,6 +77,12 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     
     public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     public var toggleConfirmPasswordVisibility: CocoaAction { return _toggleConfirmationPasswordVisibility.unsafeCocoaAction }
+    
+    public let usernameEnabled: Bool
+    public let passwordConfirmationEnabled: Bool
+    
+    private let _sessionService: SessionService
+    private let _credentialsAreValid: AndProperty
     
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = self.initializeSignUpAction()
     
@@ -128,6 +133,8 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
                 .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
         }
         _credentialsAreValid = credentialsAreValid
+        self.usernameEnabled = usernameEnabled
+        self.passwordConfirmationEnabled = passwordConfirmationEnabled
     }
     
 }
