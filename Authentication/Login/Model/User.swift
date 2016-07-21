@@ -9,8 +9,9 @@
 import Foundation
 
 /*
-     Represents a user compatible
-     with the authentication framework.
+     Represents all properties needed from
+     a user for it to be compatible with
+     the authentication framework.
  */
 public protocol UserType {
     
