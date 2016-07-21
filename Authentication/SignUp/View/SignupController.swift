@@ -107,6 +107,7 @@ private extension SignupController {
                 } else {
                     self._delegate.didFailNameValidation(self, with: errors)
                 }
+                self.signupView.usernameTextFieldValid = errors.isEmpty
             }
             if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
                 nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
@@ -123,6 +124,7 @@ private extension SignupController {
             } else {
                 self._delegate.didFailEmailValidation(self, with: errors)
             }
+            self.signupView.emailTextFieldValid = errors.isEmpty
         }
         if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
@@ -140,6 +142,7 @@ private extension SignupController {
             } else {
                 self._delegate.didFailPasswordValidation(self, with: errors)
             }
+            self.signupView.passwordTextFieldValid = errors.isEmpty
         }
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
@@ -163,6 +166,7 @@ private extension SignupController {
                 } else {
                     self._delegate.didFailPasswordConfirmationValidation(self, with: errors)
                 }
+                self.signupView.passwordConfirmationTextFieldValid = errors.isEmpty
             }
             if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
                 passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }

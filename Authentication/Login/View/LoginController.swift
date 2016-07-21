@@ -108,6 +108,7 @@ private extension LoginController {
             } else {
                 self._delegate.didFailEmailValidation(self, with: errors)
             }
+            self.loginView.emailTextFieldValid = errors.isEmpty
         }
         if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
@@ -125,6 +126,7 @@ private extension LoginController {
             } else {
                 self._delegate.didFailPasswordValidation(self, with: errors)
             }
+            self.loginView.passwordTextFieldValid = errors.isEmpty
         }
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
