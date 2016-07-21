@@ -6,22 +6,27 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
-
 /*
- All fonts used should be from the same family
- for style coherence.
+     Represents the font hierarchy necessary for
+     an authentication view.
+ 
+     All fonts used should be from the same family
+     for style coherence.
  */
 public protocol FontPaletteType {
     
     var textfields: UIFont { get }
     var passwordVisibilityButton: UIFont { get }
+    // Links refers to any navigational button or
+    // link present in the view.
     var links: UIFont { get }
     var labels: UIFont { get }
     var mainButton: UIFont { get }
     
 }
 
+/* By default, the FontPalette uses the SystemFont family, and
+ only highlights the main button text with bigger and bold font. */
 public extension FontPaletteType {
     
     public var textfields: UIFont { return .systemFontOfSize(14) }

@@ -6,14 +6,20 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
 
+/*
+     Represents the view configurations able to
+     be customized in all authentication process.
+ 
+     Includes the login and signup view configurations.
+ */
 public struct AuthenticationViewConfiguration {
     
     public let loginConfiguration: LoginViewConfigurationType
     public let signupConfiguration: SignupViewConfigurationType
     
-    public init(loginViewConfiguration: LoginViewConfigurationType = DefaultLoginViewConfiguration(), signupViewConfiguration: SignupViewConfigurationType = DefaultSignupViewConfiguration()) {
+    public init(loginViewConfiguration: LoginViewConfigurationType = LoginViewConfiguration(),
+                signupViewConfiguration: SignupViewConfigurationType = SignupViewConfiguration()) {
         loginConfiguration = loginViewConfiguration
         signupConfiguration = signupViewConfiguration
     }

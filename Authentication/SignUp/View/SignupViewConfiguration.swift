@@ -6,30 +6,46 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
 
+/*
+     Represents the configurations able to
+     be customized to a SignupViewType.
+     Includes the font and color palettes,
+     and the decision to include or exclude
+     optional textfields.
+ */
 public protocol SignupViewConfigurationType {
     
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
-    // Must be consistent with the view used.
+    
+    // Textfield selected must be consistent with the view used.
     var usernameEnabled: Bool { get }
     var passwordConfirmationEnabled: Bool { get }
     
 }
 
-public struct DefaultSignupViewConfiguration: SignupViewConfigurationType {
+/*
+    The SignupViewConfiguration stores all palettes
+    and decisions necessary.
+    By default, it uses the default palettes and
+    doesn't include optional textfields.
+ */
+public struct SignupViewConfiguration: SignupViewConfigurationType {
     
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     public let usernameEnabled: Bool
     public let passwordConfirmationEnabled: Bool
     
-    public init() {
-        colorPalette = DefaultColorPalette()
-        fontPalette = DefaultFontPalette()
-        usernameEnabled = false
-        passwordConfirmationEnabled = false
+    public init(colorPalette: ColorPaletteType = DefaultColorPalette(),
+                fontPalette: FontPaletteType = DefaultFontPalette(),
+                usernameEnabled: Bool = false,
+                passwordConfirmationEnabled: Bool = false) {
+        self.colorPalette = colorPalette
+        self.fontPalette = fontPalette
+        self.usernameEnabled = usernameEnabled
+        self.passwordConfirmationEnabled = passwordConfirmationEnabled
     }
     
 }

@@ -6,8 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
-
 /*
     Protocol for handling transition events occured during login.
 */

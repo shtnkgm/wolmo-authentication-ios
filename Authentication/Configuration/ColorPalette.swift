@@ -6,9 +6,14 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
 
+/*
+     Represents the color hierarchy necessary for
+     an authentication view.
+ */
 public protocol ColorPaletteType {
+    
+    var background: UIColor { get }
     
     var mainButtonDisabled: UIColor { get }
     var mainButtonEnabled: UIColor { get }
@@ -18,8 +23,8 @@ public protocol ColorPaletteType {
     var textfieldsNormal: UIColor { get }
     var textfieldsSelected: UIColor { get }
     
-    var background: UIColor { get }
-    
+    // Links refers to any navigational button or
+    // link present in the view.
     var links: UIColor { get }
     var labels: UIColor { get }
     var textfieldText: UIColor { get }

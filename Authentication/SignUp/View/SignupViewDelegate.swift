@@ -43,7 +43,7 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    internal init(configuration: SignupViewConfigurationType = DefaultSignupViewConfiguration()) {
+    internal init(configuration: SignupViewConfigurationType = SignupViewConfiguration()) {
         colorPalette = configuration.colorPalette
         fontPalette = configuration.fontPalette
     }

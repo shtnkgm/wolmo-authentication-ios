@@ -46,7 +46,7 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
     public var colorPalette: ColorPaletteType { return _configuration.colorPalette }
     public var fontPalette: FontPaletteType { return _configuration.fontPalette }
     
-    internal init(configuration: LoginViewConfigurationType = DefaultLoginViewConfiguration()) {
+    internal init(configuration: LoginViewConfigurationType = LoginViewConfiguration()) {
         _configuration = configuration
     }
     

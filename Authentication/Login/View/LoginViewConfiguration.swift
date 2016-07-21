@@ -6,8 +6,12 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
-
+/*
+    Represents the configurations able to
+    be customized to a LoginViewType.
+    Includes the font and color palettes,
+    and the logo image.
+*/
 public protocol LoginViewConfigurationType {
     
     var logoImage: UIImage? { get }
@@ -16,16 +20,24 @@ public protocol LoginViewConfigurationType {
     
 }
 
-public struct DefaultLoginViewConfiguration: LoginViewConfigurationType {
+/*
+     The SignupViewConfiguration stores all palettes
+     and logo necessary.
+     By default, it uses the default palettes and
+     doesn't include a logo.
+ */
+public struct LoginViewConfiguration: LoginViewConfigurationType {
     
     public let logoImage: UIImage?
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    public init(logoImage: UIImage? = .None) {
+    public init(logoImage: UIImage? = .None,
+                colorPalette: ColorPaletteType = DefaultColorPalette(),
+                fontPalette: FontPaletteType = DefaultFontPalette()) {
         self.logoImage = logoImage
-        self.colorPalette = DefaultColorPalette()
-        self.fontPalette = DefaultFontPalette()
+        self.colorPalette = colorPalette
+        self.fontPalette = fontPalette
     }
     
 }

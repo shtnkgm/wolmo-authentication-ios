@@ -294,9 +294,9 @@
 		9D72AA061C8DC7EA00BB4082 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				CE89A2611CAED30100E1903B /* Configuration */,
 				CEE226A91C9C4011005EB279 /* Localizable.strings */,
 				CEE226A41C9C3CB4005EB279 /* RecoverPassword */,
+				CE89A2611CAED30100E1903B /* Configuration */,
 				CE040D721C99CD7D0020DDE0 /* Validators */,
 				CEBF66B51C8DD3AB006EE090 /* Login */,
 				CEBF66B41C8DD3A4006EE090 /* Signup */,
