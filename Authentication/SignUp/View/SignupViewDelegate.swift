@@ -87,6 +87,11 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         signupView.termsAndServicesLabel?.textColor = colorPalette.labels
         signupView.termsAndServicesButton.titleLabel?.font = fontPalette.links
         signupView.termsAndServicesButton.titleLabel?.textColor = colorPalette.links
+        
+        signupView.loginLabel?.font = fontPalette.labels
+        signupView.loginLabel?.textColor = colorPalette.labels
+        signupView.loginButton.titleLabel?.font = fontPalette.links
+        signupView.loginButton.titleLabel?.textColor = colorPalette.links
     }
     
     private func configureErrorElements(signupView: SignupViewType) {

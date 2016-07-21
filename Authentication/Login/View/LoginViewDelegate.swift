@@ -77,11 +77,13 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
     }
     
     private func configureLinksElements(loginView: LoginViewType) {
+        loginView.recoverPasswordLabel?.font = fontPalette.labels
+        loginView.recoverPasswordLabel?.textColor = colorPalette.labels
         loginView.recoverPasswordButton.titleLabel?.font = fontPalette.links
         loginView.recoverPasswordButton.titleLabel?.textColor = colorPalette.links
         
-        loginView.signupLabel.font = fontPalette.labels
-        loginView.signupLabel.textColor = colorPalette.labels
+        loginView.signupLabel?.font = fontPalette.labels
+        loginView.signupLabel?.textColor = colorPalette.labels
         loginView.signupButton.titleLabel?.font = fontPalette.links
         loginView.signupButton.titleLabel?.textColor = colorPalette.links
     }
