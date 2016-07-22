@@ -338,45 +338,25 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8o-uo-260" userLabel="Terms&amp;Serivces View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="82"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5rz-BZ-aoM">
-                                    <rect key="frame" x="111" y="20" width="197" height="42"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I accept" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ysg-6j-g6B">
-                                            <rect key="frame" x="0.0" y="0.0" width="55" height="42"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JuJ-8k-i6o">
-                                            <rect key="frame" x="65" y="0.0" width="132" height="42"/>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                            <state key="normal" title="Terms and Services"/>
-                                        </button>
-                                    </subviews>
+                                <textView clipsSubviews="YES" contentMode="scaleAspectFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="I accept the Terms and Services" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcI-Oe-1fg">
+                                    <rect key="frame" x="21" y="20" width="376" height="42"/>
                                     <constraints>
-                                        <constraint firstItem="ysg-6j-g6B" firstAttribute="leading" secondItem="5rz-BZ-aoM" secondAttribute="leading" id="6JA-Tf-Skh"/>
-                                        <constraint firstItem="ysg-6j-g6B" firstAttribute="top" secondItem="5rz-BZ-aoM" secondAttribute="top" id="84C-bh-GWa"/>
-                                        <constraint firstItem="JuJ-8k-i6o" firstAttribute="leading" secondItem="ysg-6j-g6B" secondAttribute="trailing" constant="10" id="DUT-EY-Fgs"/>
-                                        <constraint firstItem="JuJ-8k-i6o" firstAttribute="top" secondItem="5rz-BZ-aoM" secondAttribute="top" constant="3" id="Fbf-MO-e4C"/>
-                                        <constraint firstItem="JuJ-8k-i6o" firstAttribute="bottom" secondItem="ysg-6j-g6B" secondAttribute="bottom" id="Zd7-sp-i6r"/>
-                                        <constraint firstItem="JuJ-8k-i6o" firstAttribute="top" secondItem="ysg-6j-g6B" secondAttribute="top" id="hFy-s8-pjM"/>
-                                        <constraint firstAttribute="bottom" secondItem="ysg-6j-g6B" secondAttribute="bottom" id="kli-7x-SGO"/>
-                                        <constraint firstAttribute="trailing" secondItem="JuJ-8k-i6o" secondAttribute="trailing" id="pRX-0W-ppo"/>
-                                        <constraint firstAttribute="bottom" secondItem="JuJ-8k-i6o" secondAttribute="bottom" id="zHW-yt-SRj"/>
+                                        <constraint firstAttribute="height" constant="40" id="LJ8-l9-nBu"/>
                                     </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="Fbf-MO-e4C"/>
-                                            <exclude reference="zHW-yt-SRj"/>
+                                            <exclude reference="LJ8-l9-nBu"/>
                                         </mask>
                                     </variation>
-                                </view>
+                                </textView>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="5rz-BZ-aoM" secondAttribute="bottom" constant="20" id="CUL-vJ-GsJ"/>
+                                <constraint firstItem="mcI-Oe-1fg" firstAttribute="centerY" secondItem="X8o-uo-260" secondAttribute="centerY" id="8kC-cw-CTC"/>
                                 <constraint firstAttribute="height" constant="82" id="L0b-2v-3fr"/>
-                                <constraint firstItem="5rz-BZ-aoM" firstAttribute="top" secondItem="X8o-uo-260" secondAttribute="top" constant="20" id="LFC-mg-cXC"/>
-                                <constraint firstItem="5rz-BZ-aoM" firstAttribute="centerX" secondItem="X8o-uo-260" secondAttribute="centerX" id="iW9-FP-8fP"/>
+                                <constraint firstAttribute="bottom" secondItem="mcI-Oe-1fg" secondAttribute="bottom" constant="20" id="X3i-G5-wmn"/>
+                                <constraint firstItem="mcI-Oe-1fg" firstAttribute="top" secondItem="X8o-uo-260" secondAttribute="top" constant="20" id="ie2-0M-SnX"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RS-Mz-klY" userLabel="Button View">
@@ -457,9 +437,11 @@
                 <constraint firstItem="YZp-rK-32z" firstAttribute="trailing" secondItem="OcG-29-7E9" secondAttribute="trailing" id="N5A-O6-UQh"/>
                 <constraint firstItem="YZp-rK-32z" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="56/671" id="OA0-y1-LDP"/>
                 <constraint firstItem="pSa-0q-elf" firstAttribute="top" secondItem="lPU-cw-qqE" secondAttribute="bottom" constant="10" id="OE6-Ur-KWl"/>
+                <constraint firstItem="OcG-29-7E9" firstAttribute="leading" secondItem="mcI-Oe-1fg" secondAttribute="leading" id="VBb-sg-iEB"/>
                 <constraint firstItem="Iqv-fj-4Xd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="WtO-SA-rte"/>
                 <constraint firstAttribute="trailing" secondItem="Iqv-fj-4Xd" secondAttribute="trailing" id="bCd-JD-6j7"/>
                 <constraint firstItem="lPU-cw-qqE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="cNL-Df-ANF"/>
+                <constraint firstItem="OcG-29-7E9" firstAttribute="trailing" secondItem="mcI-Oe-1fg" secondAttribute="trailing" id="gR7-rM-CTH"/>
                 <constraint firstItem="Iqv-fj-4Xd" firstAttribute="top" secondItem="pSa-0q-elf" secondAttribute="bottom" id="hiQ-ur-uol"/>
                 <constraint firstItem="lPU-cw-qqE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kX9-eB-Uo4"/>
                 <constraint firstAttribute="trailing" secondItem="lPU-cw-qqE" secondAttribute="trailing" id="uFv-Pj-4ll"/>
@@ -486,8 +468,7 @@
                 <outlet property="pswdConfirmTextFieldAndButtonViewOutlet" destination="F6s-RQ-22R" id="v0v-2q-Z26"/>
                 <outlet property="pswdConfirmValidationMessageLabelOutlet" destination="eY2-b6-On0" id="5tI-wo-a38"/>
                 <outlet property="signUpButtonOutlet" destination="YZp-rK-32z" id="2jr-Vi-Rtp"/>
-                <outlet property="termsAndServicesButtonOutlet" destination="JuJ-8k-i6o" id="gyu-mz-cvR"/>
-                <outlet property="termsAndServicesLabelOutlet" destination="ysg-6j-g6B" id="oLn-i1-MxY"/>
+                <outlet property="termsAndServicesTextViewOutlet" destination="mcI-Oe-1fg" id="HaC-8s-Dqn"/>
                 <outlet property="titleLabelOutlet" destination="Dtd-MK-bQ0" id="v4q-H7-B6l"/>
                 <outlet property="usernameErrorsView" destination="uRL-5A-Qkd" id="8Ul-M3-gpo"/>
                 <outlet property="usernameHeightConstraint" destination="V1c-OA-D28" id="dID-Dp-6ec"/>

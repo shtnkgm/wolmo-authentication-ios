@@ -117,8 +117,7 @@ public protocol SignupFormType: AuthenticationFormType {
     var signUpButtonEnabled: Bool { get set }
     var signUpButtonPressed: Bool { get set }
     
-    var termsAndServicesButton: UIButton { get }
-    var termsAndServicesLabel: UILabel? { get }
+    var termsAndServicesTextView: UITextView { get }
     
 }
 
@@ -134,7 +133,5 @@ public extension SignupFormType {
     var passwordConfirmVisibilityButton: UIButton? { return .None }
     
     var signUpErrorLabel: UILabel? { return .None }
-    
-    var termsAndServicesLabel: UILabel? { return .None }
     
 }

@@ -46,8 +46,9 @@
 "signup-view.email-placeholder" = "Email";
 "signup-view.password-placeholder" = "Contraseña";
 "signup-view.confirm-password-placeholder" = "Confirme contraseña";
-"signup-view.terms-and-services.label-text" = "Al registrarme, acepto los";
-"signup-view.terms-and-services.button-title" = "Términos y Servicios";
+"signup-view.terms-and-services.text" = "Al registrarme, acepto los Términos y Servicios.";
+"signup-view.terms-and-services.link-text" = "Términos y Servicios";
+"signup-view.terms-and-services.link-url" = "";
 "signup-view.signup-button-title" = "REGISTRARSE";
 "signup-view.login.label-text" = "¿Ya está registrado?";
 "signup-view.login.button-title" = "Inicie sesión";

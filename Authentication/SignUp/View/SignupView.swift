@@ -146,14 +146,8 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         }
     }
     
-    internal var termsAndServicesLabel: UILabel? { return termsAndServicesLabelOutlet }
-    @IBOutlet weak var termsAndServicesLabelOutlet: UILabel! {
-        didSet { termsAndServicesLabelOutlet.text = termsAndServicesLabelText }
-    }
-    internal var termsAndServicesButton: UIButton { return termsAndServicesButtonOutlet }
-    @IBOutlet weak var termsAndServicesButtonOutlet: UIButton! {
-        didSet { termsAndServicesButtonOutlet.setTitle(termsAndServicesButtonTitle, forState: .Normal) }
-    }
+    internal var termsAndServicesTextView: UITextView { return termsAndServicesTextViewOutlet }
+    @IBOutlet weak var termsAndServicesTextViewOutlet: UITextView!
     
     internal var loginLabel: UILabel? { return loginLabelOutlet }
     @IBOutlet weak var loginLabelOutlet: UILabel! {
@@ -211,6 +205,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         passwordVisible = false
         confirmationPasswordVisible = false
         
+        setTermsAndConditionsText()
         delegate.configureView(self)
     }
     
@@ -360,6 +355,23 @@ private extension SignupView {
         passwordConfirmationErrorsView?.hidden = true
     }
     
+    private func setTermsAndConditionsText() {
+        let textString = NSString(string: termsAndServicesText)
+        let textWithLinks = NSMutableAttributedString(string: textString as String)
+        
+        let termsString = termsAndServicesLinkText
+        let termsURL = NSURL(string: termsAndServicesLinkURL)!
+        let termsRange = textString.rangeOfString(termsString)
+        
+        textWithLinks.addAttribute(NSLinkAttributeName, value: termsURL, range: termsRange)
+        
+        termsAndServicesTextView.attributedText = textWithLinks
+        termsAndServicesTextView.linkTextAttributes = [NSForegroundColorAttributeName: delegate.colorPalette.links,
+                                                       NSUnderlineColorAttributeName: delegate.colorPalette.links,
+                                                       NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
+        termsAndServicesTextView.textAlignment = .Center
+    }
+    
 }
 
 public extension SignupViewType {
@@ -386,9 +398,11 @@ public extension SignupViewType {
     
     public var confirmPasswordVisibilityButtonTitle: String { return ("text-visibility-button-title." + (confirmationPasswordVisible ? "false" : "true")).frameworkLocalized }
     
-    public var termsAndServicesLabelText: String { return "signup-view.terms-and-services.label-text".frameworkLocalized }
+    public var termsAndServicesText: String { return "signup-view.terms-and-services.text".frameworkLocalized }
     
-    public var termsAndServicesButtonTitle: String { return "signup-view.terms-and-services.button-title".frameworkLocalized }
+    public var termsAndServicesLinkText: String { return "signup-view.terms-and-services.link-text".frameworkLocalized }
+    
+    public var termsAndServicesLinkURL: String { return "signup-view.terms-and-services.link-url".frameworkLocalized }
     
     public var signUpButtonTitle: String { return "signup-view.signup-button-title".frameworkLocalized }
     

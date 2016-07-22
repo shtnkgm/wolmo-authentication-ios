@@ -101,10 +101,8 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     }
     
     private func configureLinksElements(signupView: SignupViewType) {
-        signupView.termsAndServicesLabel?.font = fontPalette.labels
-        signupView.termsAndServicesLabel?.textColor = colorPalette.labels
-        signupView.termsAndServicesButton.titleLabel?.font = fontPalette.links
-        signupView.termsAndServicesButton.titleLabel?.textColor = colorPalette.links
+        signupView.termsAndServicesTextView.textColor = colorPalette.labels
+        signupView.termsAndServicesTextView.font = fontPalette.labels
         
         signupView.loginLabel?.font = fontPalette.labels
         signupView.loginLabel?.textColor = colorPalette.labels
