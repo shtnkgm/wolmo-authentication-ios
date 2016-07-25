@@ -25,7 +25,7 @@
 "login-view.login-button-title" = "INGRESAR";
 "login-view.recover-password-button-title" = "Recuperar contraseña";
 "login-view.to-signup-label" = "¿Eres nuevo?";
-"login-view.signup-button-title" = "Crea una cuenta";
+"login-view.signup-button-title" = "Crear una cuenta";
 
 /** Errores del servicio de sesión */
 "login-error.invalid-credentials.message" = "Email o contraseña incorrectos";
