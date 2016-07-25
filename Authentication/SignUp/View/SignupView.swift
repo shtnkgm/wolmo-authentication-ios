@@ -156,7 +156,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var loginButton: UIButton { return loginButtonOutlet }
     @IBOutlet weak var loginButtonOutlet: UIButton! {
-        didSet { loginButtonOutlet.setTitle(loginButtonTitle, forState: .Normal) }
+        didSet { loginButtonOutlet.setUnderlinedTitle(loginButtonTitle) }
     }
     
     internal var usernameTextFieldValid = false { didSet { usernameTextFieldValidWasSet() } }
