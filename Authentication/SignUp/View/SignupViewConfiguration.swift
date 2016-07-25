@@ -8,8 +8,9 @@
 
 
 /*
-     Represents the configurations able to
-     be customized to a SignupViewType.
+     Represents the configurable parameters
+     of a view that conforms to SignupViewType.
+ 
      Includes the font and color palettes,
      and the decision to include or exclude
      optional textfields.
@@ -28,6 +29,7 @@ public protocol SignupViewConfigurationType {
 /*
     The SignupViewConfiguration stores all palettes
     and decisions necessary.
+ 
     By default, it uses the default palettes and
     doesn't include optional textfields.
  */

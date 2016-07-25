@@ -7,8 +7,9 @@
 //
 
 /*
-    Represents the configurations able to
-    be customized to a LoginViewType.
+    Represents the configurable parameters
+    of a view that conforms to LoginViewType.
+ 
     Includes the font and color palettes,
     and the logo image.
 */
@@ -21,8 +22,9 @@ public protocol LoginViewConfigurationType {
 }
 
 /*
-     The SignupViewConfiguration stores all palettes
+     The LoginViewConfiguration stores all palettes
      and logo necessary.
+ 
      By default, it uses the default palettes and
      doesn't include a logo.
  */
