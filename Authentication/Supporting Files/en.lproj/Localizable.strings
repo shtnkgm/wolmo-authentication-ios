@@ -23,7 +23,7 @@
 "login-view.password-placeholder" = "Password";
 "login-view.login-button-title" = "LOG IN";
 "login-view.recover-password-button-title" = "Forgot password?";
-"login-view.to-signup-label" = "Don't have an account?";
+"login-view.to-signup-label" = "Don't have an account?"; // New to X?
 "login-view.signup-button-title" = "Sign up";
 
 /** Session service errors */
@@ -49,7 +49,7 @@
 "signup-view.terms-and-services.link-text" = "Terms and Services";
 "signup-view.terms-and-services.link-url" = "";
 "signup-view.signup-button-title" = "SIGN UP";
-"signup-view.login.label-text" = "Already registered?";
+"signup-view.login.label-text" = "Registered already?";
 "signup-view.login.button-title" = "Log In";
 
 /** Signup errors */
