@@ -42,7 +42,7 @@ final class MockSessionService: SessionServiceType {
         }
     }
     
-    func signUp(name: String, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
+    func signUp(name: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
         return SignalProducer.empty
     }
     
