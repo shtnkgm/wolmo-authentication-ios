@@ -58,8 +58,8 @@ extension SignupControllerDelegate {
             errorLabel.text = error.message
         }
         if shouldDisplaySignupErrorWithAlert {
-            let alert = UIAlertController(title: "signup-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "signup-error.alert.close".localized, style: .Default, handler: nil))
+            let alert = UIAlertController(title: "signup-error.alert.title".frameworkLocalized, message: error.message, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "signup-error.alert.close".frameworkLocalized, style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)
         }
     }

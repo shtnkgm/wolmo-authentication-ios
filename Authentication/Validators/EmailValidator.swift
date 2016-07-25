@@ -14,7 +14,7 @@ public struct EmailValidator: TextInputValidatorType {
         if Email.isValidEmail(text) {
             return .Valid
         } else {
-            return .Invalid(errors: ["text-input-validator.invalid-email".localized(text)])
+            return .Invalid(errors: ["text-input-validator.invalid-email".frameworkLocalized(text)])
         }
     }
     

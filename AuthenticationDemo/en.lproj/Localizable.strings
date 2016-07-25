@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  Authentication
+
+  Created by Daniela Riesgo on 7/25/16.
+  Copyright © 2016 Wolox. All rights reserved.
+*/
+
+"login-view.to-signup-label" = "New to AuthenticationDemo?";

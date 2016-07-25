@@ -21,7 +21,7 @@ public struct AlwaysInvalidValidator: TextInputValidatorType {
     public var errorTextToLocalize: String = ""
     
     public func validate(text: String) -> ValidationResult {
-        return .Invalid(errors: [errorTextToLocalize.localized(text)])
+        return .Invalid(errors: [errorTextToLocalize.frameworkLocalized(text)])
     }
     
 }

@@ -58,8 +58,8 @@ extension LoginControllerDelegate {
             errorLabel.text = error.message
         }
         if shouldDisplayLoginErrorWithAlert {
-            let alert = UIAlertController(title: "login-error.alert.title".localized, message: error.message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "login-error.alert.close".localized, style: .Default, handler: nil))
+            let alert = UIAlertController(title: "login-error.alert.title".frameworkLocalized, message: error.message, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "login-error.alert.close".frameworkLocalized, style: .Default, handler: nil))
             controller.presentViewController(alert, animated: true, completion: nil)
         }
     }

@@ -23,9 +23,9 @@
 "login-view.email-placeholder" = "Email";
 "login-view.password-placeholder" = "Contraseña";
 "login-view.login-button-title" = "INGRESAR";
-"login-view.signup-button-title" = "Regístrese";
 "login-view.recover-password-button-title" = "Recuperar contraseña";
 "login-view.to-signup-label" = "¿No tienes cuenta?";
+"login-view.signup-button-title" = "Regístrese";
 
 /* Errores del servicio de sesión */
 "login-error.invalid-credentials.message" = "Email o contraseña incorrectos";
