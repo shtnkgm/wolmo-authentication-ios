@@ -354,7 +354,7 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
          login screen.
          It will push the new controller in the navigation controller.
      */
-    public func onSignup(controller: LoginController) {
+    public final func onSignup(controller: LoginController) {
         let signupController = createSignupController()
         // The authentication framework starts the process with a navigation controller.
         controller.navigationController!.pushViewController(signupController, animated: true)
@@ -365,7 +365,7 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
          in the login screen.
          It will push the new controller in the navigation controller.
      */
-    public func onRecoverPassword(controller: LoginController) {
+    public final func onRecoverPassword(controller: LoginController) {
         let recoverPasswordController = createRecoverPasswordController()
         // The authentication framework starts the process with a navigation controller.
         controller.navigationController!.pushViewController(recoverPasswordController, animated: true)
@@ -381,7 +381,7 @@ extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
          It will pop the signup controller from the navigation controller,
          to return to login screen.
      */
-    public func onLogin(controller: SignupController) {
+    public final func onLogin(controller: SignupController) {
         // The authentication framework starts the process with a navigation controller.
         controller.navigationController!.popViewControllerAnimated(true)
     }
