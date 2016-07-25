@@ -144,8 +144,10 @@ private extension SignupViewModel {
     private func initializeSignUpAction() -> Action<AnyObject, User, SessionServiceError> {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
-                return self._sessionService.signUp(self.name.value, email: email, password: self.password.value)
+                let name: String? = self.usernameEnabled ? self.name.value : .None
+                return self._sessionService.signUp(name, email: email, password: self.password.value)
             } else {
+                // It will never enter here, since sign up action is only enabled when email is a valid email.
                 return SignalProducer(error: .InvalidSignUpCredentials(.None)).observeOn(UIScheduler())
             }
         }
