@@ -18,11 +18,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
-    
     /// The user in session.
-    public var currentUser: User? {
-        return sessionService.currentUser.value
-    }
+    public var currentUser: User? { return sessionService.currentUser.value }
     
     /// The window of the app
     private let _window: UIWindow
@@ -31,8 +28,6 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
     /// It also includes other configurations like the textfields selected to use in signup.
     private let _viewConfiguration: AuthenticationViewConfiguration
-    /// NSURL from where to get the HTML content that displays the terms and services.
-    private let _termsAndServicesURL: NSURL
 
     
     /**
@@ -49,15 +44,12 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
             - mainViewControllerFactory: Method that returns a valid mainViewController to use when starting the
             core of the app
     */
-    public init(sessionService: SessionService,
-                window: UIWindow,
-                termsAndServicesURL: NSURL,
-                viewConfiguration: AuthenticationViewConfiguration = AuthenticationViewConfiguration(),
+    public init(sessionService: SessionService, window: UIWindow,
+                viewConfiguration: AuthenticationViewConfiguration,
                 mainViewControllerFactory: () -> UIViewController) {
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
         _viewConfiguration = viewConfiguration
-        _termsAndServicesURL = termsAndServicesURL
         self.sessionService = sessionService
 
         sessionService.events.observeNext { [unowned self] event in
@@ -68,6 +60,13 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
             default: break
             }
         }
+    }
+    
+    public convenience init(sessionService: SessionService, window: UIWindow, termsAndServicesURL: NSURL,
+                            mainViewControllerFactory: () -> UIViewController) {
+        self.init(sessionService: sessionService, window: window,
+                  viewConfiguration: AuthenticationViewConfiguration(termsAndServicesURL: termsAndServicesURL),
+                  mainViewControllerFactory: mainViewControllerFactory)
     }
 
     /**
@@ -329,7 +328,7 @@ public extension AuthenticationBootstrapper {
             viewFactory: createSignupView,
             transitionDelegate: createSignupControllerTransitionDelegate(),
             delegate: createSignupControllerDelegate(),
-            termsAndServicesURL: _termsAndServicesURL)
+            termsAndServicesURL: _viewConfiguration.signupConfiguration.termsAndServicesURL)
     }
     
     /**
@@ -440,7 +439,7 @@ extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     }
     
     public func onTermsAndServices(controller: SignupController) {
-        let termsAndServicesController = createTermsAndServicesController(_termsAndServicesURL)
+        let termsAndServicesController = createTermsAndServicesController(_viewConfiguration.signupConfiguration.termsAndServicesURL)
         if let navigationController = controller.navigationController {
             navigationController.pushViewController(termsAndServicesController, animated: true)
         } else {

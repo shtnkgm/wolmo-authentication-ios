@@ -338,7 +338,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8o-uo-260" userLabel="Terms&amp;Serivces View">
                             <rect key="frame" x="0.0" y="0.0" width="418" height="82"/>
                             <subviews>
-                                <textView clipsSubviews="YES" contentMode="scaleAspectFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="I accept the Terms and Services" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcI-Oe-1fg">
+                                <textView clipsSubviews="YES" contentMode="scaleAspectFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="I accept the Terms and Services" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mcI-Oe-1fg">
                                     <rect key="frame" x="21" y="20" width="376" height="42"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="LJ8-l9-nBu"/>

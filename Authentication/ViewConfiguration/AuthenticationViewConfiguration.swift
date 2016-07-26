@@ -19,9 +19,13 @@ public struct AuthenticationViewConfiguration {
     public let signupConfiguration: SignupViewConfigurationType
     
     public init(loginViewConfiguration: LoginViewConfigurationType = LoginViewConfiguration(),
-                signupViewConfiguration: SignupViewConfigurationType = SignupViewConfiguration()) {
+                signupViewConfiguration: SignupViewConfigurationType) {
         loginConfiguration = loginViewConfiguration
         signupConfiguration = signupViewConfiguration
+    }
+    public init(loginViewConfiguration: LoginViewConfigurationType = LoginViewConfiguration(),
+                 termsAndServicesURL: NSURL) {
+        self.init(loginViewConfiguration: loginViewConfiguration, signupViewConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL))
     }
     
 }

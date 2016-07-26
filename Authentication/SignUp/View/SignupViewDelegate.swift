@@ -15,6 +15,7 @@ public protocol SignupViewDelegate {
     /** Palettes ued to configure all login view elements possible. */
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
+    var termsAndServicesURL: NSURL { get }
     
     /**
         Function to configure all view elements according to the palettes.
@@ -45,10 +46,16 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
+    public let termsAndServicesURL: NSURL
     
-    internal init(configuration: SignupViewConfigurationType = SignupViewConfiguration()) {
+    internal init(configuration: SignupViewConfigurationType) {
         colorPalette = configuration.colorPalette
         fontPalette = configuration.fontPalette
+        termsAndServicesURL = configuration.termsAndServicesURL
+    }
+    
+    internal convenience init(termsAndServicesURL: NSURL) {
+        self.init(configuration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL))
     }
     
     public func configureView(signupView: SignupViewType) {
@@ -101,6 +108,7 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     }
     
     private func configureLinksElements(signupView: SignupViewType) {
+        signupView.setTermsAndServicesText(termsAndServicesURL)
         signupView.termsAndServicesTextView.textColor = colorPalette.labels
         signupView.termsAndServicesTextView.font = fontPalette.labels
         
