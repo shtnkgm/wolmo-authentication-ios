@@ -20,8 +20,9 @@ import enum Result.NoError
     If there are more than one validation error in a field, the controller
     presents only the first one in the errors label.
  
+    //TODO: Move what's below to README.
     If wanting to use the default LoginController with some customization,
-    you should not override the `createLoginController` method of the Bootstrapper,
+    you will not override the `createLoginController` method of the Bootstrapper,
     but all the others that provide the elements this controller uses. (That is to say,
     `createLoginView`, `createLoginViewModel`, `createLoginControllerDelegate`
     and/or `createLoginControllerConfiguration`)
