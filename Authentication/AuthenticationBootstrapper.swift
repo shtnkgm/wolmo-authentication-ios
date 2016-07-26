@@ -15,24 +15,24 @@ import Core
     The authentication process includes login, signup and recover password logic.
 */
 public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
-
-    /// The window of the app
-    private let _window: UIWindow
-    
-    /// The factory method from which to obtain a main View Controller for the app
-    private let _mainViewControllerFactory: () -> UIViewController
-    
-    /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
-    /// It also includes other configurations like the textfields selected to use in signup.
-    private let _viewConfiguration: AuthenticationViewConfiguration
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
-
+    
     /// The user in session.
     public var currentUser: User? {
         return sessionService.currentUser.value
     }
+    
+    /// The window of the app
+    private let _window: UIWindow
+    /// The factory method from which to obtain a main View Controller for the app
+    private let _mainViewControllerFactory: () -> UIViewController
+    /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
+    /// It also includes other configurations like the textfields selected to use in signup.
+    private let _viewConfiguration: AuthenticationViewConfiguration
+    /// NSURL from where to get the HTML content that displays the terms and services.
+    private let _termsAndServicesURL: NSURL
 
     
     /**
@@ -42,17 +42,22 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Parameters:
             - sessionService: The session service to use for logging in and out.
             - window: The window the application will use.
+            - termsAndServicesURL: URL from where to get the HTML content that displays the terms and services.
+                It can be remote or local.
             - viewConfiguration: all configuration needed to setup all authentication views.
-            By default, it uses each view's default configuration.
+                By default, it uses each view's default configuration.
             - mainViewControllerFactory: Method that returns a valid mainViewController to use when starting the
             core of the app
     */
-    public init(sessionService: SessionService, window: UIWindow,
-        viewConfiguration: AuthenticationViewConfiguration = AuthenticationViewConfiguration(),
-        mainViewControllerFactory: () -> UIViewController) {
+    public init(sessionService: SessionService,
+                window: UIWindow,
+                termsAndServicesURL: NSURL,
+                viewConfiguration: AuthenticationViewConfiguration = AuthenticationViewConfiguration(),
+                mainViewControllerFactory: () -> UIViewController) {
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
         _viewConfiguration = viewConfiguration
+        _termsAndServicesURL = termsAndServicesURL
         self.sessionService = sessionService
 
         sessionService.events.observeNext { [unowned self] event in
@@ -77,6 +82,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
             _window.rootViewController = UINavigationController(rootViewController: createLoginController())
         }
     }
+    
 }
 
 // MARK: - Login Functions
@@ -211,7 +217,7 @@ public extension AuthenticationBootstrapper {
 
 // MARK: - Signup Functions
 public extension AuthenticationBootstrapper {
-    
+
     /**
          Creates the signup controller to use when the
          user selects that option.
@@ -322,7 +328,8 @@ public extension AuthenticationBootstrapper {
             viewModel: createSignupViewModel(),
             viewFactory: createSignupView,
             transitionDelegate: createSignupControllerTransitionDelegate(),
-            delegate: createSignupControllerDelegate())
+            delegate: createSignupControllerDelegate(),
+            termsAndServicesURL: _termsAndServicesURL)
     }
     
     /**
@@ -340,10 +347,35 @@ public extension AuthenticationBootstrapper {
         return self
     }
     
+    /*
+         Creates the terms and services controller
+         to use when the user selects that option.
+         
+         - Returns: A valid terms and services controller.
+     */
+    internal func createTermsAndServicesController(url: NSURL) -> TermsAndServicesController {
+        return TermsAndServicesController(url: url, delegate: createTermsAndServicesControllerDelegate())
+    }
+    
+    /*
+         Creates the terms and services view controller delegate
+         that can inject behaviour for when the terms and services
+         page starts loading and ends loading.
+         
+         - Returns: A valid terms and services controller delegate to use.
+         
+         - Attention: Override this method for customizing any of the used
+         delegate's reactions to events.
+     */
+    public func createTermsAndServicesControllerDelegate() -> TermsAndServicesControllerDelegate {
+        return DefaultTermsAndServicesControllerDelegate()
+    }
+    
 }
 
 // MARK: - RecoverPassword Functions
 public extension AuthenticationBootstrapper {
+    
     /**
          Creates the recover password main controller to use when the
          user selects that option.
@@ -405,6 +437,15 @@ extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     public final func onLogin(controller: SignupController) {
         // The authentication framework starts the process with a navigation controller.
         controller.navigationController!.popViewControllerAnimated(true)
+    }
+    
+    public func onTermsAndServices(controller: SignupController) {
+        let termsAndServicesController = createTermsAndServicesController(_termsAndServicesURL)
+        if let navigationController = controller.navigationController {
+            navigationController.pushViewController(termsAndServicesController, animated: true)
+        } else {
+            _window.rootViewController = UINavigationController(rootViewController: termsAndServicesController)
+        }
     }
     
 }

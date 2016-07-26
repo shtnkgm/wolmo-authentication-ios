@@ -27,9 +27,6 @@
 		CE111DAA1D4FA6C20083C99E /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA71D4FA6C20083C99E /* MockSessionService.swift */; };
 		CE111DAB1D4FA6C20083C99E /* MyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA81D4FA6C20083C99E /* MyUser.swift */; };
 		CE111DAE1D4FA6FD0083C99E /* RecoverPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DAD1D4FA6FD0083C99E /* RecoverPasswordController.swift */; };
-		CE111DB31D4FA7010083C99E /* AuthenticationViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DB01D4FA7010083C99E /* AuthenticationViewConfiguration.swift */; };
-		CE111DB41D4FA7010083C99E /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DB11D4FA7010083C99E /* ColorPalette.swift */; };
-		CE111DB51D4FA7010083C99E /* FontPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DB21D4FA7010083C99E /* FontPalette.swift */; };
 		CE111DBD1D4FA70D0083C99E /* CompositeValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DB71D4FA70D0083C99E /* CompositeValidator.swift */; };
 		CE111DBE1D4FA70D0083C99E /* ConstantValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DB81D4FA70D0083C99E /* ConstantValidators.swift */; };
 		CE111DBF1D4FA70D0083C99E /* EmailValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DB91D4FA70D0083C99E /* EmailValidator.swift */; };
@@ -62,6 +59,11 @@
 		CE111DFC1D4FA79A0083C99E /* MaxLengthValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DF61D4FA79A0083C99E /* MaxLengthValidatorTests.swift */; };
 		CE111DFD1D4FA79A0083C99E /* MinLengthValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DF71D4FA79A0083C99E /* MinLengthValidatorTests.swift */; };
 		CE111DFE1D4FA79A0083C99E /* NonEmptyValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DF81D4FA79A0083C99E /* NonEmptyValidatorTests.swift */; };
+		CE111E021D4FA80E0083C99E /* TermsAndServicesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E001D4FA80E0083C99E /* TermsAndServicesController.swift */; };
+		CE111E031D4FA80E0083C99E /* TermsAndServicesControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E011D4FA80E0083C99E /* TermsAndServicesControllerDelegate.swift */; };
+		CE111E0F1D4FA8980083C99E /* AuthenticationViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0C1D4FA8980083C99E /* AuthenticationViewConfiguration.swift */; };
+		CE111E101D4FA8980083C99E /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0D1D4FA8980083C99E /* ColorPalette.swift */; };
+		CE111E111D4FA8980083C99E /* FontPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0E1D4FA8980083C99E /* FontPalette.swift */; };
 		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
 		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
 		CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
@@ -156,9 +158,6 @@
 		CE111DA71D4FA6C20083C99E /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSessionService.swift; sourceTree = "<group>"; };
 		CE111DA81D4FA6C20083C99E /* MyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUser.swift; sourceTree = "<group>"; };
 		CE111DAD1D4FA6FD0083C99E /* RecoverPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecoverPasswordController.swift; sourceTree = "<group>"; };
-		CE111DB01D4FA7010083C99E /* AuthenticationViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewConfiguration.swift; sourceTree = "<group>"; };
-		CE111DB11D4FA7010083C99E /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
-		CE111DB21D4FA7010083C99E /* FontPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPalette.swift; sourceTree = "<group>"; };
 		CE111DB71D4FA70D0083C99E /* CompositeValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeValidator.swift; sourceTree = "<group>"; };
 		CE111DB81D4FA70D0083C99E /* ConstantValidators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantValidators.swift; sourceTree = "<group>"; };
 		CE111DB91D4FA70D0083C99E /* EmailValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailValidator.swift; sourceTree = "<group>"; };
@@ -191,6 +190,11 @@
 		CE111DF61D4FA79A0083C99E /* MaxLengthValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxLengthValidatorTests.swift; sourceTree = "<group>"; };
 		CE111DF71D4FA79A0083C99E /* MinLengthValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinLengthValidatorTests.swift; sourceTree = "<group>"; };
 		CE111DF81D4FA79A0083C99E /* NonEmptyValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NonEmptyValidatorTests.swift; sourceTree = "<group>"; };
+		CE111E001D4FA80E0083C99E /* TermsAndServicesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesController.swift; sourceTree = "<group>"; };
+		CE111E011D4FA80E0083C99E /* TermsAndServicesControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAndServicesControllerDelegate.swift; sourceTree = "<group>"; };
+		CE111E0C1D4FA8980083C99E /* AuthenticationViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewConfiguration.swift; sourceTree = "<group>"; };
+		CE111E0D1D4FA8980083C99E /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		CE111E0E1D4FA8980083C99E /* FontPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPalette.swift; sourceTree = "<group>"; };
 		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE5248881D468F8700B499CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE7A7BB31D3E9AFC00C44A25 /* Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Core.framework; path = Carthage/Build/iOS/Core.framework; sourceTree = "<group>"; };
@@ -296,7 +300,7 @@
 				CEE226A91C9C4011005EB279 /* Localizable.strings */,
 				CE111DB61D4FA70D0083C99E /* Validators */,
 				CE111DA01D4FA6A50083C99E /* Models */,
-				CE111DAF1D4FA7010083C99E /* Configuration */,
+				CE111E0B1D4FA8980083C99E /* ViewConfiguration */,
 				CE111DC31D4FA7340083C99E /* Login */,
 				CE111DD81D4FA7390083C99E /* SignUp */,
 				CE111DAC1D4FA6FD0083C99E /* RecoverPassword */,
@@ -350,16 +354,6 @@
 			path = RecoverPassword;
 			sourceTree = "<group>";
 		};
-		CE111DAF1D4FA7010083C99E /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-				CE111DB01D4FA7010083C99E /* AuthenticationViewConfiguration.swift */,
-				CE111DB11D4FA7010083C99E /* ColorPalette.swift */,
-				CE111DB21D4FA7010083C99E /* FontPalette.swift */,
-			);
-			path = Configuration;
-			sourceTree = "<group>";
-		};
 		CE111DB61D4FA70D0083C99E /* Validators */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,8 +370,8 @@
 		CE111DC31D4FA7340083C99E /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				CE111DC41D4FA7340083C99E /* View */,
 				CE111DCC1D4FA7340083C99E /* ViewModel */,
+				CE111DC41D4FA7340083C99E /* View */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -385,11 +379,11 @@
 		CE111DC41D4FA7340083C99E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE111DC51D4FA7340083C99E /* LoginConfiguration.swift */,
 				CE111DC61D4FA7340083C99E /* LoginController.swift */,
+				CE111DC51D4FA7340083C99E /* LoginConfiguration.swift */,
 				CE111DC71D4FA7340083C99E /* LoginControllerDelegate.swift */,
-				CE111DC81D4FA7340083C99E /* LoginView.swift */,
 				CE111DC91D4FA7340083C99E /* LoginView.xib */,
+				CE111DC81D4FA7340083C99E /* LoginView.swift */,
 				CE111DCA1D4FA7340083C99E /* LoginViewConfiguration.swift */,
 				CE111DCB1D4FA7340083C99E /* LoginViewDelegate.swift */,
 			);
@@ -408,8 +402,9 @@
 		CE111DD81D4FA7390083C99E /* SignUp */ = {
 			isa = PBXGroup;
 			children = (
-				CE111DD91D4FA7390083C99E /* View */,
 				CE111DE11D4FA7390083C99E /* ViewModel */,
+				CE111DD91D4FA7390083C99E /* View */,
+				CE111DFF1D4FA80E0083C99E /* TermsAndServices */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -417,12 +412,12 @@
 		CE111DD91D4FA7390083C99E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE111DDA1D4FA7390083C99E /* SignupConfiguration.swift */,
 				CE111DDB1D4FA7390083C99E /* SignupController.swift */,
-				CE111DDC1D4FA7390083C99E /* SignupControllerDelegate.swift */,
-				CE111DDD1D4FA7390083C99E /* SignupView.swift */,
-				CE111DDE1D4FA7390083C99E /* SignupView.xib */,
+				CE111DDA1D4FA7390083C99E /* SignupConfiguration.swift */,
 				CE111DDF1D4FA7390083C99E /* SignupViewConfiguration.swift */,
+				CE111DDE1D4FA7390083C99E /* SignupView.xib */,
+				CE111DDD1D4FA7390083C99E /* SignupView.swift */,
+				CE111DDC1D4FA7390083C99E /* SignupControllerDelegate.swift */,
 				CE111DE01D4FA7390083C99E /* SignupViewDelegate.swift */,
 			);
 			path = View;
@@ -457,6 +452,25 @@
 				CE111DF81D4FA79A0083C99E /* NonEmptyValidatorTests.swift */,
 			);
 			path = Validators;
+			sourceTree = "<group>";
+		};
+		CE111DFF1D4FA80E0083C99E /* TermsAndServices */ = {
+			isa = PBXGroup;
+			children = (
+				CE111E001D4FA80E0083C99E /* TermsAndServicesController.swift */,
+				CE111E011D4FA80E0083C99E /* TermsAndServicesControllerDelegate.swift */,
+			);
+			path = TermsAndServices;
+			sourceTree = "<group>";
+		};
+		CE111E0B1D4FA8980083C99E /* ViewConfiguration */ = {
+			isa = PBXGroup;
+			children = (
+				CE111E0C1D4FA8980083C99E /* AuthenticationViewConfiguration.swift */,
+				CE111E0D1D4FA8980083C99E /* ColorPalette.swift */,
+				CE111E0E1D4FA8980083C99E /* FontPalette.swift */,
+			);
+			path = ViewConfiguration;
 			sourceTree = "<group>";
 		};
 		CE89A25A1CAEC68300E1903B /* Signup */ = {
@@ -692,13 +706,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE111DD01D4FA7340083C99E /* LoginController.swift in Sources */,
-				CE111DB51D4FA7010083C99E /* FontPalette.swift in Sources */,
+				CE111E021D4FA80E0083C99E /* TermsAndServicesController.swift in Sources */,
 				CE111DC21D4FA70D0083C99E /* TextInputValidatorType.swift in Sources */,
 				CE111DCF1D4FA7340083C99E /* LoginConfiguration.swift in Sources */,
 				CE111DD11D4FA7340083C99E /* LoginControllerDelegate.swift in Sources */,
 				CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */,
 				CE111DE51D4FA7390083C99E /* SignupController.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
+				CE111E111D4FA8980083C99E /* FontPalette.swift in Sources */,
 				CE111DAE1D4FA6FD0083C99E /* RecoverPasswordController.swift in Sources */,
 				CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */,
 				CE111DEB1D4FA7390083C99E /* SignupCredentialsValidator.swift in Sources */,
@@ -708,6 +723,8 @@
 				CE111DBD1D4FA70D0083C99E /* CompositeValidator.swift in Sources */,
 				CE111DA31D4FA6A50083C99E /* Email.swift in Sources */,
 				CE111DD51D4FA7340083C99E /* LoginViewDelegate.swift in Sources */,
+				CE111E101D4FA8980083C99E /* ColorPalette.swift in Sources */,
+				CE111E031D4FA80E0083C99E /* TermsAndServicesControllerDelegate.swift in Sources */,
 				CE111DD71D4FA7340083C99E /* LoginViewModel.swift in Sources */,
 				CE111DC01D4FA70D0083C99E /* InlineValidator.swift in Sources */,
 				CE111DBF1D4FA70D0083C99E /* EmailValidator.swift in Sources */,
@@ -717,12 +734,11 @@
 				CE111DD21D4FA7340083C99E /* LoginView.swift in Sources */,
 				CE111DE91D4FA7390083C99E /* SignupViewConfiguration.swift in Sources */,
 				CE111DBE1D4FA70D0083C99E /* ConstantValidators.swift in Sources */,
-				CE111DB41D4FA7010083C99E /* ColorPalette.swift in Sources */,
 				CE111DEC1D4FA7390083C99E /* SignupViewModel.swift in Sources */,
-				CE111DB31D4FA7010083C99E /* AuthenticationViewConfiguration.swift in Sources */,
 				CE111DEA1D4FA7390083C99E /* SignupViewDelegate.swift in Sources */,
 				CE9AC3C61C8F34A70012D20B /* AuthenticationBootstrapper.swift in Sources */,
 				CE111DA41D4FA6A50083C99E /* User.swift in Sources */,
+				CE111E0F1D4FA8980083C99E /* AuthenticationViewConfiguration.swift in Sources */,
 				CE111DD61D4FA7340083C99E /* LoginCredentialsValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

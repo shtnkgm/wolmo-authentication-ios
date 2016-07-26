@@ -6,6 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+
 /**
     Delegate for any extra configuration
     to the login view when rendered.
