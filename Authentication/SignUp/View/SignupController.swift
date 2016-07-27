@@ -71,6 +71,7 @@ public final class SignupController: UIViewController {
         super.viewDidLoad()
         signupView.render()
         bindViewModel()
+        navigationController?.navigationBarHidden = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapRecognizer)
     }
