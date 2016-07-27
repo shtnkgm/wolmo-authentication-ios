@@ -36,6 +36,31 @@ class LoginViewModelSpec: QuickSpec {
                 expect(loginVM.passwordVisible.value) == false
             }
             
+            describe("#togglePasswordVisibility") {
+                
+                context("when executing action") {
+                    
+                    it("should change #passwordVisible from false to true") { waitUntil { done in
+                        loginVM.passwordVisible.signal.take(1).observeNext {
+                            expect($0) == true
+                            done()
+                        }
+                        loginVM.togglePasswordVisibility.execute("")
+                    }}
+                    
+                    it("should change #passwordVisible from true to false") { waitUntil { done in
+                        loginVM.passwordVisible.signal.take(2).skip(1).observeNext {
+                            expect($0) == false
+                            done()
+                        }
+                        loginVM.togglePasswordVisibility.execute("")
+                        loginVM.togglePasswordVisibility.execute("")
+                    }}
+                    
+                }
+                
+            }
+            
             context("when filling email with invalid email") {
                 
                 context("when email doesn't have @ character") {

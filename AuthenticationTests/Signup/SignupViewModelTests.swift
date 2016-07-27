@@ -45,6 +45,56 @@ class SignupViewModelSpec: QuickSpec {
                 expect(signupVM.passwordConfirmationVisible.value) == false
             }
             
+            describe("#togglePasswordVisibility") {
+                
+                context("when executing action") {
+                    
+                    it("should change #passwordVisible from false to true") { waitUntil { done in
+                        signupVM.passwordVisible.signal.take(1).observeNext {
+                            expect($0) == true
+                            done()
+                        }
+                        signupVM.togglePasswordVisibility.execute("")
+                    }}
+                    
+                    it("should change #passwordVisible from true to false") { waitUntil { done in
+                        signupVM.passwordVisible.signal.take(2).skip(1).observeNext {
+                            expect($0) == false
+                            done()
+                        }
+                        signupVM.togglePasswordVisibility.execute("")
+                        signupVM.togglePasswordVisibility.execute("")
+                    }}
+                    
+                }
+                
+            }
+            
+            describe("#togglePasswordConfirmVisibility") {
+                
+                context("when executing action") {
+                    
+                    it("should change #passwordConfirmationVisible from false to true") { waitUntil { done in
+                        signupVM.passwordConfirmationVisible.signal.take(1).observeNext {
+                            expect($0) == true
+                            done()
+                        }
+                        signupVM.togglePasswordConfirmVisibility.execute("")
+                    }}
+                    
+                    it("should change #passwordConfirmationVisible from true to false") { waitUntil { done in
+                        signupVM.passwordConfirmationVisible.signal.take(2).skip(1).observeNext {
+                            expect($0) == false
+                            done()
+                        }
+                        signupVM.togglePasswordConfirmVisibility.execute("")
+                        signupVM.togglePasswordConfirmVisibility.execute("")
+                    }}
+                    
+                }
+                
+            }
+            
             context("when username and password confirmation disabled") {
                 
                 context("when filling email with invalid email") {
@@ -174,9 +224,9 @@ class SignupViewModelSpec: QuickSpec {
                     }
                     
                     it("calls session service's signup") { waitUntil { done in
-                        sessionService.signUpCalled.observeNext { _ in done() }
+                        sessionService.signUpCalled.take(1).observeNext { _ in done() }
                         signupVM.signUpCocoaAction.execute("")
-                        }}
+                    }}
                     
                 }
             }
@@ -209,9 +259,9 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("calls session service's signup") { waitUntil { done in
-                            sessionService.signUpCalled.observeNext { _ in done() }
+                            sessionService.signUpCalled.take(1).observeNext { _ in done() }
                             signupVM.signUpCocoaAction.execute("")
-                            }}
+                        }}
                         
                     }
                     
@@ -263,9 +313,9 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("calls session service's signup") { waitUntil { done in
-                            sessionService.signUpCalled.observeNext { _ in done() }
+                            sessionService.signUpCalled.take(1).observeNext { _ in done() }
                             signupVM.signUpCocoaAction.execute("")
-                            }}
+                        }}
                         
                     }
                     
@@ -382,9 +432,9 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("calls session service's signup") { waitUntil { done in
-                            sessionService.signUpCalled.observeNext { _ in done() }
+                            sessionService.signUpCalled.take(1).observeNext { _ in done() }
                             signupVM.signUpCocoaAction.execute("")
-                            }}
+                        }}
                         
                     }
                     
