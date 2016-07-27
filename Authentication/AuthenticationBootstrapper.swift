@@ -8,6 +8,12 @@
 
 import Core
 
+/*
+    Enumeration representing an authentication screen
+    that can be used as the starting point of
+    authentication process.
+ */
+
 public enum AuthenticationInitialScreen {
     case Login, Signup
 }
