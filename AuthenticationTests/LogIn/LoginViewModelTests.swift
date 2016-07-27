@@ -18,12 +18,12 @@ class LoginViewModelSpec: QuickSpec {
     
     override func spec() {
         describe("LoginViewModel") {
-            
+
             var sessionService: MockSessionService!
             var loginVM: LoginViewModel<MyUser, MockSessionService>!
             
             beforeEach() {
-                sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", username: "MyUser")
+                sessionService = MockSessionService()
                 loginVM = LoginViewModel(sessionService: sessionService)
             }
             
@@ -41,7 +41,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when email doesn't have @ character") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.email.value = "my"
                     }
                     
@@ -62,7 +61,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when email is empty") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.email.value = "my"
                         loginVM.email.value = ""
                     }
@@ -89,7 +87,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when password is shorter than expected") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.password.value = "my"
                     }
                     
@@ -110,7 +107,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when password is longer than expected") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.password.value = "myVeryLongPasswordWithMoreThan30Characters"
                     }
                     
@@ -131,7 +127,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when password is empty") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.password.value = "my"
                         loginVM.password.value = ""
                     }
@@ -157,7 +152,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when email and password are wrong") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.email.value = "wrong@email.com"
                         loginVM.password.value = "wrongPassword"
                     }
@@ -171,27 +165,16 @@ class LoginViewModelSpec: QuickSpec {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("returns logIn credentials error") { waitUntil { done in
-                        sessionService.events.observeNext { event in
-                            switch event {
-                            case .LogInError(let error):
-                                switch error {
-                                case .InvalidLogInCredentials(_):
-                                    done()
-                                default: break
-                                }
-                            default: break
-                            }
-                        }
+                    it("calls session service's signup") { waitUntil { done in
+                        sessionService.logInCalled.observeNext { _ in done() }
                         loginVM.logInCocoaAction.execute("")
                     }}
                     
                 }
                 
-                context("when emailis correct but password is wrong") {
+                context("when email is correct but password is wrong") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.email.value = "myuser@mail.com"
                         loginVM.password.value = "wrongPassword"
                     }
@@ -205,18 +188,8 @@ class LoginViewModelSpec: QuickSpec {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("returns logIn credentials error") { waitUntil { done in
-                        sessionService.events.observeNext { event in
-                            switch event {
-                            case .LogInError(let error):
-                                switch error {
-                                case .InvalidLogInCredentials(_):
-                                    done()
-                                default: break
-                                }
-                            default: break
-                            }
-                        }
+                    it("calls session service's signup") { waitUntil { done in
+                        sessionService.logInCalled.observeNext { _ in done() }
                         loginVM.logInCocoaAction.execute("")
                     }}
                     
@@ -225,7 +198,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when email is wrong and password is correct") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.email.value = "wrong@email.com"
                         loginVM.password.value = "password"
                     }
@@ -239,18 +211,8 @@ class LoginViewModelSpec: QuickSpec {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("returns logIn credentials error") { waitUntil { done in
-                        sessionService.events.observeNext { event in
-                            switch event {
-                            case .LogInError(let error):
-                                switch error {
-                                case .InvalidLogInCredentials(_):
-                                    done()
-                                default: break
-                                }
-                            default: break
-                            }
-                        }
+                    it("calls session service's signup") { waitUntil { done in
+                        sessionService.logInCalled.observeNext { _ in done() }
                         loginVM.logInCocoaAction.execute("")
                     }}
                     
@@ -259,7 +221,6 @@ class LoginViewModelSpec: QuickSpec {
                 context("when email and password are correct") {
                     
                     beforeEach() {
-                        loginVM = LoginViewModel(sessionService: sessionService)
                         loginVM.email.value = "myuser@mail.com"
                         loginVM.password.value = "password"
                     }
@@ -273,24 +234,14 @@ class LoginViewModelSpec: QuickSpec {
                         expect(loginVM.logInCocoaAction.enabled) == true
                     }
                     
-                    it("returns logInUser") { waitUntil { done in
-                        sessionService.events.observeNext { event in
-                            switch event {
-                            case .LogIn(let user):
-                                expect(user.email.raw) == "myuser@mail.com"
-                                expect(user.password) == "password"
-                                expect(user.username) == "MyUser"
-                                done()
-                            default: break
-                            }
-                        }
+                    it("calls session service's signup") { waitUntil { done in
+                        sessionService.logInCalled.observeNext { _ in done() }
                         loginVM.logInCocoaAction.execute("")
                     }}
                     
                 }
                 
             }
-            
             
         }
     }

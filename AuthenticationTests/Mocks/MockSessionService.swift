@@ -14,36 +14,36 @@ import enum Result.NoError
 
 final class MockSessionService: SessionServiceType {
     
-    private let _possibleUser: MyUser
-    private let (_currentUser, _currentUserObserver) = Signal<MyUser, NoError>.pipe()
-    
     let currentUser: AnyProperty<MyUser?>
-    
     let events: Signal<SessionServiceEvent<MyUser>, NoError>
-    private let _eventsObserver: Signal<SessionServiceEvent<MyUser>, NoError>.Observer
     
-    init(email: Email, password: String, username: String) {
-        _possibleUser = User(email: email, password: password, username: username)
-        currentUser = AnyProperty(initialValue: Optional.None, signal: _currentUser.map { $0 })
-        (events, _eventsObserver) = Signal<SessionServiceEvent<User>, NoError>.pipe()
+    let logInCalled: Signal<Bool, NoError>
+    let signUpCalled: Signal<Bool, NoError>
+    
+    private let _eventsObserver: Signal<SessionServiceEvent<MyUser>, NoError>.Observer
+    private let _logInCalledObserver: Observer<Bool, NoError>
+    private let _signUpCalledObserver: Observer<Bool, NoError>
+    
+    
+    init() {
+        currentUser = AnyProperty(initialValue: Optional.None, producer: SignalProducer.never)
+        (events, _eventsObserver) = Signal<SessionServiceEvent<MyUser>, NoError>.pipe()
+        (logInCalled, _logInCalledObserver) = Signal<Bool, NoError>.pipe()
+        (signUpCalled, _signUpCalledObserver) = Signal<Bool, NoError>.pipe()
+    }
+    
+    deinit {
+        _eventsObserver.sendCompleted()
+        _logInCalledObserver.sendCompleted()
+        _signUpCalledObserver.sendCompleted()
     }
     
     func logIn(email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
-        if email == self._possibleUser.email && password == self._possibleUser.password {
-            return SignalProducer(value: self._possibleUser).on(completed: { [unowned self] in
-                self._eventsObserver.sendNext(.LogIn(self._possibleUser))
-                self._currentUserObserver.sendNext(self._possibleUser)
-            })
-        } else {
-            return SignalProducer(error: SessionServiceError.InvalidLogInCredentials(.None)).on(failed: { [unowned self] _ in
-                self._eventsObserver.sendNext(.LogInError(.InvalidLogInCredentials(.None)))
-            })
-            
-        }
+        return SignalProducer.empty.on(completed: { [unowned self] in self._logInCalledObserver.sendNext(true) })
     }
     
-    func signUp(username: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
-        return SignalProducer.empty
+    func signUp(name: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
+        return SignalProducer.empty.on(completed: { [unowned self] in self._signUpCalledObserver.sendNext(true) })
     }
     
 }
