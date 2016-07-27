@@ -42,7 +42,7 @@ class SignupViewModelSpec: QuickSpec {
             
             it("starts without showing password") {
                 expect(signupVM.passwordVisible.value) == false
-                expect(signupVM.confirmationPasswordVisible.value) == false
+                expect(signupVM.passwordConfirmationVisible.value) == false
             }
             
             context("when username and password confirmation disabled") {

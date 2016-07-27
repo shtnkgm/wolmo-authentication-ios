@@ -37,8 +37,8 @@ public protocol SignupViewModelType {
      errors and password visibility. */
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
-    var confirmationPasswordVisible: MutableProperty<Bool> { get }
-    var toggleConfirmPasswordVisibility: CocoaAction { get }
+    var passwordConfirmationVisible: MutableProperty<Bool> { get }
+    var togglePasswordConfirmVisibility: CocoaAction { get }
     
     /** Sign Up action considerations: action, executing state and errors. */
     var signUpCocoaAction: CocoaAction { get }
@@ -69,14 +69,14 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
     
     public let passwordVisible = MutableProperty(false)
-    public let confirmationPasswordVisible = MutableProperty(false)
+    public let passwordConfirmationVisible = MutableProperty(false)
     
     public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
     public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
-    public var toggleConfirmPasswordVisibility: CocoaAction { return _toggleConfirmationPasswordVisibility.unsafeCocoaAction }
+    public var togglePasswordConfirmVisibility: CocoaAction { return _togglePasswordConfirmVisibility.unsafeCocoaAction }
     
     public let usernameEnabled: Bool
     public let passwordConfirmationEnabled: Bool
@@ -87,7 +87,7 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = self.initializeSignUpAction()
     
     private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
-    private lazy var _toggleConfirmationPasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeToggleConfirmationPasswordVisibilityAction()
+    private lazy var _togglePasswordConfirmVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordConfirmationVisibilityAction()
     
     /**
          Initializes a signup view model which will communicate to the session service provided and
@@ -156,10 +156,10 @@ private extension SignupViewModel {
         }
     }
     
-    private func initializeToggleConfirmationPasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+    private func initializeTogglePasswordConfirmationVisibilityAction() -> Action<AnyObject, Bool, NoError> {
         return Action { [unowned self] _ in
-            self.confirmationPasswordVisible.value = !self.confirmationPasswordVisible.value
-            return SignalProducer(value: self.confirmationPasswordVisible.value).observeOn(UIScheduler())
+            self.passwordConfirmationVisible.value = !self.passwordConfirmationVisible.value
+            return SignalProducer(value: self.passwordConfirmationVisible.value).observeOn(UIScheduler())
         }
     }
     
