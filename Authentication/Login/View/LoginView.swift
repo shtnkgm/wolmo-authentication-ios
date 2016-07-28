@@ -8,7 +8,8 @@
 
 import Core
 
-/*
+
+/**
      Represents the minimum required
      properties from a login view
      for it to be compatible with
@@ -34,7 +35,7 @@ public extension LoginViewType {
     
 }
 
-/* Default login view. */
+/** Default login view. */
 internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()

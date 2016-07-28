@@ -8,7 +8,8 @@
 
 import Core
 
-/*
+
+/**
      Represents the minimum required
      properties from a signup view
      for it to be compatible with
@@ -30,7 +31,7 @@ public extension SignupViewType {
     
 }
 
-/* Default signup view. */
+/** Default signup view. */
 internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal lazy var delegate: SignupViewDelegate = DefaultSignupViewDelegate()

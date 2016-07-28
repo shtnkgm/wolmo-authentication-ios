@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
     Protocol for handling transition events occured during signup.
  */
 public protocol SignupControllerTransitionDelegate {
@@ -15,7 +15,7 @@ public protocol SignupControllerTransitionDelegate {
     
 }
 
-/*
+/**
      Class for configuring the signup controller.
      Includes all information required:
          view factory method,
@@ -30,12 +30,12 @@ public final class SignupControllerConfiguration {
     public let delegate: SignupControllerDelegate
     public let transitionDelegate: SignupControllerTransitionDelegate
     
-    /*
+    /**
          Initializes a signup controller configuration with the view model,
          delegate, a factory method for the signup view and transition
          delegate for the signup controller to use.
          
-         - Params:
+         - Parameters:
              - viewModel: view model to bind to and use.
              - viewFactory: factory method to call only once
              to get the signup view to use.
@@ -43,14 +43,12 @@ public final class SignupControllerConfiguration {
              transition, like selecting login.
              - delegate: delegate which adds behaviour to certain events,
              like handling a signup error or selecting sign up option.
-             A default delegate is provided.
-         
-         - Returns: A valid configuration.
+             The default delegate is provided.
      */
-    init(viewModel: SignupViewModelType,
-        viewFactory: () -> SignupViewType,
-        transitionDelegate: SignupControllerTransitionDelegate,
-        delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
+    internal init(viewModel: SignupViewModelType,
+                  viewFactory: () -> SignupViewType,
+                  transitionDelegate: SignupControllerTransitionDelegate,
+                  delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
         self.viewModel = viewModel
         self.viewFactory = viewFactory
         self.delegate = delegate

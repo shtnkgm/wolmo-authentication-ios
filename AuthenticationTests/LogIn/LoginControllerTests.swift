@@ -38,7 +38,7 @@ class LoginViewControllerSpec: QuickSpec {
                 expect(loginController).to(beNil(), description: "Retain cycle detected in LoginController")
             }
             
-            /*
+            /**
             it("basic example") {
                 let button = UIButton(frame: CGRectZero)
                 button.enabled = true

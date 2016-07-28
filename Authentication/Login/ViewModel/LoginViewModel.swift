@@ -10,32 +10,32 @@ import Foundation
 import ReactiveCocoa
 import enum Result.NoError
 
-/*
+/**
     Protocol for login view models.
     They must handle validation and
     actions of al possible login elements.
 */
 public protocol LoginViewModelType {
     
-    /* Email field considerations: content and validation errors. */
+    /** Email field considerations: content and validation errors. */
     var email: MutableProperty<String> { get }
     var emailValidationErrors: AnyProperty<[String]> { get }
     
-    /* Password field considerations: content, validation errors
+    /** Password field considerations: content, validation errors
        and password visibility. */
     var password: MutableProperty<String> { get }
     var passwordValidationErrors: AnyProperty<[String]> { get }
     var passwordVisible: MutableProperty<Bool> { get }
     var togglePasswordVisibility: CocoaAction { get }
     
-    /* Log In action considerations: action, executing state and errors. */
+    /** Log In action considerations: action, executing state and errors. */
     var logInCocoaAction: CocoaAction { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
     
 }
 
-/*
+/**
     Default LoginViewModel responsible for validating entries to email and password fields 
     and therefore enabling log in action, managing password visibility, reporting log in events
     and communicating with the session service for executing the log in.
@@ -62,7 +62,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     
     private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
-    /*
+    /**
         Initializes a login view model which will communicate to the session service provided and
         will regulate the log in with the validation criteria from the login credentials validator.
      
@@ -70,8 +70,6 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
             - sessionService: session service to communicate with for log in action.
             - credentialsValidator: login credentials validator which encapsulates the criteria
             that the email and password fields must meet.
-     
-        - Returns: A valid login view model ready to use.
     */
     internal init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
         _sessionService = sessionService

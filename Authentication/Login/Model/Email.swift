@@ -8,7 +8,7 @@
 
 import Foundation
 
-/*
+/**
      Represents a valid email.
  */
 public struct Email {

@@ -7,7 +7,7 @@
 //
 
 
-/*
+/**
      Represents the view configurations able to
      be customized in all authentication process.
  

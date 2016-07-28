@@ -8,7 +8,7 @@
 
 import Foundation
 
-/*
+/**
      Represents a validator which will validate
      the text is not empty.
  */
@@ -24,7 +24,7 @@ public struct NonEmptyValidator: TextInputValidatorType {
     
 }
 
-/*
+/**
      Represents a validator which will validate
      the text is no longer than the quantity of
      characters associated.
@@ -49,7 +49,7 @@ public struct MaxLengthValidator: TextInputValidatorType {
     
 }
 
-/*
+/**
      Represents a validator which will validate
      the text is no shorter than the quantity of
      characters associated.

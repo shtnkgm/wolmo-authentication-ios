@@ -12,7 +12,7 @@ import Rex
 import enum Result.NoError
 
 
-/*
+/**
     Login View Controller that takes care of managing the login, from
     validating email and password fields, to binding a login view to the
     view model and informing the login controller delegate when certain
@@ -29,26 +29,23 @@ import enum Result.NoError
  */
 public final class LoginController: UIViewController {
     
+    public lazy var loginView: LoginViewType = self._loginViewFactory()
+    
     private let _viewModel: LoginViewModelType
     private let _transitionDelegate: LoginControllerTransitionDelegate
     private let _loginViewFactory: () -> LoginViewType
     private let _delegate: LoginControllerDelegate
-
-    public lazy var loginView: LoginViewType = self._loginViewFactory()
     
     private let _notificationCenter: NSNotificationCenter = .defaultCenter()
     private var _disposable = CompositeDisposable()
     private let _keyboardDisplayed = MutableProperty(false)
     private let _activeField = MutableProperty<UITextField?>(.None)
     
-    /*
+    /**
         Initializes a login controller with the configuration to use.
      
-        Parameters:
-            - configuration: A login controller configuration with all
-                    elements needed to operate.
-     
-        - Returns: A valid login view controller ready to use.
+        - Parameter configuration: A login controller configuration
+        with all elements needed to operate.
     */
     internal init(configuration: LoginControllerConfiguration) {
         _viewModel = configuration.viewModel
@@ -233,10 +230,8 @@ private extension LoginController {
         return navBarHeight + statusBarHeight
     }
     
-    /*
-        As both textfields fit in all devices, it will always show the email
-        textfield at the top of the screen.
-    */
+    /* As both textfields fit in all devices, it will always show the email
+    textfield at the top of the screen. */
     private func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
         return loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
     }

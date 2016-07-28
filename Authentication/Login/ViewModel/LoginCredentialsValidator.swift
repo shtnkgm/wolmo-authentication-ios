@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
      Represents a validator for all login fields:
      email and password.
      It provides default validators for each of them.

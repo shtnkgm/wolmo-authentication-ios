@@ -6,30 +6,35 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
     Delegate for any extra configuration
     to the login view when rendered.
 */
 public protocol LoginViewDelegate {
     
-    /* Palettes ued to configure all login view elements possible. */
+    /** Palettes used to configure all login view elements possible. */
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
-    /* Function to configure all view elements according to the palettes.
-       It is called by the default login view when rendered. */
+    /**
+        Function to configure all view elements according to the palettes.
+        It is called by the default login view when rendered.
+     
+        By default, does nothing.
+     
+        - Parameter loginView: view to configure.
+     */
     func configureView(loginView: LoginViewType)
     
 }
 
 public extension LoginViewDelegate {
     
-    /* By default, does nothing. */
     func configureView(loginView: LoginViewType) { }
     
 }
 
-/*
+/**
     The default login view delegate takes care of:
        setting the logo image according to the configuration and
        setting all LoginViewType elements possible according to palettes.

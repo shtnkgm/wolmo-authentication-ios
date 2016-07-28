@@ -8,7 +8,7 @@
 
 import Foundation
 
-/*
+/**
      Represents any possible validation result:
      valid, or invalid with any possibe quantity of errors.
  */
@@ -41,7 +41,7 @@ public enum ValidationResult {
     
 }
 
-/*
+/**
      Represents any text validator.
  */
 public protocol TextInputValidatorType {

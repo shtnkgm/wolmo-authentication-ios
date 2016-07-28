@@ -7,7 +7,7 @@
 //
 
 
-/*
+/**
      Represents the color hierarchy necessary for
      an authentication view.
  */

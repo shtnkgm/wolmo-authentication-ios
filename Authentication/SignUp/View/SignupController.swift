@@ -9,7 +9,7 @@
 import ReactiveCocoa
 
 
-/*
+/**
      Signup View Controller that takes care of managing the signup, from
      validating all fields, to binding a signup view to the view model
      and informing the signup controller delegate when certain events 
@@ -39,14 +39,11 @@ public final class SignupController: UIViewController {
     private let _activeTextField = MutableProperty<UITextField?>(.None)
 
     
-    /*
+    /**
          Initializes a signup controller with the configuration to use.
          
-         Parameters:
-         - configuration: A signup controller configuration with all
+         - Parameter configuration: A signup controller configuration with all
          elements needed to operate.
-         
-         - Returns: A valid signup view controller ready to use.
      */
     internal init(configuration: SignupControllerConfiguration) {
         _viewModel = configuration.viewModel

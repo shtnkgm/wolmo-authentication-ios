@@ -7,7 +7,7 @@
 //
 
 
-/*
+/**
      Represents a composite validator which
      will validate according to all criteria
      embedded in all the TextInputValidator s

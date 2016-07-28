@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
      Represents a validator which will validate
      according to the validating function associated.
  */

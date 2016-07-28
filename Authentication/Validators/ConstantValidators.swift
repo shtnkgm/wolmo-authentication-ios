@@ -7,7 +7,7 @@
 //
 
 
-/*
+/**
      Represents a validator which will consider
      any input valid.
  */
@@ -19,7 +19,7 @@ public struct AlwaysValidValidator: TextInputValidatorType {
     
 }
 
-/*
+/**
      Represents a validator which will consider
      any input invalid.
      It provides an errorTextToLocalize property

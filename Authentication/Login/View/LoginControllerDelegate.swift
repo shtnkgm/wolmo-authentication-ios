@@ -7,7 +7,7 @@
 //
 
 
-/*
+/**
     Protocol for login controller delegates.
     Create your own delegate and override any of
     the defaut methods to add behaviour to your
@@ -15,48 +15,97 @@
 */
 public protocol LoginControllerDelegate {
     
-    /* Property indicating if the login errors
-    should be shown with an alert, apart from 
-    the login errors label if it exists. */
+    /**
+        Property indicating if the login errors
+        should be shown with an alert, apart from
+        the login errors label if it exists.
+        
+        By default, true.
+    */
     var shouldDisplayLoginErrorWithAlert: Bool { get }
 
-    /* Function called when the login action begins executing,
-       before setting the `logInButtonPressed` property of the view used. */
+    /**
+        Function called when the login action begins executing,
+        before setting the `logInButtonPressed` property of the view used.
+        
+        By default, it clears old errors from label and
+        activates the Network Activity Indicator in the status bar.
+     
+        - Parameter controller: LoginController where the event is happening.
+    */
     func willExecuteLogIn(controller: LoginController)
     
-    /* Function called when the login action ended with success,
-     before setting the `logInButtonPressed` property of the view used. */
+    /**
+        Function called when the login action ended with success,
+        before setting the `logInButtonPressed` property of the view used.
+        
+        By default, it deactivates the Network Activity Indicator in the status bar.
+     
+        - Parameter controller: LoginController where the event is happening.
+     */
     func didExecuteLogIn(controller: LoginController)
     
-    /* Function called when the login action ended with error,
-     before setting the `logInButtonPressed` property of the view used. */
+    /**
+        Function called when the login action ended with error,
+        before setting the `logInButtonPressed` property of the view used.
+        
+        By default, it deactivates the Network Activity Indicator in the status bar,
+        fills the error label with the error message and if the property
+        `shouldDisplayLoginErrorWithAlert` is set to true, shows an alert with the error.
+     
+        - Parameter controller: LoginController where the event is happening.
+        - Parameter with: error resulting from the log in attempt.
+     */
     func didLogIn(controller: LoginController, with error: SessionServiceError)
     
-    /* Function called when any new email introduced is valid,
-       before setting the `emailTextFieldValid` property of the view used. */
+    /**
+        Function called when any new email introduced is valid,
+        before setting the `emailTextFieldValid` property of the view used.
+     
+        By default, it does nothing.
+     
+        - Parameter controller: LoginController where the event is happening.
+     */
     func didPassEmailValidation(controller: LoginController)
     
-    /* Function called when any new email introduced is invalid,
-     before setting the `emailTextFieldValid` property of the view used. */
+    /**
+        Function called when any new email introduced is invalid,
+        before setting the `emailTextFieldValid` property of the view used.
+     
+        By default, it does nothing.
+     
+        - Parameter controller: LoginController where the event is happening.
+        - Parameter with: email validation errors.
+     */
     func didFailEmailValidation(controller: LoginController, with errors: [String])
     
-    /* Function called when any new password introduced is valid,
-     before setting the `passwordTextFieldValid` property of the view used. */
+    /**
+        Function called when any new password introduced is valid,
+        before setting the `passwordTextFieldValid` property of the view used.
+     
+        By default, it does nothing.
+     
+        - Parameter controller: LoginController where the event is happening.
+     */
     func didPassPasswordValidation(controller: LoginController)
     
-    /* Function called when any new password introduced is valid,
-     before setting the `passwordTextFieldValid` property of the view used. */
+    /**
+        Function called when any new password introduced is valid,
+        before setting the `passwordTextFieldValid` property of the view used.
+     
+        By default, it does nothing.
+     
+        - Parameter controller: LoginController where the event is happening.
+        - Parameter with: password validation errors.
+     */
     func didFailPasswordValidation(controller: LoginController, with errors: [String])
     
 }
 
 extension LoginControllerDelegate {
     
-    /* By default, true. */
     public var shouldDisplayLoginErrorWithAlert: Bool { return true }
     
-    /* By default, it clears old errors from label and
-       activates the Network Activity Indicator in the status bar. */
     public func willExecuteLogIn(controller: LoginController) {
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = " "
@@ -65,15 +114,11 @@ extension LoginControllerDelegate {
         app.networkActivityIndicatorVisible = true
     }
     
-    /* By default, it deactivates the Network Activity Indicator in the status bar. */
     public func didExecuteLogIn(controller: LoginController) {
         let app = UIApplication.sharedApplication()
         app.networkActivityIndicatorVisible = false
     }
     
-    /* By default, it deactivates the Network Activity Indicator in the status bar,
-       fills the error label with the error message and if the property
-       `shouldDisplayLoginErrorWithAlert` is set to true, shows an alert with the error. */
     public func didLogIn(controller: LoginController, with error: SessionServiceError) {
         let app = UIApplication.sharedApplication()
         app.networkActivityIndicatorVisible = false
@@ -87,21 +132,17 @@ extension LoginControllerDelegate {
         }
     }
     
-    /* By default, it does nothing. */
     public func didPassEmailValidation(controller: LoginController) { }
     
-    /* By default, it does nothing. */
     public func didFailEmailValidation(controller: LoginController, with errors: [String]) { }
     
-    /* By default, it does nothing. */
     public func didPassPasswordValidation(controller: LoginController) { }
     
-    /* By default, it does nothing. */
     public func didFailPasswordValidation(controller: LoginController, with errors: [String]) { }
     
 }
 
-/*
+/**
     The default login controller delegate operates with the
     default behaviour of the LoginControllerDelegate protocol's methods.
 */

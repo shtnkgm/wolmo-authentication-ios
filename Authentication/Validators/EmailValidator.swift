@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
      Represents an email validator,
      according to the Email's valid criteria.
  */

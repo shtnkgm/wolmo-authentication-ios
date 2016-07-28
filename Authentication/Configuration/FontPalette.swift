@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
      Represents the font hierarchy necessary for
      an authentication view.
  
@@ -25,7 +25,7 @@ public protocol FontPaletteType {
     
 }
 
-/* By default, the FontPalette uses the SystemFont family, and
+/** By default, the FontPalette uses the SystemFont family, and
  only highlights the main button text with bigger and bold font. */
 public extension FontPaletteType {
     

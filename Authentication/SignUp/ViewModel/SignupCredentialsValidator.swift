@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
     Represents a validator for all signup fields:
     name, email and password.
     It provides default validators for each of them.

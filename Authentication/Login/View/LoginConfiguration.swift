@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
     Protocol for handling transition events occured during login.
 */
 public protocol LoginControllerTransitionDelegate {
@@ -18,7 +18,7 @@ public protocol LoginControllerTransitionDelegate {
 }
 
 
-/*
+/**
     Class for configuring the login controller.
     Includes all information required:
         view factory method,
@@ -33,12 +33,12 @@ public final class LoginControllerConfiguration {
     public let delegate: LoginControllerDelegate
     public let transitionDelegate: LoginControllerTransitionDelegate
     
-    /*
+    /**
         Initializes a login controller configuration with the view model,
         delegate, a factory method for the login view and transition 
         delegate for the login controller to use.
      
-        - Params:
+        - Parameters:
              - viewModel: view model to bind to and use.
              - viewFactory: factory method to call only once
              to get the login view to use.
@@ -46,14 +46,12 @@ public final class LoginControllerConfiguration {
              transition, like selecting registration or recover password.
              - delegate: delegate which adds behaviour to certain events,
              like handling a login error or selecting log in option.
-             A default delegate is provided.
-     
-        - Returns: A valid configuration.
+             The default delegate is provided.
     */
-    init(viewModel: LoginViewModelType,
-        viewFactory: () -> LoginViewType,
-        transitionDelegate: LoginControllerTransitionDelegate,
-        delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
+    internal init(viewModel: LoginViewModelType,
+                  viewFactory: () -> LoginViewType,
+                  transitionDelegate: LoginControllerTransitionDelegate,
+                  delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
         self.viewModel = viewModel
         self.viewFactory = viewFactory
         self.delegate = delegate

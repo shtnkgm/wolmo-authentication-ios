@@ -1,4 +1,4 @@
-/* 
+/** 
   Localizable.strings
   Authentication
 
@@ -6,17 +6,17 @@
   Copyright © 2016 Wolox. All rights reserved.
 */
 
-/* Validators errors */
+/** Validators errors */
 "text-input-validator.empty" = "Can't be empty";
 "text-input-validator.max-length" = "Can't be longer than %d";
 "text-input-validator.min-length" = "Can't be shorter than %d";
 "text-input-validator.invalid-email" = "It has to be a valid email";
 
-/* Text visibility */
+/** Text visibility */
 "text-visibility-button-title.false" = "Hide";
 "text-visibility-button-title.true" = "Show";
 
-/* Login UI elements titles */
+/** Login UI elements titles */
 "login-view.email" = "Email:";
 "login-view.password" = "Password:";
 "login-view.email-placeholder" = "Email";
@@ -26,16 +26,16 @@
 "login-view.to-signup-label" = "Don't have an account?";
 "login-view.signup-button-title" = "Sign up";
 
-/* Session service errors */
+/** Session service errors */
 "login-error.invalid-credentials.message" = "Wrong email or password";
 "signup-error.invalid-credentials.message" = "Invalid credentials";
 "network-error.message" = "Network error";
 
-/* LogIn error alert */
+/** LogIn error alert */
 "login-error.alert.title" = "Unable to log in";
 "login-error.alert.close" = "Try again";
 
-/* Signup UI elements titles */
+/** Signup UI elements titles */
 "signup-view.title" = "Sign Up";
 "signup-view.name" = "Name:";
 "signup-view.email" = "Email:";
@@ -51,7 +51,7 @@
 "signup-view.login.label-text" = "Already registered?";
 "signup-view.login.button-title" = "Log In";
 
-/* Signup errors */
+/** Signup errors */
 "signup-error.password-confirmation.invalid" = "Passwords don't match";
 "signup-error.alert.title" = "Unable to sign up";
 "signup-error.alert.close" = "Try again";

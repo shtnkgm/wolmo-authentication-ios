@@ -34,7 +34,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         return sessionService.currentUser.value
     }
 
-
+    
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
         the factory method from where to obtain the main View Controller of the application.
@@ -42,10 +42,10 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Parameters:
             - sessionService: The session service to use for logging in and out.
             - window: The window the application will use.
-            - mainViewControllerFactory: Method that returns a valid mainViewController to use when starting the 
+            - viewConfiguration: all configuration needed to setup all authentication views.
+            By default, it uses each view's default configuration.
+            - mainViewControllerFactory: Method that returns a valid mainViewController to use when starting the
             core of the app
-
-        - Returns: A new authentication bootstrapper ready to use for starting your app as needed.
     */
     public init(sessionService: SessionService, window: UIWindow,
         viewConfiguration: AuthenticationViewConfiguration = AuthenticationViewConfiguration(),
@@ -169,21 +169,27 @@ public extension AuthenticationBootstrapper {
     }
     
     /**
-         Creates the login view controller configuration that the login controller
-         will use to access the login view model to use,
-         the login view to display and the transition delegate
-         to use for transitions to other screens.
-         
+         Creates the login view controller configuration
+         that the login controller will use to access the
+         login view model to use, the login view to display
+         and the delegates for events and transitions to
+         other screens.
+     
+         It uses the components returned by the public
+         overrideable functions:
+             `createLoginViewModel`
+             `createLoginView`
+             `createLoginControllerTransitionDelegate`
+             `createLoginControllerDelegate`
+     
          - Returns: A valid login controller configuration to use.
-         
-         - Attention: Override this method for customizing any of the used
-         configuration's parameters.
      */
-    public func createLoginControllerConfiguration() -> LoginControllerConfiguration {
+    internal func createLoginControllerConfiguration() -> LoginControllerConfiguration {
         return LoginControllerConfiguration(
             viewModel: createLoginViewModel(),
             viewFactory: createLoginView,
-            transitionDelegate: createLoginControllerTransitionDelegate())
+            transitionDelegate: createLoginControllerTransitionDelegate(),
+            delegate: createLoginControllerDelegate())
     }
     
     /**
@@ -296,21 +302,27 @@ public extension AuthenticationBootstrapper {
     }
     
     /**
-         Creates the signup view controller configuration that the signup controller
-         will use to access the signup view model to use,
-         the signup view to display and the transition delegate
-         to use for transitions to other screens.
-         
+         Creates the signup view controller configuration
+         that the signup controller will use to access the
+         signup view model to use, the signup view to display
+         and the delegates for events and transitions to
+         other screens.
+     
+         It uses the components returned by the public
+         overrideable functions:
+            `createSignupViewModel`
+            `createSignupView`
+            `createSignupControllerTransitionDelegate`
+            `createSignupControllerDelegate`
+     
          - Returns: A valid signup controller configuration to use.
-         
-         - Attention: Override this method for customizing any of the used
-         configuration's parameters.
      */
-    public func createSignupControllerConfiguration() -> SignupControllerConfiguration {
+    internal func createSignupControllerConfiguration() -> SignupControllerConfiguration {
         return SignupControllerConfiguration(
             viewModel: createSignupViewModel(),
             viewFactory: createSignupView,
-            transitionDelegate: createSignupControllerTransitionDelegate())
+            transitionDelegate: createSignupControllerTransitionDelegate(),
+            delegate: createSignupControllerDelegate())
     }
     
     /**
@@ -352,7 +364,10 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     /**
          Function that reacts to the user pressing "Sign Up" in the
          login screen.
+     
          It will push the new controller in the navigation controller.
+     
+         - Parameter controller: LoginController active when calling this.
      */
     public final func onSignup(controller: LoginController) {
         let signupController = createSignupController()
@@ -363,7 +378,10 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     /**
          Function that reacts to the user pressing "Recover Password"
          in the login screen.
+     
          It will push the new controller in the navigation controller.
+     
+         - Parameter controller: LoginController active when calling this.
      */
     public final func onRecoverPassword(controller: LoginController) {
         let recoverPasswordController = createRecoverPasswordController()
@@ -378,8 +396,11 @@ extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     /**
          Function that reacts to the user pressing "Log In"
          in the signup screen.
+     
          It will pop the signup controller from the navigation controller,
          to return to login screen.
+     
+         - Parameter controller: SignupController active when calling this.
      */
     public final func onLogin(controller: SignupController) {
         // The authentication framework starts the process with a navigation controller.

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
     Represents the configurable parameters
     of a view that conforms to LoginViewType.
  
@@ -21,7 +21,7 @@ public protocol LoginViewConfigurationType {
     
 }
 
-/*
+/**
      The LoginViewConfiguration stores all palettes
      and logo necessary.
  

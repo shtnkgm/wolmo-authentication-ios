@@ -7,7 +7,7 @@
 //
 
 
-/*
+/**
      Represents the configurable parameters
      of a view that conforms to SignupViewType.
  
@@ -26,7 +26,7 @@ public protocol SignupViewConfigurationType {
     
 }
 
-/*
+/**
     The SignupViewConfiguration stores all palettes
     and decisions necessary.
  

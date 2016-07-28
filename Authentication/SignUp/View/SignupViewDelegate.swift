@@ -6,30 +6,33 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/*
+/**
      Delegate for any extra configuration
      to the signup view when rendered.
  */
 public protocol SignupViewDelegate {
     
-    /* Palettes ued to configure all login view elements possible. */
+    /** Palettes ued to configure all login view elements possible. */
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
-    /* Function to configure all view elements according to the palettes.
-       It is called by the default signup view when rendered. */
+    /**
+        Function to configure all view elements according to the palettes.
+        It is called by the default signup view when rendered.
+        
+        By default, does nothing.
+     */
     func configureView(signupView: SignupViewType)
     
 }
 
 public extension SignupViewDelegate {
     
-    /* By default, does nothing. */
     func configureView(signupView: SignupViewType) { }
     
 }
 
-/*
+/**
      The default signup view delegate takes care of
      setting all SignupViewType elements possible according to palettes.
  
