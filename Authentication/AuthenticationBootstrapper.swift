@@ -30,8 +30,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     public var currentUser: User? {
         return sessionService.currentUser.value
     }
-
-    private let frameworkBundle: NSBundle = NSBundle(forClass: LoginView.self)
+    
     
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
@@ -112,7 +111,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Attention: Override this method for customizing the view for the login.
     */
     public func createLoginView() -> LoginViewType {
-        let view = LoginView.loadFromNib(frameworkBundle)!
+        let view = LoginView.loadFromNib(FrameworkBundle)!
         view.delegate = DefaultLoginViewDelegate(configuration: _viewConfiguration.loginConfiguration)
         return view
     }
@@ -164,7 +163,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     }
     
     public func createSignupView() -> SignupViewType {
-        let view = SignupView.loadFromNib(frameworkBundle)!
+        let view = SignupView.loadFromNib(FrameworkBundle)!
         view.delegate = DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
         return view
     }

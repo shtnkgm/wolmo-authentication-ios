@@ -8,36 +8,30 @@
 
 import Foundation
 
-public extension String {
-    
-    public var frameworkBundle: NSBundle { return  NSBundle(forClass: LoginView.self) }
+internal extension String {
     
     /**
          Returns a localized representation of the string,
          searching first in the main bundle or if it does
-         not have the key in the framework one if.
+         not have the key in the framework one.
      */
-    public var frameworkLocalized: String {
-        let mainLocalized = NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
-        if mainLocalized == self {
-            return NSLocalizedString(self, tableName: nil, bundle: frameworkBundle, value: "", comment: "")
-        } else {
-            return mainLocalized
+    internal var frameworkLocalized: String {
+        let localized: (from: NSBundle) -> String = {
+            NSLocalizedString(self, tableName: nil, bundle: $0, value: "", comment: "")
         }
+        let mainLocalized = localized(from: NSBundle.mainBundle())
+        return mainLocalized == self ? localized(from: FrameworkBundle) : mainLocalized
     }
     
     /**
-         Returns a localized representation of the string.
-         
+         Returns a localized representation of the string,
+         searching first in the main bundle or if it does
+         not have the key in the framework one.
+     
          - parameter arguments: Formatting arguments.
      */
-    public func frameworkLocalized(arguments: CVarArgType...) -> String {
-        let mainLocalized = String(format: NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: ""), arguments: arguments)
-        if mainLocalized == self {
-            return String(format: NSLocalizedString(self, tableName: nil, bundle: frameworkBundle, value: "", comment: ""), arguments: arguments)
-        } else {
-            return mainLocalized
-        }
+    internal func frameworkLocalized(arguments: CVarArgType...) -> String {
+        return String(format: frameworkLocalized, arguments: arguments)
     }
     
 }
