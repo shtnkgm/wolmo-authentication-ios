@@ -7,8 +7,8 @@
 //
 
 /*
-     Represents something that can give us an
-     UIView to show and render.
+     Represents a component that can be
+     visually displayed on the screen.
  */
 public protocol Renderable {
     
