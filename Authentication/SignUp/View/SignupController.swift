@@ -189,10 +189,21 @@ private extension SignupController {
     private func setTextfieldOrder() {
         signupView.usernameTextField?.nextTextField = signupView.emailTextField
         signupView.emailTextField.nextTextField = signupView.passwordTextField
-        signupView.passwordTextField.nextTextField = _viewModel.passwordConfirmationEnabled ? signupView.passwordConfirmTextField
-            : (_viewModel.usernameEnabled ? signupView.usernameTextField : signupView.emailTextField)
+        signupView.passwordTextField.nextTextField = passwordNextTextfield
         signupView.passwordConfirmTextField?.nextTextField = _viewModel.usernameEnabled ? signupView.usernameTextField : signupView.emailTextField
         lastTextField.returnKeyType = .Go
+    }
+    
+    private var passwordNextTextfield: UITextField? {
+        if _viewModel.passwordConfirmationEnabled {
+            return signupView.passwordConfirmTextField
+        } else {
+            if _viewModel.usernameEnabled {
+                return signupView.usernameTextField
+            } else {
+                return signupView.emailTextField
+            }
+        }
     }
     
     private var lastTextField: UITextField {
