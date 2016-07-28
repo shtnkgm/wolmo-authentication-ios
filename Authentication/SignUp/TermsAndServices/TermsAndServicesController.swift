@@ -48,17 +48,16 @@ public final class TermsAndServicesController: UIViewController, WKNavigationDel
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = false
         let request = NSURLRequest(URL: _url)
         _webView.loadRequest(request)
         _delegate.didStartLoadingTermsAndServices(self)
     }
     
-    public override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBarHidden = true
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBarHidden = false
     }
-    
+        
     // Called when a mainframe load completes.
     public func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
         _delegate.didEndLoadingTermsAndServices(self)

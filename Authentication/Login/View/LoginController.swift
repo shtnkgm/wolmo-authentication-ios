@@ -72,11 +72,15 @@ public final class LoginController: UIViewController {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = true
         loginView.render()
         bindViewModel()
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBarHidden = true
     }
     
 }
