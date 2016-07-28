@@ -8,10 +8,9 @@
 
 
 /**
-    Protocol for login controller delegates.
-    Create your own delegate and override any of
-    the defaut methods to add behaviour to your
-    login process.
+    Protocol for login controller delegates,
+    that add behaviour to certain events from
+    the login process.
 */
 public protocol LoginControllerDelegate {
     

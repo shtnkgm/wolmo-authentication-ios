@@ -9,9 +9,6 @@
 /**
     Represents the configurable parameters
     of a view that conforms to LoginViewType.
- 
-    Includes the font and color palettes,
-    and the logo image.
 */
 public protocol LoginViewConfigurationType {
     

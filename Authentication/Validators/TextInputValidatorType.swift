@@ -10,7 +10,7 @@ import Foundation
 
 /**
      Represents any possible validation result:
-     valid, or invalid with any possibe quantity of errors.
+     valid, or invalid with any possible quantity of errors.
  */
 public enum ValidationResult {
     

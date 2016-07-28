@@ -20,11 +20,6 @@ public protocol LoginControllerTransitionDelegate {
 
 /**
     Class for configuring the login controller.
-    Includes all information required:
-        view factory method,
-        view model,
-        login controller delegate and
-        login controller transition delegate.
  */
 public final class LoginControllerConfiguration {
     

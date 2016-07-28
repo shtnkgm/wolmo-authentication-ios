@@ -8,10 +8,9 @@
 
 
 /**
-     Protocol for signup controller delegates.
-     Create your own delegate and override any of
-     the defaut methods to add behaviour to your
-     singup process.
+     Protocol for signup controller delegates,
+     that add behaviour to certain events from
+     the signup process.
  */
 public protocol SignupControllerDelegate {
     

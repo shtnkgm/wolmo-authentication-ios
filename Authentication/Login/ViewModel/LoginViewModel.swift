@@ -13,7 +13,7 @@ import enum Result.NoError
 /**
     Protocol for login view models.
     They must handle validation and
-    actions of al possible login elements.
+    actions of all possible login elements.
 */
 public protocol LoginViewModelType {
     

@@ -31,6 +31,11 @@ public enum SessionServiceError: ErrorType {
     case NetworkError(NSError)
 }
 
+/**
+    Protocol that any SessionService must conform
+    to be able to handle the user session within
+    this framework.
+ */
 public protocol SessionServiceType {
     
     associatedtype User: UserType

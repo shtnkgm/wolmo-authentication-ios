@@ -10,17 +10,13 @@
 /**
      Represents the configurable parameters
      of a view that conforms to SignupViewType.
- 
-     Includes the font and color palettes,
-     and the decision to include or exclude
-     optional textfields.
  */
 public protocol SignupViewConfigurationType {
     
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
-    // Textfield selected must be consistent with the view used.
+    // Textfields selected must be consistent with the view used.
     var usernameEnabled: Bool { get }
     var passwordConfirmationEnabled: Bool { get }
     
