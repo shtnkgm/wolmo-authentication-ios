@@ -38,22 +38,28 @@ class LoginViewModelSpec: QuickSpec {
             
             describe("#togglePasswordVisibility") {
                 
-                context("when executing action") {
+                context("when #passwordVisible is false") {
                     
-                    it("should change #passwordVisible from false to true") { waitUntil { done in
+                    it("should change it to true") { waitUntil { done in
                         loginViewModel.passwordVisible.signal.take(1).observeNext {
                             expect($0) == true
                             done()
                         }
                         loginViewModel.togglePasswordVisibility.execute("")
                     }}
+                }
+                
+                context("when #passwordVisible is true") {
                     
-                    it("should change #passwordVisible from true to false") { waitUntil { done in
-                        loginViewModel.passwordVisible.signal.take(2).skip(1).observeNext {
+                    beforeEach() {
+                        loginViewModel.togglePasswordVisibility.execute("")
+                    }
+                    
+                    it("should change it to false") { waitUntil { done in
+                        loginViewModel.passwordVisible.signal.take(1).observeNext {
                             expect($0) == false
                             done()
                         }
-                        loginViewModel.togglePasswordVisibility.execute("")
                         loginViewModel.togglePasswordVisibility.execute("")
                     }}
                     

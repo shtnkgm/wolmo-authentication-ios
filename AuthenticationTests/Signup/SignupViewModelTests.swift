@@ -47,22 +47,28 @@ class SignupViewModelSpec: QuickSpec {
             
             describe("#togglePasswordVisibility") {
                 
-                context("when executing action") {
+                context("when #passwordVisible is false") {
                     
-                    it("should change #passwordVisible from false to true") { waitUntil { done in
+                    it("should change it to true") { waitUntil { done in
                         signupViewModel.passwordVisible.signal.take(1).observeNext {
                             expect($0) == true
                             done()
                         }
                         signupViewModel.togglePasswordVisibility.execute("")
                     }}
+                }
+                
+                context("when #passwordVisible is true") {
                     
-                    it("should change #passwordVisible from true to false") { waitUntil { done in
-                        signupViewModel.passwordVisible.signal.take(2).skip(1).observeNext {
+                    beforeEach() {
+                        signupViewModel.togglePasswordVisibility.execute("")
+                    }
+                    
+                    it("should change it to false") { waitUntil { done in
+                        signupViewModel.passwordVisible.signal.take(1).observeNext {
                             expect($0) == false
                             done()
                         }
-                        signupViewModel.togglePasswordVisibility.execute("")
                         signupViewModel.togglePasswordVisibility.execute("")
                     }}
                     
@@ -72,22 +78,28 @@ class SignupViewModelSpec: QuickSpec {
             
             describe("#togglePasswordConfirmVisibility") {
                 
-                context("when executing action") {
+                context("when #passwordVisible is false") {
                     
-                    it("should change #passwordConfirmationVisible from false to true") { waitUntil { done in
+                    it("should change it to true") { waitUntil { done in
                         signupViewModel.passwordConfirmationVisible.signal.take(1).observeNext {
                             expect($0) == true
                             done()
                         }
                         signupViewModel.togglePasswordConfirmVisibility.execute("")
                     }}
+                }
+                
+                context("when #passwordVisible is true") {
                     
-                    it("should change #passwordConfirmationVisible from true to false") { waitUntil { done in
-                        signupViewModel.passwordConfirmationVisible.signal.take(2).skip(1).observeNext {
+                    beforeEach() {
+                        signupViewModel.togglePasswordConfirmVisibility.execute("")
+                    }
+                    
+                    it("should change it to false") { waitUntil { done in
+                        signupViewModel.passwordConfirmationVisible.signal.take(1).observeNext {
                             expect($0) == false
                             done()
                         }
-                        signupViewModel.togglePasswordConfirmVisibility.execute("")
                         signupViewModel.togglePasswordConfirmVisibility.execute("")
                     }}
                     
