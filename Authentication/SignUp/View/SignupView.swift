@@ -57,7 +57,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var usernameValidationMessageLabel: UILabel? { return usernameValidationMessageLabelOutlet }
     @IBOutlet weak var usernameValidationMessageLabelOutlet: UILabel! {
-        didSet { usernameValidationMessageLabelOutlet.text = " " }
+        didSet { usernameValidationMessageLabelOutlet.text = "" }
     }
     
     @IBOutlet weak var usernameErrorsView: UIView!
@@ -80,7 +80,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
-        didSet { emailValidationMessageLabelOutlet.text = " " }
+        didSet { emailValidationMessageLabelOutlet.text = "" }
     }
     
     @IBOutlet weak var emailErrorsView: UIView!
@@ -100,7 +100,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
-        didSet { passwordValidationMessageLabelOutlet.text = " " }
+        didSet { passwordValidationMessageLabelOutlet.text = "" }
     }
     
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
@@ -125,7 +125,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var passwordConfirmValidationMessageLabel: UILabel? { return pswdConfirmValidationMessageLabelOutlet }
     @IBOutlet weak var pswdConfirmValidationMessageLabelOutlet: UILabel! {
-        didSet { pswdConfirmValidationMessageLabelOutlet.text = " " }
+        didSet { pswdConfirmValidationMessageLabelOutlet.text = "" }
     }
     
     internal var passwordConfirmVisibilityButton: UIButton? { return passwordConfirmVisibilityButtonOutlet }

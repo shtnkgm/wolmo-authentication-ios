@@ -110,7 +110,7 @@ private extension SignupController {
                 self.signupView.usernameTextFieldValid = errors.isEmpty
             }
             if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
-                nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
+                nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? "" }
             }
             nameTextField.delegate = self
         }
@@ -127,7 +127,7 @@ private extension SignupController {
             self.signupView.emailTextFieldValid = errors.isEmpty
         }
         if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
-            emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
+            emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? "" }
         }
         signupView.emailTextField.delegate = self
     }
@@ -145,7 +145,7 @@ private extension SignupController {
             self.signupView.passwordTextFieldValid = errors.isEmpty
         }
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
-            passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
+            passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? "" }
         }
         if let passwordVisibilityButton = signupView.passwordVisibilityButton {
             passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility
@@ -169,7 +169,7 @@ private extension SignupController {
                 self.signupView.passwordConfirmationTextFieldValid = errors.isEmpty
             }
             if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
-                passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }
+                passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? "" }
             }
             if let confirmPasswordVisibilityButton = signupView.passwordConfirmVisibilityButton {
                 confirmPasswordVisibilityButton.rex_pressed.value = _viewModel.toggleConfirmPasswordVisibility
