@@ -102,6 +102,7 @@ private extension SignupController {
         }
         
         _viewModel.signUpErrors.observeNext { [unowned self] in self._delegate.didSignUp(self, with: $0) }
+        _viewModel.signUpSuccessful.observeNext { [unowned self] _ in self._transitionDelegate.onSignupSuccess(self) }
     }
     
     private func bindUsernameElements() {

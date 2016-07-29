@@ -6,17 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/**
-    Protocol for handling transition events occured during login.
-*/
-public protocol LoginControllerTransitionDelegate {
-    
-    func toSignup(controller: LoginController)
-    
-    func toRecoverPassword(controller: LoginController)
-    
-}
-
 
 /**
     Class for configuring the login controller.

@@ -32,6 +32,7 @@ public protocol LoginViewModelType {
     var logInCocoaAction: CocoaAction { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
+    var logInSuccessful: Signal<(), NoError> { get }
     
 }
 
@@ -55,6 +56,7 @@ public final class LoginViewModel<User: UserType, SessionService: SessionService
     public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
     public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
     public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
+    public var logInSuccessful: Signal<(), NoError> { return _logIn.values.map { _ in () } }
     
     public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     

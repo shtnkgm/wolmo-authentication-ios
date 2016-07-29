@@ -6,16 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-/**
-    Protocol for handling transition events occured during signup.
- */
-public protocol SignupControllerTransitionDelegate {
-    
-    func toLogin(controller: SignupController)
-    
-    func onTermsAndServices(controller: SignupController)
-    
-}
 
 /**
      Class for configuring the signup controller.
@@ -32,7 +22,7 @@ public final class SignupControllerConfiguration {
          Initializes a signup controller configuration with the view model,
          delegate, a factory method for the signup view and transition
          delegate for the signup controller to use.
-         
+     
          - Parameters:
              - viewModel: view model to bind to and use.
              - viewFactory: factory method to call only once

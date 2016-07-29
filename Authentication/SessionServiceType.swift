@@ -50,12 +50,6 @@ public protocol SessionServiceType {
     var currentUser: AnyProperty<User?> { get }
     
     /**
-         ...
-         TODO: Check if we need a signal with all this events, or just logout.
-    */
-    var events: Signal<SessionServiceEvent<User>, NoError> { get }
-    
-    /**
         This method takes care of validating and logging in.
      
         - Returns: A SignalProducer that can send the User logged in

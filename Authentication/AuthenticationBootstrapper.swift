@@ -66,15 +66,6 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         _viewConfiguration = viewConfiguration
         _initialScreen = initialScreen
         self.sessionService = sessionService
-
-        sessionService.events.observeNext { [unowned self] event in
-            switch event {
-            case .LogIn(_): self._window.rootViewController = self._mainViewControllerFactory()
-            case .SignUp(_): self._window.rootViewController = self._mainViewControllerFactory()
-            case .LogOut(_): self._window.rootViewController = UINavigationController(rootViewController: self.createLoginController())
-            default: break
-            }
-        }
     }
     
     public convenience init(sessionService: SessionService, window: UIWindow, termsAndServicesURL: NSURL,
@@ -408,7 +399,11 @@ public extension AuthenticationBootstrapper {
 
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
-    public func toSignup(controller: LoginController) {
+    public final func onLoginSuccess(controller: LoginController) {
+        self._window.rootViewController = self._mainViewControllerFactory()
+    }
+    
+    public final func toSignup(controller: LoginController) {
         if _initialScreen == .Login {
             let signupController = createSignupController()
             controller.navigationController!.pushViewController(signupController, animated: true)
@@ -426,7 +421,11 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
 
 extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     
-    public func toLogin(controller: SignupController) {
+    public final func onSignupSuccess(controller: SignupController) {
+        self._window.rootViewController = self._mainViewControllerFactory()
+    }
+    
+    public final func toLogin(controller: SignupController) {
         if _initialScreen == .Signup {
             let loginController = createLoginController()
             controller.navigationController!.pushViewController(loginController, animated: true)
@@ -435,7 +434,7 @@ extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
         }
     }
     
-    public func onTermsAndServices(controller: SignupController) {
+    public final func onTermsAndServices(controller: SignupController) {
         let termsAndServicesController = createTermsAndServicesController(_viewConfiguration.signupConfiguration.termsAndServicesURL)
         controller.navigationController!.pushViewController(termsAndServicesController, animated: true)
     }
