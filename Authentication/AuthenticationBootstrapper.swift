@@ -6,7 +6,7 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
+import Core
 
 /**
     Bootstrapper to start the application.
@@ -30,7 +30,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     public var currentUser: User? {
         return sessionService.currentUser.value
     }
-
+    
+    
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
         the factory method from where to obtain the main View Controller of the application.
@@ -110,7 +111,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Attention: Override this method for customizing the view for the login.
     */
     public func createLoginView() -> LoginViewType {
-        let view: LoginView = .loadFromNib()
+        let view = LoginView.loadFromNib(FrameworkBundle)!
         view.delegate = DefaultLoginViewDelegate(configuration: _viewConfiguration.loginConfiguration)
         return view
     }
@@ -162,7 +163,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     }
     
     public func createSignupView() -> SignupViewType {
-        let view = SignupView.loadFromNib()
+        let view = SignupView.loadFromNib(FrameworkBundle)!
         view.delegate = DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
         return view
     }

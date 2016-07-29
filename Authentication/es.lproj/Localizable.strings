@@ -1,35 +1,36 @@
 /* 
-  Spanish(es).strings
+  Localizable.strings
   Authentication
 
-  Created by Daniela Riesgo on 3/17/16.
+  Created by Daniela Riesgo on 7/19/16.
   Copyright © 2016 Wolox. All rights reserved.
 */
+
 
 /* Errores de los validadores */
 "text-input-validator.empty" = "No puede dejarse vacío";
 "text-input-validator.max-length" = "No puede ser más largo que %d caracteres";
 "text-input-validator.min-length" = "No puede ser más corto que %d caracteres";
-"text-input-validator.invalid-email" = "Debe ser un email válido (Por ejemplo, usuario@mail.com)";
+"text-input-validator.invalid-email" = "Debe ser un email válido";
 
 /* Text visibility */
-"text-visibility-button-title.false" = "Ocultar";ß
+"text-visibility-button-title.false" = "Ocultar";
 "text-visibility-button-title.true" = "Mostrar";
 
 /* Títulos de los elementos de UI del login */
-"login-view-model.email" = "Email:";
-"login-view-model.password" = "Contraseña:";
-"login-view-model.email-placeholder" = "Email";
-"login-view-model.password-placeholder" = "Contraseña";
-"login-view-model.login-button-title" = "INGRESAR";
-"login-view-model.signup-button-title" = "Regístrese";
-"login-view-model.recover-password-button-title" = "Recuperar contraseña";
+"login-view.email" = "Email:";
+"login-view.password" = "Contraseña:";
+"login-view.email-placeholder" = "Email";
+"login-view.password-placeholder" = "Contraseña";
+"login-view.login-button-title" = "INGRESAR";
+"login-view.recover-password-button-title" = "Recuperar contraseña";
 "login-view.to-signup-label" = "¿No tienes cuenta?";
+"login-view.signup-button-title" = "Regístrese";
 
 /* Errores del servicio de sesión */
-"login-error.invalid-credentials.message" = "Email o contraseña incorrectos. ";
-"signup-error.invalid-credentials.message" = "Credenciales incorrectas. ";
-"network-error.message" = "Error en la conexión. ";
+"login-error.invalid-credentials.message" = "Email o contraseña incorrectos";
+"signup-error.invalid-credentials.message" = "Credenciales incorrectas";
+"network-error.message" = "Error en la conexión";
 
 /* Alerta de error de login */
 "login-error.alert.title" = "Error al intentar ingresar";

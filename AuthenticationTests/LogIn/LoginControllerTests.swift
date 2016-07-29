@@ -71,14 +71,14 @@ class LoginViewControllerSpec: QuickSpec {
                 
                 it("should start hidden") {
                     expect(loginViewModel.showPassword.value) == false
-                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".localized
+                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".frameworkLocalized
                     expect(loginView.passwordTextField.secureTextEntry) == true
                 }
                 
                 it("should show password when button pressed") {
                     loginView.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
                     expect(loginViewModel.showPassword.value).toEventually(beTrue())
-                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.false".localized
+                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.false".frameworkLocalized
                     expect(loginView.passwordTextField.secureTextEntry) == false
                 }
                 
@@ -86,7 +86,7 @@ class LoginViewControllerSpec: QuickSpec {
                     loginView.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
                     loginView.passwordVisibilityButton!.sendActionsForControlEvents(.TouchUpInside)
                     expect(loginViewModel.showPassword.value) == false
-                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".localized
+                    expect(loginView.passwordVisibilityButton!.titleForState(.Normal)) == "password-visibility.button-title.true".frameworkLocalized
                     expect(loginView.passwordTextField.secureTextEntry) == true                }
                 
             }
@@ -95,7 +95,7 @@ class LoginViewControllerSpec: QuickSpec {
                 
                 it("should show the first of the email errors when email is invalid") {
                     loginView.emailTextField.text = "email"
-                    expect(loginView.emailValidationMessageLabel!.text).toEventually(equal("text-input-validator.invalid-email".localized("email")))
+                    expect(loginView.emailValidationMessageLabel!.text).toEventually(equal("text-input-validator.invalid-email".frameworkLocalized("email")))
                 }
                 
             }

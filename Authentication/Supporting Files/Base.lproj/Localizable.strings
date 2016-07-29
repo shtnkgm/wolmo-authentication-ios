@@ -22,9 +22,9 @@
 "login-view.email-placeholder" = "Email";
 "login-view.password-placeholder" = "Password";
 "login-view.login-button-title" = "LOG IN";
-"login-view.signup-button-title" = "Sign up";
 "login-view.recover-password-button-title" = "Forgot password?";
 "login-view.to-signup-label" = "Don't have an account?";
+"login-view.signup-button-title" = "Sign up";
 
 /* Session service errors */
 "login-error.invalid-credentials.message" = "Wrong email or password. ";

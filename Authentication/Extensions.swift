@@ -2,20 +2,36 @@
 //  Extensions.swift
 //  Authentication
 //
-//  Created by Daniela Riesgo on 3/7/16.
+//  Created by Daniela Riesgo on 7/25/16.
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
 import Foundation
 
-public extension String {
+internal extension String {
     
-    var localized: String {
-        return NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: "")
+    /**
+         Returns a localized representation of the string,
+         searching first in the main bundle or if it does
+         not have the key in the framework one.
+     */
+    internal var frameworkLocalized: String {
+        let localized: (from: NSBundle) -> String = {
+            NSLocalizedString(self, tableName: nil, bundle: $0, value: "", comment: "")
+        }
+        let mainLocalized = localized(from: NSBundle.mainBundle())
+        return mainLocalized == self ? localized(from: FrameworkBundle) : mainLocalized
     }
     
-    func localized(arguments: CVarArgType...) -> String {
-        return String(format: NSLocalizedString(self, tableName: nil, bundle: NSBundle.mainBundle(), value: "", comment: ""), arguments: arguments)
+    /**
+         Returns a localized representation of the string,
+         searching first in the main bundle or if it does
+         not have the key in the framework one.
+     
+         - parameter arguments: Formatting arguments.
+     */
+    internal func frameworkLocalized(arguments: CVarArgType...) -> String {
+        return String(format: frameworkLocalized, arguments: arguments)
     }
     
 }

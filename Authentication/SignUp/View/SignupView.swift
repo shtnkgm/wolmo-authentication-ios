@@ -6,6 +6,8 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+import Core
+
 public protocol SignupViewType: Renderable, SignupFormType {
 
     var titleLabel: UILabel { get }
@@ -293,67 +295,67 @@ private extension SignupView {
 public extension SignupViewType {
     
     public var titleText: String {
-        return "signup-view.title".localized
+        return "signup-view.title".frameworkLocalized
     }
     
     public var nameText: String {
-        return "signup-view.name".localized
+        return "signup-view.name".frameworkLocalized
     }
     
     public var emailText: String {
-        return "signup-view.email".localized
+        return "signup-view.email".frameworkLocalized
     }
     
     public var passwordText: String {
-        return "signup-view.password".localized
+        return "signup-view.password".frameworkLocalized
     }
     
     public var confirmPasswordText: String {
-        return "signup-view.confirm-password".localized
+        return "signup-view.confirm-password".frameworkLocalized
     }
     
     public var namePlaceholderText: String {
-        return "signup-view.name-placeholder".localized
+        return "signup-view.name-placeholder".frameworkLocalized
     }
     
     public var emailPlaceholderText: String {
-        return "signup-view.email-placeholder".localized
+        return "signup-view.email-placeholder".frameworkLocalized
     }
     
     public var passwordPlaceholderText: String {
-        return "signup-view.password-placeholder".localized
+        return "signup-view.password-placeholder".frameworkLocalized
     }
     
     public var confirmPasswordPlaceholderText: String {
-        return "signup-view.confirm-password-placeholder".localized
+        return "signup-view.confirm-password-placeholder".frameworkLocalized
     }
     
     public var passwordVisibilityButtonTitle: String {
-        return ("text-visibility-button-title." + (passwordVisible ? "false" : "true")).localized
+        return ("text-visibility-button-title." + (passwordVisible ? "false" : "true")).frameworkLocalized
     }
     
     public var confirmPasswordVisibilityButtonTitle: String {
-        return ("text-visibility-button-title." + (confirmationPasswordVisible ? "false" : "true")).localized
+        return ("text-visibility-button-title." + (confirmationPasswordVisible ? "false" : "true")).frameworkLocalized
     }
     
     public var termsAndServicesLabelText: String {
-        return "signup-view.terms-and-services.label-text".localized
+        return "signup-view.terms-and-services.label-text".frameworkLocalized
     }
     
     public var termsAndServicesButtonTitle: String {
-        return "signup-view.terms-and-services.button-title".localized
+        return "signup-view.terms-and-services.button-title".frameworkLocalized
     }
     
     public var signUpButtonTitle: String {
-        return "signup-view.signup-button-title".localized
+        return "signup-view.signup-button-title".frameworkLocalized
     }
     
     public var loginLabelText: String {
-        return "signup-view.login.label-text".localized
+        return "signup-view.login.label-text".frameworkLocalized
     }
     
     public var loginButtonTitle: String {
-        return "signup-view.login.button-title".localized
+        return "signup-view.login.button-title".frameworkLocalized
     }
     
 }

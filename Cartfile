@@ -1,6 +1,7 @@
 # Core & Functional Programming
 github "ReactiveCocoa/ReactiveCocoa" ~> 4.2.1
 github "neilpa/Rex" ~> 0.11.0
+github "Wolox/wolmo-core-ios" "adding-carthage-framework"
 
 # Utilities
 github "CocoaLumberjack/CocoaLumberjack" ~> 2.2.0

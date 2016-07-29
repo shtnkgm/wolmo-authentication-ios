@@ -30,20 +30,20 @@ public protocol ColorPaletteType {
 
 public extension ColorPaletteType {
     
-    public var mainButtonDisabled: UIColor { return UIColor(hexString: "#d8d8d8ff")! }
-    public var mainButtonEnabled: UIColor { return UIColor(hexString: "#f5a623ff")! }
-    public var mainButtonExecuted: UIColor { return UIColor(hexString: "#e78f00ff")! }
+    public var mainButtonDisabled: UIColor { return UIColor(hex: "#d8d8d8ff")! }
+    public var mainButtonEnabled: UIColor { return UIColor(hex: "#f5a623ff")! }
+    public var mainButtonExecuted: UIColor { return UIColor(hex: "#e78f00ff")! }
     
-    public var textfieldsError: UIColor { return UIColor(hexString: "#d0021bff")! }
+    public var textfieldsError: UIColor { return UIColor(hex: "#d0021bff")! }
     public var textfieldsNormal: UIColor { return .clearColor() }
     public var textfieldsSelected: UIColor { return .clearColor() }
     
-    public var background: UIColor { return UIColor(hexString: "#efefefff")! }
+    public var background: UIColor { return UIColor(hex: "#efefefff")! }
     
-    public var links: UIColor { return UIColor(hexString: "#0076ffff")! }
+    public var links: UIColor { return UIColor(hex: "#0076ffff")! }
     public var labels: UIColor { return .blackColor() }
     public var textfieldText: UIColor { return .blackColor() }
-    public var passwordVisibilityButtonText: UIColor { return UIColor(hexString: "#0076ffff")! }
+    public var passwordVisibilityButtonText: UIColor { return UIColor(hex: "#0076ffff")! }
     public var mainButtonText: UIColor { return .whiteColor() }
     
 }

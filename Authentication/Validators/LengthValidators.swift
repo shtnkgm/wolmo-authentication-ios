@@ -12,7 +12,7 @@ public struct NonEmptyValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {
         if text.isEmpty {
-            return .Invalid(errors: ["text-input-validator.empty".localized])
+            return .Invalid(errors: ["text-input-validator.empty".frameworkLocalized])
         } else {
             return .Valid
         }
@@ -30,7 +30,7 @@ public struct MaxLengthValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {
         if text.characters.count > _maxLength {
-            return .Invalid(errors: ["text-input-validator.max-length".localized(_maxLength)])
+            return .Invalid(errors: ["text-input-validator.max-length".frameworkLocalized(_maxLength)])
         } else {
             return .Valid
         }
@@ -48,7 +48,7 @@ public struct MinLengthValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {
         if text.characters.count < _minLength {
-            return .Invalid(errors: ["text-input-validator.min-length".localized(_minLength)])
+            return .Invalid(errors: ["text-input-validator.min-length".frameworkLocalized(_minLength)])
         } else {
             return .Valid
         }

@@ -6,6 +6,8 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+import Core
+
 public protocol LoginViewType: Renderable, LoginFormType {
     
     var logoImageView: UIImageView { get }
@@ -227,39 +229,39 @@ private extension LoginView {
 public extension LoginViewType {
         
     public var emailText: String {
-        return "login-view.email".localized
+        return "login-view.email".frameworkLocalized
     }
     
     public var passwordText: String {
-        return "login-view.password".localized
+        return "login-view.password".frameworkLocalized
     }
     
     public var emailPlaceholderText: String {
-        return "login-view.email-placeholder".localized
+        return "login-view.email-placeholder".frameworkLocalized
     }
     
     public var passwordPlaceholderText: String {
-        return "login-view.password-placeholder".localized
+        return "login-view.password-placeholder".frameworkLocalized
     }
     
     public var logInButtonTitle: String {
-        return "login-view.login-button-title".localized
+        return "login-view.login-button-title".frameworkLocalized
     }
     
     public var signupLabelText: String {
-        return "login-view.to-signup-label".localized
+        return "login-view.to-signup-label".frameworkLocalized
     }
     
     public var signupButtonTitle: String {
-        return "login-view.signup-button-title".localized
+        return "login-view.signup-button-title".frameworkLocalized
     }
 
     private var passwordVisibilityButtonTitle: String {
-        return ("text-visibility-button-title." + (passwordVisible ? "false" : "true")).localized
+        return ("text-visibility-button-title." + (passwordVisible ? "false" : "true")).frameworkLocalized
     }
     
     public var recoverPasswordButtonTitle: String {
-        return "login-view.recover-password-button-title".localized
+        return "login-view.recover-password-button-title".frameworkLocalized
     }
     
 }

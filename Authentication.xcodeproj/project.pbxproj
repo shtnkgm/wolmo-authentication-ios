@@ -29,6 +29,12 @@
 		CE2BB8C71C972819009CAC8F /* LoginControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */; };
 		CE2BC5261C970E51003A1616 /* MyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5251C970E51003A1616 /* MyUser.swift */; };
 		CE2BC5281C970E89003A1616 /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BC5271C970E89003A1616 /* MockSessionService.swift */; };
+		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
+		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
+		CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
+		CE7A7BB61D3E9FA800C44A25 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
+		CE7A7BBD1D3EB60500C44A25 /* Authentication.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */; };
 		CE89A25C1CAED14700E1903B /* SignupViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE89A25B1CAED14700E1903B /* SignupViewDelegate.swift */; };
 		CE89A2651CAED37C00E1903B /* FontPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE89A2631CAED37C00E1903B /* FontPalette.swift */; };
 		CE89A2671CAEDE4F00E1903B /* SignupViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE89A2661CAEDE4F00E1903B /* SignupViewConfiguration.swift */; };
@@ -46,7 +52,6 @@
 		CEB4E4F31CAAEB51002FE023 /* SignupControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB4E4F21CAAEB51002FE023 /* SignupControllerDelegate.swift */; };
 		CEBF66BA1C8DD582006EE090 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66B91C8DD582006EE090 /* LoginView.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
-		CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C51C8DF0DD006EE090 /* Extensions.swift */; };
 		CEBF66C81C8DFCB1006EE090 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C71C8DFCB1006EE090 /* LoginViewModel.swift */; };
 		CEBF66CA1C8DFFF2006EE090 /* LoginCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66C91C8DFFF2006EE090 /* LoginCredentialsValidator.swift */; };
 		CEBF66CE1C8E089D006EE090 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66CD1C8E089D006EE090 /* LoginController.swift */; };
@@ -55,7 +60,6 @@
 		CED63F331C9AFFAB0092F323 /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED63F321C9AFFAB0092F323 /* LoginView.xib */; };
 		CEE226A61C9C3CEA005EB279 /* RecoverPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226A51C9C3CEA005EB279 /* RecoverPasswordController.swift */; };
 		CEE226A71C9C4011005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
-		CEE226AA1C9C4018005EB279 /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226AC1C9C4018005EB279 /* Spanish(es).strings */; };
 		CEE226B31C9C75CC005EB279 /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B21C9C75CC005EB279 /* SignupViewModel.swift */; };
 		CEE226B51C9C7692005EB279 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B41C9C7692005EB279 /* SignupView.swift */; };
 		CEE226B71C9C7FA4005EB279 /* LoginViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE226B61C9C7FA4005EB279 /* LoginViewDelegate.swift */; };
@@ -73,13 +77,8 @@
 		CEE94AA21CA06BBC0089E71B /* ExampleSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE94AA01CA06BBC0089E71B /* ExampleSessionService.swift */; };
 		CEE94AA71CA06C3C0089E71B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE94AA31CA06C3C0089E71B /* LaunchScreen.storyboard */; };
 		CEE94AA81CA06C3C0089E71B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE94AA51CA06C3C0089E71B /* Main.storyboard */; };
-		CEE94AA91CA06C520089E71B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
-		CEE94AAA1CA06C570089E71B /* Spanish(es).strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226AC1C9C4018005EB279 /* Spanish(es).strings */; };
 		CEE94AAB1CA06C6E0089E71B /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; };
-		CEE94AAC1CA06C6E0089E71B /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CEE94AAD1CA06C6E0089E71B /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; };
-		CEE94AAE1CA06C6E0089E71B /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		CEE94AB41CA06D5F0089E71B /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE94AB31CA06D5F0089E71B /* UIExtensions.swift */; };
 		CEFB5F831C91C52500760A2A /* LoginViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFB5F821C91C52500760A2A /* LoginViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,14 +116,22 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CE7A7BBC1D3EB56A00C44A25 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CE7A7BBD1D3EB60500C44A25 /* Authentication.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEE94AAF1CA06C6E0089E71B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CEE94AAC1CA06C6E0089E71B /* ReactiveCocoa.framework in Embed Frameworks */,
-				CEE94AAE1CA06C6E0089E71B /* Result.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +158,13 @@
 		CE2BB8C61C972819009CAC8F /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginControllerTests.swift; path = LogIn/LoginControllerTests.swift; sourceTree = "<group>"; };
 		CE2BC5251C970E51003A1616 /* MyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyUser.swift; path = LogIn/Mocks/MyUser.swift; sourceTree = "<group>"; };
 		CE2BC5271C970E89003A1616 /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSessionService.swift; path = LogIn/Mocks/MockSessionService.swift; sourceTree = "<group>"; };
+		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CE5248881D468F8700B499CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE7A7BB31D3E9AFC00C44A25 /* Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Core.framework; path = Carthage/Build/iOS/Core.framework; sourceTree = "<group>"; };
+		CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Carthage/Build/iOS/MBProgressHUD.framework; sourceTree = "<group>"; };
+		CE7A7BB71D3EA01C00C44A25 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CE7A7BBA1D3EA73200C44A25 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Authentication/es.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
+		CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkBundle.swift; sourceTree = "<group>"; };
 		CE89A25B1CAED14700E1903B /* SignupViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupViewDelegate.swift; path = SignUp/View/SignupViewDelegate.swift; sourceTree = "<group>"; };
 		CE89A2631CAED37C00E1903B /* FontPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FontPalette.swift; path = Configuration/FontPalette.swift; sourceTree = "<group>"; };
 		CE89A2661CAEDE4F00E1903B /* SignupViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupViewConfiguration.swift; path = SignUp/View/SignupViewConfiguration.swift; sourceTree = "<group>"; };
@@ -168,7 +182,6 @@
 		CEB4E4F21CAAEB51002FE023 /* SignupControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupControllerDelegate.swift; path = SignUp/View/SignupControllerDelegate.swift; sourceTree = "<group>"; };
 		CEBF66B91C8DD582006EE090 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = LogIn/View/LoginView.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionServiceType.swift; sourceTree = "<group>"; };
-		CEBF66C51C8DF0DD006EE090 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CEBF66C71C8DFCB1006EE090 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewModel.swift; path = LogIn/ViewModel/LoginViewModel.swift; sourceTree = "<group>"; };
 		CEBF66C91C8DFFF2006EE090 /* LoginCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginCredentialsValidator.swift; path = Login/ViewModel/LoginCredentialsValidator.swift; sourceTree = "<group>"; };
 		CEBF66CD1C8E089D006EE090 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginController.swift; path = LogIn/View/LoginController.swift; sourceTree = "<group>"; };
@@ -177,7 +190,6 @@
 		CED63F321C9AFFAB0092F323 /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginView.xib; path = Login/View/LoginView.xib; sourceTree = "<group>"; };
 		CEE226A51C9C3CEA005EB279 /* RecoverPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecoverPasswordController.swift; path = RecoverPassword/RecoverPasswordController.swift; sourceTree = "<group>"; };
 		CEE226A81C9C4011005EB279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		CEE226AB1C9C4018005EB279 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = "es.lproj/Spanish(es).strings"; sourceTree = "<group>"; };
 		CEE226AF1C9C726F005EB279 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE226B21C9C75CC005EB279 /* SignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupViewModel.swift; path = SignUp/ViewModel/SignupViewModel.swift; sourceTree = "<group>"; };
 		CEE226B41C9C7692005EB279 /* SignupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupView.swift; path = SignUp/View/SignupView.swift; sourceTree = "<group>"; };
@@ -198,7 +210,6 @@
 		CEE94AA01CA06BBC0089E71B /* ExampleSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleSessionService.swift; sourceTree = "<group>"; };
 		CEE94AA41CA06C3C0089E71B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEE94AA61CA06C3C0089E71B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CEE94AB31CA06D5F0089E71B /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		CEF7252B1CA1ADE400A4215A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CEF7252C1CA1ADEB00A4215A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		CEF7252E1CA1ADEF00A4215A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -213,9 +224,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9D1DFEFA1C8DCE0A00F0A37C /* ReactiveCocoa.framework in Frameworks */,
-				9D1DFEFC1C8DCE0A00F0A37C /* Rex.framework in Frameworks */,
-				9D1DFEFF1C8DCF5300F0A37C /* CocoaLumberjack.framework in Frameworks */,
 				9D1DFEFB1C8DCE0A00F0A37C /* Result.framework in Frameworks */,
+				9D1DFEFC1C8DCE0A00F0A37C /* Rex.framework in Frameworks */,
+				CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */,
+				CE7A7BB61D3E9FA800C44A25 /* MBProgressHUD.framework in Frameworks */,
+				9D1DFEFF1C8DCF5300F0A37C /* CocoaLumberjack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +257,9 @@
 		9D1DFEF61C8DCDF600F0A37C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE7A7BB71D3EA01C00C44A25 /* AVFoundation.framework */,
+				CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */,
+				CE7A7BB31D3E9AFC00C44A25 /* Core.framework */,
 				9D1DFF001C8DCFB300F0A37C /* Nimble.framework */,
 				9D1DFF011C8DCFB300F0A37C /* Quick.framework */,
 				9D1DFEFE1C8DCF5300F0A37C /* CocoaLumberjack.framework */,
@@ -280,18 +296,17 @@
 			children = (
 				CE89A2611CAED30100E1903B /* Configuration */,
 				CEE226A91C9C4011005EB279 /* Localizable.strings */,
-				CEE226AC1C9C4018005EB279 /* Spanish(es).strings */,
 				CEE226A41C9C3CB4005EB279 /* RecoverPassword */,
 				CE040D721C99CD7D0020DDE0 /* Validators */,
 				CEBF66B51C8DD3AB006EE090 /* Login */,
 				CEBF66B41C8DD3A4006EE090 /* Signup */,
 				9D72AA071C8DC7EA00BB4082 /* Authentication.h */,
 				9D72AA091C8DC7EA00BB4082 /* Info.plist */,
-				CEBF66C51C8DF0DD006EE090 /* Extensions.swift */,
-				CEE94AB31CA06D5F0089E71B /* UIExtensions.swift */,
 				CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */,
 				CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */,
 				CEA65B831D33F9960065283E /* ViewProtocols.swift */,
+				CE5248811D468D8200B499CC /* Extensions.swift */,
+				CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -452,6 +467,7 @@
 				CEE94A8F1CA06B1B0089E71B /* AppDelegate.swift */,
 				CEE94A961CA06B1B0089E71B /* Assets.xcassets */,
 				CEE94A9B1CA06B1B0089E71B /* Info.plist */,
+				CE5248891D468F8700B499CC /* Localizable.strings */,
 			);
 			path = AuthenticationDemo;
 			sourceTree = "<group>";
@@ -528,7 +544,8 @@
 				CEE94A8A1CA06B1B0089E71B /* Frameworks */,
 				CEE94A8B1CA06B1B0089E71B /* Resources */,
 				CEE94AAF1CA06C6E0089E71B /* Embed Frameworks */,
-				CEE94AB21CA06C860089E71B /* Carthage */,
+				CE7A7BBC1D3EB56A00C44A25 /* CopyFiles */,
+				CE7A7BBE1D3EB63600C44A25 /* Carthage */,
 			);
 			buildRules = (
 			);
@@ -589,7 +606,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA65B861D342CB30065283E /* SignupView.xib in Resources */,
-				CEE226AA1C9C4018005EB279 /* Spanish(es).strings in Resources */,
 				CEE226A71C9C4011005EB279 /* Localizable.strings in Resources */,
 				CED63F331C9AFFAB0092F323 /* LoginView.xib in Resources */,
 			);
@@ -607,10 +623,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE94AA81CA06C3C0089E71B /* Main.storyboard in Resources */,
-				CEE94AA91CA06C520089E71B /* Localizable.strings in Resources */,
+				CE5248871D468F8700B499CC /* Localizable.strings in Resources */,
 				CEE94A971CA06B1B0089E71B /* Assets.xcassets in Resources */,
 				CEE94AA71CA06C3C0089E71B /* LaunchScreen.storyboard in Resources */,
-				CEE94AAA1CA06C570089E71B /* Spanish(es).strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +640,28 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Rex.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+			);
+			name = Carthage;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		CE7A7BBE1D3EB63600C44A25 /* Carthage */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Rex.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CocoaLumberjack.framework",
 			);
@@ -649,20 +686,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ ! -z \"$RUNNING_ON_CI\" ]\nthen\necho \"SwiftLint run script has been disabled\"\nexit 0\nfi\n\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		CEE94AB21CA06C860089E71B /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -678,10 +701,10 @@
 				CE89A26F1CAF019D00E1903B /* ColorPalette.swift in Sources */,
 				CEE226B51C9C7692005EB279 /* SignupView.swift in Sources */,
 				CEB4E4F31CAAEB51002FE023 /* SignupControllerDelegate.swift in Sources */,
+				CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
 				CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */,
 				CEE226B71C9C7FA4005EB279 /* LoginViewDelegate.swift in Sources */,
-				CEBF66C61C8DF0DD006EE090 /* Extensions.swift in Sources */,
 				CE040D7A1C99CEE10020DDE0 /* LengthValidators.swift in Sources */,
 				CEE226A61C9C3CEA005EB279 /* RecoverPasswordController.swift in Sources */,
 				CE89A2651CAED37C00E1903B /* FontPalette.swift in Sources */,
@@ -695,10 +718,10 @@
 				CE11A7011C9848AE002C9779 /* LoginControllerDelegate.swift in Sources */,
 				CEA65B8A1D3435DD0065283E /* ConstantValidators.swift in Sources */,
 				CE040D741C99CDB40020DDE0 /* InlineValidator.swift in Sources */,
-				CEE94AB41CA06D5F0089E71B /* UIExtensions.swift in Sources */,
 				CE040D761C99CE650020DDE0 /* TextInputValidatorType.swift in Sources */,
 				CEB119201CA315000049DABF /* SignupCredentialsValidator.swift in Sources */,
 				CEE4048F1C9A043200AB70B3 /* CompositeValidator.swift in Sources */,
+				CE5248821D468D8200B499CC /* Extensions.swift in Sources */,
 				CEB119181CA2E43B0049DABF /* LoginConfiguration.swift in Sources */,
 				CEBF66D21C8E0A80006EE090 /* User.swift in Sources */,
 				CE9AC3C61C8F34A70012D20B /* AuthenticationBootstrapper.swift in Sources */,
@@ -750,22 +773,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		CE5248891D468F8700B499CC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE5248881D468F8700B499CC /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		CEE226A91C9C4011005EB279 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CEE226A81C9C4011005EB279 /* en */,
 				CEE226AF1C9C726F005EB279 /* Base */,
+				CE7A7BBA1D3EA73200C44A25 /* es */,
 			);
 			name = Localizable.strings;
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CEE226AC1C9C4018005EB279 /* Spanish(es).strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEE226AB1C9C4018005EB279 /* es */,
-			);
-			name = "Spanish(es).strings";
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
@@ -829,7 +852,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -871,7 +894,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -889,6 +912,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -911,6 +935,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -968,7 +993,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AuthenticationDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wolox.AuthenticationDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = ar.com.wolox.AuthenticationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -984,7 +1009,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AuthenticationDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wolox.AuthenticationDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = ar.com.wolox.AuthenticationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

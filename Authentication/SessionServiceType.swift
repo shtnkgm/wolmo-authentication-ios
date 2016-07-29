@@ -73,11 +73,11 @@ public extension SessionServiceError {
     var message: String {
         switch self {
         case .InvalidSignUpCredentials(let error):
-            return "signup-error.invalid-credentials.message".localized + (error?.localizedDescription ?? "")
+            return "signup-error.invalid-credentials.message".frameworkLocalized + (error?.localizedDescription ?? "")
         case .InvalidLogInCredentials(let error):
-            return "login-error.invalid-credentials.message".localized + (error?.localizedDescription ?? "")
+            return "login-error.invalid-credentials.message".frameworkLocalized + (error?.localizedDescription ?? "")
         case .NetworkError(let error):
-            return "network-error.message".localized + error.localizedDescription
+            return "network-error.message".frameworkLocalized + error.localizedDescription
         }
     }
 }
