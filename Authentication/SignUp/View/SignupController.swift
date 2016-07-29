@@ -221,10 +221,12 @@ private extension SignupController {
     
     private func checkTextFieldsSelection() {
         if _viewModel.usernameEnabled && signupView.usernameTextField == .None {
-            //fatalError?
+            NSLog("The signup view and view model are not compatible. The view model will try to validate content of username textfield which doesn't exist in the view.")
+            fatalError("The signup view and view model are not compatible.")
         }
         if _viewModel.passwordConfirmationEnabled && signupView.passwordConfirmTextField == .None {
-            //fatalError?
+            NSLog("The signup view and view model are not compatible. The view model will try to validate content of password confirmation textfield which doesn't exist in the view.")
+            fatalError("The signup view and view model are not compatible.")
         }
     }
     
