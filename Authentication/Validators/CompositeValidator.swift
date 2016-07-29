@@ -6,8 +6,18 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
 
+/**
+     Represents a composite validator which
+     will validate according to all criteria
+     embedded in all the TextInputValidator s
+     associated.
+     A text is valid only when it is valid for
+     all and each of the validators associated.
+     An invalid text will be accompanied by all
+     the invalid errors provided by the validators
+     associated.
+ */
 public struct CompositeTextInputValidator: TextInputValidatorType {
     
     private let _validators: [TextInputValidatorType]

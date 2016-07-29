@@ -11,31 +11,48 @@ import ReactiveCocoa
 import enum Result.NoError
 import Rex
 
-
+/**
+     Protocol for signup view models.
+     They must handle validation and
+     actions of all possible signup elements.
+ */
 public protocol SignupViewModelType {
     
+    /** Name/Username field considerations: content and validation errors. */
     var name: MutableProperty<String> { get }
     var nameValidationErrors: AnyProperty<[String]> { get }
     
+    /** Email field considerations: content and validation errors. */
     var email: MutableProperty<String> { get }
     var emailValidationErrors: AnyProperty<[String]> { get }
     
+    /** Password field considerations: content, validation errors
+     and password visibility. */
     var password: MutableProperty<String> { get }
     var passwordValidationErrors: AnyProperty<[String]> { get }
     var passwordVisible: MutableProperty<Bool> { get }
     var togglePasswordVisibility: CocoaAction { get }
     
+    /** Confirm Password field considerations: content, validation
+     errors and password visibility. */
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
     var confirmationPasswordVisible: MutableProperty<Bool> { get }
     var toggleConfirmPasswordVisibility: CocoaAction { get }
     
+    /** Sign Up action considerations: action, executing state and errors. */
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
     
 }
 
+/**
+     Default SignupViewModel responsible for validating entries to email and password fields
+     and username and/or password confirmation fields if required. Therefore it's also 
+     responsible for enabling sign up action, managing password visibility, reporting sign up
+     events and communicating with the session service for executing the sign up.
+ */
 public final class SignupViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
     
     private let _sessionService: SessionService
@@ -67,10 +84,26 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     private lazy var _toggleConfirmationPasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeToggleConfirmationPasswordVisibilityAction()
     
+    /**
+         Initializes a signup view model which will communicate to the session service provided and
+         will regulate the sign up with the validation criteria from the login credentials validator.
+         
+         - Parameters:
+             - sessionService: session service to communicate with for sign up action.
+             - credentialsValidator: signup credentials validator which encapsulates the criteria
+             that the email, password and username fields must meet.
+             - usernameEnabled: property indicating if this view model should take into account
+             username validation.
+             - passwordConfirmationEnabled: property indicating if this view model should take
+             into account the password confirmation validation.
+     
+         - Warning: The `usernameEnabled` and `passwordConfirmationEnabled` properties should be
+         consistent with the view that will be used.
+     */
     internal init(sessionService: SessionService,
-         credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator(),
-         passwordConfirmationEnabled: Bool = true,
-         usernameEnabled: Bool = true) {
+                  credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator(),
+                  usernameEnabled: Bool = true,
+                  passwordConfirmationEnabled: Bool = true) {
         _sessionService = sessionService
         
         let nameValidationResult = name.signal.map(credentialsValidator.nameValidator.validate)

@@ -8,6 +8,22 @@
 
 import ReactiveCocoa
 
+
+/**
+     Signup View Controller that takes care of managing the signup, from
+     validating all fields, to binding a signup view to the view model
+     and informing the signup controller delegate when certain events 
+     occur for it to act upon them.
+     If there are more than one validation error in a field, the controller
+     presents only the first one in the errors label.
+     
+     //TODO: Move what's below to README.
+     If wanting to use the default SignupController with some customization,
+     you will not override the `createSignupController` method of the Bootstrapper,
+     but all the others that provide the elements this controller uses. (That is to say,
+     `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`
+     and/or `createSignupControllerConfiguration`)
+ */
 public final class SignupController: UIViewController {
     
     private let _viewModel: SignupViewModelType
@@ -23,10 +39,12 @@ public final class SignupController: UIViewController {
     private let _activeTextField = MutableProperty<UITextField?>(.None)
 
     
-    // Internal initializer, because if wanting to use the  default SignupController,
-    // you should not override the `createSignupController` method, but all the others 
-    // that provide the elements this controller uses. (That is to say,
-    // `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`)
+    /**
+         Initializes a signup controller with the configuration to use.
+         
+         - Parameter configuration: A signup controller configuration with all
+         elements needed to operate.
+     */
     internal init(configuration: SignupControllerConfiguration) {
         _viewModel = configuration.viewModel
         _signupViewFactory = configuration.viewFactory
@@ -87,6 +105,7 @@ private extension SignupController {
                 } else {
                     self._delegate.didFailNameValidation(self, with: errors)
                 }
+                self.signupView.usernameTextFieldValid = errors.isEmpty
             }
             if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
                 nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? " " }
@@ -103,6 +122,7 @@ private extension SignupController {
             } else {
                 self._delegate.didFailEmailValidation(self, with: errors)
             }
+            self.signupView.emailTextFieldValid = errors.isEmpty
         }
         if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
             emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? " " }
@@ -120,6 +140,7 @@ private extension SignupController {
             } else {
                 self._delegate.didFailPasswordValidation(self, with: errors)
             }
+            self.signupView.passwordTextFieldValid = errors.isEmpty
         }
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
             passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? " " }
@@ -143,6 +164,7 @@ private extension SignupController {
                 } else {
                     self._delegate.didFailPasswordConfirmationValidation(self, with: errors)
                 }
+                self.signupView.passwordConfirmationTextFieldValid = errors.isEmpty
             }
             if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
                 passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? " " }

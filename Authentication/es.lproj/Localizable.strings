@@ -1,5 +1,5 @@
-/* 
-  Localizable.strings
+/*
+  Localizable.stringsSpanish(es).strings
   Authentication
 
   Created by Daniela Riesgo on 7/19/16.
@@ -27,16 +27,16 @@
 "login-view.to-signup-label" = "¿No tienes cuenta?";
 "login-view.signup-button-title" = "Regístrese";
 
-/* Errores del servicio de sesión */
+/** Errores del servicio de sesión */
 "login-error.invalid-credentials.message" = "Email o contraseña incorrectos";
 "signup-error.invalid-credentials.message" = "Credenciales incorrectas";
 "network-error.message" = "Error en la conexión";
 
-/* Alerta de error de login */
+/** Alerta de error de login */
 "login-error.alert.title" = "Error al intentar ingresar";
 "login-error.alert.close" = "Cerrar";
 
-/* Títulos de los elementos de UI del signup */
+/** Títulos de los elementos de UI del signup */
 "signup-view.title" = "Regístrese";
 "signup-view.name" = "Nombre:";
 "signup-view.email" = "Email:";
@@ -52,10 +52,10 @@
 "signup-view.login.label-text" = "¿Ya está registrado?";
 "signup-view.login.button-title" = "Inicie sesión";
 
-/* Errores de signup */
+/** Errores de signup */
 "signup-error.password-confirmation.invalid" = "Las contraseñas no coinciden";
 
-/* Errores de signup */
+/** Errores de signup */
 "signup-error.password-confirmation.invalid" = "Las contraseñas no coinciden";
 "signup-error.alert.title" = "Error al intentar registrarse";
 "signup-error.alert.close" = "Cerrar";

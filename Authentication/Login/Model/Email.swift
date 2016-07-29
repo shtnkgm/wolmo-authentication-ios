@@ -8,7 +8,9 @@
 
 import Foundation
 
-
+/**
+     Represents a valid email.
+ */
 public struct Email {
     
     public static func isValidEmail(raw: String) -> Bool {

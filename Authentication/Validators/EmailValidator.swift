@@ -6,8 +6,10 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-import Foundation
-
+/**
+     Represents an email validator,
+     according to the Email's valid criteria.
+ */
 public struct EmailValidator: TextInputValidatorType {
     
     public func validate(text: String) -> ValidationResult {

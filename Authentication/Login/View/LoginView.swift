@@ -8,24 +8,40 @@
 
 import Core
 
+
+/**
+     Represents the minimum required
+     properties from a login view
+     for it to be compatible with
+     the framework.
+ */
 public protocol LoginViewType: Renderable, LoginFormType {
     
     var logoImageView: UIImageView { get }
     
-    var signupLabel: UILabel { get }
+    /* Navigation elements to other screens */
+    var signupLabel: UILabel? { get }
     var signupButton: UIButton { get }
+    var recoverPasswordLabel: UILabel? { get }
     var recoverPasswordButton: UIButton { get }
     
 }
 
+public extension LoginViewType {
+    
+    var signupLabel: UILabel? { return .None }
+    
+    var recoverPasswordLabel: UILabel? { return .None }
+    
+}
+
+/** Default login view. */
 internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate()
     
     internal var logoImageView: UIImageView { return logoImageViewOutlet }
     @IBOutlet weak var logoImageViewOutlet: UIImageView!
-    
-    internal var emailLabel: UILabel?
     
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
@@ -37,8 +53,6 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
         didSet { emailValidationMessageLabelOutlet.text = " " }
     }
-    
-    internal var passwordLabel: UILabel?
     
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! {
@@ -63,9 +77,6 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    internal var logInErrorLabel: UILabel? { return .None }
-    
-    internal var signupLabel: UILabel { return toSignupLabel }
     @IBOutlet weak var toSignupLabel: UILabel! {
         didSet { toSignupLabel.text = signupLabelText }
     }
@@ -74,7 +85,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     @IBOutlet weak var signupButtonOutlet: UIButton! {
         didSet { signupButton.setTitle(signupButtonTitle, forState: .Normal) }
     }
-
+    
     internal var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton! {
         didSet { recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal) }

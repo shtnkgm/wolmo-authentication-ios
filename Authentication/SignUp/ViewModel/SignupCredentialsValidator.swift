@@ -6,6 +6,11 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+/**
+    Represents a validator for all signup fields:
+    name, email and password.
+    It provides default validators for each of them.
+*/
 public struct SignupCredentialsValidator {
     
     public static func defaultNameValidator() -> TextInputValidatorType {
@@ -16,7 +21,7 @@ public struct SignupCredentialsValidator {
         return  CompositeTextInputValidator(validators: [
             NonEmptyValidator(),
             EmailValidator()
-            ])
+        ])
     }
     
     public static func defaultPasswordValidator(minLength: Int = 4, maxLength: Int? = 30) -> TextInputValidatorType {
