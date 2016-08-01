@@ -64,6 +64,7 @@
 		CE111E0F1D4FA8980083C99E /* AuthenticationViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0C1D4FA8980083C99E /* AuthenticationViewConfiguration.swift */; };
 		CE111E101D4FA8980083C99E /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0D1D4FA8980083C99E /* ColorPalette.swift */; };
 		CE111E111D4FA8980083C99E /* FontPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0E1D4FA8980083C99E /* FontPalette.swift */; };
+		CE111E151D4FC8560083C99E /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */; };
 		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
 		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
 		CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
@@ -195,6 +196,7 @@
 		CE111E0C1D4FA8980083C99E /* AuthenticationViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationViewConfiguration.swift; sourceTree = "<group>"; };
 		CE111E0D1D4FA8980083C99E /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		CE111E0E1D4FA8980083C99E /* FontPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPalette.swift; sourceTree = "<group>"; };
+		CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
 		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE5248881D468F8700B499CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE7A7BB31D3E9AFC00C44A25 /* Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Core.framework; path = Carthage/Build/iOS/Core.framework; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 		CE89A25A1CAEC68300E1903B /* Signup */ = {
 			isa = PBXGroup;
 			children = (
+				CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */,
 			);
 			path = Signup;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 			files = (
 				CE111DF11D4FA78E0083C99E /* LoginViewModelTests.swift in Sources */,
 				CE111DF01D4FA78E0083C99E /* LoginControllerTests.swift in Sources */,
+				CE111E151D4FC8560083C99E /* SignupViewModelTests.swift in Sources */,
 				CE111DAA1D4FA6C20083C99E /* MockSessionService.swift in Sources */,
 				CE111DFE1D4FA79A0083C99E /* NonEmptyValidatorTests.swift in Sources */,
 				CE111DA91D4FA6C20083C99E /* MockLoginTransitionDelegate.swift in Sources */,

@@ -26,7 +26,7 @@ class LoginViewControllerSpec: QuickSpec {
             var loginController: LoginController!
             
             beforeEach() {
-                sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", username: "MyUser")
+                sessionService = MockSessionService()
                 loginViewModel = LoginViewModel(sessionService: sessionService)
                 loginView = LoginView()
                 let configuration = LoginControllerConfiguration(viewModel: loginViewModel, viewFactory: { return loginView }, transitionDelegate: MockLoginTransitionDelegate())

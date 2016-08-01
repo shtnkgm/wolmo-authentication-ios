@@ -177,8 +177,8 @@ private extension SignupController {
                 passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? "" }
             }
             if let confirmPasswordVisibilityButton = signupView.passwordConfirmVisibilityButton {
-                confirmPasswordVisibilityButton.rex_pressed.value = _viewModel.toggleConfirmPasswordVisibility
-                _viewModel.confirmationPasswordVisible.signal.observeNext { [unowned self] in self.signupView.confirmationPasswordVisible = $0 }
+                confirmPasswordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordConfirmVisibility
+                _viewModel.passwordConfirmationVisible.signal.observeNext { [unowned self] in self.signupView.passwordConfirmationVisible = $0 }
             }
             passwordConfirmationTextField.delegate = self
         }

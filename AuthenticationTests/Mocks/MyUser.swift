@@ -10,6 +10,7 @@ import Foundation
 import Authentication
 
 struct MyUser: UserType {
+    
     let email: Email
     let username: String
     let password: String
@@ -19,4 +20,5 @@ struct MyUser: UserType {
         self.username = username
         self.password = password
     }
+    
 }
