@@ -33,14 +33,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     
     /// The window of the app
     private let _window: UIWindow
-    /// The factory method from which to obtain a main View Controller for the app
-    private let _mainViewControllerFactory: () -> UIViewController
-    /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
-    /// It also includes other configurations like the textfields selected to use in signup.
-    private let _viewConfiguration: AuthenticationViewConfiguration
-    /// Property indicating the authentication screen to be shown the first time.
-    private let _initialScreen: AuthenticationInitialScreen
-    
+    /// The factory class to create all authentication components in the process.
+    private let _componentsFactory: AuthenticationComponentsFactoryType
     
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
@@ -58,21 +52,10 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
                 core of the app.
     */
     public init(sessionService: SessionService, window: UIWindow,
-                viewConfiguration: AuthenticationViewConfiguration,
-                initialScreen: AuthenticationInitialScreen = .Login,
-                mainViewControllerFactory: () -> UIViewController) {
+                componentsFactory: AuthenticationComponentsFactoryType) {
         _window = window
-        _mainViewControllerFactory = mainViewControllerFactory
-        _viewConfiguration = viewConfiguration
-        _initialScreen = initialScreen
+        _componentsFactory = componentsFactory
         self.sessionService = sessionService
-    }
-    
-    public convenience init(sessionService: SessionService, window: UIWindow, termsAndServicesURL: NSURL,
-                            mainViewControllerFactory: () -> UIViewController) {
-        self.init(sessionService: sessionService, window: window,
-                  viewConfiguration: AuthenticationViewConfiguration(termsAndServicesURL: termsAndServicesURL),
-                  mainViewControllerFactory: mainViewControllerFactory)
     }
 
     /**
@@ -82,9 +65,9 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     */
     public final func bootstrap() {
         if let _ = self.currentUser {
-            _window.rootViewController = _mainViewControllerFactory()
+            _window.rootViewController = _componentsFactory.createMainViewController()
         } else {
-            let mainAuthenticationController = _initialScreen == .Login ? createLoginController() : createSignupController()
+            let mainAuthenticationController = _componentsFactory.initialScreen == .Login ? createLoginController() : createSignupController()
             _window.rootViewController = UINavigationController(rootViewController: mainAuthenticationController)
         }
     }
@@ -104,119 +87,32 @@ public extension AuthenticationBootstrapper {
         let configuration = createLoginControllerConfiguration()
         return LoginController(configuration: configuration)
     }
-    
-    /**
-        Creates the log in credential validator that embodies what must be met
-        so as to enable the log in for the user.
 
-        - Returns: A log in credentials validator to use for creating the LogInViewModel.
-
-        - Attention: Override this method for customizing the criteria of email and password validity.
-        You can use email as username if you use the correct validator for it.
-    */
-    public func createLogInCredentialsValidator() -> LoginCredentialsValidator {
-        return LoginCredentialsValidator()
-    }
-
-    /**
-         Creates the LoginViewModelType to use in the authentication process logic,
-         with the LogInCredentialsValidator returned in the function createLogInCredentialsValidator.
-
-         - Returns: A login view model that controls the login logic and communicates with the session service.
-
-         - Attention: Override this method for using your own login logic, your own login view model.
-     
-         - Warning: The LoginViewModel returned must be constructed with the same session service as the
-         authentication bootstrapper, if it needs a session service, like the default one.
-     */
-    public func createLoginViewModel() -> LoginViewModelType {
-        return LoginViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
-    }
-
-    /**
-        Creates login view that conforms to the logInViewType protocol
-        and will be use for the login visual.
-
-        - Returns: A valid login view ready to be used.
-     
-        - Attention: Override this method for customizing the view for the login,
-        other than the provided by LoginViewDelegate and LoginViewConfigurationType.
-    */
-    public func createLoginView() -> LoginViewType {
-        let view = LoginView.loadFromNib(FrameworkBundle)!
-        view.delegate = createLoginViewDelegate()
-        return view
-    }
-    
-    /**
-         Creates the LoginViewDelegate to use in configuring the login view style.
-         
-         - Returns: A login view delegate that controls the color and font palette
-         setting of the view.
-         
-         - Attention: Override this method for using you own LoginViewDelegate,
-         when configuring the default one with the AuthenticationViewConfiguration
-         passed to the AuthenticationBootstrapper is not enough, or the binding
-         logic of view elements and palette hierarchy must be changed.
-     
-         - Warning: The LoginViewDelegate returned must consider the LoginViewConfigurationType
-         the AuthenticationBootstrapper holds in its view configuration.
-     */
-    public func createLoginViewDelegate() -> LoginViewDelegate {
-        return DefaultLoginViewDelegate(configuration: _viewConfiguration.loginConfiguration)
-    }
-
-    /**
-        Creates the login view controller delegate that the login controller
-        will use to add behaviour to certain events, described in
-        LoginControllerDelegate protocol.
-     
-        - Returns: A valid login controller delegate to use.
-     
-        - Attention: Override this method for customizing any of the used
-        delegate's reactions to events.
-    */
-    public func createLoginControllerDelegate() -> LoginControllerDelegate {
-        return DefaultLoginControllerDelegate()
-    }
-    
     /**
          Creates the login view controller configuration
          that the login controller will use to access the
          login view model to use, the login view to display
          and the delegates for events and transitions to
          other screens.
-     
-         It uses the components returned by the public
-         overrideable functions:
-             `createLoginViewModel`
-             `createLoginView`
-             `createLoginControllerTransitionDelegate`
-             `createLoginControllerDelegate`
-     
+         
+         It uses the components returned by the
+         components factory.
+         
          - Returns: A valid login controller configuration to use.
      */
     internal func createLoginControllerConfiguration() -> LoginControllerConfiguration {
+        let createLoginView: () -> LoginViewType = { [unowned self] in
+            return self._componentsFactory
+                .createLoginView(self._componentsFactory
+                    .createLoginViewDelegate(self._componentsFactory
+                        .createLoginViewConfiguration()))
+        }
         return LoginControllerConfiguration(
-            viewModel: createLoginViewModel(),
+            viewModel: _componentsFactory.createLoginViewModel(sessionService,
+                credentialsValidator: _componentsFactory.createLogInCredentialsValidator()),
             viewFactory: createLoginView,
-            transitionDelegate: createLoginControllerTransitionDelegate(),
-            delegate: createLoginControllerDelegate())
-    }
-    
-    /**
-         Creates the login controller transition delegate that
-         the login controller will use to handle transitions
-         to other screens (like signup).
-         
-         - Returns: A valid login controller transition delegate to use.
-         
-         - Attention: Override this method for customizing any of the transitions
-         in a way where overriding the transition's delegate methods of the
-         AuthenticationBootstrapper isn't enough.
-     */
-    public func createLoginControllerTransitionDelegate() -> LoginControllerTransitionDelegate {
-        return self
+            transitionDelegate: _componentsFactory.createLoginControllerTransitionDelegate() ?? self,
+            delegate: _componentsFactory.createLoginControllerDelegate())
     }
 
 }
@@ -235,146 +131,42 @@ public extension AuthenticationBootstrapper {
     }
     
     /**
-         Creates the SignupViewModel to use in the registration process logic,
-         with the SignUpCredentialsValidator returned in the function createSignUpCredentialsValidator,
-         and the configuration given to the AuthenticationBootstrapper in its AuthenticationViewConfiguration.
-         
-         - Returns: A signup view model that controls the registration logic and comunicates with the session service.
-         
-         - Warning: The SignupViewModel returned must be constructed with the same session service as the
-         authentication bootstrapper.
-     */
-    public func createSignupViewModel() -> SignupViewModelType {
-        return SignupViewModel(sessionService: sessionService,
-                               credentialsValidator: createSignUpCredentialsValidator(),
-                               passwordConfirmationEnabled: _viewConfiguration.signupConfiguration.passwordConfirmationEnabled,
-                               usernameEnabled: _viewConfiguration.signupConfiguration.usernameEnabled)
-    }
-    
-    /**
-         Creates the sign up credential validator that embodies the criteria that must be met
-         so as to enable the sign up for the user.
-         
-         - Returns: A sign up credentials validator to use for creating the SignupViewModel.
-         
-         - Attention: Override this method for customizing the criteria of username, email
-         and password validity.
-         You can set in SignupConfiguration which textfields to use during signup so if you
-         won't use one of them, you don't have to worry about its validator.
-     */
-    public func createSignUpCredentialsValidator() -> SignupCredentialsValidator {
-        return SignupCredentialsValidator()
-    }
-    
-    /**
-         Creates the SignupViewDelegate to use in configuring the signup view style.
-         
-         - Returns: A signup view delegate that controls the color and font palette
-        setting of the view.
-     
-         - Attention: Override this method for using you own SignupViewDelegate,
-         when configuring the default one with the AuthenticationViewConfiguration
-         passed to the AuthenticationBootstrapper is not enough, or the binding
-         logic of view elements and palette hierarchy must be changed.
-         
-         - Warning: The SignupViewDelegate returned must consider the SignupViewConfigurationType
-         the AuthenticationBootstrapper holds in its view configuration.
-     */
-    public func createSignupViewDelegate() -> SignupViewDelegate {
-        return DefaultSignupViewDelegate(configuration: _viewConfiguration.signupConfiguration)
-    }
-    
-    /**
-         Creates the signup view controller delegate
-         that the signup controller will use to add behaviour
-         to certain events, described in SignupControllerDelegate
-         protocol.
-         
-         - Returns: A valid signup controller delegate to use.
-         
-         - Attention: Override this method for customizing any of the used
-         delegate's reactions to events.
-     */
-    public func createSignupControllerDelegate() -> SignupControllerDelegate {
-        return DefaultSignupControllerDelegate()
-    }
-    
-    /**
-         Creates signup view that conforms to the SignupViewType protocol
-         and will be use for the signup visual.
-         
-         - Returns: A valid signup view ready to be used.
-         
-         - Attention: Override this method for customizing the view for the signup.
-     */
-    public func createSignupView() -> SignupViewType {
-        let view = SignupView.loadFromNib(FrameworkBundle)!
-        view.delegate = createSignupViewDelegate()
-        return view
-    }
-    
-    /**
          Creates the signup view controller configuration
          that the signup controller will use to access the
          signup view model to use, the signup view to display
          and the delegates for events and transitions to
          other screens.
      
-         It uses the components returned by the public
-         overrideable functions:
-            `createSignupViewModel`
-            `createSignupView`
-            `createSignupControllerTransitionDelegate`
-            `createSignupControllerDelegate`
+         It uses the components returned by the
+         components factory.
      
          - Returns: A valid signup controller configuration to use.
      */
     internal func createSignupControllerConfiguration() -> SignupControllerConfiguration {
+        let configuration = self._componentsFactory.createSignupViewConfiguration()
+        let createSignupView: () -> SignupViewType = { [unowned self] in
+            return self._componentsFactory
+                .createSignupView(self._componentsFactory
+                    .createSignupViewDelegate(configuration))
+        }
         return SignupControllerConfiguration(
-            viewModel: createSignupViewModel(),
+            viewModel: _componentsFactory.createSignupViewModel(sessionService,
+                credentialsValidator: _componentsFactory.createSignUpCredentialsValidator(),
+                configuration: configuration),
             viewFactory: createSignupView,
-            transitionDelegate: createSignupControllerTransitionDelegate(),
-            delegate: createSignupControllerDelegate(),
-            termsAndServicesURL: _viewConfiguration.signupConfiguration.termsAndServicesURL)
+            transitionDelegate: _componentsFactory.createSignupControllerTransitionDelegate() ?? self,
+            delegate: _componentsFactory.createSignupControllerDelegate(),
+            termsAndServicesURL: configuration.termsAndServicesURL)
     }
     
     /**
-         Creates the signup controller transition delegate that
-         the signup controller will use to handle transitions
-         to other screens (like login or terms and services).
-         
-         - Returns: A valid login controller transition delegate to use.
-         
-         - Attention: Override this method for customizing any of the transitions
-         in a way where overriding the transition's delegate methods of the
-         AuthenticationBootstrapper isn't enough.
-     */
-    public func createSignupControllerTransitionDelegate() -> SignupControllerTransitionDelegate {
-        return self
-    }
-    
-    /*
          Creates the terms and services controller
          to use when the user selects that option.
          
          - Returns: A valid terms and services controller.
      */
     internal func createTermsAndServicesController(url: NSURL) -> TermsAndServicesController {
-        return TermsAndServicesController(url: url, delegate: createTermsAndServicesControllerDelegate())
-    }
-    
-    /*
-         Creates the terms and services view controller delegate
-         that can inject behaviour for when the terms and services
-         page starts loading and ends loading.
-         
-         - Returns: A valid terms and services controller delegate to use.
-         
-         - Attention: Override this method for customizing any of the used
-         delegate's reactions to events.
-     */
-    public func createTermsAndServicesControllerDelegate() -> TermsAndServicesControllerDelegate {
-        return DefaultTermsAndServicesControllerDelegate()
+        return TermsAndServicesController(url: url, delegate: _componentsFactory.createTermsAndServicesControllerDelegate())
     }
     
 }
@@ -400,11 +192,11 @@ public extension AuthenticationBootstrapper {
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
     public final func onLoginSuccess(controller: LoginController) {
-        _window.rootViewController = _mainViewControllerFactory()
+        _window.rootViewController = _componentsFactory.createMainViewController()
     }
     
     public final func toSignup(controller: LoginController) {
-        if _initialScreen == .Login {
+        if _componentsFactory.initialScreen == .Login {
             let signupController = createSignupController()
             controller.navigationController!.pushViewController(signupController, animated: true)
         } else {
@@ -422,11 +214,11 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
 extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     
     public final func onSignupSuccess(controller: SignupController) {
-        _window.rootViewController = _mainViewControllerFactory()
+        _window.rootViewController = _componentsFactory.createMainViewController()
     }
     
     public final func toLogin(controller: SignupController) {
-        if _initialScreen == .Signup {
+        if _componentsFactory.initialScreen == .Signup {
             let loginController = createLoginController()
             controller.navigationController!.pushViewController(loginController, animated: true)
         } else {
@@ -435,7 +227,8 @@ extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     }
     
     public final func onTermsAndServices(controller: SignupController) {
-        let termsAndServicesController = createTermsAndServicesController(_viewConfiguration.signupConfiguration.termsAndServicesURL)
+        let configuration = _componentsFactory.createSignupViewConfiguration()
+        let termsAndServicesController = createTermsAndServicesController(configuration.termsAndServicesURL)
         controller.navigationController!.pushViewController(termsAndServicesController, animated: true)
     }
     

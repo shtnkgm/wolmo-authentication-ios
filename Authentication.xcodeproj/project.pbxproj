@@ -67,6 +67,7 @@
 		CE111E151D4FC8560083C99E /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */; };
 		CE111E171D4FCED70083C99E /* LoginControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */; };
 		CE111E191D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */; };
+		CE20AD671D53BA860039260B /* AuthenticationComponentsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */; };
 		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
 		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
 		CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
@@ -201,6 +202,7 @@
 		CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
 		CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerTransitionDelegate.swift; sourceTree = "<group>"; };
+		CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationComponentsFactory.swift; sourceTree = "<group>"; };
 		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE5248881D468F8700B499CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE7A7BB31D3E9AFC00C44A25 /* Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Core.framework; path = Carthage/Build/iOS/Core.framework; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				CE111DD81D4FA7390083C99E /* SignUp */,
 				CE111DAC1D4FA6FD0083C99E /* RecoverPassword */,
 				CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */,
+				CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */,
 				CE9AC3C51C8F34A70012D20B /* AuthenticationBootstrapper.swift */,
 				CEA65B831D33F9960065283E /* ViewProtocols.swift */,
 				CE5248811D468D8200B499CC /* Extensions.swift */,
@@ -722,6 +725,7 @@
 				CE111DD11D4FA7340083C99E /* LoginControllerDelegate.swift in Sources */,
 				CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */,
 				CE111DE51D4FA7390083C99E /* SignupController.swift in Sources */,
+				CE20AD671D53BA860039260B /* AuthenticationComponentsFactory.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
 				CE111E111D4FA8980083C99E /* FontPalette.swift in Sources */,
 				CE111DAE1D4FA6FD0083C99E /* RecoverPasswordController.swift in Sources */,

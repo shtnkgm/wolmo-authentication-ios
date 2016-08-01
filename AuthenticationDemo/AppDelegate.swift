@@ -18,19 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
-        
-        let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default"))
-        let signupConfiguration = SignupViewConfiguration(usernameEnabled: true, passwordConfirmationEnabled: true,
-                                                          termsAndServicesURL: NSURL(string: "https://www.hackingwithswift.com")!)
-        let authenticationConfiguration = AuthenticationViewConfiguration(loginViewConfiguration: loginConfiguration, signupViewConfiguration: signupConfiguration)
-        
-        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: exampleSessionService,
-                                                                window: window!,
-                                                                viewConfiguration: authenticationConfiguration,
+        let componentsFactory = AuthenticationComponentsFactory(termsAndServicesURL: NSURL(string: "https://www.hackingwithswift.com")!,
+                                                                logo: UIImage(named: "default")!,
+                                                                enableUsername: true,
+                                                                enableConfirmPassword: true,
                                                                 initialScreen: .Signup) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }
+        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: exampleSessionService,
+                                                                window: window!,
+                                                                componentsFactory: componentsFactory)
         authenticationBootstrapper.bootstrap()
         return true
     }
