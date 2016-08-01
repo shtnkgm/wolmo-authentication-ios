@@ -8,12 +8,12 @@
 
 /**
     Represents a validator for all signup fields:
-    name, email and password.
+    username, email and password.
     It provides default validators for each of them.
 */
 public struct SignupCredentialsValidator {
     
-    public static func defaultNameValidator() -> TextInputValidatorType {
+    public static func defaultUsernameValidator() -> TextInputValidatorType {
         return NonEmptyValidator()
     }
     
@@ -35,14 +35,14 @@ public struct SignupCredentialsValidator {
         return CompositeTextInputValidator(validators: validators)
     }
     
-    public let nameValidator: TextInputValidatorType
+    public let usernameValidator: TextInputValidatorType
     public let emailValidator: TextInputValidatorType
     public let passwordValidator: TextInputValidatorType
     
-    init(nameValidator: TextInputValidatorType = SignupCredentialsValidator.defaultNameValidator(),
+    init(usernameValidator: TextInputValidatorType = SignupCredentialsValidator.defaultUsernameValidator(),
         emailValidator: TextInputValidatorType = SignupCredentialsValidator.defaultEmailValidator(),
         passwordValidator: TextInputValidatorType = SignupCredentialsValidator.defaultPasswordValidator()) {
-            self.nameValidator = nameValidator
+            self.usernameValidator = usernameValidator
             self.emailValidator = emailValidator
             self.passwordValidator = passwordValidator
     }

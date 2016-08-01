@@ -22,8 +22,8 @@ final class MockSessionService: SessionServiceType {
     let events: Signal<SessionServiceEvent<MyUser>, NoError>
     private let _eventsObserver: Signal<SessionServiceEvent<MyUser>, NoError>.Observer
     
-    init(email: Email, password: String, name: String) {
-        _possibleUser = User(email: email, password: password, name: name)
+    init(email: Email, password: String, username: String) {
+        _possibleUser = User(email: email, password: password, username: username)
         currentUser = AnyProperty(initialValue: Optional.None, signal: _currentUser.map { $0 })
         (events, _eventsObserver) = Signal<SessionServiceEvent<User>, NoError>.pipe()
     }
@@ -42,7 +42,7 @@ final class MockSessionService: SessionServiceType {
         }
     }
     
-    func signUp(name: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
+    func signUp(username: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
         return SignalProducer.empty
     }
     

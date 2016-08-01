@@ -45,7 +45,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var usernameTextField: UITextField? { return usernameTextFieldOutlet }
     @IBOutlet weak var usernameTextFieldOutlet: UITextField! {
-        didSet { usernameTextFieldOutlet.placeholder = namePlaceholderText }
+        didSet { usernameTextFieldOutlet.placeholder = usernamePlaceholderText }
     }
     
     @IBOutlet weak var usernameTextFieldViewOutlet: UIView! {
@@ -378,7 +378,7 @@ public extension SignupViewType {
 
     public var titleText: String { return "signup-view.title".frameworkLocalized }
     
-    public var nameText: String { return "signup-view.name".frameworkLocalized }
+    public var usernameText: String { return "signup-view.username".frameworkLocalized }
     
     public var emailText: String { return "signup-view.email".frameworkLocalized }
     
@@ -386,7 +386,7 @@ public extension SignupViewType {
     
     public var confirmPasswordText: String { return "signup-view.confirm-password".frameworkLocalized }
     
-    public var namePlaceholderText: String { return "signup-view.name-placeholder".frameworkLocalized}
+    public var usernamePlaceholderText: String { return "signup-view.username-placeholder".frameworkLocalized}
     
     public var emailPlaceholderText: String { return "signup-view.email-placeholder".frameworkLocalized }
     

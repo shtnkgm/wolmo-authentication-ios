@@ -65,7 +65,7 @@ public protocol SignupControllerDelegate {
      
          - Parameter controller: SignupController where the event is happening.
      */
-    func didPassNameValidation(controller: SignupController)
+    func didPassUsernameValidation(controller: SignupController)
     
     /** 
          Function called when any new username introduced is invalid,
@@ -74,9 +74,9 @@ public protocol SignupControllerDelegate {
          By default, it does nothing.
      
          - Parameter controller: SignupController where the event is happening.
-         - Parameter with: name validation errors.
+         - Parameter with: username validation errors.
      */
-    func didFailNameValidation(controller: SignupController, with errors: [String])
+    func didFailUsernameValidation(controller: SignupController, with errors: [String])
     
     /** 
          Function called when any new email introduced is valid,
@@ -173,9 +173,9 @@ extension SignupControllerDelegate {
         }
     }
     
-    public func didPassNameValidation(controller: SignupController) { }
+    public func didPassUsernameValidation(controller: SignupController) { }
     
-    public func didFailNameValidation(controller: SignupController, with errors: [String]) { }
+    public func didFailUsernameValidation(controller: SignupController, with errors: [String]) { }
     
     public func didPassEmailValidation(controller: SignupController) { }
     

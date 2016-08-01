@@ -80,7 +80,7 @@ public final class SignupController: UIViewController {
 private extension SignupController {
     
     private func bindViewModel() {
-        bindNameElements()
+        bindUsernameElements()
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
@@ -98,21 +98,21 @@ private extension SignupController {
         _viewModel.signUpErrors.observeNext { [unowned self] in self._delegate.didSignUp(self, with: $0) }
     }
     
-    private func bindNameElements() {
-        if let nameTextField = signupView.usernameTextField {
-            _viewModel.name <~ nameTextField.rex_textSignal
-            _viewModel.nameValidationErrors.signal.observeNext { [unowned self] errors in
+    private func bindUsernameElements() {
+        if let usernameTextField = signupView.usernameTextField {
+            _viewModel.username <~ usernameTextField.rex_textSignal
+            _viewModel.usernameValidationErrors.signal.observeNext { [unowned self] errors in
                 if errors.isEmpty {
-                    self._delegate.didPassNameValidation(self)
+                    self._delegate.didPassUsernameValidation(self)
                 } else {
-                    self._delegate.didFailNameValidation(self, with: errors)
+                    self._delegate.didFailUsernameValidation(self, with: errors)
                 }
                 self.signupView.usernameTextFieldValid = errors.isEmpty
             }
-            if let nameValidationMessageLabel = signupView.usernameValidationMessageLabel {
-                nameValidationMessageLabel.rex_text <~ _viewModel.nameValidationErrors.signal.map { $0.first ?? "" }
+            if let usernameValidationMessageLabel = signupView.usernameValidationMessageLabel {
+                usernameValidationMessageLabel.rex_text <~ _viewModel.usernameValidationErrors.signal.map { $0.first ?? "" }
             }
-            nameTextField.delegate = self
+            usernameTextField.delegate = self
         }
     }
     

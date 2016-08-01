@@ -37,11 +37,11 @@
 
 /** Signup UI elements titles */
 "signup-view.title" = "Sign Up";
-"signup-view.name" = "Name:";
+"signup-view.username" = "Username:";
 "signup-view.email" = "Email:";
 "signup-view.password" = "Password:";
 "signup-view.confirm-password" = "Confirm Password:";
-"signup-view.name-placeholder" = "Name";
+"signup-view.username-placeholder" = "Username";
 "signup-view.email-placeholder" = "Email";
 "signup-view.password-placeholder" = "Password";
 "signup-view.confirm-password-placeholder" = "Confirm password";

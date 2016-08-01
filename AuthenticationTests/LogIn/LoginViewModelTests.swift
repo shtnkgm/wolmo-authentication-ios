@@ -23,7 +23,7 @@ class LoginViewModelSpec: QuickSpec {
             var loginVM: LoginViewModel<MyUser, MockSessionService>!
             
             beforeEach() {
-                sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
+                sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", username: "MyUser")
                 loginVM = LoginViewModel(sessionService: sessionService)
             }
             
@@ -279,7 +279,7 @@ class LoginViewModelSpec: QuickSpec {
                             case .LogIn(let user):
                                 expect(user.email.raw) == "myuser@mail.com"
                                 expect(user.password) == "password"
-                                expect(user.name) == "MyUser"
+                                expect(user.username) == "MyUser"
                                 done()
                             default: break
                             }

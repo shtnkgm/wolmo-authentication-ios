@@ -11,12 +11,12 @@ import Authentication
 
 struct MyUser: UserType {
     let email: Email
-    let name: String
+    let username: String
     let password: String
     
-    init(email: Email, password: String, name: String) {
+    init(email: Email, password: String, username: String) {
         self.email = email
-        self.name = name
+        self.username = username
         self.password = password
     }
 }
