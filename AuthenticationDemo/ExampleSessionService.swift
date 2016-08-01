@@ -84,7 +84,7 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    public func signUp(name: String, email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
+    public func signUp(username: String?, email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC))
         if email.raw == _email {
             if _registeredAlready {

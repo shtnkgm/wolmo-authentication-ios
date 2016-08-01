@@ -51,7 +51,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! {
-        didSet { emailValidationMessageLabelOutlet.text = " " }
+        didSet { emailValidationMessageLabelOutlet.text = "" }
     }
     
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
@@ -61,7 +61,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
 
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! {
-        didSet { passwordValidationMessageLabelOutlet.text = " " }
+        didSet { passwordValidationMessageLabelOutlet.text = "" }
     }
     
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
@@ -83,12 +83,12 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal var signupButton: UIButton { return signupButtonOutlet }
     @IBOutlet weak var signupButtonOutlet: UIButton! {
-        didSet { signupButton.setTitle(signupButtonTitle, forState: .Normal) }
+        didSet { signupButton.setUnderlinedTitle(signupButtonTitle) }
     }
     
     internal var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton! {
-        didSet { recoverPasswordButton.setTitle(recoverPasswordButtonTitle, forState: .Normal) }
+        didSet { recoverPasswordButton.setUnderlinedTitle(recoverPasswordButtonTitle) }
     }
     
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {

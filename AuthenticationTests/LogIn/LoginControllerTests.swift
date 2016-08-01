@@ -26,7 +26,7 @@ class LoginViewControllerSpec: QuickSpec {
             var loginController: LoginController!
             
             beforeEach() {
-                sessionService = MockSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
+                sessionService = MockSessionService()
                 loginViewModel = LoginViewModel(sessionService: sessionService)
                 loginView = LoginView()
                 let configuration = LoginControllerConfiguration(viewModel: loginViewModel, viewFactory: { return loginView }, transitionDelegate: MockLoginTransitionDelegate())
@@ -60,7 +60,7 @@ class LoginViewControllerSpec: QuickSpec {
             describe("PasswordVisibility") {
                 
                 beforeEach() {
-                    sessionService = OneMyUserSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", name: "MyUser")
+                    sessionService = OneMyUserSessionService(email: Email(raw: "myuser@mail.com")!, password: "password", username: "MyUser")
                     loginViewModel = LoginViewModel(sessionService: sessionService)
                     loginView = LoginView()
                     loginController = LoginController(viewModel: loginViewModel, loginViewFactory: { return loginView }, onSignup: { _ in }, onLoginError: .None)

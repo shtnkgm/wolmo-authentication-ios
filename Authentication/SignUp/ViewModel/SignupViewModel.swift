@@ -18,9 +18,9 @@ import Rex
  */
 public protocol SignupViewModelType {
     
-    /** Name/Username field considerations: content and validation errors. */
-    var name: MutableProperty<String> { get }
-    var nameValidationErrors: AnyProperty<[String]> { get }
+    /** Username field considerations: content and validation errors. */
+    var username: MutableProperty<String> { get }
+    var usernameValidationErrors: AnyProperty<[String]> { get }
     
     /** Email field considerations: content and validation errors. */
     var email: MutableProperty<String> { get }
@@ -37,13 +37,16 @@ public protocol SignupViewModelType {
      errors and password visibility. */
     var passwordConfirmation: MutableProperty<String> { get }
     var passwordConfirmationValidationErrors: AnyProperty<[String]> { get }
-    var confirmationPasswordVisible: MutableProperty<Bool> { get }
-    var toggleConfirmPasswordVisibility: CocoaAction { get }
+    var passwordConfirmationVisible: MutableProperty<Bool> { get }
+    var togglePasswordConfirmVisibility: CocoaAction { get }
     
     /** Sign Up action considerations: action, executing state and errors. */
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
+    
+    var usernameEnabled: Bool { get }
+    var passwordConfirmationEnabled: Bool { get }
     
 }
 
@@ -55,34 +58,36 @@ public protocol SignupViewModelType {
  */
 public final class SignupViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
     
-    private let _sessionService: SessionService
-    
-    private let _credentialsAreValid: AndProperty
-    
-    public let name = MutableProperty("")
+    public let username = MutableProperty("")
     public let email = MutableProperty("")
     public let password = MutableProperty("")
     public let passwordConfirmation = MutableProperty("")
     
-    public let nameValidationErrors: AnyProperty<[String]>
+    public let usernameValidationErrors: AnyProperty<[String]>
     public let emailValidationErrors: AnyProperty<[String]>
     public let passwordValidationErrors: AnyProperty<[String]>
     public let passwordConfirmationValidationErrors: AnyProperty<[String]>
     
     public let passwordVisible = MutableProperty(false)
-    public let confirmationPasswordVisible = MutableProperty(false)
+    public let passwordConfirmationVisible = MutableProperty(false)
     
     public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
     
     public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
-    public var toggleConfirmPasswordVisibility: CocoaAction { return _toggleConfirmationPasswordVisibility.unsafeCocoaAction }
+    public var togglePasswordConfirmVisibility: CocoaAction { return _togglePasswordConfirmVisibility.unsafeCocoaAction }
+    
+    public let usernameEnabled: Bool
+    public let passwordConfirmationEnabled: Bool
+    
+    private let _sessionService: SessionService
+    private let _credentialsAreValid: AndProperty
     
     private lazy var _signUp: Action<AnyObject, User, SessionServiceError> = self.initializeSignUpAction()
     
     private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
-    private lazy var _toggleConfirmationPasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeToggleConfirmationPasswordVisibilityAction()
+    private lazy var _togglePasswordConfirmVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordConfirmationVisibilityAction()
     
     /**
          Initializes a signup view model which will communicate to the session service provided and
@@ -106,28 +111,26 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
                   passwordConfirmationEnabled: Bool = true) {
         _sessionService = sessionService
         
-        let nameValidationResult = name.signal.map(credentialsValidator.nameValidator.validate)
+        let usernameValidationResult = username.signal.map(credentialsValidator.usernameValidator.validate)
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         let passwordConfirmValidationResult = combineLatest(password.signal, passwordConfirmation.signal)
-            .map { $0 == $1 }.map(getPasswordConfirmValidationResultFromEquality)
+.map { $0 == $1 }.map(getPasswordConfirmValidationResultFromEquality)
         
-        nameValidationErrors = AnyProperty(initialValue: [], signal: nameValidationResult.map { $0.errors })
+        usernameValidationErrors = AnyProperty(initialValue: [], signal: usernameValidationResult.map { $0.errors })
         emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
         passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
         passwordConfirmationValidationErrors = AnyProperty(initialValue: [], signal: passwordConfirmValidationResult.map { $0.errors })
         
         var credentialsAreValid = AnyProperty<Bool>(initialValue: false, signal: emailValidationResult.map { $0.isValid })
             .and(AnyProperty<Bool>(initialValue: false, signal: passwordValidationResult.map { $0.isValid }))
-        if usernameEnabled {
-            credentialsAreValid = credentialsAreValid
-                .and(AnyProperty<Bool>(initialValue: false, signal: nameValidationResult.map { $0.isValid }))
-        }
-        if passwordConfirmationEnabled {
-            credentialsAreValid = credentialsAreValid
-                .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
-        }
+        credentialsAreValid = usernameEnabled ? credentialsAreValid .and(AnyProperty<Bool>(initialValue: false, signal: usernameValidationResult.map { $0.isValid }))
+                                            : credentialsAreValid
+        credentialsAreValid = passwordConfirmationEnabled ? credentialsAreValid .and(AnyProperty<Bool>(initialValue: false, signal:passwordConfirmValidationResult.map { $0.isValid }))
+                                            : credentialsAreValid
         _credentialsAreValid = credentialsAreValid
+        self.usernameEnabled = usernameEnabled
+        self.passwordConfirmationEnabled = passwordConfirmationEnabled
     }
     
 }
@@ -137,8 +140,10 @@ private extension SignupViewModel {
     private func initializeSignUpAction() -> Action<AnyObject, User, SessionServiceError> {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
-                return self._sessionService.signUp(self.name.value, email: email, password: self.password.value)
+                let username: String? = self.usernameEnabled ? self.username.value : .None
+                return self._sessionService.signUp(username, email: email, password: self.password.value)
             } else {
+                // It will never enter here, since sign up action is only enabled when email is a valid email.
                 return SignalProducer(error: .InvalidSignUpCredentials(.None)).observeOn(UIScheduler())
             }
         }
@@ -151,10 +156,10 @@ private extension SignupViewModel {
         }
     }
     
-    private func initializeToggleConfirmationPasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+    private func initializeTogglePasswordConfirmationVisibilityAction() -> Action<AnyObject, Bool, NoError> {
         return Action { [unowned self] _ in
-            self.confirmationPasswordVisible.value = !self.confirmationPasswordVisible.value
-            return SignalProducer(value: self.confirmationPasswordVisible.value).observeOn(UIScheduler())
+            self.passwordConfirmationVisible.value = !self.passwordConfirmationVisible.value
+            return SignalProducer(value: self.passwordConfirmationVisible.value).observeOn(UIScheduler())
         }
     }
     

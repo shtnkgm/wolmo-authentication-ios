@@ -96,6 +96,7 @@ public protocol SignupFormType: AuthenticationFormType {
     var usernameLabel: UILabel? { get }
     var usernameTextField: UITextField? { get }
     var usernameValidationMessageLabel: UILabel? { get }
+    func hideUsernameElements()
     
     var usernameTextFieldValid: Bool { get set }
     var usernameTextFieldSelected: Bool { get set }
@@ -104,10 +105,11 @@ public protocol SignupFormType: AuthenticationFormType {
     var passwordConfirmTextField: UITextField? { get }
     var passwordConfirmValidationMessageLabel: UILabel? { get }
     var passwordConfirmVisibilityButton: UIButton? { get }
+    func hidePasswordConfirmElements()
     
     var passwordConfirmationTextFieldValid: Bool { get set }
     var passwordConfirmationTextFieldSelected: Bool { get set }
-    var confirmationPasswordVisible: Bool { get set }
+    var passwordConfirmationVisible: Bool { get set }
     
     var signUpButton: UIButton { get }
     var signUpErrorLabel: UILabel? { get }
@@ -115,8 +117,8 @@ public protocol SignupFormType: AuthenticationFormType {
     var signUpButtonEnabled: Bool { get set }
     var signUpButtonPressed: Bool { get set }
     
-    var termsAndServicesButton: UIButton { get }
-    var termsAndServicesLabel: UILabel? { get }
+    var termsAndServicesTextView: UITextView { get }
+    func setTermsAndServicesText(url: NSURL)
     
 }
 
@@ -132,7 +134,5 @@ public extension SignupFormType {
     var passwordConfirmVisibilityButton: UIButton? { return .None }
     
     var signUpErrorLabel: UILabel? { return .None }
-    
-    var termsAndServicesLabel: UILabel? { return .None }
     
 }

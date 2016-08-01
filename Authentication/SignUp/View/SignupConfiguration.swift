@@ -13,6 +13,8 @@ public protocol SignupControllerTransitionDelegate {
     
     func onLogin(controller: SignupController)
     
+    func onTermsAndServices(controller: SignupController)
+    
 }
 
 /**
@@ -24,6 +26,7 @@ public final class SignupControllerConfiguration {
     public let viewFactory: () -> SignupViewType
     public let delegate: SignupControllerDelegate
     public let transitionDelegate: SignupControllerTransitionDelegate
+    public let termsAndServicesURL: NSURL
     
     /**
          Initializes a signup controller configuration with the view model,
@@ -43,11 +46,13 @@ public final class SignupControllerConfiguration {
     internal init(viewModel: SignupViewModelType,
                   viewFactory: () -> SignupViewType,
                   transitionDelegate: SignupControllerTransitionDelegate,
-                  delegate: SignupControllerDelegate = DefaultSignupControllerDelegate()) {
+                  delegate: SignupControllerDelegate = DefaultSignupControllerDelegate(),
+                  termsAndServicesURL: NSURL) {
         self.viewModel = viewModel
         self.viewFactory = viewFactory
         self.delegate = delegate
         self.transitionDelegate = transitionDelegate
+        self.termsAndServicesURL = termsAndServicesURL
     }
     
 }
