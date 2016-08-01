@@ -20,10 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
         
         let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default"))
-        let signupConfiguration = SignupViewConfiguration(usernameEnabled: true, passwordConfirmationEnabled: true)
+        let signupConfiguration = SignupViewConfiguration(usernameEnabled: true, passwordConfirmationEnabled: true,
+                                                          termsAndServicesURL: NSURL(string: "https://www.hackingwithswift.com")!)
         let authenticationConfiguration = AuthenticationViewConfiguration(loginViewConfiguration: loginConfiguration, signupViewConfiguration: signupConfiguration)
         
-        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: exampleSessionService, window: window!, viewConfiguration: authenticationConfiguration) {
+        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: exampleSessionService,
+                                                                window: window!,
+                                                                viewConfiguration: authenticationConfiguration) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }

@@ -16,7 +16,10 @@ public protocol SignupViewConfigurationType {
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     
-    // Textfields selected must be consistent with the view used.
+    /// NSURL from where to get the HTML content that displays the terms and services.
+    var termsAndServicesURL: NSURL { get }
+    
+    // Textfield selected must be consistent with the view used.
     var usernameEnabled: Bool { get }
     var passwordConfirmationEnabled: Bool { get }
     
@@ -33,15 +36,18 @@ public struct SignupViewConfiguration: SignupViewConfigurationType {
     
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
+    public let termsAndServicesURL: NSURL
     public let usernameEnabled: Bool
     public let passwordConfirmationEnabled: Bool
     
     public init(colorPalette: ColorPaletteType = DefaultColorPalette(),
                 fontPalette: FontPaletteType = DefaultFontPalette(),
                 usernameEnabled: Bool = false,
-                passwordConfirmationEnabled: Bool = false) {
+                passwordConfirmationEnabled: Bool = false,
+                termsAndServicesURL: NSURL) {
         self.colorPalette = colorPalette
         self.fontPalette = fontPalette
+        self.termsAndServicesURL = termsAndServicesURL
         self.usernameEnabled = usernameEnabled
         self.passwordConfirmationEnabled = passwordConfirmationEnabled
     }

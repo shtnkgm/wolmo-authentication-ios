@@ -118,6 +118,7 @@ public protocol SignupFormType: AuthenticationFormType {
     var signUpButtonPressed: Bool { get set }
     
     var termsAndServicesTextView: UITextView { get }
+    func setTermsAndServicesText(url: NSURL)
     
 }
 
