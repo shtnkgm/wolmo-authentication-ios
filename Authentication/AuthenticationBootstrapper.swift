@@ -400,7 +400,7 @@ public extension AuthenticationBootstrapper {
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
     public final func onLoginSuccess(controller: LoginController) {
-        self._window.rootViewController = self._mainViewControllerFactory()
+        _window.rootViewController = _mainViewControllerFactory()
     }
     
     public final func toSignup(controller: LoginController) {
@@ -422,7 +422,7 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
 extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     
     public final func onSignupSuccess(controller: SignupController) {
-        self._window.rootViewController = self._mainViewControllerFactory()
+        _window.rootViewController = _mainViewControllerFactory()
     }
     
     public final func toLogin(controller: SignupController) {
