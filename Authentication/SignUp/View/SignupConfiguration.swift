@@ -11,7 +11,7 @@
  */
 public protocol SignupControllerTransitionDelegate {
     
-    func onLogin(controller: SignupController)
+    func toLogin(controller: SignupController)
     
     func onTermsAndServices(controller: SignupController)
     

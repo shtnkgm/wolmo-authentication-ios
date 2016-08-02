@@ -8,6 +8,16 @@
 
 import Core
 
+/*
+    Enumeration representing an authentication screen
+    that can be used as the starting point of
+    authentication process.
+ */
+
+public enum AuthenticationInitialScreen {
+    case Login, Signup
+}
+
 /**
     Bootstrapper to start the application.
     Takes care of starting the authentication process before the main View Controller of the app when necessary,
@@ -28,7 +38,9 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
     /// The configuration that defines colour and fonts and assets, like the logo, used in the views.
     /// It also includes other configurations like the textfields selected to use in signup.
     private let _viewConfiguration: AuthenticationViewConfiguration
-
+    /// Property indicating the authentication screen to be shown the first time.
+    private let _initialScreen: AuthenticationInitialScreen
+    
     
     /**
         Initializes a new authentication bootstrapper with the session service to use for logging in and out and
@@ -41,15 +53,18 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
                 It can be remote or local.
             - viewConfiguration: all configuration needed to setup all authentication views.
                 By default, it uses each view's default configuration.
+            - initialScreen: Authentication screen to be shown the first time. By default, Login.
             - mainViewControllerFactory: Method that returns a valid mainViewController to use when starting the
-            core of the app
+                core of the app.
     */
     public init(sessionService: SessionService, window: UIWindow,
                 viewConfiguration: AuthenticationViewConfiguration,
+                initialScreen: AuthenticationInitialScreen = .Login,
                 mainViewControllerFactory: () -> UIViewController) {
         _window = window
         _mainViewControllerFactory = mainViewControllerFactory
         _viewConfiguration = viewConfiguration
+        _initialScreen = initialScreen
         self.sessionService = sessionService
 
         sessionService.events.observeNext { [unowned self] event in
@@ -78,7 +93,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         if let _ = self.currentUser {
             _window.rootViewController = _mainViewControllerFactory()
         } else {
-            _window.rootViewController = UINavigationController(rootViewController: createLoginController())
+            let mainAuthenticationController = _initialScreen == .Login ? createLoginController() : createSignupController()
+            _window.rootViewController = UINavigationController(rootViewController: mainAuthenticationController)
         }
     }
     
@@ -392,31 +408,17 @@ public extension AuthenticationBootstrapper {
 
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
-    /**
-         Function that reacts to the user pressing "Sign Up" in the
-         login screen.
-     
-         It will push the new controller in the navigation controller.
-     
-         - Parameter controller: LoginController active when calling this.
-     */
-    public final func onSignup(controller: LoginController) {
-        let signupController = createSignupController()
-        // The authentication framework starts the process with a navigation controller.
-        controller.navigationController!.pushViewController(signupController, animated: true)
+    public func toSignup(controller: LoginController) {
+        if _initialScreen == .Login {
+            let signupController = createSignupController()
+            controller.navigationController!.pushViewController(signupController, animated: true)
+        } else {
+            controller.navigationController!.popViewControllerAnimated(true)
+        }
     }
     
-    /**
-         Function that reacts to the user pressing "Recover Password"
-         in the login screen.
-     
-         It will push the new controller in the navigation controller.
-     
-         - Parameter controller: LoginController active when calling this.
-     */
-    public final func onRecoverPassword(controller: LoginController) {
+    public final func toRecoverPassword(controller: LoginController) {
         let recoverPasswordController = createRecoverPasswordController()
-        // The authentication framework starts the process with a navigation controller.
         controller.navigationController!.pushViewController(recoverPasswordController, animated: true)
     }
     
@@ -424,27 +426,18 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
 
 extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     
-    /**
-         Function that reacts to the user pressing "Log In"
-         in the signup screen.
-     
-         It will pop the signup controller from the navigation controller,
-         to return to login screen.
-     
-         - Parameter controller: SignupController active when calling this.
-     */
-    public final func onLogin(controller: SignupController) {
-        // The authentication framework starts the process with a navigation controller.
-        controller.navigationController!.popViewControllerAnimated(true)
+    public func toLogin(controller: SignupController) {
+        if _initialScreen == .Signup {
+            let loginController = createLoginController()
+            controller.navigationController!.pushViewController(loginController, animated: true)
+        } else {
+            controller.navigationController!.popViewControllerAnimated(true)
+        }
     }
     
     public func onTermsAndServices(controller: SignupController) {
         let termsAndServicesController = createTermsAndServicesController(_viewConfiguration.signupConfiguration.termsAndServicesURL)
-        if let navigationController = controller.navigationController {
-            navigationController.pushViewController(termsAndServicesController, animated: true)
-        } else {
-            _window.rootViewController = UINavigationController(rootViewController: termsAndServicesController)
-        }
+        controller.navigationController!.pushViewController(termsAndServicesController, animated: true)
     }
     
 }

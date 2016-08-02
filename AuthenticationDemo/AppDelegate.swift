@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         authenticationBootstrapper = AuthenticationBootstrapper(sessionService: exampleSessionService,
                                                                 window: window!,
-                                                                viewConfiguration: authenticationConfiguration) {
+                                                                viewConfiguration: authenticationConfiguration,
+                                                                initialScreen: .Signup) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }
