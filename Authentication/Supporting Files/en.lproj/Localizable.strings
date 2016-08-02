@@ -56,3 +56,7 @@
 "signup-error.password-confirmation.invalid" = "Passwords don't match";
 "signup-error.alert.title" = "Unable to sign up";
 "signup-error.alert.close" = "Try again";
+"signup-error.no-username-textfield.fatal-error.message" = "The signup view and view model are not compatible.";
+"signup-error.no-username-textfield.fatal-error.log-message" = "The signup view and view model are not compatible. The view model will try to validate content of username textfield which doesn't exist in the view.";
+"signup-error.no-confirm-password-textfield.fatal-error.message" = "The signup view and view model are not compatible.";
+"signup-error.no-confirm-password-textfield.fatal-error.log-message" = "The signup view and view model are not compatible. The view model will try to validate content of password confirmation textfield which doesn't exist in the view.";
