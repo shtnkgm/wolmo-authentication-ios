@@ -1,5 +1,5 @@
 //
-//  AuthenticationBootstrapper.swift
+//  AuthenticationCoordinator.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/8/16.
@@ -19,12 +19,13 @@ public enum AuthenticationInitialScreen {
 }
 
 /**
-    Bootstrapper to start the application.
-    Takes care of starting the authentication process before the main View Controller of the app when necessary,
-    and after the user logs out.
-    The authentication process includes login, signup and recover password logic.
+    Coordinator to start the application and regulate screen transitions.
+    Takes care of the authentication process until the Main View Controller
+    of your app is shown. (The authentication process is only triggered
+    when necessary).
+    The authentication process includes login and signup logic.
 */
-public class AuthenticationBootstrapper<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
+public class AuthenticationCoordinator<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService
@@ -43,13 +44,8 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         - Parameters:
             - sessionService: The session service to use for logging in and out.
             - window: The window the application will use.
-            - termsAndServicesURL: URL from where to get the HTML content that displays the terms and services.
-                It can be remote or local.
-            - viewConfiguration: all configuration needed to setup all authentication views.
-                By default, it uses each view's default configuration.
-            - initialScreen: Authentication screen to be shown the first time. By default, Login.
-            - mainViewControllerFactory: Method that returns a valid mainViewController to use when starting the
-                core of the app.
+            - componentsFactory: The authentication components factory used
+                for creating all components necessary in the authentication logic.
     */
     public init(sessionService: SessionService, window: UIWindow,
                 componentsFactory: AuthenticationComponentsFactoryType) {
@@ -63,7 +59,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
         starting with the authentication project if no user is already logged in the session service.
         Otherwise, it runs your project directly from starting the Main View Controller.
     */
-    public final func bootstrap() {
+    public final func start() {
         if let _ = self.currentUser {
             _window.rootViewController = _componentsFactory.createMainViewController()
         } else {
@@ -75,7 +71,7 @@ public class AuthenticationBootstrapper<User: UserType, SessionService: SessionS
 }
 
 // MARK: - Login Functions
-public extension AuthenticationBootstrapper {
+public extension AuthenticationCoordinator {
     
     /**
          Creates the login controller to use for starting
@@ -118,7 +114,7 @@ public extension AuthenticationBootstrapper {
 }
 
 // MARK: - Signup Functions
-public extension AuthenticationBootstrapper {
+public extension AuthenticationCoordinator {
 
     /**
          Creates the signup controller to use when the
@@ -172,7 +168,7 @@ public extension AuthenticationBootstrapper {
 }
 
 // MARK: - RecoverPassword Functions
-public extension AuthenticationBootstrapper {
+public extension AuthenticationCoordinator {
     
     /**
          Creates the recover password main controller to use when the
@@ -189,7 +185,7 @@ public extension AuthenticationBootstrapper {
 
 
 
-extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
+extension AuthenticationCoordinator: LoginControllerTransitionDelegate {
     
     public final func onLoginSuccess(controller: LoginController) {
         _window.rootViewController = _componentsFactory.createMainViewController()
@@ -211,7 +207,7 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
 }
 
-extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
+extension AuthenticationCoordinator: SignupControllerTransitionDelegate {
     
     public final func onSignupSuccess(controller: SignupController) {
         _window.rootViewController = _componentsFactory.createMainViewController()

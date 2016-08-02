@@ -15,29 +15,69 @@ public protocol AuthenticationComponentsFactoryType: LoginComponentsFactory, Sig
     
 }
 
+/**
+    Factory that uses default implementations of the protocol
+    and stores all information needed for methods without default
+    implementation.
+    It stores the view configurations and the main view controller
+    factory method.
+ */
 public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryType {
     
     /// Property indicating the authentication screen to be shown the first time.
     public let initialScreen: AuthenticationInitialScreen
     
     private let _mainControllerFactory: () -> UIViewController
-    private let _termsAndServicesURL: NSURL
-    private let _logo: UIImage
-    private let _enableUsername: Bool
-    private let _enableConfirmPassword: Bool
+    private let _loginConfiguration: LoginViewConfigurationType
+    private let _signupConfiguration: SignupViewConfigurationType
     
-    public init(termsAndServicesURL: NSURL,
-                logo: UIImage,
-                enableUsername: Bool = false,
-                enableConfirmPassword: Bool = false,
-                initialScreen: AuthenticationInitialScreen = .Login,
+    /**
+        Initializes the AuthenticationComponentsFactory
+        with the components to use.
+        
+        - Parameters:
+            - initialScreen: authentication screen to be shown
+                the first time. By default, Login.
+            - loginConfiguration: login view configuration to
+                return when asked for it.
+            - signupConfiguration: signup view configuration to
+                return when asked for it.
+            - mainControllerFactory: main view controller factory
+                method to trigger when asked for the main view
+                controller.
+    */
+    public init(initialScreen: AuthenticationInitialScreen = .Login,
+                loginConfiguration: LoginViewConfigurationType,
+                signupConfiguration: SignupViewConfigurationType,
                 mainControllerFactory: () -> UIViewController) {
         _mainControllerFactory = mainControllerFactory
-        _termsAndServicesURL = termsAndServicesURL
-        _logo = logo
-        _enableUsername = enableUsername
-        _enableConfirmPassword = enableConfirmPassword
+        _loginConfiguration = loginConfiguration
+        _signupConfiguration = signupConfiguration
         self.initialScreen = initialScreen
+    }
+    
+    /**
+         Initializes the AuthenticationComponentsFactory
+         with the components to use.
+         
+         - Parameters:
+             - initialScreen: authentication screen to be shown
+                the first time. By default, Login.
+             - logo: logo to add to the default LoginViewConfiguration.
+             - termsAndServicesURL: terms and services URL used
+                to create the default SignupViewConfiguration.
+             - mainControllerFactory: main view controller factory
+                method to trigger when asked for the main view
+                controller.
+     */
+    public init(initialScreen: AuthenticationInitialScreen = .Login,
+                logo: UIImage,
+                termsAndServicesURL: NSURL,
+                mainControllerFactory: () -> UIViewController) {
+        self.init(initialScreen: initialScreen,
+                  loginConfiguration: LoginViewConfiguration(logoImage: logo),
+                  signupConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL),
+                  mainControllerFactory: mainControllerFactory)
     }
     
     public func createMainViewController() -> UIViewController {
@@ -45,13 +85,11 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     }
     
     public func createLoginViewConfiguration() -> LoginViewConfigurationType {
-        return LoginViewConfiguration(logoImage: _logo)
+        return _loginConfiguration
     }
     
     public func createSignupViewConfiguration() -> SignupViewConfigurationType {
-        return SignupViewConfiguration(termsAndServicesURL: _termsAndServicesURL,
-                                       usernameEnabled: _enableUsername,
-                                       passwordConfirmationEnabled: _enableConfirmPassword)
+        return _signupConfiguration
     }
     
 }

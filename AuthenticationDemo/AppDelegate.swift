@@ -13,23 +13,21 @@ import Authentication
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var authenticationBootstrapper: AuthenticationBootstrapper<ExampleUser, ExampleSessionService>!
+    var authenticationCoordinator: AuthenticationCoordinator<ExampleUser, ExampleSessionService>!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
-        let componentsFactory = AuthenticationComponentsFactory(termsAndServicesURL: NSURL(string: "https://www.hackingwithswift.com")!,
+        let componentsFactory = AuthenticationComponentsFactory(initialScreen: .Signup,
                                                                 logo: UIImage(named: "default")!,
-                                                                enableUsername: true,
-                                                                enableConfirmPassword: true,
-                                                                initialScreen: .Signup) {
+                                                                termsAndServicesURL: NSURL(string: "https://www.hackingwithswift.com")!) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }
-        authenticationBootstrapper = AuthenticationBootstrapper(sessionService: exampleSessionService,
+        authenticationCoordinator = AuthenticationCoordinator(sessionService: exampleSessionService,
                                                                 window: window!,
                                                                 componentsFactory: componentsFactory)
-        authenticationBootstrapper.bootstrap()
+        authenticationCoordinator.start()
         return true
     }
 
