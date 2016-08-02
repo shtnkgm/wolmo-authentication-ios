@@ -188,7 +188,7 @@ private extension SignupController {
     private func bindButtons() {
         signupView.signUpButton.rex_pressed.value = _viewModel.signUpCocoaAction
         signupView.signUpButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.signUpButtonEnabled = $0 }
-        signupView.loginButton.setAction { [unowned self] _ in self._transitionDelegate.onLogin(self) }
+        signupView.loginButton.setAction { [unowned self] _ in self._transitionDelegate.toLogin(self) }
         bindTermsAndServices()
     }
     

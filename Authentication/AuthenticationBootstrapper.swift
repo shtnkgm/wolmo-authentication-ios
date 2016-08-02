@@ -408,7 +408,7 @@ public extension AuthenticationBootstrapper {
 
 extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
     
-    public func onSignup(controller: LoginController) {
+    public func toSignup(controller: LoginController) {
         if _initialScreen == .Login {
             let signupController = createSignupController()
             controller.navigationController!.pushViewController(signupController, animated: true)
@@ -417,7 +417,7 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
         }
     }
     
-    public final func onRecoverPassword(controller: LoginController) {
+    public final func toRecoverPassword(controller: LoginController) {
         let recoverPasswordController = createRecoverPasswordController()
         controller.navigationController!.pushViewController(recoverPasswordController, animated: true)
     }
@@ -426,7 +426,7 @@ extension AuthenticationBootstrapper: LoginControllerTransitionDelegate {
 
 extension AuthenticationBootstrapper: SignupControllerTransitionDelegate {
     
-    public func onLogin(controller: SignupController) {
+    public func toLogin(controller: SignupController) {
         if _initialScreen == .Signup {
             let loginController = createLoginController()
             controller.navigationController!.pushViewController(loginController, animated: true)
