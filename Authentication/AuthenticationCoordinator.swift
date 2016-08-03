@@ -34,6 +34,8 @@ public class AuthenticationCoordinator<User, SessionService: SessionServiceType 
     
     /// The window of the app
     private let _window: UIWindow
+    /// Property indicating the authentication screen to be shown the first time.
+    private let _initialScreen: AuthenticationInitialScreen
     /// The factory class to create all authentication components in the process.
     private let _componentsFactory: AuthenticationComponentsFactoryType
     
@@ -44,12 +46,16 @@ public class AuthenticationCoordinator<User, SessionService: SessionServiceType 
         - Parameters:
             - sessionService: The session service to use for logging in and out.
             - window: The window the application will use.
+            - initialScreen: authentication screen to be shown the first time.
+                By default, Login.
             - componentsFactory: The authentication components factory used
                 for creating all components necessary in the authentication logic.
     */
     public init(sessionService: SessionService, window: UIWindow,
+                initialScreen: AuthenticationInitialScreen = .Login,
                 componentsFactory: AuthenticationComponentsFactoryType) {
         _window = window
+        _initialScreen = initialScreen
         _componentsFactory = componentsFactory
         self.sessionService = sessionService
     }
@@ -63,7 +69,7 @@ public class AuthenticationCoordinator<User, SessionService: SessionServiceType 
         if let _ = self.currentUser {
             _window.rootViewController = _componentsFactory.createMainViewController()
         } else {
-            let mainAuthenticationController = _componentsFactory.initialScreen == .Login ? createLoginController() : createSignupController()
+            let mainAuthenticationController = _initialScreen == .Login ? createLoginController() : createSignupController()
             _window.rootViewController = UINavigationController(rootViewController: mainAuthenticationController)
         }
     }
@@ -186,7 +192,7 @@ extension AuthenticationCoordinator: LoginControllerTransitionDelegate {
     }
     
     public final func toSignup(controller: LoginController) {
-        if _componentsFactory.initialScreen == .Login {
+        if _initialScreen == .Login {
             let signupController = createSignupController()
             controller.navigationController!.pushViewController(signupController, animated: true)
         } else {
@@ -208,7 +214,7 @@ extension AuthenticationCoordinator: SignupControllerTransitionDelegate {
     }
     
     public final func toLogin(controller: SignupController) {
-        if _componentsFactory.initialScreen == .Signup {
+        if _initialScreen == .Signup {
             let loginController = createLoginController()
             controller.navigationController!.pushViewController(loginController, animated: true)
         } else {

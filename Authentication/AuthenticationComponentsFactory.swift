@@ -8,9 +8,6 @@
 
 public protocol AuthenticationComponentsFactoryType: LoginComponentsFactory, SignupComponentsFactory {
     
-    //var sessionService: SessionServiceType { get }
-    var initialScreen: AuthenticationInitialScreen { get }
-    
     func createMainViewController() -> UIViewController
     
 }
@@ -24,9 +21,6 @@ public protocol AuthenticationComponentsFactoryType: LoginComponentsFactory, Sig
  */
 public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryType {
     
-    /// Property indicating the authentication screen to be shown the first time.
-    public let initialScreen: AuthenticationInitialScreen
-    
     private let _mainControllerFactory: () -> UIViewController
     private let _loginConfiguration: LoginViewConfigurationType
     private let _signupConfiguration: SignupViewConfigurationType
@@ -36,8 +30,6 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
         with the components to use.
         
         - Parameters:
-            - initialScreen: authentication screen to be shown
-                the first time. By default, Login.
             - loginConfiguration: login view configuration to
                 return when asked for it.
             - signupConfiguration: signup view configuration to
@@ -46,14 +38,12 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
                 method to trigger when asked for the main view
                 controller.
     */
-    public init(initialScreen: AuthenticationInitialScreen = .Login,
-                loginConfiguration: LoginViewConfigurationType,
+    public init(loginConfiguration: LoginViewConfigurationType,
                 signupConfiguration: SignupViewConfigurationType,
                 mainControllerFactory: () -> UIViewController) {
         _mainControllerFactory = mainControllerFactory
         _loginConfiguration = loginConfiguration
         _signupConfiguration = signupConfiguration
-        self.initialScreen = initialScreen
     }
     
     /**
@@ -70,12 +60,10 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
                 method to trigger when asked for the main view
                 controller.
      */
-    public init(initialScreen: AuthenticationInitialScreen = .Login,
-                logo: UIImage,
+    public init(logo: UIImage? = .None,
                 termsAndServicesURL: NSURL,
                 mainControllerFactory: () -> UIViewController) {
-        self.init(initialScreen: initialScreen,
-                  loginConfiguration: LoginViewConfiguration(logoImage: logo),
+        self.init(loginConfiguration: LoginViewConfiguration(logoImage: logo),
                   signupConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL),
                   mainControllerFactory: mainControllerFactory)
     }

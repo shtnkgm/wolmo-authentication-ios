@@ -18,15 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
-        let componentsFactory = AuthenticationComponentsFactory(initialScreen: .Signup,
-                                                                logo: UIImage(named: "default")!,
+        let componentsFactory = AuthenticationComponentsFactory(logo: UIImage(named: "default")!,
                                                                 termsAndServicesURL: NSURL(string: "https://www.hackingwithswift.com")!) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             return storyboard.instantiateViewControllerWithIdentifier("ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }
         authenticationCoordinator = AuthenticationCoordinator(sessionService: exampleSessionService,
-                                                                window: window!,
-                                                                componentsFactory: componentsFactory)
+                                                              window: window!,
+                                                              initialScreen: .Signup,
+                                                              componentsFactory: componentsFactory)
         authenticationCoordinator.start()
         return true
     }
