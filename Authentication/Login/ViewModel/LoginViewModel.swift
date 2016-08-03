@@ -41,7 +41,7 @@ public protocol LoginViewModelType {
     and therefore enabling log in action, managing password visibility, reporting log in events
     and communicating with the session service for executing the log in.
 */
-public final class LoginViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User> : LoginViewModelType {
+public final class LoginViewModel<User, SessionService: SessionServiceType where SessionService.User == User> : LoginViewModelType {
     
     private let _credentialsAreValid: AnyProperty<Bool>
     private let _sessionService: SessionService

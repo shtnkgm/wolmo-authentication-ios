@@ -22,7 +22,6 @@
 		9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC1F1591C94DC8C005FC65A /* Rex.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF91C8DCE0A00F0A37C /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE111DA31D4FA6A50083C99E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA11D4FA6A50083C99E /* Email.swift */; };
-		CE111DA41D4FA6A50083C99E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA21D4FA6A50083C99E /* User.swift */; };
 		CE111DA91D4FA6C20083C99E /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */; };
 		CE111DAA1D4FA6C20083C99E /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA71D4FA6C20083C99E /* MockSessionService.swift */; };
 		CE111DAB1D4FA6C20083C99E /* MyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA81D4FA6C20083C99E /* MyUser.swift */; };
@@ -157,7 +156,6 @@
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE111DA11D4FA6A50083C99E /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
-		CE111DA21D4FA6A50083C99E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE111DA71D4FA6C20083C99E /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSessionService.swift; sourceTree = "<group>"; };
 		CE111DA81D4FA6C20083C99E /* MyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUser.swift; sourceTree = "<group>"; };
@@ -340,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				CE111DA11D4FA6A50083C99E /* Email.swift */,
-				CE111DA21D4FA6A50083C99E /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -752,7 +749,6 @@
 				CE111DBE1D4FA70D0083C99E /* ConstantValidators.swift in Sources */,
 				CE111DEC1D4FA7390083C99E /* SignupViewModel.swift in Sources */,
 				CE111DEA1D4FA7390083C99E /* SignupViewDelegate.swift in Sources */,
-				CE111DA41D4FA6A50083C99E /* User.swift in Sources */,
 				CE111E0F1D4FA8980083C99E /* AuthenticationViewConfiguration.swift in Sources */,
 				CE111DD61D4FA7340083C99E /* LoginCredentialsValidator.swift in Sources */,
 			);

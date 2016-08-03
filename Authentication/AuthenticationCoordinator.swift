@@ -25,7 +25,7 @@ public enum AuthenticationInitialScreen {
     when necessary).
     The authentication process includes login and signup logic.
 */
-public class AuthenticationCoordinator<User: UserType, SessionService: SessionServiceType where SessionService.User == User> {
+public class AuthenticationCoordinator<User, SessionService: SessionServiceType where SessionService.User == User> {
     
     /// The entry and exit point to the user's session.
     public let sessionService: SessionService

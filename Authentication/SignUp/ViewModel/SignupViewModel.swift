@@ -57,7 +57,7 @@ public protocol SignupViewModelType {
      responsible for enabling sign up action, managing password visibility, reporting sign up
      events and communicating with the session service for executing the sign up.
  */
-public final class SignupViewModel<User: UserType, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
+public final class SignupViewModel<User, SessionService: SessionServiceType where SessionService.User == User>: SignupViewModelType {
     
     public let username = MutableProperty("")
     public let email = MutableProperty("")
