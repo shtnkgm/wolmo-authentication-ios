@@ -20,7 +20,6 @@ It provides logic as well as default views with plenty extensibility points.
 	* [Manually](#manually)
 * [Bootstrap](#bootstrap)
 * [Dependencies](#dependencies)
-* [Basic Usage](#basic-usage)
 * [Framework Overview](#framework-overview)
 * [Reporting Issues](#reporting-issues)
 * [Contributing](#contributing)
@@ -86,28 +85,36 @@ script/bootstrap
 - [Rex](https://github.com/neilpa/Rex): Extensions for ReactiveCocoa.
 
 
+## Usage
 
-## Basic Usage
+For more information about the framework's structure and concepts, see the [Framework Overview](FRAMEWORK-OVERVIEW.txt).
+
+There is an example application in this project called **AuthenticationDemo** in which the basic usage of the framework is shown.
+
+For being able to use anything the framework offers, after installing it you just need to add `import Authentication` to your code, as any library.
+
+The framework provides an `AuthenticationCoordinator` class that takes care of managing the authentication process and starting your app.
+
+So in your `AppDelegate.swift` file you will need to
+
+1. create the `AuthenticationCoordinator`
+2. trigger its `start` method
+
+and that's all !
+
+This will start the authentication process or redirect to your app if there is no need to authenticate.
+
+### How to create the `AuthenticationCoordinator`?
+
+ The `AuthenticationCoordinator` needs four things to be created:
+
+1. The UIWindow where the app will be shown.
+2. Which authentication screen you want to be shown first (login or signup).
+3. A session service with which the framework interacts for managing the user session.
+4. A component factory that provides the components for the framwork to work with.
 
 
-
-
-### Login
-
-
-
-
-
-### Signup
-
-
-
-## Framework Overview
-
-
-
-
-## Configuration
+...
 
 
 
@@ -122,26 +129,42 @@ script/bootstrap
 
 
 
-
-## Maintainers
-
-
-
-
 ## Change Log
 
-You can check the file [CHANGELOG.md](https://github.com/Wolox/wolmo-authentication-ios/blob/master/CHANGELOG.md) for detailed information.
+You can check the file [CHANGELOG.md](CHANGELOG.md) for detailed information.
+
+
+## About
+This project is maintained by [Daniela Paula Riesgo](https://github.com/danielaRiesgo) and it is written by [Wolox](http://www.wolox.com.ar).
+
+
+![Wolox](https://raw.githubusercontent.com/Wolox/press-kit/master/logos/logo_banner.png)
+
 
 
 ## License
 
+**WolMo - Authentication iOS** is available under the MIT [license](LICENSE.md).
 
-
-
-## About
-This project is written and maintained by [Wolox](http://www.wolox.com.ar/).
-
-![Wolox](https://raw.githubusercontent.com/Wolox/press-kit/master/logos/logo_banner.png)
+	Copyright (c) [2016] [Daniela Paula Riesgo]<daniela.riesgo>@wolox.com.ar>
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
 
 
 
