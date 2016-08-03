@@ -3,59 +3,102 @@ WolMo - Authentication iOS
 
 [![Build Status](https://travis-ci.org/Wolox/wolmo-authentication-ios.svg?branch=master)](https://travis-ci.org/Wolox/wolmo-authentication-ios)
 [![Coverage Status](https://coveralls.io/repos/github/Wolox/wolmo-authentication-ios/badge.svg?branch=master)](https://coveralls.io/github/Wolox/wolmo-authentication-ios?branch=master)
+![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-orange.svg)
 
 
-**Wolmo - Authentication** is an authentication framework for Swift, designed to take care of some basic steps present in almost every iOS app:
+**Wolmo - Authentication iOS** is an authentication framework for Swift, designed to take care of some basic steps present in almost every iOS app:
 
-- [ ] Onboarding
 - [x] Signup
 - [x] Login
-- [ ] Recover password
+- [ ] Recover password (in a future version)
 
-It provides logic as well as default views with many extensibility points.
+It provides logic as well as default views with plenty extensibility points.
 
 ## Table of Contents
 * [Installation](#installation)
-* [Dependencies](#dependencies)
+	* [Carthage](#carthage)
+	* [Manually](#manually)
 * [Bootstrap](#bootstrap)
-* [Usage](#usage)
+* [Dependencies](#dependencies)
+* [Basic Usage](#basic-usage)
 * [Framework Overview](#framework-overview)
-* [Configuration](#configuration)
 * [Reporting Issues](#reporting-issues)
 * [Contributing](#contributing)
-* [Maintainers](#maintainers)
-* [License](#license)
 * [About](#about)
+* [License](#license)
 * [Change Log](#change-log)
 
 
 ## Installation
 
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a dependency manager that builds your dependencies and provides you with binary frameworks that you can include in your project.
+
+You can install Carthage with Homebrew using the following command:
+
+```
+brew update
+brew install carthage
+```
+
+To download wolmo-core-iOS, add this to your Cartfile:
+
+```
+github "Wolox/wolmo-authentication-ios" "master"
+```
+//TODO: change for release version.
+
+### Manually
+[Bootstrap](#bootstrap) the project and then drag it to your workspace.
+
+
+## Bootstrap
+
+1. Clone the project.
+2. Run the bootstrap script that comes with it.
+
+With SSH: 
+
 ```
 git clone git@github.com:Wolox/wolmo-authentication-ios.git
+```
+
+Or with HTTPS:
+
+```
+git clone https://github.com/Wolox/wolmo-authentication-ios.git
+```
+
+And then:
+
+```
 cd wolmo-authentication-ios
 script/bootstrap
 ```
 
 
-# Dependencies
 
-- [ ] [WolmoCore](https://github.com/Wolox/wolmo-core-ios): Framework with useful basic extensions.
-- [x] [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa): Framework inspired by functional reactive programming.
-- [x] [Rex](https://github.com/neilpa/Rex): Extensions for ReactiveCocoa.
-- [x] [CocoaLumberjack](https://github.com/CocoaLumberjack/CocoaLumberjack): Logging framework.
+## Dependencies
 
-
-
-## Bootstrap
+- [WolmoCore](https://github.com/Wolox/wolmo-core-ios): Framework with useful basic extensions.
+- [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa): Framework inspired by functional reactive programming.
+- [Rex](https://github.com/neilpa/Rex): Extensions for ReactiveCocoa.
 
 
 
-
-## Usage
-
+## Basic Usage
 
 
+
+
+### Login
+
+
+
+
+
+### Signup
 
 
 
