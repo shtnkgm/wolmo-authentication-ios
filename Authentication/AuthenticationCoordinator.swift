@@ -40,7 +40,7 @@ public class AuthenticationCoordinator<User, SessionService: SessionServiceType 
     private let _componentsFactory: AuthenticationComponentsFactoryType
     
     /**
-        Initializes a new authentication bootstrapper with the session service to use for logging in and out and
+        Initializes a new authentication coordinator with the session service to use for logging in and out and
         the factory method from where to obtain the main View Controller of the application.
 
         - Parameters:

@@ -16,13 +16,6 @@ import ReactiveCocoa
      occur for it to act upon them.
      If there are more than one validation error in a field, the controller
      presents only the first one in the errors label.
-     
-     //TODO: Move what's below to README.
-     If wanting to use the default SignupController with some customization,
-     you will not override the `createSignupController` method of the Bootstrapper,
-     but all the others that provide the elements this controller uses. (That is to say,
-     `createSignupView`, `createSignupViewModel`, `createSignupControllerDelegate`
-     and/or `createSignupControllerConfiguration`)
  */
 public final class SignupController: UIViewController {
     

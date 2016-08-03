@@ -159,7 +159,7 @@ public protocol LoginComponentsFactory {
          to other screens (like signup).
          
          - Returns: A valid login controller transition delegate to use,
-            or .None if wanting to use the Bootstrapper's default
+            or .None if wanting to use the Coordinator's default
             implementation of the protocol.
             By default, returns .None.
      */
@@ -283,7 +283,7 @@ public protocol SignupComponentsFactory {
          to other screens (like login).
          
          - Returns: A valid login controller transition delegate to use,
-             or .None if wanting to use the Bootstrapper's default
+             or .None if wanting to use the Coordinator's default
              implementation of the protocol.
              By default, returns .None.
      */
