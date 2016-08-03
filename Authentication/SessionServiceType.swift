@@ -50,25 +50,17 @@ public protocol SessionServiceType {
     var currentUser: AnyProperty<User?> { get }
     
     /**
-         ...
-         TODO: Check if we need a signal with all this events, or just logout.
-    */
-    var events: Signal<SessionServiceEvent<User>, NoError> { get }
-    
-    /**
         This method takes care of validating and logging in.
      
         - Returns: A SignalProducer that can send the User logged in
         or the SessionServiceError if not.
         If the credentials are valid, the SignalProducer returned
         must take care of:
-            sending the user to the observers
-            sending the login event through the events signal and
+            sending the user to the observers and
             updating the currentUser property.
         If the credentials aren't valid, the SignalProducer returned
         must take care of:
-            sending the error to the observer and
-            sending the login error event through the events signal. -> TODO: Check if we need to demand this.
+            sending the error to the observer.
     */
     func logIn(email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
@@ -79,20 +71,11 @@ public protocol SessionServiceType {
          or the SessionServiceError if not.
          If the credentials are valid, the SignalProducer returned
          must take care of:
-             sending the user to the observers
-             sending the sign up event through the events signal and
+             sending the user to the observers and
              updating the currentUser property.
          If the credentials aren't valid, the SignalProducer returned
          must take care of:
-             sending the error to the observer and
-             sending the singup error event through the events signal. -> TODO: Check if we need to demand this.
-        
-         - Attention: The framework implies that a signup action should
-         have the same reaction as a login event: entering the main screen
-         of the app. So just by sending .SignUp event to the signal is
-         enough to trigger this.
-         Avoid sending a .LogIn event as well.
-         Don't forget to update the currentUser.
+             sending the error to the observer.
     */
     func signUp(username: String?, email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     

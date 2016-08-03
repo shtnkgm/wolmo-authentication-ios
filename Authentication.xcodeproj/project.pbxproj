@@ -65,6 +65,8 @@
 		CE111E101D4FA8980083C99E /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0D1D4FA8980083C99E /* ColorPalette.swift */; };
 		CE111E111D4FA8980083C99E /* FontPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0E1D4FA8980083C99E /* FontPalette.swift */; };
 		CE111E151D4FC8560083C99E /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */; };
+		CE111E171D4FCED70083C99E /* LoginControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */; };
+		CE111E191D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */; };
 		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
 		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
 		CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
@@ -197,6 +199,8 @@
 		CE111E0D1D4FA8980083C99E /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		CE111E0E1D4FA8980083C99E /* FontPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPalette.swift; sourceTree = "<group>"; };
 		CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
+		CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTransitionDelegate.swift; sourceTree = "<group>"; };
+		CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE5248881D468F8700B499CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE7A7BB31D3E9AFC00C44A25 /* Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Core.framework; path = Carthage/Build/iOS/Core.framework; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 				CE111DC61D4FA7340083C99E /* LoginController.swift */,
 				CE111DC51D4FA7340083C99E /* LoginConfiguration.swift */,
 				CE111DC71D4FA7340083C99E /* LoginControllerDelegate.swift */,
+				CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */,
 				CE111DC91D4FA7340083C99E /* LoginView.xib */,
 				CE111DC81D4FA7340083C99E /* LoginView.swift */,
 				CE111DCA1D4FA7340083C99E /* LoginViewConfiguration.swift */,
@@ -416,10 +421,11 @@
 			children = (
 				CE111DDB1D4FA7390083C99E /* SignupController.swift */,
 				CE111DDA1D4FA7390083C99E /* SignupConfiguration.swift */,
-				CE111DDF1D4FA7390083C99E /* SignupViewConfiguration.swift */,
+				CE111DDC1D4FA7390083C99E /* SignupControllerDelegate.swift */,
+				CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */,
 				CE111DDE1D4FA7390083C99E /* SignupView.xib */,
 				CE111DDD1D4FA7390083C99E /* SignupView.swift */,
-				CE111DDC1D4FA7390083C99E /* SignupControllerDelegate.swift */,
+				CE111DDF1D4FA7390083C99E /* SignupViewConfiguration.swift */,
 				CE111DE01D4FA7390083C99E /* SignupViewDelegate.swift */,
 			);
 			path = View;
@@ -711,6 +717,7 @@
 				CE111DD01D4FA7340083C99E /* LoginController.swift in Sources */,
 				CE111E021D4FA80E0083C99E /* TermsAndServicesController.swift in Sources */,
 				CE111DC21D4FA70D0083C99E /* TextInputValidatorType.swift in Sources */,
+				CE111E191D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift in Sources */,
 				CE111DCF1D4FA7340083C99E /* LoginConfiguration.swift in Sources */,
 				CE111DD11D4FA7340083C99E /* LoginControllerDelegate.swift in Sources */,
 				CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */,
@@ -721,6 +728,7 @@
 				CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */,
 				CE111DEB1D4FA7390083C99E /* SignupCredentialsValidator.swift in Sources */,
 				CE111DE61D4FA7390083C99E /* SignupControllerDelegate.swift in Sources */,
+				CE111E171D4FCED70083C99E /* LoginControllerTransitionDelegate.swift in Sources */,
 				CE111DC11D4FA70D0083C99E /* LengthValidators.swift in Sources */,
 				CE111DE71D4FA7390083C99E /* SignupView.swift in Sources */,
 				CE111DBD1D4FA70D0083C99E /* CompositeValidator.swift in Sources */,

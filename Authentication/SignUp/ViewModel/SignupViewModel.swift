@@ -44,6 +44,7 @@ public protocol SignupViewModelType {
     var signUpCocoaAction: CocoaAction { get }
     var signUpErrors: Signal<SessionServiceError, NoError> { get }
     var signUpExecuting: Signal<Bool, NoError> { get }
+    var signUpSuccessful: Signal<(), NoError> { get }
     
     var usernameEnabled: Bool { get }
     var passwordConfirmationEnabled: Bool { get }
@@ -74,6 +75,7 @@ public final class SignupViewModel<User: UserType, SessionService: SessionServic
     public var signUpCocoaAction: CocoaAction { return _signUp.unsafeCocoaAction }
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.executing.signal }
+    public var signUpSuccessful: Signal<(), NoError> { return _signUp.values.map { _ in () } }
     
     public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
     public var togglePasswordConfirmVisibility: CocoaAction { return _togglePasswordConfirmVisibility.unsafeCocoaAction }

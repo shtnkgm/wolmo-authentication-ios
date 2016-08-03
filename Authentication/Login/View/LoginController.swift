@@ -101,6 +101,7 @@ private extension LoginController {
         }
         
         _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.didLogIn(self, with: $0) }
+        _viewModel.logInSuccessful.observeNext { [unowned self] _ in self._transitionDelegate.onLoginSuccess(self) }
     }
     
     private func bindEmailElements() {
