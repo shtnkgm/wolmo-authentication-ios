@@ -97,12 +97,9 @@ public extension AuthenticationCoordinator {
          - Returns: A valid login controller configuration to use.
      */
     internal func createLoginControllerConfiguration() -> LoginControllerConfiguration {
-        let createLoginView: () -> LoginViewType = { [unowned self] in
-            return self._componentsFactory
-                .createLoginView(self._componentsFactory
-                    .createLoginViewDelegate(self._componentsFactory
-                        .createLoginViewConfiguration()))
-        }
+        let loginViewConfiguration = _componentsFactory.createLoginViewConfiguration()
+        let loginViewDelegate = _componentsFactory.createLoginViewDelegate(loginViewConfiguration)
+        let createLoginView: () -> LoginViewType = { [unowned self] in self._componentsFactory.createLoginView(loginViewDelegate) }
         return LoginControllerConfiguration(
             viewModel: _componentsFactory.createLoginViewModel(sessionService,
                 credentialsValidator: _componentsFactory.createLogInCredentialsValidator()),
@@ -139,20 +136,17 @@ public extension AuthenticationCoordinator {
          - Returns: A valid signup controller configuration to use.
      */
     internal func createSignupControllerConfiguration() -> SignupControllerConfiguration {
-        let configuration = self._componentsFactory.createSignupViewConfiguration()
-        let createSignupView: () -> SignupViewType = { [unowned self] in
-            return self._componentsFactory
-                .createSignupView(self._componentsFactory
-                    .createSignupViewDelegate(configuration))
-        }
+        let signupViewConfiguration = _componentsFactory.createSignupViewConfiguration()
+        let signupViewDelegate = _componentsFactory.createSignupViewDelegate(signupViewConfiguration)
+        let createSignupView: () -> SignupViewType = { [unowned self] in self._componentsFactory.createSignupView(signupViewDelegate) }
         return SignupControllerConfiguration(
             viewModel: _componentsFactory.createSignupViewModel(sessionService,
                 credentialsValidator: _componentsFactory.createSignUpCredentialsValidator(),
-                configuration: configuration),
+                configuration: signupViewConfiguration),
             viewFactory: createSignupView,
             transitionDelegate: _componentsFactory.createSignupControllerTransitionDelegate() ?? self,
             delegate: _componentsFactory.createSignupControllerDelegate(),
-            termsAndServicesURL: configuration.termsAndServicesURL)
+            termsAndServicesURL: signupViewConfiguration.termsAndServicesURL)
     }
     
     /**
