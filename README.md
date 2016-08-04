@@ -104,6 +104,7 @@ and that's all !
 
 This will start the authentication process or redirect to your app if there is no need to authenticate.
 
+
 ### How to create the `AuthenticationCoordinator`?
 
  The `AuthenticationCoordinator` needs four things to be created:
@@ -111,13 +112,51 @@ This will start the authentication process or redirect to your app if there is n
 1. The UIWindow where the app will be shown.
 2. Which authentication screen you want to be shown first (login or signup).
 3. A session service with which the framework interacts for managing the user session.
-4. A component factory that provides the components for the framwork to work with.
-
-
-...
+4. A component factory that provides the components for the framework to work with.
 
 
 
+#### Session Service
+
+You must provide a session service that comforms to the [SessionServiceType](Authentication/SessionServiceType.swift) protocol, which basically stores the current user and has endpoints for logging in and signing up with certain information (acquired by the framework from the final user).
+
+
+#### Authentication Components Factory
+
+There are many components that the framework will use, and you can configure many things about them.
+The [AuthenticationComponentsFactoryType](Authentication/AuthenticationComponentsFactory.swift) protocol ensures a factory method for each of this components.
+
+Almost all of the components have a default implementation, except for a few that are intrinsic to your app:
+
+* **MainViewController**: The UIViewController to show when the authentication is completed. This will be the entry point to your app.
+* **LoginViewConfiguration**: Stores the logo and the color and font palettes to style the authentication login screen.
+* **SignupViewConfiguration**: Stores the color and font palettes to style the authentication signup screen, but also the URL where to find your terms and services and the textfields you want to use for signup (email and password are obligatory but username and password confirmation are optional).
+
+There is a `AuthenticationComponentsFactory` that provides a way to use all default implementations and easily configure these 3 required elements.
+
+
+### Getting started
+
+With all we've learned, we can start playing with the framework as easily as including this following code in your `AppDelegate` class.
+
+
+```
+var authenticationCoordinator: AuthenticationCoordinator<MyUser, MySessionService>!
+
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    let sessionService = MySessionService()
+    let logo = UIImage(named: "logo")!
+    let termsAndServices = NSURL(string: "https://www.hackingwithswift.com")!
+    let componentsFactory = AuthenticationComponentsFactory(logo: logo, termsAndServicesURL: termsAndServices) { return MyMainViewController() }
+    authenticationCoordinator = AuthenticationCoordinator(sessionService: sessionService, window: window!, componentsFactory: componentsFactory)
+    authenticationCoordinator.start()
+    return true
+}
+```
+
+You should have declared an appropriate `MyUser`, `MySessionService` and `MyMainViewController`.
+
+You can see how this works in the basic [Demo Application](AuthenticationDemo/AppDelegate.swift) example this project includes.
 
 ## Reporting Issues
 

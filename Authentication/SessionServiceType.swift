@@ -11,15 +11,6 @@ import ReactiveCocoa
 import enum Result.NoError
 
 
-//TODO: Check if this is necessary.
-public enum SessionServiceEvent<User> {
-    case LogIn(User)
-    case LogOut(User)
-    case SignUp(User)
-    case LogInError(SessionServiceError)
-    case SignUpError(SessionServiceError)
-}
-
 /**
      Represents any possible error that may happen
      in the session service through the authentication
