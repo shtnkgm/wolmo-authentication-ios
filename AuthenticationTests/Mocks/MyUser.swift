@@ -9,7 +9,7 @@
 import Foundation
 import Authentication
 
-struct MyUser: UserType {
+struct MyUser {
     
     let email: Email
     let username: String

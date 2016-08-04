@@ -36,11 +36,6 @@ public extension SignupViewDelegate {
 /**
      The default signup view delegate takes care of
      setting all SignupViewType elements possible according to palettes.
- 
-     If wanting to use the DefaultSignupViewDelegate with some palette customization,
-     you should not override the `createSignupViewDelegate` method of the Bootstrapper,
-     but pass the correct SignupViewConfigurationType to the bootstraper in the
-     `AuthenticationViewConfiguration`.
  */
 public final class DefaultSignupViewDelegate: SignupViewDelegate {
     

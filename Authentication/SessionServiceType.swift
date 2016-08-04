@@ -12,7 +12,7 @@ import enum Result.NoError
 
 
 //TODO: Check if this is necessary.
-public enum SessionServiceEvent<User: UserType> {
+public enum SessionServiceEvent<User> {
     case LogIn(User)
     case LogOut(User)
     case SignUp(User)
@@ -38,7 +38,7 @@ public enum SessionServiceError: ErrorType {
  */
 public protocol SessionServiceType {
     
-    associatedtype User: UserType
+    associatedtype User
     
     /**
          The current user logged in in the app.

@@ -39,11 +39,6 @@ public extension LoginViewDelegate {
     The default login view delegate takes care of:
        setting the logo image according to the configuration and
        setting all LoginViewType elements possible according to palettes.
- 
-    If wanting to use the DefaultLoginViewDelegate with some palette or logo customization,
-    you should not override the `createLoginViewDelegate` method of the Bootstrapper,
-    but pass the correct LoginViewConfigurationType to the bootstraper in the
-    `AuthenticationViewConfiguration`.
 */
 public final class DefaultLoginViewDelegate: LoginViewDelegate {
     

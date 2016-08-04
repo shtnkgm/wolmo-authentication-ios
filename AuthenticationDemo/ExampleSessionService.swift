@@ -12,7 +12,7 @@ import Authentication
 import enum Result.NoError
 import ReactiveCocoa
 
-public struct ExampleUser: UserType {
+public struct ExampleUser {
     let email: Email
     let password: String
     

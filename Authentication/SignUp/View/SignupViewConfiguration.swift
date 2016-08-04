@@ -40,14 +40,14 @@ public struct SignupViewConfiguration: SignupViewConfigurationType {
     public let usernameEnabled: Bool
     public let passwordConfirmationEnabled: Bool
     
-    public init(colorPalette: ColorPaletteType = DefaultColorPalette(),
+    public init(termsAndServicesURL: NSURL,
+                colorPalette: ColorPaletteType = DefaultColorPalette(),
                 fontPalette: FontPaletteType = DefaultFontPalette(),
                 usernameEnabled: Bool = false,
-                passwordConfirmationEnabled: Bool = false,
-                termsAndServicesURL: NSURL) {
+                passwordConfirmationEnabled: Bool = false) {
+        self.termsAndServicesURL = termsAndServicesURL
         self.colorPalette = colorPalette
         self.fontPalette = fontPalette
-        self.termsAndServicesURL = termsAndServicesURL
         self.usernameEnabled = usernameEnabled
         self.passwordConfirmationEnabled = passwordConfirmationEnabled
     }
