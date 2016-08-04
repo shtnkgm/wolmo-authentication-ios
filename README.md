@@ -20,7 +20,11 @@ It provides logic as well as default views with plenty extensibility points.
 	* [Manually](#manually)
 * [Bootstrap](#bootstrap)
 * [Dependencies](#dependencies)
-* [Framework Overview](#framework-overview)
+* [Usage](#usage)
+	* [How to create the AuthenticationCoordinator?](#how-to-create-the-authenticationcoordinator)
+		* [Session Service](#session-service)
+		* [Authentication Components Factory](#authentication-components-factory)
+	* [Getting started](#getting-started)
 * [Reporting Issues](#reporting-issues)
 * [Contributing](#contributing)
 * [About](#about)
@@ -85,13 +89,14 @@ script/bootstrap
 - [Rex](https://github.com/neilpa/Rex): Extensions for ReactiveCocoa.
 
 
+
 ## Usage
 
 For more information about the framework's structure and concepts, see the [Framework Overview](FRAMEWORK-OVERVIEW.txt).
 
-There is an example application in this project called **AuthenticationDemo** in which the basic usage of the framework is shown.
+There is an example application in this project called [AuthenticationDemo](AuthenticationDemo/AppDelegate.swift) in which the basic usage of the framework is shown.
 
-For being able to use anything the framework offers, after installing it you just need to add `import Authentication` to your code, as any library.
+To use anything the framework offers, after installing it you just need to add `import Authentication` to your code, as you would do with any other library.
 
 The framework provides an `AuthenticationCoordinator` class that takes care of managing the authentication process and starting your app.
 
@@ -128,16 +133,16 @@ The [AuthenticationComponentsFactoryType](Authentication/AuthenticationComponent
 
 Almost all of the components have a default implementation, except for a few that are intrinsic to your app:
 
-* **MainViewController**: The UIViewController to show when the authentication is completed. This will be the entry point to your app.
+* **MainViewController**: The UIViewController to show when the authentication is completed. This will be the entry point of your app.
 * **LoginViewConfiguration**: Stores the logo and the color and font palettes to style the authentication login screen.
-* **SignupViewConfiguration**: Stores the color and font palettes to style the authentication signup screen, but also the URL where to find your terms and services and the textfields you want to use for signup (email and password are obligatory but username and password confirmation are optional).
+* **SignupViewConfiguration**: Stores the color and font palettes to style the authentication signup screen, but also the URL where to find your terms and services and the textfields you want to use for signup (email and password are mandatory but username and password confirmation are optional).
 
-There is a `AuthenticationComponentsFactory` that provides a way to use all default implementations and easily configure these 3 required elements.
+There is an `AuthenticationComponentsFactory` that provides a way to use all default implementations and easily configure these 3 required elements.
 
 
 ### Getting started
 
-With all we've learned, we can start playing with the framework as easily as including this following code in your `AppDelegate` class.
+With all we've learned, we can start playing with the framework just by including the following code in your `AppDelegate` class.
 
 
 ```
@@ -154,16 +159,41 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 }
 ```
 
-You should have declared an appropriate `MyUser`, `MySessionService` and `MyMainViewController`.
+You should have declared appropriate `MyUser`, `MySessionService` and `MyMainViewController`.
 
 You can see how this works in the basic [Demo Application](AuthenticationDemo/AppDelegate.swift) example this project includes.
 
+
+
 ## Reporting Issues
+
+Issues may serve for reporting bugs, requesting features or discussing implemented features.
+
+1. Search through existing issues to make sure you are not duplicating one.
+2. Write an appropriate title (think of how you would search for something like that).
+3. Write an appropriate comment that includes the following details:
+	* Short summary
+	* Piece of code causing the bug (if it's a bug report)
+	* Context or problem identified that could be solved/improved (if it's a feature request or feature modification)
+	* Expected result
+	* Actual result
 
 
 
 
 ## Contributing
+
+1. Fork this repository.
+2. [Bootstrap](#bootstrap) the forked repository (instead of `Wolox/wolmo-core-ios.git`, use `your-user/wolmo-core-ios.git`).
+3. Create your feature branch (`git checkout -b my-new-feature`).
+4. Commit your changes (`git commit -am 'Add some feature'`).
+5. Run tests (`./script/test`).
+6. Push your branch (`git push origin my-new-feature`).
+7. Create a new Pull Request with an appropriate description that includes the following details:
+	* Short summary
+	* Context or problem identified that is solved/improved
+	* Expected result
+	* Actual result
 
 
 
