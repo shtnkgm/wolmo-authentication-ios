@@ -1,4 +1,4 @@
 # Core & Functional Programming
 github "ReactiveCocoa/ReactiveCocoa" ~> 4.2.1
 github "neilpa/Rex" ~> 0.11.0
-github "Wolox/wolmo-core-ios" "master"
+github "Wolox/wolmo-core-ios" ~> 0.1.0
