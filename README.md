@@ -209,7 +209,7 @@ This project is maintained by [Daniela Paula Riesgo](https://github.com/danielaR
 
 **WolMo - Authentication iOS** is available under the MIT [license](LICENSE.md).
 
-	Copyright (c) [2016] [Daniela Paula Riesgo]<daniela.riesgo>@wolox.com.ar>
+	Copyright (c) [2016] Daniela Paula Riesgo: <daniela.riesgo@wolox.com.ar>
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
