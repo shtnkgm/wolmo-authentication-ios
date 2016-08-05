@@ -108,7 +108,7 @@ This will start the authentication process or redirect to your app if there is n
 
  The `AuthenticationCoordinator` needs four things to be initialized:
 
-1. The UIWindow where the app will be shown.
+1. The `UIWindow` where the app will be shown.
 2. Which authentication screen you want to be shown first (login or signup).
 3. A session service with which the framework interacts for managing the user session.
 4. A component factory that provides the components for the framework to work with.
