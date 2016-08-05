@@ -28,9 +28,6 @@ public final class ExampleSessionService: SessionServiceType {
     private let (_currentUser, _currentUserObserver) = Signal<ExampleUser, NoError>.pipe()
     public let currentUser: AnyProperty<ExampleUser?>
     
-    public let events: Signal<SessionServiceEvent<ExampleUser>, NoError>
-    private let _eventsObserver: Signal<SessionServiceEvent<ExampleUser>, NoError>.Observer
-    
     private let _email: String
     private let _password: String
     private let _registeredAlready: Bool
@@ -40,12 +37,10 @@ public final class ExampleSessionService: SessionServiceType {
         _password = password
         _registeredAlready = false
         currentUser = AnyProperty(initialValue: Optional.None, signal: _currentUser.map { $0 })
-        (events, _eventsObserver) = Signal<SessionServiceEvent<ExampleUser>, NoError>.pipe()
     }
     
     deinit {
         _currentUserObserver.sendCompleted()
-        _eventsObserver.sendCompleted()
     }
     
     public func logIn(email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
@@ -69,7 +64,6 @@ public final class ExampleSessionService: SessionServiceType {
                 observer.sendCompleted()
             }
         }.on(completed: { [unowned self] in
-            self._eventsObserver.sendNext(.LogIn(user))
             self._currentUserObserver.sendNext(user)
         })
     }
@@ -79,9 +73,7 @@ public final class ExampleSessionService: SessionServiceType {
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendFailed(.InvalidLogInCredentials(.None))
             }
-        }.on(failed: { [unowned self] _ in
-            self._eventsObserver.sendNext(.LogInError(.InvalidLogInCredentials(.None)))
-        })
+        }
     }
     
     public func signUp(username: String?, email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
@@ -105,7 +97,6 @@ public final class ExampleSessionService: SessionServiceType {
                 observer.sendCompleted()
             }
         }.on(completed: { [unowned self] in
-            self._eventsObserver.sendNext(.SignUp(user))
             self._currentUserObserver.sendNext(user)
         })
     }
