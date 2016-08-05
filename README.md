@@ -21,7 +21,7 @@ It provides logic as well as default views with plenty extensibility points.
 * [Bootstrap](#bootstrap)
 * [Dependencies](#dependencies)
 * [Usage](#usage)
-	* [How to create the AuthenticationCoordinator?](#how-to-create-the-authenticationcoordinator)
+	* [How to initialize the AuthenticationCoordinator?](#how-to-initialize-the-authenticationcoordinator)
 		* [Session Service](#session-service)
 		* [Authentication Components Factory](#authentication-components-factory)
 	* [Getting started](#getting-started)
@@ -59,7 +59,6 @@ github "Wolox/wolmo-authentication-ios" "master"
 ## Bootstrap
 
 1. Clone the project.
-2. Run the bootstrap script that comes with it.
 
 With SSH: 
 
@@ -67,7 +66,8 @@ With SSH:
 git clone git@github.com:Wolox/wolmo-authentication-ios.git
 ```
 
-And then:
+
+2. Run the bootstrap script that comes with it.
 
 ```
 cd wolmo-authentication-ios
@@ -86,7 +86,7 @@ script/bootstrap
 
 ## Usage
 
-For more information about the framework's structure and concepts, see the [Framework Overview](FRAMEWORK-OVERVIEW.txt).
+For more information about the framework's structure and concepts, see the [Framework Overview](FRAMEWORK-OVERVIEW.md).
 
 There is an example application in this project called [AuthenticationDemo](AuthenticationDemo/AppDelegate.swift) in which the basic usage of the framework is shown.
 
@@ -104,9 +104,9 @@ and that's all !
 This will start the authentication process or redirect to your app if there is no need to authenticate.
 
 
-### How to create the `AuthenticationCoordinator`?
+### How to initialize the `AuthenticationCoordinator`?
 
- The `AuthenticationCoordinator` needs four things to be created:
+ The `AuthenticationCoordinator` needs four things to be initialized:
 
 1. The UIWindow where the app will be shown.
 2. Which authentication screen you want to be shown first (login or signup).
