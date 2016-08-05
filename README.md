@@ -10,6 +10,7 @@ WolMo - Authentication iOS
 
 - [x] Signup
 - [x] Login
+- [ ] Login with Facebook and other services (in a future version)
 - [ ] Recover password (in a future version)
 
 It provides logic as well as default views with plenty extensibility points.
