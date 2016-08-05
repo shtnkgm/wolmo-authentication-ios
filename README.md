@@ -48,9 +48,8 @@ brew install carthage
 To download wolmo-core-iOS, add this to your Cartfile:
 
 ```
-github "Wolox/wolmo-authentication-ios" "master"
+github "Wolox/wolmo-authentication-ios" ~> 0.1.0
 ```
-//TODO: change for release version.
 
 ### Manually
 [Bootstrap](#bootstrap) the project and then drag it to your workspace.
