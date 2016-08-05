@@ -67,12 +67,6 @@ With SSH:
 git clone git@github.com:Wolox/wolmo-authentication-ios.git
 ```
 
-Or with HTTPS:
-
-```
-git clone https://github.com/Wolox/wolmo-authentication-ios.git
-```
-
 And then:
 
 ```
