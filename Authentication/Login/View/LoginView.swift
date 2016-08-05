@@ -88,7 +88,10 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton! {
-        didSet { recoverPasswordButton.setUnderlinedTitle(recoverPasswordButtonTitle) }
+        didSet {
+            recoverPasswordButtonOutlet.setUnderlinedTitle(recoverPasswordButtonTitle)
+            recoverPasswordButtonOutlet.hidden = true
+        }
     }
     
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
