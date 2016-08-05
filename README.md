@@ -117,7 +117,7 @@ This will start the authentication process or redirect to your app if there is n
 
 #### Session Service
 
-You must provide a session service that comforms to the [SessionServiceType](Authentication/SessionServiceType.swift) protocol, which basically stores the current user and has endpoints for logging in and signing up with certain information (acquired by the framework from the final user).
+You must provide a session service that comforms to the [SessionServiceType](Authentication/SessionServiceType.swift) protocol, which basically stores the current user and provides functions for logging in and signing up with certain information (acquired by the framework from the final user).
 
 
 #### Authentication Components Factory
