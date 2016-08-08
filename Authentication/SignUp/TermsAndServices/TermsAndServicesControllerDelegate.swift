@@ -15,23 +15,33 @@
  */
 public protocol TermsAndServicesControllerDelegate {
 
-    /* Function called when the terms and services content starts loading. */
+    /**
+        Function called when the terms and services content starts loading.
+     
+        By default, it activates the Network Activity Indicator in the status bar.
+     
+        - Parameter controller: TermsAndServicesController where the event is happening.
+     */
     func didStartLoadingTermsAndServices(controller: TermsAndServicesController)
 
-    /* Function called when the terms and services content finished loading. */
+    /**
+        Function called when the terms and services content finished loading.
+     
+        By default, it deactivates the Network Activity Indicator in the status bar.
+     
+        - Parameter controller: TermsAndServicesController where the event is happening.
+     */
     func didEndLoadingTermsAndServices(controller: TermsAndServicesController)
 
 }
 
 public extension TermsAndServicesControllerDelegate {
     
-    /* By default, it activates the Network Activity Indicator in the status bar. */
     public func didStartLoadingTermsAndServices(controller: TermsAndServicesController) {
         let app = UIApplication.sharedApplication()
         app.networkActivityIndicatorVisible = true
     }
 
-    /* By default, it deactivates the Network Activity Indicator in the status bar. */
     public func didEndLoadingTermsAndServices(controller: TermsAndServicesController) {
         let app = UIApplication.sharedApplication()
         app.networkActivityIndicatorVisible = false
