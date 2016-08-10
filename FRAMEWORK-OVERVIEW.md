@@ -79,5 +79,5 @@ The event delegates are the ones that add behaviour to certain events inside a s
 
 ## Localization
 
-This framework incentivates the user to localize its app. Every text seen in the framework's screens is localized and to change it you only need to create a [Strings file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html) and localize the key of the text element you want to change, withuot affecting the rest.
+This framework incentivates the user to localize its app. Every text seen in the framework's screens is localized and to change it you only need to create a [Strings file](https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/LoadingResources/Strings/Strings.html) and localize the key of the text element you want to change, without affecting the rest.
 You can find the whole list of keys to localize in the [framework's english strings file](Authentication/Supporting\ Files/en.lproj/Localizable.strings) and you can find an example of custom localization in the [example Demo app's english strings file](AuthenticationDemo/en.lproj/Localizable.strings).
