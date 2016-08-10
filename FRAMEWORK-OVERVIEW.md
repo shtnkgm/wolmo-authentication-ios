@@ -41,7 +41,7 @@ and
 
 
 
-The Signup screen has a "child screen" that is used for showing the terms and services of the app. This screen is supposed to only show the terms and services to the user and give the possibility to return to sign up. Since it's basic and it's not central, its components are not customizable, just the content it is shown (although the content is an HTML that can use javascript).
+The Signup screen has a "child screen" that is used for showing the terms and services of the app. This screen is supposed to only show the terms and services to the user and give the possibility to return to sign up. Since it's basic and it's not central, its components are not customizable, just the content is shown (although the content is an HTML that can use javascript).
 
 
 ## Session Service
