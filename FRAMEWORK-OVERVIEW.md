@@ -12,7 +12,7 @@ Finally, the Authentication framework also uses a functional reactive programmin
 
 ## Basic Structure
 
-Following the [MVVM pattern](http://www.sprynthesis.com/2014/12/06/reactivecocoa-mvvm-introduction/), each screen has a View, a View Model and a View Controller, where the View Model is in charge of handling all logic in order to provide all information the view needs to display and the View Controller is in charge of binding the View Model's information to the View's elements and viceversa.
+Following the [MVVM pattern](http://www.sprynthesis.com/2014/12/06/reactivecocoa-mvvm-introduction/), each screen has a View, a View Model and a View Controller, where the View Model is in charge of handling all logic in order to provide all information the view needs to display and the View Controller is in charge of binding the View Model's information to the View's elements.
 
 The user of the **Authentication framework** can provide any view or view model that conforms to certain protocols, but the view controller is fixed. This means that the view controller will bind all information the view model or view provides in conformance to the corresponding view or view model protocol. Any extra functionality or information the user may add to his/her view or view model will not be binded, and so must be _internal_ information of the component (or information used outside this framework).
 
