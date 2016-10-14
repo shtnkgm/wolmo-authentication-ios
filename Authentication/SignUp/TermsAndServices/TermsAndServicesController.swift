@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 
-/*
+/**
      Terms And Services View Controller that takes care of presenting
      the terms and services and informing loading events to delegate.
 */
