@@ -17,6 +17,7 @@
 		9D72AA0F1C8DC7EB00BB4082 /* Authentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; };
 		9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */; };
 		CE111DA31D4FA6A50083C99E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA11D4FA6A50083C99E /* Email.swift */; };
 		CE111DA91D4FA6C20083C99E /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */; };
 		CE111DAA1D4FA6C20083C99E /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA71D4FA6C20083C99E /* MockSessionService.swift */; };
@@ -148,6 +149,7 @@
 		9D72AA091C8DC7EA00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
 		CE111DA11D4FA6A50083C99E /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE111DA71D4FA6C20083C99E /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSessionService.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */,
 				CEE94AAB1CA06C6E0089E71B /* ReactiveCocoa.framework in Frameworks */,
 				CEE94AAD1CA06C6E0089E71B /* Result.framework in Frameworks */,
 			);
@@ -257,6 +260,7 @@
 		9D1DFEF61C8DCDF600F0A37C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */,
 				CE7A7BB71D3EA01C00C44A25 /* AVFoundation.framework */,
 				CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */,
 				CE7A7BB31D3E9AFC00C44A25 /* Core.framework */,
@@ -589,6 +593,7 @@
 					};
 					CEE94A8C1CA06B1B0089E71B = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -673,7 +678,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Rex.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -1020,9 +1024,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AuthenticationDemo/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = ar.com.wolox.AuthenticationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1036,9 +1041,10 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/AuthenticationDemo/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(PROJECT_DIR)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = ar.com.wolox.AuthenticationDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
