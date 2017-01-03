@@ -8,18 +8,18 @@
 
 import Foundation
 import ReactiveCocoa
+import ReactiveSwift
 import enum Result.NoError
-
 
 /**
      Represents any possible error that may happen
      in the session service through the authentication
      process.
 */
-public enum SessionServiceError: ErrorType {
-    case InvalidLogInCredentials(NSError?)
-    case InvalidSignUpCredentials(NSError?)
-    case NetworkError(NSError)
+public enum SessionServiceError: Error {
+    case invalidLogInCredentials(NSError?)
+    case invalidSignUpCredentials(NSError?)
+    case networkError(NSError)
 }
 
 /**
@@ -38,7 +38,7 @@ public protocol SessionServiceType {
          if a user is already logged in or if the
          authentication process should be triggered.
     */
-    var currentUser: AnyProperty<User?> { get }
+    var currentUser: Property<User?> { get }
     
     /**
         This method takes care of validating and logging in.
@@ -53,7 +53,7 @@ public protocol SessionServiceType {
         must take care of:
             sending the error to the observer.
     */
-    func logIn(email: Email, password: String) -> SignalProducer<User, SessionServiceError>
+    func logIn(_ email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
     /**
          This method takes care of validating and signing up.
@@ -68,7 +68,7 @@ public protocol SessionServiceType {
          must take care of:
              sending the error to the observer.
     */
-    func signUp(username: String?, email: Email, password: String) -> SignalProducer<User, SessionServiceError>
+    func signUp(_ username: String?, email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
 }
 
@@ -81,11 +81,11 @@ public extension SessionServiceError {
     */
     internal var message: String {
         switch self {
-        case .InvalidSignUpCredentials(let error):
+        case .invalidSignUpCredentials(let error):
             return "signup-error.invalid-credentials.message".frameworkLocalized + ". " + (error?.localizedDescription ?? "")
-        case .InvalidLogInCredentials(let error):
+        case .invalidLogInCredentials(let error):
             return "login-error.invalid-credentials.message".frameworkLocalized + ". " + (error?.localizedDescription ?? "")
-        case .NetworkError(let error):
+        case .networkError(let error):
             return "network-error.message".frameworkLocalized + ". " + error.localizedDescription
         }
     }

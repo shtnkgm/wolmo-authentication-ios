@@ -7,7 +7,7 @@
 //
 
 import ReactiveCocoa
-
+import ReactiveSwift
 
 /**
      Signup View Controller that takes care of managing the signup, from
@@ -21,17 +21,16 @@ public final class SignupController: UIViewController {
     
     public lazy var signupView: SignupViewType = self._signupViewFactory()
     
-    private let _viewModel: SignupViewModelType
-    private let _signupViewFactory: () -> SignupViewType
-    private let _delegate: SignupControllerDelegate
-    private let _transitionDelegate: SignupControllerTransitionDelegate
+    fileprivate let _viewModel: SignupViewModelType
+    fileprivate let _signupViewFactory: () -> SignupViewType
+    fileprivate let _delegate: SignupControllerDelegate //swiftlint:disable:this weak_delegate
+    fileprivate let _transitionDelegate: SignupControllerTransitionDelegate //swiftlint:disable:this weak_delegate
     
-    private let _notificationCenter: NSNotificationCenter = .defaultCenter()
-    private var _disposable = CompositeDisposable()
-    private let _keyboardDisplayed = MutableProperty(false)
-    private let _activeTextField = MutableProperty<UITextField?>(.None)
+    fileprivate let _notificationCenter: NotificationCenter = .default
+    fileprivate var _disposable = CompositeDisposable()
+    fileprivate let _keyboardDisplayed = MutableProperty(false)
+    fileprivate let _activeTextField = MutableProperty<UITextField?>(.none)
 
-    
     /**
          Initializes a signup controller with the configuration to use.
          
@@ -59,26 +58,25 @@ public final class SignupController: UIViewController {
         view = signupView.view
     }
     
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         signupView.render()
         bindViewModel()
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapRecognizer)
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
     
 }
 
 private extension SignupController {
     
-    private func bindViewModel() {
+    func bindViewModel() {
         bindUsernameElements()
         bindEmailElements()
         bindPasswordElements()
@@ -87,21 +85,21 @@ private extension SignupController {
         hideUnselectedTextfields()
         setTextfieldOrder()
         
-        _viewModel.signUpExecuting.observeNext { [unowned self] executing in
+        _viewModel.signUpExecuting.observeValues { [unowned self] executing in
             executing
                 ? self._delegate.willExecuteSignUp(self)
                 : self._delegate.didExecuteSignUp(self)
             self.signupView.signUpButtonPressed = executing
         }
         
-        _viewModel.signUpErrors.observeNext { [unowned self] in self._delegate.didSignUp(self, with: $0) }
-        _viewModel.signUpSuccessful.observeNext { [unowned self] _ in self._transitionDelegate.onSignupSuccess(self) }
+        _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didSignUp(self, with: $0) }
+        _viewModel.signUpSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onSignupSuccess(self) }
     }
     
-    private func bindUsernameElements() {
+    func bindUsernameElements() {
         if let usernameTextField = signupView.usernameTextField {
-            _viewModel.username <~ usernameTextField.rex_textSignal
-            _viewModel.usernameValidationErrors.signal.observeNext { [unowned self] errors in
+            _viewModel.username <~ usernameTextField.reactive.textValues.map { $0 ?? "" }
+            _viewModel.usernameValidationErrors.signal.observeValues { [unowned self] errors in
                 if errors.isEmpty {
                     self._delegate.didPassUsernameValidation(self)
                 } else {
@@ -110,15 +108,15 @@ private extension SignupController {
                 self.signupView.usernameTextFieldValid = errors.isEmpty
             }
             if let usernameValidationMessageLabel = signupView.usernameValidationMessageLabel {
-                usernameValidationMessageLabel.rex_text <~ _viewModel.usernameValidationErrors.signal.map { $0.first ?? "" }
+                usernameValidationMessageLabel.reactive.text <~ _viewModel.usernameValidationErrors.signal.map { $0.first ?? "" }
             }
             usernameTextField.delegate = self
         }
     }
     
-    private func bindEmailElements() {
-        _viewModel.email <~ signupView.emailTextField.rex_textSignal
-        _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
+    func bindEmailElements() {
+        _viewModel.email <~ signupView.emailTextField.reactive.textValues.map { $0 ?? "" }
+        _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassEmailValidation(self)
             } else {
@@ -127,16 +125,19 @@ private extension SignupController {
             self.signupView.emailTextFieldValid = errors.isEmpty
         }
         if let emailValidationMessageLabel = signupView.emailValidationMessageLabel {
-            emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? "" }
+            emailValidationMessageLabel.reactive.text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? "" }
         }
         signupView.emailTextField.delegate = self
     }
     
-    private func bindPasswordElements() {
-        _viewModel.password <~ signupView.passwordTextField.rex_textSignal.on(next: { [unowned self] text in
-            self.signupView.passwordVisibilityButton?.hidden = text.isEmpty
-        })
-        _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
+    func bindPasswordElements() {
+        _viewModel.password <~
+            signupView.passwordTextField.reactive.textValues
+                .map { $0 ?? "" }
+                .on(value: { [unowned self] text in
+                    self.signupView.passwordVisibilityButton?.isHidden = text.isEmpty
+                })
+        _viewModel.passwordValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassPasswordValidation(self)
             } else {
@@ -145,11 +146,11 @@ private extension SignupController {
             self.signupView.passwordTextFieldValid = errors.isEmpty
         }
         if let passwordValidationMessageLabel = signupView.passwordValidationMessageLabel {
-            passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? "" }
+            passwordValidationMessageLabel.reactive.text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? "" }
         }
         if let passwordVisibilityButton = signupView.passwordVisibilityButton {
-            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility
-            _viewModel.passwordVisible.signal.observeNext { [unowned self] in self.signupView.passwordVisible = $0 }
+            passwordVisibilityButton.reactive.pressed = _viewModel.togglePasswordVisibility
+            _viewModel.passwordVisible.signal.observeValues { [unowned self] in self.signupView.passwordVisible = $0 }
         }
         signupView.passwordTextField.delegate = self
         bindPasswordConfirmationElements()
@@ -157,10 +158,12 @@ private extension SignupController {
     
     func bindPasswordConfirmationElements() {
         if let passwordConfirmationTextField = signupView.passwordConfirmTextField {
-            _viewModel.passwordConfirmation <~ passwordConfirmationTextField.rex_textSignal.on(next: { [unowned self] text in
-                self.signupView.passwordConfirmVisibilityButton?.hidden = text.isEmpty
+            _viewModel.passwordConfirmation <~ passwordConfirmationTextField.reactive.textValues
+                .map { $0 ?? "" }
+                .on(value: { [unowned self] text in
+                self.signupView.passwordConfirmVisibilityButton?.isHidden = text.isEmpty
             })
-            _viewModel.passwordConfirmationValidationErrors.signal.observeNext { [unowned self] errors in
+            _viewModel.passwordConfirmationValidationErrors.signal.observeValues { [unowned self] errors in
                 if errors.isEmpty {
                     self._delegate.didPassPasswordConfirmationValidation(self)
                 } else {
@@ -169,37 +172,36 @@ private extension SignupController {
                 self.signupView.passwordConfirmationTextFieldValid = errors.isEmpty
             }
             if let passwordConfirmValidationMessageLabel = signupView.passwordConfirmValidationMessageLabel {
-                passwordConfirmValidationMessageLabel.rex_text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? "" }
+                passwordConfirmValidationMessageLabel.reactive.text <~ _viewModel.passwordConfirmationValidationErrors.signal.map { $0.first ?? "" }
             }
             if let confirmPasswordVisibilityButton = signupView.passwordConfirmVisibilityButton {
-                confirmPasswordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordConfirmVisibility
-                _viewModel.passwordConfirmationVisible.signal.observeNext { [unowned self] in self.signupView.passwordConfirmationVisible = $0 }
+                confirmPasswordVisibilityButton.reactive.pressed = _viewModel.togglePasswordConfirmVisibility
+                _viewModel.passwordConfirmationVisible.signal.observeValues { [unowned self] in self.signupView.passwordConfirmationVisible = $0 }
             }
             passwordConfirmationTextField.delegate = self
         }
     }
     
-    private func bindButtons() {
-        signupView.signUpButton.rex_pressed.value = _viewModel.signUpCocoaAction
-        signupView.signUpButton.rex_enabled.signal.observeNext { [unowned self] in self.signupView.signUpButtonEnabled = $0 }
+    func bindButtons() {
+        signupView.signUpButton.reactive.pressed = _viewModel.signUpCocoaAction
+        _viewModel.signUpCocoaAction.isEnabled.signal.observeValues { [unowned self] in self.signupView.signUpButtonEnabled = $0 }
         signupView.loginButton.setAction { [unowned self] _ in self._transitionDelegate.toLogin(self) }
         bindTermsAndServices()
     }
     
-    private func bindTermsAndServices() {
+    func bindTermsAndServices() {
         signupView.termsAndServicesTextView.delegate = self
     }
 
-    
-    private func setTextfieldOrder() {
+    func setTextfieldOrder() {
         signupView.usernameTextField?.nextTextField = signupView.emailTextField
         signupView.emailTextField.nextTextField = signupView.passwordTextField
         signupView.passwordTextField.nextTextField = passwordNextTextfield
         signupView.passwordConfirmTextField?.nextTextField = _viewModel.usernameEnabled ? signupView.usernameTextField : signupView.emailTextField
-        lastTextField.returnKeyType = .Go
+        lastTextField.returnKeyType = .go
     }
     
-    private var passwordNextTextfield: UITextField? {
+    var passwordNextTextfield: UITextField? {
         if _viewModel.passwordConfirmationEnabled {
             return signupView.passwordConfirmTextField
         } else {
@@ -211,11 +213,11 @@ private extension SignupController {
         }
     }
     
-    private var lastTextField: UITextField {
+    var lastTextField: UITextField {
         return _viewModel.passwordConfirmationEnabled ? signupView.passwordConfirmTextField! : signupView.passwordTextField
     }
     
-    private func hideUnselectedTextfields() {
+    func hideUnselectedTextfields() {
         if !_viewModel.usernameEnabled {
             signupView.hideUsernameElements()
         }
@@ -224,12 +226,12 @@ private extension SignupController {
         }
     }
     
-    private func checkTextFieldsSelection() {
-        if _viewModel.usernameEnabled && signupView.usernameTextField == .None {
+    func checkTextFieldsSelection() {
+        if _viewModel.usernameEnabled && signupView.usernameTextField == .none {
             NSLog("signup-error.no-username-textfield.fatal-error.log-message".frameworkLocalized)
             fatalError("signup-error.no-username-textfield.fatal-error.message".frameworkLocalized)
         }
-        if _viewModel.passwordConfirmationEnabled && signupView.passwordConfirmTextField == .None {
+        if _viewModel.passwordConfirmationEnabled && signupView.passwordConfirmTextField == .none {
             NSLog("signup-error.no-confirm-password-textfield.fatal-error.log-message".frameworkLocalized)
             fatalError("signup-error.no-confirm-password-textfield.fatal-error.message".frameworkLocalized)
         }
@@ -239,17 +241,17 @@ private extension SignupController {
 
 extension SignupController: UITextFieldDelegate {
     
-    public func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == lastTextField && _viewModel.signUpCocoaAction.enabled {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == lastTextField && _viewModel.signUpCocoaAction.isEnabled.value {
             textField.resignFirstResponder()
-            _viewModel.signUpCocoaAction.execute("")
+            _viewModel.signUpCocoaAction.execute(UIButton())
         } else {
             textField.nextTextField?.becomeFirstResponder()
         }
         return true
     }
     
-    public func textFieldDidBeginEditing(textField: UITextField) {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == signupView.usernameTextField {
             signupView.usernameTextFieldSelected = true
         } else if textField == signupView.emailTextField {
@@ -262,7 +264,7 @@ extension SignupController: UITextFieldDelegate {
         _activeTextField.value = textField
     }
     
-    public func textFieldDidEndEditing(textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == signupView.usernameTextField {
             signupView.usernameTextFieldSelected = false
         } else if textField == signupView.emailTextField {
@@ -272,14 +274,14 @@ extension SignupController: UITextFieldDelegate {
         } else {
             signupView.passwordConfirmationTextFieldSelected = false
         }
-        _activeTextField.value = .None
+        _activeTextField.value = .none
     }
     
 }
 
 extension SignupController: UITextViewDelegate {
     
-    public func textView(textView: UITextView, shouldInteractWithURL URL: NSURL, inRange characterRange: NSRange) -> Bool {
+    public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         _transitionDelegate.onTermsAndServices(self)
         return false
     }
@@ -288,22 +290,22 @@ extension SignupController: UITextViewDelegate {
 
 extension SignupController {
 
-    private func addKeyboardObservers() {
+    fileprivate func addKeyboardObservers() {
         _disposable += _keyboardDisplayed <~ _notificationCenter
-            .rac_notifications(UIKeyboardDidHideNotification)
+            .reactive.notifications(forName: NSNotification.Name.UIKeyboardDidHide)
             .map { _ in false }
         
         _disposable += _notificationCenter
-            .rac_notifications(UIKeyboardWillShowNotification)
-            .startWithNext { [unowned self] in self.keyboardWillShow($0) }
+            .reactive.notifications(forName: NSNotification.Name.UIKeyboardWillShow)
+            .observeValues { [unowned self] in self.keyboardWillShow($0) }
         
         _disposable += _notificationCenter
-            .rac_notifications(UIKeyboardWillHideNotification)
-            .startWithNext { [unowned self] _ in self.view.frame.origin.y = 0 }
+            .reactive.notifications(forName: NSNotification.Name.UIKeyboardWillHide)
+            .observeValues { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
-    private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
+    fileprivate func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
                 let keyboardOffset = keyboardSize.height
@@ -319,10 +321,10 @@ extension SignupController {
         }
     }
     
-    private func navigationBarOffset() -> CGFloat {
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.height
+    fileprivate func navigationBarOffset() -> CGFloat {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navBarHeight: CGFloat
-        if navigationController?.navigationBarHidden ?? true {
+        if navigationController?.isNavigationBarHidden ?? true {
             navBarHeight = 0
         } else {
             navBarHeight = navigationController?.navigationBar.frame.size.height ?? 0
@@ -330,19 +332,19 @@ extension SignupController {
         return navBarHeight + statusBarHeight
     }
     
-    private func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
+    fileprivate func calculateTextFieldOffsetToMoveFrame(_ keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
         let topTextField = signupView.usernameTextField ?? signupView.emailTextField
-        let top = topTextField.convertPoint(topTextField.frame.origin, toView: self.view).y - 10
+        let top = topTextField.convert(topTextField.frame.origin, to: self.view).y - 10
         let bottomTextField = signupView.passwordConfirmTextField ?? signupView.passwordTextField
-        let bottom = bottomTextField.convertPoint(bottomTextField.frame.origin, toView: self.view).y + bottomTextField.frame.size.height
+        let bottom = bottomTextField.convert(bottomTextField.frame.origin, to: self.view).y + bottomTextField.frame.size.height
         if (keyboardOffset + (bottom - top) + navBarOffset) <= self.view.frame.size.height {
             return top
         } else {
-            return _activeTextField.value!.convertPoint(_activeTextField.value!.frame.origin, toView: self.view).y - 10
+            return _activeTextField.value!.convert(_activeTextField.value!.frame.origin, to: self.view).y - 10
         }
     }
     
-    @objc private func dismissKeyboard(sender: UITapGestureRecognizer) {
+    @objc fileprivate func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)

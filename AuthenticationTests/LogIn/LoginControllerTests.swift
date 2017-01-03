@@ -13,7 +13,6 @@ import UIKit
 
 import ReactiveCocoa
 import enum Result.NoError
-import Rex
 
 class LoginViewControllerSpec: QuickSpec {
     

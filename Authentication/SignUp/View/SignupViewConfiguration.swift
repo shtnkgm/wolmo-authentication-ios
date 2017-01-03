@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Represents the configurable parameters
      of a view that conforms to SignupViewType.
@@ -17,7 +16,7 @@ public protocol SignupViewConfigurationType {
     var fontPalette: FontPaletteType { get }
     
     /// NSURL from where to get the HTML content that displays the terms and services.
-    var termsAndServicesURL: NSURL { get }
+    var termsAndServicesURL: URL { get }
     
     // Textfield selected must be consistent with the view used.
     var usernameEnabled: Bool { get }
@@ -36,11 +35,11 @@ public struct SignupViewConfiguration: SignupViewConfigurationType {
     
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
-    public let termsAndServicesURL: NSURL
+    public let termsAndServicesURL: URL
     public let usernameEnabled: Bool
     public let passwordConfirmationEnabled: Bool
     
-    public init(termsAndServicesURL: NSURL,
+    public init(termsAndServicesURL: URL,
                 colorPalette: ColorPaletteType = DefaultColorPalette(),
                 fontPalette: FontPaletteType = DefaultFontPalette(),
                 usernameEnabled: Bool = false,

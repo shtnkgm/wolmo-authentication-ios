@@ -8,6 +8,7 @@
 
 import Foundation
 import ReactiveCocoa
+import ReactiveSwift
 import enum Result.NoError
 
 /**
@@ -19,17 +20,17 @@ public protocol LoginViewModelType {
     
     /** Email field considerations: content and validation errors. */
     var email: MutableProperty<String> { get }
-    var emailValidationErrors: AnyProperty<[String]> { get }
+    var emailValidationErrors: Property<[String]> { get }
     
     /** Password field considerations: content, validation errors
        and password visibility. */
     var password: MutableProperty<String> { get }
-    var passwordValidationErrors: AnyProperty<[String]> { get }
+    var passwordValidationErrors: Property<[String]> { get }
     var passwordVisible: MutableProperty<Bool> { get }
-    var togglePasswordVisibility: CocoaAction { get }
+    var togglePasswordVisibility: CocoaAction<UIButton> { get }
     
     /** Log In action considerations: action, executing state and errors. */
-    var logInCocoaAction: CocoaAction { get }
+    var logInCocoaAction: CocoaAction<UIButton> { get }
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
     var logInSuccessful: Signal<(), NoError> { get }
@@ -41,28 +42,28 @@ public protocol LoginViewModelType {
     and therefore enabling log in action, managing password visibility, reporting log in events
     and communicating with the session service for executing the log in.
 */
-public final class LoginViewModel<User, SessionService: SessionServiceType where SessionService.User == User> : LoginViewModelType {
+public final class LoginViewModel<User, SessionService: SessionServiceType> : LoginViewModelType where SessionService.User == User {
     
-    private let _credentialsAreValid: AnyProperty<Bool>
-    private let _sessionService: SessionService
+    fileprivate let _credentialsAreValid: Property<Bool>
+    fileprivate let _sessionService: SessionService
     
     public let email = MutableProperty("")
-    public let emailValidationErrors: AnyProperty<[String]>
+    public let emailValidationErrors: Property<[String]>
     
     public let password = MutableProperty("")
-    public let passwordValidationErrors: AnyProperty<[String]>
+    public let passwordValidationErrors: Property<[String]>
     public let passwordVisible = MutableProperty(false)
     
-    public var logInCocoaAction: CocoaAction { return _logIn.unsafeCocoaAction }
+    public var logInCocoaAction: CocoaAction<UIButton> { return CocoaAction(_logIn) }
     public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
-    public var logInExecuting: Signal<Bool, NoError> { return _logIn.executing.signal }
+    public var logInExecuting: Signal<Bool, NoError> { return _logIn.isExecuting.signal }
     public var logInSuccessful: Signal<(), NoError> { return _logIn.values.map { _ in () } }
     
-    public var togglePasswordVisibility: CocoaAction { return _togglePasswordVisibility.unsafeCocoaAction }
+    public var togglePasswordVisibility: CocoaAction<UIButton> { return CocoaAction(_togglePasswordVisibility) }
     
-    private lazy var _logIn: Action<AnyObject, User, SessionServiceError> = self.initializeLogInAction()
+    fileprivate lazy var _logIn: Action<(), User, SessionServiceError> = self.initializeLogInAction()
     
-    private lazy var _togglePasswordVisibility: Action<AnyObject, Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
+    fileprivate lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
     /**
         Initializes a login view model which will communicate to the session service provided and
@@ -78,36 +79,36 @@ public final class LoginViewModel<User, SessionService: SessionServiceType where
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         
-        let credentialsValidationResults = combineLatest(
+        let credentialsValidationResults = Signal.combineLatest(
             emailValidationResult.map { $0.isValid },
             passwordValidationResult.map { $0.isValid })
-        _credentialsAreValid = AnyProperty(
-            initialValue: false,
-            signal: credentialsValidationResults.map { $0 && $1 })
+        _credentialsAreValid = Property(
+            initial: false,
+            then: credentialsValidationResults.map { $0 && $1 })
         
-        emailValidationErrors = AnyProperty(initialValue: [], signal: emailValidationResult.map { $0.errors })
-        passwordValidationErrors = AnyProperty(initialValue: [], signal: passwordValidationResult.map { $0.errors })
+        emailValidationErrors = Property(initial: [], then: emailValidationResult.map { $0.errors })
+        passwordValidationErrors = Property(initial: [], then: passwordValidationResult.map { $0.errors })
     }
     
 }
 
 private extension LoginViewModel {
     
-    private func initializeLogInAction() -> Action<AnyObject, User, SessionServiceError> {
+    func initializeLogInAction() -> Action<(), User, SessionServiceError> {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
                 let password = self.password.value
-                return self._sessionService.logIn(email, password: password).observeOn(UIScheduler())
+                return self._sessionService.logIn(email, password: password).observe(on: UIScheduler())
             } else {
-                return SignalProducer(error: .InvalidLogInCredentials(.None)).observeOn(UIScheduler())
+                return SignalProducer(error: .invalidLogInCredentials(.none)).observe(on: UIScheduler())
             }
         }
     }
     
-    private func initializeTogglePasswordVisibilityAction() -> Action<AnyObject, Bool, NoError> {
+    func initializeTogglePasswordVisibilityAction() -> Action<(), Bool, NoError> {
         return Action { [unowned self] _ in
             self.passwordVisible.value = !self.passwordVisible.value
-            return SignalProducer(value: self.passwordVisible.value).observeOn(UIScheduler())
+            return SignalProducer(value: self.passwordVisible.value).observe(on: UIScheduler())
         }
     }
 }

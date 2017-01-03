@@ -31,7 +31,7 @@ public struct LoginViewConfiguration: LoginViewConfigurationType {
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     
-    public init(logoImage: UIImage? = .None,
+    public init(logoImage: UIImage? = .none,
                 colorPalette: ColorPaletteType = DefaultColorPalette(),
                 fontPalette: FontPaletteType = DefaultFontPalette()) {
         self.logoImage = logoImage

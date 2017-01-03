@@ -20,7 +20,7 @@ public struct LoginCredentialsValidator {
                 ])
     }
     
-    public static func defaultPasswordValidator(minLength: Int = 4, maxLength: Int? = 30) -> TextInputValidatorType {
+    public static func defaultPasswordValidator(_ minLength: Int = 4, maxLength: Int? = 30) -> TextInputValidatorType {
         var validators: [TextInputValidatorType] = [
                 NonEmptyValidator(),
                 MinLengthValidator(minLength: minLength)

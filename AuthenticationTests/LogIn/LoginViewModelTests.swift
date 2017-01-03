@@ -41,26 +41,26 @@ class LoginViewModelSpec: QuickSpec {
                 context("when #passwordVisible is false") {
                     
                     it("should change it to true") { waitUntil { done in
-                        loginViewModel.passwordVisible.signal.take(1).observeNext {
+                        loginViewModel.passwordVisible.signal.take(first: 1).observeValues {
                             expect($0) == true
                             done()
                         }
-                        loginViewModel.togglePasswordVisibility.execute("")
+                        loginViewModel.togglePasswordVisibility.execute(UIButton())
                     }}
                 }
                 
                 context("when #passwordVisible is true") {
                     
                     beforeEach() {
-                        loginViewModel.togglePasswordVisibility.execute("")
+                        loginViewModel.togglePasswordVisibility.execute(UIButton())
                     }
                     
                     it("should change it to false") { waitUntil { done in
-                        loginViewModel.passwordVisible.signal.take(1).observeNext {
+                        loginViewModel.passwordVisible.signal.take(first: 1).observeValues {
                             expect($0) == false
                             done()
                         }
-                        loginViewModel.togglePasswordVisibility.execute("")
+                        loginViewModel.togglePasswordVisibility.execute(UIButton())
                     }}
                     
                 }
@@ -84,7 +84,7 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("does not let logIn start") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == false
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == false
                     }
                     
                 }
@@ -105,7 +105,7 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("does not let logIn start") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == false
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == false
                     }
                     
                 }
@@ -130,7 +130,7 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("does not let logIn start") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == false
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == false
                     }
                     
                 }
@@ -150,7 +150,7 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("does not let logIn start") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == false
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == false
                     }
                     
                 }
@@ -171,7 +171,7 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("does not let logIn start") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == false
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == false
                     }
                     
                 }
@@ -193,12 +193,12 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("enables LogIn") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == true
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == true
                     }
                     
                     it("calls session service's signup") { waitUntil { done in
-                        sessionService.logInCalled.observeNext { _ in done() }
-                        loginViewModel.logInCocoaAction.execute("")
+                        sessionService.logInCalled.observeValues { _ in done() }
+                        loginViewModel.logInCocoaAction.execute(UIButton())
                     }}
                     
                 }
@@ -216,12 +216,12 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("enables LogIn") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == true
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == true
                     }
                     
                     it("calls session service's signup") { waitUntil { done in
-                        sessionService.logInCalled.observeNext { _ in done() }
-                        loginViewModel.logInCocoaAction.execute("")
+                        sessionService.logInCalled.observeValues { _ in done() }
+                        loginViewModel.logInCocoaAction.execute(UIButton())
                     }}
                     
                 }
@@ -239,12 +239,12 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("enables LogIn") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == true
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == true
                     }
                     
                     it("calls session service's signup") { waitUntil { done in
-                        sessionService.logInCalled.observeNext { _ in done() }
-                        loginViewModel.logInCocoaAction.execute("")
+                        sessionService.logInCalled.observeValues { _ in done() }
+                        loginViewModel.logInCocoaAction.execute(UIButton())
                     }}
                     
                 }
@@ -262,12 +262,12 @@ class LoginViewModelSpec: QuickSpec {
                     }
                     
                     it("enables LogIn") {
-                        expect(loginViewModel.logInCocoaAction.enabled) == true
+                        expect(loginViewModel.logInCocoaAction.isEnabled.value) == true
                     }
                     
                     it("calls session service's signup") { waitUntil { done in
-                        sessionService.logInCalled.observeNext { _ in done() }
-                        loginViewModel.logInCocoaAction.execute("")
+                        sessionService.logInCalled.observeValues { _ in done() }
+                        loginViewModel.logInCocoaAction.execute(UIButton())
                     }}
                     
                 }

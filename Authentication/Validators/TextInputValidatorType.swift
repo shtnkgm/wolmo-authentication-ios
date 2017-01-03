@@ -14,7 +14,7 @@ import Foundation
  */
 public enum ValidationResult {
     
-    public static func invalid(errorMessage: String) -> ValidationResult {
+    public static func invalid(_ errorMessage: String) -> ValidationResult {
         return .Invalid(errors: [errorMessage])
     }
     
@@ -46,6 +46,6 @@ public enum ValidationResult {
  */
 public protocol TextInputValidatorType {
     
-    func validate(text: String) -> ValidationResult
+    func validate(_ text: String) -> ValidationResult
     
 }

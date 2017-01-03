@@ -12,7 +12,7 @@
  */
 public struct EmailValidator: TextInputValidatorType {
     
-    public func validate(text: String) -> ValidationResult {
+    public func validate(_ text: String) -> ValidationResult {
         if Email.isValidEmail(text) {
             return .Valid
         } else {

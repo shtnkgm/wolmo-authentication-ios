@@ -29,12 +29,11 @@ public protocol FontPaletteType {
  only highlights the main button text with bigger and bold font. */
 public extension FontPaletteType {
     
-    public var textfields: UIFont { return .systemFontOfSize(14) }
-    public var passwordVisibilityButton: UIFont { return .systemFontOfSize(14) }
-    public var links: UIFont { return .systemFontOfSize(14) }
-    public var labels: UIFont { return .systemFontOfSize(14) }
-    public var mainButton: UIFont { return .boldSystemFontOfSize(16) }
-    
+    public var textfields: UIFont { return .systemFont(ofSize: 14) }
+    public var passwordVisibilityButton: UIFont { return .systemFont(ofSize: 14) }
+    public var links: UIFont { return .systemFont(ofSize: 14) }
+    public var labels: UIFont { return .systemFont(ofSize: 14) }
+    public var mainButton: UIFont { return .boldSystemFont(ofSize: 16) }
     
 }
 

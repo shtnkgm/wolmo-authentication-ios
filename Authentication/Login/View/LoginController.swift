@@ -8,9 +8,8 @@
 
 import Foundation
 import ReactiveCocoa
-import Rex
+import ReactiveSwift
 import enum Result.NoError
-
 
 /**
     Login View Controller that takes care of managing the login, from
@@ -24,16 +23,15 @@ public final class LoginController: UIViewController {
     
     public lazy var loginView: LoginViewType = self._loginViewFactory()
     
-    private let _viewModel: LoginViewModelType
-    private let _transitionDelegate: LoginControllerTransitionDelegate
-    private let _loginViewFactory: () -> LoginViewType
-    private let _delegate: LoginControllerDelegate
+    fileprivate let _viewModel: LoginViewModelType
+    fileprivate let _transitionDelegate: LoginControllerTransitionDelegate //swiftlint:disable:this weak_delegate
+    fileprivate let _loginViewFactory: () -> LoginViewType
+    fileprivate let _delegate: LoginControllerDelegate //swiftlint:disable:this weak_delegate
     
-    private let _notificationCenter: NSNotificationCenter = .defaultCenter()
-    private var _disposable = CompositeDisposable()
-    private let _keyboardDisplayed = MutableProperty(false)
-    private let _activeField = MutableProperty<UITextField?>(.None)
-    
+    fileprivate let _notificationCenter: NotificationCenter = .default
+    fileprivate var _disposable = CompositeDisposable()
+    fileprivate let _keyboardDisplayed = MutableProperty(false)
+    fileprivate let _activeField = MutableProperty<UITextField?>(.none)
     
     /**
         Initializes a login controller with the configuration to use.
@@ -62,7 +60,6 @@ public final class LoginController: UIViewController {
         view = loginView.view
     }
 
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
         loginView.render()
@@ -71,35 +68,35 @@ public final class LoginController: UIViewController {
         view.addGestureRecognizer(tapRecognizer)
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
     
 }
 
 private extension LoginController {
     
-    private func bindViewModel() {
+    func bindViewModel() {
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
         setTextfieldOrder()
         
-        _viewModel.logInExecuting.observeNext { [unowned self] executing in
+        _viewModel.logInExecuting.observeValues { [unowned self] executing in
             executing
                 ? self._delegate.willExecuteLogIn(self)
                 : self._delegate.didExecuteLogIn(self)
             self.loginView.logInButtonPressed = executing
         }
         
-        _viewModel.logInErrors.observeNext { [unowned self] in self._delegate.didLogIn(self, with: $0) }
-        _viewModel.logInSuccessful.observeNext { [unowned self] _ in self._transitionDelegate.onLoginSuccess(self) }
+        _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didLogIn(self, with: $0) }
+        _viewModel.logInSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onLoginSuccess(self) }
     }
     
-    private func bindEmailElements() {
-        _viewModel.email <~ loginView.emailTextField.rex_textSignal
-        _viewModel.emailValidationErrors.signal.observeNext { [unowned self] errors in
+    func bindEmailElements() {
+        _viewModel.email <~ loginView.emailTextField.reactive.textValues.map { $0 ?? "" }
+        _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassEmailValidation(self)
             } else {
@@ -108,16 +105,18 @@ private extension LoginController {
             self.loginView.emailTextFieldValid = errors.isEmpty
         }
         if let emailValidationMessageLabel = loginView.emailValidationMessageLabel {
-            emailValidationMessageLabel.rex_text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? "" }
+            emailValidationMessageLabel.reactive.text <~ _viewModel.emailValidationErrors.signal.map { $0.first ?? "" }
         }
         loginView.emailTextField.delegate = self
     }
     
-    private func bindPasswordElements() {
-        _viewModel.password <~ loginView.passwordTextField.rex_textSignal.on(next: { [unowned self] text in
-            self.loginView.passwordVisibilityButton?.hidden = text.isEmpty
+    func bindPasswordElements() {
+        _viewModel.password <~ loginView.passwordTextField.reactive.textValues
+            .map { $0 ?? "" }
+            .on(value: { [unowned self] text in
+            self.loginView.passwordVisibilityButton?.isHidden = text.isEmpty
         })
-        _viewModel.passwordValidationErrors.signal.observeNext { [unowned self] errors in
+        _viewModel.passwordValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassPasswordValidation(self)
             } else {
@@ -126,28 +125,28 @@ private extension LoginController {
             self.loginView.passwordTextFieldValid = errors.isEmpty
         }
         if let passwordValidationMessageLabel = loginView.passwordValidationMessageLabel {
-            passwordValidationMessageLabel.rex_text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? "" }
+            passwordValidationMessageLabel.reactive.text <~ _viewModel.passwordValidationErrors.signal.map { $0.first ?? "" }
         }
         if let passwordVisibilityButton = loginView.passwordVisibilityButton {
-            passwordVisibilityButton.rex_pressed.value = _viewModel.togglePasswordVisibility
-            _viewModel.passwordVisible.signal.observeNext { [unowned self] in self.loginView.passwordVisible = $0 }
+            passwordVisibilityButton.reactive.pressed = _viewModel.togglePasswordVisibility
+            _viewModel.passwordVisible.signal.observeValues { [unowned self] in self.loginView.passwordVisible = $0 }
         }
         loginView.passwordTextField.delegate = self
     }
     
-    private func bindButtons() {
-        loginView.logInButton.rex_pressed.value = _viewModel.logInCocoaAction
-        loginView.logInButton.rex_enabled.signal.observeNext { [unowned self] in self.loginView.logInButtonEnabled = $0 }
+    func bindButtons() {
+        loginView.logInButton.reactive.pressed = _viewModel.logInCocoaAction
+        _viewModel.logInCocoaAction.isEnabled.signal.observeValues { [unowned self] in self.loginView.logInButtonEnabled = $0 }
         loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.toSignup(self) }
         loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.toRecoverPassword(self) }
     }
     
-    private func setTextfieldOrder() {
+    func setTextfieldOrder() {
         loginView.emailTextField.nextTextField = loginView.passwordTextField
         loginView.passwordTextField.nextTextField = loginView.emailTextField
     }
     
-    private var lastTextField: UITextField {
+    var lastTextField: UITextField {
         return loginView.passwordTextField
     }
 
@@ -155,17 +154,17 @@ private extension LoginController {
 
 extension LoginController: UITextFieldDelegate {
     
-    public func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == lastTextField && _viewModel.logInCocoaAction.enabled {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == lastTextField && _viewModel.logInCocoaAction.isEnabled.value {
             textField.resignFirstResponder()
-            _viewModel.logInCocoaAction.execute("")
+            _viewModel.logInCocoaAction.execute(UIButton())
         } else {
             textField.nextTextField?.becomeFirstResponder()
         }
         return true
     }
     
-    public func textFieldDidBeginEditing(textField: UITextField) {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == loginView.emailTextField {
             loginView.emailTextFieldSelected = true
         } else {
@@ -174,35 +173,35 @@ extension LoginController: UITextFieldDelegate {
         _activeField.value = textField
     }
     
-    public func textFieldDidEndEditing(textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == loginView.emailTextField {
             loginView.emailTextFieldSelected = false
         } else {
             loginView.passwordTextFieldSelected = false
         }
-        _activeField.value = .None
+        _activeField.value = .none
     }
     
 }
 
 private extension LoginController {
     
-    private func addKeyboardObservers() {
+    func addKeyboardObservers() {
         _disposable += _keyboardDisplayed <~ _notificationCenter
-            .rac_notifications(UIKeyboardDidHideNotification)
+            .reactive.notifications(forName: NSNotification.Name.UIKeyboardDidHide)
             .map { _ in false }
         
         _disposable += _notificationCenter
-            .rac_notifications(UIKeyboardWillShowNotification)
-            .startWithNext { [unowned self] in self.keyboardWillShow($0) }
+            .reactive.notifications(forName: NSNotification.Name.UIKeyboardWillShow)
+            .observeValues { [unowned self] in self.keyboardWillShow($0) }
         
         _disposable += _notificationCenter
-            .rac_notifications(UIKeyboardWillHideNotification)
-            .startWithNext { [unowned self] _ in self.view.frame.origin.y = 0 }
+            .reactive.notifications(forName: NSNotification.Name.UIKeyboardWillHide)
+            .observeValues { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
-    private func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
                 let keyboardOffset = keyboardSize.height
@@ -218,10 +217,10 @@ private extension LoginController {
         }
     }
     
-    private func navBarOffset() -> CGFloat {
-        let statusBarHeight = UIApplication .sharedApplication().statusBarFrame.height
+    func navBarOffset() -> CGFloat {
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navBarHeight: CGFloat
-        if navigationController?.navigationBarHidden ?? true {
+        if navigationController?.isNavigationBarHidden ?? true {
             navBarHeight = 0
         } else {
             navBarHeight = navigationController?.navigationBar.frame.size.height ?? 0
@@ -231,11 +230,11 @@ private extension LoginController {
     
     /* As both textfields fit in all devices, it will always show the email
     textfield at the top of the screen. */
-    private func calculateTextFieldOffsetToMoveFrame(keyboardOffset: CGFloat) -> CGFloat {
-        return loginView.emailTextField.convertPoint(loginView.emailTextField.frame.origin, toView: self.view).y - 10
+    func calculateTextFieldOffsetToMoveFrame(_ keyboardOffset: CGFloat) -> CGFloat {
+        return loginView.emailTextField.convert(loginView.emailTextField.frame.origin, to: self.view).y - 10
     }
     
-    @objc private func dismissKeyboard(sender: UITapGestureRecognizer) {
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)

@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Represents a composite validator which
      will validate according to all criteria
@@ -20,13 +19,13 @@
  */
 public struct CompositeTextInputValidator: TextInputValidatorType {
     
-    private let _validators: [TextInputValidatorType]
+    fileprivate let _validators: [TextInputValidatorType]
     
     init(validators: [TextInputValidatorType]) {
         _validators = validators
     }
     
-    public func validate(text: String) -> ValidationResult {
+    public func validate(_ text: String) -> ValidationResult {
         return _validators.reduce(.Valid) { result, validator in
             switch (result, validator.validate(text)) {
             case (.Invalid(let left), .Invalid(let right)): return .Invalid(errors: left + right)
@@ -37,7 +36,7 @@ public struct CompositeTextInputValidator: TextInputValidatorType {
         }
     }
     
-    public func addValidator(newValidator: TextInputValidatorType) -> CompositeTextInputValidator {
+    public func addValidator(_ newValidator: TextInputValidatorType) -> CompositeTextInputValidator {
         var validators = _validators
         validators.append(newValidator)
         return CompositeTextInputValidator(validators: validators)

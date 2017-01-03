@@ -22,7 +22,6 @@ public struct ExampleUser {
     }
 }
 
-
 public final class ExampleSessionService: SessionServiceType {
     
     private let (_currentUser, _currentUserObserver) = Signal<ExampleUser, NoError>.pipe()
@@ -58,7 +57,7 @@ public final class ExampleSessionService: SessionServiceType {
     }
     
     private func logInSuccess(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
-        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendNext(user)
                 observer.sendCompleted()
@@ -69,7 +68,7 @@ public final class ExampleSessionService: SessionServiceType {
     }
     
     private func logInFailure(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
-        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendFailed(.InvalidLogInCredentials(.None))
             }
@@ -91,7 +90,7 @@ public final class ExampleSessionService: SessionServiceType {
     }
     
     private func signUpSuccess(user: ExampleUser, dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
-        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendNext(user)
                 observer.sendCompleted()
@@ -102,7 +101,7 @@ public final class ExampleSessionService: SessionServiceType {
     }
     
     private func signUpFailure(dispatchTime: dispatch_time_t) -> SignalProducer<ExampleUser, SessionServiceError> {
-        return SignalProducer<ExampleUser, SessionServiceError> { observer, disposable in
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             dispatch_after(dispatchTime, dispatch_get_main_queue()) {
                 observer.sendFailed(.InvalidSignUpCredentials(.None))
             }

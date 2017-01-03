@@ -8,7 +8,6 @@
 
 import Core
 
-
 /**
      Represents the minimum required
      properties from a signup view
@@ -27,19 +26,17 @@ public protocol SignupViewType: Renderable, SignupFormType {
 
 public extension SignupViewType {
     
-    var loginLabel: UILabel? { return .None }
+    var loginLabel: UILabel? { return .none }
     
 }
 
 /** Default signup view. */
 internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
-    internal var delegate: SignupViewDelegate!
+    internal var delegate: SignupViewDelegate! //swiftlint:disable:this weak_delegate
     
     internal var titleLabel: UILabel { return titleLabelOutlet }
     @IBOutlet weak var titleLabelOutlet: UILabel! { didSet { titleLabel.text = titleText } }
-    
-    
     
     internal var usernameTextField: UITextField? { return usernameTextFieldOutlet }
     @IBOutlet weak var usernameTextFieldOutlet: UITextField! { didSet { usernameTextFieldOutlet.placeholder = usernamePlaceholderText } }
@@ -58,8 +55,6 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var usernameView: UIView!
     @IBOutlet weak var usernameHeightConstraint: NSLayoutConstraint!
     
-    
-    
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! { didSet { emailTextFieldOutlet.placeholder = emailPlaceholderText } }
     
@@ -75,8 +70,6 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     @IBOutlet weak var emailErrorsView: UIView!
     
-    
-    
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! { didSet { passwordTextFieldOutlet.placeholder = passwordPlaceholderText } }
     @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
@@ -90,12 +83,10 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! { didSet { passwordValidationMessageLabelOutlet.text = " " } }
     
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
-    @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! { didSet { passwordVisibilityButtonOutlet.hidden = true } }
+    @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! { didSet { passwordVisibilityButtonOutlet.isHidden = true } }
     
     @IBOutlet weak var passwordErrorsView: UIView!
 
-    
-    
     internal var passwordConfirmTextField: UITextField? { return passwordConfirmTextFieldOutlet }
     @IBOutlet weak var passwordConfirmTextFieldOutlet: UITextField! { didSet { passwordConfirmTextFieldOutlet.placeholder = confirmPasswordPlaceholderText } }
     @IBOutlet weak var pswdConfirmTextFieldAndButtonViewOutlet: UIView! {
@@ -109,18 +100,17 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var pswdConfirmValidationMessageLabelOutlet: UILabel! { didSet { pswdConfirmValidationMessageLabelOutlet.text = " " } }
     
     internal var passwordConfirmVisibilityButton: UIButton? { return passwordConfirmVisibilityButtonOutlet }
-    @IBOutlet weak var passwordConfirmVisibilityButtonOutlet: UIButton! { didSet { passwordConfirmVisibilityButtonOutlet.hidden = true } }
+    @IBOutlet weak var passwordConfirmVisibilityButtonOutlet: UIButton! { didSet { passwordConfirmVisibilityButtonOutlet.isHidden = true } }
     
     @IBOutlet weak var passwordConfirmationErrorsView: UIView!
     @IBOutlet weak var passwordConfirmationView: UIView!
     @IBOutlet weak var passwordConfirmationHeightConstraint: NSLayoutConstraint!
     
-    
     internal var signUpButton: UIButton { return signUpButtonOutlet }
     @IBOutlet weak var signUpButtonOutlet: UIButton! {
         didSet {
             signUpButtonOutlet.layer.cornerRadius = 6.0
-            signUpButtonOutlet.setTitle(signUpButtonTitle, forState: .Normal)
+            signUpButtonOutlet.setTitle(signUpButtonTitle, for: UIControlState())
         }
     }
     
@@ -150,29 +140,27 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     internal var signUpButtonEnabled = false { didSet { signUpButtonEnabledWasSet() } }
     internal var signUpButtonPressed = false { didSet { signUpButtonPressedWasSet() } }
     
-    
     internal func hideUsernameElements() {
-        usernameHeightConstraint.active = false
-        usernameView.hidden = true
+        usernameHeightConstraint.isActive = false
+        usernameView.isHidden = true
     }
-    
     
     internal func hidePasswordConfirmElements() {
-        passwordConfirmationHeightConstraint.active = false
-        passwordConfirmationView.hidden = true
+        passwordConfirmationHeightConstraint.isActive = false
+        passwordConfirmationView.isHidden = true
     }
     
-    internal func setTermsAndServicesText(url: NSURL) {
+    internal func setTermsAndServicesText(_ url: URL) {
         let textWithLinks = NSMutableAttributedString(string: termsAndServicesText)
         let termsString = termsAndServicesLinkText
-        let termsURLRange = NSString(string: termsAndServicesText).rangeOfString(termsString)
+        let termsURLRange = NSString(string: termsAndServicesText).range(of: termsString)
         textWithLinks.addAttribute(NSLinkAttributeName, value: url, range: termsURLRange)
         
         termsAndServicesTextView.attributedText = textWithLinks
         termsAndServicesTextView.linkTextAttributes = [NSForegroundColorAttributeName: delegate.colorPalette.links,
                                                        NSUnderlineColorAttributeName: delegate.colorPalette.links,
-                                                       NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue]
-        termsAndServicesTextView.textAlignment = .Center
+                                                       NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        termsAndServicesTextView.textAlignment = .center
     }
 
     internal func render() {
@@ -199,26 +187,26 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
 
 private extension SignupView {
     
-    private func usernameTextFieldValidWasSet() {
+    func usernameTextFieldValidWasSet() {
         if !usernameTextFieldSelected {
             let color: CGColor
             if usernameTextFieldValid {
-                color = delegate.colorPalette.textfieldsNormal.CGColor
-                usernameErrorsView.hidden = true
+                color = delegate.colorPalette.textfieldsNormal.cgColor
+                usernameErrorsView.isHidden = true
             } else {
-                color = delegate.colorPalette.textfieldsError.CGColor
-                usernameErrorsView.hidden = false
+                color = delegate.colorPalette.textfieldsError.cgColor
+                usernameErrorsView.isHidden = false
             }
             usernameTextFieldViewOutlet.layer.borderColor = color
         } else {
-            usernameErrorsView.hidden = true
+            usernameErrorsView.isHidden = true
         }
     }
     
-    private func usernameTextFieldSelectedWasSet() {
+    func usernameTextFieldSelectedWasSet() {
         if usernameTextFieldSelected {
-            usernameTextFieldOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            usernameErrorsView.hidden = true
+            usernameTextFieldOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
+            usernameErrorsView.isHidden = true
         } else {
             // To trigger the Valid's didSet.
             let valid = usernameTextFieldValid
@@ -226,26 +214,26 @@ private extension SignupView {
         }
     }
     
-    private func emailTextFieldValidWasSet() {
+    func emailTextFieldValidWasSet() {
         if !emailTextFieldSelected {
             let color: CGColor
             if emailTextFieldValid {
-                color = delegate.colorPalette.textfieldsNormal.CGColor
-                emailErrorsView.hidden = true
+                color = delegate.colorPalette.textfieldsNormal.cgColor
+                emailErrorsView.isHidden = true
             } else {
-                color = delegate.colorPalette.textfieldsError.CGColor
-                emailErrorsView.hidden = false
+                color = delegate.colorPalette.textfieldsError.cgColor
+                emailErrorsView.isHidden = false
             }
             emailTextFieldViewOutlet.layer.borderColor = color
         } else {
-            emailErrorsView.hidden = true
+            emailErrorsView.isHidden = true
         }
     }
     
-    private func emailTextFieldSelectedWasSet() {
+    func emailTextFieldSelectedWasSet() {
         if emailTextFieldSelected {
-            emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            emailErrorsView.hidden = true
+            emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
+            emailErrorsView.isHidden = true
         } else {
             // To trigger the Valid's didSet.
             let valid = emailTextFieldValid
@@ -253,26 +241,26 @@ private extension SignupView {
         }
     }
     
-    private func passwordTextFieldValidWasSet() {
+    func passwordTextFieldValidWasSet() {
         if !passwordTextFieldSelected {
             let color: CGColor
             if passwordTextFieldValid {
-                color = delegate.colorPalette.textfieldsNormal.CGColor
-                passwordErrorsView.hidden = true
+                color = delegate.colorPalette.textfieldsNormal.cgColor
+                passwordErrorsView.isHidden = true
             } else {
-                color = delegate.colorPalette.textfieldsError.CGColor
-                passwordErrorsView.hidden = false
+                color = delegate.colorPalette.textfieldsError.cgColor
+                passwordErrorsView.isHidden = false
             }
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
         } else {
-            passwordErrorsView.hidden = true
+            passwordErrorsView.isHidden = true
         }
     }
     
-    private func passwordTextFieldSelectedWasSet() {
+    func passwordTextFieldSelectedWasSet() {
         if passwordTextFieldSelected {
-            passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            passwordErrorsView.hidden = true
+            passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
+            passwordErrorsView.isHidden = true
         } else {
             // To trigger the Valid's didSet.
             let valid = passwordTextFieldValid
@@ -280,31 +268,31 @@ private extension SignupView {
         }
     }
     
-    private func passwordVisibleWasSet() {
+    func passwordVisibleWasSet() {
         toggleVisibility(passwordTextFieldOutlet, visible: passwordVisible,
                          visibilityButton: passwordVisibilityButtonOutlet, visibilityTitle: passwordVisibilityButtonTitle)
     }
     
-    private func passwordConfirmationTextFieldValidWasSet() {
+    func passwordConfirmationTextFieldValidWasSet() {
         if !passwordConfirmationTextFieldSelected {
             let color: CGColor
             if passwordConfirmationTextFieldValid {
-                color = delegate.colorPalette.textfieldsNormal.CGColor
-                passwordConfirmationErrorsView.hidden = true
+                color = delegate.colorPalette.textfieldsNormal.cgColor
+                passwordConfirmationErrorsView.isHidden = true
             } else {
-                color = delegate.colorPalette.textfieldsError.CGColor
-                passwordConfirmationErrorsView.hidden = false
+                color = delegate.colorPalette.textfieldsError.cgColor
+                passwordConfirmationErrorsView.isHidden = false
             }
             pswdConfirmTextFieldAndButtonViewOutlet.layer.borderColor = color
         } else {
-            passwordConfirmationErrorsView.hidden = true
+            passwordConfirmationErrorsView.isHidden = true
         }
     }
     
-    private func passwordConfirmationTextFieldSelectedWasSet() {
+    func passwordConfirmationTextFieldSelectedWasSet() {
         if passwordConfirmationTextFieldSelected {
-            passwordConfirmTextFieldOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.CGColor
-            passwordConfirmationErrorsView.hidden = true
+            passwordConfirmTextFieldOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
+            passwordConfirmationErrorsView.isHidden = true
         } else {
             // To trigger the Valid's didSet.
             let valid = passwordConfirmationTextFieldValid
@@ -312,34 +300,34 @@ private extension SignupView {
         }
     }
     
-    private func confirmationPasswordVisibleWasSet() {
+    func confirmationPasswordVisibleWasSet() {
         toggleVisibility(passwordConfirmTextFieldOutlet, visible: passwordConfirmationVisible,
                          visibilityButton: passwordConfirmVisibilityButtonOutlet, visibilityTitle: confirmPasswordVisibilityButtonTitle)
     }
     
-    private func toggleVisibility(textField: UITextField, visible: Bool, visibilityButton: UIButton, visibilityTitle: String) {
+    func toggleVisibility(_ textField: UITextField, visible: Bool, visibilityButton: UIButton, visibilityTitle: String) {
         // Changing enabled property for the font setting to take effect, which is necessary for it not to shrink.
-        textField.enabled = false
-        textField.secureTextEntry = !visible
-        textField.enabled = true
+        textField.isEnabled = false
+        textField.isSecureTextEntry = !visible
+        textField.isEnabled = true
         textField.font = delegate.fontPalette.textfields
-        visibilityButton.setTitle(visibilityTitle, forState: .Normal)
+        visibilityButton.setTitle(visibilityTitle, for: UIControlState())
     }
     
-    private func signUpButtonEnabledWasSet() {
+    func signUpButtonEnabledWasSet() {
         let colorPalette = delegate.colorPalette
         let color = signUpButtonEnabled ? colorPalette.mainButtonEnabled : colorPalette.mainButtonDisabled
         signUpButton.backgroundColor = color
     }
     
-    private func signUpButtonPressedWasSet() {
+    func signUpButtonPressedWasSet() {
         let colorPalette = delegate.colorPalette
         let color = signUpButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
         signUpButton.backgroundColor = color
-        usernameErrorsView?.hidden = true
-        emailErrorsView.hidden = true
-        passwordErrorsView.hidden = true
-        passwordConfirmationErrorsView?.hidden = true
+        usernameErrorsView?.isHidden = true
+        emailErrorsView.isHidden = true
+        passwordErrorsView.isHidden = true
+        passwordConfirmationErrorsView?.isHidden = true
     }
     
 }
