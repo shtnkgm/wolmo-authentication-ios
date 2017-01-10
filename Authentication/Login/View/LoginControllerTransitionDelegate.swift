@@ -17,7 +17,7 @@ public protocol LoginControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func onLoginSuccess(_ controller: LoginController)
+    func onLoginSuccess(from controller: LoginController)
     
     /**
          Function that reacts to the user pressing "Sign Up"
@@ -25,7 +25,7 @@ public protocol LoginControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func toSignup(_ controller: LoginController)
+    func toSignup(from controller: LoginController)
     
     /**
          Function that reacts to the user pressing "Recover 
@@ -33,6 +33,6 @@ public protocol LoginControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func toRecoverPassword(_ controller: LoginController)
+    func toRecoverPassword(from controller: LoginController)
     
 }

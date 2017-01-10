@@ -87,13 +87,13 @@ private extension SignupController {
         
         _viewModel.signUpExecuting.observeValues { [unowned self] executing in
             executing
-                ? self._delegate.willExecuteSignUp(self)
-                : self._delegate.didExecuteSignUp(self)
+                ? self._delegate.willExecuteSignUp(in: self)
+                : self._delegate.didExecuteSignUp(in: self)
             self.signupView.signUpButtonPressed = executing
         }
         
-        _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didSignUp(self, with: $0) }
-        _viewModel.signUpSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onSignupSuccess(self) }
+        _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didSignUp(in: self, with: $0) }
+        _viewModel.signUpSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onSignupSuccess(from: self) }
     }
     
     func bindUsernameElements() {
@@ -101,9 +101,9 @@ private extension SignupController {
             _viewModel.username <~ usernameTextField.reactive.textValues.map { $0 ?? "" }
             _viewModel.usernameValidationErrors.signal.observeValues { [unowned self] errors in
                 if errors.isEmpty {
-                    self._delegate.didPassUsernameValidation(self)
+                    self._delegate.didPassUsernameValidation(in: self)
                 } else {
-                    self._delegate.didFailUsernameValidation(self, with: errors)
+                    self._delegate.didFailUsernameValidation(in: self, with: errors)
                 }
                 self.signupView.usernameTextFieldValid = errors.isEmpty
             }
@@ -118,9 +118,9 @@ private extension SignupController {
         _viewModel.email <~ signupView.emailTextField.reactive.textValues.map { $0 ?? "" }
         _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
-                self._delegate.didPassEmailValidation(self)
+                self._delegate.didPassEmailValidation(in: self)
             } else {
-                self._delegate.didFailEmailValidation(self, with: errors)
+                self._delegate.didFailEmailValidation(in: self, with: errors)
             }
             self.signupView.emailTextFieldValid = errors.isEmpty
         }
@@ -139,9 +139,9 @@ private extension SignupController {
                 })
         _viewModel.passwordValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
-                self._delegate.didPassPasswordValidation(self)
+                self._delegate.didPassPasswordValidation(in: self)
             } else {
-                self._delegate.didFailPasswordValidation(self, with: errors)
+                self._delegate.didFailPasswordValidation(in: self, with: errors)
             }
             self.signupView.passwordTextFieldValid = errors.isEmpty
         }
@@ -165,9 +165,9 @@ private extension SignupController {
             })
             _viewModel.passwordConfirmationValidationErrors.signal.observeValues { [unowned self] errors in
                 if errors.isEmpty {
-                    self._delegate.didPassPasswordConfirmationValidation(self)
+                    self._delegate.didPassPasswordConfirmationValidation(in: self)
                 } else {
-                    self._delegate.didFailPasswordConfirmationValidation(self, with: errors)
+                    self._delegate.didFailPasswordConfirmationValidation(in: self, with: errors)
                 }
                 self.signupView.passwordConfirmationTextFieldValid = errors.isEmpty
             }
@@ -185,7 +185,7 @@ private extension SignupController {
     func bindButtons() {
         signupView.signUpButton.reactive.pressed = _viewModel.signUpCocoaAction
         _viewModel.signUpCocoaAction.isEnabled.signal.observeValues { [unowned self] in self.signupView.signUpButtonEnabled = $0 }
-        signupView.loginButton.setAction { [unowned self] _ in self._transitionDelegate.toLogin(self) }
+        signupView.loginButton.setAction { [unowned self] _ in self._transitionDelegate.toLogin(from: self) }
         bindTermsAndServices()
     }
     
@@ -282,7 +282,7 @@ extension SignupController: UITextFieldDelegate {
 extension SignupController: UITextViewDelegate {
     
     public func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        _transitionDelegate.onTermsAndServices(self)
+        _transitionDelegate.onTermsAndServices(from: self)
         return false
     }
     

@@ -61,9 +61,9 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     
     public var togglePasswordVisibility: CocoaAction<UIButton> { return CocoaAction(_togglePasswordVisibility) }
     
-    fileprivate lazy var _logIn: Action<(), User, SessionServiceError> = self.initializeLogInAction()
+    private lazy var _logIn: Action<(), User, SessionServiceError> = self.initializeLogInAction()
     
-    fileprivate lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
+    private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
     /**
         Initializes a login view model which will communicate to the session service provided and
@@ -98,7 +98,7 @@ private extension LoginViewModel {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
                 let password = self.password.value
-                return self._sessionService.logIn(email, password: password).observe(on: UIScheduler())
+                return self._sessionService.logIn(withEmail: email, password: password).observe(on: UIScheduler())
             } else {
                 return SignalProducer(error: .invalidLogInCredentials(.none)).observe(on: UIScheduler())
             }

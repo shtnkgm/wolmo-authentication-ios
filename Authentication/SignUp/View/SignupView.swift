@@ -110,7 +110,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var signUpButtonOutlet: UIButton! {
         didSet {
             signUpButtonOutlet.layer.cornerRadius = 6.0
-            signUpButtonOutlet.setTitle(signUpButtonTitle, for: UIControlState())
+            signUpButtonOutlet.setTitle(signUpButtonTitle, for: .normal)
         }
     }
     
@@ -121,7 +121,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var loginLabelOutlet: UILabel! { didSet { loginLabelOutlet.text = loginLabelText } }
     
     internal var loginButton: UIButton { return loginButtonOutlet }
-    @IBOutlet weak var loginButtonOutlet: UIButton! { didSet { loginButtonOutlet.setUnderlinedTitle(loginButtonTitle) } }
+    @IBOutlet weak var loginButtonOutlet: UIButton! { didSet { loginButtonOutlet.setUnderlined(title: loginButtonTitle) } }
     
     internal var usernameTextFieldValid = false { didSet { usernameTextFieldValidWasSet() } }
     internal var usernameTextFieldSelected = false { didSet { usernameTextFieldSelectedWasSet() } }
@@ -150,7 +150,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         passwordConfirmationView.isHidden = true
     }
     
-    internal func setTermsAndServicesText(_ url: URL) {
+    internal func setTermsAndServicesText(withURL url: URL) {
         let textWithLinks = NSMutableAttributedString(string: termsAndServicesText)
         let termsString = termsAndServicesLinkText
         let termsURLRange = NSString(string: termsAndServicesText).range(of: termsString)
@@ -180,7 +180,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         passwordVisible = false
         passwordConfirmationVisible = false
         
-        delegate.configureView(self)
+        delegate.configureSignupView(self)
     }
     
 }
@@ -269,7 +269,7 @@ private extension SignupView {
     }
     
     func passwordVisibleWasSet() {
-        toggleVisibility(passwordTextFieldOutlet, visible: passwordVisible,
+        toggleVisibility(ofTextField: passwordTextFieldOutlet, visible: passwordVisible,
                          visibilityButton: passwordVisibilityButtonOutlet, visibilityTitle: passwordVisibilityButtonTitle)
     }
     
@@ -301,11 +301,11 @@ private extension SignupView {
     }
     
     func confirmationPasswordVisibleWasSet() {
-        toggleVisibility(passwordConfirmTextFieldOutlet, visible: passwordConfirmationVisible,
+        toggleVisibility(ofTextField: passwordConfirmTextFieldOutlet, visible: passwordConfirmationVisible,
                          visibilityButton: passwordConfirmVisibilityButtonOutlet, visibilityTitle: confirmPasswordVisibilityButtonTitle)
     }
     
-    func toggleVisibility(_ textField: UITextField, visible: Bool, visibilityButton: UIButton, visibilityTitle: String) {
+    private func toggleVisibility(ofTextField textField: UITextField, visible: Bool, visibilityButton: UIButton, visibilityTitle: String) {
         // Changing enabled property for the font setting to take effect, which is necessary for it not to shrink.
         textField.isEnabled = false
         textField.isSecureTextEntry = !visible

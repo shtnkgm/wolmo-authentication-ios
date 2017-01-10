@@ -86,10 +86,10 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
     fileprivate let _sessionService: SessionService
     fileprivate let _credentialsAreValid: Property<Bool>
     
-    fileprivate lazy var _signUp: Action<(), User, SessionServiceError> = self.initializeSignUpAction()
+    private lazy var _signUp: Action<(), User, SessionServiceError> = self.initializeSignUpAction()
     
-    fileprivate lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
-    fileprivate lazy var _togglePasswordConfirmVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordConfirmationVisibilityAction()
+    private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
+    private lazy var _togglePasswordConfirmVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordConfirmationVisibilityAction()
     
     /**
          Initializes a signup view model which will communicate to the session service provided and
@@ -124,7 +124,7 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
         passwordConfirmationValidationErrors = Property(initial: [], then: passwordConfirmValidationResult.map { $0.errors })
         
         var credentialsAreValid = Property<Bool>(initial: false, then: emailValidationResult.map { $0.isValid })
-            .combineLatest(with: Property<Bool>(initial: false, then: passwordValidationResult.map { $0.isValid })).map { $0 && $1}
+            .combineLatest(with: Property<Bool>(initial: false, then: passwordValidationResult.map { $0.isValid })).map { $0 && $1 }
         credentialsAreValid = usernameEnabled ? credentialsAreValid.combineLatest(with: Property<Bool>(initial: false, then: usernameValidationResult
                 .map { $0.isValid })).map { $0 && $1 } : credentialsAreValid
         credentialsAreValid = passwordConfirmationEnabled ? credentialsAreValid.combineLatest(with: Property<Bool>(initial: false, then:passwordConfirmValidationResult
@@ -142,7 +142,7 @@ private extension SignupViewModel {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
                 let username: String? = self.usernameEnabled ? self.username.value : .none
-                return self._sessionService.signUp(username, email: email, password: self.password.value)
+                return self._sessionService.signUp(withUsername: username, email: email, password: self.password.value)
             } else {
                 // It will never enter here, since sign up action is only enabled when email is a valid email.
                 return SignalProducer(error: .invalidSignUpCredentials(.none)).observe(on: UIScheduler())
@@ -167,5 +167,5 @@ private extension SignupViewModel {
 }
 
 private func getPasswordConfirmValidationResultFromEquality(_ equals: Bool) -> ValidationResult {
-    return equals ? .Valid : .invalid("signup-error.password-confirmation.invalid".frameworkLocalized)
+    return equals ? .valid : .invalid(errors: ["signup-error.password-confirmation.invalid".frameworkLocalized])
 }

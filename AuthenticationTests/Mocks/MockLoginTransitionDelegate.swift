@@ -11,10 +11,10 @@ import Authentication
 
 final class MockLoginTransitionDelegate: LoginControllerTransitionDelegate {
     
-    func onLoginSuccess(_ controller: LoginController) { }
+    func onLoginSuccess(from controller: LoginController) { }
     
-    func toSignup(_ controller: LoginController) { }
+    func toSignup(from controller: LoginController) { }
     
-    func toRecoverPassword(_ controller: LoginController) { }
+    func toRecoverPassword(from controller: LoginController) { }
     
 }

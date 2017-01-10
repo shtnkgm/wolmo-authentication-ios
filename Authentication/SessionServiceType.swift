@@ -53,7 +53,7 @@ public protocol SessionServiceType {
         must take care of:
             sending the error to the observer.
     */
-    func logIn(_ email: Email, password: String) -> SignalProducer<User, SessionServiceError>
+    func logIn(withEmail email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
     /**
          This method takes care of validating and signing up.
@@ -68,7 +68,7 @@ public protocol SessionServiceType {
          must take care of:
              sending the error to the observer.
     */
-    func signUp(_ username: String?, email: Email, password: String) -> SignalProducer<User, SessionServiceError>
+    func signUp(withUsername username: String?, email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
 }
 

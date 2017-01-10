@@ -31,7 +31,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
     */
-    func willExecuteLogIn(_ controller: LoginController)
+    func willExecuteLogIn(in controller: LoginController)
     
     /**
         Function called when the login action ended with success,
@@ -41,7 +41,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
      */
-    func didExecuteLogIn(_ controller: LoginController)
+    func didExecuteLogIn(in controller: LoginController)
     
     /**
         Function called when the login action ended with error,
@@ -54,7 +54,7 @@ public protocol LoginControllerDelegate {
         - Parameter controller: LoginController where the event is happening.
         - Parameter with: error resulting from the log in attempt.
      */
-    func didLogIn(_ controller: LoginController, with error: SessionServiceError)
+    func didLogIn(in controller: LoginController, with error: SessionServiceError)
     
     /**
         Function called when any new email introduced is valid,
@@ -64,7 +64,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
      */
-    func didPassEmailValidation(_ controller: LoginController)
+    func didPassEmailValidation(in controller: LoginController)
     
     /**
         Function called when any new email introduced is invalid,
@@ -75,7 +75,7 @@ public protocol LoginControllerDelegate {
         - Parameter controller: LoginController where the event is happening.
         - Parameter with: email validation errors.
      */
-    func didFailEmailValidation(_ controller: LoginController, with errors: [String])
+    func didFailEmailValidation(in controller: LoginController, with errors: [String])
     
     /**
         Function called when any new password introduced is valid,
@@ -85,7 +85,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
      */
-    func didPassPasswordValidation(_ controller: LoginController)
+    func didPassPasswordValidation(in controller: LoginController)
     
     /**
         Function called when any new password introduced is valid,
@@ -96,7 +96,7 @@ public protocol LoginControllerDelegate {
         - Parameter controller: LoginController where the event is happening.
         - Parameter with: password validation errors.
      */
-    func didFailPasswordValidation(_ controller: LoginController, with errors: [String])
+    func didFailPasswordValidation(in controller: LoginController, with errors: [String])
     
 }
 
@@ -104,7 +104,7 @@ extension LoginControllerDelegate {
     
     public var shouldDisplayLoginErrorWithAlert: Bool { return true }
     
-    public func willExecuteLogIn(_ controller: LoginController) {
+    public func willExecuteLogIn(in controller: LoginController) {
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = " "
         }
@@ -112,12 +112,12 @@ extension LoginControllerDelegate {
         app.isNetworkActivityIndicatorVisible = true
     }
     
-    public func didExecuteLogIn(_ controller: LoginController) {
+    public func didExecuteLogIn(in controller: LoginController) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = false
     }
     
-    public func didLogIn(_ controller: LoginController, with error: SessionServiceError) {
+    public func didLogIn(in controller: LoginController, with error: SessionServiceError) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = false
         if let errorLabel = controller.loginView.logInErrorLabel {
@@ -130,13 +130,13 @@ extension LoginControllerDelegate {
         }
     }
     
-    public func didPassEmailValidation(_ controller: LoginController) { }
+    public func didPassEmailValidation(in controller: LoginController) { }
     
-    public func didFailEmailValidation(_ controller: LoginController, with errors: [String]) { }
+    public func didFailEmailValidation(in controller: LoginController, with errors: [String]) { }
     
-    public func didPassPasswordValidation(_ controller: LoginController) { }
+    public func didPassPasswordValidation(in controller: LoginController) { }
     
-    public func didFailPasswordValidation(_ controller: LoginController, with errors: [String]) { }
+    public func didFailPasswordValidation(in controller: LoginController, with errors: [String]) { }
     
 }
 

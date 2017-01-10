@@ -19,19 +19,19 @@
  */
 public struct CompositeTextInputValidator: TextInputValidatorType {
     
-    fileprivate let _validators: [TextInputValidatorType]
+    private let _validators: [TextInputValidatorType]
     
     init(validators: [TextInputValidatorType]) {
         _validators = validators
     }
     
     public func validate(_ text: String) -> ValidationResult {
-        return _validators.reduce(.Valid) { result, validator in
+        return _validators.reduce(.valid) { result, validator in
             switch (result, validator.validate(text)) {
-            case (.Invalid(let left), .Invalid(let right)): return .Invalid(errors: left + right)
-            case (let invalid, .Valid): return invalid
-            case (.Valid, let invalid): return invalid
-            default: return .Valid
+            case (.invalid(let left), .invalid(let right)): return .invalid(errors: left + right)
+            case (let invalid, .valid): return invalid
+            case (.valid, let invalid): return invalid
+            default: return .valid
             }
         }
     }

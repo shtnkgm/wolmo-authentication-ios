@@ -16,9 +16,9 @@ public struct NonEmptyValidator: TextInputValidatorType {
     
     public func validate(_ text: String) -> ValidationResult {
         if text.isEmpty {
-            return .Invalid(errors: ["text-input-validator.empty".frameworkLocalized])
+            return .invalid(errors: ["text-input-validator.empty".frameworkLocalized])
         } else {
-            return .Valid
+            return .valid
         }
     }
     
@@ -33,7 +33,7 @@ public struct NonEmptyValidator: TextInputValidatorType {
  */
 public struct MaxLengthValidator: TextInputValidatorType {
     
-    fileprivate let _maxLength: Int
+    private let _maxLength: Int
     
     public init(maxLength: Int) {
         _maxLength = maxLength
@@ -41,9 +41,9 @@ public struct MaxLengthValidator: TextInputValidatorType {
     
     public func validate(_ text: String) -> ValidationResult {
         if text.characters.count > _maxLength {
-            return .Invalid(errors: ["text-input-validator.max-length".frameworkLocalized(_maxLength)])
+            return .invalid(errors: ["text-input-validator.max-length".frameworkLocalized(withArguments: _maxLength)])
         } else {
-            return .Valid
+            return .valid
         }
     }
     
@@ -58,7 +58,7 @@ public struct MaxLengthValidator: TextInputValidatorType {
  */
 public struct MinLengthValidator: TextInputValidatorType {
     
-    fileprivate let _minLength: Int
+    private let _minLength: Int
     
     public init(minLength: Int) {
         _minLength = minLength
@@ -66,9 +66,9 @@ public struct MinLengthValidator: TextInputValidatorType {
     
     public func validate(_ text: String) -> ValidationResult {
         if text.characters.count < _minLength {
-            return .Invalid(errors: ["text-input-validator.min-length".frameworkLocalized(_minLength)])
+            return .invalid(errors: ["text-input-validator.min-length".frameworkLocalized(withArguments: _minLength)])
         } else {
-            return .Valid
+            return .valid
         }
     }
     

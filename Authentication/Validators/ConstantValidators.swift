@@ -13,7 +13,7 @@
 public struct AlwaysValidValidator: TextInputValidatorType {
     
     public func validate(_ text: String) -> ValidationResult {
-        return .Valid
+        return .valid
     }
     
 }
@@ -30,7 +30,7 @@ public struct AlwaysInvalidValidator: TextInputValidatorType {
     public var errorTextToLocalize: String = ""
     
     public func validate(_ text: String) -> ValidationResult {
-        return .Invalid(errors: [errorTextToLocalize.frameworkLocalized(text)])
+        return .invalid(errors: [errorTextToLocalize.frameworkLocalized(withArguments: text)])
     }
     
 }

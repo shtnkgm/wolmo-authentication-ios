@@ -31,7 +31,7 @@ public protocol SignupControllerDelegate {
      
         - Parameter controller: SignupController where the event is happening.
      */
-    func willExecuteSignUp(_ controller: SignupController)
+    func willExecuteSignUp(in controller: SignupController)
     
     /**
         Function called when the signup action ended with success,
@@ -41,7 +41,7 @@ public protocol SignupControllerDelegate {
      
         - Parameter controller: SignupController where the event is happening.
      */
-    func didExecuteSignUp(_ controller: SignupController)
+    func didExecuteSignUp(in controller: SignupController)
     
     /**
          Function called when the signup action ended with error,
@@ -54,7 +54,7 @@ public protocol SignupControllerDelegate {
          - Parameter controller: SignupController where the event is happening.
          - Parameter with: error resulting from the sign up attempt.
      */
-    func didSignUp(_ controller: SignupController, with error: SessionServiceError)
+    func didSignUp(in controller: SignupController, with error: SessionServiceError)
     
     /**
          Function called when any new username introduced is valid,
@@ -64,7 +64,7 @@ public protocol SignupControllerDelegate {
      
          - Parameter controller: SignupController where the event is happening.
      */
-    func didPassUsernameValidation(_ controller: SignupController)
+    func didPassUsernameValidation(in controller: SignupController)
     
     /** 
          Function called when any new username introduced is invalid,
@@ -75,7 +75,7 @@ public protocol SignupControllerDelegate {
          - Parameter controller: SignupController where the event is happening.
          - Parameter with: username validation errors.
      */
-    func didFailUsernameValidation(_ controller: SignupController, with errors: [String])
+    func didFailUsernameValidation(in controller: SignupController, with errors: [String])
     
     /** 
          Function called when any new email introduced is valid,
@@ -85,7 +85,7 @@ public protocol SignupControllerDelegate {
      
          - Parameter controller: SignupController where the event is happening.
      */
-    func didPassEmailValidation(_ controller: SignupController)
+    func didPassEmailValidation(in controller: SignupController)
     
     /** 
          Function called when any new email introduced is invalid,
@@ -96,7 +96,7 @@ public protocol SignupControllerDelegate {
          - Parameter controller: SignupController where the event is happening.
          - Parameter with: email validation errors.
      */
-    func didFailEmailValidation(_ controller: SignupController, with errors: [String])
+    func didFailEmailValidation(in controller: SignupController, with errors: [String])
     
     /** 
          Function called when any new password introduced is valid,
@@ -106,7 +106,7 @@ public protocol SignupControllerDelegate {
      
          - Parameter controller: SignupController where the event is happening.
      */
-    func didPassPasswordValidation(_ controller: SignupController)
+    func didPassPasswordValidation(in controller: SignupController)
     
     /** 
          Function called when any new password introduced is invalid,
@@ -117,7 +117,7 @@ public protocol SignupControllerDelegate {
          - Parameter controller: SignupController where the event is happening.
          - Parameter with: password validation errors.
      */
-    func didFailPasswordValidation(_ controller: SignupController, with errors: [String])
+    func didFailPasswordValidation(in controller: SignupController, with errors: [String])
 
     /** 
          Function called when any new password confirmation introduced is valid,
@@ -127,7 +127,7 @@ public protocol SignupControllerDelegate {
      
          - Parameter controller: SignupController where the event is happening.
      */
-    func didPassPasswordConfirmationValidation(_ controller: SignupController)
+    func didPassPasswordConfirmationValidation(in controller: SignupController)
     
     /** 
          Function called when any new password confirmation introduced is invalid,
@@ -138,7 +138,7 @@ public protocol SignupControllerDelegate {
          - Parameter controller: SignupController where the event is happening.
          - Parameter with: password confirmation validation errors.
      */
-    func didFailPasswordConfirmationValidation(_ controller: SignupController, with errors: [String])
+    func didFailPasswordConfirmationValidation(in controller: SignupController, with errors: [String])
     
 }
 
@@ -146,7 +146,7 @@ extension SignupControllerDelegate {
     
     public var shouldDisplaySignupErrorWithAlert: Bool { return true }
     
-    public func willExecuteSignUp(_ controller: SignupController) {
+    public func willExecuteSignUp(in controller: SignupController) {
         if let errorLabel = controller.signupView.signUpErrorLabel {
             errorLabel.text = " "
         }
@@ -154,12 +154,12 @@ extension SignupControllerDelegate {
         app.isNetworkActivityIndicatorVisible = true
     }
     
-    public func didExecuteSignUp(_ controller: SignupController) {
+    public func didExecuteSignUp(in controller: SignupController) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = false
     }
     
-    public func didSignUp(_ controller: SignupController, with error: SessionServiceError) {
+    public func didSignUp(in controller: SignupController, with error: SessionServiceError) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = false
         if let errorLabel = controller.signupView.signUpErrorLabel {
@@ -172,21 +172,21 @@ extension SignupControllerDelegate {
         }
     }
     
-    public func didPassUsernameValidation(_ controller: SignupController) { }
+    public func didPassUsernameValidation(in controller: SignupController) { }
     
-    public func didFailUsernameValidation(_ controller: SignupController, with errors: [String]) { }
+    public func didFailUsernameValidation(in controller: SignupController, with errors: [String]) { }
     
-    public func didPassEmailValidation(_ controller: SignupController) { }
+    public func didPassEmailValidation(in controller: SignupController) { }
     
-    public func didFailEmailValidation(_ controller: SignupController, with errors: [String]) { }
+    public func didFailEmailValidation(in controller: SignupController, with errors: [String]) { }
     
-    public func didPassPasswordValidation(_ controller: SignupController) { }
+    public func didPassPasswordValidation(in controller: SignupController) { }
     
-    public func didFailPasswordValidation(_ controller: SignupController, with errors: [String]) { }
+    public func didFailPasswordValidation(in controller: SignupController, with errors: [String]) { }
     
-    public func didPassPasswordConfirmationValidation(_ controller: SignupController) { }
+    public func didPassPasswordConfirmationValidation(in controller: SignupController) { }
     
-    public func didFailPasswordConfirmationValidation(_ controller: SignupController, with errors: [String]) { }
+    public func didFailPasswordConfirmationValidation(in controller: SignupController, with errors: [String]) { }
     
 }
 

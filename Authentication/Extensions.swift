@@ -30,22 +30,8 @@ internal extension String {
      
          - parameter arguments: Formatting arguments.
      */
-    internal func frameworkLocalized(_ arguments: CVarArg...) -> String {
+    internal func frameworkLocalized(withArguments arguments: CVarArg...) -> String {
         return String(format: frameworkLocalized, arguments: arguments)
-    }
-    
-}
-
-public extension UIButton {
-    
-    public func setUnderlinedTitle(_ title: String, style: NSUnderlineStyle = .styleSingle, color: UIColor? = .none, forState state: UIControlState = UIControlState()) {
-        var attributes: [String : AnyObject] = [NSUnderlineStyleAttributeName: style.rawValue as AnyObject]
-        if let colorAttr = color {
-            attributes[NSUnderlineColorAttributeName] = colorAttr
-        }
-        let underlinedText = NSAttributedString(string: title, attributes: attributes)
-        setAttributedTitle(underlinedText, for: state)
-
     }
     
 }

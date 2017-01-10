@@ -20,8 +20,8 @@ final class MockSessionService: SessionServiceType {
     let logInCalled: Signal<Bool, NoError>
     let signUpCalled: Signal<Bool, NoError>
     
-    fileprivate let _logInCalledObserver: Observer<Bool, NoError>
-    fileprivate let _signUpCalledObserver: Observer<Bool, NoError>
+    private let _logInCalledObserver: Observer<Bool, NoError>
+    private let _signUpCalledObserver: Observer<Bool, NoError>
     
     
     init() {
@@ -35,11 +35,11 @@ final class MockSessionService: SessionServiceType {
         _signUpCalledObserver.sendCompleted()
     }
     
-    func logIn(_ email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
+    func logIn(withEmail email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
         return SignalProducer.empty.on(completed: { [unowned self] in self._logInCalledObserver.send(value: true) })
     }
     
-    func signUp(_ name: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
+    func signUp(withUsername name: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
         return SignalProducer.empty.on(completed: { [unowned self] in self._signUpCalledObserver.send(value: true) })
     }
     

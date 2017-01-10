@@ -23,9 +23,9 @@ class CompositeValidatorSpec: QuickSpec {
                     [NonEmptyValidator(),
                         AnyTextInputValidator { text in
                             if text.contains("substring") {
-                                return .Invalid(errors: ["The string contains invalid word 'substring'"])
+                                return .invalid(errors: ["The string contains invalid word 'substring'"])
                             } else {
-                                return .Valid
+                                return .valid
                             }
                         },
                         MaxLengthValidator(maxLength: 10)]
@@ -64,9 +64,9 @@ class CompositeValidatorSpec: QuickSpec {
                             errors.append("The text has 'BB' in it")
                         }
                         if errors == [] {
-                            return .Valid
+                            return .valid
                         } else {
-                            return .Invalid(errors: errors)
+                            return .invalid(errors: errors)
                         }
                         })
                     

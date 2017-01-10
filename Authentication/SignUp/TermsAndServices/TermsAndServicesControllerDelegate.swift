@@ -21,7 +21,7 @@ public protocol TermsAndServicesControllerDelegate {
      
         - Parameter controller: TermsAndServicesController where the event is happening.
      */
-    func didStartLoadingTermsAndServices(_ controller: TermsAndServicesController)
+    func didStartLoadingTermsAndServices(in controller: TermsAndServicesController)
 
     /**
         Function called when the terms and services content finished loading.
@@ -30,18 +30,18 @@ public protocol TermsAndServicesControllerDelegate {
      
         - Parameter controller: TermsAndServicesController where the event is happening.
      */
-    func didEndLoadingTermsAndServices(_ controller: TermsAndServicesController)
+    func didEndLoadingTermsAndServices(in controller: TermsAndServicesController)
 
 }
 
 public extension TermsAndServicesControllerDelegate {
     
-    public func didStartLoadingTermsAndServices(_ controller: TermsAndServicesController) {
+    public func didStartLoadingTermsAndServices(in controller: TermsAndServicesController) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = true
     }
 
-    public func didEndLoadingTermsAndServices(_ controller: TermsAndServicesController) {
+    public func didEndLoadingTermsAndServices(in controller: TermsAndServicesController) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = false
     }

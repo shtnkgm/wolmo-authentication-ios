@@ -25,7 +25,7 @@ public enum AuthenticationInitialScreen {
     when necessary).
     The authentication process includes login and signup logic.
 */
-open class AuthenticationCoordinator<User, SessionService: SessionServiceType> where SessionService.User == User {
+public class AuthenticationCoordinator<User, SessionService: SessionServiceType> where SessionService.User == User {
     
     /// The entry and exit point to the user's session.
     open let sessionService: SessionService
@@ -104,10 +104,10 @@ public extension AuthenticationCoordinator {
      */
     internal func createLoginControllerConfiguration() -> LoginControllerConfiguration {
         let loginViewConfiguration = _componentsFactory.createLoginViewConfiguration()
-        let loginViewDelegate = _componentsFactory.createLoginViewDelegate(loginViewConfiguration)
-        let createLoginView: () -> LoginViewType = { [unowned self] in self._componentsFactory.createLoginView(loginViewDelegate) }
+        let loginViewDelegate = _componentsFactory.createLoginViewDelegate(withConfiguration: loginViewConfiguration)
+        let createLoginView: () -> LoginViewType = { [unowned self] in self._componentsFactory.createLoginView(withDelegate: loginViewDelegate) }
         return LoginControllerConfiguration(
-            viewModel: _componentsFactory.createLoginViewModel(sessionService,
+            viewModel: _componentsFactory.createLoginViewModel(withSessionService: sessionService,
                 credentialsValidator: _componentsFactory.createLogInCredentialsValidator()),
             viewFactory: createLoginView,
             transitionDelegate: _componentsFactory.createLoginControllerTransitionDelegate() ?? self,
@@ -143,10 +143,10 @@ public extension AuthenticationCoordinator {
      */
     internal func createSignupControllerConfiguration() -> SignupControllerConfiguration {
         let signupViewConfiguration = _componentsFactory.createSignupViewConfiguration()
-        let signupViewDelegate = _componentsFactory.createSignupViewDelegate(signupViewConfiguration)
-        let createSignupView: () -> SignupViewType = { [unowned self] in self._componentsFactory.createSignupView(signupViewDelegate) }
+        let signupViewDelegate = _componentsFactory.createSignupViewDelegate(withConfiguration: signupViewConfiguration)
+        let createSignupView: () -> SignupViewType = { [unowned self] in self._componentsFactory.createSignupView(withDelegate: signupViewDelegate) }
         return SignupControllerConfiguration(
-            viewModel: _componentsFactory.createSignupViewModel(sessionService,
+            viewModel: _componentsFactory.createSignupViewModel(withSessionService: sessionService,
                 credentialsValidator: _componentsFactory.createSignUpCredentialsValidator(),
                 configuration: signupViewConfiguration),
             viewFactory: createSignupView,
@@ -161,7 +161,7 @@ public extension AuthenticationCoordinator {
          
          - Returns: A valid terms and services controller.
      */
-    internal func createTermsAndServicesController(_ url: URL) -> TermsAndServicesController {
+    internal func createTermsAndServicesController(with url: URL) -> TermsAndServicesController {
         return TermsAndServicesController(url: url, delegate: _componentsFactory.createTermsAndServicesControllerDelegate())
     }
     
@@ -176,7 +176,7 @@ public extension AuthenticationCoordinator {
          
          - Returns: A valid recover password controller to use.
      */
-    public func createRecoverPasswordController() -> RecoverPasswordController {
+    internal func createRecoverPasswordController() -> RecoverPasswordController {
         //(todo)
         return RecoverPasswordController()
     }
@@ -185,11 +185,11 @@ public extension AuthenticationCoordinator {
 
 extension AuthenticationCoordinator: LoginControllerTransitionDelegate {
     
-    public final func onLoginSuccess(_ controller: LoginController) {
+    public final func onLoginSuccess(from controller: LoginController) {
         _window.rootViewController = _componentsFactory.createMainViewController()
     }
     
-    public final func toSignup(_ controller: LoginController) {
+    public final func toSignup(from controller: LoginController) {
         if _initialScreen == .login {
             let signupController = createSignupController()
             controller.navigationController!.pushViewController(signupController, animated: true)
@@ -198,7 +198,7 @@ extension AuthenticationCoordinator: LoginControllerTransitionDelegate {
         }
     }
     
-    public final func toRecoverPassword(_ controller: LoginController) {
+    public final func toRecoverPassword(from controller: LoginController) {
         let recoverPasswordController = createRecoverPasswordController()
         controller.navigationController!.pushViewController(recoverPasswordController, animated: true)
     }
@@ -207,11 +207,11 @@ extension AuthenticationCoordinator: LoginControllerTransitionDelegate {
 
 extension AuthenticationCoordinator: SignupControllerTransitionDelegate {
     
-    public final func onSignupSuccess(_ controller: SignupController) {
+    public final func onSignupSuccess(from controller: SignupController) {
         _window.rootViewController = _componentsFactory.createMainViewController()
     }
     
-    public final func toLogin(_ controller: SignupController) {
+    public final func toLogin(from controller: SignupController) {
         if _initialScreen == .signup {
             let loginController = createLoginController()
             controller.navigationController!.pushViewController(loginController, animated: true)
@@ -220,9 +220,9 @@ extension AuthenticationCoordinator: SignupControllerTransitionDelegate {
         }
     }
     
-    public final func onTermsAndServices(_ controller: SignupController) {
+    public final func onTermsAndServices(from controller: SignupController) {
         let configuration = _componentsFactory.createSignupViewConfiguration()
-        let termsAndServicesController = createTermsAndServicesController(configuration.termsAndServicesURL as URL)
+        let termsAndServicesController = createTermsAndServicesController(with: configuration.termsAndServicesURL)
         controller.navigationController!.pushViewController(termsAndServicesController, animated: true)
     }
     

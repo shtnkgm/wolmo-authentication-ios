@@ -25,7 +25,7 @@ public final class LoginController: UIViewController {
     
     fileprivate let _viewModel: LoginViewModelType
     fileprivate let _transitionDelegate: LoginControllerTransitionDelegate //swiftlint:disable:this weak_delegate
-    fileprivate let _loginViewFactory: () -> LoginViewType
+    private let _loginViewFactory: () -> LoginViewType
     fileprivate let _delegate: LoginControllerDelegate //swiftlint:disable:this weak_delegate
     
     fileprivate let _notificationCenter: NotificationCenter = .default
@@ -85,22 +85,22 @@ private extension LoginController {
         
         _viewModel.logInExecuting.observeValues { [unowned self] executing in
             executing
-                ? self._delegate.willExecuteLogIn(self)
-                : self._delegate.didExecuteLogIn(self)
+                ? self._delegate.willExecuteLogIn(in: self)
+                : self._delegate.didExecuteLogIn(in: self)
             self.loginView.logInButtonPressed = executing
         }
         
-        _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didLogIn(self, with: $0) }
-        _viewModel.logInSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onLoginSuccess(self) }
+        _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didLogIn(in: self, with: $0) }
+        _viewModel.logInSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onLoginSuccess(from: self) }
     }
     
-    func bindEmailElements() {
+    private func bindEmailElements() {
         _viewModel.email <~ loginView.emailTextField.reactive.textValues.map { $0 ?? "" }
         _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
-                self._delegate.didPassEmailValidation(self)
+                self._delegate.didPassEmailValidation(in: self)
             } else {
-                self._delegate.didFailEmailValidation(self, with: errors)
+                self._delegate.didFailEmailValidation(in: self, with: errors)
             }
             self.loginView.emailTextFieldValid = errors.isEmpty
         }
@@ -110,7 +110,7 @@ private extension LoginController {
         loginView.emailTextField.delegate = self
     }
     
-    func bindPasswordElements() {
+    private func bindPasswordElements() {
         _viewModel.password <~ loginView.passwordTextField.reactive.textValues
             .map { $0 ?? "" }
             .on(value: { [unowned self] text in
@@ -118,9 +118,9 @@ private extension LoginController {
         })
         _viewModel.passwordValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
-                self._delegate.didPassPasswordValidation(self)
+                self._delegate.didPassPasswordValidation(in: self)
             } else {
-                self._delegate.didFailPasswordValidation(self, with: errors)
+                self._delegate.didFailPasswordValidation(in: self, with: errors)
             }
             self.loginView.passwordTextFieldValid = errors.isEmpty
         }
@@ -134,14 +134,14 @@ private extension LoginController {
         loginView.passwordTextField.delegate = self
     }
     
-    func bindButtons() {
+    private func bindButtons() {
         loginView.logInButton.reactive.pressed = _viewModel.logInCocoaAction
         _viewModel.logInCocoaAction.isEnabled.signal.observeValues { [unowned self] in self.loginView.logInButtonEnabled = $0 }
-        loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.toSignup(self) }
-        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.toRecoverPassword(self) }
+        loginView.signupButton.setAction { [unowned self] _ in self._transitionDelegate.toSignup(from: self) }
+        loginView.recoverPasswordButton.setAction { [unowned self] _ in self._transitionDelegate.toRecoverPassword(from: self) }
     }
     
-    func setTextfieldOrder() {
+    private func setTextfieldOrder() {
         loginView.emailTextField.nextTextField = loginView.passwordTextField
         loginView.passwordTextField.nextTextField = loginView.emailTextField
     }
@@ -200,12 +200,12 @@ private extension LoginController {
             .observeValues { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
-    func keyboardWillShow(_ notification: Notification) {
+    private func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
                 let keyboardOffset = keyboardSize.height
-                let textFieldOffset = calculateTextFieldOffsetToMoveFrame(keyboardOffset)
+                let textFieldOffset = calculateTextFieldOffsetToMoveFrame(withKeyboardOffset: keyboardOffset)
                 if textFieldOffset > keyboardOffset {
                     view.frame.origin.y -= keyboardOffset
                 } else {
@@ -230,11 +230,11 @@ private extension LoginController {
     
     /* As both textfields fit in all devices, it will always show the email
     textfield at the top of the screen. */
-    func calculateTextFieldOffsetToMoveFrame(_ keyboardOffset: CGFloat) -> CGFloat {
+    private func calculateTextFieldOffsetToMoveFrame(withKeyboardOffset: CGFloat) -> CGFloat {
         return loginView.emailTextField.convert(loginView.emailTextField.frame.origin, to: self.view).y - 10
     }
     
-    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+    @objc func dismissKeyboard(sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)

@@ -13,11 +13,11 @@ import WebKit
      Terms And Services View Controller that takes care of presenting
      the terms and services and informing loading events to delegate.
 */
-public final class TermsAndServicesController: UIViewController, WKNavigationDelegate {
+public final class TermsAndServicesController: UIViewController {
     
-    fileprivate let _url: URL
+    private let _url: URL
+    private var _webView: WKWebView!
     fileprivate let _delegate: TermsAndServicesControllerDelegate //swiftlint:disable:this weak_delegate
-    fileprivate var _webView: WKWebView!
     
     internal init(url: URL, delegate: TermsAndServicesControllerDelegate) {
         _url = url
@@ -49,17 +49,21 @@ public final class TermsAndServicesController: UIViewController, WKNavigationDel
         super.viewDidLoad()
         let request = URLRequest(url: _url)
         _webView.load(request)
-        _delegate.didStartLoadingTermsAndServices(self)
+        _delegate.didStartLoadingTermsAndServices(in: self)
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
     }
-        
+    
+}
+
+extension TermsAndServicesController: WKNavigationDelegate {
+    
     // Called when a mainframe load completes.
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        _delegate.didEndLoadingTermsAndServices(self)
+        _delegate.didEndLoadingTermsAndServices(in: self)
     }
     
 }

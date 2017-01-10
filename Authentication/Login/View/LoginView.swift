@@ -72,7 +72,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     @IBOutlet weak var logInButtonOutlet: UIButton! {
         didSet {
             logInButtonOutlet.layer.cornerRadius = 6.0
-            logInButtonOutlet.setTitle(logInButtonTitle, for: UIControlState())
+            logInButtonOutlet.setTitle(logInButtonTitle, for: .normal)
         }
     }
     
@@ -82,13 +82,13 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal var signupButton: UIButton { return signupButtonOutlet }
     @IBOutlet weak var signupButtonOutlet: UIButton! {
-        didSet { signupButton.setUnderlinedTitle(signupButtonTitle) }
+        didSet { signupButton.setUnderlined(title: signupButtonTitle) }
     }
     
     internal var recoverPasswordButton: UIButton { return recoverPasswordButtonOutlet }
     @IBOutlet weak var recoverPasswordButtonOutlet: UIButton! {
         didSet {
-            recoverPasswordButtonOutlet.setUnderlinedTitle(recoverPasswordButtonTitle)
+            recoverPasswordButtonOutlet.setUnderlined(title: recoverPasswordButtonTitle)
             recoverPasswordButtonOutlet.isHidden = true
         }
     }
@@ -149,7 +149,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         
         //Configure colour palette
         //Configure fonts
-        delegate.configureView(self)
+        delegate.configureLoginView(self)
     }
     
 }
@@ -230,7 +230,7 @@ private extension LoginView {
         passwordTextField.isSecureTextEntry = !passwordVisible
         passwordTextField.isEnabled = true
         passwordTextField.font = delegate.fontPalette.textfields
-        passwordVisibilityButtonOutlet.setTitle(passwordVisibilityButtonTitle, for: UIControlState())
+        passwordVisibilityButtonOutlet.setTitle(passwordVisibilityButtonTitle, for: .normal)
     }
     
 }

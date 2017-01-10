@@ -18,7 +18,7 @@ public protocol SignupControllerTransitionDelegate {
          Should take care of the screen transition,
          if wanting to there be one.
      */
-    func onSignupSuccess(_ controller: SignupController)
+    func onSignupSuccess(from controller: SignupController)
     
     /**
          Function that reacts to the user pressing "Log In"
@@ -26,7 +26,7 @@ public protocol SignupControllerTransitionDelegate {
      
          Should take care of the screen transition.
      */
-    func toLogin(_ controller: SignupController)
+    func toLogin(from controller: SignupController)
     
     /**
          Function that reacts to the user pressing
@@ -34,6 +34,6 @@ public protocol SignupControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func onTermsAndServices(_ controller: SignupController)
+    func onTermsAndServices(from controller: SignupController)
     
 }

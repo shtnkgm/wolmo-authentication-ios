@@ -12,7 +12,7 @@
  */
 public struct AnyTextInputValidator: TextInputValidatorType {
     
-    fileprivate let _validate: (String) -> ValidationResult
+    private let _validate: (String) -> ValidationResult
     
     init(validate: @escaping (String) -> ValidationResult) {
         _validate = validate
