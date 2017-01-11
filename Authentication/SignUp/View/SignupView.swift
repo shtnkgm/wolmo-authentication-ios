@@ -185,9 +185,9 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
 }
 
-private extension SignupView {
+fileprivate extension SignupView {
     
-    func usernameTextFieldValidWasSet() {
+    fileprivate func usernameTextFieldValidWasSet() {
         if !usernameTextFieldSelected {
             let color: CGColor
             if usernameTextFieldValid {
@@ -203,7 +203,7 @@ private extension SignupView {
         }
     }
     
-    func usernameTextFieldSelectedWasSet() {
+    fileprivate func usernameTextFieldSelectedWasSet() {
         if usernameTextFieldSelected {
             usernameTextFieldOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
             usernameErrorsView.isHidden = true
@@ -214,7 +214,7 @@ private extension SignupView {
         }
     }
     
-    func emailTextFieldValidWasSet() {
+    fileprivate func emailTextFieldValidWasSet() {
         if !emailTextFieldSelected {
             let color: CGColor
             if emailTextFieldValid {
@@ -230,7 +230,7 @@ private extension SignupView {
         }
     }
     
-    func emailTextFieldSelectedWasSet() {
+    fileprivate func emailTextFieldSelectedWasSet() {
         if emailTextFieldSelected {
             emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
             emailErrorsView.isHidden = true
@@ -241,7 +241,7 @@ private extension SignupView {
         }
     }
     
-    func passwordTextFieldValidWasSet() {
+    fileprivate func passwordTextFieldValidWasSet() {
         if !passwordTextFieldSelected {
             let color: CGColor
             if passwordTextFieldValid {
@@ -257,7 +257,7 @@ private extension SignupView {
         }
     }
     
-    func passwordTextFieldSelectedWasSet() {
+    fileprivate func passwordTextFieldSelectedWasSet() {
         if passwordTextFieldSelected {
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
             passwordErrorsView.isHidden = true
@@ -268,12 +268,12 @@ private extension SignupView {
         }
     }
     
-    func passwordVisibleWasSet() {
+    fileprivate func passwordVisibleWasSet() {
         toggleVisibility(ofTextField: passwordTextFieldOutlet, visible: passwordVisible,
                          visibilityButton: passwordVisibilityButtonOutlet, visibilityTitle: passwordVisibilityButtonTitle)
     }
     
-    func passwordConfirmationTextFieldValidWasSet() {
+    fileprivate func passwordConfirmationTextFieldValidWasSet() {
         if !passwordConfirmationTextFieldSelected {
             let color: CGColor
             if passwordConfirmationTextFieldValid {
@@ -289,7 +289,7 @@ private extension SignupView {
         }
     }
     
-    func passwordConfirmationTextFieldSelectedWasSet() {
+    fileprivate func passwordConfirmationTextFieldSelectedWasSet() {
         if passwordConfirmationTextFieldSelected {
             passwordConfirmTextFieldOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
             passwordConfirmationErrorsView.isHidden = true
@@ -300,7 +300,7 @@ private extension SignupView {
         }
     }
     
-    func confirmationPasswordVisibleWasSet() {
+    fileprivate func confirmationPasswordVisibleWasSet() {
         toggleVisibility(ofTextField: passwordConfirmTextFieldOutlet, visible: passwordConfirmationVisible,
                          visibilityButton: passwordConfirmVisibilityButtonOutlet, visibilityTitle: confirmPasswordVisibilityButtonTitle)
     }
@@ -314,13 +314,13 @@ private extension SignupView {
         visibilityButton.setTitle(visibilityTitle, for: UIControlState())
     }
     
-    func signUpButtonEnabledWasSet() {
+    fileprivate func signUpButtonEnabledWasSet() {
         let colorPalette = delegate.colorPalette
         let color = signUpButtonEnabled ? colorPalette.mainButtonEnabled : colorPalette.mainButtonDisabled
         signUpButton.backgroundColor = color
     }
     
-    func signUpButtonPressedWasSet() {
+    fileprivate func signUpButtonPressedWasSet() {
         let colorPalette = delegate.colorPalette
         let color = signUpButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
         signUpButton.backgroundColor = color

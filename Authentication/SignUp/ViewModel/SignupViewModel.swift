@@ -136,9 +136,9 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
     
 }
 
-private extension SignupViewModel {
+fileprivate extension SignupViewModel {
     
-    func initializeSignUpAction() -> Action<(), User, SessionServiceError> {
+    fileprivate func initializeSignUpAction() -> Action<(), User, SessionServiceError> {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
                 let username: String? = self.usernameEnabled ? self.username.value : .none
@@ -150,14 +150,14 @@ private extension SignupViewModel {
         }
     }
     
-    func initializeTogglePasswordVisibilityAction() -> Action<(), Bool, NoError> {
+    fileprivate func initializeTogglePasswordVisibilityAction() -> Action<(), Bool, NoError> {
         return Action { [unowned self] _ in
             self.passwordVisible.value = !self.passwordVisible.value
             return SignalProducer(value: self.passwordVisible.value).observe(on: UIScheduler())
         }
     }
     
-    func initializeTogglePasswordConfirmationVisibilityAction() -> Action<(), Bool, NoError> {
+    fileprivate func initializeTogglePasswordConfirmationVisibilityAction() -> Action<(), Bool, NoError> {
         return Action { [unowned self] _ in
             self.passwordConfirmationVisible.value = !self.passwordConfirmationVisible.value
             return SignalProducer(value: self.passwordConfirmationVisible.value).observe(on: UIScheduler())

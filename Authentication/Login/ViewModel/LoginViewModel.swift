@@ -92,9 +92,9 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     
 }
 
-private extension LoginViewModel {
+fileprivate extension LoginViewModel {
     
-    func initializeLogInAction() -> Action<(), User, SessionServiceError> {
+    fileprivate func initializeLogInAction() -> Action<(), User, SessionServiceError> {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
             if let email = Email(raw: self.email.value) {
                 let password = self.password.value
@@ -105,7 +105,7 @@ private extension LoginViewModel {
         }
     }
     
-    func initializeTogglePasswordVisibilityAction() -> Action<(), Bool, NoError> {
+    fileprivate func initializeTogglePasswordVisibilityAction() -> Action<(), Bool, NoError> {
         return Action { [unowned self] _ in
             self.passwordVisible.value = !self.passwordVisible.value
             return SignalProducer(value: self.passwordVisible.value).observe(on: UIScheduler())

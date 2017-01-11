@@ -75,9 +75,9 @@ public final class LoginController: UIViewController {
     
 }
 
-private extension LoginController {
+fileprivate extension LoginController {
     
-    func bindViewModel() {
+    fileprivate func bindViewModel() {
         bindEmailElements()
         bindPasswordElements()
         bindButtons()
@@ -146,7 +146,7 @@ private extension LoginController {
         loginView.passwordTextField.nextTextField = loginView.emailTextField
     }
     
-    var lastTextField: UITextField {
+    fileprivate var lastTextField: UITextField {
         return loginView.passwordTextField
     }
 
@@ -184,9 +184,9 @@ extension LoginController: UITextFieldDelegate {
     
 }
 
-private extension LoginController {
+fileprivate extension LoginController {
     
-    func addKeyboardObservers() {
+    fileprivate func addKeyboardObservers() {
         _disposable += _keyboardDisplayed <~ _notificationCenter
             .reactive.notifications(forName: NSNotification.Name.UIKeyboardDidHide)
             .map { _ in false }
