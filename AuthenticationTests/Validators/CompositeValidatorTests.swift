@@ -22,10 +22,10 @@ class CompositeValidatorSpec: QuickSpec {
                 validator = CompositeTextInputValidator(validators:
                     [NonEmptyValidator(),
                         AnyTextInputValidator { text in
-                            if text.containsString("substring") {
-                                return .Invalid(errors: ["The string contains invalid word 'substring'"])
+                            if text.contains("substring") {
+                                return .invalid(errors: ["The string contains invalid word 'substring'"])
                             } else {
-                                return .Valid
+                                return .valid
                             }
                         },
                         MaxLengthValidator(maxLength: 10)]
@@ -57,16 +57,16 @@ class CompositeValidatorSpec: QuickSpec {
                 beforeEach() {
                     validator = validator.addValidator(AnyTextInputValidator { text in
                         var errors: [String] = []
-                        if text.containsString("AA") {
+                        if text.contains("AA") {
                             errors.append("The text has 'AA' in it")
                         }
-                        if text.containsString("BB") {
+                        if text.contains("BB") {
                             errors.append("The text has 'BB' in it")
                         }
                         if errors == [] {
-                            return .Valid
+                            return .valid
                         } else {
-                            return .Invalid(errors: errors)
+                            return .invalid(errors: errors)
                         }
                         })
                     

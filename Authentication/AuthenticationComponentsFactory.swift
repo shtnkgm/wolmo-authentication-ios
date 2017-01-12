@@ -40,7 +40,7 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     */
     public init(loginConfiguration: LoginViewConfigurationType,
                 signupConfiguration: SignupViewConfigurationType,
-                mainControllerFactory: () -> UIViewController) {
+                mainControllerFactory: @escaping () -> UIViewController) {
         _mainControllerFactory = mainControllerFactory
         _loginConfiguration = loginConfiguration
         _signupConfiguration = signupConfiguration
@@ -60,9 +60,9 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
                 method to trigger when asked for the main view
                 controller.
      */
-    public init(logo: UIImage? = .None,
-                termsAndServicesURL: NSURL,
-                mainControllerFactory: () -> UIViewController) {
+    public init(logo: UIImage? = .none,
+                termsAndServicesURL: URL,
+                mainControllerFactory: @escaping () -> UIViewController) {
         self.init(loginConfiguration: LoginViewConfiguration(logoImage: logo),
                   signupConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL),
                   mainControllerFactory: mainControllerFactory)
@@ -81,7 +81,6 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     }
     
 }
-
 
 public protocol LoginComponentsFactory {
     
@@ -106,7 +105,7 @@ public protocol LoginComponentsFactory {
             with the session service.
             By default, the default LoginViewModel with the parameters received.
      */
-    func createLoginViewModel<SessionService: SessionServiceType>(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType
+    func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType
     
     /**
         Creates the LoginViewConfiguration to use for setting
@@ -129,7 +128,7 @@ public protocol LoginComponentsFactory {
              setting of the view.
              By default, the DefaultLoginViewDelegate.
      */
-    func createLoginViewDelegate(configuration: LoginViewConfigurationType) -> LoginViewDelegate
+    func createLoginViewDelegate(withConfiguration configuration: LoginViewConfigurationType) -> LoginViewDelegate
     
     /**
          Creates login view that conforms to the logInViewType protocol
@@ -141,7 +140,7 @@ public protocol LoginComponentsFactory {
          - Returns: A valid login view ready to be used.
             By default, the default LoginView.
      */
-    func createLoginView(delegate: LoginViewDelegate) -> LoginViewType
+    func createLoginView(withDelegate delegate: LoginViewDelegate) -> LoginViewType
     
     /**
          Creates the login view controller delegate that the login controller
@@ -159,9 +158,9 @@ public protocol LoginComponentsFactory {
          to other screens (like signup).
          
          - Returns: A valid login controller transition delegate to use,
-            or .None if wanting to use the Coordinator's default
+            or .none if wanting to use the Coordinator's default
             implementation of the protocol.
-            By default, returns .None.
+            By default, returns .none.
      */
     func createLoginControllerTransitionDelegate() -> LoginControllerTransitionDelegate?
     
@@ -173,16 +172,16 @@ public extension LoginComponentsFactory {
         return LoginCredentialsValidator()
     }
     
-    public func createLoginViewModel<SessionService: SessionServiceType>(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType {
+    public func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType {
         return LoginViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
     }
     
-    public func createLoginViewDelegate(configuration: LoginViewConfigurationType) -> LoginViewDelegate {
+    public func createLoginViewDelegate(withConfiguration configuration: LoginViewConfigurationType) -> LoginViewDelegate {
         return DefaultLoginViewDelegate(configuration: configuration)
     }
     
-    public func createLoginView(delegate: LoginViewDelegate) -> LoginViewType {
-        let view = LoginView.loadFromNib(FrameworkBundle)!
+    public func createLoginView(withDelegate delegate: LoginViewDelegate) -> LoginViewType {
+        let view = LoginView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
         return view
     }
@@ -192,7 +191,7 @@ public extension LoginComponentsFactory {
     }
     
     public func createLoginControllerTransitionDelegate() -> LoginControllerTransitionDelegate? {
-        return .None
+        return .none
     }
     
 }
@@ -224,7 +223,7 @@ public protocol SignupComponentsFactory {
             and comunicates with the session service.
             By default, the default SignupViewModel.
      */
-    func createSignupViewModel<SessionService: SessionServiceType>(sessionService: SessionService,
+    func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
                                       credentialsValidator: SignupCredentialsValidator,
                                       configuration: SignupViewConfigurationType) -> SignupViewModelType
     
@@ -252,7 +251,7 @@ public protocol SignupComponentsFactory {
          - Warning: The textfields selected to be shown must be compatible with
             the view provided.
      */
-    func createSignupViewDelegate(configuration: SignupViewConfigurationType) -> SignupViewDelegate
+    func createSignupViewDelegate(withConfiguration configuration: SignupViewConfigurationType) -> SignupViewDelegate
     
     /**
          Creates signup view that conforms to the SignupViewType protocol
@@ -264,7 +263,7 @@ public protocol SignupComponentsFactory {
          - Returns: A valid signup view ready to be used.
             By default, the default SignupView.
      */
-    func createSignupView(delegate: SignupViewDelegate) -> SignupViewType
+    func createSignupView(withDelegate delegate: SignupViewDelegate) -> SignupViewType
     
     /**
          Creates the signup view controller delegate
@@ -283,9 +282,9 @@ public protocol SignupComponentsFactory {
          to other screens (like login).
          
          - Returns: A valid login controller transition delegate to use,
-             or .None if wanting to use the Coordinator's default
+             or .none if wanting to use the Coordinator's default
              implementation of the protocol.
-             By default, returns .None.
+             By default, returns .none.
      */
     func createSignupControllerTransitionDelegate() -> SignupControllerTransitionDelegate?
     
@@ -307,21 +306,21 @@ extension SignupComponentsFactory {
         return SignupCredentialsValidator()
     }
     
-    public func createSignupViewModel<SessionService: SessionServiceType>(sessionService: SessionService,
+    public func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
                                       credentialsValidator: SignupCredentialsValidator,
                                       configuration: SignupViewConfigurationType) -> SignupViewModelType {
         return SignupViewModel(sessionService: sessionService,
                                credentialsValidator: credentialsValidator,
-                               passwordConfirmationEnabled: configuration.passwordConfirmationEnabled,
-                               usernameEnabled: configuration.usernameEnabled)
+                               usernameEnabled: configuration.usernameEnabled,
+                               passwordConfirmationEnabled: configuration.passwordConfirmationEnabled)
     }
     
-    public func createSignupViewDelegate(configuration: SignupViewConfigurationType) -> SignupViewDelegate {
+    public func createSignupViewDelegate(withConfiguration configuration: SignupViewConfigurationType) -> SignupViewDelegate {
         return DefaultSignupViewDelegate(configuration: configuration)
     }
     
-    public func createSignupView(delegate: SignupViewDelegate) -> SignupViewType {
-        let view = SignupView.loadFromNib(FrameworkBundle)!
+    public func createSignupView(withDelegate delegate: SignupViewDelegate) -> SignupViewType {
+        let view = SignupView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
         return view
     }
@@ -331,7 +330,7 @@ extension SignupComponentsFactory {
     }
     
     public func createSignupControllerTransitionDelegate() -> SignupControllerTransitionDelegate? {
-        return .None
+        return .none
     }
     
     public func createTermsAndServicesControllerDelegate() -> TermsAndServicesControllerDelegate {

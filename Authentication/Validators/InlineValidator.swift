@@ -12,13 +12,13 @@
  */
 public struct AnyTextInputValidator: TextInputValidatorType {
     
-    private let _validate: String -> ValidationResult
+    private let _validate: (String) -> ValidationResult
     
-    init(validate: String -> ValidationResult) {
+    init(validate: @escaping (String) -> ValidationResult) {
         _validate = validate
     }
     
-    public func validate(text: String) -> ValidationResult {
+    public func validate(_ text: String) -> ValidationResult {
         return _validate(text)
     }
     

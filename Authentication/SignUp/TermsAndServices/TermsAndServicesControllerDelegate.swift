@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /*
      Protocol for terms and services controller delegates.
      Create your own delegate and override any of
@@ -22,7 +21,7 @@ public protocol TermsAndServicesControllerDelegate {
      
         - Parameter controller: TermsAndServicesController where the event is happening.
      */
-    func didStartLoadingTermsAndServices(controller: TermsAndServicesController)
+    func didStartLoadingTermsAndServices(in controller: TermsAndServicesController)
 
     /**
         Function called when the terms and services content finished loading.
@@ -31,20 +30,20 @@ public protocol TermsAndServicesControllerDelegate {
      
         - Parameter controller: TermsAndServicesController where the event is happening.
      */
-    func didEndLoadingTermsAndServices(controller: TermsAndServicesController)
+    func didEndLoadingTermsAndServices(in controller: TermsAndServicesController)
 
 }
 
 public extension TermsAndServicesControllerDelegate {
     
-    public func didStartLoadingTermsAndServices(controller: TermsAndServicesController) {
-        let app = UIApplication.sharedApplication()
-        app.networkActivityIndicatorVisible = true
+    public func didStartLoadingTermsAndServices(in controller: TermsAndServicesController) {
+        let app = UIApplication.shared
+        app.isNetworkActivityIndicatorVisible = true
     }
 
-    public func didEndLoadingTermsAndServices(controller: TermsAndServicesController) {
-        let app = UIApplication.sharedApplication()
-        app.networkActivityIndicatorVisible = false
+    public func didEndLoadingTermsAndServices(in controller: TermsAndServicesController) {
+        let app = UIApplication.shared
+        app.isNetworkActivityIndicatorVisible = false
     }
 
 }

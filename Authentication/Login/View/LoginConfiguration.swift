@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
     Class for configuring the login controller.
  */
@@ -14,8 +13,8 @@ public final class LoginControllerConfiguration {
     
     public let viewModel: LoginViewModelType
     public let viewFactory: () -> LoginViewType
-    public let delegate: LoginControllerDelegate
-    public let transitionDelegate: LoginControllerTransitionDelegate
+    public let delegate: LoginControllerDelegate //swiftlint:disable:this weak_delegate
+    public let transitionDelegate: LoginControllerTransitionDelegate //swiftlint:disable:this weak_delegate
     
     /**
         Initializes a login controller configuration with the view model,
@@ -33,7 +32,7 @@ public final class LoginControllerConfiguration {
              The default delegate is provided.
     */
     internal init(viewModel: LoginViewModelType,
-                  viewFactory: () -> LoginViewType,
+                  viewFactory: @escaping () -> LoginViewType,
                   transitionDelegate: LoginControllerTransitionDelegate,
                   delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
         self.viewModel = viewModel

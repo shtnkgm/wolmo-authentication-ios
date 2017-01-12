@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
     Protocol for login controller delegates,
     that add behaviour to certain events from
@@ -32,7 +31,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
     */
-    func willExecuteLogIn(controller: LoginController)
+    func willExecuteLogIn(in controller: LoginController)
     
     /**
         Function called when the login action ended with success,
@@ -42,7 +41,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
      */
-    func didExecuteLogIn(controller: LoginController)
+    func didExecuteLogIn(in controller: LoginController)
     
     /**
         Function called when the login action ended with error,
@@ -55,7 +54,7 @@ public protocol LoginControllerDelegate {
         - Parameter controller: LoginController where the event is happening.
         - Parameter with: error resulting from the log in attempt.
      */
-    func didLogIn(controller: LoginController, with error: SessionServiceError)
+    func didLogIn(in controller: LoginController, with error: SessionServiceError)
     
     /**
         Function called when any new email introduced is valid,
@@ -65,7 +64,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
      */
-    func didPassEmailValidation(controller: LoginController)
+    func didPassEmailValidation(in controller: LoginController)
     
     /**
         Function called when any new email introduced is invalid,
@@ -76,7 +75,7 @@ public protocol LoginControllerDelegate {
         - Parameter controller: LoginController where the event is happening.
         - Parameter with: email validation errors.
      */
-    func didFailEmailValidation(controller: LoginController, with errors: [String])
+    func didFailEmailValidation(in controller: LoginController, with errors: [String])
     
     /**
         Function called when any new password introduced is valid,
@@ -86,7 +85,7 @@ public protocol LoginControllerDelegate {
      
         - Parameter controller: LoginController where the event is happening.
      */
-    func didPassPasswordValidation(controller: LoginController)
+    func didPassPasswordValidation(in controller: LoginController)
     
     /**
         Function called when any new password introduced is valid,
@@ -97,7 +96,7 @@ public protocol LoginControllerDelegate {
         - Parameter controller: LoginController where the event is happening.
         - Parameter with: password validation errors.
      */
-    func didFailPasswordValidation(controller: LoginController, with errors: [String])
+    func didFailPasswordValidation(in controller: LoginController, with errors: [String])
     
 }
 
@@ -105,39 +104,39 @@ extension LoginControllerDelegate {
     
     public var shouldDisplayLoginErrorWithAlert: Bool { return true }
     
-    public func willExecuteLogIn(controller: LoginController) {
+    public func willExecuteLogIn(in controller: LoginController) {
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = " "
         }
-        let app = UIApplication.sharedApplication()
-        app.networkActivityIndicatorVisible = true
+        let app = UIApplication.shared
+        app.isNetworkActivityIndicatorVisible = true
     }
     
-    public func didExecuteLogIn(controller: LoginController) {
-        let app = UIApplication.sharedApplication()
-        app.networkActivityIndicatorVisible = false
+    public func didExecuteLogIn(in controller: LoginController) {
+        let app = UIApplication.shared
+        app.isNetworkActivityIndicatorVisible = false
     }
     
-    public func didLogIn(controller: LoginController, with error: SessionServiceError) {
-        let app = UIApplication.sharedApplication()
-        app.networkActivityIndicatorVisible = false
+    public func didLogIn(in controller: LoginController, with error: SessionServiceError) {
+        let app = UIApplication.shared
+        app.isNetworkActivityIndicatorVisible = false
         if let errorLabel = controller.loginView.logInErrorLabel {
             errorLabel.text = error.message
         }
         if shouldDisplayLoginErrorWithAlert {
-            let alert = UIAlertController(title: "login-error.alert.title".frameworkLocalized, message: error.message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "login-error.alert.close".frameworkLocalized, style: .Default, handler: nil))
-            controller.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "login-error.alert.title".frameworkLocalized, message: error.message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "login-error.alert.close".frameworkLocalized, style: .default, handler: nil))
+            controller.present(alert, animated: true, completion: nil)
         }
     }
     
-    public func didPassEmailValidation(controller: LoginController) { }
+    public func didPassEmailValidation(in controller: LoginController) { }
     
-    public func didFailEmailValidation(controller: LoginController, with errors: [String]) { }
+    public func didFailEmailValidation(in controller: LoginController, with errors: [String]) { }
     
-    public func didPassPasswordValidation(controller: LoginController) { }
+    public func didPassPasswordValidation(in controller: LoginController) { }
     
-    public func didFailPasswordValidation(controller: LoginController, with errors: [String]) { }
+    public func didFailPasswordValidation(in controller: LoginController, with errors: [String]) { }
     
 }
 

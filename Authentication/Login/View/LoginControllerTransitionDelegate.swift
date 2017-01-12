@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Protocol for handling transition events occured during login.
  */
@@ -18,7 +17,7 @@ public protocol LoginControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func onLoginSuccess(controller: LoginController)
+    func onLoginSuccess(from controller: LoginController)
     
     /**
          Function that reacts to the user pressing "Sign Up"
@@ -26,8 +25,7 @@ public protocol LoginControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func toSignup(controller: LoginController)
-    
+    func toSignup(from controller: LoginController)
     
     /**
          Function that reacts to the user pressing "Recover 
@@ -35,6 +33,6 @@ public protocol LoginControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func toRecoverPassword(controller: LoginController)
+    func toRecoverPassword(from controller: LoginController)
     
 }

@@ -54,12 +54,12 @@ public protocol AuthenticationFormType {
 
 public extension AuthenticationFormType {
     
-    var emailLabel: UILabel? { return .None }
-    var emailValidationMessageLabel: UILabel? { return .None }
+    var emailLabel: UILabel? { return .none }
+    var emailValidationMessageLabel: UILabel? { return .none }
     
-    var passwordLabel: UILabel? { return .None }
-    var passwordValidationMessageLabel: UILabel? { return .None }
-    var passwordVisibilityButton: UIButton? { return .None }
+    var passwordLabel: UILabel? { return .none }
+    var passwordValidationMessageLabel: UILabel? { return .none }
+    var passwordVisibilityButton: UIButton? { return .none }
     
 }
 
@@ -81,7 +81,7 @@ public protocol LoginFormType: AuthenticationFormType {
 
 public extension LoginFormType {
     
-    var logInErrorLabel: UILabel? { return .None }
+    var logInErrorLabel: UILabel? { return .none }
     
 }
 
@@ -118,21 +118,21 @@ public protocol SignupFormType: AuthenticationFormType {
     var signUpButtonPressed: Bool { get set }
     
     var termsAndServicesTextView: UITextView { get }
-    func setTermsAndServicesText(url: NSURL)
+    func setTermsAndServicesText(withURL url: URL)
     
 }
 
 public extension SignupFormType {
     
-    var usernameLabel: UILabel? { return .None }
-    var usernameTextField: UITextField? { return .None }
-    var usernameValidationMessageLabel: UILabel? { return .None }
+    var usernameLabel: UILabel? { return .none }
+    var usernameTextField: UITextField? { return .none }
+    var usernameValidationMessageLabel: UILabel? { return .none }
     
-    var passwordConfirmLabel: UILabel? { return .None }
-    var passwordConfirmTextField: UITextField? { return .None }
-    var passwordConfirmValidationMessageLabel: UILabel? { return .None }
-    var passwordConfirmVisibilityButton: UIButton? { return .None }
+    var passwordConfirmLabel: UILabel? { return .none }
+    var passwordConfirmTextField: UITextField? { return .none }
+    var passwordConfirmValidationMessageLabel: UILabel? { return .none }
+    var passwordConfirmVisibilityButton: UIButton? { return .none }
     
-    var signUpErrorLabel: UILabel? { return .None }
+    var signUpErrorLabel: UILabel? { return .none }
     
 }

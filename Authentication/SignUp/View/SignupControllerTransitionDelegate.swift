@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Protocol for handling transition events occured during signup.
  */
@@ -19,7 +18,7 @@ public protocol SignupControllerTransitionDelegate {
          Should take care of the screen transition,
          if wanting to there be one.
      */
-    func onSignupSuccess(controller: SignupController)
+    func onSignupSuccess(from controller: SignupController)
     
     /**
          Function that reacts to the user pressing "Log In"
@@ -27,7 +26,7 @@ public protocol SignupControllerTransitionDelegate {
      
          Should take care of the screen transition.
      */
-    func toLogin(controller: SignupController)
+    func toLogin(from controller: SignupController)
     
     /**
          Function that reacts to the user pressing
@@ -35,6 +34,6 @@ public protocol SignupControllerTransitionDelegate {
          
          Should take care of the screen transition.
      */
-    func onTermsAndServices(controller: SignupController)
+    func onTermsAndServices(from controller: SignupController)
     
 }

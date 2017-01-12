@@ -16,11 +16,11 @@ internal extension String {
          not have the key in the framework one.
      */
     internal var frameworkLocalized: String {
-        let localized: (from: NSBundle) -> String = {
+        let localized: (_ from: Bundle) -> String = {
             NSLocalizedString(self, tableName: nil, bundle: $0, value: "", comment: "")
         }
-        let mainLocalized = localized(from: NSBundle.mainBundle())
-        return mainLocalized == self ? localized(from: FrameworkBundle) : mainLocalized
+        let mainLocalized = localized(Bundle.main)
+        return mainLocalized == self ? localized(FrameworkBundle) : mainLocalized
     }
     
     /**
@@ -30,22 +30,8 @@ internal extension String {
      
          - parameter arguments: Formatting arguments.
      */
-    internal func frameworkLocalized(arguments: CVarArgType...) -> String {
+    internal func frameworkLocalized(withArguments arguments: CVarArg...) -> String {
         return String(format: frameworkLocalized, arguments: arguments)
-    }
-    
-}
-
-public extension UIButton {
-    
-    public func setUnderlinedTitle(title: String, style: NSUnderlineStyle = .StyleSingle, color: UIColor? = .None, forState state: UIControlState = .Normal) {
-        var attributes: [String : AnyObject] = [NSUnderlineStyleAttributeName: style.rawValue]
-        if let colorAttr = color {
-            attributes[NSUnderlineColorAttributeName] = colorAttr
-        }
-        let underlinedText = NSAttributedString(string: title, attributes: attributes)
-        setAttributedTitle(underlinedText, forState: state)
-
     }
     
 }

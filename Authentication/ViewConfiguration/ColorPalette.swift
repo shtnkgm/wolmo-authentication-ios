@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Represents the color hierarchy necessary for
      an authentication view.
@@ -40,16 +39,16 @@ public extension ColorPaletteType {
     public var mainButtonExecuted: UIColor { return UIColor(hex: "#e78f00ff")! }
     
     public var textfieldsError: UIColor { return UIColor(hex: "#d0021bff")! }
-    public var textfieldsNormal: UIColor { return .clearColor() }
-    public var textfieldsSelected: UIColor { return .clearColor() }
+    public var textfieldsNormal: UIColor { return .clear }
+    public var textfieldsSelected: UIColor { return .clear }
     
     public var background: UIColor { return UIColor(hex: "#efefefff")! }
     
     public var links: UIColor { return UIColor(hex: "#0076ffff")! }
-    public var labels: UIColor { return .blackColor() }
-    public var textfieldText: UIColor { return .blackColor() }
+    public var labels: UIColor { return .black }
+    public var textfieldText: UIColor { return .black }
     public var passwordVisibilityButtonText: UIColor { return UIColor(hex: "#0076ffff")! }
-    public var mainButtonText: UIColor { return .whiteColor() }
+    public var mainButtonText: UIColor { return .white }
     
 }
 

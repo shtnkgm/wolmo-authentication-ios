@@ -14,28 +14,20 @@ import Foundation
  */
 public enum ValidationResult {
     
-    public static func invalid(errorMessage: String) -> ValidationResult {
-        return .Invalid(errors: [errorMessage])
-    }
-    
-    public static var valid: ValidationResult {
-        return .Valid
-    }
-    
-    case Valid
-    case Invalid(errors: [String])
+    case valid
+    case invalid(errors: [String])
     
     var isValid: Bool {
         switch self {
-        case .Valid: return true
-        case .Invalid(_): return false
+        case .valid: return true
+        case .invalid(_): return false
         }
     }
     
     var errors: [String] {
         switch self {
-        case .Valid: return []
-        case .Invalid(let _errors): return _errors
+        case .valid: return []
+        case .invalid(let _errors): return _errors
         }
     }
     
@@ -46,6 +38,6 @@ public enum ValidationResult {
  */
 public protocol TextInputValidatorType {
     
-    func validate(text: String) -> ValidationResult
+    func validate(_ text: String) -> ValidationResult
     
 }

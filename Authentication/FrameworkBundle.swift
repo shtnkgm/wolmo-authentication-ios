@@ -6,4 +6,4 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-internal let FrameworkBundle = NSBundle(forClass: LoginView.self)   //swiftlint:disable:this variable_name
+internal let FrameworkBundle = Bundle(for: LoginView.self)   //swiftlint:disable:this variable_name

@@ -6,15 +6,14 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Represents a validator which will consider
      any input valid.
  */
 public struct AlwaysValidValidator: TextInputValidatorType {
     
-    public func validate(text: String) -> ValidationResult {
-        return .Valid
+    public func validate(_ text: String) -> ValidationResult {
+        return .valid
     }
     
 }
@@ -30,8 +29,8 @@ public struct AlwaysInvalidValidator: TextInputValidatorType {
     
     public var errorTextToLocalize: String = ""
     
-    public func validate(text: String) -> ValidationResult {
-        return .Invalid(errors: [errorTextToLocalize.frameworkLocalized(text)])
+    public func validate(_ text: String) -> ValidationResult {
+        return .invalid(errors: [errorTextToLocalize.frameworkLocalized(withArguments: text)])
     }
     
 }
