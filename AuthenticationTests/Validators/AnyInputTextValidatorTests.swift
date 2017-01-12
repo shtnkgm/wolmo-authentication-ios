@@ -22,9 +22,9 @@ class AnyInputTextValidatorSpec: QuickSpec {
             beforeEach() {
                 validator = AnyTextInputValidator { text in
                     if text == "myText" {
-                        return .Valid
+                        return .valid
                     } else {
-                        return .Invalid(errors: ["Not expected text"])
+                        return .invalid(errors: ["Not expected text"])
                     }
                 }
             }

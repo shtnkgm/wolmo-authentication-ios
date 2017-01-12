@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Represents the view configurations able to
      be customized in all authentication process.
@@ -24,7 +23,7 @@ public struct AuthenticationViewConfiguration {
         signupConfiguration = signupViewConfiguration
     }
     public init(loginViewConfiguration: LoginViewConfigurationType = LoginViewConfiguration(),
-                 termsAndServicesURL: NSURL) {
+                 termsAndServicesURL: URL) {
         self.init(loginViewConfiguration: loginViewConfiguration, signupViewConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL))
     }
     

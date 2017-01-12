@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
     Delegate for any extra configuration
     to the login view when rendered.
@@ -25,13 +24,13 @@ public protocol LoginViewDelegate {
      
         - Parameter loginView: view to configure.
      */
-    func configureView(loginView: LoginViewType)
+    func configureLoginView(_ loginView: LoginViewType)
     
 }
 
 public extension LoginViewDelegate {
     
-    func configureView(loginView: LoginViewType) { }
+    func configureLoginView(_ loginView: LoginViewType) { }
     
 }
 
@@ -51,34 +50,34 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
         _configuration = configuration
     }
     
-    public func configureView(loginView: LoginViewType) {
+    public func configureLoginView(_ loginView: LoginViewType) {
         if let logo = _configuration.logoImage {
             loginView.logoImageView.image = logo
         }
         
         loginView.view.backgroundColor = colorPalette.background
         
-        configureMainButton(loginView)
-        configureEmailElements(loginView)
-        configurePasswordElements(loginView)
-        configureLinksElements(loginView)
-        configureErrorElements(loginView)
+        configureMainButton(in: loginView)
+        configureEmailElements(in: loginView)
+        configurePasswordElements(in: loginView)
+        configureLinksElements(in: loginView)
+        configureErrorElements(in: loginView)
     }
     
-    private func configureMainButton(loginView: LoginViewType) {
+    private func configureMainButton(in loginView: LoginViewType) {
         loginView.logInButton.backgroundColor = colorPalette.mainButtonDisabled
         loginView.logInButton.titleLabel?.font = fontPalette.mainButton
         loginView.logInButton.titleLabel?.textColor = colorPalette.mainButtonText
     }
     
-    private func configureEmailElements(loginView: LoginViewType) {
+    private func configureEmailElements(in loginView: LoginViewType) {
         loginView.emailLabel?.font = fontPalette.labels
         loginView.emailLabel?.textColor = colorPalette.labels
         loginView.emailTextField.font = fontPalette.textfields
         loginView.emailTextField.textColor = colorPalette.textfieldText
     }
     
-    private func configurePasswordElements(loginView: LoginViewType) {
+    private func configurePasswordElements(in loginView: LoginViewType) {
         loginView.passwordLabel?.font = fontPalette.labels
         loginView.passwordLabel?.textColor = colorPalette.labels
         loginView.passwordTextField.font = fontPalette.textfields
@@ -87,7 +86,7 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
         loginView.passwordVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
     }
     
-    private func configureLinksElements(loginView: LoginViewType) {
+    private func configureLinksElements(in loginView: LoginViewType) {
         loginView.recoverPasswordLabel?.font = fontPalette.labels
         loginView.recoverPasswordLabel?.textColor = colorPalette.labels
         loginView.recoverPasswordButton.titleLabel?.font = fontPalette.links
@@ -99,7 +98,7 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
         loginView.signupButton.titleLabel?.textColor = colorPalette.links
     }
     
-    private func configureErrorElements(loginView: LoginViewType) {
+    private func configureErrorElements(in loginView: LoginViewType) {
         loginView.emailValidationMessageLabel?.font = fontPalette.labels
         loginView.emailValidationMessageLabel?.textColor = colorPalette.textfieldsError
         loginView.passwordValidationMessageLabel?.font = fontPalette.labels

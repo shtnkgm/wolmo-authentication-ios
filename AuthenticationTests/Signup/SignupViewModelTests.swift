@@ -30,7 +30,7 @@ class SignupViewModelSpec: QuickSpec {
             
             beforeEach() {
                 sessionService = MockSessionService()
-                signupViewModel = SignupViewModel(sessionService: sessionService, passwordConfirmationEnabled: false, usernameEnabled: false)
+                signupViewModel = SignupViewModel(sessionService: sessionService, usernameEnabled: false, passwordConfirmationEnabled: false)
             }
             
             it("starts without errors") {
@@ -50,26 +50,26 @@ class SignupViewModelSpec: QuickSpec {
                 context("when #passwordVisible is false") {
                     
                     it("should change it to true") { waitUntil { done in
-                        signupViewModel.passwordVisible.signal.take(1).observeNext {
+                        signupViewModel.passwordVisible.signal.take(first: 1).observeValues {
                             expect($0) == true
                             done()
                         }
-                        signupViewModel.togglePasswordVisibility.execute("")
+                        signupViewModel.togglePasswordVisibility.execute(UIButton())
                     }}
                 }
                 
                 context("when #passwordVisible is true") {
                     
                     beforeEach() {
-                        signupViewModel.togglePasswordVisibility.execute("")
+                        signupViewModel.togglePasswordVisibility.execute(UIButton())
                     }
                     
                     it("should change it to false") { waitUntil { done in
-                        signupViewModel.passwordVisible.signal.take(1).observeNext {
+                        signupViewModel.passwordVisible.signal.take(first: 1).observeValues {
                             expect($0) == false
                             done()
                         }
-                        signupViewModel.togglePasswordVisibility.execute("")
+                        signupViewModel.togglePasswordVisibility.execute(UIButton())
                     }}
                     
                 }
@@ -81,26 +81,26 @@ class SignupViewModelSpec: QuickSpec {
                 context("when #passwordVisible is false") {
                     
                     it("should change it to true") { waitUntil { done in
-                        signupViewModel.passwordConfirmationVisible.signal.take(1).observeNext {
+                        signupViewModel.passwordConfirmationVisible.signal.take(first: 1).observeValues {
                             expect($0) == true
                             done()
                         }
-                        signupViewModel.togglePasswordConfirmVisibility.execute("")
+                        signupViewModel.togglePasswordConfirmVisibility.execute(UIButton())
                     }}
                 }
                 
                 context("when #passwordVisible is true") {
                     
                     beforeEach() {
-                        signupViewModel.togglePasswordConfirmVisibility.execute("")
+                        signupViewModel.togglePasswordConfirmVisibility.execute(UIButton())
                     }
                     
                     it("should change it to false") { waitUntil { done in
-                        signupViewModel.passwordConfirmationVisible.signal.take(1).observeNext {
+                        signupViewModel.passwordConfirmationVisible.signal.take(first: 1).observeValues {
                             expect($0) == false
                             done()
                         }
-                        signupViewModel.togglePasswordConfirmVisibility.execute("")
+                        signupViewModel.togglePasswordConfirmVisibility.execute(UIButton())
                     }}
                     
                 }
@@ -126,7 +126,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -147,7 +147,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -171,7 +171,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -191,7 +191,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -212,7 +212,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -232,12 +232,12 @@ class SignupViewModelSpec: QuickSpec {
                     }
                     
                     it("enables signUp") {
-                        expect(signupViewModel.signUpCocoaAction.enabled) == true
+                        expect(signupViewModel.signUpCocoaAction.isEnabled.value) == true
                     }
                     
                     it("calls session service's signup") { waitUntil { done in
-                        sessionService.signUpCalled.take(1).observeNext { _ in done() }
-                        signupViewModel.signUpCocoaAction.execute("")
+                        sessionService.signUpCalled.take(first: 1).observeValues { _ in done() }
+                        signupViewModel.signUpCocoaAction.execute(UIButton())
                     }}
                     
                 }
@@ -246,7 +246,7 @@ class SignupViewModelSpec: QuickSpec {
             context("when username enabled and password confirmation disabled") {
                 
                 beforeEach() {
-                    signupViewModel = SignupViewModel(sessionService: sessionService, passwordConfirmationEnabled: false, usernameEnabled: true)
+                    signupViewModel = SignupViewModel(sessionService: sessionService, usernameEnabled: true, passwordConfirmationEnabled: false)
                 }
                 
                 context("when email and password are valid") {
@@ -267,12 +267,12 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("enables signUp") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == true
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == true
                         }
                         
                         it("calls session service's signup") { waitUntil { done in
-                            sessionService.signUpCalled.take(1).observeNext { _ in done() }
-                            signupViewModel.signUpCocoaAction.execute("")
+                            sessionService.signUpCalled.take(first: 1).observeValues { _ in done() }
+                            signupViewModel.signUpCocoaAction.execute(UIButton())
                         }}
                         
                     }
@@ -288,7 +288,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -300,7 +300,7 @@ class SignupViewModelSpec: QuickSpec {
             context("when password confirmation enabled and username disabled") {
                 
                 beforeEach() {
-                    signupViewModel = SignupViewModel(sessionService: sessionService, passwordConfirmationEnabled: true, usernameEnabled: false)
+                    signupViewModel = SignupViewModel(sessionService: sessionService, usernameEnabled: false, passwordConfirmationEnabled: true)
                 }
                 
                 context("when email and password valid") {
@@ -321,12 +321,12 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("enables signUp") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == true
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == true
                         }
                         
                         it("calls session service's signup") { waitUntil { done in
-                            sessionService.signUpCalled.take(1).observeNext { _ in done() }
-                            signupViewModel.signUpCocoaAction.execute("")
+                            sessionService.signUpCalled.take(first: 1).observeValues { _ in done() }
+                            signupViewModel.signUpCocoaAction.execute(UIButton())
                         }}
                         
                     }
@@ -342,7 +342,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -354,7 +354,7 @@ class SignupViewModelSpec: QuickSpec {
             context("when username and password confirmation enabled") {
                 
                 beforeEach() {
-                    signupViewModel = SignupViewModel(sessionService: sessionService, passwordConfirmationEnabled: true, usernameEnabled: true)
+                    signupViewModel = SignupViewModel(sessionService: sessionService, usernameEnabled: true, passwordConfirmationEnabled: true)
                 }
                 
                 context("when email and password valid") {
@@ -380,7 +380,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -401,7 +401,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -422,7 +422,7 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("does not let signUp start") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == false
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == false
                         }
                         
                     }
@@ -440,12 +440,12 @@ class SignupViewModelSpec: QuickSpec {
                         }
                         
                         it("enables signUp") {
-                            expect(signupViewModel.signUpCocoaAction.enabled) == true
+                            expect(signupViewModel.signUpCocoaAction.isEnabled.value) == true
                         }
                         
                         it("calls session service's signup") { waitUntil { done in
-                            sessionService.signUpCalled.take(1).observeNext { _ in done() }
-                            signupViewModel.signUpCocoaAction.execute("")
+                            sessionService.signUpCalled.take(first: 1).observeValues { _ in done() }
+                            signupViewModel.signUpCocoaAction.execute(UIButton())
                         }}
                         
                     }

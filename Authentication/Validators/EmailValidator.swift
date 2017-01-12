@@ -12,11 +12,11 @@
  */
 public struct EmailValidator: TextInputValidatorType {
     
-    public func validate(text: String) -> ValidationResult {
+    public func validate(_ text: String) -> ValidationResult {
         if Email.isValidEmail(text) {
-            return .Valid
+            return .valid
         } else {
-            return .Invalid(errors: ["text-input-validator.invalid-email".frameworkLocalized(text)])
+            return .invalid(errors: ["text-input-validator.invalid-email".frameworkLocalized(withArguments: text)])
         }
     }
     

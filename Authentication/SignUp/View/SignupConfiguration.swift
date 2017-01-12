@@ -6,7 +6,6 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
-
 /**
      Class for configuring the signup controller.
  */
@@ -14,9 +13,9 @@ public final class SignupControllerConfiguration {
     
     public let viewModel: SignupViewModelType
     public let viewFactory: () -> SignupViewType
-    public let delegate: SignupControllerDelegate
-    public let transitionDelegate: SignupControllerTransitionDelegate
-    public let termsAndServicesURL: NSURL
+    public let delegate: SignupControllerDelegate //swiftlint:disable:this weak_delegate
+    public let transitionDelegate: SignupControllerTransitionDelegate //swiftlint:disable:this weak_delegate
+    public let termsAndServicesURL: URL
     
     /**
          Initializes a signup controller configuration with the view model,
@@ -34,10 +33,10 @@ public final class SignupControllerConfiguration {
              The default delegate is provided.
      */
     internal init(viewModel: SignupViewModelType,
-                  viewFactory: () -> SignupViewType,
+                  viewFactory: @escaping () -> SignupViewType,
                   transitionDelegate: SignupControllerTransitionDelegate,
                   delegate: SignupControllerDelegate = DefaultSignupControllerDelegate(),
-                  termsAndServicesURL: NSURL) {
+                  termsAndServicesURL: URL) {
         self.viewModel = viewModel
         self.viewFactory = viewFactory
         self.delegate = delegate

@@ -9,18 +9,17 @@
 import UIKit
 import WebKit
 
-
 /**
      Terms And Services View Controller that takes care of presenting
      the terms and services and informing loading events to delegate.
 */
-public final class TermsAndServicesController: UIViewController, WKNavigationDelegate {
+public final class TermsAndServicesController: UIViewController {
     
-    private let _url: NSURL
-    private let _delegate: TermsAndServicesControllerDelegate
+    private let _url: URL
     private var _webView: WKWebView!
+    fileprivate let _delegate: TermsAndServicesControllerDelegate //swiftlint:disable:this weak_delegate
     
-    internal init(url: NSURL, delegate: TermsAndServicesControllerDelegate) {
+    internal init(url: URL, delegate: TermsAndServicesControllerDelegate) {
         _url = url
         _delegate = delegate
         super.init(nibName: nil, bundle: nil)
@@ -48,19 +47,23 @@ public final class TermsAndServicesController: UIViewController, WKNavigationDel
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        let request = NSURLRequest(URL: _url)
-        _webView.loadRequest(request)
-        _delegate.didStartLoadingTermsAndServices(self)
+        let request = URLRequest(url: _url)
+        _webView.load(request)
+        _delegate.didStartLoadingTermsAndServices(in: self)
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
     }
-        
+    
+}
+
+extension TermsAndServicesController: WKNavigationDelegate {
+    
     // Called when a mainframe load completes.
-    public func webView(webView: WKWebView, didFinishNavigation navigation: WKNavigation!) {
-        _delegate.didEndLoadingTermsAndServices(self)
+    public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        _delegate.didEndLoadingTermsAndServices(in: self)
     }
     
 }

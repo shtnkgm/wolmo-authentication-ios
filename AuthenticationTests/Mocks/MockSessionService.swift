@@ -10,11 +10,12 @@ import Foundation
 import Authentication
 
 import ReactiveCocoa
+import ReactiveSwift
 import enum Result.NoError
 
 final class MockSessionService: SessionServiceType {
     
-    let currentUser: AnyProperty<MyUser?>
+    let currentUser: Property<MyUser?>
     
     let logInCalled: Signal<Bool, NoError>
     let signUpCalled: Signal<Bool, NoError>
@@ -24,7 +25,7 @@ final class MockSessionService: SessionServiceType {
     
     
     init() {
-        currentUser = AnyProperty(initialValue: Optional.None, producer: SignalProducer.never)
+        currentUser = Property(initial: Optional.none, then: SignalProducer.never)
         (logInCalled, _logInCalledObserver) = Signal<Bool, NoError>.pipe()
         (signUpCalled, _signUpCalledObserver) = Signal<Bool, NoError>.pipe()
     }
@@ -34,12 +35,12 @@ final class MockSessionService: SessionServiceType {
         _signUpCalledObserver.sendCompleted()
     }
     
-    func logIn(email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
-        return SignalProducer.empty.on(completed: { [unowned self] in self._logInCalledObserver.sendNext(true) })
+    func logIn(withEmail email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
+        return SignalProducer.empty.on(completed: { [unowned self] in self._logInCalledObserver.send(value: true) })
     }
     
-    func signUp(name: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
-        return SignalProducer.empty.on(completed: { [unowned self] in self._signUpCalledObserver.sendNext(true) })
+    func signUp(withUsername name: String?, email: Email, password: String) -> SignalProducer<MyUser, SessionServiceError> {
+        return SignalProducer.empty.on(completed: { [unowned self] in self._signUpCalledObserver.send(value: true) })
     }
     
 }
