@@ -23,8 +23,8 @@ So you will find the following protocols:
 
 and
 
-* [SignupViewType](Authentication/Signup/View/SignupView.swift)
-* [SignupViewModelType](Authentication/Signup/ViewModel/SignupViewModel.swift)
+* [SignupViewType](Authentication/SignUp/View/SignupView.swift)
+* [SignupViewModelType](Authentication/SignUp/ViewModel/SignupViewModel.swift)
 
 
 and the following elements:
@@ -35,9 +35,9 @@ and the following elements:
 
 and
 
-* [SignupController](Authentication/Signup/View/SignupController.swift) (fixed controller)
-* [SignupView](Authentication/Signup/View/SignupView.swift) (default view)
-* [SignupViewModel](Authentication/Signup/ViewModel/SignupViewModel.swift) (default view model)
+* [SignupController](Authentication/SignUp/View/SignupController.swift) (fixed controller)
+* [SignupView](Authentication/SignUp/View/SignupView.swift) (default view)
+* [SignupViewModel](Authentication/SignUp/ViewModel/SignupViewModel.swift) (default view model)
 
 
 
@@ -64,14 +64,14 @@ The event delegates are the ones that add behaviour to certain events inside a s
 **Event delegates:**
 
 * [LoginControllerDelegate](Authentication/Login/View/LoginControllerDelegate.swift)
-* [SignupControllerDelegate](Authentication/Signup/View/SignupControllerDelegate.swift)
-* [TermsAndServicesControllerDelegate](Authentication/Signup/TermsAndServices/TermsAndServicesControllerDelegate.swift)
+* [SignupControllerDelegate](Authentication/SignUp/View/SignupControllerDelegate.swift)
+* [TermsAndServicesControllerDelegate](Authentication/SignUp/TermsAndServices/TermsAndServicesControllerDelegate.swift)
 
 
 **Transition delegates:**
 
 * [LoginControllerTransitionDelegate](Authentication/Login/View/LoginControllerTransitionDelegate.swift)
-* [SignupControllerTransitionDelegate](Authentication/Signup/View/SignupControllerTransitionDelegate.swift)
+* [SignupControllerTransitionDelegate](Authentication/SignUp/View/SignupControllerTransitionDelegate.swift)
 
 
 
