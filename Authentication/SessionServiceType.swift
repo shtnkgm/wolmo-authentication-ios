@@ -56,6 +56,27 @@ public protocol SessionServiceType {
     func logIn(withEmail email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
     /**
+     This method takes care of logging in (or signing up, if not
+     already registered) the passed user.
+     It's meant to be used alongisde login providers, like
+     the FacebookLoginProvider.
+     
+     Be aware that in this method you must take care of creating
+     a user of the `User` type from the userType passed as argument.
+     
+     - Returns: A SignalProducer that can send the User logged in
+     or the SessionServiceError if not.
+     If the creation of the user is successful, the SignalProducer
+     returned must take care of:
+        sending the user to the observers and
+        updating the currentUser property.
+     If not, the SignalProducer returned
+     must take care of:
+        sending the error to the observer.
+     */
+    func logIn(withUserType userType: LoginProviderUserType) -> SignalProducer<User, SessionServiceError>
+    
+    /**
          This method takes care of validating and signing up.
          
          - Returns: A SignalProducer that can send the User logged in

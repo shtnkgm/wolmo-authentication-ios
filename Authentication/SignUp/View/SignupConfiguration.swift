@@ -16,6 +16,7 @@ public final class SignupControllerConfiguration {
     public let delegate: SignupControllerDelegate //swiftlint:disable:this weak_delegate
     public let transitionDelegate: SignupControllerTransitionDelegate //swiftlint:disable:this weak_delegate
     public let termsAndServicesURL: URL
+    public let loginProviders: [LoginProvider]
     
     /**
          Initializes a signup controller configuration with the view model,
@@ -23,7 +24,8 @@ public final class SignupControllerConfiguration {
          delegate for the signup controller to use.
      
          - Parameters:
-             - viewModel: view model to bind to and use.
+             - viewModelFactory: factory method that creates the 
+             view model to bind to and use, given a list of LoginProviders.
              - viewFactory: factory method to call only once
              to get the signup view to use.
              - transitionDelegate: delegate to handle events that fire a
@@ -31,17 +33,20 @@ public final class SignupControllerConfiguration {
              - delegate: delegate which adds behaviour to certain events,
              like handling a signup error or selecting sign up option.
              The default delegate is provided.
+             - loginProviders: list of the login providers to use.
      */
-    internal init(viewModel: SignupViewModelType,
-                  viewFactory: @escaping () -> SignupViewType,
+    internal init(viewModelFactory: ([LoginProvider]) -> SignupViewModelType,
+                  viewFactory: @escaping ([LoginProvider]) -> () -> SignupViewType,
                   transitionDelegate: SignupControllerTransitionDelegate,
                   delegate: SignupControllerDelegate = DefaultSignupControllerDelegate(),
-                  termsAndServicesURL: URL) {
-        self.viewModel = viewModel
-        self.viewFactory = viewFactory
+                  termsAndServicesURL: URL,
+                  loginProviders: [LoginProvider]) {
+        self.viewModel = viewModelFactory(loginProviders)
+        self.viewFactory = viewFactory(loginProviders)
         self.delegate = delegate
         self.transitionDelegate = transitionDelegate
         self.termsAndServicesURL = termsAndServicesURL
+        self.loginProviders = loginProviders
     }
     
 }

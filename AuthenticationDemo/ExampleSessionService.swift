@@ -57,6 +57,18 @@ public final class ExampleSessionService: SessionServiceType {
         }
     }
     
+    public func logIn(withUserType userType: LoginProviderUserType) -> SignalProducer<ExampleUser, SessionServiceError> {
+        let dispatchTime = DispatchTime.now() + 2.0
+        switch userType {
+        case .facebook(let fbUser):
+            let exampleUser = ExampleUser(email: (fbUser.email?.raw)!, password: "")
+            return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)
+        case .custom(let name, _):
+            print("Signing up a user for service \(name) not supported")
+            return signUpFailure(dispatchTime: dispatchTime)
+        }
+    }
+
     private func logInSuccess(user: ExampleUser, dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {

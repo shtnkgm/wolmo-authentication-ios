@@ -76,6 +76,10 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
         return _loginConfiguration
     }
     
+    public func createLoginProviders() -> [LoginProvider] {
+        return []
+    }
+    
     public func createSignupViewConfiguration() -> SignupViewConfigurationType {
         return _signupConfiguration
     }
@@ -94,18 +98,20 @@ public protocol LoginComponentsFactory {
     func createLogInCredentialsValidator() -> LoginCredentialsValidator
     
     /**
-         Creates the LoginViewModelType to use in the authentication process logic.
+         Creates the LoginViewModelType factory to use in the authentication process logic.
          
          - Parameters:
             - sessionService: the session service to use for login action.
             - credentialsValidator: the credentials validator to use for validating
                 entries, before enabling the user to log in.
      
-         - Returns: A login view model that controls the login logic and communicates
+         - Returns: A function that takes an array of login providers, and returns
+            a login view model that controls the login logic and communicates
             with the session service.
-            By default, the default LoginViewModel with the parameters received.
      */
-    func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType
+    func createLoginViewModelFactory<SessionService: SessionServiceType>(
+        withSessionService sessionService: SessionService,
+        credentialsValidator: LoginCredentialsValidator) -> ([LoginProvider]) -> LoginViewModelType
     
     /**
         Creates the LoginViewConfiguration to use for setting
@@ -116,6 +122,14 @@ public protocol LoginComponentsFactory {
         - Attention: There is no default implementation.
     */
     func createLoginViewConfiguration() -> LoginViewConfigurationType
+    
+    /**
+     Creates the login providers to use.
+     
+     - Returns: An array of valid login providers.
+       The default implementation returns an empty list of providers.
+     */
+    func createLoginProviders() -> [LoginProvider]
     
     /**
          Creates the LoginViewDelegate to use in configuring the login view style.
@@ -131,16 +145,17 @@ public protocol LoginComponentsFactory {
     func createLoginViewDelegate(withConfiguration configuration: LoginViewConfigurationType) -> LoginViewDelegate
     
     /**
-         Creates login view that conforms to the logInViewType protocol
-         and will be use for the login visual.
+         Creates factory for login view that conforms to the logInViewType protocol
+         and will be used for the login visual.
      
          - Parameters:
             - delegate: view delegate for configuring the login view.
          
-         - Returns: A valid login view ready to be used.
-            By default, the default LoginView.
+     - Returns: A function that takes a list of LoginProviders and returns a
+             valid signup view ready to be used.
+             By default, the view returned is the default LoginView.
      */
-    func createLoginView(withDelegate delegate: LoginViewDelegate) -> LoginViewType
+    func createLoginViewFactory(withDelegate delegate: LoginViewDelegate) -> ([LoginProvider]) -> () -> LoginViewType
     
     /**
          Creates the login view controller delegate that the login controller
@@ -172,18 +187,30 @@ public extension LoginComponentsFactory {
         return LoginCredentialsValidator()
     }
     
-    public func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType {
-        return LoginViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
+    public func createLoginViewModelFactory<SessionService: SessionServiceType>(
+        withSessionService sessionService: SessionService,
+        credentialsValidator: LoginCredentialsValidator) -> ([LoginProvider]) -> LoginViewModelType {
+        return { (loginProviders: [LoginProvider]) in
+            for provider in loginProviders {
+                provider.configure()
+            }
+            let providerUserSignals = loginProviders.map { $0.userSignal }
+            return LoginViewModel(sessionService: sessionService,
+                                  credentialsValidator: self.createLogInCredentialsValidator(),
+                                  providerUserSignals: providerUserSignals) }
     }
     
     public func createLoginViewDelegate(withConfiguration configuration: LoginViewConfigurationType) -> LoginViewDelegate {
         return DefaultLoginViewDelegate(configuration: configuration)
     }
     
-    public func createLoginView(withDelegate delegate: LoginViewDelegate) -> LoginViewType {
+    public func createLoginViewFactory(withDelegate delegate: LoginViewDelegate) -> ([LoginProvider]) -> () -> LoginViewType {
         let view = LoginView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
-        return view
+        return { (loginProviders: [LoginProvider]) in {
+            view.loginProviderButtons = loginProviders.map { $0.button }
+            return view }
+        }
     }
     
     public func createLoginControllerDelegate() -> LoginControllerDelegate {
@@ -223,9 +250,11 @@ public protocol SignupComponentsFactory {
             and comunicates with the session service.
             By default, the default SignupViewModel.
      */
-    func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
-                                                                   credentialsValidator: SignupCredentialsValidator,
-                                                                   configuration: SignupViewConfigurationType) -> SignupViewModelType
+
+    func createSignupViewModelFactory<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
+                                      credentialsValidator: SignupCredentialsValidator,
+                                      configuration: SignupViewConfigurationType) -> ([LoginProvider]) -> SignupViewModelType
+
     
     /**
          Creates the SignupViewConfiguration to use for setting
@@ -254,16 +283,17 @@ public protocol SignupComponentsFactory {
     func createSignupViewDelegate(withConfiguration configuration: SignupViewConfigurationType) -> SignupViewDelegate
     
     /**
-         Creates signup view that conforms to the SignupViewType protocol
-         and will be use for the signup visual.
+         Creates factory for signup view that conforms to the SignupViewType protocol
+         and will be used for the signup visual.
      
          - Parameters:
             - delegate: view delegate for configuring the signup view.
          
-         - Returns: A valid signup view ready to be used.
-            By default, the default SignupView.
+         - Returns: A function that takes a list of LoginProviders and returns a 
+            valid signup view ready to be used.
+            By default, the view returned is the default SignupView.
      */
-    func createSignupView(withDelegate delegate: SignupViewDelegate) -> SignupViewType
+    func createSignupViewFactory(withDelegate delegate: SignupViewDelegate) -> ([LoginProvider]) -> () -> SignupViewType
     
     /**
          Creates the signup view controller delegate
@@ -306,23 +336,32 @@ extension SignupComponentsFactory {
         return SignupCredentialsValidator()
     }
     
-    public func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
-                                                                          credentialsValidator: SignupCredentialsValidator,
-                                                                          configuration: SignupViewConfigurationType) -> SignupViewModelType {
-        return SignupViewModel(sessionService: sessionService,
-                               credentialsValidator: credentialsValidator,
-                               usernameEnabled: configuration.usernameEnabled,
-                               passwordConfirmationEnabled: configuration.passwordConfirmationEnabled)
+    public func createSignupViewModelFactory<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
+                                                                                 credentialsValidator: SignupCredentialsValidator,
+                                                                                 configuration: SignupViewConfigurationType) -> ([LoginProvider]) -> SignupViewModelType {
+        return { (loginProviders: [LoginProvider]) in
+            for provider in loginProviders {
+                provider.configure()
+            }
+            let providerUserSignals = loginProviders.map { $0.userSignal }
+            return SignupViewModel(sessionService: sessionService,
+                                   credentialsValidator: credentialsValidator,
+                                   usernameEnabled: configuration.usernameEnabled,
+                                   passwordConfirmationEnabled: configuration.passwordConfirmationEnabled,
+                                   providerUserSignals: providerUserSignals) }
     }
     
     public func createSignupViewDelegate(withConfiguration configuration: SignupViewConfigurationType) -> SignupViewDelegate {
         return DefaultSignupViewDelegate(configuration: configuration)
     }
     
-    public func createSignupView(withDelegate delegate: SignupViewDelegate) -> SignupViewType {
+    public func createSignupViewFactory(withDelegate delegate: SignupViewDelegate) -> ([LoginProvider]) -> () -> SignupViewType {
         let view = SignupView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
-        return view
+        return { (loginProviders: [LoginProvider]) in {
+            view.loginProviderButtons = loginProviders.map { $0.button }
+            return view }
+        }
     }
     
     public func createSignupControllerDelegate() -> SignupControllerDelegate {

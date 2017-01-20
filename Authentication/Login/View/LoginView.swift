@@ -23,6 +23,7 @@ public protocol LoginViewType: Renderable, LoginFormType {
     var signupButton: UIButton { get }
     var recoverPasswordLabel: UILabel? { get }
     var recoverPasswordButton: UIButton { get }
+    var loginProviderButtons: [UIView] { get }
     
 }
 
@@ -109,6 +110,20 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     @IBOutlet weak var emailErrorsView: UIView!
     @IBOutlet weak var passwordErrorsView: UIView!
+    @IBOutlet weak var loginViewOrView: UIView!
+    @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
+    
+    internal var loginProviderButtons: [UIView] = [] {
+        didSet {
+            if loginProviderButtons.isEmpty {
+                loginViewOrView.removeFromSuperview()
+            }
+            for providerButton in loginProviderButtons {
+                loginProviderButtonsStackView.addArrangedSubview(providerButton)
+                providerButton.heightAnchor.constraint(equalTo: logInButton.heightAnchor).isActive = true
+            }
+        }
+    }
 
     internal var emailTextFieldValid = true {
         didSet { emailTextFieldValidWasSet() }

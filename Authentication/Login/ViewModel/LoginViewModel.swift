@@ -34,6 +34,7 @@ public protocol LoginViewModelType {
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     var logInExecuting: Signal<Bool, NoError> { get }
     var logInSuccessful: Signal<(), NoError> { get }
+    var logInProviderUserSignal: Signal<LoginProviderUserType, NoError> { get }
     
 }
 
@@ -57,11 +58,12 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     public var logInCocoaAction: CocoaAction<UIButton> { return CocoaAction(_logIn) }
     public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
     public var logInExecuting: Signal<Bool, NoError> { return _logIn.isExecuting.signal }
-    public var logInSuccessful: Signal<(), NoError> { return _logIn.values.map { _ in () } }
+    public private(set) lazy var logInSuccessful: Signal<(), NoError> = self.initializeLogInSuccesfulSignal()
+    public let logInProviderUserSignal: Signal<LoginProviderUserType, NoError>
     
     public var togglePasswordVisibility: CocoaAction<UIButton> { return CocoaAction(_togglePasswordVisibility) }
     
-    private lazy var _logIn: Action<(), User, SessionServiceError> = self.initializeLogInAction()
+    fileprivate lazy var _logIn: Action<(), User, SessionServiceError> = self.initializeLogInAction()
     
     private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
@@ -74,7 +76,9 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
             - credentialsValidator: login credentials validator which encapsulates the criteria
             that the email and password fields must meet.
     */
-    internal init(sessionService: SessionService, credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator()) {
+    internal init(sessionService: SessionService,
+                  credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator(),
+                  providerUserSignals: [Signal<LoginProviderUserType, NoError>] = []) {
         _sessionService = sessionService
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
@@ -88,11 +92,24 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
         
         emailValidationErrors = Property(initial: [], then: emailValidationResult.map { $0.errors })
         passwordValidationErrors = Property(initial: [], then: passwordValidationResult.map { $0.errors })
+        logInProviderUserSignal = Signal.merge(providerUserSignals)
     }
     
 }
 
 fileprivate extension LoginViewModel {
+    
+    fileprivate func initializeLogInSuccesfulSignal() -> Signal<(), NoError> {
+        let loggedInWithProviderUserSignal = self.logInProviderUserSignal.flatMap(.latest) { [unowned self] loginProviderUserType -> SignalProducer<User, SessionServiceError> in
+            return self._sessionService.logIn(withUserType: loginProviderUserType)
+        }
+        
+        let successfullyLoggedInWithProviderUserSignal = loggedInWithProviderUserSignal
+            .flatMapError { _ in return SignalProducer<User, NoError>.empty }
+            .map { _ in () }
+        let successfullyLoggedInWithMailSignal = self._logIn.values.map { _ in () }
+        return Signal.merge([successfullyLoggedInWithProviderUserSignal, successfullyLoggedInWithMailSignal])
+    }
     
     fileprivate func initializeLogInAction() -> Action<(), User, SessionServiceError> {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in

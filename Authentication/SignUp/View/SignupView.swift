@@ -21,6 +21,7 @@ public protocol SignupViewType: Renderable, SignupFormType {
     /* Navigation elements to other screens */
     var loginLabel: UILabel? { get }
     var loginButton: UIButton { get }
+    var loginProviderButtons: [UIView] { get }
     
 }
 
@@ -122,6 +123,21 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal var loginButton: UIButton { return loginButtonOutlet }
     @IBOutlet weak var loginButtonOutlet: UIButton! { didSet { loginButtonOutlet.setUnderlined(title: loginButtonTitle) } }
+    
+    @IBOutlet weak var signUpOrView: UIView!
+    @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
+    
+    internal var loginProviderButtons: [UIView] = [] {
+        didSet {
+            if loginProviderButtons.isEmpty {
+                signUpOrView.removeFromSuperview()
+            }
+            for providerButton in loginProviderButtons {
+                loginProviderButtonsStackView.addArrangedSubview(providerButton)
+                providerButton.heightAnchor.constraint(equalTo: signUpButton.heightAnchor).isActive = true
+            }
+        }
+    }
     
     internal var usernameTextFieldValid = false { didSet { usernameTextFieldValidWasSet() } }
     internal var usernameTextFieldSelected = false { didSet { usernameTextFieldSelectedWasSet() } }

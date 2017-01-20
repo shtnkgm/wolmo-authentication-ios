@@ -13,8 +13,9 @@ public final class LoginControllerConfiguration {
     
     public let viewModel: LoginViewModelType
     public let viewFactory: () -> LoginViewType
-    public let delegate: LoginControllerDelegate //swiftlint:disable:this weak_delegate
     public let transitionDelegate: LoginControllerTransitionDelegate //swiftlint:disable:this weak_delegate
+    public let delegate: LoginControllerDelegate //swiftlint:disable:this weak_delegate
+    public let loginProviders: [LoginProvider]
     
     /**
         Initializes a login controller configuration with the view model,
@@ -22,7 +23,8 @@ public final class LoginControllerConfiguration {
         delegate for the login controller to use.
      
         - Parameters:
-             - viewModel: view model to bind to and use.
+             - viewModelFactory: factory method that creates the
+             view model to bind to and use, given a list of LoginProviders.
              - viewFactory: factory method to call only once
              to get the login view to use.
              - transitionDelegate: delegate to handle events that fire a
@@ -30,15 +32,18 @@ public final class LoginControllerConfiguration {
              - delegate: delegate which adds behaviour to certain events,
              like handling a login error or selecting log in option.
              The default delegate is provided.
+             - loginProviders: list of the login providers to use.
     */
-    internal init(viewModel: LoginViewModelType,
-                  viewFactory: @escaping () -> LoginViewType,
+    internal init(viewModelFactory: ([LoginProvider]) -> LoginViewModelType,
+                  viewFactory: @escaping ([LoginProvider]) -> () -> LoginViewType,
                   transitionDelegate: LoginControllerTransitionDelegate,
-                  delegate: LoginControllerDelegate = DefaultLoginControllerDelegate()) {
-        self.viewModel = viewModel
-        self.viewFactory = viewFactory
-        self.delegate = delegate
+                  delegate: LoginControllerDelegate = DefaultLoginControllerDelegate(),
+                  loginProviders: [LoginProvider]) {
+        self.viewModel = viewModelFactory(loginProviders)
+        self.viewFactory = viewFactory(loginProviders)
         self.transitionDelegate = transitionDelegate
+        self.delegate = delegate
+        self.loginProviders = loginProviders
     }
     
 }

@@ -75,7 +75,8 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
     public var signUpCocoaAction: CocoaAction<UIButton> { return CocoaAction(_signUp) }
     public var signUpErrors: Signal<SessionServiceError, NoError> { return _signUp.errors }
     public var signUpExecuting: Signal<Bool, NoError> { return _signUp.isExecuting.signal }
-    public var signUpSuccessful: Signal<(), NoError> { return _signUp.values.map { _ in () } }
+    public private(set) lazy var signUpSuccessful: Signal<(), NoError> = self.initializeSignUpSuccesfulSignal()
+    public let logInProviderUserSignal: Signal<LoginProviderUserType, NoError>
     
     public var togglePasswordVisibility: CocoaAction<UIButton> { return CocoaAction(_togglePasswordVisibility) }
     public var togglePasswordConfirmVisibility: CocoaAction<UIButton> { return CocoaAction(_togglePasswordConfirmVisibility) }
@@ -86,7 +87,7 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
     fileprivate let _sessionService: SessionService
     fileprivate let _credentialsAreValid: Property<Bool>
     
-    private lazy var _signUp: Action<(), User, SessionServiceError> = self.initializeSignUpAction()
+    fileprivate lazy var _signUp: Action<(), User, SessionServiceError> = self.initializeSignUpAction()
     
     private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     private lazy var _togglePasswordConfirmVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordConfirmationVisibilityAction()
@@ -110,7 +111,8 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
     internal init(sessionService: SessionService,
                   credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator(),
                   usernameEnabled: Bool = true,
-                  passwordConfirmationEnabled: Bool = true) {
+                  passwordConfirmationEnabled: Bool = true,
+                  providerUserSignals: [Signal<LoginProviderUserType, NoError>] = []) {
         _sessionService = sessionService
         
         let usernameValidationResult = username.signal.map(credentialsValidator.usernameValidator.validate)
@@ -122,6 +124,7 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
         emailValidationErrors = Property(initial: [], then: emailValidationResult.map { $0.errors })
         passwordValidationErrors = Property(initial: [], then: passwordValidationResult.map { $0.errors })
         passwordConfirmationValidationErrors = Property(initial: [], then: passwordConfirmValidationResult.map { $0.errors })
+        logInProviderUserSignal = Signal.merge(providerUserSignals)
         
         var credentialsAreValid = Property<Bool>(initial: false, then: emailValidationResult.map { $0.isValid })
             .combineLatest(with: Property<Bool>(initial: false, then: passwordValidationResult.map { $0.isValid })).map { $0 && $1 }
@@ -137,6 +140,18 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
 }
 
 fileprivate extension SignupViewModel {
+    
+    fileprivate func initializeSignUpSuccesfulSignal() -> Signal<(), NoError> {
+        let loggedInWithProviderUserSignal = self.logInProviderUserSignal.flatMap(.latest) { [unowned self] loginProviderUserType -> SignalProducer<User, SessionServiceError> in
+            return self._sessionService.logIn(withUserType: loginProviderUserType)
+        }
+        
+        let successfullyLoggedInWithProviderUserSignal = loggedInWithProviderUserSignal
+            .flatMapError { _ in return SignalProducer<User, NoError>.empty }
+            .map { _ in () }
+        let successfullySignedUpWithMailSignal = self._signUp.values.map { _ in () }
+        return Signal.merge([successfullyLoggedInWithProviderUserSignal, successfullySignedUpWithMailSignal])
+    }
     
     fileprivate func initializeSignUpAction() -> Action<(), User, SessionServiceError> {
         return Action(enabledIf: self._credentialsAreValid) { [unowned self] _ in
