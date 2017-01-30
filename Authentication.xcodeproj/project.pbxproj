@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D1DFEFA1C8DCE0A00F0A37C /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; };
-		9D1DFEFB1C8DCE0A00F0A37C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; };
 		9D1DFF021C8DCFB300F0A37C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF001C8DCFB300F0A37C /* Nimble.framework */; };
 		9D1DFF031C8DCFB300F0A37C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF011C8DCFB300F0A37C /* Quick.framework */; };
 		9D1DFF051C8DCFC800F0A37C /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF001C8DCFB300F0A37C /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -21,6 +19,12 @@
 		CE0F7BA71E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */; };
 		CE0F7BA81E3FAC3E00C44C86 /* FacebookLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */; };
 		CE0F7BA91E3FAC3E00C44C86 /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */; };
+		CE0F7BAF1E3FB66700C44C86 /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */; };
+		CE0F7BB01E3FB66700C44C86 /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */; };
+		CE0F7BB11E3FB66700C44C86 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */; };
+		CE0F7BB21E3FB66700C44C86 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */; };
+		CE0F7BB31E3FB66700C44C86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */; };
+		CE0F7BB41E3FB67B00C44C86 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
 		CE111DA31D4FA6A50083C99E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA11D4FA6A50083C99E /* Email.swift */; };
 		CE111DA91D4FA6C20083C99E /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */; };
 		CE111DAA1D4FA6C20083C99E /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA71D4FA6C20083C99E /* MockSessionService.swift */; };
@@ -66,13 +70,28 @@
 		CE111E151D4FC8560083C99E /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */; };
 		CE111E171D4FCED70083C99E /* LoginControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */; };
 		CE111E191D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */; };
+		CE1CCF081E3FBF890059C191 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */; };
+		CE1CCF091E3FBF890059C191 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF071E3FBF890059C191 /* Bolts.framework */; };
+		CE1CCF0A1E3FC0350059C191 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
+		CE1CCF0B1E3FC0350059C191 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; };
+		CE1CCF0C1E3FC0350059C191 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */; };
+		CE1CCF0D1E3FC0350059C191 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; };
+		CE1CCF0E1E3FC0350059C191 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
+		CE1CCF0F1E3FC0350059C191 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */; };
+		CE1CCF101E3FC0350059C191 /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */; };
+		CE1CCF111E3FC0350059C191 /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */; };
+		CE1CCF121E3FC0350059C191 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */; };
+		CE1CCF131E3FC0350059C191 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */; };
+		CE1CCF141E3FC0350059C191 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */; };
+		CE1CCF151E3FC0350059C191 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF071E3FBF890059C191 /* Bolts.framework */; };
+		CE1CCF161E3FC1830059C191 /* ReactiveSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE1CCF171E3FC1830059C191 /* Core.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE20AD671D53BA860039260B /* AuthenticationComponentsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */; };
 		CE20AD691D53BB8C0039260B /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20AD681D53BB8B0039260B /* AuthenticationCoordinator.swift */; };
 		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
 		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
-		CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
-		CE7A7BB61D3E9FA800C44A25 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
 		CE7A7BBD1D3EB60500C44A25 /* Authentication.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE8397DB1E3FB74D001F1ABD /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
 		CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */; };
 		CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA65B831D33F9960065283E /* ViewProtocols.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
@@ -111,6 +130,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CE1CCF161E3FC1830059C191 /* ReactiveSwift.framework in Copy Frameworks */,
+				CE1CCF171E3FC1830059C191 /* Core.framework in Copy Frameworks */,
 				9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */,
 				9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */,
 				9D1DFF051C8DCFC800F0A37C /* Nimble.framework in Copy Frameworks */,
@@ -156,6 +177,11 @@
 		CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginConfiguration.swift; sourceTree = "<group>"; };
 		CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginProvider.swift; sourceTree = "<group>"; };
 		CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
+		CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookShare.framework; path = Carthage/Build/iOS/FacebookShare.framework; sourceTree = "<group>"; };
+		CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = Carthage/Build/iOS/FacebookLogin.framework; sourceTree = "<group>"; };
+		CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = Carthage/Build/iOS/FacebookCore.framework; sourceTree = "<group>"; };
+		CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CE111DA11D4FA6A50083C99E /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE111DA71D4FA6C20083C99E /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSessionService.swift; sourceTree = "<group>"; };
@@ -185,7 +211,7 @@
 		CE111DE01D4FA7390083C99E /* SignupViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewDelegate.swift; sourceTree = "<group>"; };
 		CE111DE21D4FA7390083C99E /* SignupCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupCredentialsValidator.swift; sourceTree = "<group>"; };
 		CE111DE31D4FA7390083C99E /* SignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
-		CE111DEE1D4FA78E0083C99E /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTests.swift; sourceTree = "<group>"; };
+		CE111DEE1D4FA78E0083C99E /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginControllerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CE111DEF1D4FA78E0083C99E /* LoginViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		CE111DF31D4FA79A0083C99E /* AnyInputTextValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyInputTextValidatorTests.swift; sourceTree = "<group>"; };
 		CE111DF41D4FA79A0083C99E /* CompositeValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeValidatorTests.swift; sourceTree = "<group>"; };
@@ -201,6 +227,8 @@
 		CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
 		CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerTransitionDelegate.swift; sourceTree = "<group>"; };
+		CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Carthage/Build/iOS/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		CE1CCF071E3FBF890059C191 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
 		CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationComponentsFactory.swift; sourceTree = "<group>"; };
 		CE20AD681D53BB8B0039260B /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
 		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -233,10 +261,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D1DFEFA1C8DCE0A00F0A37C /* ReactiveCocoa.framework in Frameworks */,
-				9D1DFEFB1C8DCE0A00F0A37C /* Result.framework in Frameworks */,
-				CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */,
-				CE7A7BB61D3E9FA800C44A25 /* MBProgressHUD.framework in Frameworks */,
+				CE1CCF0A1E3FC0350059C191 /* Core.framework in Frameworks */,
+				CE1CCF0E1E3FC0350059C191 /* MBProgressHUD.framework in Frameworks */,
+				CE1CCF0B1E3FC0350059C191 /* ReactiveCocoa.framework in Frameworks */,
+				CE1CCF0C1E3FC0350059C191 /* ReactiveSwift.framework in Frameworks */,
+				CE1CCF0D1E3FC0350059C191 /* Result.framework in Frameworks */,
+				CE1CCF0F1E3FC0350059C191 /* FacebookCore.framework in Frameworks */,
+				CE1CCF101E3FC0350059C191 /* FacebookShare.framework in Frameworks */,
+				CE1CCF111E3FC0350059C191 /* FacebookLogin.framework in Frameworks */,
+				CE1CCF141E3FC0350059C191 /* FBSDKCoreKit.framework in Frameworks */,
+				CE1CCF121E3FC0350059C191 /* FBSDKShareKit.framework in Frameworks */,
+				CE1CCF131E3FC0350059C191 /* FBSDKLoginKit.framework in Frameworks */,
+				CE1CCF151E3FC0350059C191 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,9 +290,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */,
+				CE0F7BB41E3FB67B00C44C86 /* Core.framework in Frameworks */,
+				CE8397DB1E3FB74D001F1ABD /* MBProgressHUD.framework in Frameworks */,
 				CEE94AAB1CA06C6E0089E71B /* ReactiveCocoa.framework in Frameworks */,
+				BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */,
 				CEE94AAD1CA06C6E0089E71B /* Result.framework in Frameworks */,
+				CE0F7BB01E3FB66700C44C86 /* FacebookLogin.framework in Frameworks */,
+				CE0F7BAF1E3FB66700C44C86 /* FacebookShare.framework in Frameworks */,
+				CE0F7BB11E3FB66700C44C86 /* FacebookCore.framework in Frameworks */,
+				CE0F7BB21E3FB66700C44C86 /* FBSDKLoginKit.framework in Frameworks */,
+				CE1CCF081E3FBF890059C191 /* FBSDKShareKit.framework in Frameworks */,
+				CE0F7BB31E3FB66700C44C86 /* FBSDKCoreKit.framework in Frameworks */,
+				CE1CCF091E3FBF890059C191 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +311,13 @@
 		9D1DFEF61C8DCDF600F0A37C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */,
+				CE1CCF071E3FBF890059C191 /* Bolts.framework */,
+				CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */,
+				CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */,
+				CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */,
+				CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */,
+				CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */,
 				BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */,
 				CE7A7BB71D3EA01C00C44A25 /* AVFoundation.framework */,
 				CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */,
@@ -681,10 +733,18 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookShare.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKShareKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -703,6 +763,14 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookShare.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKShareKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 			);
 			name = Carthage;
 			outputPaths = (
