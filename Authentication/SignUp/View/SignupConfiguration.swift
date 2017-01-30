@@ -35,14 +35,14 @@ public final class SignupControllerConfiguration {
              The default delegate is provided.
              - loginProviders: list of the login providers to use.
      */
-    internal init(viewModelFactory: ([LoginProvider]) -> SignupViewModelType,
-                  viewFactory: @escaping ([LoginProvider]) -> () -> SignupViewType,
+    internal init(viewModelFactory: @escaping ([LoginProvider]) -> SignupViewModelType,
+                  viewFactory: @escaping ([LoginProvider]) -> SignupViewType,
                   transitionDelegate: SignupControllerTransitionDelegate,
                   delegate: SignupControllerDelegate = DefaultSignupControllerDelegate(),
                   termsAndServicesURL: URL,
                   loginProviders: [LoginProvider]) {
         self.viewModel = viewModelFactory(loginProviders)
-        self.viewFactory = viewFactory(loginProviders)
+        self.viewFactory = { viewFactory(loginProviders) }
         self.delegate = delegate
         self.transitionDelegate = transitionDelegate
         self.termsAndServicesURL = termsAndServicesURL

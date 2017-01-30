@@ -34,13 +34,13 @@ public final class LoginControllerConfiguration {
              The default delegate is provided.
              - loginProviders: list of the login providers to use.
     */
-    internal init(viewModelFactory: ([LoginProvider]) -> LoginViewModelType,
-                  viewFactory: @escaping ([LoginProvider]) -> () -> LoginViewType,
+    internal init(viewModelFactory: @escaping ([LoginProvider]) -> LoginViewModelType,
+                  viewFactory: @escaping ([LoginProvider]) -> LoginViewType,
                   transitionDelegate: LoginControllerTransitionDelegate,
                   delegate: LoginControllerDelegate = DefaultLoginControllerDelegate(),
                   loginProviders: [LoginProvider]) {
         self.viewModel = viewModelFactory(loginProviders)
-        self.viewFactory = viewFactory(loginProviders)
+        self.viewFactory = { viewFactory(loginProviders) }
         self.transitionDelegate = transitionDelegate
         self.delegate = delegate
         self.loginProviders = loginProviders

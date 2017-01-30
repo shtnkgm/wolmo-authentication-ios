@@ -103,12 +103,21 @@ public extension AuthenticationCoordinator {
          - Returns: A valid login controller configuration to use.
      */
     internal func createLoginControllerConfiguration() -> LoginControllerConfiguration {
+        let credentialsValidator = _componentsFactory.createLogInCredentialsValidator()
+        let viewModelFactory: ([LoginProvider]) -> LoginViewModelType = { [unowned self] in
+            return self._componentsFactory.createLoginViewModel(withSessionService: self.sessionService,
+                                                    credentialsValidator: credentialsValidator,
+                                                    loginProviders: $0)
+        }
         let loginViewConfiguration = _componentsFactory.createLoginViewConfiguration()
         let loginViewDelegate = _componentsFactory.createLoginViewDelegate(withConfiguration: loginViewConfiguration)
+        let viewFactory: ([LoginProvider]) -> LoginViewType = { [unowned self] in
+            self._componentsFactory.createLoginView(withDelegate: loginViewDelegate,
+                                                    loginProviders: $0)
+        }
         return LoginControllerConfiguration(
-            viewModelFactory: _componentsFactory.createLoginViewModelFactory(withSessionService: sessionService,
-                                                                             credentialsValidator: _componentsFactory.createLogInCredentialsValidator()),
-            viewFactory: _componentsFactory.createLoginViewFactory(withDelegate: loginViewDelegate),
+            viewModelFactory: viewModelFactory,
+            viewFactory: viewFactory,
             transitionDelegate: _componentsFactory.createLoginControllerTransitionDelegate() ?? self,
             delegate: _componentsFactory.createLoginControllerDelegate(),
             loginProviders: _componentsFactory.createLoginProviders())
@@ -142,13 +151,22 @@ public extension AuthenticationCoordinator {
          - Returns: A valid signup controller configuration to use.
      */
     internal func createSignupControllerConfiguration() -> SignupControllerConfiguration {
+        let credentialsValidator = _componentsFactory.createSignUpCredentialsValidator()
         let signupViewConfiguration = _componentsFactory.createSignupViewConfiguration()
+        let viewModelFactory: ([LoginProvider]) -> SignupViewModelType = { [unowned self] in
+            return self._componentsFactory.createSignupViewModel(withSessionService: self.sessionService,
+                                                            credentialsValidator: credentialsValidator,
+                                                            configuration: signupViewConfiguration,
+                                                            loginProviders: $0)
+        }
         let signupViewDelegate = _componentsFactory.createSignupViewDelegate(withConfiguration: signupViewConfiguration)
+        let viewFactory: ([LoginProvider]) -> SignupViewType = { [unowned self] in
+            return self._componentsFactory.createSignupView(withDelegate: signupViewDelegate,
+                                                            loginProviders: $0)
+        }
         return SignupControllerConfiguration(
-            viewModelFactory: _componentsFactory.createSignupViewModelFactory(withSessionService: sessionService,
-                credentialsValidator: _componentsFactory.createSignUpCredentialsValidator(),
-                configuration: signupViewConfiguration),
-            viewFactory: _componentsFactory.createSignupViewFactory(withDelegate: signupViewDelegate),
+            viewModelFactory: viewModelFactory,
+            viewFactory: viewFactory,
             transitionDelegate: _componentsFactory.createSignupControllerTransitionDelegate() ?? self,
             delegate: _componentsFactory.createSignupControllerDelegate(),
             termsAndServicesURL: signupViewConfiguration.termsAndServicesURL,
