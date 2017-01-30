@@ -108,6 +108,7 @@ public protocol LoginComponentsFactory {
      
          - Returns: A login view model that controls the login logic and communicates
             with the session service.
+            By default, the default LoginViewModel configured with the arguments received.
      */
     func createLoginViewModel<SessionService: SessionServiceType>(
             withSessionService sessionService: SessionService,
@@ -251,7 +252,7 @@ public protocol SignupComponentsFactory {
      
          - Returns: A signup view model that controls the registration logic
             and comunicates with the session service.
-            By default, the default SignupViewModel.
+            By default, the default SignupViewModel configured with the arguments received.
      */
     func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
                                                                    credentialsValidator: SignupCredentialsValidator,

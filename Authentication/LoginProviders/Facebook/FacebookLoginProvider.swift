@@ -44,7 +44,7 @@ internal struct FacebookProfileRequest: GraphRequestProtocol {
  
     Except for the access token, all other properties are optional
     because they are requested in a separate request after the login
-    is completed. If this request fails, the only information the user
+    is completed. If this extra request fails, the only information the user
     will contain is its corresponding AccessToken.
  */
 public struct FacebookLoginProviderUser: LoginProviderUser {
@@ -122,6 +122,7 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
                                                      accessToken: AccessToken.current!)
                 self.observer.send(value: LoginProviderUserType.facebook(user: user))
             case .failed(let error):
+                //NSLog("facebook-login-error.failed-extra-info-request.log-message".frameworkLocalized)
                 print("Graph Request Failed: \(error) \nIf you need this info you should request it again.")
                 let user = FacebookLoginProviderUser(email: .none,
                                                      name: .none,

@@ -18,9 +18,9 @@
 		9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */; };
-		BEB2EED91E282A7B00F45BED /* FacebookLoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB2EED81E282A7B00F45BED /* FacebookLoginConfiguration.swift */; };
-		BEB2EEDB1E2974F700F45BED /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB2EEDA1E2974F700F45BED /* LoginProvider.swift */; };
-		BEB2EEDD1E29766C00F45BED /* FacebookLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEB2EEDC1E29766C00F45BED /* FacebookLoginProvider.swift */; };
+		CE0F7BA71E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */; };
+		CE0F7BA81E3FAC3E00C44C86 /* FacebookLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */; };
+		CE0F7BA91E3FAC3E00C44C86 /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */; };
 		CE111DA31D4FA6A50083C99E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA11D4FA6A50083C99E /* Email.swift */; };
 		CE111DA91D4FA6C20083C99E /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */; };
 		CE111DAA1D4FA6C20083C99E /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA71D4FA6C20083C99E /* MockSessionService.swift */; };
@@ -153,9 +153,9 @@
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
-		BEB2EED81E282A7B00F45BED /* FacebookLoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FacebookLoginConfiguration.swift; path = Authentication/Login/View/FacebookLoginConfiguration.swift; sourceTree = "<group>"; };
-		BEB2EEDA1E2974F700F45BED /* LoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
-		BEB2EEDC1E29766C00F45BED /* FacebookLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginProvider.swift; sourceTree = "<group>"; };
+		CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginConfiguration.swift; sourceTree = "<group>"; };
+		CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginProvider.swift; sourceTree = "<group>"; };
+		CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
 		CE111DA11D4FA6A50083C99E /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE111DA71D4FA6C20083C99E /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSessionService.swift; sourceTree = "<group>"; };
@@ -282,9 +282,6 @@
 		9D72A9FA1C8DC7EA00BB4082 = {
 			isa = PBXGroup;
 			children = (
-				BEB2EEDC1E29766C00F45BED /* FacebookLoginProvider.swift */,
-				BEB2EED81E282A7B00F45BED /* FacebookLoginConfiguration.swift */,
-				BEB2EEDA1E2974F700F45BED /* LoginProvider.swift */,
 				CEE94A8E1CA06B1B0089E71B /* AuthenticationDemo */,
 				9D1DFEF61C8DCDF600F0A37C /* Frameworks */,
 				9D72AA061C8DC7EA00BB4082 /* Authentication */,
@@ -313,6 +310,7 @@
 				CE111DC31D4FA7340083C99E /* Login */,
 				CE111DD81D4FA7390083C99E /* SignUp */,
 				CE111DAC1D4FA6FD0083C99E /* RecoverPassword */,
+				CE0F7BA21E3FAC3E00C44C86 /* LoginProviders */,
 				CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */,
 				CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */,
 				CE20AD681D53BB8B0039260B /* AuthenticationCoordinator.swift */,
@@ -335,6 +333,24 @@
 				9D72AA151C8DC7EB00BB4082 /* Info.plist */,
 			);
 			path = AuthenticationTests;
+			sourceTree = "<group>";
+		};
+		CE0F7BA21E3FAC3E00C44C86 /* LoginProviders */ = {
+			isa = PBXGroup;
+			children = (
+				CE0F7BA31E3FAC3E00C44C86 /* Facebook */,
+				CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */,
+			);
+			path = LoginProviders;
+			sourceTree = "<group>";
+		};
+		CE0F7BA31E3FAC3E00C44C86 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */,
+				CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */,
+			);
+			path = Facebook;
 			sourceTree = "<group>";
 		};
 		CE111DA01D4FA6A50083C99E /* Models */ = {
@@ -717,10 +733,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE111DD01D4FA7340083C99E /* LoginController.swift in Sources */,
-				BEB2EEDB1E2974F700F45BED /* LoginProvider.swift in Sources */,
 				CE111E021D4FA80E0083C99E /* TermsAndServicesController.swift in Sources */,
 				CE20AD691D53BB8C0039260B /* AuthenticationCoordinator.swift in Sources */,
-				BEB2EEDD1E29766C00F45BED /* FacebookLoginProvider.swift in Sources */,
 				CE111DC21D4FA70D0083C99E /* TextInputValidatorType.swift in Sources */,
 				CE111E191D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift in Sources */,
 				CE111DCF1D4FA7340083C99E /* LoginConfiguration.swift in Sources */,
@@ -733,6 +747,7 @@
 				CE111DAE1D4FA6FD0083C99E /* RecoverPasswordController.swift in Sources */,
 				CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */,
 				CE111DEB1D4FA7390083C99E /* SignupCredentialsValidator.swift in Sources */,
+				CE0F7BA81E3FAC3E00C44C86 /* FacebookLoginProvider.swift in Sources */,
 				CE111DE61D4FA7390083C99E /* SignupControllerDelegate.swift in Sources */,
 				CE111E171D4FCED70083C99E /* LoginControllerTransitionDelegate.swift in Sources */,
 				CE111DC11D4FA70D0083C99E /* LengthValidators.swift in Sources */,
@@ -743,8 +758,9 @@
 				CE111E101D4FA8980083C99E /* ColorPalette.swift in Sources */,
 				CE111E031D4FA80E0083C99E /* TermsAndServicesControllerDelegate.swift in Sources */,
 				CE111DD71D4FA7340083C99E /* LoginViewModel.swift in Sources */,
+				CE0F7BA91E3FAC3E00C44C86 /* LoginProvider.swift in Sources */,
 				CE111DC01D4FA70D0083C99E /* InlineValidator.swift in Sources */,
-				BEB2EED91E282A7B00F45BED /* FacebookLoginConfiguration.swift in Sources */,
+				CE0F7BA71E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift in Sources */,
 				CE111DBF1D4FA70D0083C99E /* EmailValidator.swift in Sources */,
 				CE5248821D468D8200B499CC /* Extensions.swift in Sources */,
 				CE111DD41D4FA7340083C99E /* LoginViewConfiguration.swift in Sources */,
