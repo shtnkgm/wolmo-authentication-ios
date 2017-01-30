@@ -42,7 +42,8 @@ public enum LoginProviderUserType {
 public protocol LoginProvider {
     
     /**
-        Signal that returns a user created with the LoginProvider.
+        Signal that sends the user created as a result of
+        the login triggered by the button in the LoginProvider.
      */
     var userSignal: Signal<LoginProviderUserType, NoError> { get }
     
@@ -50,9 +51,9 @@ public protocol LoginProvider {
         This is the view that should be used as the button for
         your login provider.
  
-        You should take care of settins this view up, that includes
+        You should take care of setting this view up. That includes
         adding the necessary actions that would perform the API calls
-        to use your provider.
+        to use the provider when tapped.
     */
     var button: UIView { get }
     
