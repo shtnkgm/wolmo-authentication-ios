@@ -5,7 +5,7 @@ WolMo - Authentication iOS
 [![Coverage Status](https://coveralls.io/repos/github/Wolox/wolmo-authentication-ios/badge.svg?branch=master)](https://coveralls.io/github/Wolox/wolmo-authentication-ios?branch=master)
 [![GitHub release](https://img.shields.io/github/release/Wolox/wolmo-authentication-ios.svg)](https://github.com/Wolox/wolmo-authentication-ios/releases)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![Swift 2.2.x](https://img.shields.io/badge/Swift-2.2.x-blue.svg)
+![Swift 3.x](https://img.shields.io/badge/Swift-3.x-blue.svg)
 
 **Wolmo - Authentication iOS** is an authentication framework for Swift, designed to take care of some basic steps present in almost every iOS app:
 
