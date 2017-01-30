@@ -21,7 +21,7 @@ run_tests ()
   fi
 
   destination=$(scheme_destination $1)
-  test_command="$test_command -destination $destination clean build test -configuration Debug"
+  test_command="$test_command -destination $destination clean test -configuration Debug"
   if type bundle > /dev/null && bundle show xcpretty > /dev/null
   then
     test_command="$test_command | bundle exec xcpretty -c"
@@ -32,6 +32,7 @@ run_tests ()
     fi
   fi
 
+  test_command="open -b com.apple.iphonesimulator && $test_command"
   echo ""
   echo " → Running tests for scheme '$1'"
   echo ""
@@ -78,10 +79,15 @@ then
   exit 1
 fi
 
-for scheme in $current_schemes
-do
-  run_tests $scheme
-done
+if [ -f fastlane/Scanfile ] || [ -f Scanfile ]
+then
+  bundle exec scan
+else
+  for scheme in $current_schemes
+  do
+    run_tests $scheme
+  done
+fi
 
 if [ -f "$PROJECT_NAME.podspec" ] && [ "$LINT_PODSPEC" == "yes" ]
 then
