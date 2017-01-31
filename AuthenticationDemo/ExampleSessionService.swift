@@ -61,7 +61,7 @@ public final class ExampleSessionService: SessionServiceType {
         let dispatchTime = DispatchTime.now() + 2.0
         switch userType {
         case .facebook(let fbUser):
-            let exampleUser = ExampleUser(email: (fbUser.email?.raw)!, password: "")
+            let exampleUser = ExampleUser(email: fbUser.email?.raw ?? "", password: "")
             return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)
         case .custom(let name, _):
             print("Signing up a user for service \(name) not supported")
