@@ -98,7 +98,7 @@ private extension SignupController {
     
     func bindUsernameElements() {
         if let usernameTextField = signupView.usernameTextField {
-            _viewModel.username <~ usernameTextField.reactive.textValues.map { $0 ?? "" }
+            _viewModel.username <~ usernameTextField.reactive.continuousTextValues.map { $0 ?? "" }
             _viewModel.usernameValidationErrors.signal.observeValues { [unowned self] errors in
                 if errors.isEmpty {
                     self._delegate.didPassUsernameValidation(in: self)
@@ -115,7 +115,7 @@ private extension SignupController {
     }
     
     func bindEmailElements() {
-        _viewModel.email <~ signupView.emailTextField.reactive.textValues.map { $0 ?? "" }
+        _viewModel.email <~ signupView.emailTextField.reactive.continuousTextValues.map { $0 ?? "" }
         _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassEmailValidation(in: self)

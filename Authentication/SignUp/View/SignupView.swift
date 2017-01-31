@@ -39,74 +39,32 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     internal var titleLabel: UILabel { return titleLabelOutlet }
     @IBOutlet weak var titleLabelOutlet: UILabel! { didSet { titleLabel.text = titleText } }
     
+// MARK: - Textfields and errors
     internal var usernameTextField: UITextField? { return usernameTextFieldOutlet }
     @IBOutlet weak var usernameTextFieldOutlet: UITextField! { didSet { usernameTextFieldOutlet.placeholder = usernamePlaceholderText } }
-    
-    @IBOutlet weak var usernameTextFieldViewOutlet: UIView! {
-        didSet {
-            usernameTextFieldViewOutlet.layer.borderWidth = 1
-            usernameTextFieldViewOutlet.layer.cornerRadius = 6.0
-        }
-    }
-    
     internal var usernameValidationMessageLabel: UILabel? { return usernameValidationMessageLabelOutlet }
     @IBOutlet weak var usernameValidationMessageLabelOutlet: UILabel! { didSet { usernameValidationMessageLabelOutlet.text = " " } }
-
-    @IBOutlet weak var usernameErrorsView: UIView!
-    @IBOutlet weak var usernameView: UIView!
-    @IBOutlet weak var usernameHeightConstraint: NSLayoutConstraint!
     
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! { didSet { emailTextFieldOutlet.placeholder = emailPlaceholderText } }
-    
-    @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
-        didSet {
-            emailTextFieldViewOutlet.layer.borderWidth = 1
-            emailTextFieldViewOutlet.layer.cornerRadius = 6.0
-        }
-    }
-    
     internal var emailValidationMessageLabel: UILabel? { return emailValidationMessageLabelOutlet }
     @IBOutlet weak var emailValidationMessageLabelOutlet: UILabel! { didSet { emailValidationMessageLabelOutlet.text = " " } }
     
-    @IBOutlet weak var emailErrorsView: UIView!
-    
     internal var passwordTextField: UITextField { return passwordTextFieldOutlet }
     @IBOutlet weak var passwordTextFieldOutlet: UITextField! { didSet { passwordTextFieldOutlet.placeholder = passwordPlaceholderText } }
-    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
-        didSet {
-            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
-            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
-        }
-    }
-    
     internal var passwordValidationMessageLabel: UILabel? { return passwordValidationMessageLabelOutlet }
     @IBOutlet weak var passwordValidationMessageLabelOutlet: UILabel! { didSet { passwordValidationMessageLabelOutlet.text = " " } }
-    
     internal var passwordVisibilityButton: UIButton? { return passwordVisibilityButtonOutlet }
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! { didSet { passwordVisibilityButtonOutlet.isHidden = true } }
-    
-    @IBOutlet weak var passwordErrorsView: UIView!
 
     internal var passwordConfirmTextField: UITextField? { return passwordConfirmTextFieldOutlet }
     @IBOutlet weak var passwordConfirmTextFieldOutlet: UITextField! { didSet { passwordConfirmTextFieldOutlet.placeholder = confirmPasswordPlaceholderText } }
-    @IBOutlet weak var pswdConfirmTextFieldAndButtonViewOutlet: UIView! {
-        didSet {
-            pswdConfirmTextFieldAndButtonViewOutlet.layer.borderWidth = 1
-            pswdConfirmTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
-        }
-    }
-    
     internal var passwordConfirmValidationMessageLabel: UILabel? { return pswdConfirmValidationMessageLabelOutlet }
     @IBOutlet weak var pswdConfirmValidationMessageLabelOutlet: UILabel! { didSet { pswdConfirmValidationMessageLabelOutlet.text = " " } }
-    
     internal var passwordConfirmVisibilityButton: UIButton? { return passwordConfirmVisibilityButtonOutlet }
     @IBOutlet weak var passwordConfirmVisibilityButtonOutlet: UIButton! { didSet { passwordConfirmVisibilityButtonOutlet.isHidden = true } }
     
-    @IBOutlet weak var passwordConfirmationErrorsView: UIView!
-    @IBOutlet weak var passwordConfirmationView: UIView!
-    @IBOutlet weak var passwordConfirmationHeightConstraint: NSLayoutConstraint!
-    
+// MARK: - signup buttons
     internal var signUpButton: UIButton { return signUpButtonOutlet }
     @IBOutlet weak var signUpButtonOutlet: UIButton! {
         didSet {
@@ -115,22 +73,10 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         }
     }
     
-    internal var termsAndServicesTextView: UITextView { return termsAndServicesTextViewOutlet }
-    @IBOutlet weak var termsAndServicesTextViewOutlet: UITextView!
-    
-    internal var loginLabel: UILabel? { return loginLabelOutlet }
-    @IBOutlet weak var loginLabelOutlet: UILabel! { didSet { loginLabelOutlet.text = loginLabelText } }
-    
-    internal var loginButton: UIButton { return loginButtonOutlet }
-    @IBOutlet weak var loginButtonOutlet: UIButton! { didSet { loginButtonOutlet.setUnderlined(title: loginButtonTitle) } }
-    
-    @IBOutlet weak var signUpOrView: UIView!
-    @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
-    
     internal var loginProviderButtons: [UIView] = [] {
         didSet {
             if loginProviderButtons.isEmpty {
-                signUpOrView.removeFromSuperview()
+                signupAndProvidersSeparator.isHidden = true
             }
             for providerButton in loginProviderButtons {
                 loginProviderButtonsStackView.addArrangedSubview(providerButton)
@@ -139,6 +85,58 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         }
     }
     
+// MARK: - Navigation buttons
+    internal var termsAndServicesTextView: UITextView { return termsAndServicesTextViewOutlet }
+    @IBOutlet weak var termsAndServicesTextViewOutlet: UITextView!
+    
+    internal var loginLabel: UILabel? { return loginLabelOutlet }
+    @IBOutlet weak var loginLabelOutlet: UILabel! { didSet { loginLabelOutlet.text = loginLabelText } }
+    
+    internal var loginButton: UIButton { return loginButtonOutlet }
+    @IBOutlet weak var loginButtonOutlet: UIButton! { didSet { loginButtonOutlet.setUnderlined(title: loginButtonTitle) } }
+
+// MARK: - Container views
+    @IBOutlet weak var usernameTextFieldViewOutlet: UIView! {
+        didSet {
+            usernameTextFieldViewOutlet.layer.borderWidth = 1
+            usernameTextFieldViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    @IBOutlet weak var usernameErrorsView: UIView!
+    @IBOutlet weak var usernameView: UIView!
+    @IBOutlet weak var usernameHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
+        didSet {
+            emailTextFieldViewOutlet.layer.borderWidth = 1
+            emailTextFieldViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    @IBOutlet weak var emailErrorsView: UIView!
+    
+    @IBOutlet weak var passwordTextFieldAndButtonViewOutlet: UIView! {
+        didSet {
+            passwordTextFieldAndButtonViewOutlet.layer.borderWidth = 1
+            passwordTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    @IBOutlet weak var passwordErrorsView: UIView!
+    
+    @IBOutlet weak var pswdConfirmTextFieldAndButtonViewOutlet: UIView! {
+        didSet {
+            pswdConfirmTextFieldAndButtonViewOutlet.layer.borderWidth = 1
+            pswdConfirmTextFieldAndButtonViewOutlet.layer.cornerRadius = 6.0
+        }
+    }
+    @IBOutlet weak var passwordConfirmationErrorsView: UIView!
+    @IBOutlet weak var passwordConfirmationView: UIView!
+    @IBOutlet weak var passwordConfirmationHeightConstraint: NSLayoutConstraint!
+    
+    
+    @IBOutlet weak var signupAndProvidersSeparator: UIView!
+    @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
+    
+// MARK: - SignupViewType setters
     internal var usernameTextFieldValid = false { didSet { usernameTextFieldValidWasSet() } }
     internal var usernameTextFieldSelected = false { didSet { usernameTextFieldSelectedWasSet() } }
     
@@ -340,10 +338,6 @@ fileprivate extension SignupView {
         let colorPalette = delegate.colorPalette
         let color = signUpButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
         signUpButton.backgroundColor = color
-        usernameErrorsView?.isHidden = true
-        emailErrorsView.isHidden = true
-        passwordErrorsView.isHidden = true
-        passwordConfirmationErrorsView?.isHidden = true
     }
     
 }

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C68" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -497,7 +497,7 @@
                 <outlet property="pswdConfirmTextFieldAndButtonViewOutlet" destination="F6s-RQ-22R" id="v0v-2q-Z26"/>
                 <outlet property="pswdConfirmValidationMessageLabelOutlet" destination="eY2-b6-On0" id="5tI-wo-a38"/>
                 <outlet property="signUpButtonOutlet" destination="YZp-rK-32z" id="2jr-Vi-Rtp"/>
-                <outlet property="signUpOrView" destination="CXN-iN-GcS" id="r8g-Cz-k83"/>
+                <outlet property="signupAndProvidersSeparator" destination="CXN-iN-GcS" id="kyF-TZ-pyw"/>
                 <outlet property="termsAndServicesTextViewOutlet" destination="mcI-Oe-1fg" id="HaC-8s-Dqn"/>
                 <outlet property="titleLabelOutlet" destination="Dtd-MK-bQ0" id="v4q-H7-B6l"/>
                 <outlet property="usernameErrorsView" destination="uRL-5A-Qkd" id="8Ul-M3-gpo"/>
