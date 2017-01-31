@@ -75,7 +75,7 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
     public lazy var button: UIView = self.createButton()
     private let observer: Observer<LoginProviderUserType, NoError>
     
-    init() {
+    public init() {
         (userSignal, observer) = Signal.pipe()
     }
     

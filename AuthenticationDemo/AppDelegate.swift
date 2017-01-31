@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
         let componentsFactory = AuthenticationComponentsFactory(logo: UIImage(named: "default")!,
-                                                                termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!) {
+                                                                termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
+                                                                loginProviders: [FacebookLoginProvider(), FacebookLoginProvider(), FacebookLoginProvider()]) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             return storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }

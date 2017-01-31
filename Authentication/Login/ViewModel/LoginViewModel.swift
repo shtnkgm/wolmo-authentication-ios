@@ -83,12 +83,9 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         
-        let credentialsValidationResults = Signal.combineLatest(
-            emailValidationResult.map { $0.isValid },
-            passwordValidationResult.map { $0.isValid })
-        _credentialsAreValid = Property(
-            initial: false,
-            then: credentialsValidationResults.map { $0 && $1 })
+        let credentialsValidationResults = Signal.combineLatest(emailValidationResult.map { $0.isValid },
+                                                                passwordValidationResult.map { $0.isValid })
+        _credentialsAreValid = Property(initial: false, then: credentialsValidationResults.map { $0 && $1 })
         
         emailValidationErrors = Property(initial: [], then: emailValidationResult.map { $0.errors })
         passwordValidationErrors = Property(initial: [], then: passwordValidationResult.map { $0.errors })

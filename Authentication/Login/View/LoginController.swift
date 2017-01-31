@@ -95,7 +95,7 @@ fileprivate extension LoginController {
     }
     
     private func bindEmailElements() {
-        _viewModel.email <~ loginView.emailTextField.reactive.textValues.map { $0 ?? "" }
+        _viewModel.email <~ loginView.emailTextField.reactive.continuousTextValues.map { $0 ?? "" }
         _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassEmailValidation(in: self)
@@ -111,7 +111,7 @@ fileprivate extension LoginController {
     }
     
     private func bindPasswordElements() {
-        _viewModel.password <~ loginView.passwordTextField.reactive.textValues
+        _viewModel.password <~ loginView.passwordTextField.reactive.continuousTextValues
             .map { $0 ?? "" }
             .on(value: { [unowned self] text in
             self.loginView.passwordVisibilityButton?.isHidden = text.isEmpty

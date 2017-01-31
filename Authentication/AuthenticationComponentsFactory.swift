@@ -24,6 +24,7 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     private let _mainControllerFactory: () -> UIViewController
     private let _loginConfiguration: LoginViewConfigurationType
     private let _signupConfiguration: SignupViewConfigurationType
+    private let _loginProviders: [LoginProvider]
     
     /**
         Initializes the AuthenticationComponentsFactory
@@ -37,13 +38,16 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
             - mainControllerFactory: main view controller factory
                 method to trigger when asked for the main view
                 controller.
+            - loginProviders: alternative providers for login service.
     */
     public init(loginConfiguration: LoginViewConfigurationType,
                 signupConfiguration: SignupViewConfigurationType,
+                loginProviders: [LoginProvider] = [],
                 mainControllerFactory: @escaping () -> UIViewController) {
         _mainControllerFactory = mainControllerFactory
         _loginConfiguration = loginConfiguration
         _signupConfiguration = signupConfiguration
+        _loginProviders = loginProviders
     }
     
     /**
@@ -59,12 +63,15 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
              - mainControllerFactory: main view controller factory
                 method to trigger when asked for the main view
                 controller.
+            - loginProviders: alternative providers for login service.
      */
     public init(logo: UIImage? = .none,
                 termsAndServicesURL: URL,
+                loginProviders: [LoginProvider] = [],
                 mainControllerFactory: @escaping () -> UIViewController) {
         self.init(loginConfiguration: LoginViewConfiguration(logoImage: logo),
                   signupConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL),
+                  loginProviders: loginProviders,
                   mainControllerFactory: mainControllerFactory)
     }
     
@@ -77,7 +84,7 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     }
     
     public func createLoginProviders() -> [LoginProvider] {
-        return []
+        return _loginProviders
     }
     
     public func createSignupViewConfiguration() -> SignupViewConfigurationType {

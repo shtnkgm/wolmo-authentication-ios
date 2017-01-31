@@ -43,6 +43,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     internal var logoImageView: UIImageView { return logoImageViewOutlet }
     @IBOutlet weak var logoImageViewOutlet: UIImageView!
     
+// MARK: - Textfields and errors
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
         didSet { emailTextFieldOutlet.placeholder = emailPlaceholderText }
@@ -68,7 +69,8 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
         didSet { passwordVisibilityButtonOutlet.isHidden = true }
     }
-    
+
+// MARK: - login buttons
     internal var logInButton: UIButton { return logInButtonOutlet }
     @IBOutlet weak var logInButtonOutlet: UIButton! {
         didSet {
@@ -77,8 +79,24 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    @IBOutlet weak var toSignupLabel: UILabel! {
-        didSet { toSignupLabel.text = signupLabelText }
+    internal var loginProviderButtons: [UIView] = [] {
+        didSet {
+            if loginProviderButtons.isEmpty {
+                loginAndLoginProvidersSeparator.isHidden = true
+            }
+            for providerButton in loginProviderButtons {
+                //We have an empty view at the bottom for spacing issues in view.
+                let index = loginProviderButtonsStackView.arrangedSubviews.count - 1
+                loginProviderButtonsStackView.insertArrangedSubview(providerButton, at: index)
+                providerButton.heightAnchor.constraint(equalTo: logInButton.heightAnchor).isActive = true
+            }
+        }
+    }
+    
+// MARK: - Navigation buttons
+    internal var signupLabel: UILabel? { return signupLabelOutlet }
+    @IBOutlet weak var signupLabelOutlet: UILabel! {
+        didSet { signupLabelOutlet.text = signupLabelText }
     }
     
     internal var signupButton: UIButton { return signupButtonOutlet }
@@ -93,7 +111,8 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
             recoverPasswordButtonOutlet.isHidden = true
         }
     }
-    
+
+// MARK: - Container views
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
         didSet {
             emailTextFieldViewOutlet.layer.borderWidth = 1
@@ -110,21 +129,11 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     @IBOutlet weak var emailErrorsView: UIView!
     @IBOutlet weak var passwordErrorsView: UIView!
-    @IBOutlet weak var loginViewOrView: UIView!
+    
+    @IBOutlet weak var loginAndLoginProvidersSeparator: UIView!
     @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
     
-    internal var loginProviderButtons: [UIView] = [] {
-        didSet {
-            if loginProviderButtons.isEmpty {
-                loginViewOrView.removeFromSuperview()
-            }
-            for providerButton in loginProviderButtons {
-                loginProviderButtonsStackView.addArrangedSubview(providerButton)
-                providerButton.heightAnchor.constraint(equalTo: logInButton.heightAnchor).isActive = true
-            }
-        }
-    }
-
+// MARK: - LoginViewType setters
     internal var emailTextFieldValid = true {
         didSet { emailTextFieldValidWasSet() }
     }
@@ -233,8 +242,6 @@ private extension LoginView {
         let colorPalette = delegate.colorPalette
         let color = logInButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
         logInButton.backgroundColor = color
-        emailErrorsView.isHidden = true
-        passwordErrorsView.isHidden = true
     }
     
     func passwordVisibleWasSet() {
