@@ -57,11 +57,4 @@ public protocol LoginProvider {
     */
     var button: UIView { get }
     
-    /**
-        Make any necessary set up to your provider here.
- 
-        This function is called when setting up the view.
-    */
-    func configure()
-    
 }

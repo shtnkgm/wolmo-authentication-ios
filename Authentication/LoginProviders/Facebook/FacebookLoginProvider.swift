@@ -73,7 +73,7 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
     public var configuration: FacebookLoginConfiguration = FacebookLoginConfiguration()
     public let userSignal: Signal<LoginProviderUserType, NoError>
     public lazy var button: UIView = self.createButton()
-    private let observer: Observer<LoginProviderUserType, NoError>
+    fileprivate let observer: Observer<LoginProviderUserType, NoError>
     
     public init() {
         (userSignal, observer) = Signal.pipe()
@@ -82,8 +82,6 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
     deinit {
         observer.sendCompleted()
     }
-    
-    public func configure() {}
     
     public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         switch result {
@@ -97,8 +95,12 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
     }
     
     public func loginButtonDidLogOut(_ loginButton: LoginButton) {}
+    
+}
 
-    private func createButton() -> UIView {
+fileprivate extension FacebookLoginProvider {
+
+    fileprivate func createButton() -> UIView {
         let button: LoginButton
         if configuration.publishPermissions.isEmpty {
             button = LoginButton(readPermissions: configuration.readPermissions)
@@ -110,7 +112,7 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
         return button
     }
     
-    private func createFacebookUser() {
+    fileprivate func createFacebookUser() {
         let fbRequest = FacebookProfileRequest()
         let connection = GraphRequestConnection()
         connection.add(fbRequest) { [unowned self] response, result in

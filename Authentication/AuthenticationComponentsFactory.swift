@@ -117,10 +117,9 @@ public protocol LoginComponentsFactory {
             with the session service.
             By default, the default LoginViewModel configured with the arguments received.
      */
-    func createLoginViewModel<SessionService: SessionServiceType>(
-            withSessionService sessionService: SessionService,
-            credentialsValidator: LoginCredentialsValidator,
-            loginProviders: [LoginProvider]) -> LoginViewModelType
+    func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
+                                                                  credentialsValidator: LoginCredentialsValidator,
+                                                                  loginProviders: [LoginProvider]) -> LoginViewModelType
     
     /**
         Creates the LoginViewConfiguration to use for setting
@@ -198,13 +197,9 @@ public extension LoginComponentsFactory {
         return LoginCredentialsValidator()
     }
     
-    public func createLoginViewModel<SessionService: SessionServiceType>(
-        withSessionService sessionService: SessionService,
-        credentialsValidator: LoginCredentialsValidator,
-        loginProviders: [LoginProvider]) -> LoginViewModelType {
-            for provider in loginProviders {
-                provider.configure()
-            }
+    public func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
+                                                                         credentialsValidator: LoginCredentialsValidator,
+                                                                         loginProviders: [LoginProvider]) -> LoginViewModelType {
             let providerUserSignals = loginProviders.map { $0.userSignal }
             return LoginViewModel(sessionService: sessionService,
                                   credentialsValidator: createLogInCredentialsValidator(),
@@ -349,12 +344,9 @@ extension SignupComponentsFactory {
     }
     
     public func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
-                                      credentialsValidator: SignupCredentialsValidator,
-                                      configuration: SignupViewConfigurationType,
-                                      loginProviders: [LoginProvider]) -> SignupViewModelType {
-            for provider in loginProviders {
-                provider.configure()
-            }
+                                                                          credentialsValidator: SignupCredentialsValidator,
+                                                                          configuration: SignupViewConfigurationType,
+                                                                          loginProviders: [LoginProvider]) -> SignupViewModelType {
             let providerUserSignals = loginProviders.map { $0.userSignal }
             return SignupViewModel(sessionService: sessionService,
                                    credentialsValidator: credentialsValidator,
