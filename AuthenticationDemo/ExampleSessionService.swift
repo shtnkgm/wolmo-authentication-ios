@@ -57,9 +57,9 @@ public final class ExampleSessionService: SessionServiceType {
         }
     }
     
-    public func logIn(withUserType userType: LoginProviderUserType) -> SignalProducer<ExampleUser, SessionServiceError> {
+    public func logIn(withUser user: LoginProviderUserType) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = DispatchTime.now() + 2.0
-        switch userType {
+        switch user {
         case .facebook(let fbUser):
             let exampleUser = ExampleUser(email: fbUser.email?.raw ?? "", password: "")
             return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)

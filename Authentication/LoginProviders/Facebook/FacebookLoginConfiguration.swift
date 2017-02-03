@@ -32,7 +32,7 @@ public final class FacebookLoginConfiguration: LoginProviderConfiguration {
         by Facebook.
      
         - Warning: If your app asks for more than the default readPermissions,
-            Facebook must review the app before releasing it.
+            Facebook must review the app before you release it.
      
         - Parameters:
             - readPermissions: Permissions that define which read information

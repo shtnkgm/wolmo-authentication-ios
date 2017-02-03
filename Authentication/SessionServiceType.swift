@@ -62,7 +62,11 @@ public protocol SessionServiceType {
      the FacebookLoginProvider.
      
      Be aware that in this method you must take care of creating
-     a user of the `User` type from the userType passed as argument.
+     a user of the `User` associatedtype from the user passed as argument.
+     
+     - Parameters:
+        - user: User created by a LoginProvider service when its own
+            login was succesful.
      
      - Returns: A SignalProducer that can send the User logged in
      or the SessionServiceError if not.
@@ -74,7 +78,7 @@ public protocol SessionServiceType {
      must take care of:
         sending the error to the observer.
      */
-    func logIn(withUserType userType: LoginProviderUserType) -> SignalProducer<User, SessionServiceError>
+    func logIn(withUser user: LoginProviderUserType) -> SignalProducer<User, SessionServiceError>
     
     /**
          This method takes care of validating and signing up.
