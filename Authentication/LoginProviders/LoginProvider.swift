@@ -18,23 +18,47 @@ import enum Result.NoError
 public protocol LoginProviderUser {}
 
 /**
-    Protocol that all login provider configurations
-    should implement.
- */
-public protocol LoginProviderConfiguration {}
-
-/**
-    This enum lists all the possible user types
-    login providers can return.
+ This enum lists all the possible user types
+ login providers can return.
  
-    If a service you plan to use is not listed,
-    you may use `custom` as your user type, and
-    name it.
+ If a service you plan to use is not listed,
+ you may use `custom` as your user type, and
+ name it.
  */
 public enum LoginProviderUserType {
     case facebook(user: FacebookLoginProviderUser)
     case custom(name: String, user: LoginProviderUser)
 }
+
+public protocol LoginProviderError: Error {
+
+    /**
+         Message to show the user to describe
+         the error.
+         
+         - warning: This message must be localized to the
+         current language on the device.
+     */
+    var localizedMessage: String { get }
+    
+}
+
+/**
+     Protocol that all users returned by
+     login providers should implement.
+ */
+public enum LoginProviderErrorType: Error {
+    case facebook(error: FacebookLoginProviderError)
+    case custom(name: String, user: LoginProviderError)
+}
+
+/**
+    Protocol that all login provider configurations
+    should implement.
+ */
+public protocol LoginProviderConfiguration {}
+
+
 
 /**
     Protocol that all LoginProviders must implement.
@@ -42,10 +66,23 @@ public enum LoginProviderUserType {
 public protocol LoginProvider {
     
     /**
-        Signal that sends the user created as a result of
-        the login triggered by the button in the LoginProvider.
+        Name to identify the provider in the process.
+        
+        It will be used for login provider user and error types.
+    */
+    static var name: String { get }
+    
+    /**
+         Signal that sends the user created as a result of
+         the login triggered by the button in the LoginProvider.
      */
     var userSignal: Signal<LoginProviderUserType, NoError> { get }
+    
+    /**
+         Signal that sends the errors caught as a result of
+         the login triggered by the button in the LoginProvider.
+     */
+    var errorSignal: Signal<LoginProviderErrorType, NoError> { get }
     
     /**
         This is the view that should be used as the button for

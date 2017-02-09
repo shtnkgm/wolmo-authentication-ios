@@ -15,11 +15,15 @@ import enum Result.NoError
      Represents any possible error that may happen
      in the session service through the authentication
      process.
+ 
+     It includes and wraps up any error that may arise
+     from the login providers
 */
 public enum SessionServiceError: Error {
     case invalidLogInCredentials(NSError?)
     case invalidSignUpCredentials(NSError?)
     case networkError(NSError)
+    case loginProviderError(name: String, error: LoginProviderError)
 }
 
 /**
@@ -112,6 +116,8 @@ public extension SessionServiceError {
             return "login-error.invalid-credentials.message".frameworkLocalized + ". " + (error?.localizedDescription ?? "")
         case .networkError(let error):
             return "network-error.message".frameworkLocalized + ". " + error.localizedDescription
+        case let .loginProviderError(_, error):
+            return error.localizedMessage
         }
     }
     

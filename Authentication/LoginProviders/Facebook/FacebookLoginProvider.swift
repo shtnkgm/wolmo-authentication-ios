@@ -65,11 +65,28 @@ public struct FacebookLoginProviderUser: LoginProviderUser {
     }
 }
 
+//TODO:
+public struct FacebookLoginProviderError: Error {
+    
+    let facebookError: Error
+    
+    var localizedMessage: String {
+        return facebookError.localizedDescription
+    }
+    
+}
+
 /**
     LoginProvider for Facebook Login.
  */
 public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
     
+    //TODO: Add error signal
+    public var errorSignal: Signal<LoginProviderErrorType, NoError> {
+        return Signal.empty
+    }
+
+    public static let name = "Facebook"
     public var configuration: FacebookLoginConfiguration = FacebookLoginConfiguration()
     public let userSignal: Signal<LoginProviderUserType, NoError>
     public lazy var button: UIView = self.createButton()

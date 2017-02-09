@@ -143,7 +143,7 @@ fileprivate extension SignupViewModel {
     
     fileprivate func initializeSignUpSuccesfulSignal() -> Signal<(), NoError> {
         let loggedInWithProviderUserSignal = self.logInProviderUserSignal.flatMap(.latest) { [unowned self] loginProviderUserType -> SignalProducer<User, SessionServiceError> in
-            return self._sessionService.logIn(withUserType: loginProviderUserType)
+            return self._sessionService.logIn(withUser: loginProviderUserType)
         }
         
         let successfullyLoggedInWithProviderUserSignal = loggedInWithProviderUserSignal
