@@ -54,7 +54,7 @@ public protocol LoginControllerDelegate {
         - Parameter controller: LoginController where the event is happening.
         - Parameter with: error resulting from the log in attempt.
      */
-    func didLogIn(in controller: LoginController, with error: SessionServiceError)
+    func didFailLogIn(in controller: LoginController, with error: SessionServiceError)
     
     /**
         Function called when any new email introduced is valid,
@@ -117,7 +117,7 @@ extension LoginControllerDelegate {
         app.isNetworkActivityIndicatorVisible = false
     }
     
-    public func didLogIn(in controller: LoginController, with error: SessionServiceError) {
+    public func didFailLogIn(in controller: LoginController, with error: SessionServiceError) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = false
         if let errorLabel = controller.loginView.logInErrorLabel {

@@ -1,5 +1,5 @@
 //
-//  SignupConfiguration.swift
+//  SignupControllerConfiguration.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 7/15/16.

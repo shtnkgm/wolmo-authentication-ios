@@ -58,8 +58,6 @@ public enum LoginProviderErrorType: Error {
  */
 public protocol LoginProviderConfiguration {}
 
-
-
 /**
     Protocol that all LoginProviders must implement.
 */

@@ -90,7 +90,7 @@ fileprivate extension LoginController {
             self.loginView.logInButtonPressed = executing
         }
         
-        _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didLogIn(in: self, with: $0) }
+        _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didFailLogIn(in: self, with: $0) }
         _viewModel.logInSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onLoginSuccess(from: self) }
     }
     

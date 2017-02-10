@@ -92,7 +92,7 @@ private extension SignupController {
             self.signupView.signUpButtonPressed = executing
         }
         
-        _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didSignUp(in: self, with: $0) }
+        _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didFailSignUp(in: self, with: $0) }
         _viewModel.signUpSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onSignupSuccess(from: self) }
     }
     

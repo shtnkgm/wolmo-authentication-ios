@@ -45,7 +45,8 @@ internal struct FacebookProfileRequest: GraphRequestProtocol {
     Except for the access token, all other properties are optional
     because they are requested in a separate request after the login
     is completed. If this extra request fails, the only information the user
-    will contain is its corresponding AccessToken.
+    will contain is its corresponding AccessToken, which is the only thing
+    needed for making any additional request you want.
  */
 public struct FacebookLoginProviderUser: LoginProviderUser {
     public let email: Email?
@@ -65,12 +66,17 @@ public struct FacebookLoginProviderUser: LoginProviderUser {
     }
 }
 
-//TODO:
+/**
+    Facebook Error that may arise when trying to login
+    with FacebookLoginProvider.
+ 
+    It wraps the Error Facebook returns from the request.
+ */
 public struct FacebookLoginProviderError: Error {
     
     let facebookError: Error
     
-    var localizedMessage: String {
+    public var localizedMessage: String {
         return facebookError.localizedDescription
     }
     
@@ -80,34 +86,36 @@ public struct FacebookLoginProviderError: Error {
     LoginProvider for Facebook Login.
  */
 public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
-    
-    //TODO: Add error signal
-    public var errorSignal: Signal<LoginProviderErrorType, NoError> {
-        return Signal.empty
-    }
 
     public static let name = "Facebook"
+
     public var configuration: FacebookLoginConfiguration = FacebookLoginConfiguration()
-    public let userSignal: Signal<LoginProviderUserType, NoError>
     public lazy var button: UIView = self.createButton()
-    fileprivate let observer: Observer<LoginProviderUserType, NoError>
+    public let userSignal: Signal<LoginProviderUserType, NoError>
+    public let errorSignal: Signal<LoginProviderErrorType, NoError>
+    
+    fileprivate let userObserver: Observer<LoginProviderUserType, NoError>
+    fileprivate let errorObserver: Observer<LoginProviderErrorType, NoError>
     
     public init() {
-        (userSignal, observer) = Signal.pipe()
+        (userSignal, userObserver) = Signal.pipe()
+        (errorSignal, errorObserver) = Signal.pipe()
     }
     
     deinit {
-        observer.sendCompleted()
+        userObserver.sendCompleted()
+        errorObserver.sendCompleted()
     }
     
     public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         switch result {
         case .cancelled:
-            print("User cancelled Facebook login")
+            NSLog("User cancelled Facebook login")
         case .failed(let error):
-            print(error)
+            let facebookError = FacebookLoginProviderError(facebookError: error)
+            errorObserver.send(value: .facebook(error: facebookError))
         case .success(_, _, _):
-            createFacebookUser()
+            createFacebookUser(token: AccessToken.current!)
         }
     }
     
@@ -129,7 +137,7 @@ fileprivate extension FacebookLoginProvider {
         return button
     }
     
-    fileprivate func createFacebookUser() {
+    fileprivate func createFacebookUser(token: AccessToken) {
         let fbRequest = FacebookProfileRequest()
         let connection = GraphRequestConnection()
         connection.add(fbRequest) { [unowned self] response, result in
@@ -138,16 +146,15 @@ fileprivate extension FacebookLoginProvider {
                 let user = FacebookLoginProviderUser(email: response.email,
                                                      name: response.name,
                                                      userId: response.userId,
-                                                     accessToken: AccessToken.current!)
-                self.observer.send(value: LoginProviderUserType.facebook(user: user))
+                                                     accessToken: token)
+                self.userObserver.send(value: LoginProviderUserType.facebook(user: user))
             case .failed(let error):
-                //NSLog("facebook-login-error.failed-extra-info-request.log-message".frameworkLocalized)
-                print("Graph Request Failed: \(error) \nIf you need this info you should request it again.")
+                NSLog("Graph Request Failed: \(error) \nIf you need this info you should request it again.")
                 let user = FacebookLoginProviderUser(email: .none,
                                                      name: .none,
                                                      userId: .none,
-                                                     accessToken: AccessToken.current!)
-                self.observer.send(value: LoginProviderUserType.facebook(user: user))
+                                                     accessToken: token)
+                self.userObserver.send(value: LoginProviderUserType.facebook(user: user))
             }
         }
         connection.start()

@@ -1,5 +1,5 @@
 //
-//  LoginConfiguration.swift
+//  LoginControllerConfiguration.swift
 //  Authentication
 //
 //  Created by Daniela Riesgo on 3/23/16.
