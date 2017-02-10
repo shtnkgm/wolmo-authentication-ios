@@ -9,7 +9,7 @@
 import Foundation
 import ReactiveCocoa
 import ReactiveSwift
-import enum Result.NoError
+import Result
 
 /**
     Protocol for login view models.
@@ -29,12 +29,19 @@ public protocol LoginViewModelType {
     var passwordVisible: MutableProperty<Bool> { get }
     var togglePasswordVisibility: CocoaAction<UIButton> { get }
     
-    /** Log In action considerations: action, executing state and errors. */
+    /** This action is for the login button to handle login 
+       through completed information in the login screen
+       (email, pasword, etc). */
     var logInCocoaAction: CocoaAction<UIButton> { get }
-    var logInErrors: Signal<SessionServiceError, NoError> { get }
+    /** This Signal must take into account any login triggered,
+       even the ones from LoginProviders. */
     var logInExecuting: Signal<Bool, NoError> { get }
+    /** This Signal must take into account any login triggered,
+       even the ones from LoginProviders. */
     var logInSuccessful: Signal<(), NoError> { get }
-    var logInProviderUserSignal: Signal<LoginProviderUserType, NoError> { get }
+    /** This Signal must take into account any login error risen,
+       even the ones from LoginProviders. */
+    var logInErrors: Signal<SessionServiceError, NoError> { get }
     
 }
 
@@ -56,14 +63,15 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     public let passwordVisible = MutableProperty(false)
     
     public var logInCocoaAction: CocoaAction<UIButton> { return CocoaAction(_logIn) }
-    public var logInErrors: Signal<SessionServiceError, NoError> { return _logIn.errors }
-    public var logInExecuting: Signal<Bool, NoError> { return _logIn.isExecuting.signal }
+    public private(set) lazy var logInErrors: Signal<SessionServiceError, NoError> = self.initializeLoginErrorsSignal()
+    public private(set) lazy var logInExecuting: Signal<Bool, NoError> = self.initializeLoginExecutingSignal()
     public private(set) lazy var logInSuccessful: Signal<(), NoError> = self.initializeLogInSuccesfulSignal()
-    public let logInProviderUserSignal: Signal<LoginProviderUserType, NoError>
     
     public var togglePasswordVisibility: CocoaAction<UIButton> { return CocoaAction(_togglePasswordVisibility) }
     
     fileprivate lazy var _logIn: Action<(), User, SessionServiceError> = self.initializeLogInAction()
+    fileprivate let _logInProvidersUserSignal: Signal<LoginProviderUserType, NoError>
+    fileprivate lazy var _logInProvidersFinalUserSignal: Signal<Result<User, SessionServiceError>, NoError> = self.initializeLogInUserSignal()
     
     private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
@@ -80,6 +88,7 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
                   credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator(),
                   providerUserSignals: [Signal<LoginProviderUserType, NoError>] = []) {
         _sessionService = sessionService
+        
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
         let passwordValidationResult = password.signal.map(credentialsValidator.passwordValidator.validate)
         
@@ -89,23 +98,109 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
         
         emailValidationErrors = Property(initial: [], then: emailValidationResult.map { $0.errors })
         passwordValidationErrors = Property(initial: [], then: passwordValidationResult.map { $0.errors })
-        logInProviderUserSignal = Signal.merge(providerUserSignals)
+        
+        _logInProvidersUserSignal = Signal.merge(providerUserSignals)
     }
     
 }
 
+//---------------------------------------
+// (todo) Extract to WolmoCore
+
+extension SignalProducer {
+    
+    func toResultSignalProducer() -> SignalProducer<Result<Value, Error>, NoError> {
+        return map { Result<Value, Error>.success($0) }
+            .flatMapError { error -> SignalProducer<Result<Value, Error>, NoError> in
+                let errorValue = Result<Value, Error>.failure(error)
+                return SignalProducer<Result<Value, Error>, NoError>(value: errorValue)
+        }
+    }
+    
+}
+
+extension SignalProducer where Value: ResultProtocol {
+    
+    func filterValues() -> SignalProducer<Value.Value, Error> {
+        return filter {
+            if let _ = $0.value {
+                return true
+            }
+            return false
+        }.map { $0.value! }
+    }
+    
+    func filterErrors() -> SignalProducer<Value.Error, Error> {
+        return filter {
+            if let _ = $0.error {
+                return true
+            }
+            return false
+        }.map { $0.error! }
+    }
+    
+}
+
+extension Signal where Value: ResultProtocol {
+    
+    func filterValues() -> Signal<Value.Value, Error> {
+        return filter {
+            if let _ = $0.value {
+                return true
+            }
+            return false
+        }.map { $0.value! }
+    }
+    
+    func filterErrors() -> Signal<Value.Error, Error> {
+        return filter {
+            if let _ = $0.error {
+                return true
+            }
+            return false
+        }.map { $0.error! }
+    }
+    
+}
+
+extension Signal {
+    
+    func toResultSignal() -> Signal<Result<Value, Error>, NoError> {
+        return map { Result<Value, Error>.success($0) }
+            .flatMapError { error -> SignalProducer<Result<Value, Error>, NoError> in
+                let errorValue = Result<Value, Error>.failure(error)
+                return SignalProducer<Result<Value, Error>, NoError>(value: errorValue)
+        }
+    }
+    
+}
+
+//-------------------
+
 fileprivate extension LoginViewModel {
     
-    fileprivate func initializeLogInSuccesfulSignal() -> Signal<Void, NoError> {
-        let loggedInWithProviderUserSignal = self.logInProviderUserSignal.flatMap(.latest) { [unowned self] loginProviderUserType -> SignalProducer<User, SessionServiceError> in
-            return self._sessionService.logIn(withUser: loginProviderUserType)
+    fileprivate func initializeLogInUserSignal() -> Signal<Result<User, SessionServiceError>, NoError> {
+        return _logInProvidersUserSignal.flatMap(.latest) {
+            [unowned self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
+                return self._sessionService.logIn(withUser: loginProviderUserType).toResultSignalProducer()
         }
-        
-        let successfullyLoggedInWithProviderUserSignal = loggedInWithProviderUserSignal
-            .flatMapError { _ in return SignalProducer<User, NoError>.empty }
-            .map { _ in () }
-        let successfullyLoggedInWithMailSignal = self._logIn.values.map { _ in () }
-        return Signal.merge([successfullyLoggedInWithProviderUserSignal, successfullyLoggedInWithMailSignal])
+    }
+    
+    fileprivate func initializeLogInSuccesfulSignal() -> Signal<Void, NoError> {
+        let successfullyLoggedInWithProvidersSignal = _logInProvidersFinalUserSignal.filterValues().map { _ in () }
+        let successfullyLoggedInWithMailSignal = _logIn.values.map { _ in () }
+        return Signal.merge([successfullyLoggedInWithProvidersSignal, successfullyLoggedInWithMailSignal])
+    }
+    
+    fileprivate func initializeLoginErrorsSignal() -> Signal<SessionServiceError, NoError> {
+        let loginWithMailErrors = _logIn.errors
+        let loginWithProvidersErrors = _logInProvidersFinalUserSignal.filterErrors()
+        return Signal.merge([loginWithMailErrors, loginWithProvidersErrors])
+    }
+    
+    fileprivate func initializeLoginExecutingSignal() -> Signal<Bool, NoError> {
+        //(todo) Add providers somehow
+        return _logIn.isExecuting.signal
     }
     
     fileprivate func initializeLogInAction() -> Action<(), User, SessionServiceError> {
