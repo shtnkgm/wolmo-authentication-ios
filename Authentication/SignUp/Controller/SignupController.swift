@@ -42,7 +42,7 @@ public final class SignupController: UIViewController {
         _viewModel = configuration.viewModel
         _signupViewFactory = configuration.viewFactory
         _transitionDelegate = configuration.transitionDelegate
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: .none, bundle: .none)
         addKeyboardObservers()
     }
 

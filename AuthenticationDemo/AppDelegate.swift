@@ -19,10 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
+        let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
+                                                          showLoginProviders: false)
         let componentsFactory = AuthenticationComponentsFactory(logo: UIImage(named: "default")!,
-                                                                termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
-                                                                loginProviders: [FacebookLoginProvider(), FacebookLoginProvider(), FacebookLoginProvider()]) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                                                signupConfiguration: signupConfiguration,
+                                                                loginProviders: [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]) {
+            let storyboard = UIStoryboard(name: "Main", bundle: .none)
             return storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }
         authenticationCoordinator = AuthenticationCoordinator(sessionService: exampleSessionService,

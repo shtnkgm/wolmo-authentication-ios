@@ -88,6 +88,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
                 //We have an empty view at the bottom for spacing issues in view.
                 let index = loginProviderButtonsStackView.arrangedSubviews.count - 1
                 loginProviderButtonsStackView.insertArrangedSubview(providerButton, at: index)
+                providerButton.translatesAutoresizingMaskIntoConstraints = false
                 providerButton.heightAnchor.constraint(equalTo: logInButton.heightAnchor).isActive = true
             }
         }

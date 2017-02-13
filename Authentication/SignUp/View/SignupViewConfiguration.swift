@@ -22,6 +22,8 @@ public protocol SignupViewConfigurationType {
     var usernameEnabled: Bool { get }
     var passwordConfirmationEnabled: Bool { get }
     
+    var showLoginProviders: Bool { get }
+    
 }
 
 /**
@@ -38,17 +40,20 @@ public struct SignupViewConfiguration: SignupViewConfigurationType {
     public let termsAndServicesURL: URL
     public let usernameEnabled: Bool
     public let passwordConfirmationEnabled: Bool
+    public let showLoginProviders: Bool
     
     public init(termsAndServicesURL: URL,
                 colorPalette: ColorPaletteType = DefaultColorPalette(),
                 fontPalette: FontPaletteType = DefaultFontPalette(),
                 usernameEnabled: Bool = false,
-                passwordConfirmationEnabled: Bool = false) {
+                passwordConfirmationEnabled: Bool = false,
+                showLoginProviders: Bool = true) {
         self.termsAndServicesURL = termsAndServicesURL
         self.colorPalette = colorPalette
         self.fontPalette = fontPalette
         self.usernameEnabled = usernameEnabled
         self.passwordConfirmationEnabled = passwordConfirmationEnabled
+        self.showLoginProviders = showLoginProviders
     }
     
 }

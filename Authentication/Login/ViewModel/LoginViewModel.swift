@@ -71,6 +71,7 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     
     fileprivate lazy var _logIn: Action<(), User, SessionServiceError> = self.initializeLogInAction()
     fileprivate let _logInProvidersUserSignal: Signal<LoginProviderUserType, NoError>
+    fileprivate let _logInProvidersErrorSignal: Signal<LoginProviderErrorType, NoError>
     fileprivate lazy var _logInProvidersFinalUserSignal: Signal<Result<User, SessionServiceError>, NoError> = self.initializeLogInUserSignal()
     
     private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
@@ -86,7 +87,7 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     */
     internal init(sessionService: SessionService,
                   credentialsValidator: LoginCredentialsValidator = LoginCredentialsValidator(),
-                  providerUserSignals: [Signal<LoginProviderUserType, NoError>] = []) {
+                  providerSignals: [(Signal<LoginProviderUserType, NoError>, Signal<LoginProviderErrorType, NoError>)] = []) { //swiftlint:disable:this large_tuple
         _sessionService = sessionService
         
         let emailValidationResult = email.signal.map(credentialsValidator.emailValidator.validate)
@@ -99,7 +100,8 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
         emailValidationErrors = Property(initial: [], then: emailValidationResult.map { $0.errors })
         passwordValidationErrors = Property(initial: [], then: passwordValidationResult.map { $0.errors })
         
-        _logInProvidersUserSignal = Signal.merge(providerUserSignals)
+        _logInProvidersUserSignal = Signal.merge(providerSignals.map { $0.0 })
+        _logInProvidersErrorSignal = Signal.merge(providerSignals.map { $0.1 })
     }
     
 }
@@ -180,10 +182,12 @@ extension Signal {
 fileprivate extension LoginViewModel {
     
     fileprivate func initializeLogInUserSignal() -> Signal<Result<User, SessionServiceError>, NoError> {
-        return _logInProvidersUserSignal.flatMap(.latest) {
+        let usersSignal = _logInProvidersUserSignal.flatMap(.latest) {
             [unowned self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
                 return self._sessionService.logIn(withUser: loginProviderUserType).toResultSignalProducer()
         }
+        let errorsSignal = _logInProvidersErrorSignal.map { Result<User, SessionServiceError>.failure($0.sessionServiceError) }
+        return Signal.merge([usersSignal, errorsSignal])
     }
     
     fileprivate func initializeLogInSuccesfulSignal() -> Signal<Void, NoError> {
@@ -220,4 +224,15 @@ fileprivate extension LoginViewModel {
             return SignalProducer(value: self.passwordVisible.value).observe(on: UIScheduler())
         }
     }
+}
+
+fileprivate extension LoginProviderErrorType {
+    
+    var sessionServiceError: SessionServiceError {
+        switch self {
+        case let .facebook(error: error): return .loginProviderError(name: FacebookLoginProvider.name, error: error)
+        case let .custom(name: name, error: error): return .loginProviderError(name: name, error: error)
+        }
+    }
+    
 }

@@ -43,13 +43,23 @@ public protocol LoginProviderError: Error {
     
 }
 
+public struct SimpleLoginProviderError: LoginProviderError {
+    
+    public let localizedMessage: String
+    
+    public init(localizedMessage: String) {
+        self.localizedMessage = localizedMessage
+    }
+    
+}
+
 /**
      Protocol that all users returned by
      login providers should implement.
  */
 public enum LoginProviderErrorType: Error {
     case facebook(error: FacebookLoginProviderError)
-    case custom(name: String, user: LoginProviderError)
+    case custom(name: String, error: LoginProviderError)
 }
 
 /**

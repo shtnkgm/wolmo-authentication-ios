@@ -65,7 +65,7 @@ public final class ExampleSessionService: SessionServiceType {
             return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)
         case .custom(let name, _):
             print("Signing up a user for service \(name) not supported")
-            return signUpFailure(dispatchTime: dispatchTime)
+            return signUpFailure(dispatchTime: dispatchTime, fromProvider: true)
         }
     }
 
@@ -113,10 +113,13 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    private func signUpFailure(dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func signUpFailure(dispatchTime: DispatchTime, fromProvider: Bool = false) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-                observer.send(error: .invalidSignUpCredentials(.none))
+                let error: SessionServiceError = fromProvider ? .loginProviderError(name: "Some name",
+                        error: SimpleLoginProviderError(localizedMessage: "There was an error login with that provider"))
+                                                              : .invalidSignUpCredentials(.none)
+                observer.send(error: error)
             }
         }
     }

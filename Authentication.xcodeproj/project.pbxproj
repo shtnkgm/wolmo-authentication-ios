@@ -94,6 +94,8 @@
 		CE8397DB1E3FB74D001F1ABD /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
 		CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */; };
 		CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA65B831D33F9960065283E /* ViewProtocols.swift */; };
+		CEABDDB41E52252E00A6930D /* ExampleFailLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */; };
+		CEABDDB61E52307400A6930D /* ExampleSuccessLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEE226A71C9C4011005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
 		CEE94A901CA06B1B0089E71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE94A8F1CA06B1B0089E71B /* AppDelegate.swift */; };
@@ -165,7 +167,6 @@
 /* Begin PBXFileReference section */
 		9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		9D1DFEF81C8DCE0A00F0A37C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		9D1DFEF91C8DCE0A00F0A37C /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rex.framework; path = Carthage/Build/iOS/Rex.framework; sourceTree = "<group>"; };
 		9D1DFF001C8DCFB300F0A37C /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		9D1DFF011C8DCFB300F0A37C /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		9D72AA041C8DC7EA00BB4082 /* Authentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Authentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +240,8 @@
 		CE7A7BBA1D3EA73200C44A25 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Authentication/es.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkBundle.swift; sourceTree = "<group>"; };
 		CEA65B831D33F9960065283E /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
+		CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleFailLoginProvider.swift; sourceTree = "<group>"; };
+		CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleSuccessLoginProvider.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionServiceType.swift; sourceTree = "<group>"; };
 		CEE226A81C9C4011005EB279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE226AF1C9C726F005EB279 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -326,7 +329,6 @@
 				9D1DFF011C8DCFB300F0A37C /* Quick.framework */,
 				9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */,
 				9D1DFEF81C8DCE0A00F0A37C /* Result.framework */,
-				9D1DFEF91C8DCE0A00F0A37C /* Rex.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -583,6 +585,8 @@
 				CEE94AA51CA06C3C0089E71B /* Main.storyboard */,
 				CEE94A9F1CA06BBC0089E71B /* ExampleMainViewController.swift */,
 				CEE94AA01CA06BBC0089E71B /* ExampleSessionService.swift */,
+				CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */,
+				CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */,
 				CEE94A8F1CA06B1B0089E71B /* AppDelegate.swift */,
 				CEE94A961CA06B1B0089E71B /* Assets.xcassets */,
 				CEE94A9B1CA06B1B0089E71B /* Info.plist */,
@@ -883,7 +887,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE94AA21CA06BBC0089E71B /* ExampleSessionService.swift in Sources */,
+				CEABDDB41E52252E00A6930D /* ExampleFailLoginProvider.swift in Sources */,
 				CEE94AA11CA06BBC0089E71B /* ExampleMainViewController.swift in Sources */,
+				CEABDDB61E52307400A6930D /* ExampleSuccessLoginProvider.swift in Sources */,
 				CEE94A901CA06B1B0089E71B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

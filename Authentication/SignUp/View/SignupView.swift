@@ -34,6 +34,7 @@ public extension SignupViewType {
 /** Default signup view. */
 internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
+    // - Warning: This delegate must be set before calling the `render` function.
     internal var delegate: SignupViewDelegate! //swiftlint:disable:this weak_delegate
     
     internal var titleLabel: UILabel { return titleLabelOutlet }
@@ -73,17 +74,9 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         }
     }
     
-    internal var loginProviderButtons: [UIView] = [] {
-        didSet {
-            if loginProviderButtons.isEmpty {
-                signupAndProvidersSeparator.isHidden = true
-            }
-            for providerButton in loginProviderButtons {
-                loginProviderButtonsStackView.addArrangedSubview(providerButton)
-                providerButton.heightAnchor.constraint(equalTo: signUpButton.heightAnchor).isActive = true
-            }
-        }
-    }
+    // - Warning: For these buttons to be seen, this var must be
+    //      set before calling the `render` function.
+    internal var loginProviderButtons: [UIView] = []
     
 // MARK: - Navigation buttons
     internal var termsAndServicesTextView: UITextView { return termsAndServicesTextViewOutlet }
@@ -132,7 +125,11 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var passwordConfirmationView: UIView!
     @IBOutlet weak var passwordConfirmationHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var signupAndProvidersSeparator: UIView!
+    @IBOutlet weak var signupAndProvidersSeparator: UIView! {
+        didSet {
+            signupAndProvidersSeparator.isHidden = true
+        }
+    }
     @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
     
 // MARK: - SignupViewType setters
@@ -193,11 +190,28 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         passwordVisible = false
         passwordConfirmationVisible = false
         
+        if delegate.showLoginProviders {
+            configureLoginProviders()
+        }
         delegate.configureSignupView(self)
     }
     
 }
 
+// MARK: - login providers configuration extension
+fileprivate extension SignupView {
+    
+    fileprivate func configureLoginProviders() {
+        signupAndProvidersSeparator.isHidden = false
+        for providerButton in loginProviderButtons {
+            loginProviderButtonsStackView.addArrangedSubview(providerButton)
+            providerButton.heightAnchor.constraint(equalTo: signUpButton.heightAnchor).isActive = true
+        }
+    }
+    
+}
+
+// MARK: - setters extension
 fileprivate extension SignupView {
     
     fileprivate func usernameTextFieldValidWasSet() {
@@ -341,6 +355,7 @@ fileprivate extension SignupView {
     
 }
 
+// MARK: - strings extension
 public extension SignupViewType {
 
     public var titleText: String { return "signup-view.title".frameworkLocalized }

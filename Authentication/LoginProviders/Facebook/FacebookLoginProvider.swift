@@ -72,7 +72,7 @@ public struct FacebookLoginProviderUser: LoginProviderUser {
  
     It wraps the Error Facebook returns from the request.
  */
-public struct FacebookLoginProviderError: Error {
+public struct FacebookLoginProviderError: LoginProviderError {
     
     let facebookError: Error
     
