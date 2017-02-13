@@ -224,8 +224,8 @@ public protocol SignupComponentsFactory {
             By default, the default SignupViewModel.
      */
     func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
-                                      credentialsValidator: SignupCredentialsValidator,
-                                      configuration: SignupViewConfigurationType) -> SignupViewModelType
+                                                                   credentialsValidator: SignupCredentialsValidator,
+                                                                   configuration: SignupViewConfigurationType) -> SignupViewModelType
     
     /**
          Creates the SignupViewConfiguration to use for setting
@@ -307,8 +307,8 @@ extension SignupComponentsFactory {
     }
     
     public func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
-                                      credentialsValidator: SignupCredentialsValidator,
-                                      configuration: SignupViewConfigurationType) -> SignupViewModelType {
+                                                                          credentialsValidator: SignupCredentialsValidator,
+                                                                          configuration: SignupViewConfigurationType) -> SignupViewModelType {
         return SignupViewModel(sessionService: sessionService,
                                credentialsValidator: credentialsValidator,
                                usernameEnabled: configuration.usernameEnabled,

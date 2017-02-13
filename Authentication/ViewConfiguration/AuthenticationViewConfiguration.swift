@@ -23,7 +23,7 @@ public struct AuthenticationViewConfiguration {
         signupConfiguration = signupViewConfiguration
     }
     public init(loginViewConfiguration: LoginViewConfigurationType = LoginViewConfiguration(),
-                 termsAndServicesURL: URL) {
+                termsAndServicesURL: URL) {
         self.init(loginViewConfiguration: loginViewConfiguration, signupViewConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL))
     }
     
