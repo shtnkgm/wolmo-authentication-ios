@@ -39,7 +39,7 @@ final class MockSessionService: SessionServiceType {
         return SignalProducer.empty.on(completed: { [unowned self] in self._logInCalledObserver.send(value: true) })
     }
     
-    func logIn(withUserType userType: LoginProviderUserType) -> SignalProducer<MyUser, SessionServiceError> {
+    func logIn(withUser userType: LoginProviderUserType) -> SignalProducer<MyUser, SessionServiceError> {
         return SignalProducer.empty.on(completed: { [unowned self] in self._logInCalledObserver.send(value: true) })
     }
     

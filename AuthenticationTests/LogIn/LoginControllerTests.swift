@@ -30,7 +30,7 @@ class LoginViewControllerSpec: QuickSpec {
                 loginView = LoginView()
                 let configuration = LoginControllerConfiguration(
                         viewModelFactory: { _ in return loginViewModel },
-                        viewFactory: { _ in { return loginView } },
+                        viewFactory: { _ in loginView },
                         transitionDelegate: MockLoginTransitionDelegate(),
                         loginProviders: [])
                 loginController = LoginController(configuration: configuration)
