@@ -132,7 +132,6 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     @IBOutlet weak var passwordConfirmationView: UIView!
     @IBOutlet weak var passwordConfirmationHeightConstraint: NSLayoutConstraint!
     
-    
     @IBOutlet weak var signupAndProvidersSeparator: UIView!
     @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
     

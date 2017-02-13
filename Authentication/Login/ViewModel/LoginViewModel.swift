@@ -105,7 +105,7 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
 }
 
 //---------------------------------------
-// (todo) Extract to WolmoCore
+//TODO: Extract to WolmoCore
 
 extension SignalProducer {
     
@@ -199,7 +199,7 @@ fileprivate extension LoginViewModel {
     }
     
     fileprivate func initializeLoginExecutingSignal() -> Signal<Bool, NoError> {
-        //(todo) Add providers somehow
+        //TODO: Add providers somehow
         return _logIn.isExecuting.signal
     }
     
