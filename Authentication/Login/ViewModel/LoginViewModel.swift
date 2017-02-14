@@ -74,6 +74,13 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     fileprivate let _logInProvidersErrorSignal: Signal<LoginProviderErrorType, NoError>
     fileprivate lazy var _logInProvidersFinalUserSignal: Signal<Result<User, SessionServiceError>, NoError> = self.initializeLogInUserSignal()
     
+    // The providers executing signal can only track the login to the session service,
+    //  after the login with the login provider was successful.
+    // This wouldn't affect the UX since the providers are supposed to present a view
+    //  for logging in and close it after it succeeded or failed.
+    fileprivate let _loginProvidersExecutingSignal: Signal<Bool, NoError>
+    fileprivate let _loginProvidersExecutingObserver: Observer<Bool, NoError>
+    
     private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
     /**
@@ -102,6 +109,8 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
         
         _logInProvidersUserSignal = Signal.merge(providerSignals.map { $0.0 })
         _logInProvidersErrorSignal = Signal.merge(providerSignals.map { $0.1 })
+        
+        (_loginProvidersExecutingSignal, _loginProvidersExecutingObserver) = Signal.pipe()
     }
     
 }
@@ -184,7 +193,18 @@ fileprivate extension LoginViewModel {
     fileprivate func initializeLogInUserSignal() -> Signal<Result<User, SessionServiceError>, NoError> {
         let usersSignal = _logInProvidersUserSignal.flatMap(.latest) {
             [unowned self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
-                return self._sessionService.logIn(withUser: loginProviderUserType).toResultSignalProducer()
+                return self._sessionService.logIn(withUser: loginProviderUserType)
+                                .on(started: { [unowned self] in
+                                    self._loginProvidersExecutingObserver.send(value: true)
+                                }, failed: { [unowned self] _ in
+                                    self._loginProvidersExecutingObserver.send(value: false)
+                                }, completed: {
+                                    self._loginProvidersExecutingObserver.send(value: false)
+                                }, interrupted: {
+                                    self._loginProvidersExecutingObserver.send(value: false)
+                                }, terminated: {
+                                    self._loginProvidersExecutingObserver.send(value: false)
+                                }).toResultSignalProducer()
         }
         let errorsSignal = _logInProvidersErrorSignal.map { Result<User, SessionServiceError>.failure($0.sessionServiceError) }
         return Signal.merge([usersSignal, errorsSignal])
@@ -203,8 +223,7 @@ fileprivate extension LoginViewModel {
     }
     
     fileprivate func initializeLoginExecutingSignal() -> Signal<Bool, NoError> {
-        //TODO: Add providers somehow
-        return _logIn.isExecuting.signal
+        return Signal.merge([_logIn.isExecuting.signal, _loginProvidersExecutingSignal])
     }
     
     fileprivate func initializeLogInAction() -> Action<(), User, SessionServiceError> {

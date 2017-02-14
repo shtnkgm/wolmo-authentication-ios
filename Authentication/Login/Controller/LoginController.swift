@@ -82,12 +82,15 @@ fileprivate extension LoginController {
         bindPasswordElements()
         bindButtons()
         setTextfieldOrder()
-        
+        // When one login is executing, no other login button can be pressed.
         _viewModel.logInExecuting.observeValues { [unowned self] executing in
             executing
                 ? self._delegate.willExecuteLogIn(in: self)
                 : self._delegate.didExecuteLogIn(in: self)
             self.loginView.logInButtonPressed = executing
+            for providerButton in self.loginView.loginProviderButtons {
+                providerButton.isUserInteractionEnabled = !executing
+            }
         }
         
         _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didFailLogIn(in: self, with: $0) }

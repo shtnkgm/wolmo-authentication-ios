@@ -68,53 +68,6 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
                 loginProviders: [LoginProvider] = [],
                 mainControllerFactory: @escaping () -> UIViewController) {
         self.init(loginConfiguration: LoginViewConfiguration(logoImage: logo),
-                  termsAndServicesURL: termsAndServicesURL,
-                  loginProviders: loginProviders,
-                  mainControllerFactory: mainControllerFactory)
-    }
-    
-    /**
-         Initializes the AuthenticationComponentsFactory
-         with the components to use.
-         
-         - Parameters:
-             - logo: logo to add to the default LoginViewConfiguration.
-             - signupConfiguration: signup view configuration to
-                return when asked for it.
-             - loginProviders: alternative providers for login service.
-             - mainControllerFactory: main view controller factory
-                method to trigger when asked for the main view
-                controller.
-     */
-    public init(logo: UIImage? = .none,
-                signupConfiguration: SignupViewConfigurationType,
-                loginProviders: [LoginProvider] = [],
-                mainControllerFactory: @escaping () -> UIViewController) {
-        self.init(loginConfiguration: LoginViewConfiguration(logoImage: logo),
-                  signupConfiguration: signupConfiguration,
-                  loginProviders: loginProviders,
-                  mainControllerFactory: mainControllerFactory)
-    }
-    
-    /**
-         Initializes the AuthenticationComponentsFactory
-         with the components to use.
-         
-         - Parameters:
-             - loginConfiguration: login view configuration to
-                return when asked for it.
-             - termsAndServicesURL: terms and services URL used
-                to create the default SignupViewConfiguration.
-             - loginProviders: alternative providers for login service.
-             - mainControllerFactory: main view controller factory
-                method to trigger when asked for the main view
-                controller.
-     */
-    public init(loginConfiguration: LoginViewConfigurationType,
-                termsAndServicesURL: URL,
-                loginProviders: [LoginProvider] = [],
-                mainControllerFactory: @escaping () -> UIViewController) {
-        self.init(loginConfiguration: loginConfiguration,
                   signupConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL),
                   loginProviders: loginProviders,
                   mainControllerFactory: mainControllerFactory)
