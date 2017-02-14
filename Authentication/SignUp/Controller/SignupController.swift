@@ -131,8 +131,7 @@ private extension SignupController {
     }
     
     func bindPasswordElements() {
-        _viewModel.password <~
-            signupView.passwordTextField.reactive.textValues
+        _viewModel.password <~ signupView.passwordTextField.reactive.continuousTextValues
                 .map { $0 ?? "" }
                 .on(value: { [unowned self] text in
                     self.signupView.passwordVisibilityButton?.isHidden = text.isEmpty
@@ -158,7 +157,7 @@ private extension SignupController {
     
     func bindPasswordConfirmationElements() {
         if let passwordConfirmationTextField = signupView.passwordConfirmTextField {
-            _viewModel.passwordConfirmation <~ passwordConfirmationTextField.reactive.textValues
+            _viewModel.passwordConfirmation <~ passwordConfirmationTextField.reactive.continuousTextValues
                 .map { $0 ?? "" }
                 .on(value: { [unowned self] text in
                 self.signupView.passwordConfirmVisibilityButton?.isHidden = text.isEmpty

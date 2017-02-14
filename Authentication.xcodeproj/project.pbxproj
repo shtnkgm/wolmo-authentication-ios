@@ -93,6 +93,7 @@
 		CE7A7BBD1D3EB60500C44A25 /* Authentication.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE8397DB1E3FB74D001F1ABD /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
 		CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */; };
+		CE9A42AB1E535A4600CE072B /* ViewStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A42AA1E535A4600CE072B /* ViewStates.swift */; };
 		CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA65B831D33F9960065283E /* ViewProtocols.swift */; };
 		CEABDDB41E52252E00A6930D /* ExampleFailLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */; };
 		CEABDDB61E52307400A6930D /* ExampleSuccessLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */; };
@@ -239,6 +240,7 @@
 		CE7A7BB71D3EA01C00C44A25 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CE7A7BBA1D3EA73200C44A25 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Authentication/es.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkBundle.swift; sourceTree = "<group>"; };
+		CE9A42AA1E535A4600CE072B /* ViewStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStates.swift; sourceTree = "<group>"; };
 		CEA65B831D33F9960065283E /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
 		CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleFailLoginProvider.swift; sourceTree = "<group>"; };
 		CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleSuccessLoginProvider.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				CE20AD681D53BB8B0039260B /* AuthenticationCoordinator.swift */,
 				CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */,
 				CEA65B831D33F9960065283E /* ViewProtocols.swift */,
+				CE9A42AA1E535A4600CE072B /* ViewStates.swift */,
 				CE5248811D468D8200B499CC /* Extensions.swift */,
 				9D72AA071C8DC7EA00BB4082 /* Authentication.h */,
 				9D72AA091C8DC7EA00BB4082 /* Info.plist */,
@@ -852,6 +855,7 @@
 				CE111DD21D4FA7340083C99E /* LoginView.swift in Sources */,
 				CE111DE91D4FA7390083C99E /* SignupViewConfiguration.swift in Sources */,
 				CE42AE901E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift in Sources */,
+				CE9A42AB1E535A4600CE072B /* ViewStates.swift in Sources */,
 				CE42AE861E4E4AC000B4C377 /* LoginControllerDelegate.swift in Sources */,
 				CE111DBE1D4FA70D0083C99E /* ConstantValidators.swift in Sources */,
 				CE111DEC1D4FA7390083C99E /* SignupViewModel.swift in Sources */,
