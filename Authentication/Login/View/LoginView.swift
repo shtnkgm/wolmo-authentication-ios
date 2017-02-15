@@ -279,8 +279,10 @@ private extension LoginView {
     
     func renderLogInButtonState(state: ButtonState) {
         switch state {
-        case (executing: true, enabled: _):
+        case (executing: true, enabled: true):
             logInButton.backgroundColor = delegate.colorPalette.mainButtonExecuted
+        case (executing: true, enabled: false):
+            logInButton.backgroundColor = delegate.colorPalette.mainButtonDisabled
         case (executing: false, enabled: false):
             logInButton.backgroundColor = delegate.colorPalette.mainButtonDisabled
         case (executing: false, enabled: true):

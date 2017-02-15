@@ -391,8 +391,10 @@ private extension SignupView {
     
     func renderSignUpButtonState(state: ButtonState) {
         switch state {
-        case (executing: true, enabled: _):
+        case (executing: true, enabled: true):
             signUpButton.backgroundColor = delegate.colorPalette.mainButtonExecuted
+        case (executing: true, enabled: false):
+            signUpButton.backgroundColor = delegate.colorPalette.mainButtonDisabled
         case (executing: false, enabled: false):
             signUpButton.backgroundColor = delegate.colorPalette.mainButtonDisabled
         case (executing: false, enabled: true):
