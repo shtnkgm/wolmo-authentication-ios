@@ -62,6 +62,17 @@ public enum LoginProviderErrorType: Error {
     case custom(name: String, error: LoginProviderError)
 }
 
+internal extension LoginProviderErrorType {
+
+    var sessionServiceError: SessionServiceError {
+        switch self {
+        case let .facebook(error: error): return .loginProviderError(name: FacebookLoginProvider.name, error: error)
+        case let .custom(name: name, error: error): return .loginProviderError(name: name, error: error)
+        }
+    }
+    
+}
+
 /**
     Protocol that all login provider configurations
     should implement.
@@ -93,13 +104,17 @@ public protocol LoginProvider {
     var errorSignal: Signal<LoginProviderErrorType, NoError> { get }
     
     /**
-        This is the view that should be used as the button for
+        Returns the view that should be used as the button for
         your login provider.
  
         You should take care of setting this view up. That includes
         adding the necessary actions that would perform the API calls
         to use the provider when tapped.
+     
+        - warning: This function should return a different instance of
+            the button each time it is called
+            (so to be able to have it in login screen and in signup)
     */
-    var button: UIView { get }
+    func createButton() -> UIView
     
 }

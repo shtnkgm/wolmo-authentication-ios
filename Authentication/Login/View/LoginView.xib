@@ -213,17 +213,17 @@
                 <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="5vG-Dj-ID2" userLabel="View Log in">
                     <rect key="frame" x="0.0" y="473" width="536" height="225"/>
                     <subviews>
-                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="osB-wk-6LJ" userLabel="Login Buttons View">
-                            <rect key="frame" x="0.0" y="0.0" width="536" height="159"/>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="osB-wk-6LJ" userLabel="Login Buttons View">
+                            <rect key="frame" x="0.0" y="0.0" width="536" height="154"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="fx2-sV-mn4">
-                                    <rect key="frame" x="21" y="0.0" width="494" height="159"/>
+                                    <rect key="frame" x="21" y="0.0" width="494" height="86"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hiI-H5-iJW">
                                             <rect key="frame" x="0.0" y="0.0" width="494" height="56"/>
                                             <color key="backgroundColor" red="1" green="0.75446993829115305" blue="0.19559735966350844" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="56" id="a4I-V4-fCj"/>
+                                                <constraint firstAttribute="height" constant="56" id="a4I-V4-fCj"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                             <state key="normal" title="LOG IN">
@@ -263,23 +263,19 @@
                                                 <constraint firstItem="XjN-3f-64o" firstAttribute="centerY" secondItem="94i-ur-nyn" secondAttribute="centerY" id="HTS-6I-KGh"/>
                                                 <constraint firstItem="94i-ur-nyn" firstAttribute="centerX" secondItem="BeC-8X-8Cr" secondAttribute="centerX" id="P2i-aM-485"/>
                                                 <constraint firstItem="6bR-7h-8cs" firstAttribute="centerY" secondItem="94i-ur-nyn" secondAttribute="centerY" id="j0D-MV-JrJ"/>
-                                                <constraint firstAttribute="height" constant="25" id="jlg-BD-cPX"/>
+                                                <constraint firstAttribute="height" priority="999" constant="25" id="jlg-BD-cPX"/>
                                                 <constraint firstItem="94i-ur-nyn" firstAttribute="centerY" secondItem="BeC-8X-8Cr" secondAttribute="centerY" id="myF-xD-2iy"/>
                                             </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="u52-ih-LJQ" userLabel="Extra View">
-                                            <rect key="frame" x="0.0" y="91" width="494" height="68"/>
                                         </view>
                                     </subviews>
                                 </stackView>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="fx2-sV-mn4" secondAttribute="bottom" id="3dM-FF-erM"/>
                                 <constraint firstItem="fx2-sV-mn4" firstAttribute="top" secondItem="osB-wk-6LJ" secondAttribute="top" id="I7U-LK-I2t"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d5G-OH-g8x" userLabel="View Signup">
-                            <rect key="frame" x="0.0" y="159" width="536" height="66"/>
+                            <rect key="frame" x="0.0" y="154" width="536" height="71"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="¿No tiene usuario?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1E-m0-zdE">
                                     <rect key="frame" x="209" y="0.0" width="119.5" height="17"/>
@@ -288,7 +284,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxB-U7-f9X">
-                                    <rect key="frame" x="234" y="22" width="69" height="29"/>
+                                    <rect key="frame" x="234" y="27" width="69" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="FY4-Rv-sY3"/>
                                     </constraints>
@@ -305,7 +301,7 @@
                                 <constraint firstAttribute="bottom" secondItem="cxB-U7-f9X" secondAttribute="bottom" constant="15" id="3e1-O6-Pei"/>
                                 <constraint firstItem="k1E-m0-zdE" firstAttribute="centerX" secondItem="d5G-OH-g8x" secondAttribute="centerX" id="aQh-ct-qOi"/>
                                 <constraint firstItem="k1E-m0-zdE" firstAttribute="top" secondItem="d5G-OH-g8x" secondAttribute="top" id="hUM-XW-3T6"/>
-                                <constraint firstItem="cxB-U7-f9X" firstAttribute="top" secondItem="k1E-m0-zdE" secondAttribute="bottom" constant="5" id="m1U-kp-UxZ"/>
+                                <constraint firstItem="cxB-U7-f9X" firstAttribute="top" secondItem="k1E-m0-zdE" secondAttribute="bottom" constant="10" id="m1U-kp-UxZ"/>
                                 <constraint firstItem="cxB-U7-f9X" firstAttribute="centerX" secondItem="d5G-OH-g8x" secondAttribute="centerX" id="zSE-s3-Kfb"/>
                             </constraints>
                         </view>

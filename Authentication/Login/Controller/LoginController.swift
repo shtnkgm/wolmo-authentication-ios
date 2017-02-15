@@ -73,6 +73,16 @@ public final class LoginController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _viewModel.bindProviders()
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        _viewModel.unbindProviders()
+    }
+    
 }
 
 fileprivate extension LoginController {
@@ -89,6 +99,7 @@ fileprivate extension LoginController {
                 : self._delegate.didExecuteLogIn(in: self)
             self.loginView.logInButtonPressed = executing
             for providerButton in self.loginView.loginProviderButtons {
+                providerButton.alpha = executing ? 0.5 : 1
                 providerButton.isUserInteractionEnabled = !executing
             }
         }

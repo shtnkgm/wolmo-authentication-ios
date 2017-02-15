@@ -90,7 +90,6 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
     public static let name = "Facebook"
 
     public var configuration: FacebookLoginConfiguration = FacebookLoginConfiguration()
-    public lazy var button: UIView = self.createButton()
     public let userSignal: Signal<LoginProviderUserType, NoError>
     public let errorSignal: Signal<LoginProviderErrorType, NoError>
     
@@ -105,6 +104,21 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
     deinit {
         userObserver.sendCompleted()
         errorObserver.sendCompleted()
+    }
+    
+    // Facebook Swift SDK gives as a button with fixed height at 28,
+    //  so if constraint to another height, it might collide and can't
+    //  assure what will happen, if enlarge or remain at 28.
+    public func createButton() -> UIView {
+        let button: LoginButton
+        if configuration.publishPermissions.isEmpty {
+            button = LoginButton(readPermissions: configuration.readPermissions)
+        } else {
+            button = LoginButton(publishPermissions: configuration.publishPermissions)
+        }
+        button.defaultAudience = configuration.defaultAudience
+        button.delegate = self
+        return button
     }
     
     public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
@@ -124,18 +138,6 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
 }
 
 fileprivate extension FacebookLoginProvider {
-
-    fileprivate func createButton() -> UIView {
-        let button: LoginButton
-        if configuration.publishPermissions.isEmpty {
-            button = LoginButton(readPermissions: configuration.readPermissions)
-        } else {
-            button = LoginButton(publishPermissions: configuration.publishPermissions)
-        }
-        button.defaultAudience = configuration.defaultAudience
-        button.delegate = self
-        return button
-    }
     
     fileprivate func createFacebookUser(token: AccessToken) {
         let fbRequest = FacebookProfileRequest()

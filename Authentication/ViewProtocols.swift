@@ -14,6 +14,7 @@ public protocol Renderable {
     
     var view: UIView { get }
     
+    /** Function to initialize UI after the view is already loaded. */
     func render()
     
 }

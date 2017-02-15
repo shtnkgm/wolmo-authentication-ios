@@ -45,6 +45,15 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
                                           password: (selected: false, content: .initialEmpty),
                                           logInButton: (executing: false, enabled: false))
     
+    internal let tapRecognizer = UITapGestureRecognizer()
+    
+    override func awakeFromNib() {
+        addGestureRecognizer(tapRecognizer)
+        tapRecognizer.reactive.stateChanged.observeValues { [unowned self] _ in
+            self.endEditing(true)
+        }
+    }
+    
     internal var logoImageView: UIImageView { return logoImageViewOutlet }
     @IBOutlet weak var logoImageViewOutlet: UIImageView!
     
@@ -92,9 +101,8 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
                 loginAndLoginProvidersSeparator.isHidden = true
             }
             for providerButton in loginProviderButtons {
-                //We have an empty view at the bottom for spacing issues in view.
-                let index = loginProviderButtonsStackView.arrangedSubviews.count - 1
-                loginProviderButtonsStackView.insertArrangedSubview(providerButton, at: index)
+                loginProviderButtonsStackView.addArrangedSubview(providerButton)
+                providerButton.layer.cornerRadius = 6.0
                 providerButton.translatesAutoresizingMaskIntoConstraints = false
                 providerButton.heightAnchor.constraint(equalTo: logInButton.heightAnchor).isActive = true
             }
@@ -187,16 +195,16 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
 }
 
 // MARK: - state functions
-private extension LoginView {
+fileprivate extension LoginView {
     
-    func updateState(event: LoginViewEvent) {
+    fileprivate func updateState(event: LoginViewEvent) {
         let newState = nextState(state: state, event: event)
         renderState(state: newState)
         state = newState
     }
     
     //swiftlint:disable:next function_body_length cyclomatic_complexity
-    func nextState(state: LoginViewState, event: LoginViewEvent) -> LoginViewState {
+    private func nextState(state: LoginViewState, event: LoginViewEvent) -> LoginViewState {
         switch event {
         case .emailSelected:
             let emailState = (selected: true, content: state.email.content)
@@ -237,13 +245,13 @@ private extension LoginView {
         }
     }
     
-    func renderState(state: LoginViewState) {
+    private func renderState(state: LoginViewState) {
         renderEmailState(state: state.email)
         renderPasswordState(state: state.password)
         renderLogInButtonState(state: state.logInButton)
     }
     
-    func renderEmailState(state: TextFieldState) {
+    private func renderEmailState(state: TextFieldState) {
         switch state {
         case (selected: true, _):
             emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
@@ -260,7 +268,7 @@ private extension LoginView {
         }
     }
     
-    func renderPasswordState(state: TextFieldState) {
+    private func renderPasswordState(state: TextFieldState) {
         switch state {
         case (selected: true, _):
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
@@ -277,7 +285,7 @@ private extension LoginView {
         }
     }
     
-    func renderLogInButtonState(state: ButtonState) {
+    private func renderLogInButtonState(state: ButtonState) {
         switch state {
         case (executing: true, enabled: true):
             logInButton.backgroundColor = delegate.colorPalette.mainButtonExecuted
@@ -293,39 +301,39 @@ private extension LoginView {
 }
 
 // MARK: - setters reaction extension
-private extension LoginView {
+fileprivate extension LoginView {
     
-    func emailTextFieldValidWasSet() {
+    fileprivate func emailTextFieldValidWasSet() {
         let event: LoginViewEvent = emailTextFieldValid ? .emailValid : .emailInvalid
         updateState(event: event)
     }
     
-    func emailTextFieldSelectedWasSet() {
+    fileprivate func emailTextFieldSelectedWasSet() {
         let event: LoginViewEvent = emailTextFieldSelected ? .emailSelected : .emailUnselected
         updateState(event: event)
     }
     
-    func passwordTextFieldValidWasSet() {
+    fileprivate func passwordTextFieldValidWasSet() {
         let event: LoginViewEvent = passwordTextFieldValid ? .passwordValid : .passwordInvalid
         updateState(event: event)
     }
     
-    func passwordTextFieldSelectedWasSet() {
+    fileprivate func passwordTextFieldSelectedWasSet() {
         let event: LoginViewEvent = passwordTextFieldSelected ? .passwordSelected : .passwordUnselected
         updateState(event: event)
     }
     
-    func logInButtonEnabledWasSet() {
+    fileprivate func logInButtonEnabledWasSet() {
         let event: LoginViewEvent = logInButtonEnabled ? .logInButtonEnabled : .logInButtonDisabled
         updateState(event: event)
     }
     
-    func logInButtonPressedWasSet() {
+    fileprivate func logInButtonPressedWasSet() {
         let event: LoginViewEvent = logInButtonPressed ? .logInButtonPressed : .logInButtonUnpressed
         updateState(event: event)
     }
     
-    func passwordVisibleWasSet() {
+    fileprivate func passwordVisibleWasSet() {
         // Changing enabled property for the
         // font setting to take effect, which is
         // necessary for it not to shrink.

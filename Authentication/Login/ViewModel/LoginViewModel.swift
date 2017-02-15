@@ -43,6 +43,11 @@ public protocol LoginViewModelType {
        even the ones from LoginProviders. */
     var logInErrors: Signal<SessionServiceError, NoError> { get }
     
+    /** Functions for the view model to start or stop ignoring providers'events.
+        This is needed for when one view is pushed on top of the other,
+        and so both view models exists at the same time. */
+    func bindProviders()
+    func unbindProviders()
 }
 
 /**
@@ -65,7 +70,7 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     public var logInCocoaAction: CocoaAction<UIButton> { return CocoaAction(_logIn) }
     public private(set) lazy var logInErrors: Signal<SessionServiceError, NoError> = self.initializeLoginErrorsSignal()
     public private(set) lazy var logInExecuting: Signal<Bool, NoError> = self.initializeLoginExecutingSignal()
-    public private(set) lazy var logInSuccessful: Signal<(), NoError> = self.initializeLogInSuccesfulSignal()
+    public private(set) lazy var logInSuccessful: Signal<(), NoError> = self.initializeLogInSuccessfulSignal()
     
     public var togglePasswordVisibility: CocoaAction<UIButton> { return CocoaAction(_togglePasswordVisibility) }
     
@@ -80,6 +85,8 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     //  for logging in and close it after it succeeded or failed.
     fileprivate let _loginProvidersExecutingSignal: Signal<Bool, NoError>
     fileprivate let _loginProvidersExecutingObserver: Observer<Bool, NoError>
+    
+    fileprivate var _ignoreProviders: Bool = true
     
     private lazy var _togglePasswordVisibility: Action<(), Bool, NoError> = self.initializeTogglePasswordVisibilityAction()
     
@@ -111,6 +118,14 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
         _logInProvidersErrorSignal = Signal.merge(providerSignals.map { $0.1 })
         
         (_loginProvidersExecutingSignal, _loginProvidersExecutingObserver) = Signal.pipe()
+    }
+    
+    public func bindProviders() {
+        _ignoreProviders = false
+    }
+    
+    public func unbindProviders() {
+        _ignoreProviders = true
     }
     
 }
@@ -192,25 +207,43 @@ fileprivate extension LoginViewModel {
     
     fileprivate func initializeLogInUserSignal() -> Signal<Result<User, SessionServiceError>, NoError> {
         let usersSignal = _logInProvidersUserSignal.flatMap(.latest) {
-            [unowned self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
-                return self._sessionService.logIn(withUser: loginProviderUserType)
-                                .on(started: { [unowned self] in
-                                    self._loginProvidersExecutingObserver.send(value: true)
-                                }, failed: { [unowned self] _ in
-                                    self._loginProvidersExecutingObserver.send(value: false)
-                                }, completed: {
-                                    self._loginProvidersExecutingObserver.send(value: false)
-                                }, interrupted: {
-                                    self._loginProvidersExecutingObserver.send(value: false)
-                                }, terminated: {
-                                    self._loginProvidersExecutingObserver.send(value: false)
-                                }).toResultSignalProducer()
+            // Weak self because the original signal will continue to exists
+            // independently of this view models existance (or deallocation).
+            // And so if this is the second view presented, self won't exists but the signal yes.
+            [weak self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
+                if let existingSelf = self, !existingSelf._ignoreProviders {
+                    return existingSelf.sessionServiceLogInWithExecuting(user: loginProviderUserType)
+                } else {
+                    return SignalProducer.empty
+                }
         }
-        let errorsSignal = _logInProvidersErrorSignal.map { Result<User, SessionServiceError>.failure($0.sessionServiceError) }
+        let errorsSignal = _logInProvidersErrorSignal
+            .flatMap(.latest) { [weak self] value -> SignalProducer<LoginProviderErrorType, NoError> in
+                if let existingSelf = self, !existingSelf._ignoreProviders {
+                    return SignalProducer(value: value)
+                } else {
+                    return SignalProducer.empty
+                }
+            }.map { Result<User, SessionServiceError>.failure($0.sessionServiceError) }
         return Signal.merge([usersSignal, errorsSignal])
     }
     
-    fileprivate func initializeLogInSuccesfulSignal() -> Signal<Void, NoError> {
+    private func sessionServiceLogInWithExecuting(user: LoginProviderUserType) -> SignalProducer<Result<User, SessionServiceError>, NoError> {
+        return _sessionService.logIn(withUser: user)
+            .on(started: { [unowned self] in
+                self._loginProvidersExecutingObserver.send(value: true)
+                }, failed: { [unowned self] _ in
+                    self._loginProvidersExecutingObserver.send(value: false)
+                }, completed: { [unowned self] in
+                    self._loginProvidersExecutingObserver.send(value: false)
+                }, interrupted: { [unowned self] in
+                    self._loginProvidersExecutingObserver.send(value: false)
+                }, terminated: { [unowned self] in
+                    self._loginProvidersExecutingObserver.send(value: false)
+            }).toResultSignalProducer()
+    }
+    
+    fileprivate func initializeLogInSuccessfulSignal() -> Signal<Void, NoError> {
         let successfullyLoggedInWithProvidersSignal = _logInProvidersFinalUserSignal.filterValues().map { _ in () }
         let successfullyLoggedInWithMailSignal = _logIn.values.map { _ in () }
         return Signal.merge([successfullyLoggedInWithProvidersSignal, successfullyLoggedInWithMailSignal])
@@ -243,15 +276,4 @@ fileprivate extension LoginViewModel {
             return SignalProducer(value: self.passwordVisible.value).observe(on: UIScheduler())
         }
     }
-}
-
-fileprivate extension LoginProviderErrorType {
-    
-    var sessionServiceError: SessionServiceError {
-        switch self {
-        case let .facebook(error: error): return .loginProviderError(name: FacebookLoginProvider.name, error: error)
-        case let .custom(name: name, error: error): return .loginProviderError(name: name, error: error)
-        }
-    }
-    
 }

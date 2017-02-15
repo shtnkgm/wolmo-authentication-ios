@@ -21,10 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
         let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
         let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
-                                                          showLoginProviders: false)
+                                                          showLoginProviders: true)
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
                                                                 signupConfiguration: signupConfiguration,
-                                                                loginProviders: [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]) {
+                                                                loginProviders: [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider(), ExampleSuccessLoginProvider()]) {
             let storyboard = UIStoryboard(name: "Main", bundle: .none)
             return storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }

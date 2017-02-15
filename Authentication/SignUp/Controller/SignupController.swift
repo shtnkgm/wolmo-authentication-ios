@@ -72,6 +72,16 @@ public final class SignupController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _viewModel.bindProviders()
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        _viewModel.unbindProviders()
+    }
+    
 }
 
 private extension SignupController {
@@ -90,6 +100,10 @@ private extension SignupController {
                 ? self._delegate.willExecuteSignUp(in: self)
                 : self._delegate.didExecuteSignUp(in: self)
             self.signupView.signUpButtonPressed = executing
+            for providerButton in self.signupView.loginProviderButtons {
+                providerButton.alpha = executing ? 0.5 : 1
+                providerButton.isUserInteractionEnabled = !executing
+            }
         }
         
         _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didFailSignUp(in: self, with: $0) }

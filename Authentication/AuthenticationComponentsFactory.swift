@@ -212,7 +212,7 @@ public extension LoginComponentsFactory {
                                 loginProviders: [LoginProvider]) -> LoginViewType {
         let view = LoginView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
-        view.loginProviderButtons = loginProviders.map { $0.button }
+        view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view
     }
     
@@ -345,12 +345,12 @@ extension SignupComponentsFactory {
                                                                           credentialsValidator: SignupCredentialsValidator,
                                                                           configuration: SignupViewConfigurationType,
                                                                           loginProviders: [LoginProvider]) -> SignupViewModelType {
-            let providerUserSignals = loginProviders.map { $0.userSignal }
+            let providerUserSignals = loginProviders.map { ($0.userSignal, $0.errorSignal) }
             return SignupViewModel(sessionService: sessionService,
                                    credentialsValidator: credentialsValidator,
                                    usernameEnabled: configuration.usernameEnabled,
                                    passwordConfirmationEnabled: configuration.passwordConfirmationEnabled,
-                                   providerUserSignals: providerUserSignals)
+                                   providerSignals: providerUserSignals)
     }
     
     public func createSignupViewDelegate(withConfiguration configuration: SignupViewConfigurationType) -> SignupViewDelegate {
@@ -361,7 +361,7 @@ extension SignupComponentsFactory {
                                  loginProviders: [LoginProvider]) -> SignupViewType {
         let view = SignupView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
-        view.loginProviderButtons = loginProviders.map { $0.button }
+        view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view
     }
     

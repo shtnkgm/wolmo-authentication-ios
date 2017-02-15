@@ -43,6 +43,15 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
                                            confirmPassword: (selected: false, content: .initialEmpty),
                                            signUpButton: (executing: false, enabled: false))
     
+    internal let tapRecognizer = UITapGestureRecognizer()
+    
+    override func awakeFromNib() {
+        addGestureRecognizer(tapRecognizer)
+        tapRecognizer.reactive.stateChanged.observeValues { [unowned self] _ in
+            self.endEditing(true)
+        }
+    }
+    
     internal var titleLabel: UILabel { return titleLabelOutlet }
     @IBOutlet weak var titleLabelOutlet: UILabel! { didSet { titleLabel.text = titleText } }
     
@@ -211,6 +220,7 @@ fileprivate extension SignupView {
         signupAndProvidersSeparator.isHidden = false
         for providerButton in loginProviderButtons {
             loginProviderButtonsStackView.addArrangedSubview(providerButton)
+            providerButton.layer.cornerRadius = 6.0
             providerButton.translatesAutoresizingMaskIntoConstraints = false
             providerButton.heightAnchor.constraint(equalTo: signUpButton.heightAnchor).isActive = true
         }
