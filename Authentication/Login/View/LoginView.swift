@@ -38,7 +38,8 @@ public extension LoginViewType {
 /** Default login view. */
 internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
-    // - Warning: This delegate must be set before calling the `render` function.
+    // - Warning: This delegate must be set before calling the `render` function,
+    //    if you want to use your own instead of default one.
     internal lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate() //swiftlint:disable:this weak_delegate
 
     internal var state: LoginViewState = (email: (selected: false, content: .initialEmpty),

@@ -34,7 +34,8 @@ public extension SignupViewType {
 /** Default signup view. */
 internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
-    // - Warning: This delegate must be set before calling the `render` function.
+    // - Warning: This delegate must be set before calling the `render` function
+    //    or setting any `SignupViewType` setter, or the app will crash.
     internal var delegate: SignupViewDelegate! //swiftlint:disable:this weak_delegate
     
     internal var state: SignupViewState = (email: (selected: false, content: .initialEmpty),
