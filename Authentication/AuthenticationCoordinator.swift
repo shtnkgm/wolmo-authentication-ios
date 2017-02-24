@@ -155,9 +155,9 @@ public extension AuthenticationCoordinator {
         let signupViewConfiguration = _componentsFactory.createSignupViewConfiguration()
         let viewModelFactory: ([LoginProvider]) -> SignupViewModelType = { [unowned self] in
             return self._componentsFactory.createSignupViewModel(withSessionService: self.sessionService,
-                                                            credentialsValidator: credentialsValidator,
-                                                            configuration: signupViewConfiguration,
-                                                            loginProviders: $0)
+                                                                 credentialsValidator: credentialsValidator,
+                                                                 configuration: signupViewConfiguration,
+                                                                 loginProviders: $0)
         }
         let signupViewDelegate = _componentsFactory.createSignupViewDelegate(withConfiguration: signupViewConfiguration)
         let viewFactory: ([LoginProvider]) -> SignupViewType = { [unowned self] in

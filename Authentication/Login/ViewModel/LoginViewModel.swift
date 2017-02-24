@@ -209,7 +209,7 @@ fileprivate extension LoginViewModel {
         let usersSignal = _logInProvidersUserSignal.flatMap(.latest) {
             // Weak self because the original signal will continue to exists
             // independently of this view models existance (or deallocation).
-            // And so if this is the second view presented, self won't exists but the signal yes.
+            // And so if this is the second view presented, self won't exist but the signal yes.
             [weak self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
                 if let existingSelf = self, !existingSelf._ignoreProviders {
                     return existingSelf.sessionServiceLogInWithExecuting(user: loginProviderUserType)

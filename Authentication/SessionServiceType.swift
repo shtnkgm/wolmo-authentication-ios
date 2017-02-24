@@ -62,7 +62,7 @@ public protocol SessionServiceType {
     /**
      This method takes care of logging in (or signing up, if not
      already registered) the passed user.
-     It's meant to be used alongisde login providers, like
+     It's meant to be used alongside login providers, like
      the FacebookLoginProvider.
      
      Be aware that in this method you must take care of creating
