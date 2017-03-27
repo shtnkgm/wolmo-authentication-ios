@@ -10,6 +10,7 @@ import Foundation
 import ReactiveCocoa
 import ReactiveSwift
 import Result
+import Core
 
 /**
     Protocol for login view models.
@@ -130,79 +131,6 @@ public final class LoginViewModel<User, SessionService: SessionServiceType> : Lo
     
 }
 
-//---------------------------------------
-//TODO: Extract to WolmoCore
-
-extension SignalProducer {
-    
-    func toResultSignalProducer() -> SignalProducer<Result<Value, Error>, NoError> {
-        return map { Result<Value, Error>.success($0) }
-            .flatMapError { error -> SignalProducer<Result<Value, Error>, NoError> in
-                let errorValue = Result<Value, Error>.failure(error)
-                return SignalProducer<Result<Value, Error>, NoError>(value: errorValue)
-        }
-    }
-    
-}
-
-extension SignalProducer where Value: ResultProtocol {
-    
-    func filterValues() -> SignalProducer<Value.Value, Error> {
-        return filter {
-            if let _ = $0.value {
-                return true
-            }
-            return false
-        }.map { $0.value! }
-    }
-    
-    func filterErrors() -> SignalProducer<Value.Error, Error> {
-        return filter {
-            if let _ = $0.error {
-                return true
-            }
-            return false
-        }.map { $0.error! }
-    }
-    
-}
-
-extension Signal where Value: ResultProtocol {
-    
-    func filterValues() -> Signal<Value.Value, Error> {
-        return filter {
-            if let _ = $0.value {
-                return true
-            }
-            return false
-        }.map { $0.value! }
-    }
-    
-    func filterErrors() -> Signal<Value.Error, Error> {
-        return filter {
-            if let _ = $0.error {
-                return true
-            }
-            return false
-        }.map { $0.error! }
-    }
-    
-}
-
-extension Signal {
-    
-    func toResultSignal() -> Signal<Result<Value, Error>, NoError> {
-        return map { Result<Value, Error>.success($0) }
-            .flatMapError { error -> SignalProducer<Result<Value, Error>, NoError> in
-                let errorValue = Result<Value, Error>.failure(error)
-                return SignalProducer<Result<Value, Error>, NoError>(value: errorValue)
-        }
-    }
-    
-}
-
-//-------------------
-
 fileprivate extension LoginViewModel {
     
     fileprivate func initializeLogInUserSignal() -> Signal<Result<User, SessionServiceError>, NoError> {
@@ -231,7 +159,7 @@ fileprivate extension LoginViewModel {
     private func sessionServiceLogInWithExecuting(user: LoginProviderUserType) -> SignalProducer<Result<User, SessionServiceError>, NoError> {
         return _sessionService.logIn(withUser: user)
             .on(started: { [unowned self] in
-                self._loginProvidersExecutingObserver.send(value: true)
+                    self._loginProvidersExecutingObserver.send(value: true)
                 }, failed: { [unowned self] _ in
                     self._loginProvidersExecutingObserver.send(value: false)
                 }, completed: { [unowned self] in

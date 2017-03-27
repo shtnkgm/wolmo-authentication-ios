@@ -210,7 +210,7 @@ public extension LoginComponentsFactory {
     
     public func createLoginView(withDelegate delegate: LoginViewDelegate,
                                 loginProviders: [LoginProvider]) -> LoginViewType {
-        let view = LoginView.loadFromNib(inBundle: FrameworkBundle)!
+        let view: LoginView = LoginView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
         view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view
@@ -359,7 +359,7 @@ extension SignupComponentsFactory {
     
     public func createSignupView(withDelegate delegate: SignupViewDelegate,
                                  loginProviders: [LoginProvider]) -> SignupViewType {
-        let view = SignupView.loadFromNib(inBundle: FrameworkBundle)!
+        let view: SignupView = SignupView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
         view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view

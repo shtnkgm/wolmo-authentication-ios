@@ -10,6 +10,7 @@ import Foundation
 import ReactiveCocoa
 import ReactiveSwift
 import Result
+import Core
 
 /**
      Protocol for signup view models.
