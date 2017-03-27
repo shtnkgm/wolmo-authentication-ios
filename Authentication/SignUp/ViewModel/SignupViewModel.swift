@@ -127,6 +127,7 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
          - Warning: The `usernameEnabled` and `passwordConfirmationEnabled` properties should be
          consistent with the view that will be used.
      */
+    //swiftlint:disable:next function_body_length
     internal init(sessionService: SessionService,
                   credentialsValidator: SignupCredentialsValidator = SignupCredentialsValidator(),
                   usernameEnabled: Bool = true,

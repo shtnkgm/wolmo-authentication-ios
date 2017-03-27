@@ -11,7 +11,7 @@
      that add behaviour to certain events from
      the signup process.
  */
-public protocol SignupControllerDelegate {
+public protocol SignupControllerDelegate {  //swiftlint:disable:this class_delegate_protocol
     
     /**
         Property indicating if the signup errors

@@ -9,7 +9,7 @@
 /**
      Protocol for handling transition events occured during signup.
  */
-public protocol SignupControllerTransitionDelegate {
+public protocol SignupControllerTransitionDelegate {    //swiftlint:disable:this class_delegate_protocol
     
     /**
          Function that reacts to the user signing up

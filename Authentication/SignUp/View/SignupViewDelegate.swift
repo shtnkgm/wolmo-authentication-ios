@@ -10,7 +10,7 @@
      Delegate for any extra configuration
      to the signup view when rendered.
  */
-public protocol SignupViewDelegate {
+public protocol SignupViewDelegate {    //swiftlint:disable:this class_delegate_protocol
     
     /** Palettes ued to configure all login view elements possible. */
     var colorPalette: ColorPaletteType { get }

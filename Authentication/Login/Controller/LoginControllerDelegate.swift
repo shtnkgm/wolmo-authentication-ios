@@ -11,7 +11,7 @@
     that add behaviour to certain events from
     the login process.
 */
-public protocol LoginControllerDelegate {
+public protocol LoginControllerDelegate {   //swiftlint:disable:this class_delegate_protocol
     
     /**
         Property indicating if the login errors
