@@ -8,6 +8,7 @@
 
 import UIKit
 import Authentication
+import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,9 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
-        let componentsFactory = AuthenticationComponentsFactory(logo: UIImage(named: "default")!,
-                                                                termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
+        let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
+                                                          showLoginProviders: true)
+        let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
+                                                                signupConfiguration: signupConfiguration,
+                                                                loginProviders: [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider(), ExampleSuccessLoginProvider()]) {
+            let storyboard = UIStoryboard(name: "Main", bundle: .none)
             return storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
         }
         authenticationCoordinator = AuthenticationCoordinator(sessionService: exampleSessionService,
@@ -55,6 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
     }
     
 }

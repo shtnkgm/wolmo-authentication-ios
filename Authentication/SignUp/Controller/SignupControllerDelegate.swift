@@ -11,7 +11,7 @@
      that add behaviour to certain events from
      the signup process.
  */
-public protocol SignupControllerDelegate {
+public protocol SignupControllerDelegate {  //swiftlint:disable:this class_delegate_protocol
     
     /**
         Property indicating if the signup errors
@@ -54,7 +54,7 @@ public protocol SignupControllerDelegate {
          - Parameter controller: SignupController where the event is happening.
          - Parameter with: error resulting from the sign up attempt.
      */
-    func didSignUp(in controller: SignupController, with error: SessionServiceError)
+    func didFailSignUp(in controller: SignupController, with error: SessionServiceError)
     
     /**
          Function called when any new username introduced is valid,
@@ -159,7 +159,7 @@ extension SignupControllerDelegate {
         app.isNetworkActivityIndicatorVisible = false
     }
     
-    public func didSignUp(in controller: SignupController, with error: SessionServiceError) {
+    public func didFailSignUp(in controller: SignupController, with error: SessionServiceError) {
         let app = UIApplication.shared
         app.isNetworkActivityIndicatorVisible = false
         if let errorLabel = controller.signupView.signUpErrorLabel {

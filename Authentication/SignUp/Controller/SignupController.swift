@@ -42,7 +42,7 @@ public final class SignupController: UIViewController {
         _viewModel = configuration.viewModel
         _signupViewFactory = configuration.viewFactory
         _transitionDelegate = configuration.transitionDelegate
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: .none, bundle: .none)
         addKeyboardObservers()
     }
 
@@ -72,6 +72,16 @@ public final class SignupController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _viewModel.bindProviders()
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        _viewModel.unbindProviders()
+    }
+    
 }
 
 private extension SignupController {
@@ -90,15 +100,19 @@ private extension SignupController {
                 ? self._delegate.willExecuteSignUp(in: self)
                 : self._delegate.didExecuteSignUp(in: self)
             self.signupView.signUpButtonPressed = executing
+            for providerButton in self.signupView.loginProviderButtons {
+                providerButton.alpha = executing ? 0.5 : 1
+                providerButton.isUserInteractionEnabled = !executing
+            }
         }
         
-        _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didSignUp(in: self, with: $0) }
+        _viewModel.signUpErrors.observeValues { [unowned self] in self._delegate.didFailSignUp(in: self, with: $0) }
         _viewModel.signUpSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onSignupSuccess(from: self) }
     }
     
     func bindUsernameElements() {
         if let usernameTextField = signupView.usernameTextField {
-            _viewModel.username <~ usernameTextField.reactive.textValues.map { $0 ?? "" }
+            _viewModel.username <~ usernameTextField.reactive.continuousTextValues.map { $0 ?? "" }
             _viewModel.usernameValidationErrors.signal.observeValues { [unowned self] errors in
                 if errors.isEmpty {
                     self._delegate.didPassUsernameValidation(in: self)
@@ -115,7 +129,7 @@ private extension SignupController {
     }
     
     func bindEmailElements() {
-        _viewModel.email <~ signupView.emailTextField.reactive.textValues.map { $0 ?? "" }
+        _viewModel.email <~ signupView.emailTextField.reactive.continuousTextValues.map { $0 ?? "" }
         _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassEmailValidation(in: self)
@@ -131,8 +145,7 @@ private extension SignupController {
     }
     
     func bindPasswordElements() {
-        _viewModel.password <~
-            signupView.passwordTextField.reactive.textValues
+        _viewModel.password <~ signupView.passwordTextField.reactive.continuousTextValues
                 .map { $0 ?? "" }
                 .on(value: { [unowned self] text in
                     self.signupView.passwordVisibilityButton?.isHidden = text.isEmpty
@@ -158,7 +171,7 @@ private extension SignupController {
     
     func bindPasswordConfirmationElements() {
         if let passwordConfirmationTextField = signupView.passwordConfirmTextField {
-            _viewModel.passwordConfirmation <~ passwordConfirmationTextField.reactive.textValues
+            _viewModel.passwordConfirmation <~ passwordConfirmationTextField.reactive.continuousTextValues
                 .map { $0 ?? "" }
                 .on(value: { [unowned self] text in
                 self.signupView.passwordConfirmVisibilityButton?.isHidden = text.isEmpty

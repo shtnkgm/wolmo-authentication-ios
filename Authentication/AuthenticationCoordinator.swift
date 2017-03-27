@@ -103,15 +103,24 @@ public extension AuthenticationCoordinator {
          - Returns: A valid login controller configuration to use.
      */
     internal func createLoginControllerConfiguration() -> LoginControllerConfiguration {
+        let credentialsValidator = _componentsFactory.createLogInCredentialsValidator()
+        let viewModelFactory: ([LoginProvider]) -> LoginViewModelType = { [unowned self] in
+            return self._componentsFactory.createLoginViewModel(withSessionService: self.sessionService,
+                                                    credentialsValidator: credentialsValidator,
+                                                    loginProviders: $0)
+        }
         let loginViewConfiguration = _componentsFactory.createLoginViewConfiguration()
         let loginViewDelegate = _componentsFactory.createLoginViewDelegate(withConfiguration: loginViewConfiguration)
-        let createLoginView: () -> LoginViewType = { [unowned self] in self._componentsFactory.createLoginView(withDelegate: loginViewDelegate) }
+        let viewFactory: ([LoginProvider]) -> LoginViewType = { [unowned self] in
+            self._componentsFactory.createLoginView(withDelegate: loginViewDelegate,
+                                                    loginProviders: $0)
+        }
         return LoginControllerConfiguration(
-            viewModel: _componentsFactory.createLoginViewModel(withSessionService: sessionService,
-                credentialsValidator: _componentsFactory.createLogInCredentialsValidator()),
-            viewFactory: createLoginView,
+            viewModelFactory: viewModelFactory,
+            viewFactory: viewFactory,
             transitionDelegate: _componentsFactory.createLoginControllerTransitionDelegate() ?? self,
-            delegate: _componentsFactory.createLoginControllerDelegate())
+            delegate: _componentsFactory.createLoginControllerDelegate(),
+            loginProviders: _componentsFactory.createLoginProviders())
     }
 
 }
@@ -142,17 +151,26 @@ public extension AuthenticationCoordinator {
          - Returns: A valid signup controller configuration to use.
      */
     internal func createSignupControllerConfiguration() -> SignupControllerConfiguration {
+        let credentialsValidator = _componentsFactory.createSignUpCredentialsValidator()
         let signupViewConfiguration = _componentsFactory.createSignupViewConfiguration()
+        let viewModelFactory: ([LoginProvider]) -> SignupViewModelType = { [unowned self] in
+            return self._componentsFactory.createSignupViewModel(withSessionService: self.sessionService,
+                                                                 credentialsValidator: credentialsValidator,
+                                                                 configuration: signupViewConfiguration,
+                                                                 loginProviders: $0)
+        }
         let signupViewDelegate = _componentsFactory.createSignupViewDelegate(withConfiguration: signupViewConfiguration)
-        let createSignupView: () -> SignupViewType = { [unowned self] in self._componentsFactory.createSignupView(withDelegate: signupViewDelegate) }
+        let viewFactory: ([LoginProvider]) -> SignupViewType = { [unowned self] in
+            return self._componentsFactory.createSignupView(withDelegate: signupViewDelegate,
+                                                            loginProviders: $0)
+        }
         return SignupControllerConfiguration(
-            viewModel: _componentsFactory.createSignupViewModel(withSessionService: sessionService,
-                credentialsValidator: _componentsFactory.createSignUpCredentialsValidator(),
-                configuration: signupViewConfiguration),
-            viewFactory: createSignupView,
+            viewModelFactory: viewModelFactory,
+            viewFactory: viewFactory,
             transitionDelegate: _componentsFactory.createSignupControllerTransitionDelegate() ?? self,
             delegate: _componentsFactory.createSignupControllerDelegate(),
-            termsAndServicesURL: signupViewConfiguration.termsAndServicesURL)
+            termsAndServicesURL: signupViewConfiguration.termsAndServicesURL,
+            loginProviders: _componentsFactory.createLoginProviders())
     }
     
     /**
@@ -177,7 +195,7 @@ public extension AuthenticationCoordinator {
          - Returns: A valid recover password controller to use.
      */
     internal func createRecoverPasswordController() -> RecoverPasswordController {
-        //(todo)
+        //TODO: When done, put hidden in false for the recover password view in login.
         return RecoverPasswordController()
     }
     

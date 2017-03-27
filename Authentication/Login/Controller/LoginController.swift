@@ -73,6 +73,16 @@ public final class LoginController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        _viewModel.bindProviders()
+    }
+    
+    public override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        _viewModel.unbindProviders()
+    }
+    
 }
 
 fileprivate extension LoginController {
@@ -82,20 +92,24 @@ fileprivate extension LoginController {
         bindPasswordElements()
         bindButtons()
         setTextfieldOrder()
-        
+        // When one login is executing, no other login button can be pressed.
         _viewModel.logInExecuting.observeValues { [unowned self] executing in
             executing
                 ? self._delegate.willExecuteLogIn(in: self)
                 : self._delegate.didExecuteLogIn(in: self)
             self.loginView.logInButtonPressed = executing
+            for providerButton in self.loginView.loginProviderButtons {
+                providerButton.alpha = executing ? 0.5 : 1
+                providerButton.isUserInteractionEnabled = !executing
+            }
         }
         
-        _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didLogIn(in: self, with: $0) }
+        _viewModel.logInErrors.observeValues { [unowned self] in self._delegate.didFailLogIn(in: self, with: $0) }
         _viewModel.logInSuccessful.observeValues { [unowned self] _ in self._transitionDelegate.onLoginSuccess(from: self) }
     }
     
     private func bindEmailElements() {
-        _viewModel.email <~ loginView.emailTextField.reactive.textValues.map { $0 ?? "" }
+        _viewModel.email <~ loginView.emailTextField.reactive.continuousTextValues.map { $0 ?? "" }
         _viewModel.emailValidationErrors.signal.observeValues { [unowned self] errors in
             if errors.isEmpty {
                 self._delegate.didPassEmailValidation(in: self)
@@ -111,7 +125,7 @@ fileprivate extension LoginController {
     }
     
     private func bindPasswordElements() {
-        _viewModel.password <~ loginView.passwordTextField.reactive.textValues
+        _viewModel.password <~ loginView.passwordTextField.reactive.continuousTextValues
             .map { $0 ?? "" }
             .on(value: { [unowned self] text in
             self.loginView.passwordVisibilityButton?.isHidden = text.isEmpty

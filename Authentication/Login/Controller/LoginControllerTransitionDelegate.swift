@@ -9,7 +9,7 @@
 /**
      Protocol for handling transition events occured during login.
  */
-public protocol LoginControllerTransitionDelegate {
+public protocol LoginControllerTransitionDelegate { //swiftlint:disable:this class_delegate_protocol
     
     /**
          Function that reacts to the user logging in

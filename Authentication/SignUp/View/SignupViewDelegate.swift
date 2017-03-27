@@ -10,12 +10,13 @@
      Delegate for any extra configuration
      to the signup view when rendered.
  */
-public protocol SignupViewDelegate {
+public protocol SignupViewDelegate {    //swiftlint:disable:this class_delegate_protocol
     
     /** Palettes ued to configure all login view elements possible. */
     var colorPalette: ColorPaletteType { get }
     var fontPalette: FontPaletteType { get }
     var termsAndServicesURL: URL { get }
+    var showLoginProviders: Bool { get }
     
     /**
         Function to configure all view elements according to the palettes.
@@ -42,11 +43,13 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
     public let termsAndServicesURL: URL
+    public let showLoginProviders: Bool
     
     internal init(configuration: SignupViewConfigurationType) {
         colorPalette = configuration.colorPalette
         fontPalette = configuration.fontPalette
         termsAndServicesURL = configuration.termsAndServicesURL
+        showLoginProviders = configuration.showLoginProviders
     }
     
     internal convenience init(termsAndServicesURL: URL) {

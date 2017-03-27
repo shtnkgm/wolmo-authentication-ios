@@ -10,7 +10,7 @@
     Delegate for any extra configuration
     to the login view when rendered.
 */
-public protocol LoginViewDelegate {
+public protocol LoginViewDelegate { //swiftlint:disable:this class_delegate_protocol
     
     /** Palettes used to configure all login view elements possible. */
     var colorPalette: ColorPaletteType { get }

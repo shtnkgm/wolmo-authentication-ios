@@ -57,6 +57,18 @@ public final class ExampleSessionService: SessionServiceType {
         }
     }
     
+    public func logIn(withUser user: LoginProviderUserType) -> SignalProducer<ExampleUser, SessionServiceError> {
+        let dispatchTime = DispatchTime.now() + 2.0
+        switch user {
+        case .facebook(let fbUser):
+            let exampleUser = ExampleUser(email: fbUser.email?.raw ?? "", password: "")
+            return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)
+        case .custom(let name, _):
+            print("Signing up a user for service \(name) not supported")
+            return signUpFailure(dispatchTime: dispatchTime, fromProvider: true)
+        }
+    }
+
     private func logInSuccess(user: ExampleUser, dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
@@ -101,10 +113,13 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    private func signUpFailure(dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
+    private func signUpFailure(dispatchTime: DispatchTime, fromProvider: Bool = false) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-                observer.send(error: .invalidSignUpCredentials(.none))
+                let error: SessionServiceError = fromProvider ? .loginProviderError(name: "Some name",
+                        error: SimpleLoginProviderError(localizedMessage: "There was an error login with that provider"))
+                                                              : .invalidSignUpCredentials(.none)
+                observer.send(error: error)
             }
         }
     }

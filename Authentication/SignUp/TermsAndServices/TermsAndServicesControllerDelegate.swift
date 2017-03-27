@@ -12,7 +12,7 @@
      the defaut methods to add behaviour to your
      terms and services HTML loading and presenting process.
  */
-public protocol TermsAndServicesControllerDelegate {
+public protocol TermsAndServicesControllerDelegate {    //swiftlint:disable:this class_delegate_protocol
 
     /**
         Function called when the terms and services content starts loading.

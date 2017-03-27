@@ -23,6 +23,7 @@ public protocol LoginViewType: Renderable, LoginFormType {
     var signupButton: UIButton { get }
     var recoverPasswordLabel: UILabel? { get }
     var recoverPasswordButton: UIButton { get }
+    var loginProviderButtons: [UIView] { get }
     
 }
 
@@ -37,11 +38,27 @@ public extension LoginViewType {
 /** Default login view. */
 internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
+    // - Warning: This delegate must be set before calling the `render` function,
+    //    if you want to use your own instead of default one.
     internal lazy var delegate: LoginViewDelegate = DefaultLoginViewDelegate() //swiftlint:disable:this weak_delegate
+
+    internal var state: LoginViewState = (email: (selected: false, content: .initialEmpty),
+                                          password: (selected: false, content: .initialEmpty),
+                                          logInButton: (executing: false, enabled: false))
+    
+    internal let tapRecognizer = UITapGestureRecognizer()
+    
+    override func awakeFromNib() {
+        addGestureRecognizer(tapRecognizer)
+        tapRecognizer.reactive.stateChanged.observeValues { [unowned self] _ in
+            self.endEditing(true)
+        }
+    }
     
     internal var logoImageView: UIImageView { return logoImageViewOutlet }
     @IBOutlet weak var logoImageViewOutlet: UIImageView!
     
+// MARK: - Textfields and errors
     internal var emailTextField: UITextField { return emailTextFieldOutlet }
     @IBOutlet weak var emailTextFieldOutlet: UITextField! {
         didSet { emailTextFieldOutlet.placeholder = emailPlaceholderText }
@@ -67,7 +84,8 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     @IBOutlet weak var passwordVisibilityButtonOutlet: UIButton! {
         didSet { passwordVisibilityButtonOutlet.isHidden = true }
     }
-    
+
+// MARK: - login buttons
     internal var logInButton: UIButton { return logInButtonOutlet }
     @IBOutlet weak var logInButtonOutlet: UIButton! {
         didSet {
@@ -76,8 +94,26 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         }
     }
     
-    @IBOutlet weak var toSignupLabel: UILabel! {
-        didSet { toSignupLabel.text = signupLabelText }
+    // - Warning: For these buttons to be seen, this var must be
+    //      set before calling the `render` function.
+    internal var loginProviderButtons: [UIView] = [] {
+        didSet {
+            if loginProviderButtons.isEmpty {
+                loginAndLoginProvidersSeparator.isHidden = true
+            }
+            for providerButton in loginProviderButtons {
+                loginProviderButtonsStackView.addArrangedSubview(providerButton)
+                providerButton.layer.cornerRadius = 6.0
+                providerButton.translatesAutoresizingMaskIntoConstraints = false
+                providerButton.heightAnchor.constraint(equalTo: logInButton.heightAnchor).isActive = true
+            }
+        }
+    }
+    
+// MARK: - Navigation buttons
+    internal var signupLabel: UILabel? { return signupLabelOutlet }
+    @IBOutlet weak var signupLabelOutlet: UILabel! {
+        didSet { signupLabelOutlet.text = signupLabelText }
     }
     
     internal var signupButton: UIButton { return signupButtonOutlet }
@@ -92,7 +128,8 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
             recoverPasswordButtonOutlet.isHidden = true
         }
     }
-    
+
+// MARK: - Container views
     @IBOutlet weak var emailTextFieldViewOutlet: UIView! {
         didSet {
             emailTextFieldViewOutlet.layer.borderWidth = 1
@@ -109,7 +146,11 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     @IBOutlet weak var emailErrorsView: UIView!
     @IBOutlet weak var passwordErrorsView: UIView!
-
+    
+    @IBOutlet weak var loginAndLoginProvidersSeparator: UIView!
+    @IBOutlet weak var loginProviderButtonsStackView: UIStackView!
+    
+// MARK: - LoginViewType setters
     internal var emailTextFieldValid = true {
         didSet { emailTextFieldValidWasSet() }
     }
@@ -154,75 +195,146 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
 }
 
-private extension LoginView {
+// MARK: - state functions
+fileprivate extension LoginView {
     
-    func emailTextFieldValidWasSet() {
-        if !emailTextFieldSelected {
-            let color: CGColor
-            if emailTextFieldValid {
-                color = delegate.colorPalette.textfieldsNormal.cgColor
-                emailErrorsView.isHidden = true
-            } else {
-                color = delegate.colorPalette.textfieldsError.cgColor
-                emailErrorsView.isHidden = false
-            }
-            emailTextFieldViewOutlet.layer.borderColor = color
-        } else {
-            emailErrorsView.isHidden = true
+    fileprivate func updateState(event: LoginViewEvent) {
+        let newState = nextState(state: state, event: event)
+        renderState(state: newState)
+        state = newState
+    }
+    
+    //swiftlint:disable:next function_body_length cyclomatic_complexity
+    private func nextState(state: LoginViewState, event: LoginViewEvent) -> LoginViewState {
+        switch event {
+        case .emailSelected:
+            let emailState = (selected: true, content: state.email.content)
+            return (email: emailState, password: state.password, logInButton: state.logInButton)
+        case .emailUnselected:
+            let emailState = (selected: false, content: state.email.content)
+            return (email: emailState, password: state.password, logInButton: state.logInButton)
+        case .emailValid:
+            let emailState = (selected: state.email.selected, content: TextFieldContentState.valid)
+            return (email: emailState, password: state.password, logInButton: state.logInButton)
+        case .emailInvalid:
+            let emailState = (selected: state.email.selected, content: TextFieldContentState.invalid)
+            return (email: emailState, password: state.password, logInButton: state.logInButton)
+        case .passwordSelected:
+            let passwordState = (selected: true, content: state.password.content)
+            return (email: state.email, password: passwordState, logInButton: state.logInButton)
+        case .passwordUnselected:
+            let passwordState = (selected: false, content: state.password.content)
+            return (email: state.email, password: passwordState, logInButton: state.logInButton)
+        case .passwordValid:
+            let passwordState = (selected: state.password.selected, content: TextFieldContentState.valid)
+            return (email: state.email, password: passwordState, logInButton: state.logInButton)
+        case .passwordInvalid:
+            let passwordState = (selected: state.password.selected, content: TextFieldContentState.invalid)
+            return (email: state.email, password: passwordState, logInButton: state.logInButton)
+        case .logInButtonPressed:
+            let logInButtonState = (executing: true, enabled: state.logInButton.enabled)
+            return (email: state.email, password: state.password, logInButton: logInButtonState)
+        case .logInButtonUnpressed:
+            let logInButtonState = (executing: false, enabled: state.logInButton.enabled)
+            return (email: state.email, password: state.password, logInButton: logInButtonState)
+        case .logInButtonEnabled:
+            let logInButtonState = (executing: state.logInButton.executing, enabled: true)
+            return (email: state.email, password: state.password, logInButton: logInButtonState)
+        case .logInButtonDisabled:
+            let logInButtonState = (executing: state.logInButton.executing, enabled: false)
+            return (email: state.email, password: state.password, logInButton: logInButtonState)
         }
     }
     
-    func emailTextFieldSelectedWasSet() {
-        if emailTextFieldSelected {
+    private func renderState(state: LoginViewState) {
+        renderEmailState(state: state.email)
+        renderPasswordState(state: state.password)
+        renderLogInButtonState(state: state.logInButton)
+    }
+    
+    private func renderEmailState(state: TextFieldState) {
+        switch state {
+        case (selected: true, _):
             emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
             emailErrorsView.isHidden = true
-        } else {
-            let valid = emailTextFieldValid
-            emailTextFieldValid = valid
+        case (selected: false, .initialEmpty):
+            emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsNormal.cgColor
+            emailErrorsView.isHidden = true
+        case (selected: false, .valid):
+            emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsNormal.cgColor
+            emailErrorsView.isHidden = true
+        case (selected: false, .invalid):
+            emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsError.cgColor
+            emailErrorsView.isHidden = false
         }
     }
     
-    func passwordTextFieldValidWasSet() {
-        if !passwordTextFieldSelected {
-            let color: CGColor
-            if passwordTextFieldValid {
-                color = delegate.colorPalette.textfieldsNormal.cgColor
-                passwordErrorsView.isHidden = true
-            } else {
-                color = delegate.colorPalette.textfieldsError.cgColor
-                passwordErrorsView.isHidden = false
-            }
-            passwordTextFieldAndButtonViewOutlet.layer.borderColor = color
-        } else {
-            passwordErrorsView.isHidden = true
-        }
-    }
-    
-    func passwordTextFieldSelectedWasSet() {
-        if passwordTextFieldSelected {
+    private func renderPasswordState(state: TextFieldState) {
+        switch state {
+        case (selected: true, _):
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
             passwordErrorsView.isHidden = true
-        } else {
-            let valid = passwordTextFieldValid
-            passwordTextFieldValid = valid
+        case (selected: false, .initialEmpty):
+            passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsNormal.cgColor
+            passwordErrorsView.isHidden = true
+        case (selected: false, .valid):
+            passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsNormal.cgColor
+            passwordErrorsView.isHidden = true
+        case (selected: false, .invalid):
+            passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsError.cgColor
+            passwordErrorsView.isHidden = false
         }
     }
     
-    func logInButtonEnabledWasSet() {
-        let colorPalette = delegate.colorPalette
-        let color = logInButtonEnabled ? colorPalette.mainButtonEnabled : colorPalette.mainButtonDisabled
-        logInButton.backgroundColor = color
+    private func renderLogInButtonState(state: ButtonState) {
+        switch state {
+        case (executing: true, enabled: true):
+            logInButton.backgroundColor = delegate.colorPalette.mainButtonExecuted
+        case (executing: true, enabled: false):
+            logInButton.backgroundColor = delegate.colorPalette.mainButtonDisabled
+        case (executing: false, enabled: false):
+            logInButton.backgroundColor = delegate.colorPalette.mainButtonDisabled
+        case (executing: false, enabled: true):
+            logInButton.backgroundColor = delegate.colorPalette.mainButtonEnabled
+        }
     }
     
-    func logInButtonPressedWasSet() {
-        let colorPalette = delegate.colorPalette
-        let color = logInButtonPressed ? colorPalette.mainButtonExecuted : colorPalette.mainButtonEnabled
-        logInButton.backgroundColor = color
-        emailErrorsView.isHidden = true
-        passwordErrorsView.isHidden = true
+}
+
+// MARK: - setters reaction extension
+fileprivate extension LoginView {
+    
+    fileprivate func emailTextFieldValidWasSet() {
+        let event: LoginViewEvent = emailTextFieldValid ? .emailValid : .emailInvalid
+        updateState(event: event)
     }
     
-    func passwordVisibleWasSet() {
+    fileprivate func emailTextFieldSelectedWasSet() {
+        let event: LoginViewEvent = emailTextFieldSelected ? .emailSelected : .emailUnselected
+        updateState(event: event)
+    }
+    
+    fileprivate func passwordTextFieldValidWasSet() {
+        let event: LoginViewEvent = passwordTextFieldValid ? .passwordValid : .passwordInvalid
+        updateState(event: event)
+    }
+    
+    fileprivate func passwordTextFieldSelectedWasSet() {
+        let event: LoginViewEvent = passwordTextFieldSelected ? .passwordSelected : .passwordUnselected
+        updateState(event: event)
+    }
+    
+    fileprivate func logInButtonEnabledWasSet() {
+        let event: LoginViewEvent = logInButtonEnabled ? .logInButtonEnabled : .logInButtonDisabled
+        updateState(event: event)
+    }
+    
+    fileprivate func logInButtonPressedWasSet() {
+        let event: LoginViewEvent = logInButtonPressed ? .logInButtonPressed : .logInButtonUnpressed
+        updateState(event: event)
+    }
+    
+    fileprivate func passwordVisibleWasSet() {
         // Changing enabled property for the
         // font setting to take effect, which is
         // necessary for it not to shrink.

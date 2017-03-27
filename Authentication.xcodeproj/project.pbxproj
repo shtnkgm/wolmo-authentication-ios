@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9D1DFEFA1C8DCE0A00F0A37C /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; };
-		9D1DFEFB1C8DCE0A00F0A37C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; };
 		9D1DFF021C8DCFB300F0A37C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF001C8DCFB300F0A37C /* Nimble.framework */; };
 		9D1DFF031C8DCFB300F0A37C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF011C8DCFB300F0A37C /* Quick.framework */; };
 		9D1DFF051C8DCFC800F0A37C /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF001C8DCFB300F0A37C /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -18,6 +16,15 @@
 		9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */; };
+		CE0F7BA71E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */; };
+		CE0F7BA81E3FAC3E00C44C86 /* FacebookLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */; };
+		CE0F7BA91E3FAC3E00C44C86 /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */; };
+		CE0F7BAF1E3FB66700C44C86 /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */; };
+		CE0F7BB01E3FB66700C44C86 /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */; };
+		CE0F7BB11E3FB66700C44C86 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */; };
+		CE0F7BB21E3FB66700C44C86 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */; };
+		CE0F7BB31E3FB66700C44C86 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */; };
+		CE0F7BB41E3FB67B00C44C86 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
 		CE111DA31D4FA6A50083C99E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA11D4FA6A50083C99E /* Email.swift */; };
 		CE111DA91D4FA6C20083C99E /* MockLoginTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */; };
 		CE111DAA1D4FA6C20083C99E /* MockSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DA71D4FA6C20083C99E /* MockSessionService.swift */; };
@@ -29,18 +36,12 @@
 		CE111DC01D4FA70D0083C99E /* InlineValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DBA1D4FA70D0083C99E /* InlineValidator.swift */; };
 		CE111DC11D4FA70D0083C99E /* LengthValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DBB1D4FA70D0083C99E /* LengthValidators.swift */; };
 		CE111DC21D4FA70D0083C99E /* TextInputValidatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DBC1D4FA70D0083C99E /* TextInputValidatorType.swift */; };
-		CE111DCF1D4FA7340083C99E /* LoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DC51D4FA7340083C99E /* LoginConfiguration.swift */; };
-		CE111DD01D4FA7340083C99E /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DC61D4FA7340083C99E /* LoginController.swift */; };
-		CE111DD11D4FA7340083C99E /* LoginControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DC71D4FA7340083C99E /* LoginControllerDelegate.swift */; };
 		CE111DD21D4FA7340083C99E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DC81D4FA7340083C99E /* LoginView.swift */; };
 		CE111DD31D4FA7340083C99E /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE111DC91D4FA7340083C99E /* LoginView.xib */; };
 		CE111DD41D4FA7340083C99E /* LoginViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DCA1D4FA7340083C99E /* LoginViewConfiguration.swift */; };
 		CE111DD51D4FA7340083C99E /* LoginViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DCB1D4FA7340083C99E /* LoginViewDelegate.swift */; };
 		CE111DD61D4FA7340083C99E /* LoginCredentialsValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DCD1D4FA7340083C99E /* LoginCredentialsValidator.swift */; };
 		CE111DD71D4FA7340083C99E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DCE1D4FA7340083C99E /* LoginViewModel.swift */; };
-		CE111DE41D4FA7390083C99E /* SignupConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DDA1D4FA7390083C99E /* SignupConfiguration.swift */; };
-		CE111DE51D4FA7390083C99E /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DDB1D4FA7390083C99E /* SignupController.swift */; };
-		CE111DE61D4FA7390083C99E /* SignupControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DDC1D4FA7390083C99E /* SignupControllerDelegate.swift */; };
 		CE111DE71D4FA7390083C99E /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DDD1D4FA7390083C99E /* SignupView.swift */; };
 		CE111DE81D4FA7390083C99E /* SignupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE111DDE1D4FA7390083C99E /* SignupView.xib */; };
 		CE111DE91D4FA7390083C99E /* SignupViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111DDF1D4FA7390083C99E /* SignupViewConfiguration.swift */; };
@@ -61,17 +62,41 @@
 		CE111E101D4FA8980083C99E /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0D1D4FA8980083C99E /* ColorPalette.swift */; };
 		CE111E111D4FA8980083C99E /* FontPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E0E1D4FA8980083C99E /* FontPalette.swift */; };
 		CE111E151D4FC8560083C99E /* SignupViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */; };
-		CE111E171D4FCED70083C99E /* LoginControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */; };
-		CE111E191D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */; };
+		CE1CCF081E3FBF890059C191 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */; };
+		CE1CCF091E3FBF890059C191 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF071E3FBF890059C191 /* Bolts.framework */; };
+		CE1CCF0A1E3FC0350059C191 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
+		CE1CCF0B1E3FC0350059C191 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; };
+		CE1CCF0C1E3FC0350059C191 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */; };
+		CE1CCF0D1E3FC0350059C191 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; };
+		CE1CCF0E1E3FC0350059C191 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
+		CE1CCF0F1E3FC0350059C191 /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */; };
+		CE1CCF101E3FC0350059C191 /* FacebookShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */; };
+		CE1CCF111E3FC0350059C191 /* FacebookLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */; };
+		CE1CCF121E3FC0350059C191 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */; };
+		CE1CCF131E3FC0350059C191 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */; };
+		CE1CCF141E3FC0350059C191 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */; };
+		CE1CCF151E3FC0350059C191 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE1CCF071E3FBF890059C191 /* Bolts.framework */; };
+		CE1CCF161E3FC1830059C191 /* ReactiveSwift.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE1CCF171E3FC1830059C191 /* Core.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE20AD671D53BA860039260B /* AuthenticationComponentsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */; };
 		CE20AD691D53BB8C0039260B /* AuthenticationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE20AD681D53BB8B0039260B /* AuthenticationCoordinator.swift */; };
+		CE42AE841E4E4AC000B4C377 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE801E4E4AC000B4C377 /* LoginController.swift */; };
+		CE42AE851E4E4AC000B4C377 /* LoginControllerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE811E4E4AC000B4C377 /* LoginControllerConfiguration.swift */; };
+		CE42AE861E4E4AC000B4C377 /* LoginControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE821E4E4AC000B4C377 /* LoginControllerDelegate.swift */; };
+		CE42AE871E4E4AC000B4C377 /* LoginControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE831E4E4AC000B4C377 /* LoginControllerTransitionDelegate.swift */; };
+		CE42AE8D1E4E4B0700B4C377 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE891E4E4B0700B4C377 /* SignupController.swift */; };
+		CE42AE8E1E4E4B0700B4C377 /* SignupControllerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE8A1E4E4B0700B4C377 /* SignupControllerConfiguration.swift */; };
+		CE42AE8F1E4E4B0700B4C377 /* SignupControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE8B1E4E4B0700B4C377 /* SignupControllerDelegate.swift */; };
+		CE42AE901E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE8C1E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift */; };
 		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
 		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
-		CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB31D3E9AFC00C44A25 /* Core.framework */; };
-		CE7A7BB61D3E9FA800C44A25 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
 		CE7A7BBD1D3EB60500C44A25 /* Authentication.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CE8397DB1E3FB74D001F1ABD /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */; };
 		CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */; };
+		CE9A42AB1E535A4600CE072B /* ViewStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9A42AA1E535A4600CE072B /* ViewStates.swift */; };
 		CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA65B831D33F9960065283E /* ViewProtocols.swift */; };
+		CEABDDB41E52252E00A6930D /* ExampleFailLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */; };
+		CEABDDB61E52307400A6930D /* ExampleSuccessLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */; };
 		CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */; };
 		CEE226A71C9C4011005EB279 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEE226A91C9C4011005EB279 /* Localizable.strings */; };
 		CEE94A901CA06B1B0089E71B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE94A8F1CA06B1B0089E71B /* AppDelegate.swift */; };
@@ -108,6 +133,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				CE1CCF161E3FC1830059C191 /* ReactiveSwift.framework in Copy Frameworks */,
+				CE1CCF171E3FC1830059C191 /* Core.framework in Copy Frameworks */,
 				9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */,
 				9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */,
 				9D1DFF051C8DCFC800F0A37C /* Nimble.framework in Copy Frameworks */,
@@ -141,7 +168,6 @@
 /* Begin PBXFileReference section */
 		9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		9D1DFEF81C8DCE0A00F0A37C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		9D1DFEF91C8DCE0A00F0A37C /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rex.framework; path = Carthage/Build/iOS/Rex.framework; sourceTree = "<group>"; };
 		9D1DFF001C8DCFB300F0A37C /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		9D1DFF011C8DCFB300F0A37C /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		9D72AA041C8DC7EA00BB4082 /* Authentication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Authentication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +176,14 @@
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveSwift.framework; path = Carthage/Build/iOS/ReactiveSwift.framework; sourceTree = "<group>"; };
+		CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginConfiguration.swift; sourceTree = "<group>"; };
+		CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginProvider.swift; sourceTree = "<group>"; };
+		CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
+		CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookShare.framework; path = Carthage/Build/iOS/FacebookShare.framework; sourceTree = "<group>"; };
+		CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = Carthage/Build/iOS/FacebookLogin.framework; sourceTree = "<group>"; };
+		CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = Carthage/Build/iOS/FacebookCore.framework; sourceTree = "<group>"; };
+		CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = Carthage/Build/iOS/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Carthage/Build/iOS/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		CE111DA11D4FA6A50083C99E /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		CE111DA61D4FA6C20083C99E /* MockLoginTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLoginTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE111DA71D4FA6C20083C99E /* MockSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockSessionService.swift; sourceTree = "<group>"; };
@@ -161,25 +195,19 @@
 		CE111DBA1D4FA70D0083C99E /* InlineValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InlineValidator.swift; sourceTree = "<group>"; };
 		CE111DBB1D4FA70D0083C99E /* LengthValidators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LengthValidators.swift; sourceTree = "<group>"; };
 		CE111DBC1D4FA70D0083C99E /* TextInputValidatorType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputValidatorType.swift; sourceTree = "<group>"; };
-		CE111DC51D4FA7340083C99E /* LoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginConfiguration.swift; sourceTree = "<group>"; };
-		CE111DC61D4FA7340083C99E /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		CE111DC71D4FA7340083C99E /* LoginControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerDelegate.swift; sourceTree = "<group>"; };
 		CE111DC81D4FA7340083C99E /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CE111DC91D4FA7340083C99E /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
 		CE111DCA1D4FA7340083C99E /* LoginViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewConfiguration.swift; sourceTree = "<group>"; };
 		CE111DCB1D4FA7340083C99E /* LoginViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewDelegate.swift; sourceTree = "<group>"; };
 		CE111DCD1D4FA7340083C99E /* LoginCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCredentialsValidator.swift; sourceTree = "<group>"; };
 		CE111DCE1D4FA7340083C99E /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		CE111DDA1D4FA7390083C99E /* SignupConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupConfiguration.swift; sourceTree = "<group>"; };
-		CE111DDB1D4FA7390083C99E /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
-		CE111DDC1D4FA7390083C99E /* SignupControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerDelegate.swift; sourceTree = "<group>"; };
 		CE111DDD1D4FA7390083C99E /* SignupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		CE111DDE1D4FA7390083C99E /* SignupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignupView.xib; sourceTree = "<group>"; };
 		CE111DDF1D4FA7390083C99E /* SignupViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewConfiguration.swift; sourceTree = "<group>"; };
 		CE111DE01D4FA7390083C99E /* SignupViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewDelegate.swift; sourceTree = "<group>"; };
 		CE111DE21D4FA7390083C99E /* SignupCredentialsValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupCredentialsValidator.swift; sourceTree = "<group>"; };
 		CE111DE31D4FA7390083C99E /* SignupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
-		CE111DEE1D4FA78E0083C99E /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTests.swift; sourceTree = "<group>"; };
+		CE111DEE1D4FA78E0083C99E /* LoginControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginControllerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CE111DEF1D4FA78E0083C99E /* LoginViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModelTests.swift; sourceTree = "<group>"; };
 		CE111DF31D4FA79A0083C99E /* AnyInputTextValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnyInputTextValidatorTests.swift; sourceTree = "<group>"; };
 		CE111DF41D4FA79A0083C99E /* CompositeValidatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompositeValidatorTests.swift; sourceTree = "<group>"; };
@@ -193,10 +221,18 @@
 		CE111E0D1D4FA8980083C99E /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		CE111E0E1D4FA8980083C99E /* FontPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontPalette.swift; sourceTree = "<group>"; };
 		CE111E141D4FC8560083C99E /* SignupViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewModelTests.swift; sourceTree = "<group>"; };
-		CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTransitionDelegate.swift; sourceTree = "<group>"; };
-		CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerTransitionDelegate.swift; sourceTree = "<group>"; };
+		CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = Carthage/Build/iOS/FBSDKShareKit.framework; sourceTree = "<group>"; };
+		CE1CCF071E3FBF890059C191 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = Carthage/Build/iOS/Bolts.framework; sourceTree = "<group>"; };
 		CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationComponentsFactory.swift; sourceTree = "<group>"; };
 		CE20AD681D53BB8B0039260B /* AuthenticationCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationCoordinator.swift; sourceTree = "<group>"; };
+		CE42AE801E4E4AC000B4C377 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		CE42AE811E4E4AC000B4C377 /* LoginControllerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerConfiguration.swift; sourceTree = "<group>"; };
+		CE42AE821E4E4AC000B4C377 /* LoginControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerDelegate.swift; sourceTree = "<group>"; };
+		CE42AE831E4E4AC000B4C377 /* LoginControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginControllerTransitionDelegate.swift; sourceTree = "<group>"; };
+		CE42AE891E4E4B0700B4C377 /* SignupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
+		CE42AE8A1E4E4B0700B4C377 /* SignupControllerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerConfiguration.swift; sourceTree = "<group>"; };
+		CE42AE8B1E4E4B0700B4C377 /* SignupControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerDelegate.swift; sourceTree = "<group>"; };
+		CE42AE8C1E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerTransitionDelegate.swift; sourceTree = "<group>"; };
 		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE5248881D468F8700B499CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE7A7BB31D3E9AFC00C44A25 /* Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Core.framework; path = Carthage/Build/iOS/Core.framework; sourceTree = "<group>"; };
@@ -204,7 +240,10 @@
 		CE7A7BB71D3EA01C00C44A25 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CE7A7BBA1D3EA73200C44A25 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = Authentication/es.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
 		CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameworkBundle.swift; sourceTree = "<group>"; };
+		CE9A42AA1E535A4600CE072B /* ViewStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStates.swift; sourceTree = "<group>"; };
 		CEA65B831D33F9960065283E /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
+		CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleFailLoginProvider.swift; sourceTree = "<group>"; };
+		CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleSuccessLoginProvider.swift; sourceTree = "<group>"; };
 		CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionServiceType.swift; sourceTree = "<group>"; };
 		CEE226A81C9C4011005EB279 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CEE226AF1C9C726F005EB279 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -227,10 +266,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D1DFEFA1C8DCE0A00F0A37C /* ReactiveCocoa.framework in Frameworks */,
-				9D1DFEFB1C8DCE0A00F0A37C /* Result.framework in Frameworks */,
-				CE7A7BB41D3E9AFC00C44A25 /* Core.framework in Frameworks */,
-				CE7A7BB61D3E9FA800C44A25 /* MBProgressHUD.framework in Frameworks */,
+				CE1CCF0A1E3FC0350059C191 /* Core.framework in Frameworks */,
+				CE1CCF0E1E3FC0350059C191 /* MBProgressHUD.framework in Frameworks */,
+				CE1CCF0B1E3FC0350059C191 /* ReactiveCocoa.framework in Frameworks */,
+				CE1CCF0C1E3FC0350059C191 /* ReactiveSwift.framework in Frameworks */,
+				CE1CCF0D1E3FC0350059C191 /* Result.framework in Frameworks */,
+				CE1CCF0F1E3FC0350059C191 /* FacebookCore.framework in Frameworks */,
+				CE1CCF101E3FC0350059C191 /* FacebookShare.framework in Frameworks */,
+				CE1CCF111E3FC0350059C191 /* FacebookLogin.framework in Frameworks */,
+				CE1CCF141E3FC0350059C191 /* FBSDKCoreKit.framework in Frameworks */,
+				CE1CCF121E3FC0350059C191 /* FBSDKShareKit.framework in Frameworks */,
+				CE1CCF131E3FC0350059C191 /* FBSDKLoginKit.framework in Frameworks */,
+				CE1CCF151E3FC0350059C191 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,9 +295,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */,
+				CE0F7BB41E3FB67B00C44C86 /* Core.framework in Frameworks */,
+				CE8397DB1E3FB74D001F1ABD /* MBProgressHUD.framework in Frameworks */,
 				CEE94AAB1CA06C6E0089E71B /* ReactiveCocoa.framework in Frameworks */,
+				BE1CE2BA1E1C560300A7F7CF /* ReactiveSwift.framework in Frameworks */,
 				CEE94AAD1CA06C6E0089E71B /* Result.framework in Frameworks */,
+				CE0F7BB01E3FB66700C44C86 /* FacebookLogin.framework in Frameworks */,
+				CE0F7BAF1E3FB66700C44C86 /* FacebookShare.framework in Frameworks */,
+				CE0F7BB11E3FB66700C44C86 /* FacebookCore.framework in Frameworks */,
+				CE0F7BB21E3FB66700C44C86 /* FBSDKLoginKit.framework in Frameworks */,
+				CE1CCF081E3FBF890059C191 /* FBSDKShareKit.framework in Frameworks */,
+				CE0F7BB31E3FB66700C44C86 /* FBSDKCoreKit.framework in Frameworks */,
+				CE1CCF091E3FBF890059C191 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +316,13 @@
 		9D1DFEF61C8DCDF600F0A37C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE1CCF061E3FBF890059C191 /* FBSDKShareKit.framework */,
+				CE1CCF071E3FBF890059C191 /* Bolts.framework */,
+				CE0F7BAA1E3FB66700C44C86 /* FacebookShare.framework */,
+				CE0F7BAB1E3FB66700C44C86 /* FacebookLogin.framework */,
+				CE0F7BAC1E3FB66700C44C86 /* FacebookCore.framework */,
+				CE0F7BAD1E3FB66700C44C86 /* FBSDKLoginKit.framework */,
+				CE0F7BAE1E3FB66700C44C86 /* FBSDKCoreKit.framework */,
 				BE1CE2B91E1C560300A7F7CF /* ReactiveSwift.framework */,
 				CE7A7BB71D3EA01C00C44A25 /* AVFoundation.framework */,
 				CE7A7BB51D3E9FA800C44A25 /* MBProgressHUD.framework */,
@@ -268,7 +331,6 @@
 				9D1DFF011C8DCFB300F0A37C /* Quick.framework */,
 				9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */,
 				9D1DFEF81C8DCE0A00F0A37C /* Result.framework */,
-				9D1DFEF91C8DCE0A00F0A37C /* Rex.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -304,11 +366,13 @@
 				CE111DC31D4FA7340083C99E /* Login */,
 				CE111DD81D4FA7390083C99E /* SignUp */,
 				CE111DAC1D4FA6FD0083C99E /* RecoverPassword */,
+				CE0F7BA21E3FAC3E00C44C86 /* LoginProviders */,
 				CEBF66BD1C8DDA9E006EE090 /* SessionServiceType.swift */,
 				CE20AD661D53BA860039260B /* AuthenticationComponentsFactory.swift */,
 				CE20AD681D53BB8B0039260B /* AuthenticationCoordinator.swift */,
 				CE83C5631D4A56BD00623DF5 /* FrameworkBundle.swift */,
 				CEA65B831D33F9960065283E /* ViewProtocols.swift */,
+				CE9A42AA1E535A4600CE072B /* ViewStates.swift */,
 				CE5248811D468D8200B499CC /* Extensions.swift */,
 				9D72AA071C8DC7EA00BB4082 /* Authentication.h */,
 				9D72AA091C8DC7EA00BB4082 /* Info.plist */,
@@ -326,6 +390,24 @@
 				9D72AA151C8DC7EB00BB4082 /* Info.plist */,
 			);
 			path = AuthenticationTests;
+			sourceTree = "<group>";
+		};
+		CE0F7BA21E3FAC3E00C44C86 /* LoginProviders */ = {
+			isa = PBXGroup;
+			children = (
+				CE0F7BA31E3FAC3E00C44C86 /* Facebook */,
+				CE0F7BA61E3FAC3E00C44C86 /* LoginProvider.swift */,
+			);
+			path = LoginProviders;
+			sourceTree = "<group>";
+		};
+		CE0F7BA31E3FAC3E00C44C86 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				CE0F7BA41E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift */,
+				CE0F7BA51E3FAC3E00C44C86 /* FacebookLoginProvider.swift */,
+			);
+			path = Facebook;
 			sourceTree = "<group>";
 		};
 		CE111DA01D4FA6A50083C99E /* Models */ = {
@@ -371,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				CE111DCC1D4FA7340083C99E /* ViewModel */,
+				CE42AE7F1E4E4A7D00B4C377 /* Controller */,
 				CE111DC41D4FA7340083C99E /* View */,
 			);
 			path = Login;
@@ -379,10 +462,6 @@
 		CE111DC41D4FA7340083C99E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE111DC61D4FA7340083C99E /* LoginController.swift */,
-				CE111DC51D4FA7340083C99E /* LoginConfiguration.swift */,
-				CE111DC71D4FA7340083C99E /* LoginControllerDelegate.swift */,
-				CE111E161D4FCED70083C99E /* LoginControllerTransitionDelegate.swift */,
 				CE111DC91D4FA7340083C99E /* LoginView.xib */,
 				CE111DC81D4FA7340083C99E /* LoginView.swift */,
 				CE111DCA1D4FA7340083C99E /* LoginViewConfiguration.swift */,
@@ -404,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				CE111DE11D4FA7390083C99E /* ViewModel */,
+				CE42AE881E4E4B0700B4C377 /* Controller */,
 				CE111DD91D4FA7390083C99E /* View */,
 				CE111DFF1D4FA80E0083C99E /* TermsAndServices */,
 			);
@@ -413,10 +493,6 @@
 		CE111DD91D4FA7390083C99E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				CE111DDB1D4FA7390083C99E /* SignupController.swift */,
-				CE111DDA1D4FA7390083C99E /* SignupConfiguration.swift */,
-				CE111DDC1D4FA7390083C99E /* SignupControllerDelegate.swift */,
-				CE111E181D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift */,
 				CE111DDE1D4FA7390083C99E /* SignupView.xib */,
 				CE111DDD1D4FA7390083C99E /* SignupView.swift */,
 				CE111DDF1D4FA7390083C99E /* SignupViewConfiguration.swift */,
@@ -475,6 +551,28 @@
 			path = ViewConfiguration;
 			sourceTree = "<group>";
 		};
+		CE42AE7F1E4E4A7D00B4C377 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE42AE801E4E4AC000B4C377 /* LoginController.swift */,
+				CE42AE811E4E4AC000B4C377 /* LoginControllerConfiguration.swift */,
+				CE42AE821E4E4AC000B4C377 /* LoginControllerDelegate.swift */,
+				CE42AE831E4E4AC000B4C377 /* LoginControllerTransitionDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		CE42AE881E4E4B0700B4C377 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				CE42AE891E4E4B0700B4C377 /* SignupController.swift */,
+				CE42AE8A1E4E4B0700B4C377 /* SignupControllerConfiguration.swift */,
+				CE42AE8B1E4E4B0700B4C377 /* SignupControllerDelegate.swift */,
+				CE42AE8C1E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		CE89A25A1CAEC68300E1903B /* Signup */ = {
 			isa = PBXGroup;
 			children = (
@@ -490,6 +588,8 @@
 				CEE94AA51CA06C3C0089E71B /* Main.storyboard */,
 				CEE94A9F1CA06BBC0089E71B /* ExampleMainViewController.swift */,
 				CEE94AA01CA06BBC0089E71B /* ExampleSessionService.swift */,
+				CEABDDB31E52252E00A6930D /* ExampleFailLoginProvider.swift */,
+				CEABDDB51E52307400A6930D /* ExampleSuccessLoginProvider.swift */,
 				CEE94A8F1CA06B1B0089E71B /* AppDelegate.swift */,
 				CEE94A961CA06B1B0089E71B /* Assets.xcassets */,
 				CEE94A9B1CA06B1B0089E71B /* Info.plist */,
@@ -656,10 +756,18 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookShare.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKShareKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -678,6 +786,14 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookShare.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSDKShareKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -707,23 +823,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE111DD01D4FA7340083C99E /* LoginController.swift in Sources */,
 				CE111E021D4FA80E0083C99E /* TermsAndServicesController.swift in Sources */,
 				CE20AD691D53BB8C0039260B /* AuthenticationCoordinator.swift in Sources */,
+				CE42AE8E1E4E4B0700B4C377 /* SignupControllerConfiguration.swift in Sources */,
 				CE111DC21D4FA70D0083C99E /* TextInputValidatorType.swift in Sources */,
-				CE111E191D4FCEE10083C99E /* SignupControllerTransitionDelegate.swift in Sources */,
-				CE111DCF1D4FA7340083C99E /* LoginConfiguration.swift in Sources */,
-				CE111DD11D4FA7340083C99E /* LoginControllerDelegate.swift in Sources */,
+				CE42AE8F1E4E4B0700B4C377 /* SignupControllerDelegate.swift in Sources */,
 				CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */,
-				CE111DE51D4FA7390083C99E /* SignupController.swift in Sources */,
 				CE20AD671D53BA860039260B /* AuthenticationComponentsFactory.swift in Sources */,
 				CEBF66BE1C8DDA9E006EE090 /* SessionServiceType.swift in Sources */,
+				CE42AE8D1E4E4B0700B4C377 /* SignupController.swift in Sources */,
 				CE111E111D4FA8980083C99E /* FontPalette.swift in Sources */,
 				CE111DAE1D4FA6FD0083C99E /* RecoverPasswordController.swift in Sources */,
 				CEA65B841D33F9960065283E /* ViewProtocols.swift in Sources */,
 				CE111DEB1D4FA7390083C99E /* SignupCredentialsValidator.swift in Sources */,
-				CE111DE61D4FA7390083C99E /* SignupControllerDelegate.swift in Sources */,
-				CE111E171D4FCED70083C99E /* LoginControllerTransitionDelegate.swift in Sources */,
+				CE0F7BA81E3FAC3E00C44C86 /* FacebookLoginProvider.swift in Sources */,
 				CE111DC11D4FA70D0083C99E /* LengthValidators.swift in Sources */,
 				CE111DE71D4FA7390083C99E /* SignupView.swift in Sources */,
 				CE111DBD1D4FA70D0083C99E /* CompositeValidator.swift in Sources */,
@@ -732,16 +845,23 @@
 				CE111E101D4FA8980083C99E /* ColorPalette.swift in Sources */,
 				CE111E031D4FA80E0083C99E /* TermsAndServicesControllerDelegate.swift in Sources */,
 				CE111DD71D4FA7340083C99E /* LoginViewModel.swift in Sources */,
+				CE42AE851E4E4AC000B4C377 /* LoginControllerConfiguration.swift in Sources */,
+				CE0F7BA91E3FAC3E00C44C86 /* LoginProvider.swift in Sources */,
 				CE111DC01D4FA70D0083C99E /* InlineValidator.swift in Sources */,
+				CE0F7BA71E3FAC3E00C44C86 /* FacebookLoginConfiguration.swift in Sources */,
 				CE111DBF1D4FA70D0083C99E /* EmailValidator.swift in Sources */,
 				CE5248821D468D8200B499CC /* Extensions.swift in Sources */,
 				CE111DD41D4FA7340083C99E /* LoginViewConfiguration.swift in Sources */,
-				CE111DE41D4FA7390083C99E /* SignupConfiguration.swift in Sources */,
 				CE111DD21D4FA7340083C99E /* LoginView.swift in Sources */,
 				CE111DE91D4FA7390083C99E /* SignupViewConfiguration.swift in Sources */,
+				CE42AE901E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift in Sources */,
+				CE9A42AB1E535A4600CE072B /* ViewStates.swift in Sources */,
+				CE42AE861E4E4AC000B4C377 /* LoginControllerDelegate.swift in Sources */,
 				CE111DBE1D4FA70D0083C99E /* ConstantValidators.swift in Sources */,
 				CE111DEC1D4FA7390083C99E /* SignupViewModel.swift in Sources */,
 				CE111DEA1D4FA7390083C99E /* SignupViewDelegate.swift in Sources */,
+				CE42AE841E4E4AC000B4C377 /* LoginController.swift in Sources */,
+				CE42AE871E4E4AC000B4C377 /* LoginControllerTransitionDelegate.swift in Sources */,
 				CE111E0F1D4FA8980083C99E /* AuthenticationViewConfiguration.swift in Sources */,
 				CE111DD61D4FA7340083C99E /* LoginCredentialsValidator.swift in Sources */,
 			);
@@ -771,7 +891,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE94AA21CA06BBC0089E71B /* ExampleSessionService.swift in Sources */,
+				CEABDDB41E52252E00A6930D /* ExampleFailLoginProvider.swift in Sources */,
 				CEE94AA11CA06BBC0089E71B /* ExampleMainViewController.swift in Sources */,
+				CEABDDB61E52307400A6930D /* ExampleSuccessLoginProvider.swift in Sources */,
 				CEE94A901CA06B1B0089E71B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

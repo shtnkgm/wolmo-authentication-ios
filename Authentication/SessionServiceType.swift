@@ -15,11 +15,15 @@ import enum Result.NoError
      Represents any possible error that may happen
      in the session service through the authentication
      process.
+ 
+     It includes and wraps up any error that may arise
+     from the login providers
 */
 public enum SessionServiceError: Error {
     case invalidLogInCredentials(NSError?)
     case invalidSignUpCredentials(NSError?)
     case networkError(NSError)
+    case loginProviderError(name: String, error: LoginProviderError)
 }
 
 /**
@@ -56,6 +60,31 @@ public protocol SessionServiceType {
     func logIn(withEmail email: Email, password: String) -> SignalProducer<User, SessionServiceError>
     
     /**
+     This method takes care of logging in (or signing up, if not
+     already registered) the passed user.
+     It's meant to be used alongside login providers, like
+     the FacebookLoginProvider.
+     
+     Be aware that in this method you must take care of creating
+     a user of the `User` associatedtype from the user passed as argument.
+     
+     - Parameters:
+        - user: User created by a LoginProvider service when its own
+            login was succesful.
+     
+     - Returns: A SignalProducer that can send the User logged in
+     or the SessionServiceError if not.
+     If the creation of the user is successful, the SignalProducer
+     returned must take care of:
+        sending the user to the observers and
+        updating the currentUser property.
+     If not, the SignalProducer returned
+     must take care of:
+        sending the error to the observer.
+     */
+    func logIn(withUser user: LoginProviderUserType) -> SignalProducer<User, SessionServiceError>
+    
+    /**
          This method takes care of validating and signing up.
          
          - Returns: A SignalProducer that can send the User logged in
@@ -87,6 +116,8 @@ public extension SessionServiceError {
             return "login-error.invalid-credentials.message".frameworkLocalized + ". " + (error?.localizedDescription ?? "")
         case .networkError(let error):
             return "network-error.message".frameworkLocalized + ". " + error.localizedDescription
+        case let .loginProviderError(_, error):
+            return error.localizedMessage
         }
     }
     

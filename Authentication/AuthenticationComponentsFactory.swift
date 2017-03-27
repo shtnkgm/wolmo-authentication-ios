@@ -24,6 +24,7 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     private let _mainControllerFactory: () -> UIViewController
     private let _loginConfiguration: LoginViewConfigurationType
     private let _signupConfiguration: SignupViewConfigurationType
+    private let _loginProviders: [LoginProvider]
     
     /**
         Initializes the AuthenticationComponentsFactory
@@ -34,16 +35,19 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
                 return when asked for it.
             - signupConfiguration: signup view configuration to
                 return when asked for it.
+            - loginProviders: alternative providers for login service.
             - mainControllerFactory: main view controller factory
                 method to trigger when asked for the main view
                 controller.
     */
     public init(loginConfiguration: LoginViewConfigurationType,
                 signupConfiguration: SignupViewConfigurationType,
+                loginProviders: [LoginProvider] = [],
                 mainControllerFactory: @escaping () -> UIViewController) {
         _mainControllerFactory = mainControllerFactory
         _loginConfiguration = loginConfiguration
         _signupConfiguration = signupConfiguration
+        _loginProviders = loginProviders
     }
     
     /**
@@ -51,20 +55,21 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
          with the components to use.
          
          - Parameters:
-             - initialScreen: authentication screen to be shown
-                the first time. By default, Login.
              - logo: logo to add to the default LoginViewConfiguration.
              - termsAndServicesURL: terms and services URL used
                 to create the default SignupViewConfiguration.
+             - loginProviders: alternative providers for login service.
              - mainControllerFactory: main view controller factory
                 method to trigger when asked for the main view
                 controller.
      */
     public init(logo: UIImage? = .none,
                 termsAndServicesURL: URL,
+                loginProviders: [LoginProvider] = [],
                 mainControllerFactory: @escaping () -> UIViewController) {
         self.init(loginConfiguration: LoginViewConfiguration(logoImage: logo),
                   signupConfiguration: SignupViewConfiguration(termsAndServicesURL: termsAndServicesURL),
+                  loginProviders: loginProviders,
                   mainControllerFactory: mainControllerFactory)
     }
     
@@ -74,6 +79,10 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     
     public func createLoginViewConfiguration() -> LoginViewConfigurationType {
         return _loginConfiguration
+    }
+    
+    public func createLoginProviders() -> [LoginProvider] {
+        return _loginProviders
     }
     
     public func createSignupViewConfiguration() -> SignupViewConfigurationType {
@@ -100,12 +109,15 @@ public protocol LoginComponentsFactory {
             - sessionService: the session service to use for login action.
             - credentialsValidator: the credentials validator to use for validating
                 entries, before enabling the user to log in.
+            - loginProviders: alternative providers for the login service.
      
          - Returns: A login view model that controls the login logic and communicates
             with the session service.
-            By default, the default LoginViewModel with the parameters received.
+            By default, the default LoginViewModel configured with the arguments received.
      */
-    func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType
+    func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
+                                                                  credentialsValidator: LoginCredentialsValidator,
+                                                                  loginProviders: [LoginProvider]) -> LoginViewModelType
     
     /**
         Creates the LoginViewConfiguration to use for setting
@@ -116,6 +128,14 @@ public protocol LoginComponentsFactory {
         - Attention: There is no default implementation.
     */
     func createLoginViewConfiguration() -> LoginViewConfigurationType
+    
+    /**
+     Creates the login providers to use.
+     
+     - Returns: An array of valid login providers.
+       The default implementation returns an empty list of providers.
+     */
+    func createLoginProviders() -> [LoginProvider]
     
     /**
          Creates the LoginViewDelegate to use in configuring the login view style.
@@ -131,16 +151,19 @@ public protocol LoginComponentsFactory {
     func createLoginViewDelegate(withConfiguration configuration: LoginViewConfigurationType) -> LoginViewDelegate
     
     /**
-         Creates login view that conforms to the logInViewType protocol
-         and will be use for the login visual.
+         Creates a login view that conforms to the logInViewType protocol
+         and will be used for the login visual.
      
          - Parameters:
             - delegate: view delegate for configuring the login view.
+            - loginProviders: the alternative providers used for the login service,
+                which also provide a button to represent them.
          
-         - Returns: A valid login view ready to be used.
-            By default, the default LoginView.
+     - Returns: A valid signup view ready to be used.
+             By default, the view returned is the default LoginView.
      */
-    func createLoginView(withDelegate delegate: LoginViewDelegate) -> LoginViewType
+    func createLoginView(withDelegate delegate: LoginViewDelegate,
+                         loginProviders: [LoginProvider]) -> LoginViewType
     
     /**
          Creates the login view controller delegate that the login controller
@@ -172,17 +195,24 @@ public extension LoginComponentsFactory {
         return LoginCredentialsValidator()
     }
     
-    public func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService, credentialsValidator: LoginCredentialsValidator) -> LoginViewModelType {
-        return LoginViewModel(sessionService: sessionService, credentialsValidator: createLogInCredentialsValidator())
+    public func createLoginViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
+                                                                         credentialsValidator: LoginCredentialsValidator,
+                                                                         loginProviders: [LoginProvider]) -> LoginViewModelType {
+            let providerSignals = loginProviders.map { ($0.userSignal, $0.errorSignal) }
+            return LoginViewModel(sessionService: sessionService,
+                                  credentialsValidator: createLogInCredentialsValidator(),
+                                  providerSignals: providerSignals)
     }
     
     public func createLoginViewDelegate(withConfiguration configuration: LoginViewConfigurationType) -> LoginViewDelegate {
         return DefaultLoginViewDelegate(configuration: configuration)
     }
     
-    public func createLoginView(withDelegate delegate: LoginViewDelegate) -> LoginViewType {
-        let view = LoginView.loadFromNib(inBundle: FrameworkBundle)!
+    public func createLoginView(withDelegate delegate: LoginViewDelegate,
+                                loginProviders: [LoginProvider]) -> LoginViewType {
+        let view: LoginView = LoginView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
+        view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view
     }
     
@@ -218,14 +248,16 @@ public protocol SignupComponentsFactory {
              entries, before enabling the user to sign up.
             - configuration: configuration that defines which textfields should
                 be validated.
+            - loginProviders: providers for the login service, alternative to signup.
      
          - Returns: A signup view model that controls the registration logic
             and comunicates with the session service.
-            By default, the default SignupViewModel.
+            By default, the default SignupViewModel configured with the arguments received.
      */
     func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
                                                                    credentialsValidator: SignupCredentialsValidator,
-                                                                   configuration: SignupViewConfigurationType) -> SignupViewModelType
+                                                                   configuration: SignupViewConfigurationType,
+                                                                   loginProviders: [LoginProvider]) -> SignupViewModelType
     
     /**
          Creates the SignupViewConfiguration to use for setting
@@ -254,16 +286,19 @@ public protocol SignupComponentsFactory {
     func createSignupViewDelegate(withConfiguration configuration: SignupViewConfigurationType) -> SignupViewDelegate
     
     /**
-         Creates signup view that conforms to the SignupViewType protocol
-         and will be use for the signup visual.
+         Creates a signup view that conforms to the SignupViewType protocol
+         and will be used for the signup visual.
      
          - Parameters:
             - delegate: view delegate for configuring the signup view.
-         
+            - loginProviders: the alternative providers used for the login/signup service,
+                which also provide a button to represent them.
+     
          - Returns: A valid signup view ready to be used.
-            By default, the default SignupView.
+            By default, the view returned is the default SignupView.
      */
-    func createSignupView(withDelegate delegate: SignupViewDelegate) -> SignupViewType
+    func createSignupView(withDelegate delegate: SignupViewDelegate,
+                          loginProviders: [LoginProvider]) -> SignupViewType
     
     /**
          Creates the signup view controller delegate
@@ -308,20 +343,25 @@ extension SignupComponentsFactory {
     
     public func createSignupViewModel<SessionService: SessionServiceType>(withSessionService sessionService: SessionService,
                                                                           credentialsValidator: SignupCredentialsValidator,
-                                                                          configuration: SignupViewConfigurationType) -> SignupViewModelType {
-        return SignupViewModel(sessionService: sessionService,
-                               credentialsValidator: credentialsValidator,
-                               usernameEnabled: configuration.usernameEnabled,
-                               passwordConfirmationEnabled: configuration.passwordConfirmationEnabled)
+                                                                          configuration: SignupViewConfigurationType,
+                                                                          loginProviders: [LoginProvider]) -> SignupViewModelType {
+            let providerUserSignals = loginProviders.map { ($0.userSignal, $0.errorSignal) }
+            return SignupViewModel(sessionService: sessionService,
+                                   credentialsValidator: credentialsValidator,
+                                   usernameEnabled: configuration.usernameEnabled,
+                                   passwordConfirmationEnabled: configuration.passwordConfirmationEnabled,
+                                   providerSignals: providerUserSignals)
     }
     
     public func createSignupViewDelegate(withConfiguration configuration: SignupViewConfigurationType) -> SignupViewDelegate {
         return DefaultSignupViewDelegate(configuration: configuration)
     }
     
-    public func createSignupView(withDelegate delegate: SignupViewDelegate) -> SignupViewType {
-        let view = SignupView.loadFromNib(inBundle: FrameworkBundle)!
+    public func createSignupView(withDelegate delegate: SignupViewDelegate,
+                                 loginProviders: [LoginProvider]) -> SignupViewType {
+        let view: SignupView = SignupView.loadFromNib(inBundle: FrameworkBundle)!
         view.delegate = delegate
+        view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view
     }
     
