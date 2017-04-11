@@ -87,7 +87,7 @@ public struct FacebookLoginProviderError: LoginProviderError {
  
     - note: If you are using this provider, you should register your application
             in https://developers.facebook.com/ and add to the Info.plist the following keys:
-            `FacebookAppID`: with the app id taken from Fcebook developers page,
+            `FacebookAppID`: with the app id taken from Facebook developers page,
             `FacebookDisplayName`: with the display name by which you want the user
                 to see your app with when asked for permissions.
  */

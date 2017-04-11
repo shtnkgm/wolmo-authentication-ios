@@ -17,7 +17,7 @@ Following the [MVVM pattern](http://www.sprynthesis.com/2014/12/06/reactivecocoa
 The user of the **Authentication framework** can provide any view or view model that conforms to certain protocols, but the view controller is fixed. This means that the view controller will bind all information the view model or view provides in conformance to the corresponding view or view model protocol. Any extra functionality or information the user may add to his/her view or view model will not be binded, and so must be _internal_ information of the component (or information used outside this framework).
 
 Moreover, the framework also provides customizable `LoginProvider` functionality as an alternative to common email/username - password login, that may represent any external service for login, as for example, Facebook.
-Login providers will appear in login page,a nd if wanted in signup page as well. As they all provide the same service, only one can be used at a time, so as far as view interaction is concerned, only login attempt will be notified in general. However, the Session Service will be notified exactly from where the login was performed and with which information.
+Login providers will appear in login page, and if wanted in signup page as well. As they all provide the same service, only one can be used at a time, so as far as view interaction is concerned, only login attempt will be notified in general. However, the Session Service will be notified exactly from where the login was performed and with which information.
 
 So you will find the following protocols:
 
