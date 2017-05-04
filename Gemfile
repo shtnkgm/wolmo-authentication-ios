@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'travis'
-gem 'carthage_cache'
+gem 'fastlane'
 gem 'xcpretty'
-gem 'synx'
-gem 'linterbot'
+gem 'carthage_cache'
 gem 'slather'
+gem 'codestats-metrics-reporter'
