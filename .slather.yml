@@ -2,4 +2,10 @@ xcodeproj: ./Authentication.xcodeproj
 scheme: Authentication
 ignore:
   - AuthenticationTests/*
+  - AuthenticationDemo/*
   - Carthage/*
+# Controllers can't be tested.
+  - Authentication/*/Controller/*
+  - Authentication/SignUp/TermsAndServices/*
+# Views can't be tested.
+  - Authentication/*/View/*
