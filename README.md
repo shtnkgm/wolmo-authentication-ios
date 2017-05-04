@@ -1,11 +1,11 @@
 WolMo - Authentication iOS
 ==========================
 
-[![Build Status](https://travis-ci.org/Wolox/wolmo-authentication-ios.svg?branch=master)](https://travis-ci.org/Wolox/wolmo-authentication-ios)
-[![Coverage Status](https://coveralls.io/repos/github/Wolox/wolmo-authentication-ios/badge.svg?branch=master)](https://coveralls.io/github/Wolox/wolmo-authentication-ios?branch=master)
+[![Build Status](https://www.bitrise.io/app/af174417431f3fa5.svg?token=NDJI4ZzTuuprOnPb7Ym9LQ)](https://www.bitrise.io/app/af174417431f3fa5#/builds)
+[![CodeStats](http://codestats.wolox.com.ar/organizations/wolox/projects/wolmo-authentication-ios/badge)](http://codestats.wolox.com.ar/organizations/wolox/projects/wolmo-authentication-ios)
 [![GitHub release](https://img.shields.io/github/release/Wolox/wolmo-authentication-ios.svg)](https://github.com/Wolox/wolmo-authentication-ios/releases)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![Swift 3.x](https://img.shields.io/badge/Swift-3.x-blue.svg)
+![Swift 3.0](https://img.shields.io/badge/Swift-3.0-blue.svg)
 
 **Wolmo - Authentication iOS** is an authentication framework for Swift, designed to take care of some basic steps present in almost every iOS app:
 
@@ -61,7 +61,7 @@ github "Wolox/wolmo-authentication-ios" ~> 0.1.0
 
 1. Clone the project.
 
-With SSH: 
+With SSH:
 
 ```
 git clone git@github.com:Wolox/wolmo-authentication-ios.git
@@ -211,17 +211,17 @@ This project is maintained by [Daniela Paula Riesgo](https://github.com/danielaR
 **WolMo - Authentication iOS** is available under the MIT [license](LICENSE.md).
 
 	Copyright (c) [2016] Daniela Paula Riesgo: <daniela.riesgo@wolox.com.ar>
-	
+
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
 	in the Software without restriction, including without limitation the rights
 	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 	copies of the Software, and to permit persons to whom the Software is
 	furnished to do so, subject to the following conditions:
-	
+
 	The above copyright notice and this permission notice shall be included in all
 	copies or substantial portions of the Software.
-	
+
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -229,8 +229,3 @@ This project is maintained by [Daniela Paula Riesgo](https://github.com/danielaR
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
-
-
-
-
-

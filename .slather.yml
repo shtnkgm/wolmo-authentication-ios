@@ -1,7 +1,5 @@
-coverage_service: coveralls
 xcodeproj: ./Authentication.xcodeproj
 scheme: Authentication
-ci_service: travis_pro
-coverage_access_token: 70TniiTKCtcXa8J6oDCmWG9MYkVrsJCQW
 ignore:
   - AuthenticationTests/*
+  - Carthage/*
