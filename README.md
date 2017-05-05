@@ -11,7 +11,8 @@ WolMo - Authentication iOS
 
 - [x] Signup
 - [x] Login
-- [ ] Login with Facebook and other services (in a future version)
+- [x] Login with Facebook and generic services
+- [ ] Login with Google, Twitter and other services (in a future version)
 - [ ] Recover password (in a future version)
 
 It provides logic as well as default views with plenty extensibility points.
@@ -27,8 +28,9 @@ It provides logic as well as default views with plenty extensibility points.
 		* [Session Service](#session-service)
 		* [Authentication Components Factory](#authentication-components-factory)
 	* [Getting started](#getting-started)
-* [Reporting Issues](#reporting-issues)
 * [Contributing](#contributing)
+	* [Reporting Issues](#reporting-issues)
+	* [Creating a Pull Request](#creating-a-pull-request)
 * [About](#about)
 * [License](#license)
 * [Change Log](#change-log)
@@ -159,8 +161,12 @@ You should have declared appropriate `MyUser`, `MySessionService` and `MyMainVie
 You can see how this works in the basic [Demo Application](AuthenticationDemo/AppDelegate.swift) example this project includes.
 
 
+## Contributing
 
-## Reporting Issues
+Anyone can contribute to this project by reporting issues or proposing solutions and enhancements through Pull Requests.
+
+
+### Reporting Issues
 
 Issues may serve for reporting bugs, requesting features or discussing implemented features.
 
@@ -174,9 +180,7 @@ Issues may serve for reporting bugs, requesting features or discussing implement
 	* Actual result
 
 
-
-
-## Contributing
+### Creating a Pull Request
 
 1. Fork this repository.
 2. [Bootstrap](#bootstrap) the forked repository (instead of `Wolox/wolmo-core-ios.git`, use `your-user/wolmo-core-ios.git`).
