@@ -255,39 +255,46 @@ private extension SignupController {
 extension SignupController: UITextFieldDelegate {
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == lastTextField && _viewModel.signUpCocoaAction.isEnabled.value {
-            textField.resignFirstResponder()
-            _viewModel.signUpCocoaAction.execute(UIButton())
-        } else {
-            textField.nextTextField?.becomeFirstResponder()
+        DispatchQueue.main.async { [unowned self] in
+            if textField == self.lastTextField && self._viewModel.signUpCocoaAction.isEnabled.value {
+                textField.resignFirstResponder()
+                self._viewModel.signUpCocoaAction.execute(UIButton())
+            } else {
+                textField.nextTextField?.becomeFirstResponder()
+            }
+
         }
         return true
     }
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == signupView.usernameTextField {
-            signupView.usernameTextFieldSelected = true
-        } else if textField == signupView.emailTextField {
-            signupView.emailTextFieldSelected = true
-        } else if textField == signupView.passwordTextField {
-            signupView.passwordTextFieldSelected = true
-        } else {
-            signupView.passwordConfirmationTextFieldSelected = true
+        DispatchQueue.main.async { [unowned self] in
+            if textField == self.signupView.usernameTextField {
+                self.signupView.usernameTextFieldSelected = true
+            } else if textField == self.signupView.emailTextField {
+                self.signupView.emailTextFieldSelected = true
+            } else if textField == self.signupView.passwordTextField {
+                self.signupView.passwordTextFieldSelected = true
+            } else {
+                self.signupView.passwordConfirmationTextFieldSelected = true
+            }
+            self._activeTextField.value = textField
         }
-        _activeTextField.value = textField
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == signupView.usernameTextField {
-            signupView.usernameTextFieldSelected = false
-        } else if textField == signupView.emailTextField {
-            signupView.emailTextFieldSelected = false
-        } else if textField == signupView.passwordTextField {
-            signupView.passwordTextFieldSelected = false
-        } else {
-            signupView.passwordConfirmationTextFieldSelected = false
+        DispatchQueue.main.async { [unowned self] in
+            if textField == self.signupView.usernameTextField {
+                self.signupView.usernameTextFieldSelected = false
+            } else if textField == self.signupView.emailTextField {
+                self.signupView.emailTextFieldSelected = false
+            } else if textField == self.signupView.passwordTextField {
+                self.signupView.passwordTextFieldSelected = false
+            } else {
+                self.signupView.passwordConfirmationTextFieldSelected = false
+            }
+            self._activeTextField.value = .none
         }
-        _activeTextField.value = .none
     }
     
 }
