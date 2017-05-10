@@ -169,31 +169,37 @@ fileprivate extension LoginController {
 extension LoginController: UITextFieldDelegate {
     
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == lastTextField && _viewModel.logInCocoaAction.isEnabled.value {
-            textField.resignFirstResponder()
-            _viewModel.logInCocoaAction.execute(UIButton())
-        } else {
-            textField.nextTextField?.becomeFirstResponder()
+        DispatchQueue.main.async { [unowned self] in
+            if textField == self.lastTextField && self._viewModel.logInCocoaAction.isEnabled.value {
+                textField.resignFirstResponder()
+                self._viewModel.logInCocoaAction.execute(UIButton())
+            } else {
+                textField.nextTextField?.becomeFirstResponder()
+            }
         }
         return true
     }
     
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == loginView.emailTextField {
-            loginView.emailTextFieldSelected = true
-        } else {
-            loginView.passwordTextFieldSelected = true
+        DispatchQueue.main.async { [unowned self] in
+            if textField == self.loginView.emailTextField {
+                self.loginView.emailTextFieldSelected = true
+            } else {
+                self.loginView.passwordTextFieldSelected = true
+            }
+            self._activeField.value = textField
         }
-        _activeField.value = textField
     }
     
     public func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == loginView.emailTextField {
-            loginView.emailTextFieldSelected = false
-        } else {
-            loginView.passwordTextFieldSelected = false
+        DispatchQueue.main.async { [unowned self] in
+            if textField == self.loginView.emailTextField {
+                self.loginView.emailTextFieldSelected = false
+            } else {
+                self.loginView.passwordTextFieldSelected = false
+            }
+            self._activeField.value = .none
         }
-        _activeField.value = .none
     }
     
 }

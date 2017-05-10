@@ -49,7 +49,7 @@ brew update
 brew install carthage
 ```
 
-To download wolmo-core-iOS, add this to your Cartfile:
+To download wolmo-authentication-iOS, add this to your Cartfile:
 
 ```
 github "Wolox/wolmo-authentication-ios" ~> 0.1.0
@@ -82,8 +82,8 @@ script/bootstrap
 ## Dependencies
 
 - [WolmoCore](https://github.com/Wolox/wolmo-core-ios): Framework with useful basic extensions.
-- [ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa): Framework inspired by functional reactive programming.
-- [Rex](https://github.com/neilpa/Rex): Extensions for ReactiveCocoa.
+- [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift): Framework inspired by functional reactive programming.
+- [FacebookSDKSwift](https://github.com/facebook/facebook-sdk-swift): Framework for authenticating with Facebook.
 
 
 
