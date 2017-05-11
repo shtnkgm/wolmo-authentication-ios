@@ -15,7 +15,11 @@ import enum Result.NoError
     Protocol that all users returned by
     login providers should implement.
  */
-public protocol LoginProviderUser {}
+public protocol LoginProviderUser {
+
+    func logOut()
+
+}
 
 /**
  This enum lists all the possible user types
@@ -116,11 +120,5 @@ public protocol LoginProvider {
             (so to be able to have it in login and signup screens)
     */
     func createButton() -> UIView
-
-    /**
-        Returns a SignalProducer that takes care of logging out the user
-        from the login service.
-    */
-    func logOut() -> SignalProducer<(), LoginProviderErrorType>
     
 }

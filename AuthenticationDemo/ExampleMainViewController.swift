@@ -10,19 +10,19 @@ import Foundation
 import UIKit
 import ReactiveCocoa
 import ReactiveSwift
+import Authentication
 
 final class ExampleMainViewController: UIViewController {
 
     @IBOutlet weak var logoutButton: UIButton!
 
+    var sessionService: ExampleSessionService?
+
     override func viewDidLoad() {
         logoutButton.reactive.controlEvents(.touchUpInside)
             .observe(on: UIScheduler())
-            .observeValues { _ in
-                if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                    appDelegate.sessionService.logOut()
-                    appDelegate.authenticationCoordinator.start()
-                }
+            .observeValues { [unowned self] _ in
+
         }
     }
 
