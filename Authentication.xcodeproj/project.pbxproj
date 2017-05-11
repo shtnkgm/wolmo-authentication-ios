@@ -620,7 +620,6 @@
 				9D72AA001C8DC7EA00BB4082 /* Frameworks */,
 				9D72AA011C8DC7EA00BB4082 /* Headers */,
 				9D72AA021C8DC7EA00BB4082 /* Resources */,
-				9D1DFEFD1C8DCE1500F0A37C /* Carthage */,
 				CE913DD41C90445A00D8F2B2 /* Swiftlint in CI */,
 			);
 			buildRules = (
@@ -750,32 +749,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9D1DFEFD1C8DCE1500F0A37C /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Core.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FacebookCore.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FacebookShare.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FacebookLogin.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FBSDKCoreKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FBSDKShareKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FBSDKLoginKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Bolts.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		CE7A7BBE1D3EB63600C44A25 /* Carthage */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
