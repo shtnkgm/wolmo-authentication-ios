@@ -49,7 +49,10 @@ class ExampleFailLoginProvider: LoginProvider {
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return view
+    }
 
+    func logOut() -> SignalProducer<(), LoginProviderErrorType> {
+        return SignalProducer.empty
     }
     
 }

@@ -55,5 +55,9 @@ class ExampleSuccessLoginProvider: LoginProvider {
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return view
     }
+
+    func logOut() -> SignalProducer<(), LoginProviderErrorType> {
+        return SignalProducer.empty
+    }
     
 }

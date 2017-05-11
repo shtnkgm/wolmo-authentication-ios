@@ -25,18 +25,20 @@ public struct ExampleUser {
 
 public final class ExampleSessionService: SessionServiceType {
     
-    private let (_currentUser, _currentUserObserver) = Signal<ExampleUser, NoError>.pipe()
+    fileprivate let (_currentUser, _currentUserObserver) = Signal<ExampleUser?, NoError>.pipe()
     public let currentUser: Property<ExampleUser?>
     
     private let _email: String
     private let _password: String
     private let _registeredAlready: Bool
+    fileprivate var _isFacebook: Bool
     
     init(email: String, password: String) {
         _email = email
         _password = password
         _registeredAlready = false
-        currentUser = Property(initial: Optional.none, then: _currentUser.map { $0 })
+        _isFacebook = false
+        currentUser = Property(initial: Optional.none, then: _currentUser)
     }
     
     deinit {
@@ -48,6 +50,7 @@ public final class ExampleSessionService: SessionServiceType {
         if email.raw == _email {
             if password == _password {
                 let user = User(email: email.raw, password: password)
+                self._isFacebook = false
                 return logInSuccess(user: user, dispatchTime: dispatchTime)
             } else {
                 return logInFailure(dispatchTime: dispatchTime)
@@ -62,6 +65,7 @@ public final class ExampleSessionService: SessionServiceType {
         switch user {
         case .facebook(let fbUser):
             let exampleUser = ExampleUser(email: fbUser.email?.raw ?? "", password: "")
+            self._isFacebook = true
             return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)
         case .custom(let name, _):
             print("Signing up a user for service \(name) not supported")
@@ -69,25 +73,6 @@ public final class ExampleSessionService: SessionServiceType {
         }
     }
 
-    private func logInSuccess(user: ExampleUser, dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
-        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
-            DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-                observer.send(value: user)
-                observer.sendCompleted()
-            }
-        }.on(completed: { [unowned self] in
-            self._currentUserObserver.send(value: user)
-        })
-    }
-    
-    private func logInFailure(dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
-        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
-            DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-                observer.send(error: .invalidLogInCredentials(.none))
-            }
-        }
-    }
-    
     public func signUp(withUsername username: String?, email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = DispatchTime.now() + 2.0
         if email.raw == _email {
@@ -95,14 +80,26 @@ public final class ExampleSessionService: SessionServiceType {
                 return signUpFailure(dispatchTime: dispatchTime)
             } else {
                 let user = ExampleUser(email: email.raw, password: password)
+                self._isFacebook = false
                 return signUpSuccess(user: user, dispatchTime: dispatchTime)
             }
         } else {
             return signUpFailure(dispatchTime: dispatchTime)
         }
     }
-    
-    private func signUpSuccess(user: ExampleUser, dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
+
+    public func logOut() {
+        _currentUserObserver.send(value: .none)
+        if _isFacebook {
+            (UIApplication.shared.delegate as? AppDelegate)?.facebookProvider.logOut().start()
+        }
+    }
+
+}
+
+fileprivate extension ExampleSessionService {
+
+    fileprivate func logInSuccess(user: ExampleUser, dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
                 observer.send(value: user)
@@ -113,7 +110,26 @@ public final class ExampleSessionService: SessionServiceType {
         })
     }
     
-    private func signUpFailure(dispatchTime: DispatchTime, fromProvider: Bool = false) -> SignalProducer<ExampleUser, SessionServiceError> {
+    fileprivate func logInFailure(dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+                observer.send(error: .invalidLogInCredentials(.none))
+            }
+        }
+    }
+    
+    fileprivate func signUpSuccess(user: ExampleUser, dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
+        return SignalProducer<ExampleUser, SessionServiceError> { [unowned self] observer, _ in
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
+                observer.send(value: user)
+                observer.sendCompleted()
+            }
+        }.on(completed: { [unowned self] in
+            self._currentUserObserver.send(value: user)
+        })
+    }
+    
+    fileprivate func signUpFailure(dispatchTime: DispatchTime, fromProvider: Bool = false) -> SignalProducer<ExampleUser, SessionServiceError> {
         return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
                 let error: SessionServiceError = fromProvider ? .loginProviderError(name: "Some name",

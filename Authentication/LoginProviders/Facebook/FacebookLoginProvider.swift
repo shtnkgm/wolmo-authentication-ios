@@ -91,7 +91,7 @@ public struct FacebookLoginProviderError: LoginProviderError {
             `FacebookDisplayName`: with the display name by which you want the user
                 to see your app with when asked for permissions.
  */
-public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
+public final class FacebookLoginProvider: LoginProvider {
 
     public static let name = "Facebook"
 
@@ -126,7 +126,20 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
         button.delegate = self
         return button
     }
-    
+
+    public func logOut() -> SignalProducer<(), LoginProviderErrorType> {
+        return SignalProducer { observer, _ in
+            let loginManager = LoginManager()
+            loginManager.logOut()
+            observer.send(value: ())
+            observer.sendCompleted()
+        }
+    }
+
+}
+
+extension FacebookLoginProvider: LoginButtonDelegate {
+
     public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         switch result {
         case .cancelled:

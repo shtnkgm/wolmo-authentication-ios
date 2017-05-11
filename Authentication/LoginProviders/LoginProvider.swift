@@ -113,8 +113,14 @@ public protocol LoginProvider {
      
         - warning: This function should return a different instance of
             the button each time it is called
-            (so to be able to have it in login screen and in signup)
+            (so to be able to have it in login and signup screens)
     */
     func createButton() -> UIView
+
+    /**
+        Returns a SignalProducer that takes care of logging out the user
+        from the login service.
+    */
+    func logOut() -> SignalProducer<(), LoginProviderErrorType>
     
 }
