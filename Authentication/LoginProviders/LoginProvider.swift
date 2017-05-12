@@ -15,11 +15,7 @@ import enum Result.NoError
     Protocol that all users returned by
     login providers should implement.
  */
-public protocol LoginProviderUser {
-
-    func logOut()
-
-}
+public protocol LoginProviderUser { }
 
 /**
  This enum lists all the possible user types
@@ -32,6 +28,13 @@ public protocol LoginProviderUser {
 public enum LoginProviderUserType {
     case facebook(user: FacebookLoginProviderUser)
     case custom(name: String, user: LoginProviderUser)
+
+    public var providerName: String {
+        switch self {
+        case .facebook: return FacebookLoginProvider.name
+        case let .custom(name: name, user: _): return name
+        }
+    }
 }
 
 public protocol LoginProviderError: Error {
@@ -120,5 +123,11 @@ public protocol LoginProvider {
             (so to be able to have it in login and signup screens)
     */
     func createButton() -> UIView
+
+    /**
+        Returns a SignalProducer that takes care of logging out the user
+        from the login service.
+    */
+    func logOut() -> SignalProducer<(), LoginProviderErrorType>
     
 }

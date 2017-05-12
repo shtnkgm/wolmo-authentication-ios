@@ -65,11 +65,6 @@ public struct FacebookLoginProviderUser: LoginProviderUser {
         self.accessToken = accessToken
     }
 
-    public func logOut() {
-        let loginManager = LoginManager()
-        loginManager.logOut()
-    }
-
 }
 
 /**
@@ -131,6 +126,14 @@ public final class FacebookLoginProvider: LoginProvider {
         button.defaultAudience = configuration.defaultAudience
         button.delegate = self
         return button
+    }
+
+    public func logOut() -> SignalProducer<(), LoginProviderErrorType> {
+        return SignalProducer { observer, _ in
+            LoginManager().logOut()
+            observer.send(value: ())
+            observer.sendCompleted()
+        }
     }
 
 }

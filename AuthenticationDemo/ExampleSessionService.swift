@@ -30,18 +30,14 @@ public struct ExampleUser {
         self.password = ""
     }
 
-    func logOut() {
-        if let user = facebookUser {
-            user.logOut()
-        }
-    }
-
 }
 
 public final class ExampleSessionService: SessionServiceType {
-    
-    fileprivate let (_currentUser, _currentUserObserver) = Signal<ExampleUser?, NoError>.pipe()
+
+    fileprivate let _currentUser: MutableProperty<ExampleUser?> = MutableProperty(.none)
     public let currentUser: Property<ExampleUser?>
+    fileprivate let _currentProvider: MutableProperty<String?> = MutableProperty(.none)
+    public let currentProviderName: Property<String?>
     
     private let _email: String
     private let _password: String
@@ -51,11 +47,9 @@ public final class ExampleSessionService: SessionServiceType {
         _email = email
         _password = password
         _registeredAlready = false
-        currentUser = Property(initial: Optional.none, then: _currentUser)
-    }
-    
-    deinit {
-        _currentUserObserver.sendCompleted()
+        currentUser = Property(_currentUser)
+        currentProviderName = Property(_currentProvider)
+        bindPersistance()
     }
     
     public func logIn(withEmail email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
@@ -77,7 +71,9 @@ public final class ExampleSessionService: SessionServiceType {
         switch user {
         case .facebook(let fbUser):
             let exampleUser = ExampleUser(email: fbUser.email?.raw ?? "", password: "")
-            return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)
+            return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime).on(completed: { [unowned self] in
+                self._currentProvider.value = user.providerName
+            })
         case .custom(let name, _):
             print("Signing up a user for service \(name) not supported")
             return signUpFailure(dispatchTime: dispatchTime, fromProvider: true)
@@ -99,8 +95,8 @@ public final class ExampleSessionService: SessionServiceType {
     }
 
     public func logOut() {
-        currentUser.value?.logOut()
-        _currentUserObserver.send(value: .none)
+        _currentUser.value = .none
+        _currentProvider.value = .none
     }
 
 }
@@ -114,7 +110,7 @@ fileprivate extension ExampleSessionService {
                 observer.sendCompleted()
             }
         }.on(completed: { [unowned self] in
-            self._currentUserObserver.send(value: user)
+            self._currentUser.value = user
         })
     }
     
@@ -133,7 +129,7 @@ fileprivate extension ExampleSessionService {
                 observer.sendCompleted()
             }
         }.on(completed: { [unowned self] in
-            self._currentUserObserver.send(value: user)
+            self._currentUser.value = user
         })
     }
     
@@ -148,4 +144,40 @@ fileprivate extension ExampleSessionService {
         }
     }
     
+}
+
+fileprivate extension ExampleSessionService {
+
+    fileprivate func bindPersistance() {
+        currentUser.producer.startWithValues { [unowned self] in
+            switch $0 {
+            case .some(let user): self.save(user: user)
+            case .none: self.clearUser()
+            }
+        }
+        currentProviderName.producer.startWithValues { [unowned self] in
+            switch $0 {
+            case .some(let name): self.save(providerName: name)
+            case .none: self.clearProviderName()
+            }
+        }
+    }
+
+    private func save(user: ExampleUser) {
+        // Here you could persist your token or something.
+        // Preferably, through a PersistanceService.
+    }
+
+    private func clearUser() {
+        // Here you could clear the token from persistance.
+    }
+
+    private func save(providerName: String) {
+        // Here you could persist in the same place the provider's name
+    }
+
+    private func clearProviderName() {
+        // Here you could clear the provider's name from persistance.
+    }
+
 }

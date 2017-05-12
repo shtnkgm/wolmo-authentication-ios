@@ -215,7 +215,7 @@ fileprivate extension SignupViewModel {
     private func sessionServiceLogInWithExecuting(user: LoginProviderUserType) -> SignalProducer<Result<User, SessionServiceError>, NoError> {
         return _sessionService.logIn(withUser: user)
             .on(started: { [unowned self] in
-                self._loginProvidersExecutingObserver.send(value: true)
+                    self._loginProvidersExecutingObserver.send(value: true)
                 }, failed: { [unowned self] _ in
                     self._loginProvidersExecutingObserver.send(value: false)
                 }, completed: { [unowned self] in

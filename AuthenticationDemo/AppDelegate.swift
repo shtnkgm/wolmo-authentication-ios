@@ -9,22 +9,33 @@
 import UIKit
 import Authentication
 import FacebookCore
+import ReactiveSwift
+import Result
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var facebookProvider = FacebookLoginProvider()
     var sessionService = ExampleSessionService(email: "example@mail.com", password: "password")
     lazy var authenticationCoordinator: AuthenticationCoordinator<ExampleUser, ExampleSessionService> = self.createCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        sessionService.currentUser.signal.observeValues { [unowned self] in
-            if case .none = $0 {
-                self.authenticationCoordinator.start()
+        let signal: Signal<ExampleUser?, LoginProviderErrorType> = sessionService.currentUser.signal
+            .filter {
+                if case .none = $0 {
+                    return true
+                } else { return false }
+            }.mapError { _ in .custom(name: "", error: SimpleLoginProviderError(localizedMessage: "")) }
+        signal.flatMap(.latest) { [unowned self] _ -> SignalProducer<(), LoginProviderErrorType> in
+                let prod = self.authenticationCoordinator.currentLoginProvider?.logOut()
+                return prod ?? SignalProducer(value: ())
+            }.observeResult { [unowned self] in
+                switch $0 {
+                case .success: self.authenticationCoordinator.start()
+                case .failure: break
+                }
             }
-        }
         authenticationCoordinator.start()
         return true
     }
@@ -67,7 +78,7 @@ extension AppDelegate {
         let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
         let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
                                                           showLoginProviders: true)
-        let loginProviders: [LoginProvider] = [facebookProvider, ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
+        let loginProviders: [LoginProvider] = [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
                                                                 signupConfiguration: signupConfiguration,
                                                                 loginProviders: loginProviders) { [unowned self] in
