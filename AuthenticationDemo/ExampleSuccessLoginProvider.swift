@@ -63,5 +63,7 @@ class ExampleSuccessLoginProvider: LoginProvider {
     func logOut() -> SignalProducer<(), LoginProviderErrorType> {
         return SignalProducer.empty
     }
+
+    public var currentUser: LoginProviderUserType?
     
 }

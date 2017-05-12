@@ -37,7 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         authenticationCoordinator.start()
-        return true
+
+        //You need to call this so the SDK is launched correctly (and for example you have facebook recognize a previous login).
+        // http://stackoverflow.com/a/30072323
+        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

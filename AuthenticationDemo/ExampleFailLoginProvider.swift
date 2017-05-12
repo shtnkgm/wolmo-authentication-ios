@@ -12,7 +12,7 @@ import ReactiveSwift
 import enum Result.NoError
 
 class ExampleFailLoginProvider: LoginProvider {
-    
+
     static var name: String { return "Failable Provider" }
 
     let userSignal: Signal<LoginProviderUserType, NoError>
@@ -54,5 +54,7 @@ class ExampleFailLoginProvider: LoginProvider {
     func logOut() -> SignalProducer<(), LoginProviderErrorType> {
         return SignalProducer.empty
     }
+
+    public var currentUser: LoginProviderUserType?
     
 }

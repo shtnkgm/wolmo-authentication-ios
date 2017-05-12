@@ -50,6 +50,11 @@ public protocol SessionServiceType {
 
          This will be consulted by the framework in order to be
          able to provide you the LoginProvider from which to log out.
+         This is thought so that it serves after reopening the app:
+            you create the provider again and are able to make the
+            logout (the login provider shoud be made so that you can
+            log out a user even after recreating the provider, like
+            facebook does).
      */
     var currentProviderName: Property<String?> { get }
 

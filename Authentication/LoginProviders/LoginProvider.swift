@@ -90,7 +90,7 @@ public protocol LoginProviderConfiguration {}
     Protocol that all LoginProviders must implement.
 */
 public protocol LoginProvider {
-    
+
     /**
         Name to identify the provider in the process.
         
@@ -129,5 +129,7 @@ public protocol LoginProvider {
         from the login service.
     */
     func logOut() -> SignalProducer<(), LoginProviderErrorType>
+
+    var currentUser: LoginProviderUserType? { get }
     
 }

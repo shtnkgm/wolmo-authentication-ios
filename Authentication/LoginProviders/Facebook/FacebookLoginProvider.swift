@@ -11,6 +11,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import FacebookLogin
 import FacebookCore
+import FBSDKCoreKit
 import enum Result.NoError
 
 /**
@@ -134,6 +135,10 @@ public final class FacebookLoginProvider: LoginProvider {
             observer.send(value: ())
             observer.sendCompleted()
         }
+    }
+
+    public var currentUser: LoginProviderUserType? {
+        return AccessToken.current.map { .facebook(user: FacebookLoginProviderUser(email: .none, name: .none, userId: .none, accessToken: $0)) }
     }
 
 }
