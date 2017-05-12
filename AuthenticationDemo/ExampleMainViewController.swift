@@ -22,7 +22,7 @@ final class ExampleMainViewController: UIViewController {
         logoutButton.reactive.controlEvents(.touchUpInside)
             .observe(on: UIScheduler())
             .observeValues { [unowned self] _ in
-
+                self.sessionService?.logOut()
         }
     }
 

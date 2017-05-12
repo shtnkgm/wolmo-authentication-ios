@@ -12,7 +12,11 @@ import ReactiveSwift
 import enum Result.NoError
 
 struct LoginProviderExampleUser: LoginProviderUser {
+
     let name: String
+
+    public func logOut() { }
+
 }
 
 class ExampleSuccessLoginProvider: LoginProvider {

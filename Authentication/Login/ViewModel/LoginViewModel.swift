@@ -138,7 +138,7 @@ fileprivate extension LoginViewModel {
             // Weak self because the original signal will continue to exists
             // independently of this view models existance (or deallocation).
             // And so if this is the second view presented, self won't exist but the signal yes.
-            [weak self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
+            [weak self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in  //swiftlint:disable:this closure_parameter_position
                 if let existingSelf = self, !existingSelf._ignoreProviders {
                     return existingSelf.sessionServiceLogInWithExecuting(user: loginProviderUserType)
                 } else {

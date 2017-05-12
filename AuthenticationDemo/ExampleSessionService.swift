@@ -16,11 +16,26 @@ import ReactiveSwift
 public struct ExampleUser {
     let email: Email
     let password: String
+    let facebookUser: FacebookLoginProviderUser?
     
     init(email: String, password: String) {
         self.email = Email(raw: email)!
         self.password = password
+        self.facebookUser = .none
     }
+
+    init(facebookUser: FacebookLoginProviderUser) {
+        self.facebookUser = facebookUser
+        self.email = facebookUser.email ?? Email(raw: "")!
+        self.password = ""
+    }
+
+    func logOut() {
+        if let user = facebookUser {
+            user.logOut()
+        }
+    }
+
 }
 
 public final class ExampleSessionService: SessionServiceType {
@@ -31,13 +46,11 @@ public final class ExampleSessionService: SessionServiceType {
     private let _email: String
     private let _password: String
     private let _registeredAlready: Bool
-    fileprivate var _isFacebook: Bool
     
     init(email: String, password: String) {
         _email = email
         _password = password
         _registeredAlready = false
-        _isFacebook = false
         currentUser = Property(initial: Optional.none, then: _currentUser)
     }
     
@@ -50,7 +63,6 @@ public final class ExampleSessionService: SessionServiceType {
         if email.raw == _email {
             if password == _password {
                 let user = User(email: email.raw, password: password)
-                self._isFacebook = false
                 return logInSuccess(user: user, dispatchTime: dispatchTime)
             } else {
                 return logInFailure(dispatchTime: dispatchTime)
@@ -65,7 +77,6 @@ public final class ExampleSessionService: SessionServiceType {
         switch user {
         case .facebook(let fbUser):
             let exampleUser = ExampleUser(email: fbUser.email?.raw ?? "", password: "")
-            self._isFacebook = true
             return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime)
         case .custom(let name, _):
             print("Signing up a user for service \(name) not supported")
@@ -80,7 +91,6 @@ public final class ExampleSessionService: SessionServiceType {
                 return signUpFailure(dispatchTime: dispatchTime)
             } else {
                 let user = ExampleUser(email: email.raw, password: password)
-                self._isFacebook = false
                 return signUpSuccess(user: user, dispatchTime: dispatchTime)
             }
         } else {
@@ -89,10 +99,8 @@ public final class ExampleSessionService: SessionServiceType {
     }
 
     public func logOut() {
+        currentUser.value?.logOut()
         _currentUserObserver.send(value: .none)
-        if _isFacebook {
-            (UIApplication.shared.delegate as? AppDelegate)?.facebookProvider.logOut().start()
-        }
     }
 
 }
@@ -119,7 +127,7 @@ fileprivate extension ExampleSessionService {
     }
     
     fileprivate func signUpSuccess(user: ExampleUser, dispatchTime: DispatchTime) -> SignalProducer<ExampleUser, SessionServiceError> {
-        return SignalProducer<ExampleUser, SessionServiceError> { [unowned self] observer, _ in
+        return SignalProducer<ExampleUser, SessionServiceError> { observer, _ in
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
                 observer.send(value: user)
                 observer.sendCompleted()

@@ -20,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var authenticationCoordinator: AuthenticationCoordinator<ExampleUser, ExampleSessionService> = self.createCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        sessionService.currentUser.signal.observeValues { [unowned self] in
+            if case .none = $0 {
+                self.authenticationCoordinator.start()
+            }
+        }
         authenticationCoordinator.start()
         return true
     }
@@ -65,9 +70,11 @@ extension AppDelegate {
         let loginProviders: [LoginProvider] = [facebookProvider, ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
                                                                 signupConfiguration: signupConfiguration,
-                                                                loginProviders: loginProviders) {
+                                                                loginProviders: loginProviders) { [unowned self] in
             let storyboard = UIStoryboard(name: "Main", bundle: .none)
-            return storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
+            let controller = storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
+            controller.sessionService = self.sessionService
+            return controller
         }
         let authenticationCoordinator = AuthenticationCoordinator(sessionService: sessionService,
                                                                   window: window!,

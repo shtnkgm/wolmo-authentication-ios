@@ -9,5 +9,5 @@ metrics:
      upload_report: false
    swiftlint:
      enabled: true
-     minimum: 50
+     minimum: 80
      upload_report: false
