@@ -142,7 +142,7 @@ public protocol SignupControllerDelegate {  //swiftlint:disable:this class_deleg
     
 }
 
-extension SignupControllerDelegate {
+public extension SignupControllerDelegate {
     
     public var shouldDisplaySignupErrorWithAlert: Bool { return true }
     

@@ -27,7 +27,9 @@ public protocol SignupViewType: Renderable, SignupFormType {
 
 public extension SignupViewType {
     
-    var loginLabel: UILabel? { return .none }
+    public var loginLabel: UILabel? { return .none }
+
+    public var loginProviderButtons: [UIView] { return [] }
     
 }
 
@@ -46,7 +48,7 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
     
     internal let tapRecognizer = UITapGestureRecognizer()
     
-    override func awakeFromNib() {
+    internal override func awakeFromNib() {
         addGestureRecognizer(tapRecognizer)
         tapRecognizer.reactive.stateChanged.observeValues { [unowned self] _ in
             self.endEditing(true)
@@ -230,16 +232,16 @@ fileprivate extension SignupView {
 }
 
 // MARK: - state functions
-private extension SignupView {
+fileprivate extension SignupView {
     
-    func updateState(event: SignupViewEvent) {
+    fileprivate func updateState(event: SignupViewEvent) {
         let newState = nextState(state: state, event: event)
         renderState(state: newState)
         state = newState
     }
     
     //swiftlint:disable:next function_body_length cyclomatic_complexity
-    func nextState(state: SignupViewState, event: SignupViewEvent) -> SignupViewState {
+    private func nextState(state: SignupViewState, event: SignupViewEvent) -> SignupViewState {
         switch event {
         case .emailSelected:
             let emailState = (selected: true, content: state.email.content)
@@ -324,7 +326,7 @@ private extension SignupView {
         }
     }
     
-    func renderState(state: SignupViewState) {
+    private func renderState(state: SignupViewState) {
         renderEmailState(state: state.email)
         renderPasswordState(state: state.password)
         renderUsernameState(state: state.username)
@@ -332,7 +334,7 @@ private extension SignupView {
         renderSignUpButtonState(state: state.signUpButton)
     }
     
-    func renderEmailState(state: TextFieldState) {
+    private func renderEmailState(state: TextFieldState) {
         switch state {
         case (selected: true, _):
             emailTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
@@ -349,7 +351,7 @@ private extension SignupView {
         }
     }
     
-    func renderPasswordState(state: TextFieldState) {
+    private func renderPasswordState(state: TextFieldState) {
         switch state {
         case (selected: true, _):
             passwordTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
@@ -366,7 +368,7 @@ private extension SignupView {
         }
     }
     
-    func renderUsernameState(state: TextFieldState) {
+    private func renderUsernameState(state: TextFieldState) {
         switch state {
         case (selected: true, _):
             usernameTextFieldViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
@@ -383,7 +385,7 @@ private extension SignupView {
         }
     }
     
-    func renderConfirmPasswordState(state: TextFieldState) {
+    private func renderConfirmPasswordState(state: TextFieldState) {
         switch state {
         case (selected: true, _):
             pswdConfirmTextFieldAndButtonViewOutlet.layer.borderColor = delegate.colorPalette.textfieldsSelected.cgColor
@@ -400,7 +402,7 @@ private extension SignupView {
         }
     }
     
-    func renderSignUpButtonState(state: ButtonState) {
+    private func renderSignUpButtonState(state: ButtonState) {
         switch state {
         case (executing: true, enabled: true):
             signUpButton.backgroundColor = delegate.colorPalette.mainButtonExecuted

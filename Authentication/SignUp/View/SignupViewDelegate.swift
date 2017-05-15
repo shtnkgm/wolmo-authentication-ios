@@ -68,28 +68,32 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         configureLinksElements(in: signupView)
         configureErrorElements(in: signupView)
     }
-    
-    private func configureMainButton(in signupView: SignupViewType) {
+
+}
+
+fileprivate extension DefaultSignupViewDelegate {
+
+    fileprivate func configureMainButton(in signupView: SignupViewType) {
         signupView.signUpButton.backgroundColor = colorPalette.mainButtonDisabled
         signupView.signUpButton.titleLabel?.font = fontPalette.mainButton
         signupView.signUpButton.titleLabel?.textColor = colorPalette.mainButtonText
     }
     
-    private func configureUsernameElements(in signupView: SignupViewType) {
+    fileprivate func configureUsernameElements(in signupView: SignupViewType) {
         signupView.usernameLabel?.font = fontPalette.labels
         signupView.usernameLabel?.textColor = colorPalette.labels
         signupView.usernameTextField?.font = fontPalette.textfields
         signupView.usernameTextField?.textColor = colorPalette.textfieldText
     }
     
-    private func configureEmailElements(in signupView: SignupViewType) {
+    fileprivate func configureEmailElements(in signupView: SignupViewType) {
         signupView.emailLabel?.font = fontPalette.labels
         signupView.emailLabel?.textColor = colorPalette.labels
         signupView.emailTextField.font = fontPalette.textfields
         signupView.emailTextField.textColor = colorPalette.textfieldText
     }
     
-    private func configurePasswordElements(in signupView: SignupViewType) {
+    fileprivate func configurePasswordElements(in signupView: SignupViewType) {
         signupView.passwordLabel?.font = fontPalette.labels
         signupView.passwordLabel?.textColor = colorPalette.labels
         signupView.passwordTextField.font = fontPalette.textfields
@@ -105,7 +109,7 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         signupView.passwordConfirmVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
     }
     
-    private func configureLinksElements(in signupView: SignupViewType) {
+    fileprivate func configureLinksElements(in signupView: SignupViewType) {
         signupView.setTermsAndServicesText(withURL: termsAndServicesURL)
         signupView.termsAndServicesTextView.textColor = colorPalette.labels
         signupView.termsAndServicesTextView.font = fontPalette.labels
@@ -116,7 +120,7 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
         signupView.loginButton.titleLabel?.textColor = colorPalette.links
     }
     
-    private func configureErrorElements(in signupView: SignupViewType) {
+    fileprivate func configureErrorElements(in signupView: SignupViewType) {
         signupView.usernameValidationMessageLabel?.font = fontPalette.labels
         signupView.usernameValidationMessageLabel?.textColor = colorPalette.textfieldsError
         signupView.emailValidationMessageLabel?.font = fontPalette.labels
