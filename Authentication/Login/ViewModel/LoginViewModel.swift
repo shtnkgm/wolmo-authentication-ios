@@ -204,4 +204,5 @@ fileprivate extension LoginViewModel {
             return SignalProducer(value: self.passwordVisible.value).observe(on: UIScheduler())
         }
     }
+    
 }

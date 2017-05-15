@@ -324,7 +324,7 @@ fileprivate extension SignupController {
             .observeValues { [unowned self] _ in self.view.frame.origin.y = 0 }
     }
     
-    fileprivate func keyboardWillShow(_ notification: Notification) {
+    private func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if !_keyboardDisplayed.value {
                 _keyboardDisplayed.value = true
@@ -341,7 +341,7 @@ fileprivate extension SignupController {
         }
     }
     
-    fileprivate func navigationBarOffset() -> CGFloat {
+    private func navigationBarOffset() -> CGFloat {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navBarHeight: CGFloat
         if navigationController?.isNavigationBarHidden ?? true {
@@ -352,7 +352,7 @@ fileprivate extension SignupController {
         return navBarHeight + statusBarHeight
     }
     
-    fileprivate func calculateTextFieldOffsetToMoveFrame(_ keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
+    private func calculateTextFieldOffsetToMoveFrame(_ keyboardOffset: CGFloat, navBarOffset: CGFloat) -> CGFloat {
         let topTextField = signupView.usernameTextField ?? signupView.emailTextField
         let top = topTextField.convert(topTextField.frame.origin, to: self.view).y - 10
         let bottomTextField = signupView.passwordConfirmTextField ?? signupView.passwordTextField

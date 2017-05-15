@@ -29,9 +29,9 @@ public protocol LoginViewType: Renderable, LoginFormType {
 
 public extension LoginViewType {
     
-    var signupLabel: UILabel? { return .none }
+    public var signupLabel: UILabel? { return .none }
     
-    var recoverPasswordLabel: UILabel? { return .none }
+    public var recoverPasswordLabel: UILabel? { return .none }
     
 }
 
@@ -48,7 +48,7 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
     
     internal let tapRecognizer = UITapGestureRecognizer()
     
-    override func awakeFromNib() {
+    internal override func awakeFromNib() {
         addGestureRecognizer(tapRecognizer)
         tapRecognizer.reactive.stateChanged.observeValues { [unowned self] _ in
             self.endEditing(true)

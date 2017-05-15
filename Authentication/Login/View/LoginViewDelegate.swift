@@ -30,7 +30,7 @@ public protocol LoginViewDelegate { //swiftlint:disable:this class_delegate_prot
 
 public extension LoginViewDelegate {
     
-    func configureLoginView(_ loginView: LoginViewType) { }
+    public func configureLoginView(_ loginView: LoginViewType) { }
     
 }
 
@@ -63,21 +63,25 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
         configureLinksElements(in: loginView)
         configureErrorElements(in: loginView)
     }
-    
-    private func configureMainButton(in loginView: LoginViewType) {
+
+}
+
+fileprivate extension DefaultLoginViewDelegate {
+
+    fileprivate func configureMainButton(in loginView: LoginViewType) {
         loginView.logInButton.backgroundColor = colorPalette.mainButtonDisabled
         loginView.logInButton.titleLabel?.font = fontPalette.mainButton
         loginView.logInButton.titleLabel?.textColor = colorPalette.mainButtonText
     }
     
-    private func configureEmailElements(in loginView: LoginViewType) {
+    fileprivate func configureEmailElements(in loginView: LoginViewType) {
         loginView.emailLabel?.font = fontPalette.labels
         loginView.emailLabel?.textColor = colorPalette.labels
         loginView.emailTextField.font = fontPalette.textfields
         loginView.emailTextField.textColor = colorPalette.textfieldText
     }
     
-    private func configurePasswordElements(in loginView: LoginViewType) {
+    fileprivate func configurePasswordElements(in loginView: LoginViewType) {
         loginView.passwordLabel?.font = fontPalette.labels
         loginView.passwordLabel?.textColor = colorPalette.labels
         loginView.passwordTextField.font = fontPalette.textfields
@@ -86,7 +90,7 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
         loginView.passwordVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
     }
     
-    private func configureLinksElements(in loginView: LoginViewType) {
+    fileprivate func configureLinksElements(in loginView: LoginViewType) {
         loginView.recoverPasswordLabel?.font = fontPalette.labels
         loginView.recoverPasswordLabel?.textColor = colorPalette.labels
         loginView.recoverPasswordButton.titleLabel?.font = fontPalette.links
@@ -98,7 +102,7 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
         loginView.signupButton.titleLabel?.textColor = colorPalette.links
     }
     
-    private func configureErrorElements(in loginView: LoginViewType) {
+    fileprivate func configureErrorElements(in loginView: LoginViewType) {
         loginView.emailValidationMessageLabel?.font = fontPalette.labels
         loginView.emailValidationMessageLabel?.textColor = colorPalette.textfieldsError
         loginView.passwordValidationMessageLabel?.font = fontPalette.labels

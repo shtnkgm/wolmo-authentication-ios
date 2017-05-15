@@ -100,7 +100,7 @@ public protocol LoginControllerDelegate {   //swiftlint:disable:this class_deleg
     
 }
 
-extension LoginControllerDelegate {
+public extension LoginControllerDelegate {
     
     public var shouldDisplayLoginErrorWithAlert: Bool { return true }
     
