@@ -55,7 +55,7 @@ public struct FacebookLoginProviderUser: LoginProviderUser {
     public let userId: Int64?
     public let accessToken: AccessToken
     
-    init(email: String?, name: String?, userId: Int64?, accessToken: AccessToken) {
+    internal init(email: String?, name: String?, userId: Int64?, accessToken: AccessToken) {
         if let unwrappedEmail = email {
             self.email = Email(raw: unwrappedEmail)
         } else {
@@ -76,7 +76,7 @@ public struct FacebookLoginProviderUser: LoginProviderUser {
  */
 public struct FacebookLoginProviderError: LoginProviderError {
     
-    let facebookError: Error
+    public let facebookError: Error
     
     public var localizedMessage: String {
         return facebookError.localizedDescription

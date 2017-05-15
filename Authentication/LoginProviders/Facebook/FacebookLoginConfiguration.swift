@@ -42,7 +42,7 @@ public final class FacebookLoginConfiguration: LoginProviderConfiguration {
                 you can leave the default value, it won't be used.
                 By default, the user's friends.
     */
-    init(readPermissions: [ReadPermission] = [.userFriends, .publicProfile, .email],
+    public init(readPermissions: [ReadPermission] = [.userFriends, .publicProfile, .email],
          publishPermissions: [PublishPermission] = [],
          defaultAudience: LoginDefaultAudience = .friends) {
         self.readPermissions = readPermissions

@@ -71,7 +71,7 @@ public enum LoginProviderErrorType: Error {
 
 internal extension LoginProviderErrorType {
 
-    var sessionServiceError: SessionServiceError {
+    internal var sessionServiceError: SessionServiceError {
         switch self {
         case let .facebook(error: error): return .loginProviderError(name: FacebookLoginProvider.name, error: error)
         case let .custom(name: name, error: error): return .loginProviderError(name: name, error: error)
