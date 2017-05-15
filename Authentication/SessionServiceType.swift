@@ -115,7 +115,7 @@ public protocol SessionServiceType {
     
 }
 
-public extension SessionServiceError {
+internal extension SessionServiceError {
     
     /**
          The message from an error service is composed by
