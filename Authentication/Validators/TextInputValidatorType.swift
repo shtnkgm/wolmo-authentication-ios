@@ -17,14 +17,14 @@ public enum ValidationResult {
     case valid
     case invalid(errors: [String])
     
-    var isValid: Bool {
+    public var isValid: Bool {
         switch self {
         case .valid: return true
         case .invalid(_): return false
         }
     }
     
-    var errors: [String] {
+    public var errors: [String] {
         switch self {
         case .valid: return []
         case .invalid(let _errors): return _errors

@@ -21,7 +21,7 @@ public struct CompositeTextInputValidator: TextInputValidatorType {
     
     private let _validators: [TextInputValidatorType]
     
-    init(validators: [TextInputValidatorType]) {
+    public init(validators: [TextInputValidatorType]) {
         _validators = validators
     }
     
