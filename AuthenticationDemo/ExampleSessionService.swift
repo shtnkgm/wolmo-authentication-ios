@@ -8,7 +8,6 @@
 
 import Foundation
 import Authentication
-
 import enum Result.NoError
 import ReactiveCocoa
 import ReactiveSwift
@@ -38,17 +37,18 @@ public final class ExampleSessionService: SessionServiceType {
     public let currentUser: Property<ExampleUser?>
     fileprivate let _currentProvider: MutableProperty<String?> = MutableProperty(.none)
     public let currentProviderName: Property<String?>
-    
+
     private let _email: String
     private let _password: String
-    private let _registeredAlready: Bool
+
+    fileprivate let _userDefaults = UserDefaults.standard
     
     init(email: String, password: String) {
         _email = email
         _password = password
-        _registeredAlready = false
         currentUser = Property(_currentUser)
         currentProviderName = Property(_currentProvider)
+        loadUserInfo()
         bindPersistance()
     }
     
@@ -83,12 +83,8 @@ public final class ExampleSessionService: SessionServiceType {
     public func signUp(withUsername username: String?, email: Email, password: String) -> SignalProducer<ExampleUser, SessionServiceError> {
         let dispatchTime = DispatchTime.now() + 2.0
         if email.raw == _email {
-            if _registeredAlready {
-                return signUpFailure(dispatchTime: dispatchTime)
-            } else {
-                let user = ExampleUser(email: email.raw, password: password)
-                return signUpSuccess(user: user, dispatchTime: dispatchTime)
-            }
+            let user = ExampleUser(email: email.raw, password: password)
+            return signUpSuccess(user: user, dispatchTime: dispatchTime)
         } else {
             return signUpFailure(dispatchTime: dispatchTime)
         }
@@ -163,21 +159,47 @@ fileprivate extension ExampleSessionService {
         }
     }
 
+    fileprivate func loadUserInfo() {
+        if let user = getUser() {
+            _currentUser.value = user
+        }
+        if let providerName = getProviderName() {
+            _currentProvider.value = providerName
+        }
+    }
+
+    private static let UserKey = "AuthExample.User"
+    private static let ProviderKey = "AuthExample.Provider"
+
     private func save(user: ExampleUser) {
         // Here you could persist your token or something.
         // Preferably, through a PersistanceService.
+        let dict = ["Email": user.email.raw, "Password": user.password]
+        _userDefaults.set(dict, forKey: ExampleSessionService.UserKey)
+    }
+
+    private func getUser() -> ExampleUser? {
+        let info = _userDefaults.dictionary(forKey: ExampleSessionService.UserKey) as? [String: String]
+        return info.map { ExampleUser(email: $0["Email"]!, password: $0["Password"]!) }
     }
 
     private func clearUser() {
         // Here you could clear the token from persistance.
+        _userDefaults.removeObject(forKey: ExampleSessionService.UserKey)
     }
 
     private func save(providerName: String) {
         // Here you could persist in the same place the provider's name
+        _userDefaults.set(providerName, forKey: ExampleSessionService.ProviderKey)
+    }
+
+    private func getProviderName() -> String? {
+        return _userDefaults.string(forKey: ExampleSessionService.ProviderKey)
     }
 
     private func clearProviderName() {
         // Here you could clear the provider's name from persistance.
+        _userDefaults.removeObject(forKey: ExampleSessionService.ProviderKey)
     }
 
 }

@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         authenticationCoordinator.start()
 
-        //You need to call this so the SDK is launched correctly (and for example you have facebook recognize a previous login).
+        //You need to call this so the SDK is launched correctly (and for example to have facebook recognize a previous login).
         // http://stackoverflow.com/a/30072323
         return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }

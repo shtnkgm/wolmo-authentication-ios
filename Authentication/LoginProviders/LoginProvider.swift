@@ -97,7 +97,13 @@ public protocol LoginProvider {
         It will be used for login provider user and error types.
     */
     static var name: String { get }
-    
+
+    /**
+        Returns the current user if the user is logged in to this
+        provider's service, or .none if it's not logged in.
+     */
+    var currentUser: LoginProviderUserType? { get }
+
     /**
          Signal that sends the user created as a result of
          the login triggered by the button in the LoginProvider.
@@ -129,7 +135,5 @@ public protocol LoginProvider {
         from the login service.
     */
     func logOut() -> SignalProducer<(), LoginProviderErrorType>
-
-    var currentUser: LoginProviderUserType? { get }
     
 }

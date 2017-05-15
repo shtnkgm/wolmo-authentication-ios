@@ -36,6 +36,13 @@ public class AuthenticationCoordinator<User, SessionService: SessionServiceType>
     public var currentLoginProvider: LoginProvider? {
         return sessionService.currentProviderName.value.flatMap { _componentsFactory.getProvider(withName: $0) }
     }
+    /// The login provider user obtained from the login provider used,
+    /// or .none if the user didn't login through a provider, or if there is no logged in user.
+    public var currentLoginProviderUser: LoginProviderUserType? {
+        return sessionService.currentProviderName.value.flatMap { _componentsFactory.getProvider(withName: $0)?.currentUser }
+    }
+
+
     
     /// The window of the app
     fileprivate let _window: UIWindow
