@@ -79,7 +79,7 @@ extension AppDelegate {
 
     func createCoordinator() -> AuthenticationCoordinator<ExampleUser, ExampleSessionService> {
         let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
-        let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
+        let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.wolox.com.ar/")!,
                                                           showLoginProviders: true)
         let loginProviders: [LoginProvider] = [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
