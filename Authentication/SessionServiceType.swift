@@ -66,7 +66,7 @@ public protocol SessionServiceType {
         If the credentials are valid, the SignalProducer returned
         must take care of:
             sending the user to the observers and
-            updating the currentUser and curentProviderName properties.
+            updating the currentUser and currentProviderName properties.
         If the credentials aren't valid, the SignalProducer returned
         must take care of:
             sending the error to the observer.
@@ -91,7 +91,7 @@ public protocol SessionServiceType {
      If the creation of the user is successful, the SignalProducer
      returned must take care of:
         sending the user to the observers and
-        updating the currentUser and curentProviderName properties.
+        updating the currentUser and currentProviderName properties.
      If not, the SignalProducer returned
      must take care of:
         sending the error to the observer.
@@ -106,7 +106,7 @@ public protocol SessionServiceType {
          If the credentials are valid, the SignalProducer returned
          must take care of:
              sending the user to the observers and
-             updating the currentUser and curentProviderName properties.
+             updating the currentUser and currentProviderName properties.
          If the credentials aren't valid, the SignalProducer returned
          must take care of:
              sending the error to the observer.

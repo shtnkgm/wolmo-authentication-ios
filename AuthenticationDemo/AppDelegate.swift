@@ -21,9 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var authenticationCoordinator: AuthenticationCoordinator<ExampleUser, ExampleSessionService> = self.createCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        sessionService.currentUser.signal
-            .filter { $0 != nil }
-            .mapError { _ in .custom(name: "", error: SimpleLoginProviderError(localizedMessage: "")) }
+        sessionService.currentUser.signal.skipNil().liftError()
             .flatMap(.latest) { [unowned self] _ -> SignalProducer<(), LoginProviderErrorType> in
                 return self.authenticationCoordinator.currentLoginProvider?.logOut() ?? SignalProducer(value: ())
             }.observeResult { [unowned self] in
