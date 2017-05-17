@@ -15,8 +15,6 @@ struct LoginProviderExampleUser: LoginProviderUser {
 
     let name: String
 
-    public func logOut() { }
-
 }
 
 class ExampleSuccessLoginProvider: LoginProvider {
