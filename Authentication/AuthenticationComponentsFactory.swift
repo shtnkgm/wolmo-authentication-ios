@@ -343,7 +343,7 @@ public protocol SignupComponentsFactory {
     
 }
 
-extension SignupComponentsFactory {
+public extension SignupComponentsFactory {
     
     public func createSignUpCredentialsValidator() -> SignupCredentialsValidator {
         return SignupCredentialsValidator()

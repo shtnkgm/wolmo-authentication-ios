@@ -255,6 +255,6 @@ fileprivate extension SignupViewModel {
     
 }
 
-private func getPasswordConfirmValidationResultFromEquality(_ equals: Bool) -> ValidationResult {
+fileprivate func getPasswordConfirmValidationResultFromEquality(_ equals: Bool) -> ValidationResult {
     return equals ? .valid : .invalid(errors: ["signup-error.password-confirmation.invalid".frameworkLocalized])
 }

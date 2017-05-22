@@ -237,7 +237,7 @@ fileprivate extension LoginController {
         }
     }
     
-    func navBarOffset() -> CGFloat {
+    private func navBarOffset() -> CGFloat {
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let navBarHeight: CGFloat
         if navigationController?.isNavigationBarHidden ?? true {
@@ -254,7 +254,7 @@ fileprivate extension LoginController {
         return loginView.emailTextField.convert(loginView.emailTextField.frame.origin, to: self.view).y - 10
     }
     
-    @objc func dismissKeyboard(sender: UITapGestureRecognizer) {
+    @objc fileprivate func dismissKeyboard(sender: UITapGestureRecognizer) {
         if _keyboardDisplayed.value {
             _keyboardDisplayed.value = false
             self.view.endEditing(true)

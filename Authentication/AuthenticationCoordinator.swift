@@ -87,7 +87,7 @@ public class AuthenticationCoordinator<User, SessionService: SessionServiceType>
 }
 
 // MARK: - Login Functions
-public extension AuthenticationCoordinator {
+internal extension AuthenticationCoordinator {
     
     /**
          Creates the login controller to use for starting
@@ -136,7 +136,7 @@ public extension AuthenticationCoordinator {
 }
 
 // MARK: - Signup Functions
-public extension AuthenticationCoordinator {
+internal extension AuthenticationCoordinator {
 
     /**
          Creates the signup controller to use when the
@@ -196,7 +196,7 @@ public extension AuthenticationCoordinator {
 }
 
 // MARK: - RecoverPassword Functions
-public extension AuthenticationCoordinator {
+internal extension AuthenticationCoordinator {
     
     /**
          Creates the recover password main controller to use when the

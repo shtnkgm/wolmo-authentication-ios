@@ -34,7 +34,7 @@ public struct LoginCredentialsValidator {
     public let emailValidator: TextInputValidatorType
     public let passwordValidator: TextInputValidatorType
     
-    init(emailValidator: TextInputValidatorType = LoginCredentialsValidator.defaultEmailValidator(),
+    public init(emailValidator: TextInputValidatorType = LoginCredentialsValidator.defaultEmailValidator(),
          passwordValidator: TextInputValidatorType = LoginCredentialsValidator.defaultPasswordValidator()) {
             self.emailValidator = emailValidator
             self.passwordValidator = passwordValidator

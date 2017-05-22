@@ -39,7 +39,7 @@ public struct SignupCredentialsValidator {
     public let emailValidator: TextInputValidatorType
     public let passwordValidator: TextInputValidatorType
     
-    init(usernameValidator: TextInputValidatorType = SignupCredentialsValidator.defaultUsernameValidator(),
+    public init(usernameValidator: TextInputValidatorType = SignupCredentialsValidator.defaultUsernameValidator(),
          emailValidator: TextInputValidatorType = SignupCredentialsValidator.defaultEmailValidator(),
          passwordValidator: TextInputValidatorType = SignupCredentialsValidator.defaultPasswordValidator()) {
             self.usernameValidator = usernameValidator
