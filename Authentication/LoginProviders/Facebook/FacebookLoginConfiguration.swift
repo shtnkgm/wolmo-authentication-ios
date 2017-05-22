@@ -11,9 +11,6 @@ import FacebookLogin
 
 public final class FacebookLoginConfiguration: LoginProviderConfiguration {
     
-    //TODO: Check if we can add a request for requesting publish permissions
-    //  after logging in (like the extra information).
-    
     public let readPermissions: [ReadPermission]
     public let publishPermissions: [PublishPermission]
     public let defaultAudience: LoginDefaultAudience

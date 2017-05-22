@@ -194,7 +194,7 @@ fileprivate extension SignupViewModel {
             // Weak self because the original signal will continue to exists
             // independently of this view models existance (or deallocation).
             // And so if this is the second view presented, self won't exists but the signal yes.
-            [weak self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in
+            [weak self] loginProviderUserType -> SignalProducer<Result<User, SessionServiceError>, NoError> in  //swiftlint:disable:this closure_parameter_position
             if let existingSelf = self, !existingSelf._ignoreProviders {
                 return existingSelf.sessionServiceLogInWithExecuting(user: loginProviderUserType)
             } else {
@@ -215,7 +215,7 @@ fileprivate extension SignupViewModel {
     private func sessionServiceLogInWithExecuting(user: LoginProviderUserType) -> SignalProducer<Result<User, SessionServiceError>, NoError> {
         return _sessionService.logIn(withUser: user)
             .on(started: { [unowned self] in
-                self._loginProvidersExecutingObserver.send(value: true)
+                    self._loginProvidersExecutingObserver.send(value: true)
                 }, failed: { [unowned self] _ in
                     self._loginProvidersExecutingObserver.send(value: false)
                 }, completed: { [unowned self] in

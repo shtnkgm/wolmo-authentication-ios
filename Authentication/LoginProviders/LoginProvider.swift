@@ -15,7 +15,7 @@ import enum Result.NoError
     Protocol that all users returned by
     login providers should implement.
  */
-public protocol LoginProviderUser {}
+public protocol LoginProviderUser { }
 
 /**
  This enum lists all the possible user types
@@ -28,6 +28,13 @@ public protocol LoginProviderUser {}
 public enum LoginProviderUserType {
     case facebook(user: FacebookLoginProviderUser)
     case custom(name: String, user: LoginProviderUser)
+
+    public var providerName: String {
+        switch self {
+        case .facebook: return FacebookLoginProvider.name
+        case let .custom(name: name, user: _): return name
+        }
+    }
 }
 
 public protocol LoginProviderError: Error {
@@ -83,14 +90,20 @@ public protocol LoginProviderConfiguration {}
     Protocol that all LoginProviders must implement.
 */
 public protocol LoginProvider {
-    
+
     /**
         Name to identify the provider in the process.
         
         It will be used for login provider user and error types.
     */
     static var name: String { get }
-    
+
+    /**
+        Returns the current user if the user is logged in to this
+        provider's service, or .none if it's not logged in.
+     */
+    var currentUser: LoginProviderUserType? { get }
+
     /**
          Signal that sends the user created as a result of
          the login triggered by the button in the LoginProvider.
@@ -113,8 +126,14 @@ public protocol LoginProvider {
      
         - warning: This function should return a different instance of
             the button each time it is called
-            (so to be able to have it in login screen and in signup)
+            (so to be able to have it in login and signup screens)
     */
     func createButton() -> UIView
+
+    /**
+        Returns a SignalProducer that takes care of logging out the user
+        from the login service.
+    */
+    func logOut() -> SignalProducer<(), LoginProviderErrorType>
     
 }

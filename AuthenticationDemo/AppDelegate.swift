@@ -9,31 +9,32 @@
 import UIKit
 import Authentication
 import FacebookCore
+import ReactiveSwift
+import Result
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var authenticationCoordinator: AuthenticationCoordinator<ExampleUser, ExampleSessionService>!
+
+    var sessionService = ExampleSessionService(email: "example@mail.com", password: "password")
+    lazy var authenticationCoordinator: AuthenticationCoordinator<ExampleUser, ExampleSessionService> = self.createCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        let exampleSessionService = ExampleSessionService(email: "example@mail.com", password: "password")
-        let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
-        let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.hackingwithswift.com")!,
-                                                          showLoginProviders: true)
-        let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
-                                                                signupConfiguration: signupConfiguration,
-                                                                loginProviders: [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider(), ExampleSuccessLoginProvider()]) {
-            let storyboard = UIStoryboard(name: "Main", bundle: .none)
-            return storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
-        }
-        authenticationCoordinator = AuthenticationCoordinator(sessionService: exampleSessionService,
-                                                              window: window!,
-                                                              initialScreen: .signup,
-                                                              componentsFactory: componentsFactory)
+        sessionService.currentUser.signal.skipNil().liftError()
+            .flatMap(.latest) { [unowned self] _ -> SignalProducer<(), LoginProviderErrorType> in
+                return self.authenticationCoordinator.currentLoginProvider?.logOut() ?? SignalProducer(value: ())
+            }.observeResult { [unowned self] in
+                switch $0 {
+                case .success: self.authenticationCoordinator.start()
+                case .failure: break
+                }
+            }
         authenticationCoordinator.start()
-        return true
+
+        //You need to call this so the SDK is launched correctly (and for example to have facebook recognize a previous login).
+        // http://stackoverflow.com/a/30072323
+        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -66,4 +67,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return SDKApplicationDelegate.shared.application(app, open: url, options: options)
     }
     
+}
+
+extension AppDelegate {
+
+    func createCoordinator() -> AuthenticationCoordinator<ExampleUser, ExampleSessionService> {
+        let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
+        let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.wolox.com.ar/")!,
+                                                          showLoginProviders: true)
+        let loginProviders: [LoginProvider] = [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
+        let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
+                                                                signupConfiguration: signupConfiguration,
+                                                                loginProviders: loginProviders) { [unowned self] in
+            let storyboard = UIStoryboard(name: "Main", bundle: .none)
+            let controller = storyboard.instantiateViewController(withIdentifier: "ExampleMainViewController") as! ExampleMainViewController // swiftlint:disable:this force_cast
+            controller.sessionService = self.sessionService
+            return controller
+        }
+        let authenticationCoordinator = AuthenticationCoordinator(sessionService: sessionService,
+                                                                  window: window!,
+                                                                  initialScreen: .signup,
+                                                                  componentsFactory: componentsFactory)
+        return authenticationCoordinator
+    }
+
 }

@@ -16,6 +16,7 @@ import enum Result.NoError
 final class MockSessionService: SessionServiceType {
     
     let currentUser: Property<MyUser?>
+    let currentProviderName: Property<String?>
     
     let logInCalled: Signal<Bool, NoError>
     let signUpCalled: Signal<Bool, NoError>
@@ -26,6 +27,7 @@ final class MockSessionService: SessionServiceType {
     
     init() {
         currentUser = Property(initial: Optional.none, then: SignalProducer.never)
+        currentProviderName = Property(initial: Optional.none, then: SignalProducer.never)
         (logInCalled, _logInCalledObserver) = Signal<Bool, NoError>.pipe()
         (signUpCalled, _signUpCalledObserver) = Signal<Bool, NoError>.pipe()
     }

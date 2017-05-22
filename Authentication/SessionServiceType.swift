@@ -43,7 +43,21 @@ public protocol SessionServiceType {
          authentication process should be triggered.
     */
     var currentUser: Property<User?> { get }
-    
+
+    /**
+         The name of login provider from which we obtained
+         the current user, if there is one.
+
+         This will be consulted by the framework in order to be
+         able to provide you the LoginProvider from which to log out.
+         This is thought so that it serves after reopening the app:
+            you create the provider again and are able to make the
+            logout (the login provider shoud be made so that you can
+            log out a user even after recreating the provider, like
+            facebook does).
+     */
+    var currentProviderName: Property<String?> { get }
+
     /**
         This method takes care of validating and logging in.
      
@@ -52,7 +66,7 @@ public protocol SessionServiceType {
         If the credentials are valid, the SignalProducer returned
         must take care of:
             sending the user to the observers and
-            updating the currentUser property.
+            updating the currentUser and currentProviderName properties.
         If the credentials aren't valid, the SignalProducer returned
         must take care of:
             sending the error to the observer.
@@ -77,7 +91,7 @@ public protocol SessionServiceType {
      If the creation of the user is successful, the SignalProducer
      returned must take care of:
         sending the user to the observers and
-        updating the currentUser property.
+        updating the currentUser and currentProviderName properties.
      If not, the SignalProducer returned
      must take care of:
         sending the error to the observer.
@@ -92,7 +106,7 @@ public protocol SessionServiceType {
          If the credentials are valid, the SignalProducer returned
          must take care of:
              sending the user to the observers and
-             updating the currentUser property.
+             updating the currentUser and currentProviderName properties.
          If the credentials aren't valid, the SignalProducer returned
          must take care of:
              sending the error to the observer.

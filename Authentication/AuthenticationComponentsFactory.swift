@@ -6,9 +6,13 @@
 //  Copyright © 2016 Wolox. All rights reserved.
 //
 
+import Core
+
 public protocol AuthenticationComponentsFactoryType: LoginComponentsFactory, SignupComponentsFactory {
     
     func createMainViewController() -> UIViewController
+
+    func getProvider(withName name: String) -> LoginProvider?
     
 }
 
@@ -88,7 +92,11 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     public func createSignupViewConfiguration() -> SignupViewConfigurationType {
         return _signupConfiguration
     }
-    
+
+    public func getProvider(withName name: String) -> LoginProvider? {
+        return _loginProviders.getFirst { type(of: $0).name == name }
+    }
+
 }
 
 public protocol LoginComponentsFactory {

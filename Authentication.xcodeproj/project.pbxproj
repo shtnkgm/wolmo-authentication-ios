@@ -88,6 +88,7 @@
 		CE42AE8E1E4E4B0700B4C377 /* SignupControllerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE8A1E4E4B0700B4C377 /* SignupControllerConfiguration.swift */; };
 		CE42AE8F1E4E4B0700B4C377 /* SignupControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE8B1E4E4B0700B4C377 /* SignupControllerDelegate.swift */; };
 		CE42AE901E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE42AE8C1E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift */; };
+		CE48286C1EC5FCE9008BE751 /* SignupView+LocalizedTexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE48286B1EC5FCE9008BE751 /* SignupView+LocalizedTexts.swift */; };
 		CE5248821D468D8200B499CC /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5248811D468D8200B499CC /* Extensions.swift */; };
 		CE5248871D468F8700B499CC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE5248891D468F8700B499CC /* Localizable.strings */; };
 		CE7A7BBD1D3EB60500C44A25 /* Authentication.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -233,6 +234,7 @@
 		CE42AE8A1E4E4B0700B4C377 /* SignupControllerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerConfiguration.swift; sourceTree = "<group>"; };
 		CE42AE8B1E4E4B0700B4C377 /* SignupControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerDelegate.swift; sourceTree = "<group>"; };
 		CE42AE8C1E4E4B0700B4C377 /* SignupControllerTransitionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupControllerTransitionDelegate.swift; sourceTree = "<group>"; };
+		CE48286B1EC5FCE9008BE751 /* SignupView+LocalizedTexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SignupView+LocalizedTexts.swift"; sourceTree = "<group>"; };
 		CE5248811D468D8200B499CC /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE5248881D468F8700B499CC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE7A7BB31D3E9AFC00C44A25 /* Core.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Core.framework; path = Carthage/Build/iOS/Core.framework; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 				CE111DDD1D4FA7390083C99E /* SignupView.swift */,
 				CE111DDF1D4FA7390083C99E /* SignupViewConfiguration.swift */,
 				CE111DE01D4FA7390083C99E /* SignupViewDelegate.swift */,
+				CE48286B1EC5FCE9008BE751 /* SignupView+LocalizedTexts.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				CE111E021D4FA80E0083C99E /* TermsAndServicesController.swift in Sources */,
 				CE20AD691D53BB8C0039260B /* AuthenticationCoordinator.swift in Sources */,
 				CE42AE8E1E4E4B0700B4C377 /* SignupControllerConfiguration.swift in Sources */,
+				CE48286C1EC5FCE9008BE751 /* SignupView+LocalizedTexts.swift in Sources */,
 				CE111DC21D4FA70D0083C99E /* TextInputValidatorType.swift in Sources */,
 				CE42AE8F1E4E4B0700B4C377 /* SignupControllerDelegate.swift in Sources */,
 				CE83C5641D4A56BD00623DF5 /* FrameworkBundle.swift in Sources */,

@@ -28,10 +28,20 @@ public enum AuthenticationInitialScreen {
 public class AuthenticationCoordinator<User, SessionService: SessionServiceType> where SessionService.User == User {
     
     /// The entry and exit point to the user's session.
-    open let sessionService: SessionService
+    public let sessionService: SessionService
     /// The user in session.
-    open var currentUser: User? { return sessionService.currentUser.value }
-    
+    public var currentUser: User? { return sessionService.currentUser.value }
+    /// The login provider from which we obtained the current user,
+    /// or .none if it wasn't obtained by a provider, or if there is no current user.
+    public var currentLoginProvider: LoginProvider? {
+        return sessionService.currentProviderName.value.flatMap { _componentsFactory.getProvider(withName: $0) }
+    }
+    /// The login provider user obtained from the login provider used,
+    /// or .none if the user didn't login through a provider, or if there is no logged in user.
+    public var currentLoginProviderUser: LoginProviderUserType? {
+        return sessionService.currentProviderName.value.flatMap { _componentsFactory.getProvider(withName: $0)?.currentUser }
+    }
+
     /// The window of the app
     fileprivate let _window: UIWindow
     /// Property indicating the authentication screen to be shown the first time.
@@ -106,8 +116,8 @@ public extension AuthenticationCoordinator {
         let credentialsValidator = _componentsFactory.createLogInCredentialsValidator()
         let viewModelFactory: ([LoginProvider]) -> LoginViewModelType = { [unowned self] in
             return self._componentsFactory.createLoginViewModel(withSessionService: self.sessionService,
-                                                    credentialsValidator: credentialsValidator,
-                                                    loginProviders: $0)
+                                                                credentialsValidator: credentialsValidator,
+                                                                loginProviders: $0)
         }
         let loginViewConfiguration = _componentsFactory.createLoginViewConfiguration()
         let loginViewDelegate = _componentsFactory.createLoginViewDelegate(withConfiguration: loginViewConfiguration)

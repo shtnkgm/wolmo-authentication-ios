@@ -11,6 +11,7 @@ import ReactiveCocoa
 import ReactiveSwift
 import FacebookLogin
 import FacebookCore
+import FBSDKCoreKit
 import enum Result.NoError
 
 /**
@@ -64,6 +65,7 @@ public struct FacebookLoginProviderUser: LoginProviderUser {
         self.userId = userId
         self.accessToken = accessToken
     }
+
 }
 
 /**
@@ -91,7 +93,7 @@ public struct FacebookLoginProviderError: LoginProviderError {
             `FacebookDisplayName`: with the display name by which you want the user
                 to see your app with when asked for permissions.
  */
-public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
+public final class FacebookLoginProvider: LoginProvider {
 
     public static let name = "Facebook"
 
@@ -126,7 +128,23 @@ public final class FacebookLoginProvider: LoginProvider, LoginButtonDelegate {
         button.delegate = self
         return button
     }
-    
+
+    public func logOut() -> SignalProducer<(), LoginProviderErrorType> {
+        return SignalProducer { observer, _ in
+            LoginManager().logOut()
+            observer.send(value: ())
+            observer.sendCompleted()
+        }
+    }
+
+    public var currentUser: LoginProviderUserType? {
+        return AccessToken.current.map { .facebook(user: FacebookLoginProviderUser(email: .none, name: .none, userId: .none, accessToken: $0)) }
+    }
+
+}
+
+extension FacebookLoginProvider: LoginButtonDelegate {
+
     public func loginButtonDidCompleteLogin(_ loginButton: LoginButton, result: LoginResult) {
         switch result {
         case .cancelled:

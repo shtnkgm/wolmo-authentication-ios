@@ -12,7 +12,9 @@ import ReactiveSwift
 import enum Result.NoError
 
 struct LoginProviderExampleUser: LoginProviderUser {
+
     let name: String
+
 }
 
 class ExampleSuccessLoginProvider: LoginProvider {
@@ -55,5 +57,11 @@ class ExampleSuccessLoginProvider: LoginProvider {
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return view
     }
+
+    func logOut() -> SignalProducer<(), LoginProviderErrorType> {
+        return SignalProducer.empty
+    }
+
+    public var currentUser: LoginProviderUserType?
     
 }
