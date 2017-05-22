@@ -42,8 +42,6 @@ public class AuthenticationCoordinator<User, SessionService: SessionServiceType>
         return sessionService.currentProviderName.value.flatMap { _componentsFactory.getProvider(withName: $0)?.currentUser }
     }
 
-
-    
     /// The window of the app
     fileprivate let _window: UIWindow
     /// Property indicating the authentication screen to be shown the first time.
