@@ -9,6 +9,7 @@
 import UIKit
 import Authentication
 import FacebookCore
+import GoogleSignIn
 import ReactiveSwift
 import Result
 
@@ -64,7 +65,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        
+        if (url.scheme?.hasPrefix("fb"))! {
+            return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        }
+        
+        return GIDSignIn.sharedInstance().handle(
+                                                 url,
+                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
     }
     
 }
@@ -75,7 +84,10 @@ extension AppDelegate {
         let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
         let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.wolox.com.ar/")!,
                                                           showLoginProviders: true)
-        let loginProviders: [LoginProvider] = [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
+        let loginProviders: [LoginProvider] = [FacebookLoginProvider(),
+                                               GoogleLoginProvider(with: "223197056946-ssnoko9vqn23960ia31kt3cevg44d4m4.apps.googleusercontent.com"),
+                                               ExampleFailLoginProvider(),
+                                               ExampleSuccessLoginProvider()]
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
                                                                 signupConfiguration: signupConfiguration,
                                                                 loginProviders: loginProviders) { [unowned self] in

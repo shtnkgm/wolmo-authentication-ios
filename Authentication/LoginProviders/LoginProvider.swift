@@ -27,11 +27,13 @@ public protocol LoginProviderUser { }
  */
 public enum LoginProviderUserType {
     case facebook(user: FacebookLoginProviderUser)
+    case google(user: GoogleLoginProviderUser)
     case custom(name: String, user: LoginProviderUser)
 
     public var providerName: String {
         switch self {
         case .facebook: return FacebookLoginProvider.name
+        case .google: return GoogleLoginProvider.name
         case let .custom(name: name, user: _): return name
         }
     }
@@ -66,6 +68,7 @@ public struct SimpleLoginProviderError: LoginProviderError {
  */
 public enum LoginProviderErrorType: Error {
     case facebook(error: FacebookLoginProviderError)
+    case google(error: GoogleLoginProviderError)
     case custom(name: String, error: LoginProviderError)
 }
 
@@ -74,6 +77,7 @@ internal extension LoginProviderErrorType {
     internal var sessionServiceError: SessionServiceError {
         switch self {
         case let .facebook(error: error): return .loginProviderError(name: FacebookLoginProvider.name, error: error)
+        case let .google(error: error): return .loginProviderError(name: GoogleLoginProvider.name, error: error)
         case let .custom(name: name, error: error): return .loginProviderError(name: name, error: error)
         }
     }

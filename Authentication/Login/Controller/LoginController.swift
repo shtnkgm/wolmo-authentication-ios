@@ -9,6 +9,7 @@
 import Foundation
 import ReactiveCocoa
 import ReactiveSwift
+import GoogleSignIn
 import enum Result.NoError
 
 /**
@@ -19,7 +20,7 @@ import enum Result.NoError
     If there are more than one validation error in a field, the controller
     presents only the first one in the errors label.
  */
-public final class LoginController: UIViewController {
+public final class LoginController: UIViewController, GIDSignInUIDelegate {
     
     public lazy var loginView: LoginViewType = self._loginViewFactory()
     
@@ -76,6 +77,7 @@ public final class LoginController: UIViewController {
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         _viewModel.bindProviders()
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     public override func viewDidDisappear(_ animated: Bool) {
