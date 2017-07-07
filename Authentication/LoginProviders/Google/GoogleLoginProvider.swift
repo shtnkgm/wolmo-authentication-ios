@@ -76,7 +76,7 @@ public final class GoogleLoginProvider: NSObject, LoginProvider {
     
     public func logOut() -> SignalProducer<(), LoginProviderErrorType> {
         return SignalProducer { observer, _ in
-            //LoginManager().logOut()
+            GIDSignIn.sharedInstance().signOut()
             observer.send(value: ())
             observer.sendCompleted()
         }
@@ -84,6 +84,16 @@ public final class GoogleLoginProvider: NSObject, LoginProvider {
     
     public var currentUser: LoginProviderUserType? {
         return .google(user: GoogleLoginProviderUser(with: .none))
+    }
+    
+    public func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        return true
     }
     
 }

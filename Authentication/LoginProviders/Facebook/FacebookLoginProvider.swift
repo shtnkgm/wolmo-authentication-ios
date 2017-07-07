@@ -141,6 +141,16 @@ public final class FacebookLoginProvider: LoginProvider {
         return AccessToken.current.map { .facebook(user: FacebookLoginProviderUser(email: .none, name: .none, userId: .none, accessToken: $0)) }
     }
 
+    public func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+    }
+    
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        //You need to call this so the SDK is launched correctly (and for example to have facebook recognize a previous login).
+        // http://stackoverflow.com/a/30072323
+        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
 }
 
 extension FacebookLoginProvider: LoginButtonDelegate {

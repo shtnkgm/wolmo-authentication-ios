@@ -14,6 +14,10 @@ public protocol AuthenticationComponentsFactoryType: LoginComponentsFactory, Sig
 
     func getProvider(withName name: String) -> LoginProvider?
     
+    func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+    
 }
 
 /**
@@ -95,6 +99,24 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
 
     public func getProvider(withName name: String) -> LoginProvider? {
         return _loginProviders.getFirst { type(of: $0).name == name }
+    }
+    
+    public func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        for provider in _loginProviders {
+            if provider.handleUrl(app, open: url, options: options) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        for provider in _loginProviders {
+            if !provider.application(application, didFinishLaunchingWithOptions: launchOptions) {
+                return false
+            }
+        }
+        return true
     }
 
 }

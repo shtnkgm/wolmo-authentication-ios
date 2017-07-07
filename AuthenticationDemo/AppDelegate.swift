@@ -33,9 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         authenticationCoordinator.start()
 
-        //You need to call this so the SDK is launched correctly (and for example to have facebook recognize a previous login).
-        // http://stackoverflow.com/a/30072323
-        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        return authenticationCoordinator.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -65,15 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        
-        if (url.scheme?.hasPrefix("fb"))! {
-            return SDKApplicationDelegate.shared.application(app, open: url, options: options)
-        }
-        
-        return GIDSignIn.sharedInstance().handle(
-                                                 url,
-                                                 sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+        return authenticationCoordinator.handleUrl(app, open: url, options: options)
     }
     
 }
