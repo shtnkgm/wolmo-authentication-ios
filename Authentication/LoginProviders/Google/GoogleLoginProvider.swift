@@ -19,14 +19,13 @@ public struct GoogleLoginProviderUser: LoginProviderUser {
     public let familyName: String
     public let email: Email?
     
-    internal init(with user: GIDGoogleUser?) {
-        userId = user?.userID ?? ""
-        idToken = user?.authentication.idToken ?? ""
-        fullName = user?.profile.name ?? ""
-        givenName = user?.profile.givenName ?? ""
-        familyName = user?.profile.familyName ?? ""
-        email = Email(raw: user?.profile.email ?? "")
-        
+    internal init(with user: GIDGoogleUser) {
+        userId = user.userID
+        idToken = user.authentication.idToken
+        fullName = user.profile.name
+        givenName = user.profile.givenName
+        familyName = user.profile.familyName
+        email = Email(raw: user.profile.email)
     }
     
 }
@@ -45,7 +44,6 @@ public final class GoogleLoginProvider: NSObject, LoginProvider {
     
     public static let name = "Google"
     
-    public var configuration: GoogleLoginConfiguration = GoogleLoginConfiguration()
     public let userSignal: Signal<LoginProviderUserType, NoError>
     public let errorSignal: Signal<LoginProviderErrorType, NoError>
     
@@ -59,7 +57,7 @@ public final class GoogleLoginProvider: NSObject, LoginProvider {
         super.init()
         // Initialize sign-in
         GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().clientID = clientId //capaz en config
+        GIDSignIn.sharedInstance().clientID = clientId
     }
     
     deinit {
@@ -83,7 +81,7 @@ public final class GoogleLoginProvider: NSObject, LoginProvider {
     }
     
     public var currentUser: LoginProviderUserType? {
-        return .google(user: GoogleLoginProviderUser(with: .none))
+        return .google(user: GoogleLoginProviderUser(with: GIDSignIn.sharedInstance().currentUser))
     }
     
     public func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
@@ -102,9 +100,10 @@ extension GoogleLoginProvider: GIDSignInDelegate {
     
     public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
-            print("\(error.localizedDescription)")
+            let googleError = GoogleLoginProviderError(googleError: error)
+            errorObserver.send(value: .google(error: googleError))
         } else {
-            self.userObserver.send(value: LoginProviderUserType.google(user: GoogleLoginProviderUser(with: user)))
+            userObserver.send(value: LoginProviderUserType.google(user: GoogleLoginProviderUser(with: user)))
         }
     }
     

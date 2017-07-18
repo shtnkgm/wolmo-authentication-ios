@@ -75,7 +75,7 @@ extension AppDelegate {
         let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.wolox.com.ar/")!,
                                                           showLoginProviders: true)
         let loginProviders: [LoginProvider] = [FacebookLoginProvider(),
-                                               GoogleLoginProvider(with: "223197056946-ssnoko9vqn23960ia31kt3cevg44d4m4.apps.googleusercontent.com"),
+                                               GoogleLoginProvider(with: Bundle.main.getString(for: "CLIENT_ID", fromPlist: "GoogleService-Info")!),
                                                ExampleFailLoginProvider(),
                                                ExampleSuccessLoginProvider()]
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,

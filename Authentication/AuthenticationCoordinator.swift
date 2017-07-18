@@ -215,11 +215,21 @@ internal extension AuthenticationCoordinator {
 public extension AuthenticationCoordinator {
     
     public func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-        return _componentsFactory.handleUrl(app, open: url, options: options)
+        for provider in _componentsFactory.getProviders() {
+            if provider.handleUrl(app, open: url, options: options) {
+                return true
+            }
+        }
+        return false
     }
     
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        return _componentsFactory.application(application, didFinishLaunchingWithOptions: launchOptions)
+        for provider in _componentsFactory.getProviders() {
+            if !provider.application(application, didFinishLaunchingWithOptions: launchOptions) {
+                return false
+            }
+        }
+        return true
     }
     
 }

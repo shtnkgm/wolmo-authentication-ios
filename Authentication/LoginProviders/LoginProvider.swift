@@ -141,12 +141,17 @@ public protocol LoginProvider {
     func logOut() -> SignalProducer<(), LoginProviderErrorType>
     
     /**
-        Handles the url returned by the login process. Parameters should be the same of the AppDelegate method.
+        Handles url opening process:
+            if the provider recognizes the url, it will react accordingly and return true. It should receive the same arguments as your app's AppDelegate does for this.
+            if the provider doesn't recognize the url, it will return false.
     */
     func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
     
     /**
-        Handles the initializing of the providers. Parameters should be the same of the AppDelegate method.
+        Handles the initializing of the provider so that it works as expected.
+        It's used for example for recognizing a user that had already logged in to this app through this provider before.
+        For this to work correctly, it should receive the same arguments your app's AppDelegate does for this.
+        Returns true if the provider could be correctly initialized.
      */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     

@@ -61,7 +61,6 @@ public final class SignupController: UIViewController, GIDSignInUIDelegate {
     
     public override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance().uiDelegate = self
         signupView.render()
         bindViewModel()
         navigationController?.isNavigationBarHidden = true
@@ -77,6 +76,7 @@ public final class SignupController: UIViewController, GIDSignInUIDelegate {
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         _viewModel.bindProviders()
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     public override func viewDidDisappear(_ animated: Bool) {

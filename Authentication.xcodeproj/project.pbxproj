@@ -15,7 +15,7 @@
 		9D72AA0F1C8DC7EB00BB4082 /* Authentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D72AA041C8DC7EA00BB4082 /* Authentication.framework */; };
 		9DC1F1571C94DC8C005FC65A /* ReactiveCocoa.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9DC1F1581C94DC8C005FC65A /* Result.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFEF81C8DCE0A00F0A37C /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B88FEE541F0EBC2300E8BEEE /* GoogleLoginConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88FEE521F0EBC2300E8BEEE /* GoogleLoginConfiguration.swift */; };
+		B86F21951F1E9F6700019927 /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86F21941F1E9F6700019927 /* BundleExtension.swift */; };
 		B88FEE551F0EBC2300E8BEEE /* GoogleLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88FEE531F0EBC2300E8BEEE /* GoogleLoginProvider.swift */; };
 		B88FEE571F0EBC3B00E8BEEE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B88FEE561F0EBC3B00E8BEEE /* GoogleService-Info.plist */; };
 		B88FEE5D1F0EBC5000E8BEEE /* GoogleAppUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B88FEE581F0EBC5000E8BEEE /* GoogleAppUtilities.framework */; };
@@ -206,7 +206,7 @@
 		9D72AA091C8DC7EA00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D72AA0E1C8DC7EB00BB4082 /* AuthenticationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AuthenticationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D72AA151C8DC7EB00BB4082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B88FEE521F0EBC2300E8BEEE /* GoogleLoginConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleLoginConfiguration.swift; sourceTree = "<group>"; };
+		B86F21941F1E9F6700019927 /* BundleExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
 		B88FEE531F0EBC2300E8BEEE /* GoogleLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleLoginProvider.swift; sourceTree = "<group>"; };
 		B88FEE561F0EBC3B00E8BEEE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B88FEE581F0EBC5000E8BEEE /* GoogleAppUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleAppUtilities.framework; path = Frameworks/GoogleAppUtilities.framework; sourceTree = "<group>"; };
@@ -451,7 +451,6 @@
 		B88FEE511F0EBC2300E8BEEE /* Google */ = {
 			isa = PBXGroup;
 			children = (
-				B88FEE521F0EBC2300E8BEEE /* GoogleLoginConfiguration.swift */,
 				B88FEE531F0EBC2300E8BEEE /* GoogleLoginProvider.swift */,
 			);
 			path = Google;
@@ -662,6 +661,7 @@
 				B88FEE561F0EBC3B00E8BEEE /* GoogleService-Info.plist */,
 				CEE94A9B1CA06B1B0089E71B /* Info.plist */,
 				CE5248891D468F8700B499CC /* Localizable.strings */,
+				B86F21941F1E9F6700019927 /* BundleExtension.swift */,
 			);
 			path = AuthenticationDemo;
 			sourceTree = "<group>";
@@ -909,7 +909,6 @@
 				CE42AE841E4E4AC000B4C377 /* LoginController.swift in Sources */,
 				CE42AE871E4E4AC000B4C377 /* LoginControllerTransitionDelegate.swift in Sources */,
 				CE111E0F1D4FA8980083C99E /* AuthenticationViewConfiguration.swift in Sources */,
-				B88FEE541F0EBC2300E8BEEE /* GoogleLoginConfiguration.swift in Sources */,
 				CE111DD61D4FA7340083C99E /* LoginCredentialsValidator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -942,6 +941,7 @@
 				CEE94AA11CA06BBC0089E71B /* ExampleMainViewController.swift in Sources */,
 				CEABDDB61E52307400A6930D /* ExampleSuccessLoginProvider.swift in Sources */,
 				CEE94A901CA06B1B0089E71B /* AppDelegate.swift in Sources */,
+				B86F21951F1E9F6700019927 /* BundleExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
