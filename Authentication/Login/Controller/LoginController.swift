@@ -71,12 +71,12 @@ public final class LoginController: UIViewController, GIDSignInUIDelegate {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        _viewModel.bindProviders()
         navigationController?.isNavigationBarHidden = true
     }
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        _viewModel.bindProviders()
         GIDSignIn.sharedInstance().uiDelegate = self
     }
     
