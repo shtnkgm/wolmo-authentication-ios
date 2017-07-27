@@ -101,8 +101,8 @@ public final class FacebookLoginProvider: LoginProvider {
     public let userSignal: Signal<LoginProviderUserType, NoError>
     public let errorSignal: Signal<LoginProviderErrorType, NoError>
     
-    fileprivate let userObserver: Observer<LoginProviderUserType, NoError>
-    fileprivate let errorObserver: Observer<LoginProviderErrorType, NoError>
+    fileprivate let userObserver: Signal<LoginProviderUserType, NoError>.Observer
+    fileprivate let errorObserver: Signal<LoginProviderErrorType, NoError>.Observer
     
     public init() {
         (userSignal, userObserver) = Signal.pipe()

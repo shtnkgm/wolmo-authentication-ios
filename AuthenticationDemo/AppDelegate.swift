@@ -21,15 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var authenticationCoordinator: AuthenticationCoordinator<ExampleUser, ExampleSessionService> = self.createCoordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        sessionService.currentUser.signal.liftError().filter { $0 == nil }
+        sessionService.currentUser
+            .signal
+            .filter { $0 == nil }
             .flatMap(.latest) { [unowned self] _ -> SignalProducer<(), LoginProviderErrorType> in
-                return self.authenticationCoordinator.currentLoginProvider?.logOut() ?? SignalProducer(value: ())
-            }.observeResult { [unowned self] in
-                switch $0 {
-                case .success: self.authenticationCoordinator.start()
-                case .failure: break
+                    return self.authenticationCoordinator.currentLoginProvider?.logOut() ?? SignalProducer(value: ())
                 }
-            }
+            .observeResult { [unowned self] in
+                    switch $0 {
+                    case .success: self.authenticationCoordinator.start()
+                    case .failure: break
+                    }
+                }
         authenticationCoordinator.start()
 
         //You need to call this so the SDK is launched correctly (and for example to have facebook recognize a previous login).

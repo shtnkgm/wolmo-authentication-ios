@@ -107,7 +107,7 @@ public final class SignupViewModel<User, SessionService: SessionServiceType>: Si
     // This wouldn't affect the UX since the providers are supposed to present a view
     //  for logging in and close it after it succeeded or failed.
     fileprivate let _loginProvidersExecutingSignal: Signal<Bool, NoError>
-    fileprivate let _loginProvidersExecutingObserver: Observer<Bool, NoError>
+    fileprivate let _loginProvidersExecutingObserver: Signal<Bool, NoError>.Observer
     
     fileprivate var _ignoreProviders: Bool = true
     

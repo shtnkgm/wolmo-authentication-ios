@@ -94,7 +94,7 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
     }
 
     public func getProvider(withName name: String) -> LoginProvider? {
-        return _loginProviders.getFirst { type(of: $0).name == name }
+        return _loginProviders.first { type(of: $0).name == name }
     }
 
 }
@@ -218,7 +218,7 @@ public extension LoginComponentsFactory {
     
     public func createLoginView(withDelegate delegate: LoginViewDelegate,
                                 loginProviders: [LoginProvider]) -> LoginViewType {
-        let view: LoginView = LoginView.loadFromNib(inBundle: FrameworkBundle)!
+        let view: LoginView = LoginView.loadFromNib()!
         view.delegate = delegate
         view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view
@@ -367,7 +367,7 @@ public extension SignupComponentsFactory {
     
     public func createSignupView(withDelegate delegate: SignupViewDelegate,
                                  loginProviders: [LoginProvider]) -> SignupViewType {
-        let view: SignupView = SignupView.loadFromNib(inBundle: FrameworkBundle)!
+        let view: SignupView = SignupView.loadFromNib()!
         view.delegate = delegate
         view.loginProviderButtons = loginProviders.map { $0.createButton() }
         return view

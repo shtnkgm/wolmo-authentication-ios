@@ -18,8 +18,8 @@ class ExampleFailLoginProvider: LoginProvider {
     let userSignal: Signal<LoginProviderUserType, NoError>
     let errorSignal: Signal<LoginProviderErrorType, NoError>
     
-    private let userObserver: Observer<LoginProviderUserType, NoError>
-    private let errorObserver: Observer<LoginProviderErrorType, NoError>
+    private let userObserver: Signal<LoginProviderUserType, NoError>.Observer
+    private let errorObserver: Signal<LoginProviderErrorType, NoError>.Observer
 
     init() {
         (userSignal, userObserver) = Signal.pipe()
