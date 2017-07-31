@@ -79,6 +79,7 @@ fileprivate extension DefaultLoginViewDelegate {
         loginView.emailLabel?.textColor = colorPalette.labels
         loginView.emailTextField.font = fontPalette.textfields
         loginView.emailTextField.textColor = colorPalette.textfieldText
+        loginView.emailTextField.tintColor = colorPalette.textfieldTint
     }
     
     fileprivate func configurePasswordElements(in loginView: LoginViewType) {
@@ -86,6 +87,7 @@ fileprivate extension DefaultLoginViewDelegate {
         loginView.passwordLabel?.textColor = colorPalette.labels
         loginView.passwordTextField.font = fontPalette.textfields
         loginView.passwordTextField.textColor = colorPalette.textfieldText
+        loginView.passwordTextField.tintColor = colorPalette.textfieldTint
         loginView.passwordVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
         loginView.passwordVisibilityButton?.setTitleColor(colorPalette.passwordVisibilityButtonText, for: .normal)
     }

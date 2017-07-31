@@ -100,5 +100,6 @@ struct ColorPalette: ColorPaletteType {
     
     var textfieldBackground: UIColor = .cyan
     var passwordVisibilityButtonText: UIColor = .black
+    var textfieldTint: UIColor = .red
     
 }

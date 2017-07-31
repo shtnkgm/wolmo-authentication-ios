@@ -85,6 +85,7 @@ fileprivate extension DefaultSignupViewDelegate {
         signupView.usernameTextField?.font = fontPalette.textfields
         signupView.usernameTextField?.textColor = colorPalette.textfieldText
         signupView.usernameTextField?.backgroundColor = colorPalette.textfieldBackground
+        signupView.usernameTextField?.tintColor = colorPalette.textfieldTint
     }
     
     fileprivate func configureEmailElements(in signupView: SignupViewType) {
@@ -93,6 +94,7 @@ fileprivate extension DefaultSignupViewDelegate {
         signupView.emailTextField.font = fontPalette.textfields
         signupView.emailTextField.textColor = colorPalette.textfieldText
         signupView.emailTextField.backgroundColor = colorPalette.textfieldBackground
+        signupView.emailTextField.tintColor = colorPalette.textfieldTint
     }
     
     fileprivate func configurePasswordElements(in signupView: SignupViewType) {
@@ -100,13 +102,14 @@ fileprivate extension DefaultSignupViewDelegate {
         signupView.passwordLabel?.textColor = colorPalette.labels
         signupView.passwordTextField.font = fontPalette.textfields
         signupView.passwordTextField.textColor = colorPalette.textfieldText
+        signupView.passwordTextField.tintColor = colorPalette.textfieldTint
         signupView.passwordVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
         signupView.passwordVisibilityButton?.setTitleColor(colorPalette.passwordVisibilityButtonText, for: .normal)
-        
         signupView.passwordConfirmLabel?.font = fontPalette.labels
         signupView.passwordConfirmLabel?.textColor = colorPalette.labels
         signupView.passwordConfirmTextField?.font = fontPalette.textfields
         signupView.passwordConfirmTextField?.textColor = colorPalette.textfieldText
+        signupView.passwordConfirmTextField?.tintColor = colorPalette.textfieldTint
         signupView.passwordConfirmVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
         signupView.passwordConfirmVisibilityButton?.setTitleColor(colorPalette.passwordVisibilityButtonText, for: .normal)
     }
