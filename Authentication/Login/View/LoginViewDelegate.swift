@@ -87,7 +87,7 @@ fileprivate extension DefaultLoginViewDelegate {
         loginView.passwordTextField.font = fontPalette.textfields
         loginView.passwordTextField.textColor = colorPalette.textfieldText
         loginView.passwordVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
-        loginView.passwordVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
+        loginView.passwordVisibilityButton?.setTitleColor(colorPalette.passwordVisibilityButtonText, for: .normal)
     }
     
     fileprivate func configureLinksElements(in loginView: LoginViewType) {

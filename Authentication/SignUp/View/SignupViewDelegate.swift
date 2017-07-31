@@ -101,14 +101,14 @@ fileprivate extension DefaultSignupViewDelegate {
         signupView.passwordTextField.font = fontPalette.textfields
         signupView.passwordTextField.textColor = colorPalette.textfieldText
         signupView.passwordVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
-        signupView.passwordVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
+        signupView.passwordVisibilityButton?.setTitleColor(colorPalette.passwordVisibilityButtonText, for: .normal)
         
         signupView.passwordConfirmLabel?.font = fontPalette.labels
         signupView.passwordConfirmLabel?.textColor = colorPalette.labels
         signupView.passwordConfirmTextField?.font = fontPalette.textfields
         signupView.passwordConfirmTextField?.textColor = colorPalette.textfieldText
         signupView.passwordConfirmVisibilityButton?.titleLabel?.font = fontPalette.passwordVisibilityButton
-        signupView.passwordConfirmVisibilityButton?.titleLabel?.textColor = colorPalette.passwordVisibilityButtonText
+        signupView.passwordConfirmVisibilityButton?.setTitleColor(colorPalette.passwordVisibilityButtonText, for: .normal)
     }
     
     fileprivate func configureLinksElements(in signupView: SignupViewType) {

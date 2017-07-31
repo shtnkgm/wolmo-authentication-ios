@@ -99,5 +99,6 @@ extension AppDelegate {
 struct ColorPalette: ColorPaletteType {
     
     var textfieldBackground: UIColor = .cyan
+    var passwordVisibilityButtonText: UIColor = .black
     
 }
