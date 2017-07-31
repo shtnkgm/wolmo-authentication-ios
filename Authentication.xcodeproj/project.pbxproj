@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		466043E31F2FC6AA00E56AC4 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466043E21F2FC6AA00E56AC4 /* ButtonConfiguration.swift */; };
 		9D1DFF021C8DCFB300F0A37C /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF001C8DCFB300F0A37C /* Nimble.framework */; };
 		9D1DFF031C8DCFB300F0A37C /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF011C8DCFB300F0A37C /* Quick.framework */; };
 		9D1DFF051C8DCFC800F0A37C /* Nimble.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9D1DFF001C8DCFB300F0A37C /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -167,6 +168,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		466043E21F2FC6AA00E56AC4 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		9D1DFEF71C8DCE0A00F0A37C /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
 		9D1DFEF81C8DCE0A00F0A37C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		9D1DFF001C8DCFB300F0A37C /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				CE111E0C1D4FA8980083C99E /* AuthenticationViewConfiguration.swift */,
 				CE111E0D1D4FA8980083C99E /* ColorPalette.swift */,
 				CE111E0E1D4FA8980083C99E /* FontPalette.swift */,
+				466043E21F2FC6AA00E56AC4 /* ButtonConfiguration.swift */,
 			);
 			path = ViewConfiguration;
 			sourceTree = "<group>";
@@ -836,6 +839,7 @@
 				CE42AE861E4E4AC000B4C377 /* LoginControllerDelegate.swift in Sources */,
 				CE111DBE1D4FA70D0083C99E /* ConstantValidators.swift in Sources */,
 				CE111DEC1D4FA7390083C99E /* SignupViewModel.swift in Sources */,
+				466043E31F2FC6AA00E56AC4 /* ButtonConfiguration.swift in Sources */,
 				CE111DEA1D4FA7390083C99E /* SignupViewDelegate.swift in Sources */,
 				CE42AE841E4E4AC000B4C377 /* LoginController.swift in Sources */,
 				CE42AE871E4E4AC000B4C377 /* LoginControllerTransitionDelegate.swift in Sources */,

@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
 
     func createCoordinator() -> AuthenticationCoordinator<ExampleUser, ExampleSessionService> {
-        let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!, colorPalette: ColorPalette())
+        let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!, colorPalette: ColorPalette(), buttonConfiguration: ButtonConfiguration())
         let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.wolox.com.ar/")!,
                                                           colorPalette: ColorPalette(), showLoginProviders: true)
         let loginProviders: [LoginProvider] = [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
@@ -101,5 +101,11 @@ struct ColorPalette: ColorPaletteType {
     var textfieldBackground: UIColor = .cyan
     var passwordVisibilityButtonText: UIColor = .black
     var textfieldTint: UIColor = .red
+    
+}
+
+struct ButtonConfiguration: ButtonConfigurationType {
+    
+    var cornerRadius: CGFloat = 25.0
     
 }

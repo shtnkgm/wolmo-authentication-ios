@@ -42,12 +42,14 @@ public final class DefaultSignupViewDelegate: SignupViewDelegate {
     
     public let colorPalette: ColorPaletteType
     public let fontPalette: FontPaletteType
+    public let buttonConfiguration: ButtonConfigurationType
     public let termsAndServicesURL: URL
     public let showLoginProviders: Bool
     
     internal init(configuration: SignupViewConfigurationType) {
         colorPalette = configuration.colorPalette
         fontPalette = configuration.fontPalette
+        buttonConfiguration = configuration.buttonCofinguration
         termsAndServicesURL = configuration.termsAndServicesURL
         showLoginProviders = configuration.showLoginProviders
     }
@@ -77,6 +79,7 @@ fileprivate extension DefaultSignupViewDelegate {
         signupView.signUpButton.backgroundColor = colorPalette.mainButtonDisabled
         signupView.signUpButton.titleLabel?.font = fontPalette.mainButton
         signupView.signUpButton.titleLabel?.textColor = colorPalette.mainButtonText
+        signupView.signUpButton.layer.cornerRadius = buttonConfiguration.cornerRadius
     }
     
     fileprivate func configureUsernameElements(in signupView: SignupViewType) {

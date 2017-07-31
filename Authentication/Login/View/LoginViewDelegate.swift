@@ -45,6 +45,7 @@ public final class DefaultLoginViewDelegate: LoginViewDelegate {
 
     public var colorPalette: ColorPaletteType { return _configuration.colorPalette }
     public var fontPalette: FontPaletteType { return _configuration.fontPalette }
+    public var buttonConfiguration: ButtonConfigurationType { return _configuration.buttonConfiguration }
     
     internal init(configuration: LoginViewConfigurationType = LoginViewConfiguration()) {
         _configuration = configuration
@@ -72,6 +73,7 @@ fileprivate extension DefaultLoginViewDelegate {
         loginView.logInButton.backgroundColor = colorPalette.mainButtonDisabled
         loginView.logInButton.titleLabel?.font = fontPalette.mainButton
         loginView.logInButton.titleLabel?.textColor = colorPalette.mainButtonText
+        loginView.logInButton.layer.cornerRadius = buttonConfiguration.cornerRadius
     }
     
     fileprivate func configureEmailElements(in loginView: LoginViewType) {
