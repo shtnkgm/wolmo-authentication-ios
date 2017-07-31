@@ -191,6 +191,8 @@ internal final class LoginView: UIView, LoginViewType, NibLoadable {
         //Configure colour palette
         //Configure fonts
         delegate.configureLoginView(self)
+        
+        configureUI()
     }
     
 }
@@ -343,6 +345,11 @@ fileprivate extension LoginView {
         passwordTextField.isEnabled = true
         passwordTextField.font = delegate.fontPalette.textfields
         passwordVisibilityButtonOutlet.setTitle(passwordVisibilityButtonTitle, for: .normal)
+    }
+    
+    fileprivate func configureUI() {
+        passwordTextFieldAndButtonViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
+        emailTextFieldViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
     }
     
 }

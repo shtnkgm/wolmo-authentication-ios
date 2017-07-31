@@ -212,6 +212,8 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
             configureLoginProviders()
         }
         delegate.configureSignupView(self)
+        
+        configureUI()
     }
     
 }
@@ -487,6 +489,13 @@ fileprivate extension SignupView {
     fileprivate func signUpButtonPressedWasSet() {
         let event: SignupViewEvent = signUpButtonPressed ? .signUpButtonPressed : .signUpButtonUnpressed
         updateState(event: event)
+    }
+    
+    fileprivate func configureUI() {
+        usernameTextFieldViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
+        passwordTextFieldAndButtonViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
+        emailTextFieldViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
+        pswdConfirmTextFieldAndButtonViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
     }
     
 }

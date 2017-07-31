@@ -84,6 +84,7 @@ fileprivate extension DefaultSignupViewDelegate {
         signupView.usernameLabel?.textColor = colorPalette.labels
         signupView.usernameTextField?.font = fontPalette.textfields
         signupView.usernameTextField?.textColor = colorPalette.textfieldText
+        signupView.usernameTextField?.backgroundColor = colorPalette.textfieldBackground
     }
     
     fileprivate func configureEmailElements(in signupView: SignupViewType) {
@@ -91,6 +92,7 @@ fileprivate extension DefaultSignupViewDelegate {
         signupView.emailLabel?.textColor = colorPalette.labels
         signupView.emailTextField.font = fontPalette.textfields
         signupView.emailTextField.textColor = colorPalette.textfieldText
+        signupView.emailTextField.backgroundColor = colorPalette.textfieldBackground
     }
     
     fileprivate func configurePasswordElements(in signupView: SignupViewType) {
