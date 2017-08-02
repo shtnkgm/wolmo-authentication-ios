@@ -350,6 +350,13 @@ fileprivate extension LoginView {
     fileprivate func configureUI() {
         passwordTextFieldAndButtonViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
         emailTextFieldViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
+        
+        let placeholderColor = delegate.colorPalette.textfieldPlaceholderColor
+        emailTextFieldOutlet.attributedPlaceholder =
+            NSAttributedString(string: emailPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+        passwordTextField.attributedPlaceholder =
+            NSAttributedString(string: passwordPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+        
     }
     
 }

@@ -29,6 +29,7 @@ public protocol ColorPaletteType {
     var textfieldText: UIColor { get }
     var textfieldBackground: UIColor { get }
     var textfieldTint: UIColor { get }
+    var textfieldPlaceholderColor: UIColor { get }
     var passwordVisibilityButtonText: UIColor { get }
     var mainButtonText: UIColor { get }
     
@@ -51,6 +52,7 @@ public extension ColorPaletteType {
     public var textfieldText: UIColor { return .black }
     public var textfieldBackground: UIColor { return .white }
     public var textfieldTint: UIColor { return .blue }
+    public var textfieldPlaceholderColor: UIColor { return .gray }
     public var passwordVisibilityButtonText: UIColor { return UIColor(hex: "#0076ffff")! }
     public var mainButtonText: UIColor { return .white }
     

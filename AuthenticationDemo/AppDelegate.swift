@@ -77,7 +77,7 @@ extension AppDelegate {
     func createCoordinator() -> AuthenticationCoordinator<ExampleUser, ExampleSessionService> {
         let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!, colorPalette: ColorPalette(), buttonConfiguration: ButtonConfiguration())
         let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.wolox.com.ar/")!,
-                                                          colorPalette: ColorPalette(), showLoginProviders: true)
+                                                          colorPalette: ColorPalette(), buttonConfiguration: ButtonConfiguration(), showLoginProviders: true)
         let loginProviders: [LoginProvider] = [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
                                                                 signupConfiguration: signupConfiguration,
@@ -101,11 +101,11 @@ struct ColorPalette: ColorPaletteType {
     var textfieldBackground: UIColor = .cyan
     var passwordVisibilityButtonText: UIColor = .black
     var textfieldTint: UIColor = .red
-    
+    var textfieldPlaceholderColor: UIColor = .blue
 }
 
 struct ButtonConfiguration: ButtonConfigurationType {
     
-    var cornerRadius: CGFloat = 25.0
+    var cornerRadius: CGFloat = 10.0
     
 }

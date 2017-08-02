@@ -496,6 +496,16 @@ fileprivate extension SignupView {
         passwordTextFieldAndButtonViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
         emailTextFieldViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
         pswdConfirmTextFieldAndButtonViewOutlet.backgroundColor = delegate.colorPalette.textfieldBackground
+        
+        let placeholderColor = delegate.colorPalette.textfieldPlaceholderColor
+        usernameTextFieldOutlet.attributedPlaceholder =
+            NSAttributedString(string: usernamePlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+        emailTextFieldOutlet.attributedPlaceholder =
+            NSAttributedString(string: emailPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+        passwordTextFieldOutlet.attributedPlaceholder =
+            NSAttributedString(string: passwordPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+        passwordConfirmTextFieldOutlet.attributedPlaceholder =
+            NSAttributedString(string: confirmPasswordPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
     }
     
 }
