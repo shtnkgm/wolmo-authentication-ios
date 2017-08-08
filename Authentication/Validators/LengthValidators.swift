@@ -14,6 +14,8 @@ import Foundation
  */
 public struct NonEmptyValidator: TextInputValidatorType {
     
+    public init() { }
+    
     public func validate(_ text: String) -> ValidationResult {
         if text.isEmpty {
             return .invalid(errors: ["text-input-validator.empty".frameworkLocalized])
