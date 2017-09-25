@@ -71,17 +71,17 @@ public final class ExampleSessionService: SessionServiceType {
         switch user {
         case .facebook(let fbUser):
             let exampleUser = ExampleUser(email: fbUser.email?.raw ?? "", password: "")
-            return logInSuccess(user: exampleUser, dispatchTime: dispatchTime).on(completed: { [unowned self] in
+            return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime).on(completed: { [unowned self] in
                 self._currentProvider.value = user.providerName
             })
         case .google(let gUser):
             let exampleUser = ExampleUser(email: gUser.email?.raw ?? "", password: "")
-            return logInSuccess(user: exampleUser, dispatchTime: dispatchTime).on(completed: { [unowned self] in
+            return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime).on(completed: { [unowned self] in
                 self._currentProvider.value = user.providerName
             })
         case .custom(let name, _):
             print("Signing up a user for service \(name) not supported")
-            return logInFailure(dispatchTime: dispatchTime)
+            return signUpFailure(dispatchTime: dispatchTime, fromProvider: true)
         }
     }
 

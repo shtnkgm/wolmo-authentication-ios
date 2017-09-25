@@ -231,7 +231,7 @@ public extension AuthenticationCoordinator {
     
     /**
      Handles the initializing of the providers so that they work as expected.
-     It's used for example for recognizing a user that had already logged in to this app through this provider before.
+     It's used for example for recognizing a user that had already logged in to this app through one of the providers before.
      For this to work correctly, it should receive the same arguments your app's AppDelegate does for this.
      Returns true if every provider could be correctly initialized.
      */
