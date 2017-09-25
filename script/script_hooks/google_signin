@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -e
+
+GOOGLE_SIGNIN_VERSION="4_0_1"
+googlesignin_url="https://developers.google.com/identity/sign-in/ios/sdk/google_signin_sdk_$GOOGLE_SIGNIN_VERSION.zip"
+
+echo ""
+echo " → Installing GoogleSignIn framework"
+echo ""
+if [ ! -d "Frameworks/GoogleSignIn.framework" ]
+then
+  echo "  → Downloading GoogleSignIn"
+  curl -s -L -o Frameworks/GoogleSignIn.zip "$googlesignin_url"
+  echo "    ✔ GoogleSignIn.zip downloaded"
+  mkdir Frameworks/GoogleSignIn
+  tar -xzf Frameworks/GoogleSignIn.zip -C Frameworks/GoogleSignIn > /dev/null
+  echo "    ✔ GoogleSignIn.zip unzipped"
+  mv "Frameworks/GoogleSignIn/google_signin_sdk_$GOOGLE_SIGNIN_VERSION/GoogleAppUtilities.framework" "Frameworks/GoogleAppUtilities.framework"
+  mv "Frameworks/GoogleSignIn/google_signin_sdk_$GOOGLE_SIGNIN_VERSION/GoogleSignIn.bundle" "Frameworks/GoogleSignIn.bundle"
+  mv "Frameworks/GoogleSignIn/google_signin_sdk_$GOOGLE_SIGNIN_VERSION/GoogleSignIn.framework" "Frameworks/GoogleSignIn.framework"
+  mv "Frameworks/GoogleSignIn/google_signin_sdk_$GOOGLE_SIGNIN_VERSION/GoogleSignInDependencies.framework" "Frameworks/GoogleSignInDependencies.framework"
+  mv "Frameworks/GoogleSignIn/google_signin_sdk_$GOOGLE_SIGNIN_VERSION/GoogleSymbolUtilities.framework" "Frameworks/GoogleSymbolUtilities.framework"
+  rm -r "Frameworks/GoogleSignIn"
+  rm Frameworks/GoogleSignIn.zip
+  echo "    ✔ ""GoogleSignIn.framework installed"
+else
+  echo "    ✔ GoogleSignIn.framework is already installed"
+fi
