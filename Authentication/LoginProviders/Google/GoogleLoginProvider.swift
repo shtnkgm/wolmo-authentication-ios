@@ -40,6 +40,15 @@ public struct GoogleLoginProviderError: LoginProviderError {
     
 }
 
+/*
+    To be able to login using Google you will need to generate 
+    a Configuration File (you can do it here: https://developers.google.com/identity/sign-in/ios/start-integrating)
+    Then drag the GoogleService-Info.plist file you just downloaded into the root of your Xcode project and add it to all targets.
+    Then you will need to add a custom URL Scheme to the project. Select the Info tab of the project and expand the URL Types section.
+    add a URL scheme for your reversed client ID. To find this value, open the GoogleService-Info.plist configuration file, and look for the
+    REVERSED_CLIENT_ID key. Copy the value of that key, and paste it into the URL Schemes box on the configuration page. Leave the other fields blank.
+ */
+
 public final class GoogleLoginProvider: NSObject, LoginProvider {
     
     public static let name = "Google"
