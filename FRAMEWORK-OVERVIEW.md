@@ -48,6 +48,7 @@ and
 and
 
 * [FacebookLoginProvider](Authentication/LoginProviders/Facebook/FacebookLoginProvider.swift)
+* [GoogleLoginProvider](Authentication/LoginProviders/Google/GoogleLoginProvider.swift)
 
 The Signup screen has a "child screen" that is used for showing the terms and services of the app (check [Terms and Services](Authentication/SignUp/TermsAndServices/)). This screen is supposed to only show the terms and services to the user and give the possibility to return to sign up. Since it's basic and it's not central, its components are not customizable, just the content is shown (although the content is an HTML that can use javascript).
 
@@ -82,7 +83,12 @@ The event delegates are the ones that add behaviour to certain events inside a s
 * [SignupControllerTransitionDelegate](Authentication/SignUp/View/SignupControllerTransitionDelegate.swift)
 
 
+## Using Custom Views
 
+If the user wants to use custom views for Login, Sign Up or both, he or she should create a class that implements `AuthenticationComponentsFactoryType` and override the correspondent method (`createLoginView(withDelegate delegate: LoginViewDelegate, loginProviders: [LoginProvider]) -> LoginViewType` for example) and pass it to the `AuthenticationCoordinator` on creation.
+The custom view will need to implement `LoginViewType` (or `SignUpViewType`). To implement that protocol the user will also need to implement `Renderable` and `LoginFormType` (or `SignUpFormType`) and that one will also need to implement `AuthenticationFormType`. 
+Note that those protocols will ask to implement properties that should match an UI element from the view (`var passwordTextField: UITextField` for example). In those cases the best solution is probably to return an IBOutlet reference of the element.
+If the user is using `GoogleLoginProvider`, the ViewController will need to implement the protocol `GIDSignInUIDelegate` and in `viewDidLoad` add the line `GIDSignIn.sharedInstance().uiDelegate = self`.
 
 
 ## Localization
