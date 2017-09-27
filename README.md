@@ -11,8 +11,8 @@ WolMo - Authentication iOS
 
 - [x] Signup
 - [x] Login
-- [x] Login with Facebook and generic services
-- [ ] Login with Google, Twitter and other services (in a future version)
+- [x] Login with Facebook, Google and generic services
+- [ ] Login with Twitter and other services (in a future version)
 - [ ] Recover password (in a future version)
 
 It provides logic as well as default views with plenty extensibility points.
@@ -84,7 +84,7 @@ script/bootstrap
 - [WolmoCore](https://github.com/Wolox/wolmo-core-ios): Framework with useful basic extensions.
 - [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift): Framework inspired by functional reactive programming.
 - [FacebookSDKSwift](https://github.com/facebook/facebook-sdk-swift): Framework for authenticating with Facebook.
-
+- [GoogleSignInSDK](https://developers.google.com/identity/sign-in/ios/sdk): Framework for authenticating with Google. You don't need to download this as it is embedded in Authentication.
 
 
 ## Usage

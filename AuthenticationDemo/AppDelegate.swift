@@ -9,6 +9,7 @@
 import UIKit
 import Authentication
 import FacebookCore
+import GoogleSignIn
 import ReactiveSwift
 import Result
 
@@ -32,9 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         authenticationCoordinator.start()
 
-        //You need to call this so the SDK is launched correctly (and for example to have facebook recognize a previous login).
-        // http://stackoverflow.com/a/30072323
-        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        return authenticationCoordinator.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -64,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+        return authenticationCoordinator.handleUrl(app, open: url, options: options)
     }
     
 }
@@ -75,7 +74,10 @@ extension AppDelegate {
         let loginConfiguration = LoginViewConfiguration(logoImage: UIImage(named: "default")!)
         let signupConfiguration = SignupViewConfiguration(termsAndServicesURL: URL(string: "https://www.wolox.com.ar/")!,
                                                           showLoginProviders: true)
-        let loginProviders: [LoginProvider] = [FacebookLoginProvider(), ExampleFailLoginProvider(), ExampleSuccessLoginProvider()]
+        let loginProviders: [LoginProvider] = [FacebookLoginProvider(),
+                                               GoogleLoginProvider(with: Bundle.main.getString(for: "CLIENT_ID", fromPlist: "GoogleService-Info")!),
+                                               ExampleFailLoginProvider(),
+                                               ExampleSuccessLoginProvider()]
         let componentsFactory = AuthenticationComponentsFactory(loginConfiguration: loginConfiguration,
                                                                 signupConfiguration: signupConfiguration,
                                                                 loginProviders: loginProviders) { [unowned self] in

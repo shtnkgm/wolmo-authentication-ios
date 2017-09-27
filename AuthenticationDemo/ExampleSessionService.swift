@@ -74,6 +74,11 @@ public final class ExampleSessionService: SessionServiceType {
             return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime).on(completed: { [unowned self] in
                 self._currentProvider.value = user.providerName
             })
+        case .google(let gUser):
+            let exampleUser = ExampleUser(email: gUser.email?.raw ?? "", password: "")
+            return signUpSuccess(user: exampleUser, dispatchTime: dispatchTime).on(completed: { [unowned self] in
+                self._currentProvider.value = user.providerName
+            })
         case .custom(let name, _):
             print("Signing up a user for service \(name) not supported")
             return signUpFailure(dispatchTime: dispatchTime, fromProvider: true)

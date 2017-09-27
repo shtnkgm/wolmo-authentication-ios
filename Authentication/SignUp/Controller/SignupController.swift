@@ -8,6 +8,7 @@
 
 import ReactiveCocoa
 import ReactiveSwift
+import GoogleSignIn
 
 /**
      Signup View Controller that takes care of managing the signup, from
@@ -17,7 +18,7 @@ import ReactiveSwift
      If there are more than one validation error in a field, the controller
      presents only the first one in the errors label.
  */
-public final class SignupController: UIViewController {
+public final class SignupController: UIViewController, GIDSignInUIDelegate {
     
     public lazy var signupView: SignupViewType = self._signupViewFactory()
     
@@ -75,6 +76,7 @@ public final class SignupController: UIViewController {
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         _viewModel.bindProviders()
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     public override func viewDidDisappear(_ animated: Bool) {

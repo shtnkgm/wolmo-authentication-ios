@@ -14,6 +14,8 @@ public protocol AuthenticationComponentsFactoryType: LoginComponentsFactory, Sig
 
     func getProvider(withName name: String) -> LoginProvider?
     
+    func getProviders() -> [LoginProvider]
+    
 }
 
 /**
@@ -95,6 +97,10 @@ public struct AuthenticationComponentsFactory: AuthenticationComponentsFactoryTy
 
     public func getProvider(withName name: String) -> LoginProvider? {
         return _loginProviders.getFirst { type(of: $0).name == name }
+    }
+    
+    public func getProviders() -> [LoginProvider] {
+        return _loginProviders
     }
 
 }

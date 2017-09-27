@@ -211,6 +211,41 @@ internal extension AuthenticationCoordinator {
     
 }
 
+// MARK: - AppDelegate handling functions
+public extension AuthenticationCoordinator {
+    
+    /**
+     Handles url opening process:
+     Will check if any provider recognizes the url, reacting accordingly and returning true if it did. 
+     It should receive the same arguments as your app's AppDelegate does for this.
+     if no provider recognizes the url, it will return false.
+     */
+    public func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        for provider in _componentsFactory.getProviders() {
+            if provider.handleUrl(app, open: url, options: options) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    /**
+     Handles the initializing of the providers so that they work as expected.
+     It's used for example for recognizing a user that had already logged in to this app through one of the providers before.
+     For this to work correctly, it should receive the same arguments your app's AppDelegate does for this.
+     Returns true if every provider could be correctly initialized.
+     */
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        for provider in _componentsFactory.getProviders() {
+            if !provider.application(application, didFinishLaunchingWithOptions: launchOptions) {
+                return false
+            }
+        }
+        return true
+    }
+    
+}
+
 extension AuthenticationCoordinator: LoginControllerTransitionDelegate {
     
     public final func onLoginSuccess(from controller: LoginController) {

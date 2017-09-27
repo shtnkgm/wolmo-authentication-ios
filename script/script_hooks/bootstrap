@@ -1,0 +1,16 @@
+#!/bin/bash
+
+bootstrap_before_install_hooks ()
+{
+  if [ ! -d ./Frameworks ]
+  then
+    mkdir ./Frameworks
+  fi
+  
+  source script/script_hooks/google_signin
+}
+
+bootstrap_after_install_hooks () 
+{
+  :
+}

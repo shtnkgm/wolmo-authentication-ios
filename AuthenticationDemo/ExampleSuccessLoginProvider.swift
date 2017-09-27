@@ -64,4 +64,12 @@ class ExampleSuccessLoginProvider: LoginProvider {
 
     public var currentUser: LoginProviderUserType?
     
+    public func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+        return false
+    }
+    
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        return true
+    }
+    
 }

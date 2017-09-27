@@ -27,11 +27,13 @@ public protocol LoginProviderUser { }
  */
 public enum LoginProviderUserType {
     case facebook(user: FacebookLoginProviderUser)
+    case google(user: GoogleLoginProviderUser)
     case custom(name: String, user: LoginProviderUser)
 
     public var providerName: String {
         switch self {
         case .facebook: return FacebookLoginProvider.name
+        case .google: return GoogleLoginProvider.name
         case let .custom(name: name, user: _): return name
         }
     }
@@ -66,6 +68,7 @@ public struct SimpleLoginProviderError: LoginProviderError {
  */
 public enum LoginProviderErrorType: Error {
     case facebook(error: FacebookLoginProviderError)
+    case google(error: GoogleLoginProviderError)
     case custom(name: String, error: LoginProviderError)
 }
 
@@ -74,6 +77,7 @@ internal extension LoginProviderErrorType {
     internal var sessionServiceError: SessionServiceError {
         switch self {
         case let .facebook(error: error): return .loginProviderError(name: FacebookLoginProvider.name, error: error)
+        case let .google(error: error): return .loginProviderError(name: GoogleLoginProvider.name, error: error)
         case let .custom(name: name, error: error): return .loginProviderError(name: name, error: error)
         }
     }
@@ -135,5 +139,20 @@ public protocol LoginProvider {
         from the login service.
     */
     func logOut() -> SignalProducer<(), LoginProviderErrorType>
+    
+    /**
+        Handles url opening process:
+            if the provider recognizes the url, it will react accordingly and return true. It should receive the same arguments as your app's AppDelegate does for this.
+            if the provider doesn't recognize the url, it will return false.
+    */
+    func handleUrl(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool
+    
+    /**
+        Handles the initializing of the provider so that it works as expected.
+        It's used for example for recognizing a user that had already logged in to this app through this provider before.
+        For this to work correctly, it should receive the same arguments your app's AppDelegate does for this.
+        Returns true if the provider could be correctly initialized.
+     */
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
     
 }

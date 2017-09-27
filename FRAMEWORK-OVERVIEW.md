@@ -6,15 +6,15 @@ The **Authentication framework** takes care of two primary screens: Login and Si
 
 To handle those screens, the framework uses the [MVVM pattern](http://www.sprynthesis.com/2014/12/06/reactivecocoa-mvvm-introduction/).
 
-This framework is intended to be customizable for the user to adapt it to his/her app. For this, the framework uses the [Delegation](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-ID276) design pattern, also used by Apple's UIKit framework, for example.
+This framework is intended to be customizable for you to adapt it to your app. For this, the framework uses the [Delegation](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-ID276) design pattern, also used by Apple's UIKit framework, for example.
 
-Finally, the Authentication framework also uses a functional reactive programming framework ([ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)) which the user will need to use for conforming certain protocols (see [Session Service](#session-service) below).
+Finally, the Authentication framework also uses a functional reactive programming framework ([ReactiveCocoa](https://github.com/ReactiveCocoa/ReactiveCocoa)) which you will need to use for conforming certain protocols (see [Session Service](#session-service) below).
 
 ## Basic Structure
 
 Following the [MVVM pattern](http://www.sprynthesis.com/2014/12/06/reactivecocoa-mvvm-introduction/), each screen has a View, a View Model and a View Controller, where the View Model is in charge of handling all logic in order to provide all information the view needs to display and the View Controller is in charge of binding the View Model's information to the View's elements.
 
-The user of the **Authentication framework** can provide any view or view model that conforms to certain protocols, but the view controller is fixed. This means that the view controller will bind all information the view model or view provides in conformance to the corresponding view or view model protocol. Any extra functionality or information the user may add to his/her view or view model will not be binded, and so must be _internal_ information of the component (or information used outside this framework).
+You can provide any view or view model that conforms to certain protocols, but the view controller is fixed. This means that the view controller will bind all information the view model or view provides in conformance to the corresponding view or view model protocol. Any extra functionality or information you may add to your view or view model will not be binded, and so must be _internal_ information of the component (or information used outside this framework).
 
 Moreover, the framework also provides customizable `LoginProvider` functionality as an alternative to common email/username - password login, that may represent any external service for login, as for example, Facebook.
 Login providers will appear in login page, and if wanted in signup page as well. As they all provide the same service, only one can be used at a time, so as far as view interaction is concerned, only login attempt will be notified in general. However, the Session Service will be notified exactly from where the login was performed and with which information.
@@ -48,6 +48,7 @@ and
 and
 
 * [FacebookLoginProvider](Authentication/LoginProviders/Facebook/FacebookLoginProvider.swift)
+* [GoogleLoginProvider](Authentication/LoginProviders/Google/GoogleLoginProvider.swift)
 
 The Signup screen has a "child screen" that is used for showing the terms and services of the app (check [Terms and Services](Authentication/SignUp/TermsAndServices/)). This screen is supposed to only show the terms and services to the user and give the possibility to return to sign up. Since it's basic and it's not central, its components are not customizable, just the content is shown (although the content is an HTML that can use javascript).
 
@@ -56,7 +57,7 @@ The Signup screen has a "child screen" that is used for showing the terms and se
 
 All screens for finally executing the main action (logging in or signing up a user) will delegate to the `Session Service` provided.
 
-This component must always be designed by the user of this framework and must respond to the functional reactive interface required by the [SessionServiceType](Authentication/SessionServiceType.swift) protocol.
+This component must always be designed by you and must respond to the functional reactive interface required by the [SessionServiceType](Authentication/SessionServiceType.swift) protocol.
 So take a look at the [functional reactive programming](https://github.com/ReactiveCocoa/ReactiveCocoa) framework used. You can also take a look at the [ExampleSessionService](AuthenticationDemo/ExampleSessionService.swift) in the Demo app included in this project.
 
 
@@ -82,7 +83,11 @@ The event delegates are the ones that add behaviour to certain events inside a s
 * [SignupControllerTransitionDelegate](Authentication/SignUp/View/SignupControllerTransitionDelegate.swift)
 
 
+## Using Custom Views
 
+If you want to use custom views for Login, Sign Up or both, you should create a class that implements `AuthenticationComponentsFactoryType` and override the correspondent method (`createLoginView(withDelegate delegate: LoginViewDelegate, loginProviders: [LoginProvider]) -> LoginViewType` for example) and pass it to the `AuthenticationCoordinator` on creation.
+The custom view will need to implement `LoginViewType` (or `SignUpViewType`). To implement that protocol you will also need to implement `Renderable` and `LoginFormType` (or `SignUpFormType`) and that one will also need to implement `AuthenticationFormType`. 
+Note that those protocols will ask you to implement properties that should match an UI element from the view (`var passwordTextField: UITextField` for example). In those cases the best solution is probably to return an IBOutlet reference of the element.
 
 
 ## Localization
