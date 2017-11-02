@@ -1,4 +1,3 @@
 # Core & Functional Programming
-github "wolox/wolmo-core-ios" "swift-3.2-compatibility"
+github "wolox/wolmo-core-ios" "swift-4-support"
 github "facebook/Facebook-SDK-Swift" "master"
-github "facebook/facebook-ios-sdk" == 4.21
