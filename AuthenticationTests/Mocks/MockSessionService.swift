@@ -21,8 +21,8 @@ final class MockSessionService: SessionServiceType {
     let logInCalled: Signal<Bool, NoError>
     let signUpCalled: Signal<Bool, NoError>
     
-    private let _logInCalledObserver: Observer<Bool, NoError>
-    private let _signUpCalledObserver: Observer<Bool, NoError>
+    private let _logInCalledObserver: Signal<Bool, NoError>.Observer
+    private let _signUpCalledObserver: Signal<Bool, NoError>.Observer
     
     
     init() {

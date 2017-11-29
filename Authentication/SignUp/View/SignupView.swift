@@ -182,12 +182,12 @@ internal final class SignupView: UIView, SignupViewType, NibLoadable {
         let textWithLinks = NSMutableAttributedString(string: termsAndServicesText)
         let termsString = termsAndServicesLinkText
         let termsURLRange = NSString(string: termsAndServicesText).range(of: termsString)
-        textWithLinks.addAttribute(NSLinkAttributeName, value: url, range: termsURLRange)
+        textWithLinks.addAttribute(NSAttributedStringKey.link, value: url, range: termsURLRange)
         
         termsAndServicesTextView.attributedText = textWithLinks
-        termsAndServicesTextView.linkTextAttributes = [NSForegroundColorAttributeName: delegate.colorPalette.links,
-                                                       NSUnderlineColorAttributeName: delegate.colorPalette.links,
-                                                       NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        termsAndServicesTextView.linkTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: delegate.colorPalette.links,
+                                                       NSAttributedStringKey.underlineColor.rawValue: delegate.colorPalette.links,
+                                                       NSAttributedStringKey.underlineStyle.rawValue: NSUnderlineStyle.styleSingle.rawValue]
         termsAndServicesTextView.textAlignment = .center
     }
 
@@ -499,13 +499,13 @@ fileprivate extension SignupView {
         
         let placeholderColor = delegate.colorPalette.textfieldPlaceholderColor
         usernameTextFieldOutlet.attributedPlaceholder =
-            NSAttributedString(string: usernamePlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+            NSAttributedString(string: usernamePlaceholderText, attributes: [ NSAttributedStringKey.foregroundColor: placeholderColor])
         emailTextFieldOutlet.attributedPlaceholder =
-            NSAttributedString(string: emailPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+            NSAttributedString(string: emailPlaceholderText, attributes: [ NSAttributedStringKey.foregroundColor: placeholderColor])
         passwordTextFieldOutlet.attributedPlaceholder =
-            NSAttributedString(string: passwordPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+            NSAttributedString(string: passwordPlaceholderText, attributes: [ NSAttributedStringKey.foregroundColor: placeholderColor])
         passwordConfirmTextFieldOutlet.attributedPlaceholder =
-            NSAttributedString(string: confirmPasswordPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+            NSAttributedString(string: confirmPasswordPlaceholderText, attributes: [ NSAttributedStringKey.foregroundColor: placeholderColor])
     }
     
 }

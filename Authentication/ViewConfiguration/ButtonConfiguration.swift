@@ -24,4 +24,6 @@ public extension ButtonConfigurationType {
     
 }
 
-public struct DefaultButtonConfiguration: ButtonConfigurationType { }
+public struct DefaultButtonConfiguration: ButtonConfigurationType {
+    public init() { }
+}

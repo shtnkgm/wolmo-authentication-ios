@@ -58,4 +58,6 @@ public extension ColorPaletteType {
     
 }
 
-public struct DefaultColorPalette: ColorPaletteType { }
+public struct DefaultColorPalette: ColorPaletteType {
+    public init() { }
+}

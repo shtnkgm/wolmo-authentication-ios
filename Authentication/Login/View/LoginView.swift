@@ -353,9 +353,9 @@ fileprivate extension LoginView {
         
         let placeholderColor = delegate.colorPalette.textfieldPlaceholderColor
         emailTextFieldOutlet.attributedPlaceholder =
-            NSAttributedString(string: emailPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+            NSAttributedString(string: emailPlaceholderText, attributes: [NSAttributedStringKey.foregroundColor: placeholderColor])
         passwordTextField.attributedPlaceholder =
-            NSAttributedString(string: passwordPlaceholderText, attributes: [NSForegroundColorAttributeName: placeholderColor])
+            NSAttributedString(string: passwordPlaceholderText, attributes: [NSAttributedStringKey.foregroundColor: placeholderColor])
         
     }
     

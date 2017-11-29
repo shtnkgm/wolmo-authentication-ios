@@ -37,4 +37,6 @@ public extension FontPaletteType {
     
 }
 
-public struct DefaultFontPalette: FontPaletteType { }
+public struct DefaultFontPalette: FontPaletteType {
+    public init() { }
+}
