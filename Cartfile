@@ -1,4 +1,4 @@
 # Core & Functional Programming
-github "wolox/wolmo-core-ios" "swift-4-support"
+github "wolox/wolmo-core-ios" "master"
 github "facebook/Facebook-SDK-Swift" ~> 0.3.0
 github "jdg/MBProgressHUD" ~> 1.0.0
