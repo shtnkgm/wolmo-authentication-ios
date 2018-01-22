@@ -151,8 +151,12 @@ fileprivate extension LoginController {
     private func bindButtons() {
         loginView.logInButton.reactive.pressed = _viewModel.logInCocoaAction
         _viewModel.logInCocoaAction.isEnabled.signal.observeValues { [unowned self] in self.loginView.logInButtonEnabled = $0 }
-        loginView.signupButton.setAction { [unowned self] _,_ in self._transitionDelegate.toSignup(from: self) }
-        loginView.recoverPasswordButton.setAction { [unowned self] _,_ in self._transitionDelegate.toRecoverPassword(from: self) }
+        loginView.signupButton.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
+            self._transitionDelegate.toSignup(from: self)
+        }
+        loginView.recoverPasswordButton.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in
+            self._transitionDelegate.toRecoverPassword(from: self)
+        }
     }
     
     private func setTextfieldOrder() {

@@ -8,6 +8,7 @@
 
 import ReactiveCocoa
 import ReactiveSwift
+import ReactiveMapKit
 
 /**
      Signup View Controller that takes care of managing the signup, from
@@ -198,7 +199,9 @@ fileprivate extension SignupController {
     fileprivate func bindButtons() {
         signupView.signUpButton.reactive.pressed = _viewModel.signUpCocoaAction
         _viewModel.signUpCocoaAction.isEnabled.signal.observeValues { [unowned self] in self.signupView.signUpButtonEnabled = $0 }
-        signupView.loginButton.setAction { [unowned self] _,_ in self._transitionDelegate.toLogin(from: self) }
+        signupView.loginButton.reactive.controlEvents(.touchUpInside).observeValues { [unowned self] _ in self._transitionDelegate.toLogin(from: self)
+        }
+        
         bindTermsAndServices()
     }
     
